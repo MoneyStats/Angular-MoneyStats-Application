@@ -1,0 +1,264 @@
+<div id="appCapsule" style="margin-top: 10px;" class="faded faded-bottom">
+    <section class="section-width">
+        <div class="row">
+            <!-- Wallet Card -->
+            <div class="section wallet-card-section pt-1 col-xl-6">
+                <div class="wallet-card">
+                    <!-- Balance -->
+                    <div class="balance">
+                        <div class="left">
+                            <span class="title">{{"dashboardCard.title" | translate}}</span>
+                            <h1 id="reportStatement" class="total">€ 0.00</h1>
+                        </div>
+                        <div class="right">
+                            <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#addStatement">
+                                <ion-icon name="add-outline"></ion-icon>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- * Balance -->
+                    <!-- Wallet Footer -->
+                    <div class="wallet-footer">
+                        <div class="item">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#addWalletActionSheet">
+                                <div class="icon-wrapper bg-danger">
+                                    <span>+</span>
+                                    <ion-icon name="card-outline"></ion-icon>
+                                </div>
+                                <strong>{{"dashboardCard.footer.title1" | translate}}</strong>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#categoryActionSheet">
+                                <div class="icon-wrapper">
+                                    <ion-icon name="arrow-down-outline"></ion-icon>
+                                </div>
+                                <strong>{{"dashboardCard.footer.title2" | translate}}</strong>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="app-wallet.html">
+                                <div class="icon-wrapper bg-success">
+                                    <ion-icon name="card-outline"></ion-icon>
+                                </div>
+                                <strong>{{"dashboardCard.footer.title3" | translate}}</strong>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#dateStatementActionSheet">
+                                <div class="icon-wrapper bg-warning">
+                                    <ion-icon name="bar-chart-outline"></ion-icon>
+                                </div>
+                                <strong>{{"dashboardCard.footer.title4" | translate}}</strong>
+                            </a>
+                        </div>
+
+                    </div>
+                    <!-- * Wallet Footer -->
+                </div>
+            </div>
+            <!-- Wallet Card -->
+
+            <!-- Stats -->
+            <div class="section stats-section col-xl-6">
+                <div class="row mt-2">
+                    <div class="col-6">
+                        <div class="stat-box">
+                            <div class="title">{{"dashboardCard.stats.title1" | translate}}</div>
+                            <div class="value performanceFirstDate">0 %</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="stat-box">
+                            <div class="title sincetotalecapitale">{{"dashboardCard.stats.title2" | translate}}</div>
+                            <div class="value performanceLastStatement">01 Gen 2022</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-6">
+                        <div class="stat-box">
+                            <div class="title sincetotalecapitale1">{{"dashboardCard.stats.title3" | translate}}</div>
+                            <div id="pil" class="value">€ 0.00</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="stat-box">
+                            <div class="title">{{"dashboardCard.stats.title4" | translate}}</div>
+                            <div id="pilTotale" class="value">€ 0.00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- * Stats -->
+        </div>
+
+        <div class="row">
+
+            <!-- Transactions -->
+            <div class="section mt-4 col-xl-6">
+                <div class="section-heading">
+                    <h2 class="title">Transactions</h2>
+                    <a href="app-transactions.html" class="link">View All</a>
+                </div>
+                <div class="transactions">
+                    <!-- item -->
+                    <a href="app-transaction-detail.html" class="item">
+                        <div class="detail">
+                            <img src="../../../assets/images/img/sample/brand/1.jpg" alt="img"
+                                class="image-block imaged w48">
+                            <div>
+                                <strong>Amazon</strong>
+                                <p>Shopping</p>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="price text-danger"> - $ 150</div>
+                        </div>
+                    </a>
+                    <!-- * item -->
+                    <!-- item -->
+                    <a href="app-transaction-detail.html" class="item">
+                        <div class="detail">
+                            <img src="../../../assets/images/img/sample/brand/2.jpg" alt="img"
+                                class="image-block imaged w48">
+                            <div>
+                                <strong>Apple</strong>
+                                <p>Appstore Purchase</p>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="price text-danger">- $ 29</div>
+                        </div>
+                    </a>
+                    <!-- * item -->
+                    <!-- item -->
+                    <a href="app-transaction-detail.html" class="item">
+                        <div class="detail">
+                            <img src="../../../assets/images/img/sample/avatar/avatar3.jpg" alt="img"
+                                class="image-block imaged w48">
+                            <div>
+                                <strong>Alex Ljung</strong>
+                                <p>Transfer</p>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="price">+ $ 1,000</div>
+                        </div>
+                    </a>
+                    <!-- * item -->
+                    <!-- item -->
+                    <a href="app-transaction-detail.html" class="item">
+                        <div class="detail">
+                            <img src="../../../assets/images/img/sample/avatar/avatar4.jpg" alt="img"
+                                class="image-block imaged w48">
+                            <div>
+                                <strong>Beatriz Brito</strong>
+                                <p>Transfer</p>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="price text-danger">- $ 186</div>
+                        </div>
+                    </a>
+                    <!-- * item -->
+                </div>
+            </div>
+            <!-- * Transactions -->
+
+            <!-- Graph -->
+            <div class="section mt-4 col-xl-6">
+                <div class="section-heading">
+                    <h2 class="title" id="year">Graph</h2>
+                    <a href="#" class="link" onclick="toastbox('soon')">View All</a>
+                </div>
+                <div id="chart" class=" text-center">
+                    <div id="timeline-chart"></div>
+                </div>
+                <div id="pieChart">
+                    <div id="timeline-chart"></div>
+                </div>
+            </div>
+            <!-- * Graph -->
+
+        </div>
+
+        <!-- Monthly Bills -->
+        <div class="section full mt-4">
+            <div class="section-heading padding">
+                <h2 class="title">Wallet</h2>
+                <a href="app-bills.html" class="link">View All</a>
+            </div>
+            <!-- carousel multiple -->
+            <div class="carousel-multiple splide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+
+                        <li class="splide__slide">
+                            <div class="bill-box">
+                                <div class="img-wrapper">
+                                    <img src="../../../assets/images/img/sample/brand/1.jpg" alt="img"
+                                        class="image-block imaged w48">
+                                </div>
+                                <div class="price">$ 14</div>
+                                <p>Prime Monthly Subscription</p>
+                                <a href="#" class="btn btn-primary btn-block btn-sm">Open</a>
+                            </div>
+                        </li>
+
+                        <li class="splide__slide">
+                            <div class="bill-box">
+                                <div class="img-wrapper">
+                                    <img src="../../../assets/images/img/sample/brand/2.jpg" alt="img"
+                                        class="image-block imaged w48">
+                                </div>
+                                <div class="price">$ 9</div>
+                                <p>Music Monthly Subscription</p>
+                                <a href="#" class="btn btn-primary btn-block btn-sm">PAY NOW</a>
+                            </div>
+                        </li>
+
+                        <li class="splide__slide">
+                            <div class="bill-box">
+                                <div class="img-wrapper">
+                                    <div class="iconbox bg-danger">
+                                        <ion-icon name="medkit-outline"></ion-icon>
+                                    </div>
+                                </div>
+                                <div class="price">$ 299</div>
+                                <p>Monthly Health Insurance</p>
+                                <a href="#" class="btn btn-primary btn-block btn-sm">PAY NOW</a>
+                            </div>
+                        </li>
+
+                        <li class="splide__slide">
+                            <div class="bill-box">
+                                <div class="img-wrapper">
+                                    <div class="iconbox">
+                                        <ion-icon name="card-outline"></ion-icon>
+                                    </div>
+                                </div>
+                                <div class="price">$ 962</div>
+                                <p>Credit Card Statement
+                                </p>
+                                <a href="#" class="btn btn-primary btn-block btn-sm">PAY NOW</a>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <!-- * carousel multiple -->
+        </div>
+        <!-- * Monthly Bills -->
+
+    </section>
+
+    <!-- app footer -->
+    <div class="appFooter">
+        <div class="footer-title">
+            Copyright © MoneyStats 2021. All Rights Reserved.
+        </div>
+    </div>
+    <!-- * app footer -->
+</div>

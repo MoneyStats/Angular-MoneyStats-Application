@@ -1,0 +1,17 @@
+{
+    "dashboardCard": {
+        "title": "Total Balance",
+        "footer": {
+            "title1": "Add Wallet",
+            "title2": "Category",
+            "title3": "Wallet",
+            "title4": "Statement on Date"
+        },
+        "stats": {
+            "title1": "PIL Performance",
+            "title2": "Performance Since",
+            "title3": "PIL Since",
+            "title4": "PIL Totale"
+        }
+    }
+}

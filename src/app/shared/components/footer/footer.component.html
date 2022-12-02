@@ -1,0 +1,46 @@
+<!-- App Bottom Menu -->
+<div class="appBottomMenu">
+    <a href="index.html" class="item active">
+        <div class="col">
+            <ion-icon name="home-outline"></ion-icon>
+            <strong>Dashboard</strong>
+        </div>
+    </a>
+    <a href="#" class="item" onclick="toastbox('soon')">
+        <div class="col">
+            <ion-icon name="document-text-outline"></ion-icon>
+            <strong>Status</strong>
+        </div>
+    </a>
+    <a href="#" class="item" data-bs-toggle="modal" data-bs-target="#infoActionSheet">
+        <div class="col">
+            <div class="action-button large">
+                <ion-icon name="arrow-up-outline"></ion-icon>
+            </div>
+        </div>
+    </a>
+    <a href="app-wallet.html" class="item">
+        <div class="col">
+            <ion-icon name="card-outline"></ion-icon>
+            <strong>My Wallet</strong>
+        </div>
+    </a>
+    <a href="app-settings.html" class="item">
+        <div class="col">
+            <ion-icon name="settings-outline"></ion-icon>
+            <strong>Settings</strong>
+        </div>
+    </a>
+</div>
+<!-- * App Bottom Menu -->
+
+<!-- toast danger -->
+<div id="soon" class="toast-box toast-bottom bg-danger">
+    <div class="in">
+        <div class="text">
+            Available Soon..
+        </div>
+    </div>
+    <button type="button" class="btn btn-sm btn-text-light close-button">OK</button>
+</div>
+<!-- * toast danger -->
