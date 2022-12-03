@@ -3,59 +3,7 @@
         <div class="row">
             <!-- Wallet Card -->
             <div class="section wallet-card-section pt-1 col-xl-6">
-                <div class="wallet-card">
-                    <!-- Balance -->
-                    <div class="balance">
-                        <div class="left">
-                            <span class="title">{{"dashboardCard.title" | translate}}</span>
-                            <h1 id="reportStatement" class="total">€ 0.00</h1>
-                        </div>
-                        <div class="right">
-                            <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#addStatement">
-                                <ion-icon name="add-outline"></ion-icon>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- * Balance -->
-                    <!-- Wallet Footer -->
-                    <div class="wallet-footer">
-                        <div class="item">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#addWalletActionSheet">
-                                <div class="icon-wrapper bg-danger">
-                                    <span>+</span>
-                                    <ion-icon name="card-outline"></ion-icon>
-                                </div>
-                                <strong>{{"dashboardCard.footer.title1" | translate}}</strong>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#categoryActionSheet">
-                                <div class="icon-wrapper">
-                                    <ion-icon name="arrow-down-outline"></ion-icon>
-                                </div>
-                                <strong>{{"dashboardCard.footer.title2" | translate}}</strong>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="app-wallet.html">
-                                <div class="icon-wrapper bg-success">
-                                    <ion-icon name="card-outline"></ion-icon>
-                                </div>
-                                <strong>{{"dashboardCard.footer.title3" | translate}}</strong>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#dateStatementActionSheet">
-                                <div class="icon-wrapper bg-warning">
-                                    <ion-icon name="bar-chart-outline"></ion-icon>
-                                </div>
-                                <strong>{{"dashboardCard.footer.title4" | translate}}</strong>
-                            </a>
-                        </div>
-
-                    </div>
-                    <!-- * Wallet Footer -->
-                </div>
+                <app-dashboard-wallet [dashboard]="dashboard" [user]="user"></app-dashboard-wallet>
             </div>
             <!-- Wallet Card -->
 

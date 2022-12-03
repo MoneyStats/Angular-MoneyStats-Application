@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AvailableSoonComponent } from './shared/components/modal/available-soon/available-soon.component';
+import { DashboardWalletComponent } from './shared/components/card/dashboard-wallet/dashboard-wallet.component';
 
 @NgModule({
   declarations: [
@@ -20,12 +21,12 @@ import { AvailableSoonComponent } from './shared/components/modal/available-soon
     DashboardComponent,
     FooterComponent,
     AvailableSoonComponent,
+    DashboardWalletComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     IonicModule.forRoot(),
-    // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

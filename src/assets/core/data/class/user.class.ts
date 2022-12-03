@@ -8,4 +8,5 @@ export class User implements UserInterface {
   role: string = 'USER';
   profilePhoto: string =
     '../../../../assets/images/img/sample/avatar/avatar1.jpg';
+  value: string = 'EUR';
 }

@@ -5,4 +5,5 @@ export interface UserInterface {
   username: string;
   role: string;
   profilePhoto: string;
+  value: string;
 }
