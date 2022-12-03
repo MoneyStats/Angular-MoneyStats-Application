@@ -28,10 +28,10 @@
             "title4": "Statement on Date"
         },
         "stats": {
-            "title1": "PIL Performance",
+            "title1": "Performance",
             "title2": "Performance Since",
-            "title3": "PIL Since",
-            "title4": "PIL Totale"
+            "title3": "Last Stats Performance",
+            "title4": "Last Stats Difference"
         }
     }
 }

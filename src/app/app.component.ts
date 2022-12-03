@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
     user.subscribe((data) => {
       this.user = data;
       this.userService.user = data;
+      this.userService.setValue();
     });
   }
 }

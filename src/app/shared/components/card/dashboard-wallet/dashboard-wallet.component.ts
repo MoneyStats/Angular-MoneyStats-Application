@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Coin, CoinSymbol } from 'src/assets/core/data/class/coin';
 import { Dashboard } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
+import { UserService } from 'src/assets/core/services/user.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
 
 @Component({
@@ -12,18 +13,13 @@ import { ToastService } from 'src/assets/core/utils/toast.service';
 export class DashboardWalletComponent implements OnInit {
   @Input('dashboard') dashboard?: Dashboard;
   @Input('user') user?: User;
-  value?: string = this.user?.value;
+  @Input('value') value?: string;
 
-  constructor(private toast: ToastService) {}
+  constructor(private toast: ToastService, private us: UserService) {}
 
   ngOnInit(): void {
-    this.setValue();
   }
 
-  setValue() {
-    if (this.user?.value === Coin.EUR) this.value = CoinSymbol.EUR;
-    else if (this.user?.value === Coin.EUR) this.value = CoinSymbol.EUR;
-  }
 
   availableSoon() {
     this.toast.availableSoon();

@@ -13,6 +13,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AvailableSoonComponent } from './shared/components/modal/available-soon/available-soon.component';
 import { DashboardWalletComponent } from './shared/components/card/dashboard-wallet/dashboard-wallet.component';
+import { StatsCardComponent } from './shared/components/card/stats-card/stats-card.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { DashboardWalletComponent } from './shared/components/card/dashboard-wal
     FooterComponent,
     AvailableSoonComponent,
     DashboardWalletComponent,
+    StatsCardComponent,
   ],
   imports: [
     BrowserModule,

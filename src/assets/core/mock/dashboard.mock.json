@@ -1,3 +1,7 @@
 {
-    "balance": 13500.00
+    "balance": 13500.00,
+    "performace": 80,
+    "performanceSince": "01-01-2022",
+    "lastStatsPerformance" : -10,
+    "lastStatsBalanceDifference": -350
 }
