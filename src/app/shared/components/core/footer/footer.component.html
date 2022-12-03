@@ -1,15 +1,15 @@
 <!-- App Bottom Menu -->
 <div class="appBottomMenu">
-    <a href="index.html" class="item active">
+    <a routerLink="" class="item active">
         <div class="col">
             <ion-icon name="home-outline"></ion-icon>
-            <strong>Dashboard</strong>
+            <strong>{{"footer.title1" | translate}}</strong>
         </div>
     </a>
-    <a href="#" class="item" onclick="toastbox('soon')">
+    <a href="#" class="item" (click)="availableSoon()">
         <div class="col">
             <ion-icon name="document-text-outline"></ion-icon>
-            <strong>Status</strong>
+            <strong>{{"footer.title2" | translate}}</strong>
         </div>
     </a>
     <a href="#" class="item" data-bs-toggle="modal" data-bs-target="#infoActionSheet">
@@ -22,25 +22,14 @@
     <a href="app-wallet.html" class="item">
         <div class="col">
             <ion-icon name="card-outline"></ion-icon>
-            <strong>My Wallet</strong>
+            <strong>{{"footer.title3" | translate}}</strong>
         </div>
     </a>
     <a href="app-settings.html" class="item">
         <div class="col">
             <ion-icon name="settings-outline"></ion-icon>
-            <strong>Settings</strong>
+            <strong>{{"footer.title4" | translate}}</strong>
         </div>
     </a>
 </div>
 <!-- * App Bottom Menu -->
-
-<!-- toast danger -->
-<div id="soon" class="toast-box toast-bottom bg-danger">
-    <div class="in">
-        <div class="text">
-            Available Soon..
-        </div>
-    </div>
-    <button type="button" class="btn btn-sm btn-text-light close-button">OK</button>
-</div>
-<!-- * toast danger -->

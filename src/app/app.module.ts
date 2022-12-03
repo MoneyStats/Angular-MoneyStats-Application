@@ -1,17 +1,17 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './shared/components/header/header.component';
+import { HeaderComponent } from './shared/components/core/header/header.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { IonicModule } from '@ionic/angular';
-import { FooterComponent } from './shared/components/footer/footer.component';
-import { SidebarComponent } from './shared/components/header/sidebar/sidebar.component';
+import { FooterComponent } from './shared/components/core/footer/footer.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AvailableSoonComponent } from './shared/components/modal/available-soon/available-soon.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     HeaderComponent,
     DashboardComponent,
     FooterComponent,
-    SidebarComponent,
+    AvailableSoonComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +37,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
   ],
   providers: [],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}
 // required for AOT compilation

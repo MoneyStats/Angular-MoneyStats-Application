@@ -297,6 +297,10 @@ a:hover, a:active, a:focus {
   font-weight: 400;
 }
 
+.appBottomMenu .item:hover {
+  opacity: .8;
+}
+
 .appBottomMenu .item:active {
   opacity: .8;
 }
@@ -6867,6 +6871,10 @@ body.dark-mode .image-listview > li a.item {
 }
 
 body.dark-mode .image-listview > li a.item:active {
+  background: rgba(45, 31, 59, 0.3);
+}
+
+body.dark-mode .image-listview>li a.item:hover {
   background: rgba(45, 31, 59, 0.3);
 }
 
