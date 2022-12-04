@@ -14,6 +14,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AvailableSoonComponent } from './shared/components/modal/available-soon/available-soon.component';
 import { DashboardWalletComponent } from './shared/components/card/dashboard-wallet/dashboard-wallet.component';
 import { StatsCardComponent } from './shared/components/card/stats-card/stats-card.component';
+import { DatePipe } from '@angular/common';
+import { TransactionCardComponent } from './shared/components/card/transaction-card/transaction-card.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { StatsCardComponent } from './shared/components/card/stats-card/stats-ca
     AvailableSoonComponent,
     DashboardWalletComponent,
     StatsCardComponent,
+    TransactionCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,7 @@ import { StatsCardComponent } from './shared/components/card/stats-card/stats-ca
       },
     }),
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
   //schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

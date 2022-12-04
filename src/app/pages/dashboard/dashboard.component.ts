@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { Dashboard } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
@@ -21,7 +22,8 @@ export class DashboardComponent implements OnInit {
     this.dashboard.lastStatsBalanceDifference.toString();
   constructor(
     private dashboardService: DashboardService,
-    public userService: UserService
+    public userService: UserService,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit(): void {
@@ -29,7 +31,10 @@ export class DashboardComponent implements OnInit {
       this.dashboard = data;
       this.dashboardService.dashboard = data;
       this.performance = this.dashboard.performace + ' %';
-      this.performanceSince = this.dashboard.performanceSince.toString();
+      let date = this.datePipe
+        .transform(this.dashboard.performanceSince, 'dd MMM y')
+        ?.toString();
+      this.performanceSince = date!;
       this.lastStatsPerformance = this.dashboard.lastStatsPerformance + ' %';
       this.lastStatsBalanceDifference =
         this.dashboard.lastStatsBalanceDifference +

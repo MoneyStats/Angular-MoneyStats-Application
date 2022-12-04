@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Coin, CoinSymbol } from 'src/assets/core/data/class/coin';
 import { Dashboard } from 'src/assets/core/data/class/dashboard.class';
@@ -17,9 +18,7 @@ export class DashboardWalletComponent implements OnInit {
 
   constructor(private toast: ToastService, private us: UserService) {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 
   availableSoon() {
     this.toast.availableSoon();

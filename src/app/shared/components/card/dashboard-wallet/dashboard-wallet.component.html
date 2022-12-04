@@ -3,7 +3,7 @@
     <div class="balance">
         <div class="left">
             <span class="title">{{"dashboardCard.title" | translate}}</span>
-            <h1 id="reportStatement" class="total">{{value}} {{dashboard?.balance}}</h1>
+            <h1 id="reportStatement" class="total">{{value}} {{dashboard?.balance | number}}</h1>
         </div>
         <div class="right">
             <a href="#" (click)="availableSoon()" class="button" data-bs-toggle="modal" data-bs-target="#addStatement">
