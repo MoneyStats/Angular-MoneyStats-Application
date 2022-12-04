@@ -384,6 +384,47 @@ notificationTaptoClose.forEach(function (el) {
 
 
 //-----------------------------------------------------------------------
+// Toast
+// trigger toast
+var toastCloseButton = document.querySelectorAll(".toast-box .close-button");
+var toastTaptoClose = document.querySelectorAll(".toast-box.tap-to-close");
+var toastBoxes = document.querySelectorAll(".toast-box");
+
+function closeToastBox() {
+    toastBoxes.forEach(function (el) {
+        el.classList.remove("show")
+    })
+}
+function toastbox(target, time) {
+    var a = document.getElementById(target);
+    closeToastBox()
+    setTimeout(() => {
+        a.classList.add("show")
+    }, 100);
+    if (time) {
+        time = time + 100;
+        setTimeout(() => {
+            closeToastBox()
+        }, time);
+    }
+}
+// close button toast
+toastCloseButton.forEach(function (el) {
+    el.addEventListener("click", function (e) {
+        e.preventDefault();
+        closeToastBox();
+    })
+})
+// tap to close toast
+toastTaptoClose.forEach(function (el) {
+    el.addEventListener("click", function (e) {
+        closeToastBox();
+    })
+})
+//-----------------------------------------------------------------------
+
+
+//-----------------------------------------------------------------------
 // Add to Home
 var osDetection = navigator.userAgent || navigator.vendor || window.opera;
 var windowsPhoneDetection = /windows phone/i.test(osDetection);

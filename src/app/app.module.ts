@@ -40,7 +40,7 @@ import { StatsCardComponent } from './shared/components/card/stats-card/stats-ca
   ],
   providers: [],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  //schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}
 // required for AOT compilation
