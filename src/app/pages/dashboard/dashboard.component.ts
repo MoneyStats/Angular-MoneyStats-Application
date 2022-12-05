@@ -4,6 +4,7 @@ import { Dashboard } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { UserService } from 'src/assets/core/services/user.service';
+import { SplideService } from 'src/assets/core/utils/splide.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,7 +24,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private dashboardService: DashboardService,
     public userService: UserService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private splide: SplideService
   ) {}
 
   ngOnInit(): void {
@@ -41,5 +43,6 @@ export class DashboardComponent implements OnInit {
         ' ' +
         this.userService.coinSymbol;
     });
+    this.splide.activeSplide();
   }
 }

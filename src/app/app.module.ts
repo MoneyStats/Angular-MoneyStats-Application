@@ -16,6 +16,8 @@ import { DashboardWalletComponent } from './shared/components/card/dashboard-wal
 import { StatsCardComponent } from './shared/components/card/stats-card/stats-card.component';
 import { DatePipe } from '@angular/common';
 import { TransactionCardComponent } from './shared/components/card/transaction-card/transaction-card.component';
+import { ContentBoxComponent } from './shared/components/card/content-box/content-box.component';
+import { SplideSlideComponent } from './shared/components/card/splide-slide/splide-slide.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { TransactionCardComponent } from './shared/components/card/transaction-c
     DashboardWalletComponent,
     StatsCardComponent,
     TransactionCardComponent,
+    ContentBoxComponent,
+    SplideSlideComponent,
   ],
   imports: [
     BrowserModule,

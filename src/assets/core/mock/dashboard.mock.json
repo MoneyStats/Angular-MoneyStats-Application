@@ -5,7 +5,7 @@
     "performanceSince": "01-01-2022",
     "lastStatsPerformance" : -10,
     "lastStatsBalanceDifference": -3500,
-    "wallet": [
+    "wallets": [
         {
             "id": 1,
             "name": "Coinbase",

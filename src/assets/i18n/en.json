@@ -1,37 +1,53 @@
 {
-    "sidebar": {
-        "overviewTitle": "Balance",
-        "menuTitle": "Menu",
-        "menu": {
-            "title1": "Dashboard",
-            "title2": "My Wallet"
+    "dashboard":{
+        "sidebar": {
+            "overviewTitle": "Balance",
+            "menuTitle": "Menu",
+            "menu": {
+                "title1": "Dashboard",
+                "title2": "My Wallet"
+            },
+            "subMenuTitle": "Others",
+            "subMenu": {
+                "title1": "Settings",
+                "title2": "Support",
+                "title3": "Log out"
+            }
         },
-        "subMenuTitle": "Others",
-        "subMenu": {
-            "title1": "Settings",
-            "title2": "Support",
-            "title3": "Log out"
-        }
-    },
-    "footer": {
-        "title1": "Dashboard",
-        "title2": "Status",
-        "title3": "My Wallet",
-        "title4": "Settings"
-    },
-    "dashboardCard": {
-        "title": "Total Balance",
         "footer": {
-            "title1": "Add Wallet",
-            "title2": "Category",
-            "title3": "Wallet",
-            "title4": "Statement on Date"
+            "title1": "Dashboard",
+            "title2": "Status",
+            "title3": "My Wallet",
+            "title4": "Settings"
         },
-        "stats": {
-            "title1": "Performance",
-            "title2": "Performance Since",
-            "title3": "Last Stats Performance",
-            "title4": "Last Stats Difference"
+        "dashboardCard": {
+            "title": "Total Balance",
+            "footer": {
+                "title1": "Add Wallet",
+                "title2": "Category",
+                "title3": "Wallet",
+                "title4": "Statement on Date"
+            },
+            "stats": {
+                "title1": "Performance",
+                "title2": "Performance Since",
+                "title3": "Last Stats Performance",
+                "title4": "Last Stats Difference"
+            }
+        },
+        "transaction": {
+            "title": "Transactions",
+            "view": "View All",
+            "nodata": {
+                "header": "Transaction",
+                "body": "Insert new data to get transaction History.",
+                "footer": "MoneyStats"
+            }
+        },
+        "wallet_splide":{
+            "title": "Wallet",
+            "view": "View All",
+            "btn": "Open Wallet"
         }
     }
 }

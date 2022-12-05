@@ -210,7 +210,7 @@ searchboxToggle.forEach(function (el) {
 //-----------------------------------------------------------------------
 // Carousel
 // Splide Carousel
-document.addEventListener('DOMContentLoaded', function () {
+/*document.addEventListener('DOMContentLoaded', function () {
 
     // Full Carousel
     document.querySelectorAll('.carousel-full').forEach(carousel => new Splide(carousel, {
@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }).mount());
-});
+});*/
 //-----------------------------------------------------------------------
 
 

@@ -12,24 +12,26 @@
             <div class="section stats-section col-xl-6">
                 <div class="row mt-2">
                     <div class="col-6">
-                        <app-stats-card [title]="'dashboardCard.stats.title1' | translate" [value]="performance"
+                        <app-stats-card [title]="'dashboard.dashboardCard.stats.title1' | translate"
+                            [value]="performance"
                             [class]="dashboard.performace === 0 ? 'text-warning' : (dashboard.performace > 0 ? 'text-success' : 'text-danger')">
                         </app-stats-card>
                     </div>
                     <div class="col-6">
-                        <app-stats-card [title]="'dashboardCard.stats.title2' | translate" [value]="performanceSince">
+                        <app-stats-card [title]="'dashboard.dashboardCard.stats.title2' | translate"
+                            [value]="performanceSince">
                         </app-stats-card>
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col-6">
-                        <app-stats-card [title]="'dashboardCard.stats.title3' | translate"
+                        <app-stats-card [title]="'dashboard.dashboardCard.stats.title3' | translate"
                             [value]="lastStatsPerformance"
                             [class]="dashboard.lastStatsPerformance === 0 ? 'text-warning' : (dashboard.lastStatsPerformance > 0 ? 'text-success' : 'text-danger')">
                         </app-stats-card>
                     </div>
                     <div class="col-6">
-                        <app-stats-card [title]="'dashboardCard.stats.title3' | translate"
+                        <app-stats-card [title]="'dashboard.dashboardCard.stats.title3' | translate"
                             [value]="lastStatsBalanceDifference"
                             [class]="dashboard.lastStatsBalanceDifference === 0 ? 'text-warning' : (dashboard.lastStatsBalanceDifference > 0 ? 'text-success' : 'text-danger')">
                         </app-stats-card>
@@ -44,70 +46,21 @@
             <!-- Transactions -->
             <div class="section mt-4 col-xl-6">
                 <div class="section-heading">
-                    <h2 class="title">Transactions</h2>
-                    <a href="app-transactions.html" class="link">View All</a>
+                    <h2 class="title">{{"dashboard.transaction.title" | translate}}</h2>
+                    <a href="#" class="link">{{"dashboard.transaction.view" | translate}}</a>
                 </div>
                 <div class="transactions">
-                    <!-- item -->
-                    <a href="app-transaction-detail.html" class="item">
-                        <div class="detail">
-                            <img src="../../../assets/images/img/sample/brand/1.jpg" alt="img"
-                                class="image-block imaged w48">
-                            <div>
-                                <strong>Amazon</strong>
-                                <p>Shopping</p>
-                            </div>
-                        </div>
-                        <div class="right">
-                            <div class="price text-danger"> - $ 150</div>
-                        </div>
-                    </a>
-                    <!-- * item -->
-                    <!-- item -->
-                    <a href="app-transaction-detail.html" class="item">
-                        <div class="detail">
-                            <img src="../../../assets/images/img/sample/brand/2.jpg" alt="img"
-                                class="image-block imaged w48">
-                            <div>
-                                <strong>Apple</strong>
-                                <p>Appstore Purchase</p>
-                            </div>
-                        </div>
-                        <div class="right">
-                            <div class="price text-danger">- $ 29</div>
-                        </div>
-                    </a>
-                    <!-- * item -->
-                    <!-- item -->
-                    <a href="app-transaction-detail.html" class="item">
-                        <div class="detail">
-                            <img src="../../../assets/images/img/sample/avatar/avatar3.jpg" alt="img"
-                                class="image-block imaged w48">
-                            <div>
-                                <strong>Alex Ljung</strong>
-                                <p>Transfer</p>
-                            </div>
-                        </div>
-                        <div class="right">
-                            <div class="price">+ $ 1,000</div>
-                        </div>
-                    </a>
-                    <!-- * item -->
-                    <!-- item -->
-                    <a href="app-transaction-detail.html" class="item">
-                        <div class="detail">
-                            <img src="../../../assets/images/img/sample/avatar/avatar4.jpg" alt="img"
-                                class="image-block imaged w48">
-                            <div>
-                                <strong>Beatriz Brito</strong>
-                                <p>Transfer</p>
-                            </div>
-                        </div>
-                        <div class="right">
-                            <div class="price text-danger">- $ 186</div>
-                        </div>
-                    </a>
-                    <!-- * item -->
+                    <app-content-box *ngIf="!dashboard.wallets || !dashboard.wallets.length"
+                        [header]="'dashboard.transaction.nodata.header' | translate"
+                        [body]="'dashboard.transaction.nodata.body' | translate"
+                        [footer]="'dashboard.transaction.nodata.footer' | translate"></app-content-box>
+                    <div *ngFor="let wallet of dashboard.wallets; let i=index">
+                        <app-transaction-card *ngIf="i<4" [category]="wallet.category"
+                            [class]="wallet.differenceLastStats === 0 ? 'text-warning' : (wallet.differenceLastStats > 0 ? 'text-success' : 'text-danger')"
+                            [differenceLastStats]="wallet.differenceLastStats + ' ' + userService.coinSymbol"
+                            [walletName]="wallet.name" [walletImg]="wallet.img">
+                        </app-transaction-card>
+                    </div>
                 </div>
             </div>
             <!-- * Transactions -->
@@ -132,65 +85,21 @@
         <!-- Monthly Bills -->
         <div class="section full mt-4">
             <div class="section-heading padding">
-                <h2 class="title">Wallet</h2>
+                <h2 class="title">{{"dashboard.wallet_splide.title" | translate}}</h2>
                 <a href="app-bills.html" class="link">View All</a>
             </div>
             <!-- carousel multiple -->
             <div class="carousel-multiple splide">
                 <div class="splide__track">
+                    <app-content-box *ngIf="!dashboard.wallets || !dashboard.wallets.length"
+                        [header]="'dashboard.transaction.nodata.header' | translate"
+                        [body]="'dashboard.transaction.nodata.body' | translate"
+                        [footer]="'dashboard.transaction.nodata.footer' | translate"></app-content-box>
                     <ul class="splide__list">
-
-                        <li class="splide__slide">
-                            <div class="bill-box">
-                                <div class="img-wrapper">
-                                    <img src="../../../assets/images/img/sample/brand/1.jpg" alt="img"
-                                        class="image-block imaged w48">
-                                </div>
-                                <div class="price">$ 14</div>
-                                <p>Prime Monthly Subscription</p>
-                                <a href="#" class="btn btn-primary btn-block btn-sm">Open</a>
-                            </div>
-                        </li>
-
-                        <li class="splide__slide">
-                            <div class="bill-box">
-                                <div class="img-wrapper">
-                                    <img src="../../../assets/images/img/sample/brand/2.jpg" alt="img"
-                                        class="image-block imaged w48">
-                                </div>
-                                <div class="price">$ 9</div>
-                                <p>Music Monthly Subscription</p>
-                                <a href="#" class="btn btn-primary btn-block btn-sm">PAY NOW</a>
-                            </div>
-                        </li>
-
-                        <li class="splide__slide">
-                            <div class="bill-box">
-                                <div class="img-wrapper">
-                                    <div class="iconbox bg-danger">
-                                        <ion-icon name="medkit-outline"></ion-icon>
-                                    </div>
-                                </div>
-                                <div class="price">$ 299</div>
-                                <p>Monthly Health Insurance</p>
-                                <a href="#" class="btn btn-primary btn-block btn-sm">PAY NOW</a>
-                            </div>
-                        </li>
-
-                        <li class="splide__slide">
-                            <div class="bill-box">
-                                <div class="img-wrapper">
-                                    <div class="iconbox">
-                                        <ion-icon name="card-outline"></ion-icon>
-                                    </div>
-                                </div>
-                                <div class="price">$ 962</div>
-                                <p>Credit Card Statement
-                                </p>
-                                <a href="#" class="btn btn-primary btn-block btn-sm">PAY NOW</a>
-                            </div>
-                        </li>
-
+                        <app-splide-slide *ngFor="let wallet of dashboard.wallets; let i=index"
+                            [category]="wallet.category" [walletName]="wallet.name" [walletImg]="wallet.img"
+                            [btn]="'Open'">
+                        </app-splide-slide>
                     </ul>
                 </div>
             </div>
