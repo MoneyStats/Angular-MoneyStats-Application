@@ -47,7 +47,7 @@
             <div class="section mt-4 col-xl-6">
                 <div class="section-heading">
                     <h2 class="title">{{"dashboard.transaction.title" | translate}}</h2>
-                    <a href="#" (click)="availableSoon()" class="link">{{"dashboard.transaction.view" | translate}}</a>
+                    <a href="#" routerLink="/transactions" class="link">{{"dashboard.transaction.view" | translate}}</a>
                 </div>
                 <div class="transactions">
                     <app-content-box *ngIf="!dashboard.wallets || !dashboard.wallets.length"

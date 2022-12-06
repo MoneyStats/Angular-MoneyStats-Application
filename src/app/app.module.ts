@@ -18,6 +18,7 @@ import { DatePipe } from '@angular/common';
 import { TransactionCardComponent } from './shared/components/card/transaction-card/transaction-card.component';
 import { ContentBoxComponent } from './shared/components/card/content-box/content-box.component';
 import { SplideSlideComponent } from './shared/components/card/splide-slide/splide-slide.component';
+import { TransactionsComponent } from './pages/transactions/transactions.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { SplideSlideComponent } from './shared/components/card/splide-slide/spli
     TransactionCardComponent,
     ContentBoxComponent,
     SplideSlideComponent,
+    TransactionsComponent,
   ],
   imports: [
     BrowserModule,

@@ -71,7 +71,7 @@
                 "input": "src/theme/variables.css"
               }
             ],
-            "scripts": ["src/app/shared/js/splide.min.js", "src/app/shared/js/apexcharts.min.js", "src/app/shared/js/base.js"]
+            "scripts": ["src/app/shared/js/splide.min.js",  "src/app/shared/js/base.js"]
           },
           "configurations": {
             "production": {

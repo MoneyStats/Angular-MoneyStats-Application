@@ -2,4 +2,8 @@
     app-footer{
         display: none;
     }
+    .section-width {
+        max-width: 2000px !important;
+        /*margin-left: calc(50% - 1000px);*/
+    }
 }
