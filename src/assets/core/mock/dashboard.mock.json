@@ -1,0 +1,353 @@
+{
+    "balance": 1350000.00,
+    "value": "EUR",
+    "performace": 800,
+    "performanceSince": "01-01-2022",
+    "lastStatsPerformance" : -10,
+    "lastStatsBalanceDifference": -3500,
+    "statsWalletDays": ["31-01-2022", "28-02-2022", "31-03-2022", "30-04-2022", "31-05-2022", "30-06-2022", "31-07-2022", "31-08-2022", "30-09-2022", "31-10-2022", "30-11-2022", "31-12-2022"],
+    "wallets": [
+        {
+            "id": 1,
+            "name": "Coinbase",
+            "img": "https://avatars.githubusercontent.com/u/1885080?s=280&v=4",
+            "category": "Investmets",
+            "differenceLastStats": 2500,
+            "history": [
+                {
+                    "date": "31-01-2022",
+                    "balance": 1000
+                },
+                {
+                    "date": "28-02-2022",
+                    "balance": 1500
+                },
+                {
+                    "date": "31-03-2022",
+                    "balance": 1200
+                },
+                {
+                    "date": "30-04-2022",
+                    "balance": 3000
+                },
+                {
+                    "date": "31-05-2022",
+                    "balance": 5000
+                },
+                {
+                    "date": "30-06-2022",
+                    "balance": 4000
+                },
+                {
+                    "date": "31-07-2022",
+                    "balance": 6000
+                },
+                {
+                    "date": "31-08-2022",
+                    "balance": 7000
+                },
+                {
+                    "date": "30-09-2022",
+                    "balance": 6000
+                },
+                {
+                    "date": "31-10-2022",
+                    "balance": 8000
+                },
+                {
+                    "date": "30-11-2022",
+                    "balance": 12000
+                },
+                {
+                    "date": "31-12-2022",
+                    "balance": 10000
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Binance",
+            "img": "https://public.bnbstatic.com/20190405/eb2349c3-b2f8-4a93-a286-8f86a62ea9d8.png",
+            "category": "Investmets",
+            "differenceLastStats": 5000,
+            "history": [
+                {
+                    "date": "31-01-2022",
+                    "balance": 7557
+                },
+                {
+                    "date": "28-02-2022",
+                    "balance": 75
+                },
+                {
+                    "date": "31-03-2022",
+                    "balance": 242
+                },
+                {
+                    "date": "30-04-2022",
+                    "balance": 353
+                },
+                {
+                    "date": "31-05-2022",
+                    "balance": 46
+                },
+                {
+                    "date": "30-06-2022",
+                    "balance": 64
+                },
+                {
+                    "date": "31-07-2022",
+                    "balance": 5454
+                },
+                {
+                    "date": "31-08-2022",
+                    "balance": 65
+                },
+                {
+                    "date": "30-09-2022",
+                    "balance": 244
+                },
+                {
+                    "date": "31-10-2022",
+                    "balance": 545
+                },
+                {
+                    "date": "30-11-2022",
+                    "balance": 3535
+                },
+                {
+                    "date": "31-12-2022",
+                    "balance": 289
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "UniCredit",
+            "img": "https://s3-symbol-logo.tradingview.com/unicredit--600.png",
+            "category": "Bank Account",
+            "differenceLastStats": 0,
+            "history": [
+                {
+                    "date": "31-01-2022",
+                    "balance": 1100
+                },
+                {
+                    "date": "28-02-2022",
+                    "balance": 1100
+                },
+                {
+                    "date": "31-03-2022",
+                    "balance": 1100
+                },
+                {
+                    "date": "30-04-2022",
+                    "balance": 3100
+                },
+                {
+                    "date": "31-05-2022",
+                    "balance": 5100
+                },
+                {
+                    "date": "30-06-2022",
+                    "balance": 4100
+                },
+                {
+                    "date": "31-07-2022",
+                    "balance": 6100
+                },
+                {
+                    "date": "31-08-2022",
+                    "balance": 7100
+                },
+                {
+                    "date": "30-09-2022",
+                    "balance": 6100
+                },
+                {
+                    "date": "31-10-2022",
+                    "balance": 8100
+                },
+                {
+                    "date": "30-11-2022",
+                    "balance": 11000
+                },
+                {
+                    "date": "31-12-2022",
+                    "balance": 11000
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Revolut",
+            "img": "https://play-lh.googleusercontent.com/YciEyN9kE0EVsUrm28c23yf7LXMnhB35geLXJRCenAKBkOtUGNgdwA3mEArRSSu9bOM",
+            "category": "Bank Account",
+            "differenceLastStats": -500,
+            "history": [
+                {
+                    "date": "31-01-2022",
+                    "balance": 1500
+                },
+                {
+                    "date": "28-02-2022",
+                    "balance": 100
+                },
+                {
+                    "date": "31-03-2022",
+                    "balance": 1500
+                },
+                {
+                    "date": "30-04-2022",
+                    "balance": 3500
+                },
+                {
+                    "date": "31-05-2022",
+                    "balance": 5500
+                },
+                {
+                    "date": "30-06-2022",
+                    "balance": 4500
+                },
+                {
+                    "date": "31-07-2022",
+                    "balance": 6500
+                },
+                {
+                    "date": "31-08-2022",
+                    "balance": 7500
+                },
+                {
+                    "date": "30-09-2022",
+                    "balance": 6500
+                },
+                {
+                    "date": "31-10-2022",
+                    "balance": 8500
+                },
+                {
+                    "date": "30-11-2022",
+                    "balance": 12500
+                },
+                {
+                    "date": "31-12-2022",
+                    "balance": 10500
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Crypto.com",
+            "img": "https://is5-ssl.mzstatic.com/image/thumb/Purple112/v4/ed/c7/fc/edc7fcc9-9f2f-d4ce-22b1-e049f55d8102/AppIcon-0-1x_U007emarketing-0-10-0-85-220.png/512x512bb.jpg",
+            "category": "Investmets",
+            "differenceLastStats": 3460,
+            "history": [
+                {
+                    "date": "31-01-2022",
+                    "balance": 10
+                },
+                {
+                    "date": "28-02-2022",
+                    "balance": 150
+                },
+                {
+                    "date": "31-03-2022",
+                    "balance": 120
+                },
+                {
+                    "date": "30-04-2022",
+                    "balance": 100
+                },
+                {
+                    "date": "31-05-2022",
+                    "balance": 200
+                },
+                {
+                    "date": "30-06-2022",
+                    "balance": 410
+                },
+                {
+                    "date": "31-07-2022",
+                    "balance": 600
+                },
+                {
+                    "date": "31-08-2022",
+                    "balance": 700
+                },
+                {
+                    "date": "30-09-2022",
+                    "balance": 605
+                },
+                {
+                    "date": "31-10-2022",
+                    "balance": 802
+                },
+                {
+                    "date": "30-11-2022",
+                    "balance": 1209
+                },
+                {
+                    "date": "31-12-2022",
+                    "balance": 1000
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "name": "BNL",
+            "img": "https://it.dealiry.com/images/brands/BNL-codice-sconto-promozionale-coupon-buono-voucher.webp",
+            "category": "Bank Account",
+            "differenceLastStats": 295,
+            "history": [
+                {
+                    "date": "31-01-2022",
+                    "balance": 100
+                },
+                {
+                    "date": "28-02-2022",
+                    "balance": 150
+                },
+                {
+                    "date": "31-03-2022",
+                    "balance": 120
+                },
+                {
+                    "date": "30-04-2022",
+                    "balance": 300
+                },
+                {
+                    "date": "31-05-2022",
+                    "balance": 500
+                },
+                {
+                    "date": "30-06-2022",
+                    "balance": 400
+                },
+                {
+                    "date": "31-07-2022",
+                    "balance": 600
+                },
+                {
+                    "date": "31-08-2022",
+                    "balance": 700
+                },
+                {
+                    "date": "30-09-2022",
+                    "balance": 600
+                },
+                {
+                    "date": "31-10-2022",
+                    "balance": 800
+                },
+                {
+                    "date": "30-11-2022",
+                    "balance": 1200
+                },
+                {
+                    "date": "31-12-2022",
+                    "balance": 1000
+                }
+            ]
+        }
+    ]
+}
