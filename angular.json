@@ -36,7 +36,7 @@
               }
             ],
             "styles": [
-              "src/styles.scss", "src/app/shared/styles/style.css",
+              "src/styles.scss", "src/app/shared/styles/style.css", "src/app/shared/styles/src/splide/splide.min.css",
               {
                 "input": "node_modules/@ionic/angular/css/core.css"
               },
@@ -71,7 +71,7 @@
                 "input": "src/theme/variables.css"
               }
             ],
-            "scripts": ["src/app/shared/js/splide.min.js", "src/app/shared/js/base.js"]
+            "scripts": ["src/app/shared/js/splide.min.js", "src/app/shared/js/apexcharts.min.js", "src/app/shared/js/base.js"]
           },
           "configurations": {
             "production": {

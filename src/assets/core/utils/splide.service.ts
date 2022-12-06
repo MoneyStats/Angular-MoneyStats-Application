@@ -57,7 +57,8 @@ function activeSplide() {
     new Splide(carousel, {
       perPage: 4,
       rewind: true,
-      type: 'loop',
+      type: 'slide',
+      autoWidth: true,
       gap: 16,
       padding: 16,
       arrows: false,

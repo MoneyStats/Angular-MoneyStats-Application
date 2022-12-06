@@ -7,6 +7,7 @@ export class Dashboard implements DashboardInterface {
   performanceSince: Date = new Date();
   lastStatsPerformance: number = 0;
   lastStatsBalanceDifference: number = 0;
+  statsWalletDays: string[] = [];
   wallets: Wallet[] = [];
 }
 
@@ -16,4 +17,10 @@ export class Wallet {
   img!: string;
   category!: string;
   differenceLastStats!: number;
+  history: Array<Stats> = [];
+}
+
+export class Stats {
+  date!: string;
+  balance!: number;
 }

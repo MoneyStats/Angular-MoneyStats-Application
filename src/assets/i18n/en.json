@@ -44,10 +44,15 @@
                 "footer": "MoneyStats"
             }
         },
+        "graph":{
+            "title": "Graph of ",
+            "view": "View All"
+        },
         "wallet_splide":{
             "title": "Wallet",
             "view": "View All",
             "btn": "Open Wallet"
         }
-    }
+    },
+    "copyright": "Copyright © MoneyStats 2023. All Rights Reserved."
 }

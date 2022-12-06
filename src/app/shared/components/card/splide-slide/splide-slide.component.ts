@@ -15,6 +15,6 @@ export class SplideSlideComponent implements OnInit {
   constructor(private splide: SplideService) {}
 
   ngOnInit(): void {
-    this.splide.activeSplide();
+    //this.splide.activeSplide();
   }
 }

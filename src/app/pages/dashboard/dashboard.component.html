@@ -47,7 +47,7 @@
             <div class="section mt-4 col-xl-6">
                 <div class="section-heading">
                     <h2 class="title">{{"dashboard.transaction.title" | translate}}</h2>
-                    <a href="#" class="link">{{"dashboard.transaction.view" | translate}}</a>
+                    <a href="#" (click)="availableSoon()" class="link">{{"dashboard.transaction.view" | translate}}</a>
                 </div>
                 <div class="transactions">
                     <app-content-box *ngIf="!dashboard.wallets || !dashboard.wallets.length"
@@ -68,14 +68,17 @@
             <!-- Graph -->
             <div class="section mt-4 col-xl-6">
                 <div class="section-heading">
-                    <h2 class="title" id="year">Graph</h2>
-                    <a href="#" class="link" onclick="toastbox('soon')">View All</a>
+                    <h2 class="title" id="year">{{"dashboard.graph.title" | translate}} {{currentYear()}}</h2>
+                    <a href="#" (click)="availableSoon()" class="link">{{"dashboard.graph.view" | translate}}</a>
                 </div>
-                <div id="chart" class=" text-center">
-                    <div id="timeline-chart"></div>
-                </div>
-                <div id="pieChart">
-                    <div id="timeline-chart"></div>
+                <app-content-box *ngIf="!dashboard.wallets || !dashboard.wallets.length"
+                    [header]="'dashboard.transaction.nodata.header' | translate"
+                    [body]="'dashboard.transaction.nodata.body' | translate"
+                    [footer]="'dashboard.transaction.nodata.footer' | translate"></app-content-box>
+                <div *ngIf="dashboard.wallets.length" class="card">
+                    <div class="card-body">
+                        <div id="chart-line"></div>
+                    </div>
                 </div>
             </div>
             <!-- * Graph -->
@@ -86,7 +89,7 @@
         <div class="section full mt-4">
             <div class="section-heading padding">
                 <h2 class="title">{{"dashboard.wallet_splide.title" | translate}}</h2>
-                <a href="app-bills.html" class="link">View All</a>
+                <a href="#" (click)="availableSoon()" class="link">{{"dashboard.wallet_splide.view" | translate}}</a>
             </div>
             <!-- carousel multiple -->
             <div class="carousel-multiple splide">
@@ -96,7 +99,7 @@
                         [body]="'dashboard.transaction.nodata.body' | translate"
                         [footer]="'dashboard.transaction.nodata.footer' | translate"></app-content-box>
                     <ul class="splide__list">
-                        <app-splide-slide *ngFor="let wallet of dashboard.wallets; let i=index"
+                        <app-splide-slide class="splide__slide" *ngFor="let wallet of dashboard.wallets; let i=index"
                             [category]="wallet.category" [walletName]="wallet.name" [walletImg]="wallet.img"
                             [btn]="'Open'">
                         </app-splide-slide>
@@ -112,7 +115,7 @@
     <!-- app footer -->
     <div class="appFooter">
         <div class="footer-title">
-            Copyright © MoneyStats 2021. All Rights Reserved.
+            {{"copyright" | translate}}
         </div>
     </div>
     <!-- * app footer -->
