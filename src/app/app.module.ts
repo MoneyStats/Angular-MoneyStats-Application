@@ -19,6 +19,7 @@ import { TransactionCardComponent } from './shared/components/card/transaction-c
 import { ContentBoxComponent } from './shared/components/card/content-box/content-box.component';
 import { SplideSlideComponent } from './shared/components/card/splide-slide/splide-slide.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { TransactionsComponent } from './pages/transactions/transactions.compone
     AppRoutingModule,
     IonicModule.forRoot(),
     HttpClientModule,
+    NgApexchartsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

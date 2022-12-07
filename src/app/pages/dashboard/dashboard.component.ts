@@ -1,8 +1,9 @@
 import { DatePipe } from '@angular/common';
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Dashboard } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
+import { ChartOptions } from 'src/assets/core/data/constant/apex.chart';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { UserService } from 'src/assets/core/services/user.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
@@ -24,12 +25,13 @@ export class DashboardComponent implements OnInit {
     this.dashboard.lastStatsPerformance + ' %';
   @Output('lastStatsPerformance') lastStatsBalanceDifference: string =
     this.dashboard.lastStatsBalanceDifference.toString();
+  public chartOptions?: Partial<ChartOptions>;
   constructor(
     private dashboardService: DashboardService,
     public userService: UserService,
     private datePipe: DatePipe,
     private splide: SplideService,
-    private chart: ChartService,
+    private charts: ChartService,
     private toast: ToastService
   ) {}
 
@@ -50,7 +52,8 @@ export class DashboardComponent implements OnInit {
         this.dashboard.lastStatsBalanceDifference +
         ' ' +
         this.userService.coinSymbol;
-      this.chart.render(data);
+      //this.chart.render(data);
+      this.chartOptions = this.charts.renderChartLine(data);
     });
     this.splide.activeSplide();
   }

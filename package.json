@@ -22,7 +22,8 @@
     "@ng-bootstrap/ng-bootstrap": "^12.1.2",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
-    "@splidejs/splide": "^4.1.4",
+    "apexcharts": "^3.36.3",
+    "ng-apexcharts": "^1.7.4",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

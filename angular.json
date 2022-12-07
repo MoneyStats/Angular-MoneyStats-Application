@@ -71,15 +71,15 @@
                 "input": "src/theme/variables.css"
               }
             ],
-            "scripts": ["src/app/shared/js/splide.min.js",  "src/app/shared/js/base.js"]
+            "scripts": ["src/app/shared/js/splide.min.js", "node_modules/apexcharts/dist/apexcharts.min.js", "src/app/shared/js/base.js"]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "4mb"
                 },
                 {
                   "type": "anyComponentStyle",

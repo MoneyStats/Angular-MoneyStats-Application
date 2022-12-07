@@ -77,7 +77,11 @@
                     [footer]="'dashboard.transaction.nodata.footer' | translate"></app-content-box>
                 <div *ngIf="dashboard.wallets.length" class="card">
                     <div class="card-body">
-                        <div id="chart-line"></div>
+                        <apx-chart [series]="chartOptions!.series!" [chart]="chartOptions!.chart!"
+                            [title]="chartOptions!.title!" [colors]="chartOptions!.colors!"
+                            [legend]="chartOptions!.legend!" [stroke]="chartOptions!.stroke!"
+                            [labels]="chartOptions!.labels!"></apx-chart>
+                        <!--<div id="chart-line"></div>-->
                     </div>
                 </div>
             </div>

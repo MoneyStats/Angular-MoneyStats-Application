@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { Dashboard } from 'src/assets/core/data/class/dashboard.class';
+import { DashboardService } from 'src/assets/core/services/dashboard.service';
+import { UserService } from 'src/assets/core/services/user.service';
 
 @Component({
   selector: 'app-transactions',
   templateUrl: './transactions.component.html',
-  styleUrls: ['./transactions.component.scss']
+  styleUrls: ['./transactions.component.scss'],
 })
 export class TransactionsComponent implements OnInit {
+  dashboard?: Dashboard;
 
-  constructor() { }
+  constructor(
+    private dashService: DashboardService,
+    public userService: UserService
+  ) {}
 
   ngOnInit(): void {
+    this.dashboard = this.dashService.dashboard;
   }
-
 }
