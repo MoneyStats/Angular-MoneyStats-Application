@@ -56,6 +56,7 @@ export class DashboardComponent implements OnInit {
       this.chartOptions = this.charts.renderChartLine(data);
     });
     this.splide.activeSplide();
+    this.activeHeader();
   }
 
   availableSoon() {
@@ -64,5 +65,10 @@ export class DashboardComponent implements OnInit {
 
   currentYear(): string {
     return new Date().getFullYear().toString();
+  }
+
+  activeHeader() {
+    const header = document.getElementById('header');
+    header!.style.display = 'flex';
   }
 }

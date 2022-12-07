@@ -1,25 +1,28 @@
 <section class="section-width">
+    <app-header-mobile *ngIf="screenService?.screenWidth! <= 780" [title]="'transaction.title' | translate"
+        [backBtn]="'transaction.mobile_back' | translate">
+    </app-header-mobile>
 
     <!-- App Capsule -->
     <div id="appCapsule">
         <div class="title-section">
-            <h2 class="title">{{"dashboard.transaction.title" | translate}}</h2>
+            <h2 class="title">{{"transaction.title" | translate}}</h2>
             <a routerLink="" class="link"><i class="fa fa-arrow-left" style="padding-right: 10px"></i>
-                Go Back to dashboard</a>
+                {{"transaction.back" | translate}}</a>
         </div>
         <!-- Transactions -->
-        <div class="section mt-2">
-            <div class="section-title">Today</div>
+        <div class="section mt-2 mb-2">
+            <div class="section-title">{{dashboard?.performanceLastDate | date:'dd MMM y'}}</div>
             <div class="transactions">
                 <app-content-box *ngIf="!dashboard?.wallets || !dashboard?.wallets?.length"
                     [header]="'dashboard.transaction.nodata.header' | translate"
                     [body]="'dashboard.transaction.nodata.body' | translate"
                     [footer]="'dashboard.transaction.nodata.footer' | translate"></app-content-box>
                 <div *ngFor="let wallet of dashboard?.wallets; let i=index">
-                    <app-transaction-card [category]="wallet.category"
+                    <app-transaction-card
                         [class]="wallet.differenceLastStats === 0 ? 'text-warning' : (wallet.differenceLastStats > 0 ? 'text-success' : 'text-danger')"
                         [differenceLastStats]="wallet.differenceLastStats + ' ' + userService.coinSymbol"
-                        [walletName]="wallet.name" [walletImg]="wallet.img">
+                        [wallet]="wallet">
                     </app-transaction-card>
                 </div>
             </div>

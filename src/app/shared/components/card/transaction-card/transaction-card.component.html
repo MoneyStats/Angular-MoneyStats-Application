@@ -1,10 +1,10 @@
 <!-- item -->
-<a href="#" class="item">
+<a href="#" [routerLink]="['/transaction/details', wallet?.name]" (click)="parsingWallet()" class="item">
     <div class="detail">
-        <img src="{{walletImg}}" alt="img" class="image-block imaged w48">
+        <img src="{{wallet?.img}}" alt="img" class="image-block imaged w48">
         <div>
-            <strong>{{walletName}}</strong>
-            <p>{{category}}</p>
+            <strong>{{wallet?.name}}</strong>
+            <p>{{wallet?.category}}</p>
         </div>
     </div>
     <div class="right">

@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Dashboard } from '../data/class/dashboard.class';
+import { CoinSymbol } from '../data/class/coin';
+import { Dashboard, Wallet } from '../data/class/dashboard.class';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +11,8 @@ import { Dashboard } from '../data/class/dashboard.class';
 export class DashboardService {
   environment = environment;
   public dashboard: Dashboard = new Dashboard();
+  public wallet?: Wallet;
+  public coinSymbol?: string;
   constructor(private http: HttpClient) {}
 
   getData(): Observable<Dashboard> {

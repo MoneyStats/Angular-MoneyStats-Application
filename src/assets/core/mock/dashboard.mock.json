@@ -3,6 +3,7 @@
     "value": "EUR",
     "performace": 800,
     "performanceSince": "01-01-2022",
+    "performanceLastDate": "12-01-2022",
     "lastStatsPerformance" : -10,
     "lastStatsBalanceDifference": -3500,
     "statsWalletDays": ["31-01-2022", "28-02-2022", "31-03-2022", "30-04-2022", "31-05-2022", "30-06-2022", "31-07-2022", "31-08-2022", "30-09-2022", "31-10-2022", "30-11-2022", "31-12-2022"],
@@ -13,6 +14,8 @@
             "img": "https://avatars.githubusercontent.com/u/1885080?s=280&v=4",
             "category": "Investmets",
             "differenceLastStats": 2500,
+            "dateLastStats": "12-01-2022 12:59",
+            "balance": 10000,
             "history": [
                 {
                     "date": "31-01-2022",
@@ -70,6 +73,8 @@
             "img": "https://public.bnbstatic.com/20190405/eb2349c3-b2f8-4a93-a286-8f86a62ea9d8.png",
             "category": "Investmets",
             "differenceLastStats": 5000,
+            "dateLastStats": "12-01-2022 12:59",
+            "balance": 10000,
             "history": [
                 {
                     "date": "31-01-2022",
@@ -127,6 +132,8 @@
             "img": "https://s3-symbol-logo.tradingview.com/unicredit--600.png",
             "category": "Bank Account",
             "differenceLastStats": 0,
+            "dateLastStats": "12-01-2022 12:59",
+            "balance": 10000,
             "history": [
                 {
                     "date": "31-01-2022",
@@ -184,6 +191,8 @@
             "img": "https://play-lh.googleusercontent.com/YciEyN9kE0EVsUrm28c23yf7LXMnhB35geLXJRCenAKBkOtUGNgdwA3mEArRSSu9bOM",
             "category": "Bank Account",
             "differenceLastStats": -500,
+            "dateLastStats": "12-01-2022 12:59",
+            "balance": 10000,
             "history": [
                 {
                     "date": "31-01-2022",
@@ -241,6 +250,8 @@
             "img": "https://is5-ssl.mzstatic.com/image/thumb/Purple112/v4/ed/c7/fc/edc7fcc9-9f2f-d4ce-22b1-e049f55d8102/AppIcon-0-1x_U007emarketing-0-10-0-85-220.png/512x512bb.jpg",
             "category": "Investmets",
             "differenceLastStats": 3460,
+            "dateLastStats": "12-01-2022 12:59",
+            "balance": 10000,
             "history": [
                 {
                     "date": "31-01-2022",
@@ -298,6 +309,8 @@
             "img": "https://it.dealiry.com/images/brands/BNL-codice-sconto-promozionale-coupon-buono-voucher.webp",
             "category": "Bank Account",
             "differenceLastStats": 295,
+            "dateLastStats": "12-01-2022 12:59",
+            "balance": 10000,
             "history": [
                 {
                     "date": "31-01-2022",

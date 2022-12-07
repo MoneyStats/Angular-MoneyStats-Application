@@ -55,10 +55,10 @@
                         [body]="'dashboard.transaction.nodata.body' | translate"
                         [footer]="'dashboard.transaction.nodata.footer' | translate"></app-content-box>
                     <div *ngFor="let wallet of dashboard.wallets; let i=index">
-                        <app-transaction-card *ngIf="i<4" [category]="wallet.category"
+                        <app-transaction-card *ngIf="i<4"
                             [class]="wallet.differenceLastStats === 0 ? 'text-warning' : (wallet.differenceLastStats > 0 ? 'text-success' : 'text-danger')"
                             [differenceLastStats]="wallet.differenceLastStats + ' ' + userService.coinSymbol"
-                            [walletName]="wallet.name" [walletImg]="wallet.img">
+                            [wallet]="wallet">
                         </app-transaction-card>
                     </div>
                 </div>

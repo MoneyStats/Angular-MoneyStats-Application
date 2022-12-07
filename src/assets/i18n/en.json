@@ -54,5 +54,19 @@
             "btn": "Open Wallet"
         }
     },
+    "transaction":{
+        "title": "Transactions",
+        "back": "Go back to dashboard",
+        "mobile_back": "Back",
+        "details": {
+            "title": "Transaction Details",
+            "status": "Status",
+            "success": "Success",
+            "category": "Category",
+            "lastStats": "Difference",
+            "date": "Date",
+            "amount": "Balance"
+        }
+    },
     "copyright": "Copyright © MoneyStats 2023. All Rights Reserved."
 }

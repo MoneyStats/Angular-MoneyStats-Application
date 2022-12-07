@@ -20,6 +20,8 @@ import { ContentBoxComponent } from './shared/components/card/content-box/conten
 import { SplideSlideComponent } from './shared/components/card/splide-slide/splide-slide.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { HeaderMobileComponent } from './shared/components/core/header-mobile/header-mobile.component';
+import { TransactionDetailsComponent } from './pages/transactions/transaction-details/transaction-details.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     ContentBoxComponent,
     SplideSlideComponent,
     TransactionsComponent,
+    HeaderMobileComponent,
+    TransactionDetailsComponent,
   ],
   imports: [
     BrowserModule,
