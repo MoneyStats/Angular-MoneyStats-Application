@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ErrorHandleComponent } from './interceptors/error-handle/error-handle.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { TransactionDetailsComponent } from './pages/transactions/transaction-details/transaction-details.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'transaction/details/:wallet',
     component: TransactionDetailsComponent,
+  },
+  {
+    path: 'error',
+    component: ErrorHandleComponent,
   },
 ];
 

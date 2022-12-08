@@ -4,6 +4,11 @@
     </app-header-mobile>
     <!-- App Capsule -->
     <div id="appCapsule" class="full-height">
+        <div class="title-section">
+            <h2 class="title">{{"transaction.details.title" | translate}}</h2>
+            <a routerLink="/transactions" class="link"><i class="fa fa-arrow-left" style="padding-right: 10px"></i>
+                {{"transaction.details.back" | translate}}</a>
+        </div>
         <div class="section mt-2 mb-2">
 
             <div class="listed-detail mt-3">
@@ -57,60 +62,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">Gen 01, 12:59</th>
-                                <td class="text-end text-primary">€ 509.40</td>
-                                <td class="text-end text-success">10 %</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Gen 01, 12:59</th>
-                                <td class="text-end text-primary">€ 509.40</td>
-                                <td class="text-end text-success">10 %</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Gen 01, 12:59</th>
-                                <td class="text-end text-primary">€ 509.40</td>
-                                <td class="text-end text-success">10 %</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Gen 01, 12:59</th>
-                                <td class="text-end text-primary">€ 509.40</td>
-                                <td class="text-end text-success">10 %</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Gen 01, 12:59</th>
-                                <td class="text-end text-primary">€ 509.40</td>
-                                <td class="text-end text-success">10 %</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Gen 01, 12:59</th>
-                                <td class="text-end text-primary">€ 509.40</td>
-                                <td class="text-end text-success">10 %</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Gen 01, 12:59</th>
-                                <td class="text-end text-primary">€ 509.40</td>
-                                <td class="text-end text-success">10 %</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Gen 01, 12:59</th>
-                                <td class="text-end text-primary">€ 509.40</td>
-                                <td class="text-end text-success">10 %</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Gen 01, 12:59</th>
-                                <td class="text-end text-primary">€ 509.40</td>
-                                <td class="text-end text-success">10 %</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Gen 01, 12:59</th>
-                                <td class="text-end text-primary">€ 509.40</td>
-                                <td class="text-end text-success">10 %</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Gen 01, 12:59</th>
-                                <td class="text-end text-primary">€ 509.40</td>
-                                <td class="text-end text-success">10 %</td>
+                            <tr *ngFor="let history of wallet?.history; let i=index">
+                                <th scope="row">{{history.date}}</th>
+                                <td class="text-end text-primary">{{dashboardService.coinSymbol}} {{history.balance}}
+                                </td>
+                                <td
+                                    class="text-end {{history.percentage === 0 ? 'text-warning' : (history.percentage > 0 ? 'text-success' : 'text-danger')}}">
+                                    {{history.percentage}} %</td>
                             </tr>
                         </tbody>
                     </table>

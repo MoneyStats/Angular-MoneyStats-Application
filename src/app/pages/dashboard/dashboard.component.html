@@ -69,7 +69,7 @@
             <div class="section mt-4 col-xl-6">
                 <div class="section-heading">
                     <h2 class="title" id="year">{{"dashboard.graph.title" | translate}} {{currentYear()}}</h2>
-                    <a href="#" (click)="availableSoon()" class="link">{{"dashboard.graph.view" | translate}}</a>
+                    <a href="#" (click)="error()" class="link">{{"dashboard.graph.view" | translate}}</a>
                 </div>
                 <app-content-box *ngIf="!dashboard.wallets || !dashboard.wallets.length"
                     [header]="'dashboard.transaction.nodata.header' | translate"

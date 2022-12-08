@@ -9,7 +9,11 @@ import { IonicModule } from '@ionic/angular';
 import { FooterComponent } from './shared/components/core/footer/footer.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AvailableSoonComponent } from './shared/components/modal/available-soon/available-soon.component';
 import { DashboardWalletComponent } from './shared/components/card/dashboard-wallet/dashboard-wallet.component';
@@ -22,6 +26,8 @@ import { TransactionsComponent } from './pages/transactions/transactions.compone
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { HeaderMobileComponent } from './shared/components/core/header-mobile/header-mobile.component';
 import { TransactionDetailsComponent } from './pages/transactions/transaction-details/transaction-details.component';
+import { ErrorHandleComponent } from './interceptors/error-handle/error-handle.component';
+import { HttpErrorInterceptor } from 'src/assets/core/interceptors/error.inteceptor';
 
 @NgModule({
   declarations: [
@@ -38,6 +44,7 @@ import { TransactionDetailsComponent } from './pages/transactions/transaction-de
     TransactionsComponent,
     HeaderMobileComponent,
     TransactionDetailsComponent,
+    ErrorHandleComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +60,14 @@ import { TransactionDetailsComponent } from './pages/transactions/transaction-de
       },
     }),
   ],
-  providers: [DatePipe],
+  providers: [
+    DatePipe,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
   //schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

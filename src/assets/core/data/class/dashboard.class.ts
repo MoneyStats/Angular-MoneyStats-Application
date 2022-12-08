@@ -1,4 +1,8 @@
-import { DashboardInterface } from '../interfaces/dashboard.interface';
+import {
+  DashboardInterface,
+  StatsInterface,
+  WalletInterface,
+} from '../interfaces/dashboard.interface';
 
 export class Dashboard implements DashboardInterface {
   balance: number = 0;
@@ -12,7 +16,7 @@ export class Dashboard implements DashboardInterface {
   wallets: Wallet[] = [];
 }
 
-export class Wallet {
+export class Wallet implements WalletInterface {
   id!: number;
   name!: string;
   img!: string;
@@ -23,7 +27,8 @@ export class Wallet {
   history: Array<Stats> = [];
 }
 
-export class Stats {
+export class Stats implements StatsInterface {
   date!: string;
   balance!: number;
+  percentage!: number;
 }

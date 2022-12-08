@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Dashboard } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
 import { ChartOptions } from 'src/assets/core/data/constant/apex.chart';
+import { ErrorService } from 'src/assets/core/interceptors/error.service';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { UserService } from 'src/assets/core/services/user.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
@@ -32,7 +33,8 @@ export class DashboardComponent implements OnInit {
     private datePipe: DatePipe,
     private splide: SplideService,
     private charts: ChartService,
-    private toast: ToastService
+    private toast: ToastService,
+    private err: ErrorService
   ) {}
 
   ngOnInit(): void {
@@ -70,5 +72,8 @@ export class DashboardComponent implements OnInit {
   activeHeader() {
     const header = document.getElementById('header');
     header!.style.display = 'flex';
+  }
+  error() {
+    this.err.throwException().subscribe((res) => console.log(res));
   }
 }
