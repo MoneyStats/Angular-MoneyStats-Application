@@ -1,0 +1,43 @@
+<app-header-mobile
+  *ngIf="screenService?.screenWidth! <= 780"
+  [title]="''"
+  [backBtn]="'transaction.mobile_back' | translate"
+>
+</app-header-mobile>
+<section class="error-section">
+  <!-- App Capsule -->
+  <div id="appCapsule">
+    <div class="section">
+      <div class="splash-page mt-5 mb-5">
+        <div class="icon-wrapper pt-5">
+          <div class="iconbox">
+            <ion-icon name="skull-outline"></ion-icon>
+          </div>
+        </div>
+        <h1>{{ exception?.statusCode }}</h1>
+        <h2 class="mb-2">{{ exception?.exceptionCode }}</h2>
+        <h2 class="mb-2">{{ exception?.exceptionError }}</h2>
+        <p>
+          {{ exception?.message }}
+        </p>
+        <p>
+          {{ exception?.exceptionMessage }}
+        </p>
+      </div>
+    </div>
+
+    <div class="fixed-bar">
+      <div class="row">
+        <div class="col-12 text-center">
+          <a
+            href="#"
+            routerLink=""
+            class="btn btn-lg btn-primary btn-block backBtn"
+            >Go Back</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- * App Capsule -->
+</section>

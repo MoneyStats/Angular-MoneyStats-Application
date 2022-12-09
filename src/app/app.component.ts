@@ -9,6 +9,7 @@ import { UserService } from 'src/assets/core/services/user.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  public showHeader: boolean = true;
   @Output('user') user?: User = new User();
   constructor(
     private translate: TranslateService,

@@ -1,8 +1,10 @@
 import { DatePipe } from '@angular/common';
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Dashboard } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
+import { ChartOptions } from 'src/assets/core/data/constant/apex.chart';
+import { ErrorService } from 'src/assets/core/interceptors/error.service';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { UserService } from 'src/assets/core/services/user.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
@@ -24,13 +26,15 @@ export class DashboardComponent implements OnInit {
     this.dashboard.lastStatsPerformance + ' %';
   @Output('lastStatsPerformance') lastStatsBalanceDifference: string =
     this.dashboard.lastStatsBalanceDifference.toString();
+  public chartOptions?: Partial<ChartOptions>;
   constructor(
     private dashboardService: DashboardService,
     public userService: UserService,
     private datePipe: DatePipe,
     private splide: SplideService,
-    private chart: ChartService,
-    private toast: ToastService
+    private charts: ChartService,
+    private toast: ToastService,
+    private err: ErrorService
   ) {}
 
   ngOnInit(): void {
@@ -50,9 +54,11 @@ export class DashboardComponent implements OnInit {
         this.dashboard.lastStatsBalanceDifference +
         ' ' +
         this.userService.coinSymbol;
-      this.chart.render(data);
+      //this.chart.render(data);
+      this.chartOptions = this.charts.renderChartLine(data);
     });
     this.splide.activeSplide();
+    this.activeHeaderAndFooter();
   }
 
   availableSoon() {
@@ -61,5 +67,15 @@ export class DashboardComponent implements OnInit {
 
   currentYear(): string {
     return new Date().getFullYear().toString();
+  }
+
+  activeHeaderAndFooter() {
+    const header = document.getElementById('header');
+    header!.style.display = 'flex';
+    const footer = document.getElementById('footer');
+    footer!.style.display = 'flex';
+  }
+  error() {
+    this.err.throwException().subscribe((res) => console.log(res));
   }
 }

@@ -3,6 +3,7 @@ export interface DashboardInterface {
   value: string;
   performace: number;
   performanceSince: Date;
+  performanceLastDate: Date;
   lastStatsPerformance: number;
   lastStatsBalanceDifference: number;
   statsWalletDays: string[];
@@ -15,10 +16,13 @@ export interface WalletInterface {
   img: string;
   category: string;
   differenceLastStats: number;
+  dateLastStats: Date;
+  balance: number;
   history: Array<StatsInterface>;
 }
 
 export interface StatsInterface {
   date: string;
   balance: number;
+  percentage: number;
 }

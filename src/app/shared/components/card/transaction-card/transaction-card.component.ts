@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { DashboardService } from 'src/assets/core/services/dashboard.service';
 
 @Component({
   selector: 'app-transaction-card',
@@ -6,13 +8,15 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./transaction-card.component.scss'],
 })
 export class TransactionCardComponent implements OnInit {
-  @Input('walletImg') walletImg?: string;
-  @Input('walletName') walletName?: string;
-  @Input('category') category?: string;
+  @Input('wallet') wallet?: Wallet;
   @Input('differenceLastStats') differenceLastStats?: string;
   @Input('class') class?: string;
 
-  constructor() {}
+  constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {}
+
+  parsingWallet() {
+    this.dashboardService.wallet = this.wallet;
+  }
 }

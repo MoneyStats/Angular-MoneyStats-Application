@@ -1,122 +1,187 @@
-<div id="appCapsule" style="margin-top: 10px;" class="faded faded-bottom">
-    <section class="section-width">
-        <div class="row">
-            <!-- Wallet Card -->
-            <div class="section wallet-card-section pt-1 col-xl-6">
-                <app-dashboard-wallet [dashboard]="dashboard" [value]="userService.coinSymbol" [user]="user">
-                </app-dashboard-wallet>
-            </div>
-            <!-- Wallet Card -->
+<div id="appCapsule" style="margin-top: 10px" class="faded faded-bottom">
+  <section class="section-width">
+    <div class="row">
+      <!-- Wallet Card -->
+      <div class="section wallet-card-section pt-1 col-xl-6">
+        <app-dashboard-wallet
+          [dashboard]="dashboard"
+          [value]="userService.coinSymbol"
+          [user]="user"
+        >
+        </app-dashboard-wallet>
+      </div>
+      <!-- Wallet Card -->
 
-            <!-- Stats -->
-            <div class="section stats-section col-xl-6">
-                <div class="row mt-2">
-                    <div class="col-6">
-                        <app-stats-card [title]="'dashboard.dashboardCard.stats.title1' | translate"
-                            [value]="performance"
-                            [class]="dashboard.performace === 0 ? 'text-warning' : (dashboard.performace > 0 ? 'text-success' : 'text-danger')">
-                        </app-stats-card>
-                    </div>
-                    <div class="col-6">
-                        <app-stats-card [title]="'dashboard.dashboardCard.stats.title2' | translate"
-                            [value]="performanceSince">
-                        </app-stats-card>
-                    </div>
-                </div>
-                <div class="row mt-2">
-                    <div class="col-6">
-                        <app-stats-card [title]="'dashboard.dashboardCard.stats.title3' | translate"
-                            [value]="lastStatsPerformance"
-                            [class]="dashboard.lastStatsPerformance === 0 ? 'text-warning' : (dashboard.lastStatsPerformance > 0 ? 'text-success' : 'text-danger')">
-                        </app-stats-card>
-                    </div>
-                    <div class="col-6">
-                        <app-stats-card [title]="'dashboard.dashboardCard.stats.title3' | translate"
-                            [value]="lastStatsBalanceDifference"
-                            [class]="dashboard.lastStatsBalanceDifference === 0 ? 'text-warning' : (dashboard.lastStatsBalanceDifference > 0 ? 'text-success' : 'text-danger')">
-                        </app-stats-card>
-                    </div>
-                </div>
-            </div>
-            <!-- * Stats -->
+      <!-- Stats -->
+      <div class="section stats-section col-xl-6">
+        <div class="row mt-2">
+          <div class="col-6">
+            <app-stats-card
+              [title]="'dashboard.dashboardCard.stats.title1' | translate"
+              [value]="performance"
+              [class]="
+                dashboard.performace === 0
+                  ? 'text-warning'
+                  : dashboard.performace > 0
+                  ? 'text-success'
+                  : 'text-danger'
+              "
+            >
+            </app-stats-card>
+          </div>
+          <div class="col-6">
+            <app-stats-card
+              [title]="'dashboard.dashboardCard.stats.title2' | translate"
+              [value]="performanceSince"
+            >
+            </app-stats-card>
+          </div>
         </div>
-
-        <div class="row">
-
-            <!-- Transactions -->
-            <div class="section mt-4 col-xl-6">
-                <div class="section-heading">
-                    <h2 class="title">{{"dashboard.transaction.title" | translate}}</h2>
-                    <a href="#" (click)="availableSoon()" class="link">{{"dashboard.transaction.view" | translate}}</a>
-                </div>
-                <div class="transactions">
-                    <app-content-box *ngIf="!dashboard.wallets || !dashboard.wallets.length"
-                        [header]="'dashboard.transaction.nodata.header' | translate"
-                        [body]="'dashboard.transaction.nodata.body' | translate"
-                        [footer]="'dashboard.transaction.nodata.footer' | translate"></app-content-box>
-                    <div *ngFor="let wallet of dashboard.wallets; let i=index">
-                        <app-transaction-card *ngIf="i<4" [category]="wallet.category"
-                            [class]="wallet.differenceLastStats === 0 ? 'text-warning' : (wallet.differenceLastStats > 0 ? 'text-success' : 'text-danger')"
-                            [differenceLastStats]="wallet.differenceLastStats + ' ' + userService.coinSymbol"
-                            [walletName]="wallet.name" [walletImg]="wallet.img">
-                        </app-transaction-card>
-                    </div>
-                </div>
-            </div>
-            <!-- * Transactions -->
-
-            <!-- Graph -->
-            <div class="section mt-4 col-xl-6">
-                <div class="section-heading">
-                    <h2 class="title" id="year">{{"dashboard.graph.title" | translate}} {{currentYear()}}</h2>
-                    <a href="#" (click)="availableSoon()" class="link">{{"dashboard.graph.view" | translate}}</a>
-                </div>
-                <app-content-box *ngIf="!dashboard.wallets || !dashboard.wallets.length"
-                    [header]="'dashboard.transaction.nodata.header' | translate"
-                    [body]="'dashboard.transaction.nodata.body' | translate"
-                    [footer]="'dashboard.transaction.nodata.footer' | translate"></app-content-box>
-                <div *ngIf="dashboard.wallets.length" class="card">
-                    <div class="card-body">
-                        <div id="chart-line"></div>
-                    </div>
-                </div>
-            </div>
-            <!-- * Graph -->
-
+        <div class="row mt-2">
+          <div class="col-6">
+            <app-stats-card
+              [title]="'dashboard.dashboardCard.stats.title3' | translate"
+              [value]="lastStatsPerformance"
+              [class]="
+                dashboard.lastStatsPerformance === 0
+                  ? 'text-warning'
+                  : dashboard.lastStatsPerformance > 0
+                  ? 'text-success'
+                  : 'text-danger'
+              "
+            >
+            </app-stats-card>
+          </div>
+          <div class="col-6">
+            <app-stats-card
+              [title]="'dashboard.dashboardCard.stats.title3' | translate"
+              [value]="lastStatsBalanceDifference"
+              [class]="
+                dashboard.lastStatsBalanceDifference === 0
+                  ? 'text-warning'
+                  : dashboard.lastStatsBalanceDifference > 0
+                  ? 'text-success'
+                  : 'text-danger'
+              "
+            >
+            </app-stats-card>
+          </div>
         </div>
-
-        <!-- Monthly Bills -->
-        <div class="section full mt-4">
-            <div class="section-heading padding">
-                <h2 class="title">{{"dashboard.wallet_splide.title" | translate}}</h2>
-                <a href="#" (click)="availableSoon()" class="link">{{"dashboard.wallet_splide.view" | translate}}</a>
-            </div>
-            <!-- carousel multiple -->
-            <div class="carousel-multiple splide">
-                <div class="splide__track">
-                    <app-content-box *ngIf="!dashboard.wallets || !dashboard.wallets.length"
-                        [header]="'dashboard.transaction.nodata.header' | translate"
-                        [body]="'dashboard.transaction.nodata.body' | translate"
-                        [footer]="'dashboard.transaction.nodata.footer' | translate"></app-content-box>
-                    <ul class="splide__list">
-                        <app-splide-slide class="splide__slide" *ngFor="let wallet of dashboard.wallets; let i=index"
-                            [category]="wallet.category" [walletName]="wallet.name" [walletImg]="wallet.img"
-                            [btn]="'Open'">
-                        </app-splide-slide>
-                    </ul>
-                </div>
-            </div>
-            <!-- * carousel multiple -->
-        </div>
-        <!-- * Monthly Bills -->
-
-    </section>
-
-    <!-- app footer -->
-    <div class="appFooter">
-        <div class="footer-title">
-            {{"copyright" | translate}}
-        </div>
+      </div>
+      <!-- * Stats -->
     </div>
-    <!-- * app footer -->
+
+    <div class="row">
+      <!-- Transactions -->
+      <div class="section mt-4 col-xl-6">
+        <div class="section-heading">
+          <h2 class="title">{{ "dashboard.transaction.title" | translate }}</h2>
+          <a href="#" routerLink="/transactions" class="link">{{
+            "dashboard.transaction.view" | translate
+          }}</a>
+        </div>
+        <div class="transactions">
+          <app-content-box
+            *ngIf="!dashboard.wallets || !dashboard.wallets.length"
+            [header]="'dashboard.transaction.nodata.header' | translate"
+            [body]="'dashboard.transaction.nodata.body' | translate"
+            [footer]="'dashboard.transaction.nodata.footer' | translate"
+          ></app-content-box>
+          <div *ngFor="let wallet of dashboard.wallets; let i = index">
+            <app-transaction-card
+              *ngIf="i < 4"
+              [class]="
+                wallet.differenceLastStats === 0
+                  ? 'text-warning'
+                  : wallet.differenceLastStats > 0
+                  ? 'text-success'
+                  : 'text-danger'
+              "
+              [differenceLastStats]="
+                wallet.differenceLastStats + ' ' + userService.coinSymbol
+              "
+              [wallet]="wallet"
+            >
+            </app-transaction-card>
+          </div>
+        </div>
+      </div>
+      <!-- * Transactions -->
+
+      <!-- Graph -->
+      <div class="section mt-4 col-xl-6">
+        <div class="section-heading">
+          <h2 class="title" id="year">
+            {{ "dashboard.graph.title" | translate }} {{ currentYear() }}
+          </h2>
+          <a href="#" (click)="error()" class="link">{{
+            "dashboard.graph.view" | translate
+          }}</a>
+        </div>
+        <app-content-box
+          *ngIf="!dashboard.wallets || !dashboard.wallets.length"
+          [header]="'dashboard.transaction.nodata.header' | translate"
+          [body]="'dashboard.transaction.nodata.body' | translate"
+          [footer]="'dashboard.transaction.nodata.footer' | translate"
+        ></app-content-box>
+        <div *ngIf="dashboard.wallets.length" class="card">
+          <div class="card-body">
+            <apx-chart
+              [series]="chartOptions!.series!"
+              [chart]="chartOptions!.chart!"
+              [title]="chartOptions!.title!"
+              [colors]="chartOptions!.colors!"
+              [legend]="chartOptions!.legend!"
+              [stroke]="chartOptions!.stroke!"
+              [labels]="chartOptions!.labels!"
+            ></apx-chart>
+            <!--<div id="chart-line"></div>-->
+          </div>
+        </div>
+      </div>
+      <!-- * Graph -->
+    </div>
+
+    <!-- Monthly Bills -->
+    <div class="section full mt-4">
+      <div class="section-heading padding">
+        <h2 class="title">{{ "dashboard.wallet_splide.title" | translate }}</h2>
+        <a href="#" (click)="availableSoon()" class="link">{{
+          "dashboard.wallet_splide.view" | translate
+        }}</a>
+      </div>
+      <!-- carousel multiple -->
+      <div class="carousel-multiple splide">
+        <div class="splide__track">
+          <app-content-box
+            *ngIf="!dashboard.wallets || !dashboard.wallets.length"
+            [header]="'dashboard.transaction.nodata.header' | translate"
+            [body]="'dashboard.transaction.nodata.body' | translate"
+            [footer]="'dashboard.transaction.nodata.footer' | translate"
+          ></app-content-box>
+          <ul class="splide__list">
+            <app-splide-slide
+              class="splide__slide"
+              *ngFor="let wallet of dashboard.wallets; let i = index"
+              [category]="wallet.category"
+              [walletName]="wallet.name"
+              [walletImg]="wallet.img"
+              [btn]="'Open'"
+            >
+            </app-splide-slide>
+          </ul>
+        </div>
+      </div>
+      <!-- * carousel multiple -->
+    </div>
+    <!-- * Monthly Bills -->
+  </section>
+
+  <!-- app footer -->
+  <div class="appFooter">
+    <div class="footer-title">
+      {{ "copyright" | translate }}
+    </div>
+  </div>
+  <!-- * app footer -->
 </div>
