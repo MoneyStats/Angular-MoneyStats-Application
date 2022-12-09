@@ -1,4 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { UtilsException } from 'src/assets/core/data/class/error';
+import { ErrorService } from 'src/assets/core/interceptors/error.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
@@ -8,9 +10,21 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class ErrorHandleComponent implements OnInit {
-  @Input('title') title?: string;
+  @Input('statusCode') statusCode?: string;
+  @Input('exceptionCode') exceptionCode?: any;
+  @Input('exceptionError') exceptionError?: string;
+  @Input('message') message?: string;
+  @Input('exceptionMessage') exceptionMessage?: string;
+  public exception?: UtilsException;
 
-  constructor(public screenService: ScreenService) {}
+  constructor(
+    public screenService: ScreenService,
+    private errorService: ErrorService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.screenService.setupHeader();
+    this.errorService.exception = this.exception!;
+    console.log(this.exception);
+  }
 }

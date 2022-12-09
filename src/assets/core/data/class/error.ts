@@ -1,5 +1,7 @@
 export class UtilsException {
-  exception?: string;
-  status?: number;
+  statusCode?: number;
+  exceptionCode?: any;
+  exceptionError?: string;
   message?: string;
+  exceptionMessage?: string;
 }

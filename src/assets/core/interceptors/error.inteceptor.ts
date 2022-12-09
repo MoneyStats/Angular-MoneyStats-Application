@@ -9,12 +9,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ErrorHandleComponent } from 'src/app/interceptors/error-handle/error-handle.component';
+import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpErrorInterceptor implements HttpInterceptor {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private errorService: ErrorService) {}
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -29,6 +31,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         } else {
           console.log('this is server side error');
           errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
+          this.errorService.throwException1(error);
           this.router.navigateByUrl('error');
         }
         console.log(errorMsg);

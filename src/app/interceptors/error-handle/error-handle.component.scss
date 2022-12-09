@@ -1,3 +1,13 @@
-body{
-    background-color: #161129 !important;
+body {
+  background-color: #161129 !important;
+}
+
+.iconbox {
+  background-color: crimson !important;
+}
+
+@media screen and (max-width: 780px) {
+  app-footer {
+    display: none;
+  }
 }

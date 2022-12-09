@@ -7,14 +7,17 @@ import { UtilsException } from '../data/class/error';
   providedIn: 'root',
 })
 export class ErrorService {
-  exception: UtilsException = new UtilsException();
+  public exception: UtilsException = new UtilsException();
   environment = environment;
   constructor(private http: HttpClient) {}
 
   throwException() {
-    this.exception.status = 404;
-    this.exception.message = 'Error Exception Message';
-    this.exception.exception = 'EXC_DEF_001';
     return this.http.get<any>('environment.getDashboardDataUrl');
+  }
+
+  throwException1(error: any) {
+    this.exception.statusCode = error.status;
+    this.exception.message = error.message;
+    this.exception.exceptionCode = error.name;
   }
 }
