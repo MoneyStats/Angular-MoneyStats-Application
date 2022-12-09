@@ -1,76 +1,82 @@
 {
-    "dashboard":{
-        "sidebar": {
-            "overviewTitle": "Balance",
-            "menuTitle": "Menu",
-            "menu": {
-                "title1": "Dashboard",
-                "title2": "My Wallet"
-            },
-            "subMenuTitle": "Others",
-            "subMenu": {
-                "title1": "Settings",
-                "title2": "Support",
-                "title3": "Log out"
-            }
-        },
-        "footer": {
-            "title1": "Dashboard",
-            "title2": "Status",
-            "title3": "My Wallet",
-            "title4": "Settings"
-        },
-        "dashboardCard": {
-            "title": "Total Balance",
-            "footer": {
-                "title1": "Add Wallet",
-                "title2": "Category",
-                "title3": "Wallet",
-                "title4": "Statement on Date"
-            },
-            "stats": {
-                "title1": "Performance",
-                "title2": "Performance Since",
-                "title3": "Last Stats Performance",
-                "title4": "Last Stats Difference"
-            }
-        },
-        "transaction": {
-            "title": "Transactions",
-            "view": "View All",
-            "nodata": {
-                "header": "Transaction",
-                "body": "Insert new data to get transaction History.",
-                "footer": "MoneyStats"
-            }
-        },
-        "graph":{
-            "title": "Graph of ",
-            "view": "View All"
-        },
-        "wallet_splide":{
-            "title": "Wallet",
-            "view": "View All",
-            "btn": "Open Wallet"
-        }
+  "dashboard": {
+    "sidebar": {
+      "overviewTitle": "Balance",
+      "menuTitle": "Menu",
+      "menu": {
+        "title1": "Dashboard",
+        "title2": "My Wallet"
+      },
+      "subMenuTitle": "Others",
+      "subMenu": {
+        "title1": "Settings",
+        "title2": "Support",
+        "title3": "Log out"
+      }
     },
-    "transaction":{
-        "title": "Transactions",
-        "back": "Go back to dashboard",
-        "mobile_back": "Back",
-        "details": {
-            "title": "Transaction Details",
-            "back": "Go back to transaction",
-            "status": "Status",
-            "success": "Success",
-            "category": "Category",
-            "lastStats": "Difference",
-            "date": "Date",
-            "amount": "Balance"
-        }
+    "footer": {
+      "title1": "Dashboard",
+      "title2": "Status",
+      "title3": "My Wallet",
+      "title4": "Settings"
     },
-    "error":{
-"title": ""
+    "dashboardCard": {
+      "title": "Total Balance",
+      "footer": {
+        "title1": "Add Wallet",
+        "title2": "Category",
+        "title3": "Wallet",
+        "title4": "Statement on Date"
+      },
+      "stats": {
+        "title1": "Performance",
+        "title2": "Performance Since",
+        "title3": "Last Stats Performance",
+        "title4": "Last Stats Difference"
+      }
     },
-    "copyright": "Copyright © MoneyStats 2023. All Rights Reserved."
+    "transaction": {
+      "title": "Transactions",
+      "view": "View All",
+      "nodata": {
+        "header": "Transaction",
+        "body": "Insert new data to get transaction History.",
+        "footer": "MoneyStats"
+      }
+    },
+    "graph": {
+      "title": "Graph of ",
+      "view": "View All"
+    },
+    "wallet_splide": {
+      "title": "Wallet",
+      "view": "View All",
+      "btn": "Open Wallet"
+    }
+  },
+  "transaction": {
+    "title": "Transactions",
+    "back": "Go back to dashboard",
+    "mobile_back": "Back",
+    "details": {
+      "title": "Transaction Details",
+      "back": "Go back to transaction",
+      "status": "Status",
+      "success": "Success",
+      "category": "Category",
+      "lastStats": "Difference",
+      "date": "Date",
+      "amount": "Balance"
+    }
+  },
+  "wallet": {
+    "active": "Active Wallet",
+    "deleted": "Deleted Wallet",
+    "title": "Wallet",
+    "back": "Go back to dashboard"
+  },
+  "error": {
+    "title": ""
+  },
+  "copyright": "Copyright © MoneyStats 2023. All Rights Reserved."
 }

@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Dashboard } from 'src/assets/core/data/class/dashboard.class';
+import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
 import { ChartOptions } from 'src/assets/core/data/constant/apex.chart';
 import { ErrorService } from 'src/assets/core/interceptors/error.service';
@@ -77,5 +77,9 @@ export class DashboardComponent implements OnInit {
   }
   error() {
     this.err.throwException().subscribe((res) => console.log(res));
+  }
+
+  walletFilter(wallets: Wallet[]): Array<Wallet> {
+    return wallets.filter((w) => !w.deleted);
   }
 }

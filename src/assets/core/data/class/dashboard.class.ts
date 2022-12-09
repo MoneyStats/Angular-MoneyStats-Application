@@ -3,6 +3,7 @@ import {
   StatsInterface,
   WalletInterface,
 } from '../interfaces/dashboard.interface';
+import { GenericModel } from './generic.class';
 
 export class Dashboard implements DashboardInterface {
   balance: number = 0;
@@ -16,7 +17,7 @@ export class Dashboard implements DashboardInterface {
   wallets: Wallet[] = [];
 }
 
-export class Wallet implements WalletInterface {
+export class Wallet extends GenericModel implements WalletInterface {
   id!: number;
   name!: string;
   img!: string;

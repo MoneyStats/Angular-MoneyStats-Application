@@ -142,11 +142,11 @@
       <!-- * Graph -->
     </div>
 
-    <!-- Monthly Bills -->
+    <!-- Wallet -->
     <div class="section full mt-4">
       <div class="section-heading padding">
         <h2 class="title">{{ "dashboard.wallet_splide.title" | translate }}</h2>
-        <a href="#" (click)="availableSoon()" class="link">{{
+        <a href="#" routerLink="wallet" class="link">{{
           "dashboard.wallet_splide.view" | translate
         }}</a>
       </div>
@@ -162,7 +162,7 @@
           <ul class="splide__list">
             <app-splide-slide
               class="splide__slide"
-              *ngFor="let wallet of dashboard.wallets; let i = index"
+              *ngFor="let wallet of walletFilter(dashboard.wallets)"
               [category]="wallet.category"
               [walletName]="wallet.name"
               [walletImg]="wallet.img"
@@ -174,7 +174,7 @@
       </div>
       <!-- * carousel multiple -->
     </div>
-    <!-- * Monthly Bills -->
+    <!-- * Wallet -->
   </section>
 
   <!-- app footer -->

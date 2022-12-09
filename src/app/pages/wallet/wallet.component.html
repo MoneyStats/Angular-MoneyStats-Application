@@ -1,0 +1,68 @@
+<section class="section-width">
+  <!-- Extra Header -->
+  <div class="extraHeader pe-0 ps-0">
+    <ul class="nav nav-tabs lined" role="tablist">
+      <li class="nav-item">
+        <a
+          class="nav-link active"
+          data-bs-toggle="tab"
+          href="#active"
+          role="tab"
+        >
+          {{ "wallet.active" | translate }}
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#deleted" role="tab">
+          {{ "wallet.deleted" | translate }}
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- * Extra Header -->
+
+  <!-- App Capsule -->
+  <div id="appCapsule" class="extra-header-active full-height">
+    <div class="title-section">
+      <h2 class="title">{{ "wallet.title" | translate }}</h2>
+      <a routerLink="" class="link"
+        ><i class="fa fa-arrow-left" style="padding-right: 10px"></i>
+        {{ "wallet.back" | translate }}</a
+      >
+    </div>
+    <div class="section tab-content mt-2 mb-1">
+      <!-- waiting tab -->
+      <div class="tab-pane fade show active" id="active" role="tabpanel">
+        <div class="row">
+          <app-wallet-card
+            *ngFor="let wallet of walletActive(wallets!)"
+            class="col-xl-3 mt-3"
+            [category]="wallet.category"
+            [walletName]="wallet.name"
+            [walletImg]="wallet.img"
+            [btn]="'Open'"
+          >
+          </app-wallet-card>
+        </div>
+      </div>
+      <!-- * waiting tab -->
+
+      <!-- deleted tab -->
+      <div class="tab-pane fade" id="deleted" role="tabpanel">
+        <div class="row">
+          <app-wallet-card
+            *ngFor="let wallet of walletDeleted(wallets!)"
+            class="col-xl-3 mt-3"
+            [category]="wallet.category"
+            [walletName]="wallet.name"
+            [walletImg]="wallet.img"
+            [btn]="'Open'"
+          >
+          </app-wallet-card>
+        </div>
+      </div>
+      <!-- * deleted tab -->
+    </div>
+  </div>
+  <!-- * App Capsule -->
+</section>

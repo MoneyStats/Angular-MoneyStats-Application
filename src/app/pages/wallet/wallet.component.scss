@@ -1,0 +1,33 @@
+.extraHeader {
+  margin-top: 20px;
+}
+
+.link {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 100px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.title-section {
+  margin-left: 30px;
+  margin-top: 45px;
+}
+
+.section-title {
+  margin-left: 20px;
+}
+
+@media screen and (max-width: 780px) {
+  .title-section {
+    display: none;
+  }
+}

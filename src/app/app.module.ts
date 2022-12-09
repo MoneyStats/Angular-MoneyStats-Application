@@ -28,6 +28,8 @@ import { HeaderMobileComponent } from './shared/components/core/header-mobile/he
 import { TransactionDetailsComponent } from './pages/transactions/transaction-details/transaction-details.component';
 import { ErrorHandleComponent } from './interceptors/error-handle/error-handle.component';
 import { HttpErrorInterceptor } from 'src/assets/core/interceptors/error.inteceptor';
+import { WalletComponent } from './pages/wallet/wallet.component';
+import { WalletCardComponent } from './shared/components/card/wallet-card/wallet-card.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { HttpErrorInterceptor } from 'src/assets/core/interceptors/error.intecep
     HeaderMobileComponent,
     TransactionDetailsComponent,
     ErrorHandleComponent,
+    WalletComponent,
+    WalletCardComponent,
   ],
   imports: [
     BrowserModule,
