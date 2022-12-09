@@ -15,7 +15,7 @@ export class ErrorHandleComponent implements OnInit {
   @Input('exceptionError') exceptionError?: string;
   @Input('message') message?: string;
   @Input('exceptionMessage') exceptionMessage?: string;
-  public exception?: UtilsException;
+  exception?: UtilsException;
 
   constructor(
     public screenService: ScreenService,
@@ -24,7 +24,7 @@ export class ErrorHandleComponent implements OnInit {
 
   ngOnInit(): void {
     this.screenService.setupHeader();
-    this.errorService.exception = this.exception!;
-    console.log(this.exception);
+    this.screenService.hideFooter();
+    this.exception = this.errorService.exception;
   }
 }

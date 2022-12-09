@@ -23,4 +23,8 @@ export class ScreenService {
       header!.style.display = 'none';
     }
   }
+  hideFooter() {
+    const footer = document.getElementById('footer');
+    footer!.style.display = 'none';
+  }
 }

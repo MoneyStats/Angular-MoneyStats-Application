@@ -58,7 +58,7 @@ export class DashboardComponent implements OnInit {
       this.chartOptions = this.charts.renderChartLine(data);
     });
     this.splide.activeSplide();
-    this.activeHeader();
+    this.activeHeaderAndFooter();
   }
 
   availableSoon() {
@@ -69,9 +69,11 @@ export class DashboardComponent implements OnInit {
     return new Date().getFullYear().toString();
   }
 
-  activeHeader() {
+  activeHeaderAndFooter() {
     const header = document.getElementById('header');
     header!.style.display = 'flex';
+    const footer = document.getElementById('footer');
+    footer!.style.display = 'flex';
   }
   error() {
     this.err.throwException().subscribe((res) => console.log(res));
