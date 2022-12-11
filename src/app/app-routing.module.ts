@@ -4,6 +4,7 @@ import { ErrorHandleComponent } from './interceptors/error-handle/error-handle.c
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { TransactionDetailsComponent } from './pages/transactions/transaction-details/transaction-details.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
+import { WalletDetailsComponent } from './pages/wallet/wallet-details/wallet-details.component';
 import { WalletComponent } from './pages/wallet/wallet.component';
 
 const routes: Routes = [
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'wallet',
     component: WalletComponent,
+  },
+  {
+    path: 'wallet/details',
+    component: WalletDetailsComponent,
   },
   {
     path: 'error',
