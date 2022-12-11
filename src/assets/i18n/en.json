@@ -46,12 +46,22 @@
     },
     "graph": {
       "title": "Graph of ",
-      "view": "View All"
+      "view": "View All",
+      "nodata": {
+        "header": "Graph",
+        "body": "Insert new data to get graph.",
+        "footer": "MoneyStats"
+      }
     },
     "wallet_splide": {
       "title": "Wallet",
       "view": "View All",
-      "btn": "Open Wallet"
+      "btn": "Open Wallet",
+      "nodata": {
+        "header": "Wallet",
+        "body": "Insert new data to get wallet.",
+        "footer": "MoneyStats"
+      }
     }
   },
   "transaction": {
@@ -73,7 +83,12 @@
     "active": "Active Wallet",
     "deleted": "Deleted Wallet",
     "title": "Wallet",
-    "back": "Go back to dashboard"
+    "back": "Go back to dashboard",
+    "nodata": {
+        "header": "Wallet",
+        "body": "Insert new data to get wallet.",
+        "footer": "MoneyStats"
+      }
   },
   "error": {
     "title": ""

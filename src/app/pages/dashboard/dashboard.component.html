@@ -120,9 +120,9 @@
         </div>
         <app-content-box
           *ngIf="!dashboard.wallets || !dashboard.wallets.length"
-          [header]="'dashboard.transaction.nodata.header' | translate"
-          [body]="'dashboard.transaction.nodata.body' | translate"
-          [footer]="'dashboard.transaction.nodata.footer' | translate"
+          [header]="'dashboard.graph.nodata.header' | translate"
+          [body]="'dashboard.graph.nodata.body' | translate"
+          [footer]="'dashboard.graph.nodata.footer' | translate"
         ></app-content-box>
         <div *ngIf="dashboard.wallets.length" class="card">
           <div class="card-body">
@@ -155,9 +155,9 @@
         <div class="splide__track">
           <app-content-box
             *ngIf="!dashboard.wallets || !dashboard.wallets.length"
-            [header]="'dashboard.transaction.nodata.header' | translate"
-            [body]="'dashboard.transaction.nodata.body' | translate"
-            [footer]="'dashboard.transaction.nodata.footer' | translate"
+            [header]="'dashboard.wallet_splide.nodata.header' | translate"
+            [body]="'dashboard.wallet_splide.nodata.body' | translate"
+            [footer]="'dashboard.wallet_splide.nodata.footer' | translate"
           ></app-content-box>
           <ul class="splide__list">
             <app-splide-slide

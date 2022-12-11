@@ -1,26 +1,4 @@
-{
-  "balance": 1350000.0,
-  "value": "EUR",
-  "performace": 800,
-  "performanceSince": "01-01-2022",
-  "performanceLastDate": "12-01-2022",
-  "lastStatsPerformance": -10,
-  "lastStatsBalanceDifference": -3500,
-  "statsWalletDays": [
-    "31-01-2022",
-    "28-02-2022",
-    "31-03-2022",
-    "30-04-2022",
-    "31-05-2022",
-    "30-06-2022",
-    "31-07-2022",
-    "31-08-2022",
-    "30-09-2022",
-    "31-10-2022",
-    "30-11-2022",
-    "31-12-2022"
-  ],
-  "wallets": [
+[
     {
       "id": 1,
       "name": "Coinbase",
@@ -446,6 +424,62 @@
           "percentage": 10
         }
       ]
+    },
+    {
+      "id": 7,
+      "name": "Coinbase Pro",
+      "img": "https://play-lh.googleusercontent.com/hi0SSeYyAbDcl1UTDVit1Or4noRiBwuNi-rAZ6QAEnGFQcZDZEIMKYkH5pbY5fn4SA",
+      "category": "Investmets",
+      "differenceLastStats": -2500,
+      "dateLastStats": "09-01-2022 12:59",
+      "balance": 0,
+      "deleted": "09-01-2022 12:59",
+      "history": [
+        {
+          "date": "31-01-2022",
+          "balance": 1000,
+          "percentage": 10
+        },
+        {
+          "date": "28-02-2022",
+          "balance": 1500,
+          "percentage": 20
+        },
+        {
+          "date": "31-03-2022",
+          "balance": 1200,
+          "percentage": 1
+        },
+        {
+          "date": "30-04-2022",
+          "balance": 3000,
+          "percentage": -10
+        },
+        {
+          "date": "31-05-2022",
+          "balance": 5000,
+          "percentage": 10
+        },
+        {
+          "date": "30-06-2022",
+          "balance": 4000,
+          "percentage": -10
+        },
+        {
+          "date": "31-07-2022",
+          "balance": 6000,
+          "percentage": 10
+        },
+        {
+          "date": "31-08-2022",
+          "balance": 7000,
+          "percentage": -10
+        },
+        {
+          "date": "30-09-2022",
+          "balance": 0,
+          "percentage": -100
+        }
+      ]
     }
-  ]
-}
+]
