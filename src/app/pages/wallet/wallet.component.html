@@ -1,9 +1,20 @@
 <section class="section-width">
+  <app-header-mobile
+    *ngIf="screenService?.screenWidth! <= 780"
+    [title]="'transaction.title' | translate"
+    [backBtn]="'transaction.mobile_back' | translate"
+  >
+  </app-header-mobile>
   <!-- Extra Header -->
   <div class="extraHeader pe-0 ps-0">
     <ul class="nav nav-tabs lined" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" data-bs-toggle="tab" href="#active" role="tab">
+        <a
+          class="nav-link active"
+          data-bs-toggle="tab"
+          href="#active"
+          role="tab"
+        >
           {{ "wallet.active" | translate }}
         </a>
       </li>
@@ -20,17 +31,27 @@
   <div id="appCapsule" class="extra-header-active full-height">
     <div class="title-section">
       <h2 class="title">{{ "wallet.title" | translate }}</h2>
-      <a routerLink="" class="link"><i class="fa fa-arrow-left" style="padding-right: 10px"></i>
-        {{ "wallet.back" | translate }}</a>
+      <a routerLink="" class="link"
+        ><i class="fa fa-arrow-left" style="padding-right: 10px"></i>
+        {{ "wallet.back" | translate }}</a
+      >
     </div>
-    <app-content-box *ngIf="!wallets || !wallets.length" [header]="'wallet.nodata.header' | translate"
-      [body]="'wallet.nodata.body' | translate" [footer]="'wallet.nodata.footer' | translate"></app-content-box>
+    <app-content-box
+      *ngIf="!wallets || !wallets.length"
+      [header]="'wallet.nodata.header' | translate"
+      [body]="'wallet.nodata.body' | translate"
+      [footer]="'wallet.nodata.footer' | translate"
+    ></app-content-box>
     <div class="section tab-content mt-2 mb-1">
       <!-- waiting tab -->
       <div class="tab-pane fade show active" id="active" role="tabpanel">
         <div class="row">
-          <app-wallet-card *ngFor="let wallet of walletActive(wallets)" class="col-md-3 mt-3"
-            [category]="wallet.category" [walletName]="wallet.name" [walletImg]="wallet.img" [btn]="'Open'">
+          <app-wallet-card
+            *ngFor="let wallet of walletActive(wallets)"
+            class="col-md-3 mt-3 col-sm-4 col-6"
+            [wallet]="wallet"
+            [btn]="'Open'"
+          >
           </app-wallet-card>
         </div>
       </div>
@@ -39,8 +60,12 @@
       <!-- deleted tab -->
       <div class="tab-pane fade" id="deleted" role="tabpanel">
         <div class="row">
-          <app-wallet-card *ngFor="let wallet of walletDeleted(wallets)" class="col-md-3 mt-3"
-            [category]="wallet.category" [walletName]="wallet.name" [walletImg]="wallet.img" [btn]="'Open'">
+          <app-wallet-card
+            *ngFor="let wallet of walletDeleted(wallets)"
+            class="col-md-3 mt-3 col-sm-4 col-6"
+            [wallet]="wallet"
+            [btn]="'Open'"
+          >
           </app-wallet-card>
         </div>
       </div>

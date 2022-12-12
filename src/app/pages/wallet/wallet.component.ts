@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
-import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { WalletService } from 'src/assets/core/services/wallet.service';
+import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
   selector: 'app-wallet',
@@ -11,9 +11,13 @@ import { WalletService } from 'src/assets/core/services/wallet.service';
 export class WalletComponent implements OnInit {
   wallets: Wallet[] = [];
 
-  constructor(private walletService: WalletService) {}
+  constructor(
+    private walletService: WalletService,
+    public screenService: ScreenService
+  ) {}
 
   ngOnInit(): void {
+    this.screenService.setupHeader();
     this.walletService.getWallet().subscribe((res) => {
       this.wallets = res;
       this.walletService.walletActive = this.walletActive(res);

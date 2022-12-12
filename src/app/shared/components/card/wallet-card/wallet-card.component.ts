@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 
 @Component({
   selector: 'app-wallet-card',
@@ -6,9 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./wallet-card.component.scss'],
 })
 export class WalletCardComponent implements OnInit {
-  @Input('walletImg') walletImg?: string;
-  @Input('walletName') walletName?: string;
-  @Input('category') category?: string;
+  @Input('wallet') wallet?: Wallet;
   @Input('btn') btn?: string;
   constructor() {}
 

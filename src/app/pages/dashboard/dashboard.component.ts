@@ -55,7 +55,9 @@ export class DashboardComponent implements OnInit {
         ' ' +
         this.userService.coinSymbol;
       //this.chart.render(data);
-      this.chartOptions = this.charts.renderChartLine(data);
+      setTimeout(() => {
+        this.chartOptions = this.charts.renderChartLine(data);
+      }, 100);
     });
     this.splide.activeSplide();
     this.activeHeaderAndFooter();

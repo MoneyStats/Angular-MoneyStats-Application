@@ -32,7 +32,7 @@ export class ChartService {
       chart: {
         type: 'area',
         width: '100%',
-        height: '350px',
+        height: 350,
         sparkline: {
           enabled: true,
         },
@@ -64,6 +64,35 @@ export class ChartService {
     };
     return chartOptions;
     //chartLine(series, dashboard.statsWalletDays);
+  }
+
+  renderChartWallet(): Partial<ChartOptions> {
+    let chartExample1: Partial<ChartOptions> = {
+      series: [
+        {
+          data: [
+            512, 405, 666, 1090, 1309, 1400, 1500, 700, 1600, 1400, 1600, 2000,
+            1100, 501, 3000, 1000, 2000,
+          ],
+        },
+      ],
+      chart: {
+        type: 'area',
+        width: '100%',
+        height: 140,
+        sparkline: {
+          enabled: true,
+        },
+      },
+      stroke: {
+        width: 2,
+      },
+      colors: ['#1DCC70'],
+      tooltip: {
+        enabled: false,
+      },
+    };
+    return chartExample1;
   }
 }
 

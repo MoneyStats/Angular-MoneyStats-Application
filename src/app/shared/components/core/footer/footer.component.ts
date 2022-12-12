@@ -16,4 +16,24 @@ export class FooterComponent implements OnInit {
   availableSoon() {
     this.toast.availableSoon();
   }
+
+  goToDashboard() {
+    this.resetAllBtn();
+    const dashboard = document.getElementById('dashboard');
+    dashboard!.classList.add('active');
+  }
+
+  goToWallet() {
+    this.resetAllBtn();
+    const wallet = document.getElementById('wallet');
+    wallet!.classList.add('active');
+  }
+
+  resetAllBtn() {
+    const dashboard = document.getElementById('dashboard');
+    dashboard!.classList.remove('active');
+
+    const wallet = document.getElementById('wallet');
+    wallet!.classList.remove('active');
+  }
 }
