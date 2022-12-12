@@ -7,33 +7,36 @@
 
 <!-- App Capsule -->
 <div id="appCapsule">
-  <div class="title-section">
-    <h2 class="title">{{ "wallet.title" | translate }}</h2>
-    <a routerLink="" class="link"
-      ><i class="fa fa-arrow-left" style="padding-right: 10px"></i>
-      {{ "wallet.back" | translate }}</a
-    >
-  </div>
+  <app-title-desktop
+    [title]="'wallet.title' | translate"
+    [back]="'wallet.back' | translate"
+  ></app-title-desktop>
   <div class="row">
     <div class="col-md-6">
       <!-- Coin Status -->
       <div id="gradientSection" class="section full gradientSection">
         <div class="in coin-head">
           <div class="hidden_mobile">
-            <img
-              src="{{ wallet?.img }}"
-              alt="img"
-              class="image-block imaged w48"
-            />
-            <h3 class="text-center mt-2">{{ wallet?.name }}</h3>
+            <div class="row">
+              <div class="col-6">
+                <img
+                  src="{{ wallet?.img }}"
+                  alt="img"
+                  class="image-block imaged w50"
+                />
+                <h3 class="text-center mt-2">{{ wallet?.name }}</h3>
+              </div>
+              <div class="col-6">
+                <h1 class="total">$ 32,517.50</h1>
+                <h4 class="caption">
+                  <span class="iconbox text-success">
+                    <ion-icon name="caret-up"></ion-icon>
+                  </span>
+                  $2,325.19 <strong>(+1.50%)</strong>
+                </h4>
+              </div>
+            </div>
           </div>
-          <h1 class="total">$ 32,517.50</h1>
-          <h4 class="caption">
-            <span class="iconbox text-success">
-              <ion-icon name="caret-up"></ion-icon>
-            </span>
-            $2,325.19 <strong>(+1.50%)</strong>
-          </h4>
         </div>
       </div>
       <!-- * Coin Status -->
@@ -105,7 +108,7 @@
 
           <!-- tab content -->
           <div class="tab-content">
-            <div class="tab-pane fade show active" id="tab-24h" role="tabpanel">
+            <div class="tab-pane fade" id="tab-24h" role="tabpanel">
               <apx-chart
                 [series]="chartOptions!.series!"
                 [chart]="chartOptions!.chart!"
@@ -150,7 +153,7 @@
                 [labels]="chartOptions!.labels!"
               ></apx-chart>
             </div>
-            <div class="tab-pane fade" id="tab-all" role="tabpanel">
+            <div class="tab-pane fade show active" id="tab-all" role="tabpanel">
               <apx-chart
                 [series]="chartOptions!.series!"
                 [chart]="chartOptions!.chart!"
@@ -235,285 +238,149 @@
     </div>
   </div>
 
-  <!-- History -->
-  <div class="section mt-4">
-    <div class="section-heading">
-      <h2 class="title">History</h2>
-      <a href="#" class="link">View All</a>
-    </div>
-    <div class="card">
-      <ul
-        class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1"
-      >
-        <!-- item -->
-        <li>
-          <a href="#" class="item">
-            <div class="icon-box bg-success">
-              <ion-icon name="arrow-up-outline"></ion-icon>
-            </div>
-            <div class="in">
-              <div>
-                <strong>Bitcoin</strong>
-                <div class="text-small text-secondary">Sell Order #7893</div>
-              </div>
-              <div class="text-end">
-                <strong>$855,24</strong>
-                <div class="text-small">Today 11:38 AM</div>
-              </div>
-            </div>
-          </a>
-        </li>
-        <!-- * item -->
-        <!-- item -->
-        <li>
-          <a href="#" class="item">
-            <div class="icon-box bg-danger">
-              <ion-icon name="arrow-down-outline"></ion-icon>
-            </div>
-            <div class="in">
-              <div>
-                <strong>Bitcoin</strong>
-                <div class="text-small text-secondary">Buy order #5501</div>
-              </div>
-              <div class="text-end">
-                <strong>$550,26</strong>
-                <div class="text-small">March 23, 2021</div>
-              </div>
-            </div>
-          </a>
-        </li>
-        <!-- * item -->
-        <!-- item -->
-        <li>
-          <a href="#" class="item">
-            <div class="icon-box bg-danger">
-              <ion-icon name="arrow-down-outline"></ion-icon>
-            </div>
-            <div class="in">
-              <div>
-                <strong>Bitcoin</strong>
-                <div class="text-small text-secondary">Buy order #5432</div>
-              </div>
-              <div class="text-end">
-                <strong>$1.509,24</strong>
-                <div class="text-small">March 22, 2021</div>
-              </div>
-            </div>
-          </a>
-        </li>
-        <!-- * item -->
-        <!-- item -->
-        <li>
-          <a href="#" class="item">
-            <div class="icon-box bg-success">
-              <ion-icon name="arrow-up-outline"></ion-icon>
-            </div>
-            <div class="in">
-              <div>
-                <strong>Bitcoin</strong>
-                <div class="text-small text-secondary">Sell order #5245</div>
-              </div>
-              <div class="text-end">
-                <strong>$52,68</strong>
-                <div class="text-small">March 5, 2021</div>
-              </div>
-            </div>
-          </a>
-        </li>
-        <!-- * item -->
-        <!-- item -->
-        <li>
-          <a href="#" class="item">
-            <div class="icon-box bg-danger">
-              <ion-icon name="arrow-down-outline"></ion-icon>
-            </div>
-            <div class="in">
-              <div>
-                <strong>Bitcoin</strong>
-                <div class="text-small text-secondary">Buy order #4954</div>
-              </div>
-              <div class="text-end">
-                <strong>$1.509,24</strong>
-                <div class="text-small">March 3, 2021</div>
-              </div>
-            </div>
-          </a>
-        </li>
-        <!-- * item -->
-        <!-- item -->
-        <li>
-          <a href="#" class="item">
-            <div class="icon-box bg-success">
-              <ion-icon name="arrow-up-outline"></ion-icon>
-            </div>
-            <div class="in">
-              <div>
-                <strong>Bitcoin</strong>
-                <div class="text-small text-secondary">Sell order #4923</div>
-              </div>
-              <div class="text-end">
-                <strong>$52,68</strong>
-                <div class="text-small">March 2, 2021</div>
-              </div>
-            </div>
-          </a>
-        </li>
-        <!-- * item -->
-      </ul>
-      <div class="card-body pt-0">
-        <a href="#" class="btn btn-block btn-outline-secondary">Load more</a>
-      </div>
-    </div>
-  </div>
-  <!-- History -->
-
-  <!-- News -->
-  <div class="section full mt-4 mb-4">
-    <div class="section-heading padding">
-      <h2 class="title">Bitcoin News</h2>
-      <a href="app-blog.html" class="link">View All</a>
-    </div>
-
-    <!-- carousel multiple -->
-    <div class="carousel-multiple splide">
-      <div class="splide__track">
-        <ul class="splide__list">
-          <li class="splide__slide">
-            <a href="app-blog-post.html">
-              <div class="blog-card">
-                <img
-                  src="assets/img/sample/photo/1.jpg"
-                  alt="image"
-                  class="imaged w-100"
-                />
-                <div class="text">
-                  <h4 class="title">
-                    What will be the value of bitcoin in the next...
-                  </h4>
-                </div>
-              </div>
-            </a>
-          </li>
-
-          <li class="splide__slide">
-            <a href="app-blog-post.html">
-              <div class="blog-card">
-                <img
-                  src="assets/img/sample/photo/2.jpg"
-                  alt="image"
-                  class="imaged w-100"
-                />
-                <div class="text">
-                  <h4 class="title">Rules you need to know in business</h4>
-                </div>
-              </div>
-            </a>
-          </li>
-
-          <li class="splide__slide">
-            <a href="app-blog-post.html">
-              <div class="blog-card">
-                <img
-                  src="assets/img/sample/photo/3.jpg"
-                  alt="image"
-                  class="imaged w-100"
-                />
-                <div class="text">
-                  <h4 class="title">10 easy ways to save your money</h4>
-                </div>
-              </div>
-            </a>
-          </li>
-
-          <li class="splide__slide">
-            <a href="app-blog-post.html">
-              <div class="blog-card">
-                <img
-                  src="assets/img/sample/photo/4.jpg"
-                  alt="image"
-                  class="imaged w-100"
-                />
-                <div class="text">
-                  <h4 class="title">Follow the financial agenda with...</h4>
-                </div>
-              </div>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <!-- * carousel multiple -->
-  </div>
-  <!-- * News -->
-
-  <div class="section inset mb-4 mt-4">
-    <div class="accordion" id="accordionExample1">
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#accordion01"
+  <div class="row mt-3">
+    <div class="col-md-6">
+      <!-- History -->
+      <div class="section">
+        <div class="section-heading">
+          <h2 class="title">{{ "dashboard.transaction.title" | translate }}</h2>
+          <a href="#" routerLink="/transactions" class="link">{{
+            "dashboard.transaction.view" | translate
+          }}</a>
+        </div>
+        <div class="card">
+          <ul
+            class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1"
           >
-            What is Bitcoin?
-          </button>
-        </h2>
-        <div
-          id="accordion01"
-          class="accordion-collapse collapse"
-          data-bs-parent="#accordionExample1"
-        >
-          <div class="accordion-body">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut at
-            feugiat tellus. Sed quis velit tellus.
+            <!-- item -->
+            <li>
+              <a href="#" class="item">
+                <div class="icon-box bg-success">
+                  <ion-icon name="arrow-up-outline"></ion-icon>
+                </div>
+                <div class="in">
+                  <div>
+                    <strong>Bitcoin</strong>
+                    <div class="text-small text-secondary">
+                      Sell Order #7893
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <strong>$855,24</strong>
+                    <div class="text-small">Today 11:38 AM</div>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <!-- * item -->
+            <!-- item -->
+            <li>
+              <a href="#" class="item">
+                <div class="icon-box bg-danger">
+                  <ion-icon name="arrow-down-outline"></ion-icon>
+                </div>
+                <div class="in">
+                  <div>
+                    <strong>Bitcoin</strong>
+                    <div class="text-small text-secondary">Buy order #5501</div>
+                  </div>
+                  <div class="text-end">
+                    <strong>$550,26</strong>
+                    <div class="text-small">March 23, 2021</div>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <!-- * item -->
+            <!-- item -->
+            <li>
+              <a href="#" class="item">
+                <div class="icon-box bg-danger">
+                  <ion-icon name="arrow-down-outline"></ion-icon>
+                </div>
+                <div class="in">
+                  <div>
+                    <strong>Bitcoin</strong>
+                    <div class="text-small text-secondary">Buy order #5432</div>
+                  </div>
+                  <div class="text-end">
+                    <strong>$1.509,24</strong>
+                    <div class="text-small">March 22, 2021</div>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <!-- * item -->
+            <!-- item -->
+            <li>
+              <a href="#" class="item">
+                <div class="icon-box bg-success">
+                  <ion-icon name="arrow-up-outline"></ion-icon>
+                </div>
+                <div class="in">
+                  <div>
+                    <strong>Bitcoin</strong>
+                    <div class="text-small text-secondary">
+                      Sell order #5245
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <strong>$52,68</strong>
+                    <div class="text-small">March 5, 2021</div>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <!-- * item -->
+            <!-- item -->
+            <li>
+              <a href="#" class="item">
+                <div class="icon-box bg-danger">
+                  <ion-icon name="arrow-down-outline"></ion-icon>
+                </div>
+                <div class="in">
+                  <div>
+                    <strong>Bitcoin</strong>
+                    <div class="text-small text-secondary">Buy order #4954</div>
+                  </div>
+                  <div class="text-end">
+                    <strong>$1.509,24</strong>
+                    <div class="text-small">March 3, 2021</div>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <!-- * item -->
+            <!-- item -->
+            <li>
+              <a href="#" class="item">
+                <div class="icon-box bg-success">
+                  <ion-icon name="arrow-up-outline"></ion-icon>
+                </div>
+                <div class="in">
+                  <div>
+                    <strong>Bitcoin</strong>
+                    <div class="text-small text-secondary">
+                      Sell order #4923
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <strong>$52,68</strong>
+                    <div class="text-small">March 2, 2021</div>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <!-- * item -->
+          </ul>
+          <div class="card-body pt-0">
+            <a href="#" class="btn btn-block btn-outline-secondary"
+              >Load more</a
+            >
           </div>
         </div>
       </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#accordion02"
-          >
-            How Bitcoin works?
-          </button>
-        </h2>
-        <div
-          id="accordion02"
-          class="accordion-collapse collapse"
-          data-bs-parent="#accordionExample1"
-        >
-          <div class="accordion-body">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut at
-            feugiat tellus. Sed quis velit tellus.
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#accordion03"
-          >
-            How can i buy/sell Bitcoin?
-          </button>
-        </h2>
-        <div
-          id="accordion03"
-          class="accordion-collapse collapse"
-          data-bs-parent="#accordionExample1"
-        >
-          <div class="accordion-body">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut at
-            feugiat tellus. Sed quis velit tellus.
-          </div>
-        </div>
-      </div>
+      <!-- History -->
     </div>
   </div>
 </div>

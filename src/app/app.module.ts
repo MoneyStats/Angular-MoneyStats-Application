@@ -31,6 +31,7 @@ import { HttpErrorInterceptor } from 'src/assets/core/interceptors/error.intecep
 import { WalletComponent } from './pages/wallet/wallet.component';
 import { WalletCardComponent } from './shared/components/card/wallet-card/wallet-card.component';
 import { WalletDetailsComponent } from './pages/wallet/wallet-details/wallet-details.component';
+import { TitleDesktopComponent } from './shared/components/core/title-desktop/title-desktop.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { WalletDetailsComponent } from './pages/wallet/wallet-details/wallet-det
     WalletComponent,
     WalletCardComponent,
     WalletDetailsComponent,
+    TitleDesktopComponent,
   ],
   imports: [
     BrowserModule,

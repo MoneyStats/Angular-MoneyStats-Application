@@ -29,7 +29,7 @@
   }
 }
 
-.link {
+.links {
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -40,10 +40,16 @@
   text-decoration: none;
 }
 
-.link:hover {
+.links:hover {
   color: rgba(255, 255, 255, 0.5);
 }
 
 .gradientSection {
   border-radius: 20px;
 }
+
+.w50 {
+  width: 100px;
+  border-radius: 20px;
+}
+

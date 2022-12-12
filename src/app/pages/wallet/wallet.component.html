@@ -29,13 +29,11 @@
 
   <!-- App Capsule -->
   <div id="appCapsule" class="extra-header-active full-height">
-    <div class="title-section">
-      <h2 class="title">{{ "wallet.title" | translate }}</h2>
-      <a routerLink="" class="link"
-        ><i class="fa fa-arrow-left" style="padding-right: 10px"></i>
-        {{ "wallet.back" | translate }}</a
-      >
-    </div>
+    <app-title-desktop
+      [title]="'wallet.title' | translate"
+      [back]="'wallet.back' | translate"
+    ></app-title-desktop>
+
     <app-content-box
       *ngIf="!wallets || !wallets.length"
       [header]="'wallet.nodata.header' | translate"

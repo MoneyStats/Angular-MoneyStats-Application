@@ -66,11 +66,11 @@
   },
   "transaction": {
     "title": "Transactions",
-    "back": "Go back to dashboard",
+    "back": "Go back to previous page",
     "mobile_back": "Back",
     "details": {
       "title": "Transaction Details",
-      "back": "Go back to transaction",
+      "back": "Go back to previous page",
       "status": "Status",
       "success": "Success",
       "category": "Category",
@@ -83,12 +83,12 @@
     "active": "Active Wallet",
     "deleted": "Deleted Wallet",
     "title": "Wallet",
-    "back": "Go back to dashboard",
+    "back": "Go back to previous page",
     "nodata": {
-        "header": "Wallet",
-        "body": "Insert new data to get wallet.",
-        "footer": "MoneyStats"
-      }
+      "header": "Wallet",
+      "body": "Insert new data to get wallet.",
+      "footer": "MoneyStats"
+    }
   },
   "error": {
     "title": ""
