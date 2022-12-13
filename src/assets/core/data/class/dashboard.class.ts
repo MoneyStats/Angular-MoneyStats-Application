@@ -22,10 +22,17 @@ export class Wallet extends GenericModel implements WalletInterface {
   name!: string;
   img!: string;
   category!: string;
+  allTimeHigh!: number;
+  allTimeHighDate!: Date;
+  totalPerformance!: number;
+  highPrice!: number;
+  highPriceDate!: Date;
+  lowPrice!: number;
+  lowPriceDate!: Date;
   differenceLastStats!: number;
   dateLastStats!: Date;
   balance!: number;
-  history: Array<Stats> = [];
+  history: Stats[] = [];
 }
 
 export class Stats implements StatsInterface {

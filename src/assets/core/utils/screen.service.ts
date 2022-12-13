@@ -16,6 +16,13 @@ export class ScreenService {
     this.screenWidth = window.innerWidth;
   }
 
+  activeHeaderAndFooter() {
+    const header = document.getElementById('header');
+    header!.style.display = 'flex';
+    const footer = document.getElementById('footer');
+    footer!.style.display = 'flex';
+  }
+
   setupHeader() {
     this.getScreenSize();
     if (this.screenWidth! <= 780) {
@@ -26,5 +33,25 @@ export class ScreenService {
   hideFooter() {
     const footer = document.getElementById('footer');
     footer!.style.display = 'none';
+  }
+
+  goToDashboard() {
+    this.resetAllBtn();
+    const dashboard = document.getElementById('dashboard');
+    dashboard!.classList.add('active');
+  }
+
+  goToWallet() {
+    this.resetAllBtn();
+    const wallet = document.getElementById('wallet');
+    wallet!.classList.add('active');
+  }
+
+  resetAllBtn() {
+    const dashboard = document.getElementById('dashboard');
+    dashboard!.classList.remove('active');
+
+    const wallet = document.getElementById('wallet');
+    wallet!.classList.remove('active');
   }
 }

@@ -18,10 +18,12 @@ export class WalletComponent implements OnInit {
 
   ngOnInit(): void {
     this.screenService.setupHeader();
+    this.screenService.goToWallet();
     this.walletService.getWallet().subscribe((res) => {
       this.wallets = res;
       this.walletService.walletActive = this.walletActive(res);
       this.walletService.walletDeleted = this.walletDeleted(res);
+      this.walletDetails(res);
     });
   }
 
@@ -31,5 +33,9 @@ export class WalletComponent implements OnInit {
 
   walletDeleted(wallets: Wallet[]): Array<Wallet> {
     return wallets.filter((w) => w.deleted);
+  }
+
+  walletDetails(res: Wallet[]) {
+    this.walletService.walletDetails = res;
   }
 }

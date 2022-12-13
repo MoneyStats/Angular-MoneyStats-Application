@@ -88,6 +88,17 @@
       "header": "Wallet",
       "body": "Insert new data to get wallet.",
       "footer": "MoneyStats"
+    },
+    "details": {
+      "title": " Details",
+      "back": "Go back to previous page",
+      "status": "Status",
+      "allTimeHigh": "All Time High on ",
+      "totalPerformance": "Total Performance",
+      "highPrice": "High Price on ",
+      "lowPrice": "Low Price on ",
+      "category": "Category",
+      "dateLastStats": "Date Last Stats"
     }
   },
   "error": {

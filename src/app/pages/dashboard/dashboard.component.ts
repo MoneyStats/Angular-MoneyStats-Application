@@ -1,13 +1,14 @@
 import { DatePipe } from '@angular/common';
-import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
 import { ChartOptions } from 'src/assets/core/data/constant/apex.chart';
 import { ErrorService } from 'src/assets/core/interceptors/error.service';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { UserService } from 'src/assets/core/services/user.service';
+import { WalletService } from 'src/assets/core/services/wallet.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
+import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { SplideService } from 'src/assets/core/utils/splide.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
 
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit {
   @Output('lastStatsPerformance') lastStatsBalanceDifference: string =
     this.dashboard.lastStatsBalanceDifference.toString();
   public chartOptions?: Partial<ChartOptions>;
+
   constructor(
     private dashboardService: DashboardService,
     public userService: UserService,
@@ -34,7 +36,9 @@ export class DashboardComponent implements OnInit {
     private splide: SplideService,
     private charts: ChartService,
     private toast: ToastService,
-    private err: ErrorService
+    private err: ErrorService,
+    private screenService: ScreenService,
+    private walletService: WalletService
   ) {}
 
   ngOnInit(): void {
@@ -54,13 +58,15 @@ export class DashboardComponent implements OnInit {
         this.dashboard.lastStatsBalanceDifference +
         ' ' +
         this.userService.coinSymbol;
+      this.walletService.totalBalance = data.balance;
       //this.chart.render(data);
       setTimeout(() => {
         this.chartOptions = this.charts.renderChartLine(data);
       }, 100);
     });
     this.splide.activeSplide();
-    this.activeHeaderAndFooter();
+    this.screenService.activeHeaderAndFooter();
+    this.screenService.goToDashboard();
   }
 
   availableSoon() {
@@ -71,12 +77,6 @@ export class DashboardComponent implements OnInit {
     return new Date().getFullYear().toString();
   }
 
-  activeHeaderAndFooter() {
-    const header = document.getElementById('header');
-    header!.style.display = 'flex';
-    const footer = document.getElementById('footer');
-    footer!.style.display = 'flex';
-  }
   error() {
     this.err.throwException().subscribe((res) => console.log(res));
   }

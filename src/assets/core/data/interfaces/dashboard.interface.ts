@@ -15,10 +15,17 @@ export interface WalletInterface {
   name: string;
   img: string;
   category: string;
+  allTimeHigh: number;
+  allTimeHighDate: Date;
+  totalPerformance: number;
+  highPrice: number;
+  highPriceDate: Date;
+  lowPrice: number;
+  lowPriceDate: Date;
   differenceLastStats: number;
   dateLastStats: Date;
   balance: number;
-  history: Array<StatsInterface>;
+  history: StatsInterface[];
 }
 
 export interface StatsInterface {

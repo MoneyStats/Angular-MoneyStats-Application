@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { WalletService } from 'src/assets/core/services/wallet.service';
 
 @Component({
   selector: 'app-wallet-card',

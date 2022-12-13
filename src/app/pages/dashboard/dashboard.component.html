@@ -128,13 +128,15 @@
         <div *ngIf="dashboard.wallets.length" class="card">
           <div class="card-body">
             <apx-chart
-              [series]="chartOptions!.series!"
-              [chart]="chartOptions!.chart!"
-              [title]="chartOptions!.title!"
-              [colors]="chartOptions!.colors!"
-              [legend]="chartOptions!.legend!"
-              [stroke]="chartOptions!.stroke!"
-              [labels]="chartOptions!.labels!"
+              *ngIf="chartOptions"
+              [series]="chartOptions.series!"
+              [chart]="chartOptions.chart!"
+              [title]="chartOptions.title!"
+              [colors]="chartOptions.colors!"
+              [legend]="chartOptions.legend!"
+              [stroke]="chartOptions.stroke!"
+              [labels]="chartOptions.labels!"
+              type="area"
             ></apx-chart>
             <!--<div id="chart-line"></div>-->
           </div>

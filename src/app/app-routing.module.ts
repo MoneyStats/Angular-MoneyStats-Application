@@ -25,7 +25,7 @@ const routes: Routes = [
     component: WalletComponent,
   },
   {
-    path: 'wallet/details',
+    path: 'wallet/details/:wallet',
     component: WalletDetailsComponent,
   },
   {

@@ -8,8 +8,8 @@
 <!-- App Capsule -->
 <div id="appCapsule">
   <app-title-desktop
-    [title]="'wallet.title' | translate"
-    [back]="'wallet.back' | translate"
+    [title]="wallet?.name + ('wallet.details.title' | translate)"
+    [back]="'wallet.details.back' | translate"
   ></app-title-desktop>
   <div class="row">
     <div class="col-md-6">
@@ -28,12 +28,25 @@
               </div>
             </div>
             <div class="col-6 w100">
-              <h1 class="total">$ 32,517.50</h1>
+              <h1 class="total">{{ coinSymbol }} {{ wallet?.balance }}</h1>
               <h4 class="caption">
-                <span class="iconbox text-success">
-                  <ion-icon name="caret-up"></ion-icon>
+                <span
+                  class="iconbox {{
+                    wallet!.differenceLastStats > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  }}"
+                >
+                  <ion-icon
+                    name="{{
+                      wallet!.differenceLastStats > 0
+                        ? 'caret-up'
+                        : 'caret-down'
+                    }}"
+                  ></ion-icon>
                 </span>
-                $2,325.19 <strong>(+1.50%)</strong>
+                {{ coinSymbol }}{{ wallet?.differenceLastStats }}
+                <strong>({{ percentageLastStats }})</strong>
               </h4>
             </div>
           </div>
@@ -51,44 +64,22 @@
                 <a
                   class="nav-link"
                   data-bs-toggle="tab"
-                  href="#tab-24h"
-                  role="tab"
-                  (click)="renderGraph()"
-                >
-                  24H
-                </a>
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  data-bs-toggle="tab"
-                  href="#tab-1w"
-                  role="tab"
-                  (click)="renderGraph()"
-                >
-                  1W
-                </a>
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  data-bs-toggle="tab"
-                  href="#tab-1m"
-                  role="tab"
-                  (click)="renderGraph()"
-                >
-                  1M
-                </a>
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  data-bs-toggle="tab"
                   href="#tab-1y"
                   role="tab"
-                  (click)="renderGraph()"
+                  (click)="graph1Y()"
                 >
                   1Y
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  data-bs-toggle="tab"
+                  href="#tab-3y"
+                  role="tab"
+                  (click)="graph3Y()"
+                >
+                  3Y
                 </a>
               </li>
               <li class="nav-item">
@@ -97,7 +88,6 @@
                   data-bs-toggle="tab"
                   href="#tab-all"
                   role="tab"
-                  (click)="renderGraph()"
                 >
                   All
                 </a>
@@ -108,60 +98,43 @@
 
           <!-- tab content -->
           <div class="tab-content">
-            <div class="tab-pane fade" id="tab-24h" role="tabpanel">
-              <apx-chart
-                [series]="chartOptions!.series!"
-                [chart]="chartOptions!.chart!"
-                [title]="chartOptions!.title!"
-                [colors]="chartOptions!.colors!"
-                [legend]="chartOptions!.legend!"
-                [stroke]="chartOptions!.stroke!"
-                [labels]="chartOptions!.labels!"
-              ></apx-chart>
-            </div>
-
-            <div class="tab-pane fade" id="tab-1w" role="tabpanel">
-              <apx-chart
-                [series]="chartOptions!.series!"
-                [chart]="chartOptions!.chart!"
-                [title]="chartOptions!.title!"
-                [colors]="chartOptions!.colors!"
-                [legend]="chartOptions!.legend!"
-                [stroke]="chartOptions!.stroke!"
-                [labels]="chartOptions!.labels!"
-              ></apx-chart>
-            </div>
-            <div class="tab-pane fade" id="tab-1m" role="tabpanel">
-              <apx-chart
-                [series]="chartOptions!.series!"
-                [chart]="chartOptions!.chart!"
-                [title]="chartOptions!.title!"
-                [colors]="chartOptions!.colors!"
-                [legend]="chartOptions!.legend!"
-                [stroke]="chartOptions!.stroke!"
-                [labels]="chartOptions!.labels!"
-              ></apx-chart>
-            </div>
             <div class="tab-pane fade" id="tab-1y" role="tabpanel">
               <apx-chart
-                [series]="chartOptions!.series!"
-                [chart]="chartOptions!.chart!"
-                [title]="chartOptions!.title!"
-                [colors]="chartOptions!.colors!"
-                [legend]="chartOptions!.legend!"
-                [stroke]="chartOptions!.stroke!"
-                [labels]="chartOptions!.labels!"
+                *ngIf="chart1Y"
+                [series]="chart1Y.series!"
+                [chart]="chart1Y.chart!"
+                [title]="chart1Y.title!"
+                [colors]="chart1Y.colors!"
+                [legend]="chart1Y.legend!"
+                [stroke]="chart1Y.stroke!"
+                [labels]="chart1Y.labels!"
+                type="area"
+              ></apx-chart>
+            </div>
+            <div class="tab-pane fade" id="tab-3y" role="tabpanel">
+              <apx-chart
+                *ngIf="chart3Y"
+                [series]="chart3Y.series!"
+                [chart]="chart3Y.chart!"
+                [title]="chart3Y.title!"
+                [colors]="chart3Y.colors!"
+                [legend]="chart3Y.legend!"
+                [stroke]="chart3Y.stroke!"
+                [labels]="chart3Y.labels!"
+                type="area"
               ></apx-chart>
             </div>
             <div class="tab-pane fade show active" id="tab-all" role="tabpanel">
               <apx-chart
-                [series]="chartOptions!.series!"
-                [chart]="chartOptions!.chart!"
-                [title]="chartOptions!.title!"
-                [colors]="chartOptions!.colors!"
-                [legend]="chartOptions!.legend!"
-                [stroke]="chartOptions!.stroke!"
-                [labels]="chartOptions!.labels!"
+                *ngIf="chartAll"
+                [series]="chartAll.series!"
+                [chart]="chartAll.chart!"
+                [title]="chartAll.title!"
+                [colors]="chartAll.colors!"
+                [legend]="chartAll.legend!"
+                [stroke]="chartAll.stroke!"
+                [labels]="chartAll.labels!"
+                type="area"
               ></apx-chart>
             </div>
           </div>
@@ -176,57 +149,100 @@
         <div class="card">
           <ul class="listview no-line transparent flush simple-listview">
             <li>
-              <div class="text-muted">Status</div>
-              <strong class="text-success">Active</strong>
+              <div class="text-muted">
+                {{ "wallet.details.status" | translate }}
+              </div>
+              <strong
+                class="{{ wallet?.deleted ? 'text-danger' : 'text-success' }}"
+                >{{ wallet?.deleted ? "Deleted" : "Active" }}</strong
+              >
             </li>
             <li>
-              <div class="text-muted">Last Change</div>
-              <strong class="text-success">+5.10%</strong>
+              <div class="text-muted">
+                {{ "wallet.details.allTimeHigh" | translate }}
+                {{ wallet?.allTimeHighDate | date : "d MMM y" }}
+              </div>
+              <strong>{{ coinSymbol }} {{ wallet?.allTimeHigh }}</strong>
             </li>
             <li>
-              <div class="text-muted">All Time High</div>
-              <strong>$56,367.23</strong>
+              <div class="text-muted">
+                {{ "wallet.details.totalPerformance" | translate }}
+              </div>
+              <strong
+                class="{{
+                  wallet?.totalPerformance === 0
+                    ? 'text-warning'
+                    : wallet!.totalPerformance > 0
+                    ? 'text-success'
+                    : 'text-danger'
+                }}"
+                >{{ wallet?.totalPerformance }}%</strong
+              >
             </li>
             <li>
-              <div class="text-muted">High Price 2022</div>
-              <strong>$56,367.23</strong>
+              <div class="text-muted">
+                {{ "wallet.details.highPrice" | translate }}
+                {{ wallet?.highPriceDate | date : "d MMM y" }}
+              </div>
+              <strong>{{ wallet?.highPrice }}</strong>
             </li>
             <li>
-              <div class="text-muted">Low Price 2022</div>
-              <strong>$18,529.90</strong>
+              <div class="text-muted">
+                {{ "wallet.details.lowPrice" | translate }}
+                {{ wallet?.lowPriceDate | date : "d MMM y" }}
+              </div>
+              <strong>{{ wallet?.lowPrice }}</strong>
             </li>
             <li>
-              <div class="text-muted">First Stats</div>
-              <strong>BTC 14.62M</strong>
+              <div class="text-muted">
+                {{ "wallet.details.category" | translate }}
+              </div>
+              <strong>{{ wallet?.category }}</strong>
             </li>
             <li>
-              <div class="text-muted">Last Stats</div>
-              <strong>$526.48B</strong>
+              <div class="text-muted">
+                {{ "wallet.details.dateLastStats" | translate }}
+              </div>
+              <strong>{{ wallet?.dateLastStats | date : "d MMM y" }}</strong>
             </li>
           </ul>
         </div>
         <div class="card mt-2">
           <div class="card-body">
             <div class="row mb-05 fontsize-sub">
-              <div class="col text-success"><strong>72% Buy</strong></div>
+              <div class="col text-success">
+                <strong
+                  >{{ percentageWalletInTotal() | number : "1.0-2" }}%
+                </strong>
+              </div>
               <div class="col text-secondary text-end">
-                <strong>26% Sell</strong>
+                <strong
+                  >{{ coinSymbol }} {{ walletService.totalBalance }}</strong
+                >
               </div>
             </div>
             <div class="progress">
               <div
                 class="progress-bar bg-success"
                 role="progressbar"
-                style="width: 72%"
-                aria-valuenow="72"
+                attr.style="width: {{
+                  percentageWalletInTotal() | number : '1.0-2'
+                }}%"
+                attr.aria-valuenow="{{
+                  percentageWalletInTotal() | number : '1.0-2'
+                }}"
                 aria-valuemin="0"
                 aria-valuemax="100"
               ></div>
               <div
                 class="progress-bar bg-secondary"
                 role="progressbar"
-                style="width: 28%"
-                aria-valuenow="28"
+                attr.style="width: {{
+                  100 - percentageWalletInTotal() | number : '1.0-2'
+                }}%"
+                attr.aria-valuenow="{{
+                  100 - percentageWalletInTotal() | number : '1.0-2'
+                }}"
                 aria-valuemin="0"
                 aria-valuemax="100"
               ></div>

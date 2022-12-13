@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Coin, CoinSymbol } from '../data/class/coin';
 import { User } from '../data/class/user.class';
 import { DashboardService } from './dashboard.service';
+import { WalletService } from './wallet.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,8 @@ export class UserService {
   public coinSymbol: string = CoinSymbol.USD;
   constructor(
     private http: HttpClient,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private walletService: WalletService
   ) {}
 
   getUser(): Observable<User> {
@@ -27,5 +29,6 @@ export class UserService {
     else if (this.user?.value === Coin.EUR) this.coinSymbol = CoinSymbol.EUR;
 
     this.dashboardService.coinSymbol = this.coinSymbol;
+    this.walletService.coinSymbol = this.coinSymbol;
   }
 }
