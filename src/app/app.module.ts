@@ -29,9 +29,11 @@ import { TransactionDetailsComponent } from './pages/transactions/transaction-de
 import { ErrorHandleComponent } from './interceptors/error-handle/error-handle.component';
 import { HttpErrorInterceptor } from 'src/assets/core/interceptors/error.inteceptor';
 import { WalletComponent } from './pages/wallet/wallet.component';
-import { WalletCardComponent } from './shared/components/card/wallet-card/wallet-card.component';
+import { WalletCardComponent } from './shared/components/wallet/wallet-card/wallet-card.component';
 import { WalletDetailsComponent } from './pages/wallet/wallet-details/wallet-details.component';
 import { TitleDesktopComponent } from './shared/components/core/title-desktop/title-desktop.component';
+import { WalletHistoryComponent } from './pages/wallet/wallet-details/wallet-history/wallet-history.component';
+import { WalletHistoryCardComponent } from './shared/components/wallet/wallet-history/wallet-history.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ import { TitleDesktopComponent } from './shared/components/core/title-desktop/ti
     WalletCardComponent,
     WalletDetailsComponent,
     TitleDesktopComponent,
+    WalletHistoryComponent,
+    WalletHistoryCardComponent,
   ],
   imports: [
     BrowserModule,

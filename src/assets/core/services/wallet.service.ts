@@ -18,6 +18,9 @@ export class WalletService {
   //Used for WalletDetails
   public walletDetails?: Wallet[];
   public statsList?: Stats[];
+
+  // Used for History
+  public walletHistory?: Wallet;
   constructor(private http: HttpClient) {}
 
   getWallet(): Observable<Wallet[]> {

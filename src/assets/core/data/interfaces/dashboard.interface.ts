@@ -29,6 +29,7 @@ export interface WalletInterface {
 }
 
 export interface StatsInterface {
+  id: number;
   date: string;
   balance: number;
   percentage: number;

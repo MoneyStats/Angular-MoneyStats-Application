@@ -8,6 +8,7 @@
     background-position: center center;
     background-size: cover;
     box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
+    margin-right: -7px;
   }
   .w100 {
     width: 100%;
@@ -28,4 +29,8 @@
 .w50 {
   width: 100px;
   border-radius: 20px;
+}
+
+.row {
+  margin-right: 0px;
 }

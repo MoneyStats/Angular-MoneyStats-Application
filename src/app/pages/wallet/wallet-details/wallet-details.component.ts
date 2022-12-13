@@ -48,6 +48,7 @@ export class WalletDetailsComponent implements OnInit {
       const image = document.getElementById('gradientSection');
       image!.style.backgroundImage = 'url(' + this.wallet!.img + ')';
     }
+    this.walletService.walletHistory = this.wallet;
     this.coinSymbol = this.walletService.coinSymbol;
   }
 
@@ -62,7 +63,7 @@ export class WalletDetailsComponent implements OnInit {
 
   graph1Y() {
     let lastYear = this.wallet?.history.filter(
-      (h) => h.date.split('-')[2] === new Date().getFullYear().toString()
+      (h) => h.date.split('-')[0] === new Date().getFullYear().toString()
     );
     setTimeout(() => {
       this.chart1Y = this.charts.renderChartWallet(
@@ -79,7 +80,7 @@ export class WalletDetailsComponent implements OnInit {
       (new Date().getFullYear() - 2).toString(),
     ];
     let last3Year = this.wallet?.history.filter((h) =>
-      last3.includes(h.date.split('-')[2])
+      last3.includes(h.date.split('-')[0])
     );
     setTimeout(() => {
       this.chart3Y = this.charts.renderChartWallet(

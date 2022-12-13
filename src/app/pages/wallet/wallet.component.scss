@@ -6,4 +6,19 @@
   .extraHeader {
     margin-top: 0px;
   }
+  .addWallet {
+    display: none;
+  }
+}
+
+.addWallet {
+  position: absolute;
+  float: right !important;
+  top: 165px;
+  right: 20px;
+}
+
+.modal-content {
+  max-width: 1000px !important;
+  border-radius: 20px !important;
 }

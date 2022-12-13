@@ -83,7 +83,9 @@
     "active": "Active Wallet",
     "deleted": "Deleted Wallet",
     "title": "Wallet",
+    "mobile_back": "Back",
     "back": "Go back to previous page",
+    "add": "Add new Wallet",
     "nodata": {
       "header": "Wallet",
       "body": "Insert new data to get wallet.",
@@ -92,13 +94,25 @@
     "details": {
       "title": " Details",
       "back": "Go back to previous page",
+      "mobile_back": "Back",
       "status": "Status",
       "allTimeHigh": "All Time High on ",
       "totalPerformance": "Total Performance",
       "highPrice": "High Price on ",
       "lowPrice": "Low Price on ",
       "category": "Category",
-      "dateLastStats": "Date Last Stats"
+      "dateLastStats": "Date Last Stats",
+      "transaction": {
+        "title": "Last Stats",
+        "mobile_back": "Back",
+        "view": "View All",
+        "more": "Load more",
+        "history": {
+          "title": "Transaction History",
+          "mobile_back": "Back",
+          "back": "Go back to previous page"
+        }
+      }
     }
   },
   "error": {

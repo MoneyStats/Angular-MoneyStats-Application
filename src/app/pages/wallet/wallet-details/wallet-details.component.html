@@ -254,144 +254,35 @@
     </div>
   </div>
 
-  <div class="row mt-3">
+  <div class="row mt-3 mb-3">
     <div class="col-md-6">
       <!-- History -->
       <div class="section">
         <div class="section-heading">
-          <h2 class="title">{{ "dashboard.transaction.title" | translate }}</h2>
-          <a href="#" routerLink="/transactions" class="link">{{
-            "dashboard.transaction.view" | translate
+          <h2 class="title">
+            {{ "wallet.details.transaction.title" | translate }}
+          </h2>
+          <a href="#" routerLink="history" class="link">{{
+            "wallet.details.transaction.view" | translate
           }}</a>
         </div>
         <div class="card">
-          <ul
-            class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1"
+          <div
+            *ngFor="
+              let stats of wallet?.history?.slice()?.reverse();
+              let i = index
+            "
           >
-            <!-- item -->
-            <li>
-              <a href="#" class="item">
-                <div class="icon-box bg-success">
-                  <ion-icon name="arrow-up-outline"></ion-icon>
-                </div>
-                <div class="in">
-                  <div>
-                    <strong>Bitcoin</strong>
-                    <div class="text-small text-secondary">
-                      Sell Order #7893
-                    </div>
-                  </div>
-                  <div class="text-end">
-                    <strong>$855,24</strong>
-                    <div class="text-small">Today 11:38 AM</div>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <!-- * item -->
-            <!-- item -->
-            <li>
-              <a href="#" class="item">
-                <div class="icon-box bg-danger">
-                  <ion-icon name="arrow-down-outline"></ion-icon>
-                </div>
-                <div class="in">
-                  <div>
-                    <strong>Bitcoin</strong>
-                    <div class="text-small text-secondary">Buy order #5501</div>
-                  </div>
-                  <div class="text-end">
-                    <strong>$550,26</strong>
-                    <div class="text-small">March 23, 2021</div>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <!-- * item -->
-            <!-- item -->
-            <li>
-              <a href="#" class="item">
-                <div class="icon-box bg-danger">
-                  <ion-icon name="arrow-down-outline"></ion-icon>
-                </div>
-                <div class="in">
-                  <div>
-                    <strong>Bitcoin</strong>
-                    <div class="text-small text-secondary">Buy order #5432</div>
-                  </div>
-                  <div class="text-end">
-                    <strong>$1.509,24</strong>
-                    <div class="text-small">March 22, 2021</div>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <!-- * item -->
-            <!-- item -->
-            <li>
-              <a href="#" class="item">
-                <div class="icon-box bg-success">
-                  <ion-icon name="arrow-up-outline"></ion-icon>
-                </div>
-                <div class="in">
-                  <div>
-                    <strong>Bitcoin</strong>
-                    <div class="text-small text-secondary">
-                      Sell order #5245
-                    </div>
-                  </div>
-                  <div class="text-end">
-                    <strong>$52,68</strong>
-                    <div class="text-small">March 5, 2021</div>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <!-- * item -->
-            <!-- item -->
-            <li>
-              <a href="#" class="item">
-                <div class="icon-box bg-danger">
-                  <ion-icon name="arrow-down-outline"></ion-icon>
-                </div>
-                <div class="in">
-                  <div>
-                    <strong>Bitcoin</strong>
-                    <div class="text-small text-secondary">Buy order #4954</div>
-                  </div>
-                  <div class="text-end">
-                    <strong>$1.509,24</strong>
-                    <div class="text-small">March 3, 2021</div>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <!-- * item -->
-            <!-- item -->
-            <li>
-              <a href="#" class="item">
-                <div class="icon-box bg-success">
-                  <ion-icon name="arrow-up-outline"></ion-icon>
-                </div>
-                <div class="in">
-                  <div>
-                    <strong>Bitcoin</strong>
-                    <div class="text-small text-secondary">
-                      Sell order #4923
-                    </div>
-                  </div>
-                  <div class="text-end">
-                    <strong>$52,68</strong>
-                    <div class="text-small">March 2, 2021</div>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <!-- * item -->
-          </ul>
+            <app-wallet-history-card
+              *ngIf="i < 6"
+              [stats]="stats"
+            ></app-wallet-history-card>
+          </div>
           <div class="card-body pt-0">
-            <a href="#" class="btn btn-block btn-outline-secondary"
-              >Load more</a
+            <a
+              routerLink="history"
+              class="btn btn-block btn-outline-secondary"
+              >{{ "wallet.details.transaction.more" | translate }}</a
             >
           </div>
         </div>
