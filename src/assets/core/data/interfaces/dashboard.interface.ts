@@ -11,7 +11,6 @@ export interface DashboardInterface {
 }
 
 export interface WalletInterface {
-  id: number;
   name: string;
   img: string;
   category: string;
@@ -29,8 +28,11 @@ export interface WalletInterface {
 }
 
 export interface StatsInterface {
-  id: number;
   date: string;
   balance: number;
   percentage: number;
+}
+
+export interface CategoryInterface {
+  name: string;
 }

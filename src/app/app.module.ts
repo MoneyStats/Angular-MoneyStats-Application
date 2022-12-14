@@ -34,6 +34,7 @@ import { WalletDetailsComponent } from './pages/wallet/wallet-details/wallet-det
 import { TitleDesktopComponent } from './shared/components/core/title-desktop/title-desktop.component';
 import { WalletHistoryComponent } from './pages/wallet/wallet-details/wallet-history/wallet-history.component';
 import { WalletHistoryCardComponent } from './shared/components/wallet/wallet-history/wallet-history.component';
+import { AddWalletComponent } from './shared/components/modal/add-wallet/add-wallet.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { WalletHistoryCardComponent } from './shared/components/wallet/wallet-hi
     TitleDesktopComponent,
     WalletHistoryComponent,
     WalletHistoryCardComponent,
+    AddWalletComponent,
   ],
   imports: [
     BrowserModule,

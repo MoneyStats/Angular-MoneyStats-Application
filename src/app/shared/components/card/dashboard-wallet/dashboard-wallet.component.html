@@ -27,9 +27,8 @@
     <div class="item">
       <a
         href="#"
-        (click)="availableSoon()"
         data-bs-toggle="modal"
-        data-bs-target="#addWalletActionSheet"
+        attr.data-bs-target="#{{ modalConstant.ADDWALLET }}"
       >
         <div class="icon-wrapper bg-danger">
           <span>+</span>

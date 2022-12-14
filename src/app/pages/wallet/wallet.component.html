@@ -1,10 +1,13 @@
 <section class="section-width">
   <app-header-mobile
     *ngIf="screenService?.screenWidth! <= 780"
-    [title]="'wallet.title' | translate"
-    [backBtn]="'transaction.mobile_back' | translate"
+    title="{{ 'wallet.title' | translate }}"
+    backBtn="{{ 'transaction.mobile_back' | translate }}"
+    rightBtn="Add"
+    [dataBsTarget]="modalConstant.ADDWALLET"
   >
   </app-header-mobile>
+
   <!-- Extra Header -->
   <div class="extraHeader pe-0 ps-0">
     <ul class="nav nav-tabs lined" role="tablist">
@@ -39,7 +42,7 @@
           type="button"
           class="btn btn-primary me-1 mb-1"
           data-bs-toggle="modal"
-          data-bs-target="#sendActionSheet"
+          attr.data-bs-target="#{{ modalConstant.ADDWALLET }}"
         >
           {{ "wallet.add" | translate }}
         </button>
@@ -85,73 +88,4 @@
   <!-- * App Capsule -->
 </section>
 
-<!-- Send Action Sheet -->
-<div
-  class="modal fade action-sheet"
-  id="sendActionSheet"
-  tabindex="-1"
-  role="dialog"
->
-  <div class="modal-dialog" role="document">
-    <div class="modal-content mx-auto">
-      <div class="modal-header">
-        <h5 class="modal-title">Send Money</h5>
-      </div>
-      <div class="modal-body">
-        <div class="action-sheet-content">
-          <form>
-            <div class="form-group basic">
-              <div class="input-wrapper">
-                <label class="label" for="account2">From</label>
-                <select class="form-control custom-select" id="account2">
-                  <option value="0">Savings (*** 5019)</option>
-                  <option value="1">Investment (*** 6212)</option>
-                  <option value="2">Mortgage (*** 5021)</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group basic">
-              <div class="input-wrapper">
-                <label class="label" for="text11">To</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="text11"
-                  placeholder="Enter bank ID"
-                />
-                <i class="clear-input">
-                  <ion-icon name="close-circle"></ion-icon>
-                </i>
-              </div>
-            </div>
-
-            <div class="form-group basic">
-              <label class="label">Enter Amount</label>
-              <div class="input-group mb-2">
-                <span class="input-group-text" id="basic-addon1">$</span>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Enter an amount"
-                  value="100"
-                />
-              </div>
-            </div>
-
-            <div class="form-group basic">
-              <button
-                type="button"
-                class="btn btn-primary btn-block btn-lg"
-                data-bs-dismiss="modal"
-              >
-                Send
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- * Send Action Sheet -->
+<app-add-wallet></app-add-wallet>

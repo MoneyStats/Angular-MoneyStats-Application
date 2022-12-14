@@ -1,4 +1,5 @@
 import {
+  CategoryInterface,
   DashboardInterface,
   StatsInterface,
   WalletInterface,
@@ -14,11 +15,11 @@ export class Dashboard implements DashboardInterface {
   lastStatsPerformance: number = 0;
   lastStatsBalanceDifference: number = 0;
   statsWalletDays: string[] = [];
+  categories: Category[] = [];
   wallets: Wallet[] = [];
 }
 
 export class Wallet extends GenericModel implements WalletInterface {
-  id!: number;
   name!: string;
   img!: string;
   category!: string;
@@ -40,4 +41,8 @@ export class Stats implements StatsInterface {
   date!: string;
   balance!: number;
   percentage!: number;
+}
+
+export class Category implements CategoryInterface {
+  name!: string;
 }

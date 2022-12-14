@@ -3,6 +3,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
 import { ChartOptions } from 'src/assets/core/data/constant/apex.chart';
+import { ModalConstant } from 'src/assets/core/data/constant/modal.constant';
 import { ErrorService } from 'src/assets/core/interceptors/error.service';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { UserService } from 'src/assets/core/services/user.service';

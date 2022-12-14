@@ -10,6 +10,7 @@ export class HeaderMobileComponent implements OnInit {
   @Input('backBtn') backBtn: string = '';
   @Input('title') title: string = '';
   @Input('rightBtn') rightBtn: string = '';
+  @Input('dataBsTarget') dataBsTarget: string = '';
 
   constructor(private location: Location) {}
 
