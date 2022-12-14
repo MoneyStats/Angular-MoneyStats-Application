@@ -7,3 +7,7 @@
 #fileUpload1 {
   height: 150px;
 }
+
+::ng-deep.swal2-container {
+  z-index: 1000000;
+}

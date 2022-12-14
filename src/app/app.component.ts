@@ -19,10 +19,23 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     const user = this.userService.getUser();
-    user.subscribe((data) => {
+    user.subscribe(async (data) => {
       this.user = data;
       this.userService.user = data;
       this.userService.setValue();
+      this.userService.getGithubUser(this.user.github.username);
     });
+    this.updateGithubData();
+  }
+
+  updateGithubData() {
+    this.userService.updateGithubUser();
+    if (this.userService.github === undefined) {
+      setTimeout(() => {
+        this.updateGithubData();
+      }, 100 * 10);
+    } else {
+      this.user!.profilePhoto = this.userService.github.avatar_url;
+    }
   }
 }

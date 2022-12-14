@@ -93,6 +93,12 @@
       "category": "Category",
       "img": "Add Image",
       "imgContent": "Add Image from URL",
+      "imageModal": {
+        "title": "Add Image",
+        "subTitle": "Insert image URL and press continue",
+        "continue": "Continue",
+        "cancel": "Cancel"
+      },
       "save": "Save"
     },
     "nodata": {
@@ -123,6 +129,11 @@
         }
       }
     }
+  },
+  "github": {
+    "title": "Get data from Github for ",
+    "connect": "Connect",
+    "confirm": "Confirm"
   },
   "error": {
     "title": ""

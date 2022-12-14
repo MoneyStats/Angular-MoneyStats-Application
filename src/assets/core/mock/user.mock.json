@@ -1,9 +1,12 @@
 {
-    "name": "Giovanni",
-    "surname": "Lamarmora",
-    "email": "gio.lamarmora@gmail.com",
-    "username": "giovannilamarmora",
-    "role": "ADMIN",
-    "profilePhoto": "../../../../assets/images/img/sample/avatar/avatar1.jpg",
-    "value": "EUR"
+  "name": "Giovanni",
+  "surname": "Lamarmora",
+  "email": "gio.lamarmora@gmail.com",
+  "username": "giovannilamarmora",
+  "role": "ADMIN",
+  "profilePhoto": "../../../../assets/images/img/sample/avatar/avatar1.jpg",
+  "value": "EUR",
+  "github": {
+    "username": "giovannilamarmora"
+  }
 }

@@ -29,3 +29,16 @@
   -ms-user-select: none; /* IE10+/Edge */
   user-select: none; /* Standard */
 }
+
+.border_round {
+  border-radius: 20px !important;
+}
+
+.rounded-pill {
+  border-radius: 50rem !important;
+}
+
+.buttonInput {
+  height: 50px;
+  width: 150px;
+}

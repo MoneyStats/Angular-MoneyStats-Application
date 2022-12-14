@@ -4,6 +4,7 @@
   id="{{ modalConstant.ADDWALLET }}"
   tabindex="-1"
   role="dialog"
+  data-bs-focus="false"
 >
   <div class="modal-dialog" role="document">
     <div class="modal-content mx-auto">
@@ -13,13 +14,13 @@
       <div class="modal-body">
         <div class="action-sheet-content">
           <form>
-            <div class="form-group basic">
+            <div class="form-group boxed">
               <div class="input-wrapper">
                 <label class="label" for="text11">{{
                   "wallet.modal.name" | translate
                 }}</label>
                 <input
-                  type="email"
+                  type="text"
                   class="form-control"
                   id="text11"
                   placeholder="{{ 'wallet.modal.sub_name' | translate }}"
@@ -55,14 +56,15 @@
                   "wallet.modal.img" | translate
                 }}</label>
                 <div class="custom-file-upload mt-1" id="fileUpload1">
-                  <input
+                  <!--<input
                     type="file"
                     id="fileuploadInput"
                     accept=".png, .jpg, .jpeg"
-                  />
+                  />-->
                   <label
                     class="fileuploadInput clickable"
                     for="fileuploadInput"
+                    (click)="importimage()"
                   >
                     <span>
                       <strong>
