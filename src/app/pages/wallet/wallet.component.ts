@@ -43,4 +43,9 @@ export class WalletComponent implements OnInit {
   walletDetails(res: Wallet[]) {
     this.walletService.walletDetails = res;
   }
+
+  addWallet(wallet: Wallet) {
+    console.log('DENTRO WALLET');
+    this.wallets.push(wallet);
+  }
 }

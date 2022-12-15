@@ -35,4 +35,5 @@ export interface StatsInterface {
 
 export interface CategoryInterface {
   name: string;
+  img: string;
 }

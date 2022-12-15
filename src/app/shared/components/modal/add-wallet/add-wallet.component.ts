@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Category } from 'src/assets/core/data/class/dashboard.class';
+import { Category, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ModalConstant } from 'src/assets/core/data/constant/modal.constant';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
+import { WalletService } from 'src/assets/core/services/wallet.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 
 @Component({
@@ -11,16 +12,21 @@ import { SwalService } from 'src/assets/core/utils/swal.service';
   styleUrls: ['./add-wallet.component.scss'],
 })
 export class AddWalletComponent implements OnInit {
+  @Output('emitAddWallet') emitAddWallet = new EventEmitter<Wallet>();
   @Input('categoriesInput') categoriesInput?: Category[];
-  name: string = '';
-  categories?: Category[];
+  wallet: Wallet = new Wallet();
+  categories: Category[] = [];
+
+  defaultImg: boolean = false;
+  checkbox: boolean = true;
   walletImg: string =
     'https://scarpedimaremma.com/wp-content/uploads/2022/09/Sfondo-di-IMG_1265-rimosso-300x300.png';
 
   constructor(
     private dashboardService: DashboardService,
     private swalService: SwalService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private walletService: WalletService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -39,6 +45,7 @@ export class AddWalletComponent implements OnInit {
       this.translate.instant('wallet.modal.imageModal.cancel')
     );
     this.updateImageData();
+    this.checkbox = false;
   }
 
   updateImageData() {
@@ -51,5 +58,18 @@ export class AddWalletComponent implements OnInit {
     }
   }
 
-  addWallet() {}
+  addWallet() {
+    let walletToSave = this.wallet;
+    walletToSave.img = this.walletImg;
+
+    // Save Wallet
+    this.emitAddWallet.emit(walletToSave);
+  }
+
+  validateBtn(): boolean {
+    return (this.checkbox && this.defaultImg) ||
+      (!this.checkbox && !this.defaultImg)
+      ? true
+      : false;
+  }
 }

@@ -23,16 +23,16 @@ export class Wallet extends GenericModel implements WalletInterface {
   name!: string;
   img!: string;
   category!: string;
-  allTimeHigh!: number;
-  allTimeHighDate!: Date;
-  totalPerformance!: number;
-  highPrice!: number;
-  highPriceDate!: Date;
-  lowPrice!: number;
-  lowPriceDate!: Date;
-  differenceLastStats!: number;
-  dateLastStats!: Date;
-  balance!: number;
+  allTimeHigh: number = 0;
+  allTimeHighDate: Date = new Date();
+  totalPerformance: number = 0;
+  highPrice: number = 0;
+  highPriceDate: Date = new Date();
+  lowPrice: number = 0;
+  lowPriceDate: Date = new Date();
+  differenceLastStats: number = 0;
+  dateLastStats: Date = new Date();
+  balance: number = 0;
   history: Stats[] = [];
 }
 
@@ -45,4 +45,5 @@ export class Stats implements StatsInterface {
 
 export class Category implements CategoryInterface {
   name!: string;
+  img!: string;
 }

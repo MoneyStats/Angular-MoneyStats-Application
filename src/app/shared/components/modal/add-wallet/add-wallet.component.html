@@ -13,13 +13,19 @@
       </div>
       <div class="modal-body">
         <div class="action-sheet-content">
-          <form>
+          <form #f="ngForm" type="submit">
             <div class="form-group boxed">
               <div class="input-wrapper">
                 <label class="label" for="text11">{{
                   "wallet.modal.name" | translate
                 }}</label>
                 <input
+                  name="name"
+                  class="form-control"
+                  rows="5"
+                  [(ngModel)]="wallet.name"
+                  #name="ngModel"
+                  required
                   type="text"
                   class="form-control"
                   id="text11"
@@ -35,8 +41,17 @@
                 <label class="label" for="category">{{
                   "wallet.modal.category" | translate
                 }}</label>
-                <select class="form-control custom-select" id="category">
+                <select
+                  class="form-control custom-select"
+                  id="category"
+                  name="category"
+                  class="form-control"
+                  rows="5"
+                  [(ngModel)]="wallet.category"
+                  #category="ngModel"
+                >
                   <option
+                    [ngValue]="undefined"
                     *ngFor="
                       let category of categoriesInput != undefined
                         ? categoriesInput
@@ -50,7 +65,7 @@
               </div>
             </div>
 
-            <div class="form-group basic">
+            <div *ngIf="!defaultImg" class="form-group basic">
               <div class="input-wrapper">
                 <label class="label" for="text11">{{
                   "wallet.modal.img" | translate
@@ -80,8 +95,23 @@
               </div>
             </div>
 
+            <div *ngIf="checkbox" class="form-check mb-1">
+              <input
+                [(ngModel)]="defaultImg"
+                [ngModelOptions]="{ standalone: true }"
+                type="checkbox"
+                class="form-check-input"
+                id="defaultImg"
+              />
+              <label class="form-check-label" for="defaultImg">{{
+                "wallet.modal.default" | translate
+              }}</label>
+            </div>
+
             <div class="form-group basic">
               <button
+                (click)="addWallet()"
+                [disabled]="f.invalid || !validateBtn()"
                 type="button"
                 class="btn btn-primary btn-block btn-lg"
                 data-bs-dismiss="modal"

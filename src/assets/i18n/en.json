@@ -93,6 +93,7 @@
       "category": "Category",
       "img": "Add Image",
       "imgContent": "Add Image from URL",
+      "default": "Use default wallet image",
       "imageModal": {
         "title": "Add Image",
         "subTitle": "Insert image URL and press continue",

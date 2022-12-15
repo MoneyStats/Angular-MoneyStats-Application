@@ -4,8 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ChartOptions } from 'src/assets/core/data/constant/apex.chart';
 import { ChartService } from 'src/assets/core/utils/chart.service';
-import { CoinSymbol } from 'src/assets/core/data/class/coin';
-import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { WalletService } from 'src/assets/core/services/wallet.service';
 
 @Component({
@@ -37,12 +35,15 @@ export class WalletDetailsComponent implements OnInit {
     this.wallet = this.walletService.walletDetails?.find(
       (w) => w.name === this.walletName
     );
-    this.percentageLastStats =
-      (this.wallet?.history[this.wallet?.history.length - 1].percentage! > 0
-        ? '+'
-        : '') +
-      this.wallet?.history[this.wallet?.history.length - 1].percentage! +
-      '%';
+    if (this.wallet!.history.length > 0) {
+      this.percentageLastStats =
+        (this.wallet?.history[this.wallet?.history.length - 1].percentage! > 0
+          ? '+'
+          : '') +
+        this.wallet?.history[this.wallet?.history.length - 1].percentage! +
+        '%';
+    }
+
     this.renderGraph();
     if (this.screenService!.screenWidth! <= 780) {
       const image = document.getElementById('gradientSection');

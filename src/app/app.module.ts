@@ -35,6 +35,7 @@ import { TitleDesktopComponent } from './shared/components/core/title-desktop/ti
 import { WalletHistoryComponent } from './pages/wallet/wallet-details/wallet-history/wallet-history.component';
 import { WalletHistoryCardComponent } from './shared/components/wallet/wallet-history/wallet-history.component';
 import { AddWalletComponent } from './shared/components/modal/add-wallet/add-wallet.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { AddWalletComponent } from './shared/components/modal/add-wallet/add-wal
     IonicModule.forRoot(),
     HttpClientModule,
     NgApexchartsModule,
+    FormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
