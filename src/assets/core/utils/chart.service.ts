@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Dashboard, Wallet } from '../data/class/dashboard.class';
+import { Dashboard, Stats, Wallet } from '../data/class/dashboard.class';
 import * as ApexCharts from 'apexcharts';
 import { ChartOptions } from '../data/constant/apex.chart';
 
@@ -32,7 +32,7 @@ export class ChartService {
       chart: {
         type: 'area',
         width: '100%',
-        height: '350px',
+        height: 350,
         sparkline: {
           enabled: true,
         },
@@ -64,6 +64,42 @@ export class ChartService {
     };
     return chartOptions;
     //chartLine(series, dashboard.statsWalletDays);
+  }
+
+  renderChartWallet(name: string, stats: Stats[]): Partial<ChartOptions> {
+    let series: Array<any> = [];
+    let historyBalance: Array<number> = [];
+    let historyDates: Array<string> = [];
+    stats.forEach((s) => {
+      historyBalance.push(s.balance);
+      historyDates.push(s.date);
+    });
+    let serie = {
+      name: name,
+      data: historyBalance,
+    };
+    series.push(serie);
+    historyBalance = [];
+    let chartExample1: Partial<ChartOptions> = {
+      series: series,
+      chart: {
+        type: 'area',
+        width: '100%',
+        height: 140,
+        sparkline: {
+          enabled: true,
+        },
+      },
+      stroke: {
+        width: 2,
+      },
+      colors: ['#1DCC70'],
+      tooltip: {
+        enabled: false,
+      },
+      labels: historyDates,
+    };
+    return chartExample1;
   }
 }
 

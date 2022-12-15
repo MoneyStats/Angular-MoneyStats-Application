@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-header-mobile',
@@ -9,8 +10,13 @@ export class HeaderMobileComponent implements OnInit {
   @Input('backBtn') backBtn: string = '';
   @Input('title') title: string = '';
   @Input('rightBtn') rightBtn: string = '';
+  @Input('dataBsTarget') dataBsTarget: string = '';
 
-  constructor() {}
+  constructor(private location: Location) {}
 
   ngOnInit(): void {}
+
+  goBack() {
+    this.location.back();
+  }
 }

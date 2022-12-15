@@ -1,16 +1,21 @@
 <!-- App Header -->
 <div class="appHeader">
-    <div class="left">
-        <a href="#" routerLink="" class="headerButton">
-            <ion-icon name="chevron-back-outline"></ion-icon>
-            {{backBtn}}
-        </a>
-    </div>
-    <div class="pageTitle">{{title}}</div>
-    <div *ngIf="rightBtn != ''" class="right">
-        <a href="#" class="headerButton">
-            {{rightBtn}}
-        </a>
-    </div>
+  <div class="left">
+    <a (click)="goBack()" class="headerButton">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+      {{ backBtn }}
+    </a>
+  </div>
+  <div class="pageTitle text-not-selected">{{ title }}</div>
+  <div *ngIf="rightBtn != ''" class="right">
+    <a
+      href="#"
+      class="headerButton"
+      data-bs-toggle="modal"
+      attr.data-bs-target="#{{ dataBsTarget }}"
+    >
+      {{ rightBtn }}
+    </a>
+  </div>
 </div>
 <!-- * App Header -->

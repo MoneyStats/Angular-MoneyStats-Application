@@ -1,9 +1,44 @@
 @media screen and (min-width: 780px) {
-    app-footer{
-        display: none;
-    }
-    .section-width {
-        max-width: 2000px !important;
-        /*margin-left: calc(50% - 1000px);*/
-    }
+  app-footer {
+    display: none;
+  }
+  .section-width {
+    max-width: 2000px !important;
+    /*margin-left: calc(50% - 1000px);*/
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .hidden_mobile {
+    display: none;
+  }
+}
+
+.clickable {
+  pointer-events: visible;
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+.text-not-selected {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+.border_round {
+  border-radius: 20px !important;
+}
+
+.rounded-pill {
+  border-radius: 50rem !important;
+}
+
+.buttonInput {
+  height: 50px;
+  width: 150px;
 }

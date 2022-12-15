@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Coin, CoinSymbol } from 'src/assets/core/data/class/coin';
 import { Dashboard } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
+import { ModalConstant } from 'src/assets/core/data/constant/modal.constant';
 import { UserService } from 'src/assets/core/services/user.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
 
@@ -17,6 +18,10 @@ export class DashboardWalletComponent implements OnInit {
   @Input('value') value?: string;
 
   constructor(private toast: ToastService, private us: UserService) {}
+
+  public get modalConstant(): typeof ModalConstant {
+    return ModalConstant;
+  }
 
   ngOnInit(): void {}
 

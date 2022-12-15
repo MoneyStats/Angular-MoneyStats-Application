@@ -36,7 +36,9 @@
               }
             ],
             "styles": [
-              "src/styles.scss", "src/app/shared/styles/style.css", "src/app/shared/styles/src/splide/splide.min.css",
+              "src/styles.scss",
+              "src/app/shared/styles/style.css",
+              "src/app/shared/styles/src/splide/splide.min.css",
               {
                 "input": "node_modules/@ionic/angular/css/core.css"
               },
@@ -71,7 +73,11 @@
                 "input": "src/theme/variables.css"
               }
             ],
-            "scripts": ["src/app/shared/js/splide.min.js", "node_modules/apexcharts/dist/apexcharts.min.js", "src/app/shared/js/base.js"]
+            "scripts": [
+              "src/app/shared/js/splide.min.js",
+              "node_modules/apexcharts/dist/apexcharts.min.js",
+              "src/app/shared/js/base.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -107,6 +113,10 @@
           "defaultConfiguration": "production"
         },
         "serve": {
+          "options": {
+            "disableHostCheck": true,
+            "host": "0.0.0.0"
+          },
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
@@ -141,9 +151,7 @@
                 "output": "./svg"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["src/styles.scss"],
             "scripts": []
           }
         },

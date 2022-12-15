@@ -33,6 +33,7 @@
             <app-stats-card
               [title]="'dashboard.dashboardCard.stats.title2' | translate"
               [value]="performanceSince"
+              [class]="'date'"
             >
             </app-stats-card>
           </div>
@@ -76,7 +77,7 @@
       <div class="section mt-4 col-xl-6">
         <div class="section-heading">
           <h2 class="title">{{ "dashboard.transaction.title" | translate }}</h2>
-          <a href="#" routerLink="/transactions" class="link">{{
+          <a href="#" routerLink="/transaction" class="link">{{
             "dashboard.transaction.view" | translate
           }}</a>
         </div>
@@ -120,20 +121,22 @@
         </div>
         <app-content-box
           *ngIf="!dashboard.wallets || !dashboard.wallets.length"
-          [header]="'dashboard.transaction.nodata.header' | translate"
-          [body]="'dashboard.transaction.nodata.body' | translate"
-          [footer]="'dashboard.transaction.nodata.footer' | translate"
+          [header]="'dashboard.graph.nodata.header' | translate"
+          [body]="'dashboard.graph.nodata.body' | translate"
+          [footer]="'dashboard.graph.nodata.footer' | translate"
         ></app-content-box>
         <div *ngIf="dashboard.wallets.length" class="card">
           <div class="card-body">
             <apx-chart
-              [series]="chartOptions!.series!"
-              [chart]="chartOptions!.chart!"
-              [title]="chartOptions!.title!"
-              [colors]="chartOptions!.colors!"
-              [legend]="chartOptions!.legend!"
-              [stroke]="chartOptions!.stroke!"
-              [labels]="chartOptions!.labels!"
+              *ngIf="chartOptions"
+              [series]="chartOptions.series!"
+              [chart]="chartOptions.chart!"
+              [title]="chartOptions.title!"
+              [colors]="chartOptions.colors!"
+              [legend]="chartOptions.legend!"
+              [stroke]="chartOptions.stroke!"
+              [labels]="chartOptions.labels!"
+              type="area"
             ></apx-chart>
             <!--<div id="chart-line"></div>-->
           </div>
@@ -142,11 +145,11 @@
       <!-- * Graph -->
     </div>
 
-    <!-- Monthly Bills -->
+    <!-- Wallet -->
     <div class="section full mt-4">
       <div class="section-heading padding">
         <h2 class="title">{{ "dashboard.wallet_splide.title" | translate }}</h2>
-        <a href="#" (click)="availableSoon()" class="link">{{
+        <a href="#" routerLink="wallet" class="link">{{
           "dashboard.wallet_splide.view" | translate
         }}</a>
       </div>
@@ -155,17 +158,15 @@
         <div class="splide__track">
           <app-content-box
             *ngIf="!dashboard.wallets || !dashboard.wallets.length"
-            [header]="'dashboard.transaction.nodata.header' | translate"
-            [body]="'dashboard.transaction.nodata.body' | translate"
-            [footer]="'dashboard.transaction.nodata.footer' | translate"
+            [header]="'dashboard.wallet_splide.nodata.header' | translate"
+            [body]="'dashboard.wallet_splide.nodata.body' | translate"
+            [footer]="'dashboard.wallet_splide.nodata.footer' | translate"
           ></app-content-box>
           <ul class="splide__list">
             <app-splide-slide
               class="splide__slide"
-              *ngFor="let wallet of dashboard.wallets; let i = index"
-              [category]="wallet.category"
-              [walletName]="wallet.name"
-              [walletImg]="wallet.img"
+              *ngFor="let wallet of walletFilter(dashboard.wallets)"
+              [wallet]="wallet"
               [btn]="'Open'"
             >
             </app-splide-slide>
@@ -174,7 +175,7 @@
       </div>
       <!-- * carousel multiple -->
     </div>
-    <!-- * Monthly Bills -->
+    <!-- * Wallet -->
   </section>
 
   <!-- app footer -->
@@ -185,3 +186,5 @@
   </div>
   <!-- * app footer -->
 </div>
+
+<app-add-wallet [categoriesInput]="dashboard.categories"></app-add-wallet>

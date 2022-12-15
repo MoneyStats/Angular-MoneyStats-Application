@@ -28,6 +28,14 @@ import { HeaderMobileComponent } from './shared/components/core/header-mobile/he
 import { TransactionDetailsComponent } from './pages/transactions/transaction-details/transaction-details.component';
 import { ErrorHandleComponent } from './interceptors/error-handle/error-handle.component';
 import { HttpErrorInterceptor } from 'src/assets/core/interceptors/error.inteceptor';
+import { WalletComponent } from './pages/wallet/wallet.component';
+import { WalletCardComponent } from './shared/components/wallet/wallet-card/wallet-card.component';
+import { WalletDetailsComponent } from './pages/wallet/wallet-details/wallet-details.component';
+import { TitleDesktopComponent } from './shared/components/core/title-desktop/title-desktop.component';
+import { WalletHistoryComponent } from './pages/wallet/wallet-details/wallet-history/wallet-history.component';
+import { WalletHistoryCardComponent } from './shared/components/wallet/wallet-history/wallet-history.component';
+import { AddWalletComponent } from './shared/components/modal/add-wallet/add-wallet.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -45,6 +53,13 @@ import { HttpErrorInterceptor } from 'src/assets/core/interceptors/error.intecep
     HeaderMobileComponent,
     TransactionDetailsComponent,
     ErrorHandleComponent,
+    WalletComponent,
+    WalletCardComponent,
+    WalletDetailsComponent,
+    TitleDesktopComponent,
+    WalletHistoryComponent,
+    WalletHistoryCardComponent,
+    AddWalletComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +67,7 @@ import { HttpErrorInterceptor } from 'src/assets/core/interceptors/error.intecep
     IonicModule.forRoot(),
     HttpClientModule,
     NgApexchartsModule,
+    FormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

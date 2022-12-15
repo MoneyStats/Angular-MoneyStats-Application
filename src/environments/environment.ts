@@ -9,6 +9,7 @@ export const environment = {
 
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
   getDashboardDataUrl: baseUrlApp + 'assets/core/mock/dashboard.mock.json',
+  getWalletDataUrl: baseUrlApp + 'assets/core/mock/wallets.mock.json',
 };
 
 /*

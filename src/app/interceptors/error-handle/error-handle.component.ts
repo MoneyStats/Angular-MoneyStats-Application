@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { UtilsException } from 'src/assets/core/data/class/error';
 import { ErrorService } from 'src/assets/core/interceptors/error.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-error-handle',
@@ -19,12 +20,17 @@ export class ErrorHandleComponent implements OnInit {
 
   constructor(
     public screenService: ScreenService,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
     this.screenService.setupHeader();
     this.screenService.hideFooter();
     this.exception = this.errorService.exception;
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

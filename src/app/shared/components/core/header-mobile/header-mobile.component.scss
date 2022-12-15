@@ -1,20 +1,29 @@
 @media screen and (max-width: 780px) {
-    .appHeader {
-        height: 56px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        top: env(safe-area-inset-top);
-        left: 0;
-        right: 0;
-        z-index: 999;
-        background: #FFFFFF;
-        color: #27173E;
-        border-bottom: 1px solid #DCDCE9;
-    }
+  .appHeader {
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: env(safe-area-inset-top);
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: #ffffff;
+    color: #27173e;
+    border-bottom: 1px solid #dcdce9;
+  }
 
-    .headerButton {
-        margin-top: 0px !important;
-    }
+  .headerButton {
+    margin-top: 0px !important;
+  }
+}
+
+.left {
+  pointer-events: visible;
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 }

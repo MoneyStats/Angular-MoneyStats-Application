@@ -1,0 +1,19 @@
+.extraHeader {
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 780px) {
+  .extraHeader {
+    margin-top: 0px;
+  }
+  .addWallet {
+    display: none;
+  }
+}
+
+.addWallet {
+  position: absolute;
+  float: right !important;
+  top: 165px;
+  right: 20px;
+}

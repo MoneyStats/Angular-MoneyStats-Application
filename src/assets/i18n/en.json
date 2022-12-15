@@ -1,76 +1,143 @@
 {
-    "dashboard":{
-        "sidebar": {
-            "overviewTitle": "Balance",
-            "menuTitle": "Menu",
-            "menu": {
-                "title1": "Dashboard",
-                "title2": "My Wallet"
-            },
-            "subMenuTitle": "Others",
-            "subMenu": {
-                "title1": "Settings",
-                "title2": "Support",
-                "title3": "Log out"
-            }
-        },
-        "footer": {
-            "title1": "Dashboard",
-            "title2": "Status",
-            "title3": "My Wallet",
-            "title4": "Settings"
-        },
-        "dashboardCard": {
-            "title": "Total Balance",
-            "footer": {
-                "title1": "Add Wallet",
-                "title2": "Category",
-                "title3": "Wallet",
-                "title4": "Statement on Date"
-            },
-            "stats": {
-                "title1": "Performance",
-                "title2": "Performance Since",
-                "title3": "Last Stats Performance",
-                "title4": "Last Stats Difference"
-            }
-        },
-        "transaction": {
-            "title": "Transactions",
-            "view": "View All",
-            "nodata": {
-                "header": "Transaction",
-                "body": "Insert new data to get transaction History.",
-                "footer": "MoneyStats"
-            }
-        },
-        "graph":{
-            "title": "Graph of ",
-            "view": "View All"
-        },
-        "wallet_splide":{
-            "title": "Wallet",
-            "view": "View All",
-            "btn": "Open Wallet"
-        }
+  "dashboard": {
+    "sidebar": {
+      "overviewTitle": "Balance",
+      "menuTitle": "Menu",
+      "menu": {
+        "title1": "Dashboard",
+        "title2": "My Wallet"
+      },
+      "subMenuTitle": "Others",
+      "subMenu": {
+        "title1": "Settings",
+        "title2": "Support",
+        "title3": "Log out"
+      }
     },
-    "transaction":{
-        "title": "Transactions",
-        "back": "Go back to dashboard",
+    "footer": {
+      "title1": "Dashboard",
+      "title2": "Status",
+      "title3": "My Wallet",
+      "title4": "Settings"
+    },
+    "dashboardCard": {
+      "title": "Total Balance",
+      "footer": {
+        "title1": "Add Wallet",
+        "title2": "Category",
+        "title3": "Wallet",
+        "title4": "Statement on Date"
+      },
+      "stats": {
+        "title1": "Performance",
+        "title2": "Performance Since",
+        "title3": "Last Stats Performance",
+        "title4": "Last Stats Difference"
+      }
+    },
+    "transaction": {
+      "title": "Transactions",
+      "view": "View All",
+      "nodata": {
+        "header": "Transaction",
+        "body": "Insert new data to get transaction History.",
+        "footer": "MoneyStats"
+      }
+    },
+    "graph": {
+      "title": "Graph of ",
+      "view": "View All",
+      "nodata": {
+        "header": "Graph",
+        "body": "Insert new data to get graph.",
+        "footer": "MoneyStats"
+      }
+    },
+    "wallet_splide": {
+      "title": "Wallet",
+      "view": "View All",
+      "btn": "Open Wallet",
+      "nodata": {
+        "header": "Wallet",
+        "body": "Insert new data to get wallet.",
+        "footer": "MoneyStats"
+      }
+    }
+  },
+  "transaction": {
+    "title": "Transactions",
+    "back": "Go back to previous page",
+    "mobile_back": "Back",
+    "details": {
+      "title": "Transaction Details",
+      "back": "Go back to previous page",
+      "status": "Status",
+      "success": "Success",
+      "category": "Category",
+      "lastStats": "Difference",
+      "date": "Date",
+      "amount": "Balance"
+    }
+  },
+  "wallet": {
+    "active": "Active Wallet",
+    "deleted": "Deleted Wallet",
+    "title": "Wallet",
+    "mobile_back": "Back",
+    "back": "Go back to previous page",
+    "add": "Add new Wallet",
+    "modal": {
+      "title": "Add Wallet",
+      "name": "Name",
+      "sub_name": "Enter Wallet Name",
+      "category": "Category",
+      "img": "Add Image",
+      "imgContent": "Add Image from URL",
+      "default": "Use default wallet image",
+      "imageModal": {
+        "title": "Add Image",
+        "subTitle": "Insert image URL and press continue",
+        "continue": "Continue",
+        "cancel": "Cancel"
+      },
+      "save": "Save"
+    },
+    "nodata": {
+      "header": "Wallet",
+      "body": "Insert new data to get wallet.",
+      "footer": "MoneyStats"
+    },
+    "details": {
+      "title": " Details",
+      "back": "Go back to previous page",
+      "mobile_back": "Back",
+      "status": "Status",
+      "allTimeHigh": "All Time High on ",
+      "totalPerformance": "Total Performance",
+      "highPrice": "High Price on ",
+      "lowPrice": "Low Price on ",
+      "category": "Category",
+      "dateLastStats": "Date Last Stats",
+      "transaction": {
+        "title": "Last Stats",
         "mobile_back": "Back",
-        "details": {
-            "title": "Transaction Details",
-            "back": "Go back to transaction",
-            "status": "Status",
-            "success": "Success",
-            "category": "Category",
-            "lastStats": "Difference",
-            "date": "Date",
-            "amount": "Balance"
+        "view": "View All",
+        "more": "Load more",
+        "history": {
+          "title": "Transaction History",
+          "mobile_back": "Back",
+          "back": "Go back to previous page"
         }
-    },
-    "error":{
-"title": ""
-    },
-    "copyright": "Copyright © MoneyStats 2023. All Rights Reserved."
+      }
+    }
+  },
+  "github": {
+    "title": "Get data from Github for ",
+    "connect": "Connect",
+    "confirm": "Confirm"
+  },
+  "error": {
+    "title": ""
+  },
+  "copyright": "Copyright © MoneyStats 2023. All Rights Reserved."
 }

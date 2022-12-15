@@ -7,3 +7,7 @@ export interface UserInterface {
   profilePhoto: string;
   value: string;
 }
+
+export interface GithubInterface {
+  username: string;
+}

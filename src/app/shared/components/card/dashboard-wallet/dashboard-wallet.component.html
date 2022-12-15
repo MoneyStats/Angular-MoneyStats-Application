@@ -1,53 +1,83 @@
 <div class="wallet-card">
-    <!-- Balance -->
-    <div class="balance">
-        <div class="left">
-            <span class="title">{{"dashboard.dashboardCard.title" | translate}}</span>
-            <h1 id="reportStatement" class="total">{{value}} {{dashboard?.balance | number}}</h1>
-        </div>
-        <div class="right">
-            <a href="#" (click)="availableSoon()" class="button" data-bs-toggle="modal" data-bs-target="#addStatement">
-                <ion-icon name="add-outline"></ion-icon>
-            </a>
-        </div>
+  <!-- Balance -->
+  <div class="balance">
+    <div class="left">
+      <span class="title">{{
+        "dashboard.dashboardCard.title" | translate
+      }}</span>
+      <h1 id="reportStatement" class="total">
+        {{ value }} {{ dashboard?.balance | number }}
+      </h1>
     </div>
-    <!-- * Balance -->
-    <!-- Wallet Footer -->
-    <div class="wallet-footer">
-        <div class="item">
-            <a href="#" (click)="availableSoon()" data-bs-toggle="modal" data-bs-target="#addWalletActionSheet">
-                <div class="icon-wrapper bg-danger">
-                    <span>+</span>
-                    <ion-icon name="card-outline"></ion-icon>
-                </div>
-                <strong>{{"dashboard.dashboardCard.footer.title1" | translate}}</strong>
-            </a>
-        </div>
-        <div class="item">
-            <a href="#" (click)="availableSoon()" data-bs-toggle="modal" data-bs-target="#categoryActionSheet">
-                <div class="icon-wrapper">
-                    <ion-icon name="arrow-down-outline"></ion-icon>
-                </div>
-                <strong>{{"dashboard.dashboardCard.footer.title2" | translate}}</strong>
-            </a>
-        </div>
-        <div class="item">
-            <a href="#" (click)="availableSoon()">
-                <div class="icon-wrapper bg-success">
-                    <ion-icon name="card-outline"></ion-icon>
-                </div>
-                <strong>{{"dashboard.dashboardCard.footer.title3" | translate}}</strong>
-            </a>
-        </div>
-        <div class="item" (click)="availableSoon()">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#dateStatementActionSheet">
-                <div class="icon-wrapper bg-warning">
-                    <ion-icon name="bar-chart-outline"></ion-icon>
-                </div>
-                <strong>{{"dashboard.dashboardCard.footer.title4" | translate}}</strong>
-            </a>
-        </div>
-
+    <div class="right">
+      <a
+        href="#"
+        (click)="availableSoon()"
+        class="button"
+        data-bs-toggle="modal"
+        data-bs-target="#addStatement"
+      >
+        <ion-icon name="add-outline"></ion-icon>
+      </a>
     </div>
-    <!-- * Wallet Footer -->
+  </div>
+  <!-- * Balance -->
+  <!-- Wallet Footer -->
+  <div class="wallet-footer">
+    <div class="item">
+      <a
+        href="#"
+        data-bs-toggle="modal"
+        attr.data-bs-target="#{{ modalConstant.ADDWALLET }}"
+      >
+        <div class="icon-wrapper bg-danger">
+          <span>+</span>
+          <ion-icon name="card-outline"></ion-icon>
+        </div>
+        <strong>{{
+          "dashboard.dashboardCard.footer.title1" | translate
+        }}</strong>
+      </a>
+    </div>
+    <div class="item">
+      <a
+        href="#"
+        (click)="availableSoon()"
+        data-bs-toggle="modal"
+        data-bs-target="#categoryActionSheet"
+      >
+        <div class="icon-wrapper">
+          <ion-icon name="arrow-down-outline"></ion-icon>
+        </div>
+        <strong>{{
+          "dashboard.dashboardCard.footer.title2" | translate
+        }}</strong>
+      </a>
+    </div>
+    <div class="item">
+      <a href="#" routerLink="wallet">
+        <div class="icon-wrapper bg-success">
+          <ion-icon name="card-outline"></ion-icon>
+        </div>
+        <strong>{{
+          "dashboard.dashboardCard.footer.title3" | translate
+        }}</strong>
+      </a>
+    </div>
+    <div class="item" (click)="availableSoon()">
+      <a
+        href="#"
+        data-bs-toggle="modal"
+        data-bs-target="#dateStatementActionSheet"
+      >
+        <div class="icon-wrapper bg-warning">
+          <ion-icon name="bar-chart-outline"></ion-icon>
+        </div>
+        <strong>{{
+          "dashboard.dashboardCard.footer.title4" | translate
+        }}</strong>
+      </a>
+    </div>
+  </div>
+  <!-- * Wallet Footer -->
 </div>
