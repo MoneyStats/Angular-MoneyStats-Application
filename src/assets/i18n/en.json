@@ -139,6 +139,11 @@
       }
     }
   },
+  "settings": {
+    "title": "Settings",
+    "back": "Go back to previous page",
+    "mobile_back": "Back"
+  },
   "github": {
     "title": "Get data from Github for ",
     "connect": "Connect",
