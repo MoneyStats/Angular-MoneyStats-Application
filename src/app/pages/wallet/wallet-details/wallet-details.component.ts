@@ -5,6 +5,7 @@ import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ChartOptions } from 'src/assets/core/data/constant/apex.chart';
 import { ChartService } from 'src/assets/core/utils/chart.service';
 import { WalletService } from 'src/assets/core/services/wallet.service';
+import { ModalConstant } from 'src/assets/core/data/constant/modal.constant';
 
 @Component({
   selector: 'app-wallet-details',
@@ -26,6 +27,10 @@ export class WalletDetailsComponent implements OnInit {
     private charts: ChartService,
     public walletService: WalletService
   ) {}
+
+  public get modalConstant(): typeof ModalConstant {
+    return ModalConstant;
+  }
 
   ngOnInit(): void {
     this.screenService.setupHeader();

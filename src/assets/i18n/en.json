@@ -84,15 +84,21 @@
     "deleted": "Deleted Wallet",
     "title": "Wallet",
     "mobile_back": "Back",
+    "mobile_add": "Add",
     "back": "Go back to previous page",
     "add": "Add new Wallet",
     "modal": {
       "title": "Add Wallet",
+      "editWallet": {
+        "title": "Edit Wallet",
+        "default": "Keep same wallet image"
+      },
       "name": "Name",
       "sub_name": "Enter Wallet Name",
       "category": "Category",
       "img": "Add Image",
       "imgContent": "Add Image from URL",
+      "image": "Image",
       "default": "Use default wallet image",
       "imageModal": {
         "title": "Add Image",
@@ -111,6 +117,7 @@
       "title": " Details",
       "back": "Go back to previous page",
       "mobile_back": "Back",
+      "mobile_edit": "Edit",
       "status": "Status",
       "allTimeHigh": "All Time High on ",
       "totalPerformance": "Total Performance",
@@ -118,6 +125,7 @@
       "lowPrice": "Low Price on ",
       "category": "Category",
       "dateLastStats": "Date Last Stats",
+      "edit": "Edit Wallet",
       "transaction": {
         "title": "Last Stats",
         "mobile_back": "Back",

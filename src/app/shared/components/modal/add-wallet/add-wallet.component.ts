@@ -12,15 +12,15 @@ import { SwalService } from 'src/assets/core/utils/swal.service';
   styleUrls: ['./add-wallet.component.scss'],
 })
 export class AddWalletComponent implements OnInit {
+  @Input('modalId') modalId: string = '';
   @Output('emitAddWallet') emitAddWallet = new EventEmitter<Wallet>();
   @Input('categoriesInput') categoriesInput?: Category[];
-  wallet: Wallet = new Wallet();
+  @Input('wallet') wallet: Wallet = new Wallet();
   categories: Category[] = [];
 
   defaultImg: boolean = false;
   checkbox: boolean = true;
-  walletImg: string =
-    'https://scarpedimaremma.com/wp-content/uploads/2022/09/Sfondo-di-IMG_1265-rimosso-300x300.png';
+  walletImg: string = '';
 
   constructor(
     private dashboardService: DashboardService,
@@ -58,12 +58,19 @@ export class AddWalletComponent implements OnInit {
     }
   }
 
-  addWallet() {
+  addUpdateWallet() {
     let walletToSave = this.wallet;
-    walletToSave.img = this.walletImg;
+
+    if (!this.defaultImg) {
+      walletToSave.img = this.walletImg;
+    }
 
     // Save Wallet
     this.emitAddWallet.emit(walletToSave);
+    this.wallet = new Wallet();
+    this.defaultImg = false;
+    this.checkbox = true;
+    this.walletImg = '';
   }
 
   validateBtn(): boolean {

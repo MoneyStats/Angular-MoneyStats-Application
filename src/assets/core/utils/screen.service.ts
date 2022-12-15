@@ -47,11 +47,20 @@ export class ScreenService {
     wallet!.classList.add('active');
   }
 
+  goToSettings() {
+    this.resetAllBtn();
+    const settings = document.getElementById('settings');
+    settings!.classList.add('active');
+  }
+
   resetAllBtn() {
     const dashboard = document.getElementById('dashboard');
     dashboard!.classList.remove('active');
 
     const wallet = document.getElementById('wallet');
     wallet!.classList.remove('active');
+
+    const settings = document.getElementById('settings');
+    settings!.classList.remove('active');
   }
 }

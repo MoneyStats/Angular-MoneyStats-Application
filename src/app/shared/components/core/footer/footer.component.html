@@ -31,7 +31,7 @@
       <strong>{{ "dashboard.footer.title3" | translate }}</strong>
     </div>
   </a>
-  <a href="#" (click)="availableSoon()" class="item">
+  <a id="settings" (click)="goToSettings()" routerLink="settings" class="item">
     <div class="col">
       <ion-icon name="settings-outline"></ion-icon>
       <strong>{{ "dashboard.footer.title4" | translate }}</strong>

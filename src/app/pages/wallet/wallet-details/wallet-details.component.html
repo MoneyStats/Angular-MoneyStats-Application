@@ -1,7 +1,9 @@
 <app-header-mobile
   *ngIf="screenService?.screenWidth! <= 780"
   [title]="wallet!.name"
-  [backBtn]="'transaction.mobile_back' | translate"
+  [backBtn]="'wallet.details.mobile_back' | translate"
+  rightBtn="{{ 'wallet.details.mobile_edit' | translate }}"
+  [dataBsTarget]="modalConstant.EDITWALLET"
 >
 </app-header-mobile>
 
@@ -11,6 +13,16 @@
     [title]="wallet?.name + ('wallet.details.title' | translate)"
     [back]="'wallet.details.back' | translate"
   ></app-title-desktop>
+  <div class="editWallet">
+    <button
+      type="button"
+      class="btn btn-primary me-1 mb-1"
+      data-bs-toggle="modal"
+      attr.data-bs-target="#{{ modalConstant.EDITWALLET }}"
+    >
+      {{ "wallet.details.edit" | translate }}
+    </button>
+  </div>
   <div class="row">
     <div class="col-md-6">
       <!-- Coin Status -->
@@ -291,3 +303,8 @@
     </div>
   </div>
 </div>
+
+<app-add-wallet
+  [wallet]="wallet!"
+  [modalId]="modalConstant.EDITWALLET"
+></app-add-wallet>

@@ -36,6 +36,7 @@ import { WalletHistoryComponent } from './pages/wallet/wallet-details/wallet-his
 import { WalletHistoryCardComponent } from './shared/components/wallet/wallet-history/wallet-history.component';
 import { AddWalletComponent } from './shared/components/modal/add-wallet/add-wallet.component';
 import { FormsModule } from '@angular/forms';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { FormsModule } from '@angular/forms';
     WalletHistoryComponent,
     WalletHistoryCardComponent,
     AddWalletComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,

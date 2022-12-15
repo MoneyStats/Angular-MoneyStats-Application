@@ -1,3 +1,4 @@
 export enum ModalConstant {
-    ADDWALLET = "addWalletModal"
+  ADDWALLET = 'addWalletModal',
+  EDITWALLET = 'editWalletModal',
 }

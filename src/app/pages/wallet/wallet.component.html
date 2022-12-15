@@ -2,8 +2,8 @@
   <app-header-mobile
     *ngIf="screenService?.screenWidth! <= 780"
     title="{{ 'wallet.title' | translate }}"
-    backBtn="{{ 'transaction.mobile_back' | translate }}"
-    rightBtn="Add"
+    backBtn="{{ 'wallet.mobile_back' | translate }}"
+    rightBtn="{{ 'wallet.mobile_add' | translate }}"
     [dataBsTarget]="modalConstant.ADDWALLET"
   >
   </app-header-mobile>
@@ -88,4 +88,7 @@
   <!-- * App Capsule -->
 </section>
 
-<app-add-wallet (emitAddWallet)="addWallet($event)"></app-add-wallet>
+<app-add-wallet
+  [modalId]="modalConstant.ADDWALLET"
+  (emitAddWallet)="addWallet($event)"
+></app-add-wallet>

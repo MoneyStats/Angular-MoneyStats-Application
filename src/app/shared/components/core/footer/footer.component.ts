@@ -28,4 +28,8 @@ export class FooterComponent implements OnInit {
   goToWallet() {
     this.screenService.goToWallet();
   }
+
+  goToSettings() {
+    this.screenService.goToSettings();
+  }
 }

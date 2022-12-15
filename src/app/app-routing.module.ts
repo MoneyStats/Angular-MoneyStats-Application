@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ErrorHandleComponent } from './interceptors/error-handle/error-handle.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 import { TransactionDetailsComponent } from './pages/transactions/transaction-details/transaction-details.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
 import { WalletDetailsComponent } from './pages/wallet/wallet-details/wallet-details.component';
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'wallet/details/:wallet/history',
     component: WalletHistoryComponent,
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent,
   },
   {
     path: 'error',
