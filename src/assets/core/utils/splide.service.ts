@@ -55,10 +55,10 @@ function activeSplide() {
   // Multiple Carousel
   document.querySelectorAll('.carousel-multiple').forEach((carousel) =>
     new Splide(carousel, {
-      perPage: 4,
+      perPage: 5,
       rewind: true,
-      type: 'slide',
-      autoWidth: true,
+      type: 'loop',
+      //autoWidth: true,
       gap: 16,
       padding: 16,
       arrows: false,

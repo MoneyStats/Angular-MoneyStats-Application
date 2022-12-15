@@ -35,6 +35,7 @@ export class WalletDetailsComponent implements OnInit {
     this.wallet = this.walletService.walletDetails?.find(
       (w) => w.name === this.walletName
     );
+    console.log(this.walletService.walletDetails);
     if (this.wallet!.history.length > 0) {
       this.percentageLastStats =
         (this.wallet?.history[this.wallet?.history.length - 1].percentage! > 0

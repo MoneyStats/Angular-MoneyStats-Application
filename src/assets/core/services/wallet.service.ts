@@ -16,7 +16,7 @@ export class WalletService {
   public coinSymbol?: string;
 
   //Used for WalletDetails
-  public walletDetails?: Wallet[];
+  public walletDetails: Wallet[] = [];
   public statsList?: Stats[];
 
   // Used for History

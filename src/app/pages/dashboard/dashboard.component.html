@@ -166,9 +166,7 @@
             <app-splide-slide
               class="splide__slide"
               *ngFor="let wallet of walletFilter(dashboard.wallets)"
-              [category]="wallet.category"
-              [walletName]="wallet.name"
-              [walletImg]="wallet.img"
+              [wallet]="wallet"
               [btn]="'Open'"
             >
             </app-splide-slide>

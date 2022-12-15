@@ -65,7 +65,10 @@ export class DashboardComponent implements OnInit {
         this.chartOptions = this.charts.renderChartLine(data);
       }, 100);
     });
-    this.splide.activeSplide();
+    setTimeout(() => {
+      this.splide.activeSplide();
+    }, 100);
+
     this.screenService.activeHeaderAndFooter();
     this.screenService.goToDashboard();
   }

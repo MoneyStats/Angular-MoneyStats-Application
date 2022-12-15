@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { WalletService } from 'src/assets/core/services/wallet.service';
 import { SplideService } from 'src/assets/core/utils/splide.service';
 
 @Component({
@@ -7,14 +9,16 @@ import { SplideService } from 'src/assets/core/utils/splide.service';
   styleUrls: ['./splide-slide.component.scss'],
 })
 export class SplideSlideComponent implements OnInit {
-  @Input('walletImg') walletImg?: string;
-  @Input('walletName') walletName?: string;
-  @Input('category') category?: string;
+  @Input('wallet') wallet?: Wallet;
   @Input('btn') btn?: string;
 
-  constructor(private splide: SplideService) {}
+  constructor(private walletService: WalletService) {}
 
   ngOnInit(): void {
     //this.splide.activeSplide();
+  }
+
+  walletDetails() {
+    this.walletService.walletDetails.push(this.wallet!);
   }
 }
