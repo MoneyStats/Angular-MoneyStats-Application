@@ -49,8 +49,8 @@ export class SwalService {
   ): any {
     const customClassSwal = Swal.mixin({
       customClass: {
-        confirmButton: 'rounded-pill',
-        denyButton: 'rounded-pill',
+        confirmButton: 'rounded-pill buttonInput',
+        denyButton: 'rounded-pill buttonInput',
         popup: 'border_round',
       },
       buttonsStyling: true,
@@ -90,7 +90,7 @@ export class SwalService {
   simpleDialog(icon: any, title: string, text: string) {
     const customClassSwal = Swal.mixin({
       customClass: {
-        confirmButton: 'rounded-pill',
+        confirmButton: 'rounded-pill buttonInput',
         popup: 'border_round',
       },
       buttonsStyling: true,

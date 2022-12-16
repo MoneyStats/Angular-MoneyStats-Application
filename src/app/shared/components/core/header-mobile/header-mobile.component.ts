@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { ModalConstant } from 'src/assets/core/data/constant/modal.constant';
 
 @Component({
   selector: 'app-header-mobile',
@@ -11,8 +12,13 @@ export class HeaderMobileComponent implements OnInit {
   @Input('title') title: string = '';
   @Input('rightBtn') rightBtn: string = '';
   @Input('dataBsTarget') dataBsTarget: string = '';
+  @Input('restore') restore: boolean = false;
 
   constructor(private location: Location) {}
+
+  public get modalConstant(): typeof ModalConstant {
+    return ModalConstant;
+  }
 
   ngOnInit(): void {}
 

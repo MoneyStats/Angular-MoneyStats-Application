@@ -5,26 +5,45 @@
     [backBtn]="'wallet.details.mobile_back' | translate"
     rightBtn="{{ 'wallet.details.mobile_edit' | translate }}"
     [dataBsTarget]="modalConstant.EDITWALLET"
+    [restore]="wallet?.deleted ? true : false"
   >
   </app-header-mobile>
 
   <!-- App Capsule -->
   <div id="appCapsule">
     <div class="row">
-    <app-title-desktop class="col-md-6"
-      [title]="wallet?.name + ('wallet.details.title' | translate)"
-      [back]="'wallet.details.back' | translate"
-    ></app-title-desktop>
-    <div class="editWallet text-end col-md-6">
-      <button
-        type="button"
-        class="btn btn-primary me-1 mb-1"
-        data-bs-toggle="modal"
-        attr.data-bs-target="#{{ modalConstant.EDITWALLET }}"
-      >
-        {{ "wallet.details.edit" | translate }}
-      </button>
-    </div>
+      <app-title-desktop
+        class="col-md-6"
+        [title]="wallet?.name + ('wallet.details.title' | translate)"
+        [back]="'wallet.details.back' | translate"
+      ></app-title-desktop>
+      <div class="editWallet text-end col-md-6">
+        <button
+          type="button"
+          class="btn btn-primary me-1 mb-1"
+          data-bs-toggle="modal"
+          attr.data-bs-target="#{{ modalConstant.EDITWALLET }}"
+        >
+          {{ "wallet.details.edit" | translate }}
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger me-1 mb-1"
+          data-bs-toggle="modal"
+          attr.data-bs-target="#{{ modalConstant.DELETEWALLET }}"
+        >
+          {{ "wallet.details.delete" | translate }}
+        </button>
+        <button
+          *ngIf="wallet?.deleted"
+          type="button"
+          class="btn btn-success me-1 mb-1"
+          data-bs-toggle="modal"
+          attr.data-bs-target="#{{ modalConstant.RESTOREWALLET }}"
+        >
+          {{ "wallet.details.restore" | translate }}
+        </button>
+      </div>
     </div>
     <div class="row">
       <div class="col-md-6">
@@ -316,3 +335,12 @@
   [wallet]="wallet!"
   [modalId]="modalConstant.EDITWALLET"
 ></app-add-wallet>
+<app-delete-wallet
+  [modalId]="modalConstant.DELETEWALLET"
+  [wallet]="wallet!"
+></app-delete-wallet>
+<app-delete-wallet
+  *ngIf="wallet?.deleted"
+  [modalId]="modalConstant.RESTOREWALLET"
+  [wallet]="wallet!"
+></app-delete-wallet>
