@@ -19,11 +19,24 @@
         class="logo"
     /></a>
   </div>
-  <div class="right">
-    <a href="#" class="headerButton" routerLink="settings">
+  <!-- Options -->
+  <div class="right dropdown">
+    <a href="#" class="headerButton" data-bs-toggle="dropdown">
       <img src="{{ user?.profilePhoto }}" alt="image" class="imaged w32" />
       <span class="badge badge-danger"></span>
     </a>
+    <div class="dropdown-menu dropdown-menu-end">
+      <h6 class="dropdown-header">
+        {{ "dashboard.sidebar.dropdown.options" | translate }}
+      </h6>
+      <a class="dropdown-item" href="#" routerLink="settings">
+        {{ "dashboard.sidebar.dropdown.settings" | translate }}</a
+      >
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">{{
+        "dashboard.sidebar.dropdown.logout" | translate
+      }}</a>
+    </div>
   </div>
 </div>
 <!-- * App Header -->

@@ -6,6 +6,11 @@
   },
   "dashboard": {
     "sidebar": {
+      "dropdown": {
+        "options": "Menu Options",
+        "settings": "Settings",
+        "logout": "Log Out"
+      },
       "overviewTitle": "Balance",
       "menuTitle": "Menu",
       "menu": {
