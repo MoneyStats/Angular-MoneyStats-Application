@@ -1,4 +1,4 @@
-<section class="section-width">
+<section class="section-width mx-auto">
   <app-header-mobile
     *ngIf="screenService?.screenWidth! <= 780"
     title="{{ 'wallet.title' | translate }}"
@@ -32,12 +32,13 @@
 
   <!-- App Capsule -->
   <div id="appCapsule" class="extra-header-active full-height">
-    <div>
+    <div class="row">
       <app-title-desktop
+        class="col-md-6"
         [title]="'wallet.title' | translate"
         [back]="'wallet.back' | translate"
       ></app-title-desktop>
-      <div class="addWallet">
+      <div class="addWallet col-md-6 text-end">
         <button
           type="button"
           class="btn btn-primary me-1 mb-1"

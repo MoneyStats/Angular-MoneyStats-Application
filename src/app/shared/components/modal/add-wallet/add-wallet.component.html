@@ -57,7 +57,22 @@
                   #category="ngModel"
                 >
                   <option
-                    [ngValue]="wallet.category"
+                    *ngIf="!wallet.id"
+                    [value]="wallet.category"
+                    selected
+                    disabled
+                  >
+                    {{ "wallet.modal.categoryText" | translate }}
+                  </option>
+                  <option
+                    *ngIf="wallet.id"
+                    [value]="wallet.category"
+                    selected
+                    disabled
+                  >
+                    {{ "wallet.modal.categoryTextEdit" | translate }}
+                  </option>
+                  <option
                     *ngFor="
                       let category of categoriesInput != undefined
                         ? categoriesInput

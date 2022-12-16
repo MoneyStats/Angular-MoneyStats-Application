@@ -1,4 +1,4 @@
-<section class="section-width">
+<section class="section-width mx-auto">
   <app-header-mobile
     *ngIf="screenService?.screenWidth! <= 780"
     [title]="'wallet.details.transaction.history.title' | translate"
@@ -13,7 +13,7 @@
       [back]="'wallet.details.transaction.history.back' | translate"
     ></app-title-desktop>
 
-    <!-- History -->
+    <!-- History
     <div class="section mt-3 mb-3">
       <div *ngIf="screenService?.screenWidth! <= 780" class="section-title">
         {{ "wallet.details.transaction.history.title" | translate }}
@@ -22,6 +22,26 @@
         <div
           *ngFor="
             let stats of wallet?.history?.slice()?.reverse();
+            let i = index
+          "
+        >
+          <app-wallet-history-card [stats]="stats"></app-wallet-history-card>
+        </div>
+      </div>
+    </div>-->
+    <!-- History -->
+    <!-- History -->
+    <div
+      class="section mt-3 mb-3"
+      *ngFor="let year of uniqueYears?.slice()?.reverse()"
+    >
+      <div class="section-title">
+        {{ "wallet.details.transaction.history.title" | translate }} {{ year }}
+      </div>
+      <div class="card">
+        <div
+          *ngFor="
+            let stats of walletMap?.get(year)?.slice()?.reverse();
             let i = index
           "
         >

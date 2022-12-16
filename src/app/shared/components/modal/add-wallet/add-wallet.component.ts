@@ -18,6 +18,8 @@ export class AddWalletComponent implements OnInit {
   @Input('wallet') wallet: Wallet = new Wallet();
   categories: Category[] = [];
 
+  categorySelect: string = 'Select Category';
+
   defaultImg: boolean = false;
   checkbox: boolean = true;
   walletImg: string = '';
@@ -60,6 +62,7 @@ export class AddWalletComponent implements OnInit {
 
   addUpdateWallet() {
     let walletToSave = this.wallet;
+    console.log(walletToSave);
 
     if (!this.defaultImg) {
       walletToSave.img = this.walletImg;
@@ -74,9 +77,11 @@ export class AddWalletComponent implements OnInit {
   }
 
   validateBtn(): boolean {
-    return (this.checkbox && this.defaultImg) ||
-      (!this.checkbox && !this.defaultImg)
-      ? true
-      : false;
+    let categoryValidation = this.wallet.category ? true : false;
+    let imageValidation =
+      (this.checkbox && this.defaultImg) || (!this.checkbox && !this.defaultImg)
+        ? true
+        : false;
+    return categoryValidation && imageValidation ? true : false;
   }
 }

@@ -96,6 +96,8 @@
       "name": "Name",
       "sub_name": "Enter Wallet Name",
       "category": "Category",
+      "categoryText": "Choose a category",
+      "categoryTextEdit": "Leave to keep same category",
       "img": "Add Image",
       "imgContent": "Add Image from URL",
       "image": "Image",
