@@ -6,6 +6,7 @@ const baseUrlApp: string = '../../';
 export const environment = {
   production: false,
   baseUrl: '../../',
+  version: "1.0.0",
 
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
   getDashboardDataUrl: baseUrlApp + 'assets/core/mock/dashboard.mock.json',

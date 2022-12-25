@@ -40,6 +40,8 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { DeleteWalletComponent } from './shared/components/modal/delete-wallet/delete-wallet.component';
 import { SocialListComponent } from './shared/components/modal/social/social-list/social-list.component';
 import { SocialDetailsComponent } from './shared/components/modal/social/social-details/social-details.component';
+import { VersionComponent } from './shared/components/modal/version-and-change/version/version.component';
+import { ChangelogComponent } from './shared/components/modal/version-and-change/changelog/changelog.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +70,8 @@ import { SocialDetailsComponent } from './shared/components/modal/social/social-
     DeleteWalletComponent,
     SocialListComponent,
     SocialDetailsComponent,
+    VersionComponent,
+    ChangelogComponent,
   ],
   imports: [
     BrowserModule,

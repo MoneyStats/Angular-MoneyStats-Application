@@ -5,6 +5,8 @@ export enum ModalConstant {
   RESTOREWALLET = 'restoreWalletModal',
   ACCOUNTLIST = 'accountListModal',
   ACCOUNTDETAILS = 'accountDetailsModal',
+  VERSION = 'versionModal',
+  CHANGELOG = 'changelogModal',
 }
 
 export enum StorageConstant {

@@ -1,0 +1,30 @@
+<div class="modal fade modalbox" id="{{modalId}}" tabindex="-1" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{"modal.version.title" |translate}}</h5>
+                <a href="javascript:;" data-bs-dismiss="modal">{{"modal.version.close" |translate}}</a>
+            </div>
+            <div class="modal-body">
+                <div class="section mt-2 mb-2">
+                    <div class="captionCenter">
+                        <div class="card" style="max-width: 400px;">
+                            <img src="../../../../../../assets/images/logos/logo_transparent.png" class="responsive"
+                                alt="logo_transparent">
+                            <hr>
+                            <p class="text-center">{{"modal.version.moneystats" |translate}} {{environment.version}}</p>
+                            <button type="button" data-bs-toggle="modal"
+                                attr.data-bs-target="#{{modalConstant.CHANGELOG}}"
+                                class="btn btn-text-primary rounded shadowed me-1 mb-1">{{"modal.version.changelog.title"
+                                |translate}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- * MoneyStats Info Action Sheet -->
+
+<app-changelog [modalId]="modalConstant.CHANGELOG"></app-changelog>

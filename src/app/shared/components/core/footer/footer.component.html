@@ -12,13 +12,7 @@
       <strong>{{ "dashboard.footer.title2" | translate }}</strong>
     </div>
   </a>
-  <a
-    href="#"
-    class="item"
-    (click)="availableSoon()"
-    data-bs-toggle="modal"
-    data-bs-target="#infoActionSheet"
-  >
+  <a href="#" class="item" data-bs-toggle="modal" attr.data-bs-target="#{{modalConstant.VERSION}}">
     <div class="col">
       <div class="action-button large">
         <ion-icon name="arrow-up-outline"></ion-icon>
@@ -39,3 +33,5 @@
   </a>
 </div>
 <!-- * App Bottom Menu -->
+
+<app-version [modalId]="modalConstant.VERSION"></app-version>

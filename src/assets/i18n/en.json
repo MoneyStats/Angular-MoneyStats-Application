@@ -8,6 +8,7 @@
     "sidebar": {
       "dropdown": {
         "options": "Menu Options",
+        "version": "Version",
         "settings": "Settings",
         "logout": "Log Out"
       },
@@ -204,6 +205,23 @@
       "followers": "Followers",
       "following": "Following",
       "url": "URL"
+    },
+    "version": {
+      "title": "MoneyStats Version",
+      "close": "Close",
+      "moneystats": "MoneyStats",
+      "changelog": {
+        "title": "Changelog",
+        "data": [
+          {
+            "modalId": "v1",
+            "version_date": "2023-01-01",
+            "version_title": "MoneyStats V1.0.0",
+            "version": "V1.0.0",
+            "changelog": "&#183; Initial release"
+          }
+        ]
+      }
     }
   },
   "github": {
