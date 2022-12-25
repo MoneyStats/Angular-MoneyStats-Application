@@ -50,19 +50,7 @@
         <li>
           <a href="#" class="item">
             <div class="in">
-              <div>Notification Sound</div>
-              <span class="text-primary">Beep</span>
-            </div>
-          </a>
-        </li>
-      </ul>
-
-      <div class="listview-title mt-1">Profile Settings</div>
-      <ul class="listview image-listview text inset">
-        <li>
-          <a href="#" class="item">
-            <div class="in">
-              <div>Change Username</div>
+              <div>{{"settings.account.username" | translate}}</div>
             </div>
           </a>
         </li>
@@ -73,25 +61,27 @@
             </div>
           </a>
         </li>
+      </ul>
+
+      <div class="listview-title mt-1">App Settings</div>
+      <ul class="listview image-listview text inset">
+        <li>
+          <a href="#" routerLink="/wallet" class="item">
+            <div class="in">
+              <div>Edit Wallet</div>
+            </div>
+            <span class="text-primary">{{"settings.account.open" | translate}}</span>
+          </a>
+        </li>
         <li>
           <a href="#" class="item">
             <div class="in">
-              <div>Address</div>
+              <div>Languages</div>
               <span class="text-primary">Edit</span>
             </div>
           </a>
         </li>
-        <li>
-          <div class="item">
-            <div class="in">
-              <div>Private Profile</div>
-              <div class="form-check form-switch ms-2">
-                <input class="form-check-input" type="checkbox" id="SwitchCheckDefault2" />
-                <label class="form-check-label" for="SwitchCheckDefault2"></label>
-              </div>
-            </div>
-          </div>
-        </li>
+
       </ul>
 
       <div class="listview-title mt-1">Security</div>
@@ -103,17 +93,7 @@
             </div>
           </a>
         </li>
-        <li>
-          <div class="item">
-            <div class="in">
-              <div>2 Step Verification</div>
-              <div class="form-check form-switch ms-2">
-                <input class="form-check-input" type="checkbox" id="SwitchCheckDefault3" checked />
-                <label class="form-check-label" for="SwitchCheckDefault3"></label>
-              </div>
-            </div>
-          </div>
-        </li>
+
         <li>
           <a href="#" class="item">
             <div class="in">
@@ -121,6 +101,28 @@
             </div>
           </a>
         </li>
+      </ul>
+
+      <div class="listview-title mt-1">Info</div>
+      <ul class="listview image-listview text inset">
+        <li>
+          <a href="#" class="item">
+            <div class="in">
+              <div>Support</div>
+            </div>
+
+          </a>
+        </li>
+
+        <li>
+          <a href="#" class="item" data-bs-toggle="modal" attr.data-bs-target="#{{modalConstant.VERSION}}">
+            <div class="in">
+              <div>MoneyStats Version</div>
+            </div>
+            <span class="text-primary">{{"settings.account.open" | translate}}</span>
+          </a>
+        </li>
+
       </ul>
     </div>
   </div>

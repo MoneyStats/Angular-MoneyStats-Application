@@ -184,7 +184,8 @@
       "title": "Account Settings",
       "sync": "Sync Account",
       "descriptionSync": "Sync your profile pictures with an existing social Account",
-      "open": "Open"
+      "open": "Open",
+      "username": "Change Username"
     }
   },
   "modal": {
