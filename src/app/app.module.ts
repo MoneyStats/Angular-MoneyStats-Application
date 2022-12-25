@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -38,6 +38,8 @@ import { AddWalletComponent } from './shared/components/modal/add-wallet/add-wal
 import { FormsModule } from '@angular/forms';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { DeleteWalletComponent } from './shared/components/modal/delete-wallet/delete-wallet.component';
+import { SocialListComponent } from './shared/components/modal/social/social-list/social-list.component';
+import { SocialDetailsComponent } from './shared/components/modal/social/social-details/social-details.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,8 @@ import { DeleteWalletComponent } from './shared/components/modal/delete-wallet/d
     AddWalletComponent,
     SettingsComponent,
     DeleteWalletComponent,
+    SocialListComponent,
+    SocialDetailsComponent,
   ],
   imports: [
     BrowserModule,

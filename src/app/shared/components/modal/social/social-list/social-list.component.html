@@ -1,0 +1,30 @@
+<!-- Date list Action Sheet: USE modalbox for fullscreen -->
+<div class="modal fade action-sheet" id="{{ modalId }}" tabindex="-1" role="dialog" data-bs-focus="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content mx-auto">
+            <div class="modal-header">
+                <h5 class="modal-title">{{"modal.socialList.title" | translate}}</h5>
+                <!--<a href="javascript:;" data-bs-dismiss="modal">{{"modal.socialList.close" | translate}}</a>-->
+            </div>
+            <div class="modal-body">
+                <div class="listview-title mt-2">{{"modal.socialList.select" | translate}}</div>
+                <ul class="listview image-listview inset mb-3">
+                    <li>
+                        <a href="#" data-bs-toggle="modal" attr.data-bs-target="#{{modalConstant.ACCOUNTDETAILS}}"
+                            class="item">
+                            <div class="icon-box bg-primary">
+                                <ion-icon name="logo-github"></ion-icon>
+                            </div>
+                            <div class="in">
+                                {{"modal.socialList.github" | translate}}
+                            </div>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-social-details [modalId]="modalConstant.ACCOUNTDETAILS" [github]="user!.github"></app-social-details>

@@ -1,25 +1,15 @@
 <section class="section-width mx-auto">
-  <app-header-mobile
-    *ngIf="screenService?.screenWidth! <= 780"
-    [title]="'settings.title' | translate"
-    [backBtn]="'settings.mobile_back' | translate"
-  >
+  <app-header-mobile *ngIf="screenService?.screenWidth! <= 780" [title]="'settings.title' | translate"
+    [backBtn]="'settings.mobile_back' | translate">
   </app-header-mobile>
   <!-- App Capsule -->
   <div id="appCapsule">
-    <app-title-desktop
-      [title]="'settings.title' | translate"
-      [back]="'settings.back' | translate"
-    ></app-title-desktop>
+    <app-title-desktop [title]="'settings.title' | translate" [back]="'settings.back' | translate"></app-title-desktop>
     <div class="settings mx-auto">
       <div class="section mt-3 text-center">
         <div class="avatar-section">
           <a href="#">
-            <img
-              src="{{ user?.profilePhoto }}"
-              alt="avatar"
-              class="imaged w100 rounded"
-            />
+            <img src="{{ user?.profilePhoto }}" alt="avatar" class="imaged w100 rounded" />
             <span class="button">
               <ion-icon name="camera-outline"></ion-icon>
             </span>
@@ -27,18 +17,14 @@
         </div>
       </div>
 
-      <div class="listview-title mt-1">Theme</div>
+      <div class="listview-title mt-1">{{"settings.theme.title" | translate}}</div>
       <ul class="listview image-listview text inset no-line">
         <li>
           <div class="item">
             <div class="in">
-              <div>Dark Mode</div>
+              <div>{{"settings.theme.dark" | translate}}</div>
               <div class="form-check form-switch ms-2">
-                <input
-                  class="form-check-input dark-mode-switch"
-                  type="checkbox"
-                  id="darkmodeSwitch"
-                />
+                <input class="form-check-input dark-mode-switch" type="checkbox" id="darkmodeSwitch" />
                 <label class="form-check-label" for="darkmodeSwitch"></label>
               </div>
             </div>
@@ -46,30 +32,20 @@
         </li>
       </ul>
 
-      <div class="listview-title mt-1">Notifications</div>
+      <div class="listview-title mt-1">{{"settings.account.title" | translate}}</div>
       <ul class="listview image-listview text inset">
         <li>
-          <div class="item">
+          <a href="#" data-bs-toggle="modal" attr.data-bs-target="#{{ modalConstant.ACCOUNTLIST }}" class="item">
             <div class="in">
               <div>
-                Payment Alert
+                {{"settings.account.sync" | translate}}
                 <div class="text-muted">
-                  Send notification when new payment received
+                  {{"settings.account.descriptionSync" | translate}}
                 </div>
               </div>
-              <div class="form-check form-switch ms-2">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  id="SwitchCheckDefault1"
-                />
-                <label
-                  class="form-check-label"
-                  for="SwitchCheckDefault1"
-                ></label>
-              </div>
+              <span class="text-primary">{{"settings.account.open" | translate}}</span>
             </div>
-          </div>
+          </a>
         </li>
         <li>
           <a href="#" class="item">
@@ -110,15 +86,8 @@
             <div class="in">
               <div>Private Profile</div>
               <div class="form-check form-switch ms-2">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  id="SwitchCheckDefault2"
-                />
-                <label
-                  class="form-check-label"
-                  for="SwitchCheckDefault2"
-                ></label>
+                <input class="form-check-input" type="checkbox" id="SwitchCheckDefault2" />
+                <label class="form-check-label" for="SwitchCheckDefault2"></label>
               </div>
             </div>
           </div>
@@ -139,16 +108,8 @@
             <div class="in">
               <div>2 Step Verification</div>
               <div class="form-check form-switch ms-2">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  id="SwitchCheckDefault3"
-                  checked
-                />
-                <label
-                  class="form-check-label"
-                  for="SwitchCheckDefault3"
-                ></label>
+                <input class="form-check-input" type="checkbox" id="SwitchCheckDefault3" checked />
+                <label class="form-check-label" for="SwitchCheckDefault3"></label>
               </div>
             </div>
           </div>
@@ -165,3 +126,5 @@
   </div>
   <!-- * App Capsule -->
 </section>
+
+<app-social-list [modalId]="modalConstant.ACCOUNTLIST" [user]="user"></app-social-list>

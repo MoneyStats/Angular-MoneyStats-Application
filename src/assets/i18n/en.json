@@ -174,7 +174,37 @@
   "settings": {
     "title": "Settings",
     "back": "Go back to previous page",
-    "mobile_back": "Back"
+    "mobile_back": "Back",
+    "theme": {
+      "title": "Theme",
+      "dark": "Dark Mode"
+    },
+    "account": {
+      "title": "Account Settings",
+      "sync": "Sync Account",
+      "descriptionSync": "Sync your profile pictures with an existing social Account",
+      "open": "Open"
+    }
+  },
+  "modal": {
+    "socialList": {
+      "title": "Connect Social Account",
+      "close": "Close",
+      "select": "Please Select an account to Sync",
+      "github": "Github"
+    },
+    "socialDetails":{
+      "user": "User ID",
+      "details": "Account Details",
+      "connect":"Connect",
+      "disconnect": "Disconnect",
+      "githubId": "Github ID",
+      "created": "Created On",
+      "updated": "Updated On",
+      "followers": "Followers",
+      "following": "Following",
+      "url": "URL"
+    }
   },
   "github": {
     "title": "Get data from Github for ",

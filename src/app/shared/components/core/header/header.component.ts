@@ -17,7 +17,8 @@ export class HeaderComponent implements OnInit {
   @Input() dashboard?: Dashboard;
   constructor(
     private toast: ToastService,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    public userService: UserService
   ) {}
 
   ngOnInit(): void {}

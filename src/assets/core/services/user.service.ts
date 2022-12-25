@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { Coin, CoinSymbol } from '../data/class/coin';
-import { User } from '../data/class/user.class';
+import { Github, User } from '../data/class/user.class';
 import { SwalService } from '../utils/swal.service';
 import { DashboardService } from './dashboard.service';
 import { WalletService } from './wallet.service';
@@ -16,7 +16,6 @@ export class UserService {
   environment = environment;
   public user: User = new User();
   public coinSymbol: string = CoinSymbol.USD;
-  public github: any;
 
   constructor(
     private http: HttpClient,
@@ -37,11 +36,23 @@ export class UserService {
     this.walletService.coinSymbol = this.coinSymbol;
   }
 
-  getGithubUser(user: string) {
-    this.swalService.getGithubUser(user);
+  syncGithubUser(user: string) {
+    this.swalService.syncGithubUser(user);
+    this.updateGithubData();
   }
 
   updateGithubUser() {
-    this.github = this.swalService.githubAccount;
+    this.user.github = this.swalService.githubAccount;
+  }
+
+  updateGithubData() {
+    this.updateGithubUser();
+    if (this.user.github === undefined) {
+      setTimeout(() => {
+        this.updateGithubData();
+      }, 100 * 10);
+    } else {
+      this.user!.profilePhoto = this.user.github.avatar_url!;
+    }
   }
 }

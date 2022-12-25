@@ -1,6 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { User } from 'src/assets/core/data/class/user.class';
+import { StorageConstant } from 'src/assets/core/data/constant/modal.constant';
 import { UserService } from 'src/assets/core/services/user.service';
 import { ThemeService } from 'src/assets/core/utils/theme.service';
 
@@ -26,19 +27,10 @@ export class AppComponent implements OnInit {
       this.user = data;
       this.userService.user = data;
       this.userService.setValue();
-      this.userService.getGithubUser(this.user.github.username);
+      localStorage.setItem(
+        StorageConstant.GITHUBACCOUNT,
+        JSON.stringify(data.github)
+      );
     });
-    this.updateGithubData();
-  }
-
-  updateGithubData() {
-    this.userService.updateGithubUser();
-    if (this.userService.github === undefined) {
-      setTimeout(() => {
-        this.updateGithubData();
-      }, 100 * 10);
-    } else {
-      this.user!.profilePhoto = this.userService.github.avatar_url;
-    }
   }
 }

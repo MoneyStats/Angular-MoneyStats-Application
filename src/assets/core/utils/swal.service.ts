@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import Swal, { SweetAlertResult } from 'sweetalert2';
+import {
+  ModalConstant,
+  StorageConstant,
+} from '../data/constant/modal.constant';
 import { SwalIcon } from '../data/constant/swal.icon';
 import { UserService } from '../services/user.service';
 
@@ -182,7 +186,7 @@ export class SwalService {
       });
   }
 
-  getGithubUser(user: string) {
+  syncGithubUser(user: string) {
     const customClassSwal = Swal.mixin({
       customClass: {
         image: 'border_round',
@@ -230,6 +234,11 @@ export class SwalService {
           });
         }
         this.githubAccount = result.value;
+        this.githubAccount.username = result.value?.login;
+        localStorage.setItem(
+          StorageConstant.GITHUBACCOUNT,
+          JSON.stringify(result.value)
+        );
       });
   }
 }
