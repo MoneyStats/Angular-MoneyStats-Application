@@ -185,7 +185,23 @@
       "sync": "Sync Account",
       "descriptionSync": "Sync your profile pictures with an existing social Account",
       "open": "Open",
-      "username": "Change Username"
+      "username": "Change Username",
+      "user_label": "Username",
+      "user_placeholder": "Digit your new username",
+      "email": "Update E-Mail",
+      "email_label": "E-Mail",
+      "email_placeholder": "Digit your new email address",
+      "save": "Save"
+    },
+    "security":{
+      "title": "Security",
+      "password": "Change Password",
+      "old_label": "Old Password",
+      "old_placeholder": "Digit your current password",
+      "new_label": "New Password",
+      "new_placeholder": "Digit your new password",
+      "repete_label": "Repete Password",
+      "repete_placeholder": "Digit your new password again"
     }
   },
   "modal": {

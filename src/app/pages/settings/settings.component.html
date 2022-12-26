@@ -48,16 +48,18 @@
           </a>
         </li>
         <li>
-          <a href="#" class="item">
+          <a href="#" data-bs-toggle="modal" attr.data-bs-target="#{{ modalConstant.PROFILESETTINGS }}" class="item"
+            (click)="profileConst = profileSettings.USERNAME">
             <div class="in">
               <div>{{"settings.account.username" | translate}}</div>
             </div>
           </a>
         </li>
         <li>
-          <a href="#" class="item">
+          <a href="#" data-bs-toggle="modal" attr.data-bs-target="#{{ modalConstant.PROFILESETTINGS }}" class="item"
+            (click)="profileConst = profileSettings.EMAIL">
             <div class="in">
-              <div>Update E-mail</div>
+              <div>{{"settings.account.email" | translate}}</div>
             </div>
           </a>
         </li>
@@ -84,12 +86,13 @@
 
       </ul>
 
-      <div class="listview-title mt-1">Security</div>
+      <div class="listview-title mt-1">{{"settings.security.title" | translate}}</div>
       <ul class="listview image-listview text mb-2 inset">
         <li>
-          <a href="#" class="item">
+          <a href="#" data-bs-toggle="modal" attr.data-bs-target="#{{ modalConstant.PROFILESETTINGS }}" class="item"
+            (click)="profileConst = profileSettings.PASSWORD">
             <div class="in">
-              <div>Update Password</div>
+              <div>{{"settings.security.password" | translate}}</div>
             </div>
           </a>
         </li>
@@ -104,7 +107,7 @@
       </ul>
 
       <div class="listview-title mt-1">Info</div>
-      <ul class="listview image-listview text inset">
+      <ul class="listview image-listview text inset mb-2">
         <li>
           <a href="#" class="item">
             <div class="in">
@@ -130,3 +133,4 @@
 </section>
 
 <app-social-list [modalId]="modalConstant.ACCOUNTLIST" [user]="user"></app-social-list>
+<app-profile-settings [modalId]="modalConstant.PROFILESETTINGS" [profileConst]="profileConst"></app-profile-settings>
