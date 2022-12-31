@@ -29,4 +29,36 @@ export class ProfileSettingsComponent implements OnInit {
       this.user = this.userService.user;
     }
   }
+
+  updateUser() {
+    if (this.username != '') {
+      this.user!.username = this.username;
+    }
+    if (this.email != '') {
+      this.user!.email = this.email;
+    }
+    if (
+      this.oldPassword != '' &&
+      this.newPassword != '' &&
+      this.repetePassword != ''
+    ) {
+      this.user!.password = this.newPassword;
+    }
+    this.userService.user = this.user!;
+  }
+
+  validate(): boolean {
+    let validate = false;
+    if (
+      this.oldPassword != '' &&
+      this.newPassword != '' &&
+      this.repetePassword != ''
+    )
+      validate = true;
+    else validate = false;
+    if (this.oldPassword === this.newPassword) validate = true;
+    else validate = false;
+    console.log(validate);
+    return validate;
+  }
 }

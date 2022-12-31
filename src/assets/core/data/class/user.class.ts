@@ -5,6 +5,7 @@ export class User implements UserInterface {
   surname: string = 'Surname';
   email: string = 'email@email.com';
   username: string = 'username';
+  password: string = '';
   role: string = 'USER';
   profilePhoto: string =
     '../../../../assets/images/img/sample/avatar/avatar1.jpg';
