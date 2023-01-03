@@ -42,6 +42,10 @@ export class DashboardComponent implements OnInit {
     private walletService: WalletService
   ) {}
 
+  public get modalConstant(): typeof ModalConstant {
+    return ModalConstant;
+  }
+
   ngOnInit(): void {
     this.dashboardService.getData().subscribe((data) => {
       this.dashboard = data;

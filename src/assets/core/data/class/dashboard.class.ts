@@ -21,7 +21,8 @@ export class Dashboard implements DashboardInterface {
 
 export class Wallet extends GenericModel implements WalletInterface {
   name!: string;
-  img!: string;
+  img: string =
+    'https://scarpedimaremma.com/wp-content/uploads/2022/09/Sfondo-di-IMG_1265-rimosso-300x300.png';
   category!: string;
   allTimeHigh: number = 0;
   allTimeHighDate: Date = new Date();

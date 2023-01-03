@@ -1,23 +1,14 @@
-<section class="section-width">
-  <app-header-mobile
-    *ngIf="screenService?.screenWidth! <= 780"
-    title="{{ 'wallet.title' | translate }}"
-    backBtn="{{ 'transaction.mobile_back' | translate }}"
-    rightBtn="Add"
-    [dataBsTarget]="modalConstant.ADDWALLET"
-  >
+<section class="section-width mx-auto">
+  <app-header-mobile *ngIf="screenService?.screenWidth! <= 780" title="{{ 'wallet.title' | translate }}"
+    backBtn="{{ 'wallet.mobile_back' | translate }}" rightBtn="{{ 'wallet.mobile_add' | translate }}"
+    [dataBsTarget]="modalConstant.ADDWALLET">
   </app-header-mobile>
 
   <!-- Extra Header -->
   <div class="extraHeader pe-0 ps-0">
     <ul class="nav nav-tabs lined" role="tablist">
       <li class="nav-item">
-        <a
-          class="nav-link active"
-          data-bs-toggle="tab"
-          href="#active"
-          role="tab"
-        >
+        <a class="nav-link active" data-bs-toggle="tab" href="#active" role="tab">
           {{ "wallet.active" | translate }}
         </a>
       </li>
@@ -32,39 +23,25 @@
 
   <!-- App Capsule -->
   <div id="appCapsule" class="extra-header-active full-height">
-    <div>
-      <app-title-desktop
-        [title]="'wallet.title' | translate"
-        [back]="'wallet.back' | translate"
-      ></app-title-desktop>
-      <div class="addWallet">
-        <button
-          type="button"
-          class="btn btn-primary me-1 mb-1"
-          data-bs-toggle="modal"
-          attr.data-bs-target="#{{ modalConstant.ADDWALLET }}"
-        >
+    <div class="row">
+      <app-title-desktop class="col-md-6" [title]="'wallet.title' | translate"
+        [back]="'wallet.back' | translate"></app-title-desktop>
+      <div class="addWallet col-md-6 text-end">
+        <button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal"
+          attr.data-bs-target="#{{ modalConstant.ADDWALLET }}">
           {{ "wallet.add" | translate }}
         </button>
       </div>
     </div>
 
-    <app-content-box
-      *ngIf="!wallets || !wallets.length"
-      [header]="'wallet.nodata.header' | translate"
-      [body]="'wallet.nodata.body' | translate"
-      [footer]="'wallet.nodata.footer' | translate"
-    ></app-content-box>
-    <div class="section tab-content mt-2 mb-1">
+    <app-content-box *ngIf="!wallets || !wallets.length" [header]="'wallet.nodata.header' | translate"
+      [body]="'wallet.nodata.body' | translate" [footer]="'wallet.nodata.footer' | translate"></app-content-box>
+    <div class="section tab-content mt-0 mb-2">
       <!-- waiting tab -->
       <div class="tab-pane fade show active" id="active" role="tabpanel">
         <div class="row">
-          <app-wallet-card
-            *ngFor="let wallet of walletActive(wallets)"
-            class="col-md-3 mt-3 col-sm-4 col-6"
-            [wallet]="wallet"
-            [btn]="'Open'"
-          >
+          <app-wallet-card *ngFor="let wallet of walletActive(wallets)" class="col-md-3 mt-3 col-sm-4 col-6"
+            [wallet]="wallet" [btn]="'Open'">
           </app-wallet-card>
         </div>
       </div>
@@ -73,12 +50,8 @@
       <!-- deleted tab -->
       <div class="tab-pane fade" id="deleted" role="tabpanel">
         <div class="row">
-          <app-wallet-card
-            *ngFor="let wallet of walletDeleted(wallets)"
-            class="col-md-3 mt-3 col-sm-4 col-6"
-            [wallet]="wallet"
-            [btn]="'Open'"
-          >
+          <app-wallet-card *ngFor="let wallet of walletDeleted(wallets)" class="col-md-3 mt-3 col-sm-4 col-6"
+            [wallet]="wallet" [btn]="'Open'">
           </app-wallet-card>
         </div>
       </div>
@@ -88,4 +61,4 @@
   <!-- * App Capsule -->
 </section>
 
-<app-add-wallet (emitAddWallet)="addWallet($event)"></app-add-wallet>
+<app-add-wallet [modalId]="modalConstant.ADDWALLET" (emitAddWallet)="addWallet($event)"></app-add-wallet>

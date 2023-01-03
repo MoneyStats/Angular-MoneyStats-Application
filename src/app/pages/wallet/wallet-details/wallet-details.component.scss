@@ -16,6 +16,9 @@
   .section {
     margin-right: -7px;
   }
+  .editWallet {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 780px) {
@@ -36,4 +39,9 @@
 
 .row {
   margin-right: 0px;
+}
+
+.editWallet {
+  margin-top: 65px;
+  padding-right: 20px;
 }

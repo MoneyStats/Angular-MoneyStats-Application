@@ -7,7 +7,10 @@
     </a>
   </div>
   <div class="pageTitle text-not-selected">{{ title }}</div>
-  <div *ngIf="rightBtn != ''" class="right">
+  <div
+    *ngIf="rightBtn != '' && dataBsTarget != modalConstant.EDITWALLET"
+    class="right"
+  >
     <a
       href="#"
       class="headerButton"
@@ -16,6 +19,46 @@
     >
       {{ rightBtn }}
     </a>
+  </div>
+
+  <!-- Mobile Options -->
+  <div
+    *ngIf="
+      rightBtn != '' &&
+      (dataBsTarget === modalConstant.EDITWALLET ||
+        dataBsTarget === modalConstant.RESTOREWALLET)
+    "
+    class="right dropdown"
+  >
+    <a href="#" class="headerButton" data-bs-toggle="dropdown">
+      <i class="icon ion-ios-more"></i>
+    </a>
+    <div class="dropdown-menu dropdown-menu-end">
+      <h6 class="dropdown-header">{{ "headerMobile.options" | translate }}</h6>
+      <a
+        class="dropdown-item"
+        href="#"
+        data-bs-toggle="modal"
+        attr.data-bs-target="#{{ dataBsTarget }}"
+        >{{ rightBtn }}</a
+      >
+      <a
+        class="dropdown-item"
+        href="#"
+        data-bs-toggle="modal"
+        attr.data-bs-target="#{{ modalConstant.DELETEWALLET }}"
+        >{{ "headerMobile.delete" | translate }}</a
+      >
+      <div *ngIf="restore" class="dropdown-divider"></div>
+      <a
+        *ngIf="restore"
+        class="dropdown-item"
+        href="#"
+        data-bs-toggle="modal"
+        attr.data-bs-target="#{{ modalConstant.RESTOREWALLET }}"
+        >{{ "headerMobile.restore" | translate }}</a
+      >
+    </div>
   </div>
 </div>
 <!-- * App Header -->

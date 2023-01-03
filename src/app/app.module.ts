@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -36,6 +36,14 @@ import { WalletHistoryComponent } from './pages/wallet/wallet-details/wallet-his
 import { WalletHistoryCardComponent } from './shared/components/wallet/wallet-history/wallet-history.component';
 import { AddWalletComponent } from './shared/components/modal/add-wallet/add-wallet.component';
 import { FormsModule } from '@angular/forms';
+import { SettingsComponent } from './pages/settings/settings.component';
+import { DeleteWalletComponent } from './shared/components/modal/delete-wallet/delete-wallet.component';
+import { SocialListComponent } from './shared/components/modal/social/social-list/social-list.component';
+import { SocialDetailsComponent } from './shared/components/modal/social/social-details/social-details.component';
+import { VersionComponent } from './shared/components/modal/version-and-change/version/version.component';
+import { ChangelogComponent } from './shared/components/modal/version-and-change/changelog/changelog.component';
+import { ProfileSettingsComponent } from './shared/components/modal/profile-settings/profile-settings.component';
+import { LanguagesComponent } from './shared/components/modal/languages/languages.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +68,14 @@ import { FormsModule } from '@angular/forms';
     WalletHistoryComponent,
     WalletHistoryCardComponent,
     AddWalletComponent,
+    SettingsComponent,
+    DeleteWalletComponent,
+    SocialListComponent,
+    SocialDetailsComponent,
+    VersionComponent,
+    ChangelogComponent,
+    ProfileSettingsComponent,
+    LanguagesComponent,
   ],
   imports: [
     BrowserModule,

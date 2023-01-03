@@ -3,11 +3,19 @@ export interface UserInterface {
   surname: string;
   email: string;
   username: string;
+  password: string;
   role: string;
   profilePhoto: string;
   value: string;
 }
 
 export interface GithubInterface {
-  username: string;
+  id?: number;
+  username?: string;
+  avatar_url?: string;
+  updated_at?: Date;
+  created_at?: Date;
+  followers?: number;
+  following?: number;
+  html_url?: string;
 }

@@ -1,4 +1,4 @@
-<section class="section-width">
+<section class="section-width mx-auto">
   <app-header-mobile
     *ngIf="screenService?.screenWidth! <= 780"
     [title]="'transaction.title' | translate"
@@ -7,7 +7,7 @@
   </app-header-mobile>
 
   <!-- App Capsule -->
-  <div id="appCapsule">
+  <div id="appCapsule" class="mx_">
     <app-title-desktop
       [title]="'transaction.title' | translate"
       [back]="'transaction.back' | translate"
