@@ -37,4 +37,8 @@ export class FooterComponent implements OnInit {
   goToSettings() {
     this.screenService.goToSettings();
   }
+
+  goToStats() {
+    this.screenService.goToStats();
+  }
 }

@@ -53,6 +53,12 @@ export class ScreenService {
     settings!.classList.add('active');
   }
 
+  goToStats() {
+    this.resetAllBtn();
+    const stats = document.getElementById('stats');
+    stats!.classList.add('active');
+  }
+
   resetAllBtn() {
     const dashboard = document.getElementById('dashboard');
     dashboard!.classList.remove('active');
@@ -62,5 +68,8 @@ export class ScreenService {
 
     const settings = document.getElementById('settings');
     settings!.classList.remove('active');
+
+    const stats = document.getElementById('stats');
+    stats!.classList.remove('active');
   }
 }
