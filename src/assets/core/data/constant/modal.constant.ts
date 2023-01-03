@@ -8,6 +8,7 @@ export enum ModalConstant {
   VERSION = 'versionModal',
   CHANGELOG = 'changelogModal',
   PROFILESETTINGS = 'profileSettingsModal',
+  LANGUAGES = 'languagesModal',
 }
 
 export enum StorageConstant {
@@ -18,4 +19,9 @@ export enum ProfileSettings {
   USERNAME = 'usernameSettings',
   EMAIL = 'emailSettings',
   PASSWORD = 'passwordSettings',
+}
+
+export enum LanguagesSettings {
+  ATTR_LANGUAGE = 'lang',
+  ENGLISH = 'en',
 }

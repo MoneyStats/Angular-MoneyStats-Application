@@ -43,6 +43,7 @@ import { SocialDetailsComponent } from './shared/components/modal/social/social-
 import { VersionComponent } from './shared/components/modal/version-and-change/version/version.component';
 import { ChangelogComponent } from './shared/components/modal/version-and-change/changelog/changelog.component';
 import { ProfileSettingsComponent } from './shared/components/modal/profile-settings/profile-settings.component';
+import { LanguagesComponent } from './shared/components/modal/languages/languages.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { ProfileSettingsComponent } from './shared/components/modal/profile-sett
     VersionComponent,
     ChangelogComponent,
     ProfileSettingsComponent,
+    LanguagesComponent,
   ],
   imports: [
     BrowserModule,

@@ -193,7 +193,7 @@
       "email_placeholder": "Digit your new email address",
       "save": "Save"
     },
-    "security":{
+    "security": {
       "title": "Security",
       "password": "Change Password",
       "old_label": "Old Password",
@@ -201,7 +201,28 @@
       "new_label": "New Password",
       "new_placeholder": "Digit your new password",
       "repete_label": "Repete Password",
-      "repete_placeholder": "Digit your new password again"
+      "repete_placeholder": "Digit your new password again",
+      "warning": "The Password do not match!"
+    },
+    "app": {
+      "title": "App Settings",
+      "wallet": {
+        "title": "Edit Wallet",
+        "open": "Open"
+      },
+      "languages": {
+        "title": "Languages",
+        "open": "Edit",
+        "en": "English",
+        "change": "Change Languages"
+      }
+    },
+    "info": {
+      "title": "Info",
+      "logout": "Log Out",
+      "support": "Support",
+      "version": "MoneyStats Version",
+      "version_open": "Open"
     }
   },
   "modal": {
@@ -211,10 +232,10 @@
       "select": "Please Select an account to Sync",
       "github": "Github"
     },
-    "socialDetails":{
+    "socialDetails": {
       "user": "User ID",
       "details": "Account Details",
-      "connect":"Connect",
+      "connect": "Connect",
       "disconnect": "Disconnect",
       "githubId": "Github ID",
       "created": "Created On",

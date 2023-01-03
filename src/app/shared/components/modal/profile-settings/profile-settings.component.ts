@@ -1,6 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { User } from 'src/assets/core/data/class/user.class';
-import { ProfileSettings } from 'src/assets/core/data/constant/modal.constant';
+import {
+  ModalConstant,
+  ProfileSettings,
+} from 'src/assets/core/data/constant/modal.constant';
 import { UserService } from 'src/assets/core/services/user.service';
 
 @Component({
@@ -17,6 +20,7 @@ export class ProfileSettingsComponent implements OnInit {
   oldPassword: string = '';
   newPassword: string = '';
   repetePassword: string = '';
+  warning: boolean = false;
 
   constructor(private userService: UserService) {}
 
@@ -42,9 +46,28 @@ export class ProfileSettingsComponent implements OnInit {
       this.newPassword != '' &&
       this.repetePassword != ''
     ) {
-      this.user!.password = this.newPassword;
+      if (this.newPassword === this.repetePassword)
+        this.user!.password = this.newPassword;
+      else {
+        this.warning = true;
+        return;
+      }
     }
+    // DELETE PASSWORD
+    this.user!.password = '';
+
     this.userService.user = this.user!;
+    this.warning = false;
+    var a = document.getElementById(ModalConstant.PROFILESETTINGS);
+    setTimeout(() => {
+      a?.classList.remove('show');
+      a?.click();
+      this.email = '';
+      this.username = '';
+      this.oldPassword = '';
+      this.newPassword = '';
+      this.repetePassword = '';
+    }, 100);
   }
 
   validate(): boolean {
@@ -55,10 +78,6 @@ export class ProfileSettingsComponent implements OnInit {
       this.repetePassword != ''
     )
       validate = true;
-    else validate = false;
-    if (this.oldPassword === this.newPassword) validate = true;
-    else validate = false;
-    console.log(validate);
     return validate;
   }
 }
