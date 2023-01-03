@@ -225,6 +225,19 @@
       "version_open": "Open"
     }
   },
+  "stats": {
+    "title": "Resume Data",
+    "back": "Go back to previous page",
+    "mobile_back": "Back",
+    "tab_stats": "Stats Resume",
+    "tab_category": "Category Resume",
+    "tab_history": "History",
+    "nodata": {
+      "header": "Resume",
+      "body": "Insert new data to get resume.",
+      "footer": "MoneyStats"
+    }
+  },
   "modal": {
     "socialList": {
       "title": "Connect Social Account",

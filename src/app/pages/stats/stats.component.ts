@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ModalConstant } from 'src/assets/core/data/constant/modal.constant';
+import { DashboardService } from 'src/assets/core/services/dashboard.service';
+import { WalletService } from 'src/assets/core/services/wallet.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
@@ -10,11 +12,23 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 })
 export class StatsComponent implements OnInit {
   wallets: Wallet[] = [];
-  constructor(public screenService: ScreenService) {}
+  dashboard: Dashboard = new Dashboard();
+  constructor(
+    public screenService: ScreenService,
+    private walletService: WalletService,
+    private dashboardService: DashboardService
+  ) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.screenService.setupHeader();
+    this.screenService.goToStats();
+    this.walletService.getWallet().subscribe((res) => {
+      this.wallets = res;
+    });
+    this.dashboard = this.dashboardService.dashboard;
+  }
 }

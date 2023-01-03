@@ -6,8 +6,18 @@
   .extraHeader {
     margin-top: 0px;
   }
-  .addWallet {
+  .input-wrapper {
+    max-width: 90% !important;
+    margin-left: 7% !important;
+  }
+  app-title-desktop {
     display: none;
+  }
+  .row {
+    margin-right: 0px;
+  }
+  .addWallet {
+    margin-top: 30px !important;
   }
 }
 

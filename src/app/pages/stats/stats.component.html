@@ -1,10 +1,8 @@
 <section class="section-width mx-auto">
   <app-header-mobile
     *ngIf="screenService?.screenWidth! <= 780"
-    title="{{ 'wallet.title' | translate }}"
-    backBtn="{{ 'wallet.mobile_back' | translate }}"
-    rightBtn="{{ 'wallet.mobile_add' | translate }}"
-    [dataBsTarget]="modalConstant.ADDWALLET"
+    title="{{ 'stats.title' | translate }}"
+    backBtn="{{ 'stats.mobile_back' | translate }}"
   >
   </app-header-mobile>
 
@@ -15,15 +13,25 @@
         <a
           class="nav-link active"
           data-bs-toggle="tab"
-          href="#active"
+          href="#tab_stats"
           role="tab"
         >
-          {{ "wallet.active" | translate }}
+          {{ "stats.tab_stats" | translate }}
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="tab" href="#deleted" role="tab">
-          {{ "wallet.deleted" | translate }}
+        <a
+          class="nav-link"
+          data-bs-toggle="tab"
+          href="#tab_category"
+          role="tab"
+        >
+          {{ "stats.tab_category" | translate }}
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#tab_history" role="tab">
+          {{ "stats.tab_history" | translate }}
         </a>
       </li>
     </ul>
@@ -35,42 +43,53 @@
     <div class="row">
       <app-title-desktop
         class="col-md-6"
-        [title]="'wallet.title' | translate"
-        [back]="'wallet.back' | translate"
+        [title]="'stats.title' | translate"
+        [back]="'stats.back' | translate"
       ></app-title-desktop>
-      <div class="addWallet col-md-6 text-end">
-        <button
-          type="button"
-          class="btn btn-primary me-1 mb-1"
-          data-bs-toggle="modal"
-          attr.data-bs-target="#{{ modalConstant.ADDWALLET }}"
-        >
-          {{ "wallet.add" | translate }}
-        </button>
+      <div class="addWallet col-md-6">
+        <div class="form-group boxed">
+          <div class="input-wrapper" style="max-width: 150px; margin-left: 80%">
+            <select class="form-control custom-select" id="select4b">
+              <option value="1">Select 1</option>
+              <option value="2">Select 2</option>
+              <option value="3">Select 3</option>
+              <option value="4">Select 4</option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
 
     <app-content-box
       *ngIf="!wallets || !wallets.length"
-      [header]="'wallet.nodata.header' | translate"
-      [body]="'wallet.nodata.body' | translate"
-      [footer]="'wallet.nodata.footer' | translate"
+      [header]="'stats.nodata.header' | translate"
+      [body]="'stats.nodata.body' | translate"
+      [footer]="'stats.nodata.footer' | translate"
     ></app-content-box>
     <div class="section tab-content mt-0 mb-2">
       <!-- waiting tab -->
-      <div class="tab-pane fade show active" id="active" role="tabpanel">
-        <div class="row"></div>
+      <div class="tab-pane fade show active" id="tab_stats" role="tabpanel">
+        <div class="row">
+          <app-data
+            *ngIf="wallets && wallets.length"
+            [dashboard]="dashboard"
+          ></app-data>
+        </div>
       </div>
       <!-- * waiting tab -->
 
       <!-- deleted tab -->
-      <div class="tab-pane fade" id="deleted" role="tabpanel">
+      <div class="tab-pane fade" id="tab_category" role="tabpanel">
         <div class="row"></div>
       </div>
       <!-- * deleted tab -->
+
+      <!-- history tab -->
+      <div class="tab-pane fade" id="tab_history" role="tabpanel">
+        <div class="row"></div>
+      </div>
+      <!-- * history tab -->
     </div>
   </div>
   <!-- * App Capsule -->
 </section>
-
-<app-add-wallet [modalId]="modalConstant.ADDWALLET"></app-add-wallet>

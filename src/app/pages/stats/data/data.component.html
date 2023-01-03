@@ -1,0 +1,135 @@
+<div class="row">
+  <!-- Graph -->
+  <div class="section mt-4 col-xl-6">
+    <div class="section-heading">
+      <h2 class="title" id="year">
+        {{ "dashboard.graph.title" | translate }} {{ currentYear() }}
+      </h2>
+    </div>
+    <app-content-box
+      *ngIf="!dashboard.wallets || !dashboard.wallets.length"
+      [header]="'dashboard.graph.nodata.header' | translate"
+      [body]="'dashboard.graph.nodata.body' | translate"
+      [footer]="'dashboard.graph.nodata.footer' | translate"
+    ></app-content-box>
+    <div *ngIf="dashboard.wallets.length" class="card">
+      <div class="card-body">
+        <apx-chart
+          *ngIf="chartOptions"
+          [series]="chartOptions.series!"
+          [chart]="chartOptions.chart!"
+          [title]="chartOptions.title!"
+          [colors]="chartOptions.colors!"
+          [legend]="chartOptions.legend!"
+          [stroke]="chartOptions.stroke!"
+          [labels]="chartOptions.labels!"
+          type="area"
+        ></apx-chart>
+        <!--<div id="chart-line"></div>-->
+      </div>
+    </div>
+  </div>
+  <!-- * Graph -->
+
+  <!-- Graph -->
+  <div class="section mt-4 col-xl-6">
+    <div class="section-heading">
+      <h2 class="title" id="year">
+        {{ "dashboard.graph.title" | translate }} {{ currentYear() }}
+      </h2>
+    </div>
+    <app-content-box
+      *ngIf="!dashboard.wallets || !dashboard.wallets.length"
+      [header]="'dashboard.graph.nodata.header' | translate"
+      [body]="'dashboard.graph.nodata.body' | translate"
+      [footer]="'dashboard.graph.nodata.footer' | translate"
+    ></app-content-box>
+    <div *ngIf="dashboard.wallets.length" class="card">
+      <div class="card-body">
+        <apx-chart
+          *ngIf="chartOptions"
+          [series]="chartOptions.series!"
+          [chart]="chartOptions.chart!"
+          [title]="chartOptions.title!"
+          [colors]="chartOptions.colors!"
+          [legend]="chartOptions.legend!"
+          [stroke]="chartOptions.stroke!"
+          [labels]="chartOptions.labels!"
+          type="area"
+        ></apx-chart>
+        <!--<div id="chart-line"></div>-->
+      </div>
+    </div>
+  </div>
+  <!-- * Graph -->
+
+  <!-- Graph -->
+  <div class="section mt-4 col-xl-6">
+    <div class="section-heading">
+      <h2 class="title" id="year">
+        {{ "dashboard.graph.title" | translate }} {{ currentYear() }}
+      </h2>
+    </div>
+    <app-content-box
+      *ngIf="!dashboard.wallets || !dashboard.wallets.length"
+      [header]="'dashboard.graph.nodata.header' | translate"
+      [body]="'dashboard.graph.nodata.body' | translate"
+      [footer]="'dashboard.graph.nodata.footer' | translate"
+    ></app-content-box>
+    <div *ngIf="dashboard.wallets.length" class="card">
+      <div class="card-body">
+        <apx-chart
+          *ngIf="chartOptions"
+          [series]="chartOptions.series!"
+          [chart]="chartOptions.chart!"
+          [title]="chartOptions.title!"
+          [colors]="chartOptions.colors!"
+          [legend]="chartOptions.legend!"
+          [stroke]="chartOptions.stroke!"
+          [labels]="chartOptions.labels!"
+          type="area"
+        ></apx-chart>
+        <!--<div id="chart-line"></div>-->
+      </div>
+    </div>
+  </div>
+  <!-- * Graph -->
+</div>
+<!-- App Capsule -->
+<div class="section mt-2">
+  <div class="section-title">Default</div>
+  <div class="card">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">User ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Title</th>
+            <th scope="col" class="text-end">Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">15323</th>
+            <td>John</td>
+            <td>Manager</td>
+            <td class="text-end text-primary">$ 509.40</td>
+          </tr>
+          <tr>
+            <th scope="row">55212</th>
+            <td>Mark</td>
+            <td>User</td>
+            <td class="text-end text-primary">$ 230.95</td>
+          </tr>
+          <tr>
+            <th scope="row">44623</th>
+            <td>Jane</td>
+            <td>User</td>
+            <td class="text-end text-primary">$ 3,420.50</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -45,7 +45,6 @@ export class WalletComponent implements OnInit {
   }
 
   addWallet(wallet: Wallet) {
-    console.log('DENTRO WALLET');
     this.wallets.push(wallet);
   }
 }

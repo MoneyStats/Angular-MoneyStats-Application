@@ -45,6 +45,7 @@ import { ChangelogComponent } from './shared/components/modal/version-and-change
 import { ProfileSettingsComponent } from './shared/components/modal/profile-settings/profile-settings.component';
 import { LanguagesComponent } from './shared/components/modal/languages/languages.component';
 import { StatsComponent } from './pages/stats/stats.component';
+import { DataComponent } from './pages/stats/data/data.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { StatsComponent } from './pages/stats/stats.component';
     ProfileSettingsComponent,
     LanguagesComponent,
     StatsComponent,
+    DataComponent,
   ],
   imports: [
     BrowserModule,
