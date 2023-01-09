@@ -229,6 +229,9 @@
     "title": "Resume Data",
     "back": "Go back to previous page",
     "mobile_back": "Back",
+    "total": "Total Balance",
+    "since": "Since",
+    "performance": "Performance",
     "tab_stats": "Stats Resume",
     "tab_category": "Category Resume",
     "tab_history": "History",
@@ -236,6 +239,10 @@
       "header": "Resume",
       "body": "Insert new data to get resume.",
       "footer": "MoneyStats"
+    },
+    "data": {
+      "wallet": "Current Wallet",
+      "since": "Since"
     }
   },
   "modal": {

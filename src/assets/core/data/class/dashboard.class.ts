@@ -10,6 +10,7 @@ export class Dashboard implements DashboardInterface {
   balance: number = 0;
   value: string = 'USD';
   performace: number = 0;
+  performanceValue: number = 0;
   performanceSince: Date = new Date();
   performanceLastDate: Date = new Date();
   lastStatsPerformance: number = 0;

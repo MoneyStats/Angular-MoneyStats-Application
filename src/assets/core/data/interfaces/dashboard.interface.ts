@@ -2,6 +2,7 @@ export interface DashboardInterface {
   balance: number;
   value: string;
   performace: number;
+  performanceValue: number;
   performanceSince: Date;
   performanceLastDate: Date;
   lastStatsPerformance: number;

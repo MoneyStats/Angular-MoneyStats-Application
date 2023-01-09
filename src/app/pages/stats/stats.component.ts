@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ModalConstant } from 'src/assets/core/data/constant/modal.constant';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
+import { StatsService } from 'src/assets/core/services/stats.service';
 import { WalletService } from 'src/assets/core/services/wallet.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
@@ -12,11 +13,14 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 })
 export class StatsComponent implements OnInit {
   wallets: Wallet[] = [];
-  dashboard: Dashboard = new Dashboard();
+  resumeData: Dashboard = new Dashboard();
+  resume: Map<string, Dashboard> = new Map<string, Dashboard>();
+  years: Array<string> = [];
   constructor(
     public screenService: ScreenService,
     private walletService: WalletService,
-    private dashboardService: DashboardService
+    public dashboardService: DashboardService,
+    private statsService: StatsService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -26,9 +30,21 @@ export class StatsComponent implements OnInit {
   ngOnInit(): void {
     this.screenService.setupHeader();
     this.screenService.goToStats();
+    this.statsService.getResume().subscribe((res: any) => {
+      this.resume = new Map<string, Dashboard>(Object.entries(res));
+      this.years = Array.from(this.resume.keys());
+    });
     this.walletService.getWallet().subscribe((res) => {
       this.wallets = res;
     });
-    this.dashboard = this.dashboardService.dashboard;
+    this.resumeData = this.dashboardService.dashboard;
+  }
+
+  onChange(e: any) {
+    this.updateData(e.target.value);
+  }
+
+  updateData(year: string) {
+    this.resumeData = this.resume.get(year)!;
   }
 }

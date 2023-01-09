@@ -49,11 +49,17 @@
       <div class="addWallet col-md-6">
         <div class="form-group boxed">
           <div class="input-wrapper" style="max-width: 150px; margin-left: 80%">
-            <select class="form-control custom-select" id="select4b">
-              <option value="1">Select 1</option>
-              <option value="2">Select 2</option>
-              <option value="3">Select 3</option>
-              <option value="4">Select 4</option>
+            <select
+              class="form-control custom-select"
+              id="select4b"
+              (change)="onChange($event)"
+            >
+              <option
+                *ngFor="let year of years.slice().reverse()"
+                value="{{ year }}"
+              >
+                {{ year }}
+              </option>
             </select>
           </div>
         </div>
@@ -66,13 +72,106 @@
       [body]="'stats.nodata.body' | translate"
       [footer]="'stats.nodata.footer' | translate"
     ></app-content-box>
+
+    <div class="transactions row">
+      <div class="col-md-6 mt-2">
+        <!-- item -->
+        <a href="#" class="item">
+          <div class="detail">
+            <div class="col-auto" style="padding-right: 20px">
+              <div
+                class="icon icon-shape bg-danger text-white rounded-circle shadow"
+              >
+                <i class="fas fa-chart-bar"></i>
+              </div>
+            </div>
+            <div>
+              <strong>{{ "stats.total" | translate }}</strong>
+              <p class="sincetot">
+                {{ "stats.since" | translate }}
+                {{ resumeData.performanceLastDate | date : "dd MMM y" }}
+              </p>
+            </div>
+          </div>
+          <div class="right">
+            <div class="price" id="totale">
+              {{ dashboardService.coinSymbol }} {{ resumeData.balance }}
+            </div>
+            <div class="price performancetot">
+              <span
+                class="{{
+                  resumeData.lastStatsPerformance > 0
+                    ? 'text-success'
+                    : 'text-danger'
+                }} mr-2"
+                ><i
+                  class="fa {{
+                    resumeData.lastStatsPerformance > 0
+                      ? 'fa-arrow-up'
+                      : 'fa-arrow-down'
+                  }}"
+                ></i>
+                {{ resumeData.lastStatsPerformance }}%</span
+              >
+            </div>
+          </div>
+        </a>
+        <!-- * item -->
+      </div>
+      <div class="col-md-6 mt-2">
+        <!-- item -->
+        <a href="#" class="item">
+          <div class="detail">
+            <div class="col-auto" style="padding-right: 20px">
+              <div
+                class="icon icon-shape bg-warning text-white rounded-circle shadow"
+              >
+                <i class="fas fa-poll"></i>
+              </div>
+            </div>
+            <div>
+              <strong>{{ "stats.performance" | translate }}</strong>
+              <p class="sincetot">
+                {{ "stats.since" | translate }}
+                {{ resumeData.performanceSince | date : "dd MMM y" }}
+              </p>
+            </div>
+          </div>
+          <div class="right">
+            <div
+              class="price {{
+                resumeData.performanceValue > 0 ? 'text-success' : 'text-danger'
+              }}"
+              id="pil"
+            >
+              {{ dashboardService.coinSymbol }}
+              {{ resumeData.performanceValue }}
+            </div>
+            <div class="price performancetot">
+              <span
+                class="{{
+                  resumeData.performace > 0 ? 'text-success' : 'text-danger'
+                }} mr-2"
+                ><i
+                  class="fa {{
+                    resumeData.performace > 0 ? 'fa-arrow-up' : 'fa-arrow-down'
+                  }}"
+                ></i>
+                {{ resumeData.performace }}%</span
+              >
+            </div>
+          </div>
+        </a>
+        <!-- * item -->
+      </div>
+    </div>
     <div class="section tab-content mt-0 mb-2">
       <!-- waiting tab -->
       <div class="tab-pane fade show active" id="tab_stats" role="tabpanel">
         <div class="row">
           <app-data
             *ngIf="wallets && wallets.length"
-            [dashboard]="dashboard"
+            [dashboard]="resumeData"
           ></app-data>
         </div>
       </div>

@@ -101,6 +101,81 @@ export class ChartService {
     };
     return chartExample1;
   }
+
+  renderChartPie(wallets: Wallet[]): Partial<ChartOptions> {
+    let series: Array<any> = [];
+    let walletName: Array<string> = [];
+    wallets.forEach((wallet) => {
+      walletName.push(wallet.name);
+      series.push(wallet.balance);
+      //let historyBalance: Array<number> = [];
+      /*wallet.history.forEach((h) => {
+        historyBalance.push(h.balance);
+      });*/
+      /*let serie = {
+        name: wallet.name,
+        data: historyBalance,
+      };*/
+      //series.push(serie);
+    });
+    let chartExample1: Partial<ChartOptions> = {
+      series: series,
+      chart: {
+        width: '100%',
+        height: 345,
+        type: 'pie',
+      },
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200,
+            },
+            legend: {
+              position: 'right',
+            },
+          },
+        },
+      ],
+      labels: walletName,
+    };
+    series = [];
+    return chartExample1;
+  }
+  renderChartBar(wallets: Wallet[]): Partial<ChartOptions> {
+    let series: Array<any> = [];
+    let walletName: Array<string> = [];
+    wallets.forEach((wallet) => {
+      walletName.push(wallet.name);
+      //series.push(wallet.balance);
+      let historyBalance: Array<number> = [];
+      wallet.history.forEach((h) => {
+        historyBalance.push(h.balance);
+      });
+      let serie = {
+        name: wallet.name,
+        data: historyBalance,
+      };
+      series.push(serie);
+    });
+    let chartExample1: Partial<ChartOptions> = {
+      series: series,
+      chart: {
+        width: '100%',
+        height: 400,
+        type: 'bar',
+      },
+      stroke: {
+        width: 2,
+      },
+      colors: ['#6236FF'],
+      labels: walletName,
+    };
+    console.log(chartExample1);
+    series = [];
+    return chartExample1;
+  }
 }
 
 // Obsolete
