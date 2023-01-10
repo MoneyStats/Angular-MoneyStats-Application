@@ -242,7 +242,9 @@
     },
     "data": {
       "wallet": "Current Wallet",
-      "since": "Since"
+      "graph1": "Graph wallet performance in current year",
+      "graph2": "Graph wallet quantity",
+      "graph3": "Graph wallet performance"
     }
   },
   "modal": {

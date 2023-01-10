@@ -16,6 +16,7 @@ export class Dashboard implements DashboardInterface {
   lastStatsPerformance: number = 0;
   lastStatsBalanceDifference: number = 0;
   statsWalletDays: string[] = [];
+  statsBalances: number[] = [];
   categories: Category[] = [];
   wallets: Wallet[] = [];
 }

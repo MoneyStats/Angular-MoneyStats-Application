@@ -33,9 +33,7 @@ export class StatsComponent implements OnInit {
     this.statsService.getResume().subscribe((res: any) => {
       this.resume = new Map<string, Dashboard>(Object.entries(res));
       this.years = Array.from(this.resume.keys());
-    });
-    this.walletService.getWallet().subscribe((res) => {
-      this.wallets = res;
+      this.updateData(this.years[this.years.length - 1]);
     });
     this.resumeData = this.dashboardService.dashboard;
   }
@@ -46,5 +44,6 @@ export class StatsComponent implements OnInit {
 
   updateData(year: string) {
     this.resumeData = this.resume.get(year)!;
+    this.wallets = this.resumeData.wallets;
   }
 }
