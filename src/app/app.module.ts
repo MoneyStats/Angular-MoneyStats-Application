@@ -47,6 +47,7 @@ import { LanguagesComponent } from './shared/components/modal/languages/language
 import { StatsComponent } from './pages/stats/stats.component';
 import { DataComponent } from './pages/stats/data/data.component';
 import { CategoryComponent } from './pages/stats/category/category.component';
+import { HistoryComponent } from './pages/stats/history/history.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { CategoryComponent } from './pages/stats/category/category.component';
     StatsComponent,
     DataComponent,
     CategoryComponent,
+    HistoryComponent,
   ],
   imports: [
     BrowserModule,

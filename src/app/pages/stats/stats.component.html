@@ -191,7 +191,12 @@
 
       <!-- history tab -->
       <div class="tab-pane fade" id="tab_history" role="tabpanel">
-        <div class="row"></div>
+        <div class="row">
+          <app-history
+            *ngIf="wallets && wallets.length"
+            [resume]="resume"
+          ></app-history>
+        </div>
       </div>
       <!-- * history tab -->
     </div>

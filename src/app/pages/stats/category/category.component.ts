@@ -52,7 +52,6 @@ export class CategoryComponent implements OnInit, OnChanges {
   }
 
   renderChart() {
-    console.log(this.totalMap);
     setTimeout(() => {
       this.chartOptions = this.charts.renderChartLineCategory(this.totalMap);
     }, 200);
