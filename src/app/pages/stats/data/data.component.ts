@@ -15,6 +15,7 @@ import { ChartService } from 'src/assets/core/utils/chart.service';
   styleUrls: ['./data.component.scss'],
 })
 export class DataComponent implements OnInit, OnChanges {
+  @Input('page') page: string = '';
   public chartOptions?: Partial<ChartOptions>;
   public chartPie?: Partial<ChartOptions>;
   public chartBar?: Partial<ChartOptions>;
@@ -41,6 +42,7 @@ export class DataComponent implements OnInit, OnChanges {
   }
 
   renderChart() {
+    console.log('CHART');
     setTimeout(() => {
       this.chartOptions = this.charts.renderChartLine(this.dashboard);
       this.chartPie = this.charts.renderChartPie(this.dashboard.wallets);

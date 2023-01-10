@@ -66,6 +66,69 @@ export class ChartService {
     //chartLine(series, dashboard.statsWalletDays);
   }
 
+  renderChartLineCategory(totalMap: Map<string, any>): Partial<ChartOptions> {
+    let labels: Array<string> = [];
+    let series: Array<any> = [];
+    let index = 0;
+    totalMap.forEach((value: any, key: string) => {
+      let historyBalance: Array<number> = [];
+      let date: string = '';
+
+      value.forEach((v: any) => {
+        historyBalance.push(v.balance);
+        if (index === 0) {
+          labels.push(v.date);
+        }
+      });
+      let serie = {
+        name: key,
+        data: historyBalance,
+      };
+      series.push(serie);
+      historyBalance = [];
+
+      index++;
+    });
+
+    let chartOptions: Partial<ChartOptions> = {
+      series: series,
+      chart: {
+        type: 'area',
+        width: '100%',
+        height: 350,
+        sparkline: {
+          enabled: true,
+        },
+      },
+      stroke: {
+        width: 2,
+      },
+      colors: [
+        '#6236FF',
+        '#d119d0',
+        '#bb9df7',
+        '#de3454',
+        '#407306',
+        '#9c413c',
+        '#f2ed0a',
+        '#fa5c42',
+        '#57cb54',
+        '#500295',
+        '#f7eedc',
+      ],
+      labels: labels,
+      legend: {
+        show: true,
+        position: 'top',
+        horizontalAlign: 'center',
+        floating: false,
+        fontFamily: 'Helvetica, Arial',
+      },
+    };
+    return chartOptions;
+    //chartLine(series, dashboard.statsWalletDays);
+  }
+
   renderChartWallet(name: string, stats: Stats[]): Partial<ChartOptions> {
     let series: Array<any> = [];
     let historyBalance: Array<number> = [];

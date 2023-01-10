@@ -46,6 +46,7 @@ import { ProfileSettingsComponent } from './shared/components/modal/profile-sett
 import { LanguagesComponent } from './shared/components/modal/languages/languages.component';
 import { StatsComponent } from './pages/stats/stats.component';
 import { DataComponent } from './pages/stats/data/data.component';
+import { CategoryComponent } from './pages/stats/category/category.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { DataComponent } from './pages/stats/data/data.component';
     LanguagesComponent,
     StatsComponent,
     DataComponent,
+    CategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,6 +100,8 @@ import { DataComponent } from './pages/stats/data/data.component';
   ],
   providers: [
     DatePipe,
+    DataComponent,
+    CategoryComponent,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
