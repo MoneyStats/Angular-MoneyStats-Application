@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Dashboard, Stats, Wallet } from '../data/class/dashboard.class';
 import * as ApexCharts from 'apexcharts';
-import { ChartOptions } from '../data/constant/apex.chart';
+import { ApexOptions } from '../data/constant/apex.chart';
 
 //declare var ApexCharts: any;
 
@@ -13,7 +13,7 @@ export class ChartService {
   environment = environment;
   constructor() {}
 
-  renderChartLine(dashboard: Dashboard): Partial<ChartOptions> {
+  renderChartLine(dashboard: Dashboard): Partial<ApexOptions> {
     let series: Array<any> = [];
     dashboard.wallets.forEach((wallet) => {
       let historyBalance: Array<number> = [];
@@ -27,7 +27,7 @@ export class ChartService {
       series.push(serie);
       historyBalance = [];
     });
-    let chartOptions: Partial<ChartOptions> = {
+    let chartOptions: Partial<ApexOptions> = {
       series: series,
       chart: {
         type: 'area',
@@ -36,6 +36,9 @@ export class ChartService {
         sparkline: {
           enabled: true,
         },
+      },
+      dataLabels: {
+        enabled: false
       },
       stroke: {
         width: 2,
@@ -66,7 +69,7 @@ export class ChartService {
     //chartLine(series, dashboard.statsWalletDays);
   }
 
-  renderChartLineCategory(totalMap: Map<string, any>): Partial<ChartOptions> {
+  renderChartLineCategory(totalMap: Map<string, any>): Partial<ApexOptions> {
     let labels: Array<string> = [];
     let series: Array<any> = [];
     let index = 0;
@@ -90,7 +93,7 @@ export class ChartService {
       index++;
     });
 
-    let chartOptions: Partial<ChartOptions> = {
+    let chartOptions: Partial<ApexOptions> = {
       series: series,
       chart: {
         type: 'area',
@@ -129,7 +132,7 @@ export class ChartService {
     //chartLine(series, dashboard.statsWalletDays);
   }
 
-  renderChartWallet(name: string, stats: Stats[]): Partial<ChartOptions> {
+  renderChartWallet(name: string, stats: Stats[]): Partial<ApexOptions> {
     let series: Array<any> = [];
     let historyBalance: Array<number> = [];
     let historyDates: Array<string> = [];
@@ -143,7 +146,7 @@ export class ChartService {
     };
     series.push(serie);
     historyBalance = [];
-    let chartExample1: Partial<ChartOptions> = {
+    let chartExample1: Partial<ApexOptions> = {
       series: series,
       chart: {
         type: 'area',
@@ -165,7 +168,7 @@ export class ChartService {
     return chartExample1;
   }
 
-  renderChartPie(wallets: Wallet[]): Partial<ChartOptions> {
+  renderChartPie(wallets: Wallet[]): Partial<ApexOptions> {
     let series: Array<any> = [];
     let walletName: Array<string> = [];
     wallets.forEach((wallet) => {
@@ -181,7 +184,7 @@ export class ChartService {
       };*/
       //series.push(serie);
     });
-    let chartExample1: Partial<ChartOptions> = {
+    let chartExample1: Partial<ApexOptions> = {
       series: series,
       chart: {
         width: '100%',
@@ -206,7 +209,7 @@ export class ChartService {
     series = [];
     return chartExample1;
   }
-  renderChartBar(dates: string[], balances: number[]): Partial<ChartOptions> {
+  renderChartBar(dates: string[], balances: number[]): Partial<ApexOptions> {
     let series: Array<any> = [];
     let walletName: Array<string> = dates;
     let serie = [
@@ -214,7 +217,7 @@ export class ChartService {
         data: balances,
       },
     ];
-    let chartExample1: Partial<ChartOptions> = {
+    let chartExample1: Partial<ApexOptions> = {
       series: serie,
       chart: {
         width: '100%',

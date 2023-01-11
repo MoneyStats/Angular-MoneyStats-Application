@@ -23,7 +23,6 @@ export class StatsComponent implements OnInit {
     private walletService: WalletService,
     public dashboardService: DashboardService,
     private statsService: StatsService,
-    public category: CategoryComponent
   ) {}
 
   public get modalConstant(): typeof ModalConstant {

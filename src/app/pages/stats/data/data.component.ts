@@ -5,8 +5,9 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { CoinSymbol } from 'src/assets/core/data/class/coin';
 import { Dashboard, Stats } from 'src/assets/core/data/class/dashboard.class';
-import { ChartOptions } from 'src/assets/core/data/constant/apex.chart';
+import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { ChartService } from 'src/assets/core/utils/chart.service';
 
 @Component({
@@ -15,29 +16,34 @@ import { ChartService } from 'src/assets/core/utils/chart.service';
   styleUrls: ['./data.component.scss'],
 })
 export class DataComponent implements OnInit, OnChanges {
-  public chartOptions?: Partial<ChartOptions>;
-  public chartPie?: Partial<ChartOptions>;
-  public chartBar?: Partial<ChartOptions>;
+  public chartOptions?: Partial<ApexOptions>;
+  public chartPie?: Partial<ApexOptions>;
+  public chartBar?: Partial<ApexOptions>;
   @Input('dashboard') dashboard: Dashboard = new Dashboard();
+  @Input('coinSymbol') coinSymbol: string = '';
   balances: Array<number> = [];
   tableBalance: Array<any> = [];
 
   constructor(private charts: ChartService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.renderChart();
     this.tableBalance = [];
+    this.balances = [];
     this.dashboard.statsWalletDays.forEach((date) => {
+      console.log(date);
       this.tableBalance.push(this.tableCreate(date));
     });
+    this.renderChart();
   }
 
   ngOnInit(): void {
-    this.renderChart();
     this.tableBalance = [];
+    this.balances = [];
     this.dashboard.statsWalletDays.forEach((date) => {
+      console.log(date);
       this.tableBalance.push(this.tableCreate(date));
     });
+    this.renderChart();
   }
 
   renderChart() {
@@ -46,7 +52,7 @@ export class DataComponent implements OnInit, OnChanges {
       this.chartPie = this.charts.renderChartPie(this.dashboard.wallets);
       this.chartBar = this.charts.renderChartBar(
         this.dashboard.statsWalletDays,
-        this.dashboard.statsBalances
+        this.balances
       );
     }, 100);
   }
@@ -73,7 +79,15 @@ export class DataComponent implements OnInit, OnChanges {
       100
     ).toFixed(2);
     total.percentage = parseFloat(percentage);
+
+    let trendStats: Stats = new Stats();
+    let trend = (
+      total.balance - this.balances[this.balances.length - 1]
+    ).toFixed(2);
+    trendStats.balance = parseFloat(trend);
+
     array.push(total);
+    array.push(trendStats);
     this.balances.push(total.balance);
     array.index = array.length - 1;
     return array;

@@ -7,8 +7,14 @@ import {
 } from '@angular/core';
 import { map } from 'rxjs';
 import { Dashboard, Stats } from 'src/assets/core/data/class/dashboard.class';
-import { ChartOptions } from 'src/assets/core/data/constant/apex.chart';
+//import { ChartOptions } from 'src/assets/core/data/constant/apex.chart';
 import { ChartService } from 'src/assets/core/utils/chart.service';
+import { ChartConfiguration, ChartOptions, ChartType } from 'chart.js';
+import {
+  ApexOptions,
+  ChartJSOptions,
+} from 'src/assets/core/data/constant/apex.chart';
+import { ChartJSService } from 'src/assets/core/utils/chartjs.service';
 
 @Component({
   selector: 'app-category',
@@ -16,8 +22,9 @@ import { ChartService } from 'src/assets/core/utils/chart.service';
   styleUrls: ['./category.component.scss'],
 })
 export class CategoryComponent implements OnInit, OnChanges {
-  @Input('page') page: string = '';
   @Input('dashboard') dashboard: Dashboard = new Dashboard();
+  @Input('coinSymbol') coinSymbol: string = '';
+
   INVESTMENTS: string[] = ['Investments', 'Cryptocurrency'];
   CAPITAL: string[] = ['Cash', 'Bank Account', 'Debit Card'];
   SAVING: string[] = ['Save Account', 'Save'];
@@ -37,9 +44,10 @@ export class CategoryComponent implements OnInit, OnChanges {
   totalMap: Map<string, any> = new Map<string, any>();
   totalList: Array<any> = [];
 
-  public chartOptions?: Partial<ChartOptions>;
+  public lineChartJS?: ChartJSOptions = new ChartJSOptions();
+  public chartCategory?: Partial<ApexOptions>;
   public chartBar?: Partial<ChartOptions>;
-  constructor(private charts: ChartService) {}
+  constructor(private charts: ChartService, private chartsJS: ChartJSService) {}
 
   ngOnInit(): void {
     this.generateData();
@@ -52,9 +60,10 @@ export class CategoryComponent implements OnInit, OnChanges {
   }
 
   renderChart() {
-    setTimeout(() => {
-      this.chartOptions = this.charts.renderChartLineCategory(this.totalMap);
-    }, 200);
+    this.lineChartJS = this.chartsJS.renderChartLine(this.totalMap);
+    //setTimeout(() => {
+    //  this.chartCategory = this.charts.renderChartLineCategory(this.totalMap);
+    //}, 200);
   }
 
   generateData() {
@@ -122,8 +131,6 @@ export class CategoryComponent implements OnInit, OnChanges {
     });
     this.mapWalletCategory.set(this.KEY_OTHER, this.categoryTableBalance);
     this.totalMap.set(this.KEY_OTHER, this.totalList);
-
-    console.log(this.totalMap);
   }
 
   tableCreate(date: string, wallet: any) {

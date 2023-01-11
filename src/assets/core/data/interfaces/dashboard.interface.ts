@@ -33,6 +33,7 @@ export interface StatsInterface {
   date: string;
   balance: number;
   percentage: number;
+  trend: number;
 }
 
 export interface CategoryInterface {

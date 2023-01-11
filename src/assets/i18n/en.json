@@ -16,7 +16,8 @@
       "menuTitle": "Menu",
       "menu": {
         "title1": "Dashboard",
-        "title2": "My Wallet"
+        "title2": "My Wallet",
+        "title3": "Resume"
       },
       "subMenuTitle": "Others",
       "subMenu": {
@@ -242,9 +243,22 @@
     },
     "data": {
       "wallet": "Current Wallet",
-      "graph1": "Graph wallet performance in current year",
+      "graph1": "Graph wallet performance",
       "graph2": "Graph wallet quantity",
-      "graph3": "Graph wallet performance"
+      "graph3": "Graph bar wallet performance",
+      "table": "List Stats of the Year",
+      "table_date": "Date",
+      "table_balance": "Balance",
+      "table_trend": "Trend",
+      "table_performance": "Performance",
+      "table_value": "Value Trend",
+      "investments": "Investments",
+      "capital": "Capital",
+      "others": "Others",
+      "debits": "Debits",
+      "saving": "Saving",
+      "history": "History",
+      "graphHistory": "Graph History Performance"
     }
   },
   "modal": {

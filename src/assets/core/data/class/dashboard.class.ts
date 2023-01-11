@@ -44,6 +44,7 @@ export class Stats implements StatsInterface {
   date!: string;
   balance!: number;
   percentage!: number;
+  trend!: number;
 }
 
 export class Category implements CategoryInterface {

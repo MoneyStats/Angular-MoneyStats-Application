@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -48,6 +48,7 @@ import { StatsComponent } from './pages/stats/stats.component';
 import { DataComponent } from './pages/stats/data/data.component';
 import { CategoryComponent } from './pages/stats/category/category.component';
 import { HistoryComponent } from './pages/stats/history/history.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { HistoryComponent } from './pages/stats/history/history.component';
     IonicModule.forRoot(),
     HttpClientModule,
     NgApexchartsModule,
+    NgChartsModule,
     FormsModule,
     TranslateModule.forRoot({
       loader: {
@@ -102,8 +104,6 @@ import { HistoryComponent } from './pages/stats/history/history.component';
   ],
   providers: [
     DatePipe,
-    DataComponent,
-    CategoryComponent,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,

@@ -1,7 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Dashboard, Stats } from 'src/assets/core/data/class/dashboard.class';
-import { ChartOptions } from 'src/assets/core/data/constant/apex.chart';
+import {
+  ApexOptions,
+  ChartJSOptions,
+} from 'src/assets/core/data/constant/apex.chart';
 import { ChartService } from 'src/assets/core/utils/chart.service';
+import { ChartJSService } from 'src/assets/core/utils/chartjs.service';
 
 @Component({
   selector: 'app-history',
@@ -9,18 +13,20 @@ import { ChartService } from 'src/assets/core/utils/chart.service';
   styleUrls: ['./history.component.scss'],
 })
 export class HistoryComponent implements OnInit {
-  public chartOptions?: Partial<ChartOptions>;
+  public chartOptions?: Partial<ApexOptions>;
   @Input('resume') resume: Map<string, Dashboard> = new Map<
     string,
     Dashboard
   >();
+  @Input('coinSymbol') coinSymbol: string = '';
   balances: Array<number> = [];
   totalList: Array<any> = [];
   totalMap: Map<string, any> = new Map<string, any>();
 
   tableBalance: Array<any> = [];
 
-  constructor(private charts: ChartService) {}
+  public lineChartJS?: ChartJSOptions = new ChartJSOptions();
+  constructor(private charts: ChartService, private chartsJS: ChartJSService) {}
 
   ngOnInit(): void {
     this.resume.forEach((value: Dashboard, key: string) => {
@@ -31,9 +37,10 @@ export class HistoryComponent implements OnInit {
   }
 
   renderChart() {
-    setTimeout(() => {
-      this.chartOptions = this.charts.renderChartLineCategory(this.totalMap);
-    }, 200);
+    this.lineChartJS = this.chartsJS.renderChartLine(this.totalMap);
+    //setTimeout(() => {
+    //  this.chartOptions = this.charts.renderChartLineCategory(this.totalMap);
+    //}, 200);
   }
 
   tableCreate(date: string, dashboard: any) {

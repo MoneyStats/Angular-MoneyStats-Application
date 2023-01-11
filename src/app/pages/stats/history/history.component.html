@@ -1,15 +1,19 @@
 <div class="row">
   <div class="section mt-2 col-xl-4 col-md-5">
-    <div class="section-title">History</div>
+    <div class="section-title">{{ "stats.data.history" | translate }}</div>
     <div class="card">
       <div class="table-responsive">
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Date</th>
-              <th scope="col">Balance</th>
-              <th scope="col" class="text-end">Performance</th>
-              <th scope="col" class="text-end">Value Trend</th>
+              <th scope="col">{{ "stats.data.table_date" | translate }}</th>
+              <th scope="col">{{ "stats.data.table_balance" | translate }}</th>
+              <th scope="col" class="text-end">
+                {{ "stats.data.table_performance" | translate }}
+              </th>
+              <th scope="col" class="text-end">
+                {{ "stats.data.table_value" | translate }}
+              </th>
             </tr>
           </thead>
           <tbody
@@ -32,7 +36,7 @@
                     : 'text-danger'
                 }} {{ balance.index === y ? 'text-end' : '' }}"
               >
-                € {{ balance.balance }}
+                {{ coinSymbol }} {{ balance.balance }}
               </td>
               <td
                 class="{{
@@ -54,7 +58,7 @@
                     : 'text-danger'
                 }} text-end"
               >
-                € {{ balance.trend }}
+                {{ coinSymbol }} {{ balance.trend }}
               </td>
             </tr>
           </tbody>
@@ -67,7 +71,7 @@
   <div class="section mt-4 col-xl-8 col-md-7">
     <div class="section-heading">
       <h2 class="title" id="year">
-        {{ "stats.data.graph1" | translate }}
+        {{ "stats.data.graphHistory" | translate }}
       </h2>
     </div>
     <app-content-box
@@ -78,7 +82,16 @@
     ></app-content-box>
     <div *ngIf="resume" class="card">
       <div class="card-body">
-        <apx-chart
+        <canvas
+          baseChart
+          height="400"
+          [type]="'line'"
+          [data]="lineChartJS!.lineChartData"
+          [options]="lineChartJS!.lineChartOptions"
+          [legend]="lineChartJS!.lineChartLegend"
+        >
+        </canvas>
+        <!--<apx-chart
           *ngIf="chartOptions"
           [series]="chartOptions.series!"
           [chart]="chartOptions.chart!"
@@ -89,7 +102,7 @@
           [labels]="chartOptions.labels!"
           type="area"
         ></apx-chart>
-        <!--<div id="chart-line"></div>-->
+        <div id="chart-line"></div>-->
       </div>
     </div>
   </div>

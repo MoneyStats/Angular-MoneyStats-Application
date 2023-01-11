@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { ActivatedRoute } from '@angular/router';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
-import { ChartOptions } from 'src/assets/core/data/constant/apex.chart';
+import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { ChartService } from 'src/assets/core/utils/chart.service';
 import { WalletService } from 'src/assets/core/services/wallet.service';
 import { ModalConstant } from 'src/assets/core/data/constant/modal.constant';
@@ -14,9 +14,9 @@ import { SwalService } from 'src/assets/core/utils/swal.service';
   styleUrls: ['./wallet-details.component.scss'],
 })
 export class WalletDetailsComponent implements OnInit {
-  public chartAll?: Partial<ChartOptions>;
-  public chart1Y?: Partial<ChartOptions>;
-  public chart3Y?: Partial<ChartOptions>;
+  public chartAll?: Partial<ApexOptions>;
+  public chart1Y?: Partial<ApexOptions>;
+  public chart3Y?: Partial<ApexOptions>;
 
   coinSymbol?: string;
   wallet?: Wallet;

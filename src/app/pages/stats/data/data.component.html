@@ -110,17 +110,26 @@
 
   <!-- App Capsule -->
   <div class="section mt-2 col-xl-12">
-    <div class="section-title">List Stats of the year</div>
+    <div class="section-title">{{ "stats.data.table" | translate }}</div>
     <div class="card">
       <div class="table-responsive">
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Date</th>
-              <th scope="col" *ngFor="let wallet of dashboard.wallets">
+              <th scope="col">{{ "stats.data.table_date" | translate }}</th>
+              <th
+                scope="col"
+                class="text-center"
+                *ngFor="let wallet of dashboard.wallets"
+              >
                 {{ wallet.name }}
               </th>
-              <th scope="col" class="text-end">Balance</th>
+              <th scope="col" class="text-end">
+                {{ "stats.data.table_balance" | translate }}
+              </th>
+              <th scope="col" class="text-end">
+                {{ "stats.data.table_trend" | translate }}
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -128,15 +137,33 @@
               <th scope="row">{{ balances[6].date | date : "d MMM y" }}</th>
               <td
                 class="{{
-                  balance.percentage === 0
-                    ? 'text-warning'
-                    : balance.percentage > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                }} {{ balance.index === y ? 'text-end' : '' }}"
+                  balances.index != y
+                    ? balance.percentage === 0
+                      ? 'text-warning'
+                      : balance.percentage > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                    : ''
+                }} {{
+                  balances.index - 1 === y || balances.index === y
+                    ? 'text-end'
+                    : 'text-center'
+                }}
+                {{
+                  balances.index === y
+                    ? balance.balance === 0
+                      ? 'text-warning'
+                      : balance.balance > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                    : ''
+                }}"
                 *ngFor="let balance of balances; let y = index"
               >
-                € {{ balance.balance }} <span>({{ balance.percentage }}%)</span>
+                {{ coinSymbol }} {{ balance.balance }}
+                <span *ngIf="balances.index != y"
+                  >({{ balance.percentage }}%)</span
+                >
               </td>
             </tr>
           </tbody>

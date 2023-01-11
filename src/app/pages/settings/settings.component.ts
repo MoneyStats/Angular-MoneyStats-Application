@@ -7,6 +7,7 @@ import {
 import { UserService } from 'src/assets/core/services/user.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { ThemeService } from 'src/assets/core/utils/theme.service';
+import { ToastService } from 'src/assets/core/utils/toast.service';
 
 @Component({
   selector: 'app-settings',
@@ -19,7 +20,8 @@ export class SettingsComponent implements OnInit {
   constructor(
     public screenService: ScreenService,
     private userService: UserService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private toast: ToastService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -39,5 +41,9 @@ export class SettingsComponent implements OnInit {
 
   openAccountSettings(profileConst: string) {
     this.profileConst = profileConst;
+  }
+
+  availableSoon() {
+    this.toast.availableSoon();
   }
 }

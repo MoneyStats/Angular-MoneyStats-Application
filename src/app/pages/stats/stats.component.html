@@ -25,7 +25,6 @@
           data-bs-toggle="tab"
           href="#tab_category"
           role="tab"
-          (click)="category.ngOnInit()"
         >
           {{ "stats.tab_category" | translate }}
         </a>
@@ -173,6 +172,7 @@
           <app-data
             *ngIf="wallets && wallets.length"
             [dashboard]="resumeData"
+            [coinSymbol]="dashboardService.coinSymbol!"
           ></app-data>
         </div>
       </div>
