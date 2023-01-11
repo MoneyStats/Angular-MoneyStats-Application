@@ -1,12 +1,9 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ModalConstant } from 'src/assets/core/data/constant/modal.constant';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { StatsService } from 'src/assets/core/services/stats.service';
-import { WalletService } from 'src/assets/core/services/wallet.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
-import { CategoryComponent } from './category/category.component';
-import { DataComponent } from './data/data.component';
 
 @Component({
   selector: 'app-stats',
@@ -20,9 +17,8 @@ export class StatsComponent implements OnInit {
   years: Array<string> = [];
   constructor(
     public screenService: ScreenService,
-    private walletService: WalletService,
     public dashboardService: DashboardService,
-    private statsService: StatsService,
+    private statsService: StatsService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {

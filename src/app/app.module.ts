@@ -49,6 +49,7 @@ import { DataComponent } from './pages/stats/data/data.component';
 import { CategoryComponent } from './pages/stats/category/category.component';
 import { HistoryComponent } from './pages/stats/history/history.component';
 import { NgChartsModule } from 'ng2-charts';
+import { AddStatsComponent } from './pages/stats/add-stats/add-stats.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { NgChartsModule } from 'ng2-charts';
     DataComponent,
     CategoryComponent,
     HistoryComponent,
+    AddStatsComponent,
   ],
   imports: [
     BrowserModule,

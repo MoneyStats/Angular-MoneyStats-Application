@@ -6,6 +6,9 @@
     max-width: 2000px !important;
     /*margin-left: calc(50% - 1000px);*/
   }
+  .hidden_desktop {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 780px) {

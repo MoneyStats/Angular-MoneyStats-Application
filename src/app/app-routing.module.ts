@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ErrorHandleComponent } from './interceptors/error-handle/error-handle.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { AddStatsComponent } from './pages/stats/add-stats/add-stats.component';
 import { StatsComponent } from './pages/stats/stats.component';
 import { TransactionDetailsComponent } from './pages/transactions/transaction-details/transaction-details.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
@@ -42,6 +43,10 @@ const routes: Routes = [
   {
     path: 'stats',
     component: StatsComponent,
+  },
+  {
+    path: 'stats/insert',
+    component: AddStatsComponent,
   },
   {
     path: 'error',
