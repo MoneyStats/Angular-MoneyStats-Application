@@ -24,6 +24,7 @@ export interface WalletInterface {
   lowPrice: number;
   lowPriceDate: Date;
   differenceLastStats: number;
+  performanceLastStats: number;
   dateLastStats: Date;
   balance: number;
   history: StatsInterface[];

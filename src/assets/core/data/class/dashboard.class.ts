@@ -33,9 +33,11 @@ export class Wallet extends GenericModel implements WalletInterface {
   highPriceDate: Date = new Date();
   lowPrice: number = 0;
   lowPriceDate: Date = new Date();
+  performanceLastStats: number = 0;
   differenceLastStats: number = 0;
   dateLastStats: Date = new Date();
   balance: number = 0;
+  newBalance!: number; // Local Variable, used just for save
   history: Stats[] = [];
 }
 

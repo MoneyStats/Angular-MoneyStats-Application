@@ -1,6 +1,6 @@
 .section {
   margin-top: 30px !important;
-  max-width: 1600px;
+  max-width: 1800px;
 }
 
 @media screen and (max-width: 780px) {
@@ -13,6 +13,12 @@
   }
   .editWallet {
     display: none;
+  }
+  .transactions {
+    margin: 0px !important;
+    margin-top: 20px !important;
+    margin-left: -15px !important;
+    margin-right: -15px !important;
   }
 }
 
@@ -40,4 +46,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .date-form {
   margin-top: -10px;
+}
+
+.card-footer {
+  margin-bottom: -20px;
 }

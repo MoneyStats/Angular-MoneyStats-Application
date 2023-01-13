@@ -9,6 +9,7 @@ export enum ModalConstant {
   CHANGELOG = 'changelogModal',
   PROFILESETTINGS = 'profileSettingsModal',
   LANGUAGES = 'languagesModal',
+  ADDSTATS = 'addStatsPage',
 }
 
 export enum StorageConstant {

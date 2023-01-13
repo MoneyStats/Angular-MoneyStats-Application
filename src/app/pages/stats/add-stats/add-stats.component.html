@@ -1,153 +1,183 @@
 <section class="section-width mx-auto">
   <app-header-mobile
     *ngIf="screenService?.screenWidth! <= 780"
-    title="{{ 'stats.title' | translate }}"
-    backBtn="{{ 'stats.mobile_back' | translate }}"
+    title="{{ 'insertStats.title' | translate }}"
+    backBtn="{{ 'insertStats.mobile_back' | translate }}"
   >
   </app-header-mobile>
   <div id="appCapsule">
-    <div class="row">
-      <app-title-desktop
-        class="col-md-6"
-        [title]="'transaction.title' | translate"
-        [back]="'transaction.back' | translate"
-      ></app-title-desktop>
+    <form #f="ngForm" type="submit">
+      <div class="row">
+        <app-title-desktop
+          class="col-md-6"
+          [title]="'insertStats.title' | translate"
+          [back]="'insertStats.back' | translate"
+        ></app-title-desktop>
 
-      <div class="editWallet text-end col-md-6">
-        <div class="row">
-          <div class="col-md-6">
-            <div
-              class="form-group boxed float-end"
-              style="max-width: 200px; margin-top: -10px"
-            >
-              <div class="input-wrapper">
-                <input
-                  type="date"
-                  class="form-control"
-                  id="text4b"
-                  [value]="'today'"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <button type="button" class="btn btn-primary me-1 mb-1">
-              {{ "wallet.details.edit" | translate }}
-            </button>
-            <button type="button" class="btn btn-success me-1 mb-1">
-              {{ "wallet.details.restore" | translate }}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="section mt-2 mx-auto">
-      <div class="card box-shadow">
-        <div class="card-body">
-          <div class="transactions row">
-            <div
-              class="col-xl-3 col-sm-6"
-              *ngFor="let wallet of dashboard.wallets"
-            >
-              <div class="card card-stats mb-4 mb-xl-0">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">
-                        {{ wallet.name }} ({{ wallet.category }})
-                      </h5>
-                      <div class="form-group boxed">
-                        <div class="input-wrapper">
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="text4b"
-                            placeholder="Please insert new balance"
-                          />
-                          <i class="clear-input">
-                            <ion-icon
-                              name="close-circle"
-                              role="img"
-                              class="md hydrated"
-                              aria-label="close circle"
-                            ></ion-icon>
-                          </i>
-                        </div>
-                        <div class="input-info">
-                          {{ wallet.name }} balance: {{ wallet.balance }}
-                        </div>
-                      </div>
-                      <span class="h2 font-weight-bold mb-0" id="tot1"
-                        >€ {{ wallet.balance }}</span
-                      >
-                    </div>
-                    <div class="col-auto">
-                      <img
-                        src="{{ wallet?.img }}"
-                        alt="img"
-                        class="image-block imaged w48 round-img"
-                      />
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-muted text-sm">
-                    <span class="performancesingle0 float-end"
-                      ><span
-                        class="{{
-                          wallet.differenceLastStats > 0
-                            ? 'text-success'
-                            : 'text-danger'
-                        }} mr-2"
-                        ><i
-                          class="fa {{
-                            wallet.differenceLastStats > 0
-                              ? 'fa-arrow-up'
-                              : 'fa-arrow-down'
-                          }}"
-                        ></i>
-                        {{ wallet.differenceLastStats }}%</span
-                      ></span
-                    >
-                    <span class="text-nowrap sincetot"
-                      >{{ "stats.since" | translate }}
-                      {{ wallet.dateLastStats | date : "dd MMM y" }}</span
-                    >
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group boxed hidden_desktop">
+        <div class="editWallet col-md-6">
+          <button
+            style="width: 150px"
+            *ngIf="!saveValidation"
+            type="button"
+            class="btn btn-primary ms-1 me-1 mb-1 float-end"
+            [disabled]="f.invalid || validate()"
+            (click)="confirm()"
+          >
+            {{ "insertStats.continue" | translate }}
+          </button>
+          <button
+            style="width: 150px"
+            *ngIf="saveValidation"
+            type="button"
+            class="btn btn-primary ms-1 me-1 mb-1 float-end"
+            [disabled]="f.invalid"
+            (click)="save()"
+          >
+            {{ "insertStats.save" | translate }}
+          </button>
+          <div
+            class="form-group boxed float-end ms-1 me-1"
+            style="max-width: 200px; margin-top: -10px"
+          >
             <div class="input-wrapper">
               <input
+                name="date"
+                [(ngModel)]="dateStats"
+                #date="ngModel"
                 type="date"
                 class="form-control"
                 id="text4b"
-                [value]="'today'"
+                required
               />
             </div>
           </div>
         </div>
       </div>
-      <div class="card-footer hidden_desktop">
-        <div class="form-group basic">
-          <button
-            type="button"
-            class="btn btn-primary btn-block btn-lg"
-            data-bs-dismiss="modal"
-          >
-            {{ "wallet.modal.save" | translate }}
-          </button>
+      <div class="section mt-2 mx-auto">
+        <div class="card box-shadow">
+          <div class="card-body">
+            <h5 class="card-title text-center">
+              {{ "insertStats.card_title" | translate }}
+            </h5>
+            <h6 class="card-subtitle text-center mb-1">
+              {{ "insertStats.card_subtitle" | translate }}
+            </h6>
+            <div class="transactions row m-4">
+              <div
+                class="col-xl-3 col-sm-6"
+                *ngFor="let wallet of walletsToSave"
+              >
+                <div class="card card-stats mb-4 mb-xl-0">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-0">
+                          {{ wallet.name }} ({{ wallet.category }})
+                        </h5>
+                        <div *ngIf="!saveValidation" class="form-group boxed">
+                          <div class="input-wrapper">
+                            <input
+                              name="balance"
+                              [(ngModel)]="wallet.newBalance"
+                              #balance="ngModel"
+                              type="number"
+                              class="form-control"
+                              id="text4b"
+                              placeholder="Please insert new balance"
+                              required
+                            />
+                            <i class="clear-input">
+                              <ion-icon
+                                name="close-circle"
+                                role="img"
+                                class="md hydrated"
+                                aria-label="close circle"
+                              ></ion-icon>
+                            </i>
+                          </div>
+                          <div class="input-info">
+                            {{ wallet.name }} balance: {{ wallet.balance }}
+                          </div>
+                        </div>
+                        <span
+                          *ngIf="saveValidation"
+                          class="h2 font-weight-bold mb-0"
+                          id="tot1"
+                          >€ {{ wallet.balance }}</span
+                        >
+                      </div>
+                      <div class="col-auto">
+                        <img
+                          src="{{ wallet?.img }}"
+                          alt="img"
+                          class="image-block imaged w48 round-img"
+                        />
+                      </div>
+                    </div>
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                      <span class="performancesingle0 float-end"
+                        ><span
+                          class="{{
+                            wallet.performanceLastStats > 0
+                              ? 'text-success'
+                              : 'text-danger'
+                          }} mr-2"
+                          ><i
+                            class="fa {{
+                              wallet.performanceLastStats > 0
+                                ? 'fa-arrow-up'
+                                : 'fa-arrow-down'
+                            }}"
+                          ></i>
+                          {{ wallet.performanceLastStats }}%</span
+                        ></span
+                      >
+                      <span class="text-nowrap sincetot"
+                        >{{ "stats.since" | translate }}
+                        {{ wallet.dateLastStats | date : "dd MMM y" }}</span
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group boxed hidden_desktop">
+              <div class="input-wrapper">
+                <input
+                  type="date"
+                  class="form-control"
+                  id="text4b"
+                  [value]="dateStats"
+                />
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="form-group basic">
-          <button
-            type="button"
-            class="btn btn-primary btn-block btn-lg"
-            data-bs-dismiss="modal"
-          >
-            {{ "wallet.modal.save" | translate }}
-          </button>
+        <div class="card-footer hidden_desktop">
+          <div class="form-group basic">
+            <button
+              type="button"
+              class="btn btn-primary btn-block btn-lg"
+              [disabled]="f.invalid || validate()"
+              *ngIf="!saveValidation"
+              (click)="confirm()"
+            >
+              {{ "insertStats.continue" | translate }}
+            </button>
+          </div>
+          <div class="form-group basic">
+            <button
+              type="button"
+              *ngIf="saveValidation"
+              class="btn btn-primary btn-block btn-lg"
+              [disabled]="f.invalid"
+              (click)="save()"
+            >
+              {{ "insertStats.save" | translate }}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 </section>
