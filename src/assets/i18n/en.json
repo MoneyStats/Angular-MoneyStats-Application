@@ -1,4 +1,17 @@
 {
+  "auth": {
+    "login": {
+      "title": "Log In",
+      "subtitle": "Fill the form to log in",
+      "user": "Username",
+      "userPlaceholder": "Your username",
+      "password": "Password",
+      "passPlaceholder": "Your Password",
+      "register": "Register Now",
+      "forgot": "Forgot Password?",
+      "login": "Login"
+    }
+  },
   "headerMobile": {
     "options": "Menu Options",
     "delete": "Delete",

@@ -51,10 +51,11 @@ import { HistoryComponent } from './pages/stats/history/history.component';
 import { NgChartsModule } from 'ng2-charts';
 import { AddStatsComponent } from './pages/stats/add-stats/add-stats.component';
 import { CategoryModalComponent } from './shared/components/modal/category/category.component';
-import { LoginComponent } from './pages/auth/login/login.component';
-import { RegisterComponent } from './pages/auth/register/register.component';
-import { ForgotComponent } from './pages/auth/forgot/forgot.component';
-import { AuthComponent } from './pages/auth/auth.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { ForgotComponent } from './auth/forgot/forgot.component';
+import { AuthComponent } from './auth/auth.component';
+import { PagesComponent } from './pages/pages.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import { AuthComponent } from './pages/auth/auth.component';
     RegisterComponent,
     ForgotComponent,
     AuthComponent,
+    PagesComponent,
   ],
   imports: [
     BrowserModule,
