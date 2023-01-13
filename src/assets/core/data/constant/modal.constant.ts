@@ -10,6 +10,7 @@ export enum ModalConstant {
   PROFILESETTINGS = 'profileSettingsModal',
   LANGUAGES = 'languagesModal',
   ADDSTATS = 'addStatsPage',
+  CATEGORY = 'categoryModal',
 }
 
 export enum StorageConstant {

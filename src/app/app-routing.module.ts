@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ErrorHandleComponent } from './interceptors/error-handle/error-handle.component';
+import { AuthComponent } from './pages/auth/auth.component';
+import { LoginComponent } from './pages/auth/login/login.component';
+import { RegisterComponent } from './pages/auth/register/register.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { AddStatsComponent } from './pages/stats/add-stats/add-stats.component';
@@ -15,6 +18,30 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
+  },
+  {
+    path: 'auth',
+    redirectTo: 'auth/login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'auth/register',
+    redirectTo: 'auth/register',
+    pathMatch: 'full',
+  },
+  {
+    path: 'auth',
+    component: AuthComponent,
+    children: [
+      {
+        path: 'login',
+        component: LoginComponent,
+      },
+      {
+        path: 'register',
+        component: RegisterComponent, // another child route component that the router renders
+      },
+    ],
   },
   {
     path: 'transaction',

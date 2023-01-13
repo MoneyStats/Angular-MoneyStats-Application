@@ -50,6 +50,11 @@ import { CategoryComponent } from './pages/stats/category/category.component';
 import { HistoryComponent } from './pages/stats/history/history.component';
 import { NgChartsModule } from 'ng2-charts';
 import { AddStatsComponent } from './pages/stats/add-stats/add-stats.component';
+import { CategoryModalComponent } from './shared/components/modal/category/category.component';
+import { LoginComponent } from './pages/auth/login/login.component';
+import { RegisterComponent } from './pages/auth/register/register.component';
+import { ForgotComponent } from './pages/auth/forgot/forgot.component';
+import { AuthComponent } from './pages/auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +92,11 @@ import { AddStatsComponent } from './pages/stats/add-stats/add-stats.component';
     CategoryComponent,
     HistoryComponent,
     AddStatsComponent,
+    CategoryModalComponent,
+    LoginComponent,
+    RegisterComponent,
+    ForgotComponent,
+    AuthComponent,
   ],
   imports: [
     BrowserModule,

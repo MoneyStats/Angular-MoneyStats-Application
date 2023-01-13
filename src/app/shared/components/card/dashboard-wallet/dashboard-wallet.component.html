@@ -40,9 +40,8 @@
     <div class="item">
       <a
         href="#"
-        (click)="availableSoon()"
         data-bs-toggle="modal"
-        data-bs-target="#categoryActionSheet"
+        attr.data-bs-target="#{{ modalConstant.CATEGORY }}"
       >
         <div class="icon-wrapper">
           <ion-icon name="arrow-down-outline"></ion-icon>

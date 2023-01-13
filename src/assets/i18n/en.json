@@ -289,6 +289,11 @@
       "following": "Following",
       "url": "URL"
     },
+    "category": {
+      "title": "Category Avaiable",
+      "close": "Close",
+      "list": "List of all categories"
+    },
     "version": {
       "title": "MoneyStats Version",
       "close": "Close",
