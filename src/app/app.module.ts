@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -44,6 +44,12 @@ import { VersionComponent } from './shared/components/modal/version-and-change/v
 import { ChangelogComponent } from './shared/components/modal/version-and-change/changelog/changelog.component';
 import { ProfileSettingsComponent } from './shared/components/modal/profile-settings/profile-settings.component';
 import { LanguagesComponent } from './shared/components/modal/languages/languages.component';
+import { StatsComponent } from './pages/stats/stats.component';
+import { DataComponent } from './pages/stats/data/data.component';
+import { CategoryComponent } from './pages/stats/category/category.component';
+import { HistoryComponent } from './pages/stats/history/history.component';
+import { NgChartsModule } from 'ng2-charts';
+import { AddStatsComponent } from './pages/stats/add-stats/add-stats.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +82,11 @@ import { LanguagesComponent } from './shared/components/modal/languages/language
     ChangelogComponent,
     ProfileSettingsComponent,
     LanguagesComponent,
+    StatsComponent,
+    DataComponent,
+    CategoryComponent,
+    HistoryComponent,
+    AddStatsComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,6 +94,7 @@ import { LanguagesComponent } from './shared/components/modal/languages/language
     IonicModule.forRoot(),
     HttpClientModule,
     NgApexchartsModule,
+    NgChartsModule,
     FormsModule,
     TranslateModule.forRoot({
       loader: {

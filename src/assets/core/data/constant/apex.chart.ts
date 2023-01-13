@@ -5,7 +5,9 @@ import {
   ApexTitleSubtitle,
 } from 'ng-apexcharts';
 
-export type ChartOptions = {
+import { ChartConfiguration, ChartOptions, ChartType } from 'chart.js';
+
+export type ApexOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
   xaxis: ApexXAxis;
@@ -26,3 +28,9 @@ export type ChartOptions = {
   subtitle: ApexTitleSubtitle;
   theme: ApexTheme;
 };
+
+export class ChartJSOptions {
+  lineChartData?: ChartConfiguration<'line'>['data'];
+  lineChartOptions?: ChartOptions;
+  lineChartLegend?: boolean;
+}

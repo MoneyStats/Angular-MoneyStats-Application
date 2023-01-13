@@ -6,13 +6,18 @@
       <strong>{{ "dashboard.footer.title1" | translate }}</strong>
     </div>
   </a>
-  <a href="#" class="item" (click)="availableSoon()">
+  <a id="stats" class="item" (click)="goToStats()" routerLink="stats">
     <div class="col">
-      <ion-icon name="document-text-outline"></ion-icon>
+      <ion-icon name="stats-chart-outline"></ion-icon>
       <strong>{{ "dashboard.footer.title2" | translate }}</strong>
     </div>
   </a>
-  <a href="#" class="item" data-bs-toggle="modal" attr.data-bs-target="#{{modalConstant.VERSION}}">
+  <a
+    href="#"
+    class="item"
+    data-bs-toggle="modal"
+    attr.data-bs-target="#{{ modalConstant.VERSION }}"
+  >
     <div class="col">
       <div class="action-button large">
         <ion-icon name="arrow-up-outline"></ion-icon>

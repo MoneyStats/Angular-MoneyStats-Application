@@ -1,0 +1,18 @@
+canvas {
+  width: 800px !important;
+  max-width: 100% !important;
+}
+
+@media screen and (max-width: 780px) {
+  canvas {
+    width: 600px !important;
+    max-width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  canvas {
+    width: 400px !important;
+    max-width: 100% !important;
+  }
+}

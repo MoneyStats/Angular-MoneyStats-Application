@@ -12,10 +12,8 @@
     <div class="right">
       <a
         href="#"
-        (click)="availableSoon()"
+        routerLink="stats/insert"
         class="button"
-        data-bs-toggle="modal"
-        data-bs-target="#addStatement"
       >
         <ion-icon name="add-outline"></ion-icon>
       </a>
@@ -64,9 +62,10 @@
         }}</strong>
       </a>
     </div>
-    <div class="item" (click)="availableSoon()">
+    <div class="item">
       <a
         href="#"
+        routerLink="stats"
         data-bs-toggle="modal"
         data-bs-target="#dateStatementActionSheet"
       >
