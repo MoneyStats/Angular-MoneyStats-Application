@@ -15,6 +15,7 @@ import { WalletDetailsComponent } from './pages/wallet/wallet-details/wallet-det
 import { WalletHistoryComponent } from './pages/wallet/wallet-details/wallet-history/wallet-history.component';
 import { WalletComponent } from './pages/wallet/wallet.component';
 import { ForgotComponent } from './auth/forgot/forgot.component';
+import { RouteGuardService } from './auth/route-guard.service';
 
 const routes: Routes = [
   {
@@ -48,6 +49,7 @@ const routes: Routes = [
   {
     path: '',
     component: PagesComponent,
+    canActivate: [RouteGuardService],
     children: [
       {
         path: '',

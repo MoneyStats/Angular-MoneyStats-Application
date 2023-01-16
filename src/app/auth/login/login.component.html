@@ -26,6 +26,10 @@
                 "auth.login.user" | translate
               }}</label>
               <input
+                name="username"
+                #username1="ngModel"
+                [(ngModel)]="username"
+                required
                 type="text"
                 class="form-control"
                 id="username"
@@ -43,6 +47,10 @@
                 "auth.login.password" | translate
               }}</label>
               <input
+                name="password"
+                #password1="ngModel"
+                [(ngModel)]="password"
+                required
                 type="password"
                 class="form-control"
                 id="password1"
@@ -71,7 +79,11 @@
       </div>
 
       <div class="form-button-group transparent section-width mx-auto">
-        <button type="submit" class="btn btn-primary btn-block btn-lg">
+        <button
+          type="submit"
+          class="btn btn-primary btn-block btn-lg"
+          (click)="login()"
+        >
           {{ "auth.login.login" | translate }}
         </button>
       </div>

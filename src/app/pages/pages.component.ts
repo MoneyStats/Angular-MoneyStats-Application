@@ -14,15 +14,6 @@ export class PagesComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    const user = this.userService.getUser();
-    user.subscribe(async (data) => {
-      this.user = data;
-      this.userService.user = data;
-      this.userService.setValue();
-      localStorage.setItem(
-        StorageConstant.GITHUBACCOUNT,
-        JSON.stringify(data.github)
-      );
-    });
+    this.user = this.userService.user;
   }
 }

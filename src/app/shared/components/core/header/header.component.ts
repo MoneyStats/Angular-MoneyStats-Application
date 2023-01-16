@@ -35,4 +35,8 @@ export class HeaderComponent implements OnInit {
   availableSoon() {
     this.toast.availableSoon();
   }
+
+  logout() {
+    this.userService.logout();
+  }
 }

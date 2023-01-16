@@ -15,6 +15,7 @@ export enum ModalConstant {
 
 export enum StorageConstant {
   GITHUBACCOUNT = 'github_account',
+  ACCESSTOKEN = 'accessToken',
 }
 
 export enum ProfileSettings {

@@ -7,7 +7,9 @@
   </div>
   <div class="pageTitle"></div>
   <div class="right">
-    <a routerLink="/auth/login" class="headerButton"> Login </a>
+    <a routerLink="/auth/login" class="headerButton">
+      {{ "auth.login.login" | translate }}
+    </a>
   </div>
 </div>
 <!-- * App Header -->
@@ -15,21 +17,27 @@
 <!-- App Capsule -->
 <div id="appCapsule" class="section-width mx-auto">
   <div class="section mt-2 text-center">
-    <h1>Register now</h1>
-    <h4>Create an account</h4>
+    <h1>{{ "auth.register.title" | translate }}</h1>
+    <h4>{{ "auth.register.subtitle" | translate }}</h4>
   </div>
   <div class="section mb-5 p-2">
-    <form action="index.html">
+    <form #f="ngForm" type="submit">
       <div class="card">
         <div class="card-body">
           <div class="form-group basic">
             <div class="input-wrapper">
-              <label class="label" for="name">Name</label>
+              <label class="label" for="name">{{
+                "auth.register.name" | translate
+              }}</label>
               <input
+                name="name"
+                #name1="ngModel"
+                [(ngModel)]="name"
+                required
                 type="text"
                 class="form-control"
                 id="name"
-                placeholder="Your name"
+                placeholder="{{ 'auth.register.namePlaceholder' | translate }}"
               />
               <i class="clear-input">
                 <ion-icon name="close-circle"></ion-icon>
@@ -39,12 +47,20 @@
 
           <div class="form-group basic">
             <div class="input-wrapper">
-              <label class="label" for="surname">Surname</label>
+              <label class="label" for="surname">{{
+                "auth.register.surname" | translate
+              }}</label>
               <input
+                name="surname"
+                #surname1="ngModel"
+                [(ngModel)]="surname"
+                required
                 type="text"
                 class="form-control"
                 id="surname"
-                placeholder="Your surname"
+                placeholder="{{
+                  'auth.register.surnamePlaceholder' | translate
+                }}"
               />
               <i class="clear-input">
                 <ion-icon name="close-circle"></ion-icon>
@@ -54,12 +70,18 @@
 
           <div class="form-group basic">
             <div class="input-wrapper">
-              <label class="label" for="email1">E-mail</label>
+              <label class="label" for="email1">{{
+                "auth.register.email" | translate
+              }}</label>
               <input
+                name="email"
+                #email1="ngModel"
+                [(ngModel)]="email"
+                required
                 type="email"
                 class="form-control"
                 id="email1"
-                placeholder="Your e-mail"
+                placeholder="{{ 'auth.register.emailPlaceholder' | translate }}"
               />
               <i class="clear-input">
                 <ion-icon name="close-circle"></ion-icon>
@@ -69,12 +91,20 @@
 
           <div class="form-group basic">
             <div class="input-wrapper">
-              <label class="label" for="username">Username</label>
+              <label class="label" for="username">{{
+                "auth.register.username" | translate
+              }}</label>
               <input
+                name="username"
+                #username1="ngModel"
+                [(ngModel)]="username"
+                required
                 type="text"
                 class="form-control"
                 id="username"
-                placeholder="Your username"
+                placeholder="{{
+                  'auth.register.usernamePlaceholder' | translate
+                }}"
               />
               <i class="clear-input">
                 <ion-icon name="close-circle"></ion-icon>
@@ -84,13 +114,19 @@
 
           <div class="form-group basic">
             <div class="input-wrapper">
-              <label class="label" for="password1">Password</label>
+              <label class="label" for="password1">{{
+                "auth.register.password" | translate
+              }}</label>
               <input
+                name="password"
+                #password1="ngModel"
+                [(ngModel)]="password"
+                required
                 type="password"
                 class="form-control"
                 id="password1"
                 autocomplete="off"
-                placeholder="Your password"
+                placeholder="{{ 'auth.register.passPlaceholder' | translate }}"
               />
               <i class="clear-input">
                 <ion-icon name="close-circle"></ion-icon>
@@ -100,28 +136,54 @@
 
           <div class="form-group basic">
             <div class="input-wrapper">
-              <label class="label" for="password2">Password Again</label>
+              <label class="label" for="password2">{{
+                "auth.register.passwordAgain" | translate
+              }}</label>
               <input
+                name="passwordAgain"
+                #passwordAgain1="ngModel"
+                [(ngModel)]="passwordAgain"
+                required
                 type="password"
                 class="form-control"
                 id="password2"
                 autocomplete="off"
-                placeholder="Type password again"
+                placeholder="{{
+                  'auth.register.passAgainPlaceholder' | translate
+                }}"
               />
               <i class="clear-input">
                 <ion-icon name="close-circle"></ion-icon>
               </i>
+            </div>
+            <div
+              *ngIf="verifyPassword()"
+              class="alert alert-danger mb-1"
+              role="alert"
+            >
+              {{ "settings.security.warning" | translate }}
             </div>
           </div>
 
           <div class="form-group boxed">
             <div class="input-wrapper">
-              <label class="label" for="select4b">Currency</label>
-              <select class="form-control custom-select" id="select4b">
-                <option value="1">EUR</option>
-                <option value="2">USD</option>
-                <option value="3">GBP</option>
-                <option value="4">Select 4</option>
+              <label class="label" for="select4b">{{
+                "auth.register.currency" | translate
+              }}</label>
+              <select
+                class="form-control custom-select"
+                id="select4b"
+                name="currency"
+                #currency1="ngModel"
+                [(ngModel)]="currency"
+                required
+              >
+                <option selected disabled>
+                  {{ "auth.register.selectCurrency" | translate }}
+                </option>
+                <option value="{{ coin }}" *ngFor="let coin of currencyList">
+                  {{ coin }}
+                </option>
               </select>
             </div>
           </div>
@@ -129,14 +191,20 @@
           <div class="custom-control custom-checkbox mt-2 mb-1">
             <div class="form-check">
               <input
+                name="check"
+                #check1="ngModel"
+                [(ngModel)]="check"
+                required
                 type="checkbox"
                 class="form-check-input"
                 id="customCheckb1"
               />
               <label class="form-check-label" for="customCheckb1">
-                I agree
-                <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal"
-                  >terms and conditions</a
+                {{ "auth.register.terms" | translate }}
+                <a
+                  href="https://raw.githubusercontent.com/giovannilamarmora/Angular-MoneyStats/master/LICENSE"
+                  target="_blank"
+                  >{{ "auth.register.terms2" | translate }}</a
                 >
               </label>
             </div>
@@ -145,8 +213,13 @@
       </div>
 
       <div class="form-button-group transparent section-width mx-auto">
-        <button type="submit" class="btn btn-primary btn-block btn-lg">
-          Register
+        <button
+          [disabled]="f.invalid || verifyPassword()"
+          type="submit"
+          class="btn btn-primary btn-block btn-lg"
+          (click)="register()"
+        >
+          {{ "auth.register.register" | translate }}
         </button>
       </div>
     </form>

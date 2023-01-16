@@ -10,6 +10,27 @@
       "register": "Register Now",
       "forgot": "Forgot Password?",
       "login": "Login"
+    },
+    "register": {
+      "title": "Register Now",
+      "subtitle": "Create an account",
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "surname": "Surname",
+      "surnamePlaceholder": "Your surname",
+      "email": "E-Mail",
+      "emailPlaceholder": "Your email",
+      "username": "Username",
+      "usernamePlaceholder": "Your username",
+      "password": "Password",
+      "passPlaceholder": "Your password",
+      "passwordAgain": "Password Again",
+      "passAgainPlaceholder": "Type password again",
+      "currency": "Currency",
+      "selectCurrency": "Select Currency",
+      "terms": "I agree",
+      "terms2": "terms and conditions",
+      "register": "Register"
     }
   },
   "headerMobile": {

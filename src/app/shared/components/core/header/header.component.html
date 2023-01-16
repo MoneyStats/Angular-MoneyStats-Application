@@ -41,7 +41,7 @@
         {{ "dashboard.sidebar.dropdown.version" | translate }}</a
       >
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" routerLink="/auth/login">{{
+      <a class="dropdown-item" (click)="logout()">{{
         "dashboard.sidebar.dropdown.logout" | translate
       }}</a>
     </div>
@@ -171,7 +171,7 @@
             <a
               href="#"
               data-bs-dismiss="modal"
-              routerLink="auth/login"
+              (click)="logout()"
               id="logout"
               class="item"
             >
