@@ -41,7 +41,7 @@
         {{ "dashboard.sidebar.dropdown.version" | translate }}</a
       >
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">{{
+      <a class="dropdown-item" routerLink="/auth/login">{{
         "dashboard.sidebar.dropdown.logout" | translate
       }}</a>
     </div>
@@ -168,7 +168,13 @@
             </a>
           </li>
           <li>
-            <a href="#" routerLink="auth/login" id="logout" class="item">
+            <a
+              href="#"
+              data-bs-dismiss="modal"
+              routerLink="auth/login"
+              id="logout"
+              class="item"
+            >
               <div class="icon-box bg-primary">
                 <ion-icon name="log-out-outline"></ion-icon>
               </div>

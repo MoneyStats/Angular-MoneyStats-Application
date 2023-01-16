@@ -1,7 +1,7 @@
 <!-- App Header -->
 <div class="appHeader no-border transparent position-absolute">
   <div class="left">
-    <a href="#" class="headerButton goBack">
+    <a (click)="goBack()" class="headerButton goBack">
       <ion-icon name="chevron-back-outline"></ion-icon>
     </a>
   </div>
@@ -11,7 +11,7 @@
 <!-- * App Header -->
 
 <!-- App Capsule -->
-<div id="appCapsule">
+<div id="appCapsule" class="section-width mx-auto">
   <div class="section mt-2 text-center">
     <h1>Forgot password</h1>
     <h4>Type your e-mail to reset your password</h4>
@@ -37,7 +37,7 @@
         </div>
       </div>
 
-      <div class="form-button-group transparent">
+      <div class="form-button-group transparent section-width mx-auto">
         <button type="submit" class="btn btn-primary btn-block btn-lg">
           Reset Password
         </button>

@@ -1,7 +1,7 @@
 <!-- App Header -->
 <div class="appHeader no-border transparent position-absolute">
   <div class="left">
-    <a href="#" class="headerButton goBack">
+    <a (click)="goBack()" class="headerButton goBack">
       <ion-icon name="chevron-back-outline"></ion-icon>
     </a>
   </div>
@@ -11,10 +11,10 @@
 <!-- * App Header -->
 
 <!-- App Capsule -->
-<div id="appCapsule">
+<div id="appCapsule" class="section-width mx-auto">
   <div class="section mt-2 text-center">
-    <h1>Log in</h1>
-    <h4>Fill the form to log in</h4>
+    <h1>{{ "auth.login.title" | translate }}</h1>
+    <h4>{{ "auth.login.subtitle" | translate }}</h4>
   </div>
   <div class="section mb-5 p-2">
     <form action="index.html">
@@ -22,12 +22,14 @@
         <div class="card-body pb-1">
           <div class="form-group basic">
             <div class="input-wrapper">
-              <label class="label" for="email1">E-mail</label>
+              <label class="label" for="username">{{
+                "auth.login.user" | translate
+              }}</label>
               <input
-                type="email"
+                type="text"
                 class="form-control"
-                id="email1"
-                placeholder="Your e-mail"
+                id="username"
+                placeholder="{{ 'auth.login.userPlaceholder' | translate }}"
               />
               <i class="clear-input">
                 <ion-icon name="close-circle"></ion-icon>
@@ -37,13 +39,15 @@
 
           <div class="form-group basic">
             <div class="input-wrapper">
-              <label class="label" for="password1">Password</label>
+              <label class="label" for="password1">{{
+                "auth.login.password" | translate
+              }}</label>
               <input
                 type="password"
                 class="form-control"
                 id="password1"
                 autocomplete="off"
-                placeholder="Your password"
+                placeholder="{{ 'auth.login.passPlaceholder' | translate }}"
               />
               <i class="clear-input">
                 <ion-icon name="close-circle"></ion-icon>
@@ -55,18 +59,20 @@
 
       <div class="form-links mt-2">
         <div>
-          <a href="app-register.html">Register Now</a>
+          <a routerLink="/auth/register">{{
+            "auth.login.register" | translate
+          }}</a>
         </div>
         <div>
-          <a href="app-forgot-password.html" class="text-muted"
-            >Forgot Password?</a
-          >
+          <a routerLink="/auth/forgot" class="text-muted">{{
+            "auth.login.forgot" | translate
+          }}</a>
         </div>
       </div>
 
-      <div class="form-button-group transparent">
+      <div class="form-button-group transparent section-width mx-auto">
         <button type="submit" class="btn btn-primary btn-block btn-lg">
-          Log in
+          {{ "auth.login.login" | translate }}
         </button>
       </div>
     </form>
