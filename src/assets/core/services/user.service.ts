@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { Coin, CoinSymbol } from '../data/class/coin';
-import { Github, User } from '../data/class/user.class';
+import { ResponseModel } from '../data/class/generic.class';
+import { Github, MockUser, User } from '../data/class/user.class';
 import { StorageConstant } from '../data/constant/modal.constant';
 import { SwalService } from '../utils/swal.service';
 import { DashboardService } from './dashboard.service';
@@ -27,16 +28,16 @@ export class UserService {
     private router: Router
   ) {}
 
-  getUser(): Observable<User> {
-    return this.http.get<User>(environment.getUserUrl);
-  }
-
   setValue() {
-    if (this.user?.value === Coin.EUR) this.coinSymbol = CoinSymbol.EUR;
-    else if (this.user?.value === Coin.EUR) this.coinSymbol = CoinSymbol.EUR;
+    if (this.user?.currency === Coin.EUR) this.coinSymbol = CoinSymbol.EUR;
+    else if (this.user?.currency === Coin.EUR) this.coinSymbol = CoinSymbol.EUR;
 
     this.dashboardService.coinSymbol = this.coinSymbol;
     this.walletService.coinSymbol = this.coinSymbol;
+  }
+
+  setUserGlobally() {
+    this.walletService.user = this.user;
   }
 
   syncGithubUser(user: string) {
@@ -62,5 +63,23 @@ export class UserService {
   logout() {
     localStorage.removeItem(StorageConstant.ACCESSTOKEN);
     this.router.navigate(['auth/login']);
+  }
+
+  register(user: User): Observable<ResponseModel> {
+    return this.http.post<ResponseModel>(environment.registerDataUrl, user);
+  }
+
+  login(username: string, password: string): Observable<ResponseModel> {
+    const url =
+      environment.loginDataUrl +
+      '?username=' +
+      username +
+      '&password=' +
+      password;
+    if (username === MockUser.USERNAME && password === MockUser.PASSWORD) {
+      return this.http.get<ResponseModel>(environment.getUserUrl);
+    } else {
+      return this.http.post<ResponseModel>(url, {});
+    }
   }
 }

@@ -6,7 +6,7 @@ export interface UserInterface {
   password: string;
   role: string;
   profilePhoto: string;
-  value: string;
+  currency: string;
 }
 
 export interface GithubInterface {

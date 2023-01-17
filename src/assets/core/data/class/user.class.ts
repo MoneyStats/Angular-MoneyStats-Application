@@ -9,7 +9,9 @@ export class User implements UserInterface {
   role: string = 'USER';
   profilePhoto: string =
     '../../../../assets/images/img/sample/avatar/avatar1.jpg';
-  value: string = 'USD';
+  currency: string = 'USD';
+  authToken: any;
+  mockedUser?: boolean;
   github: Github = new Github();
 }
 
@@ -23,4 +25,9 @@ export class Github implements GithubInterface {
   followers?: number;
   following?: number;
   html_url?: string;
+}
+
+export enum MockUser {
+  USERNAME = 'moneystats',
+  PASSWORD = 'moneystats',
 }

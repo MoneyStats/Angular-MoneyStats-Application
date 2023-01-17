@@ -17,7 +17,7 @@
     <h4>{{ "auth.login.subtitle" | translate }}</h4>
   </div>
   <div class="section mb-5 p-2">
-    <form action="index.html">
+    <form #f="ngForm" type="submit">
       <div class="card">
         <div class="card-body pb-1">
           <div class="form-group basic">
@@ -71,7 +71,7 @@
             "auth.login.register" | translate
           }}</a>
         </div>
-        <div>
+        <div *ngIf="environment.forgotPassword">
           <a routerLink="/auth/forgot" class="text-muted">{{
             "auth.login.forgot" | translate
           }}</a>
@@ -80,6 +80,7 @@
 
       <div class="form-button-group transparent section-width mx-auto">
         <button
+          [disabled]="f.invalid"
           type="submit"
           class="btn btn-primary btn-block btn-lg"
           (click)="login()"

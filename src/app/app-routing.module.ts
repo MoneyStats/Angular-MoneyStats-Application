@@ -19,6 +19,10 @@ import { RouteGuardService } from './auth/route-guard.service';
 
 const routes: Routes = [
   {
+    path: 'error',
+    component: ErrorHandleComponent,
+  },
+  {
     path: 'auth',
     redirectTo: 'auth/login',
     pathMatch: 'full',
@@ -87,10 +91,6 @@ const routes: Routes = [
       {
         path: 'stats/insert',
         component: AddStatsComponent,
-      },
-      {
-        path: 'error',
-        component: ErrorHandleComponent,
       },
     ],
   },

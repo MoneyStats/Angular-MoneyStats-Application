@@ -4,6 +4,7 @@ import { UserService } from 'src/assets/core/services/user.service';
 import { User } from 'src/assets/core/data/class/user.class';
 import { StorageConstant } from 'src/assets/core/data/constant/modal.constant';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  environment = environment;
   @Output('user') user?: User = new User();
   username: string = '';
   password: string = '';
@@ -27,16 +29,21 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    const user = this.userService.getUser();
-    user.subscribe(async (data) => {
-      this.user = data;
-      this.userService.user = data;
+    const user = this.userService.login(this.username, this.password);
+    user.subscribe((data) => {
+      console.log(data);
+      this.user = data.data;
+      this.userService.user = data.data;
       this.userService.setValue();
       localStorage.setItem(
         StorageConstant.GITHUBACCOUNT,
-        JSON.stringify(data.github)
+        JSON.stringify(data.data.github)
       );
-      localStorage.setItem(StorageConstant.ACCESSTOKEN, JSON.stringify(data));
+      localStorage.setItem(
+        StorageConstant.ACCESSTOKEN,
+        data.data.authToken.accessToken
+      );
+      this.userService.setUserGlobally();
       this.router.navigate(['']);
     });
   }

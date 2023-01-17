@@ -62,14 +62,15 @@ export class AddWalletComponent implements OnInit {
 
   addUpdateWallet() {
     let walletToSave = this.wallet;
-    console.log(walletToSave);
 
     if (!this.defaultImg) {
       walletToSave.img = this.walletImg;
     }
 
-    // Save Wallet
-    this.emitAddWallet.emit(walletToSave);
+    this.walletService.addWallet(walletToSave).subscribe((data) => {
+      // Save Wallet
+      this.emitAddWallet.emit(data.data);
+    });
     this.wallet = new Wallet();
     this.defaultImg = false;
     this.checkbox = true;

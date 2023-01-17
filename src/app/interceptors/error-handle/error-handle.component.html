@@ -1,9 +1,16 @@
-<app-header-mobile
-  *ngIf="screenService?.screenWidth! <= 780"
-  [title]="''"
-  [backBtn]="'transaction.mobile_back' | translate"
->
-</app-header-mobile>
+<!-- App Header -->
+<div class="appHeader no-border">
+  <div class="left">
+    <a href="#" (click)="goBack()" class="headerButton goBack">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </a>
+  </div>
+  <div class="pageTitle">
+    {{ exception?.error?.statusCode }} {{ exception?.error?.status }}
+  </div>
+  <div class="right"></div>
+</div>
+<!-- * App Header -->
 <section class="error-section">
   <!-- App Capsule -->
   <div id="appCapsule">
@@ -14,14 +21,18 @@
             <ion-icon name="skull-outline"></ion-icon>
           </div>
         </div>
-        <h1>{{ exception?.statusCode }}</h1>
-        <h2 class="mb-2">{{ exception?.exceptionCode }}</h2>
-        <h2 class="mb-2">{{ exception?.exceptionError }}</h2>
-        <p>
-          {{ exception?.message }}
+        <h1>{{ exception?.error?.statusCode }}</h1>
+        <h2 class="mb-2">{{ exception?.error?.exceptionCode }}</h2>
+        <p ng *ngIf="exception?.correlationId">
+          Date: {{ exception?.dateTime | date : "d MMM y" }} <br />
+          Correlation ID: {{ exception?.correlationId }} <br />
+          Exception: {{ exception?.error?.exceptionName }}
         </p>
         <p>
-          {{ exception?.exceptionMessage }}
+          {{ exception?.error?.message }}
+        </p>
+        <p>
+          {{ exception?.error?.exceptionMessage }}
         </p>
       </div>
     </div>
