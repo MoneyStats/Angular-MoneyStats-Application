@@ -1,0 +1,202 @@
+<section class="section-width mx-auto">
+  <app-header-mobile
+    *ngIf="screenService?.screenWidth! <= 780"
+    [title]="'settings.title' | translate"
+    [backBtn]="'settings.mobile_back' | translate"
+  >
+  </app-header-mobile>
+  <!-- App Capsule -->
+  <div id="appCapsule">
+    <app-title-desktop
+      [title]="'settings.title' | translate"
+      [back]="'settings.back' | translate"
+    ></app-title-desktop>
+    <div class="settings mx-auto">
+      <div class="section mt-3 text-center">
+        <div class="avatar-section">
+          <a href="#">
+            <img
+              src="{{ user?.profilePhoto }}"
+              alt="avatar"
+              class="imaged w100 rounded"
+            />
+            <span class="button">
+              <ion-icon name="camera-outline"></ion-icon>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <div class="listview-title mt-1">
+        {{ "settings.theme.title" | translate }}
+      </div>
+      <ul class="listview image-listview text inset no-line">
+        <li>
+          <div class="item">
+            <div class="in">
+              <div>{{ "settings.theme.dark" | translate }}</div>
+              <div class="form-check form-switch ms-2">
+                <input
+                  class="form-check-input dark-mode-switch"
+                  type="checkbox"
+                  id="darkmodeSwitch"
+                />
+                <label class="form-check-label" for="darkmodeSwitch"></label>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <div class="listview-title mt-1">
+        {{ "settings.account.title" | translate }}
+      </div>
+      <ul class="listview image-listview text inset">
+        <li>
+          <a
+            href="#"
+            data-bs-toggle="modal"
+            attr.data-bs-target="#{{ modalConstant.ACCOUNTLIST }}"
+            class="item"
+          >
+            <div class="in">
+              <div>
+                {{ "settings.account.sync" | translate }}
+                <div class="text-muted">
+                  {{ "settings.account.descriptionSync" | translate }}
+                </div>
+              </div>
+              <span class="text-primary">{{
+                "settings.account.open" | translate
+              }}</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            data-bs-toggle="modal"
+            attr.data-bs-target="#{{ modalConstant.PROFILESETTINGS }}"
+            class="item"
+            (click)="profileConst = profileSettings.USERNAME"
+          >
+            <div class="in">
+              <div>{{ "settings.account.username" | translate }}</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            data-bs-toggle="modal"
+            attr.data-bs-target="#{{ modalConstant.PROFILESETTINGS }}"
+            class="item"
+            (click)="profileConst = profileSettings.EMAIL"
+          >
+            <div class="in">
+              <div>{{ "settings.account.email" | translate }}</div>
+            </div>
+          </a>
+        </li>
+      </ul>
+
+      <div class="listview-title mt-1">
+        {{ "settings.app.title" | translate }}
+      </div>
+      <ul class="listview image-listview text inset">
+        <li>
+          <a href="#" routerLink="/wallet" class="item">
+            <div class="in">
+              <div>{{ "settings.app.wallet.title" | translate }}</div>
+            </div>
+            <span class="text-primary">{{
+              "settings.app.wallet.open" | translate
+            }}</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            data-bs-toggle="modal"
+            attr.data-bs-target="#{{ modalConstant.LANGUAGES }}"
+            class="item"
+          >
+            <div class="in">
+              <div>{{ "settings.app.languages.title" | translate }}</div>
+              <span class="text-primary">{{
+                "settings.app.languages.open" | translate
+              }}</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+
+      <div class="listview-title mt-1">
+        {{ "settings.security.title" | translate }}
+      </div>
+      <ul class="listview image-listview text mb-2 inset">
+        <li>
+          <a
+            href="#"
+            data-bs-toggle="modal"
+            attr.data-bs-target="#{{ modalConstant.PROFILESETTINGS }}"
+            class="item"
+            (click)="profileConst = profileSettings.PASSWORD"
+          >
+            <div class="in">
+              <div>{{ "settings.security.password" | translate }}</div>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a (click)="logout()" class="item">
+            <div class="in">
+              <div>{{ "settings.info.logout" | translate }}</div>
+            </div>
+          </a>
+        </li>
+      </ul>
+
+      <div class="listview-title mt-1">
+        {{ "settings.info.title" | translate }}
+      </div>
+      <ul class="listview image-listview text inset mb-2">
+        <li>
+          <a class="item" (click)="availableSoon()">
+            <div class="in">
+              <div>{{ "settings.info.support" | translate }}</div>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="#"
+            class="item"
+            data-bs-toggle="modal"
+            attr.data-bs-target="#{{ modalConstant.VERSION }}"
+          >
+            <div class="in">
+              <div>{{ "settings.info.version" | translate }}</div>
+            </div>
+            <span class="text-primary">{{
+              "settings.info.version_open" | translate
+            }}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- * App Capsule -->
+</section>
+
+<app-social-list
+  [modalId]="modalConstant.ACCOUNTLIST"
+  [user]="user"
+></app-social-list>
+<app-profile-settings
+  [modalId]="modalConstant.PROFILESETTINGS"
+  [profileConst]="profileConst"
+></app-profile-settings>
+<app-languages [modalId]="modalConstant.LANGUAGES"></app-languages>

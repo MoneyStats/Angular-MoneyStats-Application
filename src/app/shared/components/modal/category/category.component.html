@@ -1,0 +1,34 @@
+<div
+  class="modal fade modalbox"
+  id="{{ modalId }}"
+  tabindex="-1"
+  style="display: none"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content section-width">
+      <div class="modal-header section-width mx-auto">
+        <h5 class="modal-title">{{ "modal.category.title" | translate }}</h5>
+        <a href="javascript:;" data-bs-dismiss="modal">{{
+          "modal.category.close" | translate
+        }}</a>
+      </div>
+      <div class="modal-body">
+        <div class="listview-title mt-1">
+          {{ "modal.category.list" | translate }}
+        </div>
+        <ul class="listview image-listview inset mb-2">
+          <li *ngFor="let category of categories">
+            <a class="item">
+              <div class="icon-box {{ setResult(category).color }}">
+                <ion-icon name="{{ setResult(category).img }}"></ion-icon>
+              </div>
+              <div class="in">{{ category.name }}</div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- * MoneyStats Info Action Sheet -->

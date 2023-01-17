@@ -1,0 +1,358 @@
+{
+  "auth": {
+    "login": {
+      "title": "Log In",
+      "subtitle": "Fill the form to log in",
+      "user": "Username",
+      "userPlaceholder": "Your username",
+      "password": "Password",
+      "passPlaceholder": "Your Password",
+      "register": "Register Now",
+      "forgot": "Forgot Password?",
+      "login": "Login"
+    },
+    "register": {
+      "title": "Register Now",
+      "subtitle": "Create an account",
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "surname": "Surname",
+      "surnamePlaceholder": "Your surname",
+      "email": "E-Mail",
+      "emailPlaceholder": "Your email",
+      "username": "Username",
+      "usernamePlaceholder": "Your username",
+      "password": "Password",
+      "passPlaceholder": "Your password",
+      "passwordAgain": "Password Again",
+      "passAgainPlaceholder": "Type password again",
+      "currency": "Currency",
+      "selectCurrency": "Select Currency",
+      "terms": "I agree",
+      "terms2": "terms and conditions",
+      "register": "Register"
+    }
+  },
+  "headerMobile": {
+    "options": "Menu Options",
+    "delete": "Delete",
+    "restore": "Restore"
+  },
+  "dashboard": {
+    "sidebar": {
+      "dropdown": {
+        "options": "Menu Options",
+        "version": "Version",
+        "settings": "Settings",
+        "logout": "Log Out"
+      },
+      "overviewTitle": "Balance",
+      "menuTitle": "Menu",
+      "menu": {
+        "title1": "Dashboard",
+        "title2": "My Wallet",
+        "title3": "Resume"
+      },
+      "subMenuTitle": "Others",
+      "subMenu": {
+        "title1": "Settings",
+        "title2": "Support",
+        "title3": "Log out"
+      }
+    },
+    "footer": {
+      "title1": "Dashboard",
+      "title2": "Resume",
+      "title3": "My Wallet",
+      "title4": "Settings"
+    },
+    "dashboardCard": {
+      "title": "Total Balance",
+      "footer": {
+        "title1": "Add Wallet",
+        "title2": "Category",
+        "title3": "Wallet",
+        "title4": "Statement on Date"
+      },
+      "stats": {
+        "title1": "Performance",
+        "title2": "Performance Since",
+        "title3": "Last Stats Performance",
+        "title4": "Last Stats Difference"
+      }
+    },
+    "transaction": {
+      "title": "Transactions",
+      "view": "View All",
+      "nodata": {
+        "header": "Transaction",
+        "body": "Insert new data to get transaction History.",
+        "footer": "MoneyStats"
+      }
+    },
+    "graph": {
+      "title": "Graph of ",
+      "view": "View All",
+      "nodata": {
+        "header": "Graph",
+        "body": "Insert new data to get graph.",
+        "footer": "MoneyStats"
+      }
+    },
+    "wallet_splide": {
+      "title": "Wallet",
+      "view": "View All",
+      "btn": "Open Wallet",
+      "nodata": {
+        "header": "Wallet",
+        "body": "Insert new data to get wallet.",
+        "footer": "MoneyStats"
+      }
+    }
+  },
+  "transaction": {
+    "title": "Transactions",
+    "back": "Go back to previous page",
+    "mobile_back": "Back",
+    "details": {
+      "title": "Transaction Details",
+      "back": "Go back to previous page",
+      "status": "Status",
+      "success": "Success",
+      "category": "Category",
+      "lastStats": "Difference",
+      "date": "Date",
+      "amount": "Balance"
+    }
+  },
+  "wallet": {
+    "active": "Active Wallet",
+    "deleted": "Deleted Wallet",
+    "title": "Wallet",
+    "mobile_back": "Back",
+    "mobile_add": "Add",
+    "back": "Go back to previous page",
+    "add": "Add new Wallet",
+    "modal": {
+      "title": "Add Wallet",
+      "editWallet": {
+        "title": "Edit Wallet",
+        "default": "Keep same wallet image"
+      },
+      "name": "Name",
+      "sub_name": "Enter Wallet Name",
+      "category": "Category",
+      "categoryText": "Choose a category",
+      "categoryTextEdit": "Leave to keep same category",
+      "img": "Add Image",
+      "imgContent": "Add Image from URL",
+      "image": "Image",
+      "default": "Use default wallet image",
+      "imageModal": {
+        "title": "Add Image",
+        "subTitle": "Insert image URL and press continue",
+        "continue": "Continue",
+        "cancel": "Cancel"
+      },
+      "save": "Save"
+    },
+    "nodata": {
+      "header": "Wallet",
+      "body": "Insert new data to get wallet.",
+      "footer": "MoneyStats"
+    },
+    "details": {
+      "title": " Details",
+      "back": "Go back to previous page",
+      "mobile_back": "Back",
+      "mobile_edit": "Edit",
+      "mobile_delete": "Delete",
+      "status": "Status",
+      "allTimeHigh": "All Time High on ",
+      "totalPerformance": "Total Performance",
+      "highPrice": "High Price on ",
+      "lowPrice": "Low Price on ",
+      "category": "Category",
+      "dateLastStats": "Date Last Stats",
+      "edit": "Edit Wallet",
+      "delete": "Delete Wallet",
+      "restore": "Restore Wallet",
+      "modal": {
+        "delete": {
+          "title": "Delete Confirmation",
+          "text": "Are you sure you want to delete the current wallet? It would be logically deleted, always avaiable to restore it."
+        },
+        "permanent": {
+          "title": "Permanent Delete",
+          "text": "Are you sure you want to delete the current wallet? It would be permanent deleted."
+        },
+        "restore": {
+          "title": "Restore Confirmation",
+          "text": "Do you want to restore the current wallet?"
+        },
+        "back": "Back",
+        "confirm": "Confirm",
+        "restoreBtn": "Restore"
+      },
+      "transaction": {
+        "title": "Last Stats",
+        "mobile_back": "Back",
+        "view": "View All",
+        "more": "Load more",
+        "history": {
+          "title": "Transaction History",
+          "mobile_back": "Back",
+          "back": "Go back to previous page"
+        }
+      }
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "back": "Go back to previous page",
+    "mobile_back": "Back",
+    "theme": {
+      "title": "Theme",
+      "dark": "Dark Mode"
+    },
+    "account": {
+      "title": "Account Settings",
+      "sync": "Sync Account",
+      "descriptionSync": "Sync your profile pictures with an existing social Account",
+      "open": "Open",
+      "username": "Change Username",
+      "user_label": "Username",
+      "user_placeholder": "Digit your new username",
+      "email": "Update E-Mail",
+      "email_label": "E-Mail",
+      "email_placeholder": "Digit your new email address",
+      "save": "Save"
+    },
+    "security": {
+      "title": "Security",
+      "password": "Change Password",
+      "old_label": "Old Password",
+      "old_placeholder": "Digit your current password",
+      "new_label": "New Password",
+      "new_placeholder": "Digit your new password",
+      "repete_label": "Repete Password",
+      "repete_placeholder": "Digit your new password again",
+      "warning": "The Password do not match!"
+    },
+    "app": {
+      "title": "App Settings",
+      "wallet": {
+        "title": "Edit Wallet",
+        "open": "Open"
+      },
+      "languages": {
+        "title": "Languages",
+        "open": "Edit",
+        "en": "English",
+        "change": "Change Languages"
+      }
+    },
+    "info": {
+      "title": "Info",
+      "logout": "Log Out",
+      "support": "Support",
+      "version": "MoneyStats Version",
+      "version_open": "Open"
+    }
+  },
+  "stats": {
+    "title": "Resume Data",
+    "back": "Go back to previous page",
+    "mobile_back": "Back",
+    "total": "Total Balance",
+    "since": "Since",
+    "performance": "Performance",
+    "tab_stats": "Stats Resume",
+    "tab_category": "Category Resume",
+    "tab_history": "History",
+    "nodata": {
+      "header": "Resume",
+      "body": "Insert new data to get resume.",
+      "footer": "MoneyStats"
+    },
+    "data": {
+      "wallet": "Current Wallet",
+      "graph1": "Graph wallet performance",
+      "graph2": "Graph wallet quantity",
+      "graph3": "Graph bar wallet performance",
+      "table": "List Stats of the Year",
+      "table_date": "Date",
+      "table_balance": "Balance",
+      "table_trend": "Trend",
+      "table_performance": "Performance",
+      "table_value": "Value Trend",
+      "investments": "Investments",
+      "capital": "Capital",
+      "others": "Others",
+      "debits": "Debits",
+      "saving": "Saving",
+      "history": "History",
+      "graphHistory": "Graph History Performance"
+    }
+  },
+  "insertStats": {
+    "title": "Insert Data",
+    "back": "Go back to previous page",
+    "mobile_back": "Back",
+    "card_title": "Insert a new Stats",
+    "card_subtitle": "Select a date to save the Stats and insert a Stats for each Wallet",
+    "continue": "Continue",
+    "save": "Save"
+  },
+  "modal": {
+    "socialList": {
+      "title": "Connect Social Account",
+      "close": "Close",
+      "select": "Please Select an account to Sync",
+      "github": "Github"
+    },
+    "socialDetails": {
+      "user": "User ID",
+      "details": "Account Details",
+      "connect": "Connect",
+      "disconnect": "Disconnect",
+      "githubId": "Github ID",
+      "created": "Created On",
+      "updated": "Updated On",
+      "followers": "Followers",
+      "following": "Following",
+      "url": "URL"
+    },
+    "category": {
+      "title": "Category Avaiable",
+      "close": "Close",
+      "list": "List of all categories"
+    },
+    "version": {
+      "title": "MoneyStats Version",
+      "close": "Close",
+      "moneystats": "MoneyStats",
+      "changelog": {
+        "title": "Changelog",
+        "data": [
+          {
+            "modalId": "v1",
+            "version_date": "2023-01-01",
+            "version_title": "MoneyStats V1.0.0",
+            "version": "V1.0.0",
+            "changelog": "&#183; Initial release"
+          }
+        ]
+      }
+    }
+  },
+  "github": {
+    "title": "Get data from Github for ",
+    "connect": "Connect",
+    "confirm": "Confirm"
+  },
+  "error": {
+    "title": ""
+  },
+  "copyright": "Copyright © MoneyStats 2023. All Rights Reserved."
+}

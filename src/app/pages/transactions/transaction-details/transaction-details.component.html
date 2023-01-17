@@ -1,0 +1,96 @@
+<section class="section-width mx-auto">
+  <app-header-mobile
+    *ngIf="screenService?.screenWidth! <= 780"
+    [title]="'transaction.details.title' | translate"
+    [backBtn]="'transaction.mobile_back' | translate"
+  >
+  </app-header-mobile>
+  <!-- App Capsule -->
+  <div id="appCapsule" class="full-height">
+    <app-title-desktop
+      [title]="'transaction.details.title' | translate"
+      [back]="'transaction.details.back' | translate"
+    ></app-title-desktop>
+
+    <div class="section mt-2 mb-2">
+      <div class="listed-detail mt-3">
+        <div class="icon-wrapper">
+          <!--<div class="iconbox">
+                        <ion-icon name="arrow-forward-outline"></ion-icon>
+
+                    </div>-->
+          <img
+            src="{{ wallet?.img }}"
+            alt="img"
+            class="image-block imaged w48"
+          />
+        </div>
+        <h3 class="text-center mt-2">{{ wallet?.name }}</h3>
+      </div>
+
+      <ul class="listview flush transparent simple-listview no-space mt-3">
+        <li>
+          <strong>{{ "transaction.details.status" | translate }}</strong>
+          <span class="text-success">{{
+            "transaction.details.success" | translate
+          }}</span>
+        </li>
+        <li>
+          <strong>{{ "transaction.details.category" | translate }}</strong>
+          <span>{{ wallet?.category }}</span>
+        </li>
+        <li>
+          <strong>{{ "transaction.details.lastStats" | translate }}</strong>
+          <span class="{{ class }}">{{ wallet?.differenceLastStats }}</span>
+        </li>
+        <li>
+          <strong>{{ "transaction.details.date" | translate }}</strong>
+          <span>{{ wallet?.dateLastStats | date : "MMM dd, y HH:mm" }}</span>
+        </li>
+        <li>
+          <strong>{{ "transaction.details.amount" | translate }}</strong>
+          <h3 class="m-0">
+            {{ dashboardService.coinSymbol }} {{ wallet?.balance }}
+          </h3>
+        </li>
+      </ul>
+    </div>
+    <hr />
+    <div class="section mt-2">
+      <div class="section-title">History</div>
+      <div class="card">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col" class="text-end">Balance</th>
+                <th scope="col" class="text-end">%</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let history of wallet?.history; let i = index">
+                <th scope="row">{{ history.date }}</th>
+                <td class="text-end text-primary">
+                  {{ dashboardService.coinSymbol }} {{ history.balance }}
+                </td>
+                <td
+                  class="text-end {{
+                    history.percentage === 0
+                      ? 'text-warning'
+                      : history.percentage > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  }}"
+                >
+                  {{ history.percentage }} %
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- * App Capsule -->
+</section>
