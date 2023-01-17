@@ -56,6 +56,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { ForgotComponent } from './auth/forgot/forgot.component';
 import { AuthComponent } from './auth/auth.component';
 import { PagesComponent } from './pages/pages.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -114,6 +115,12 @@ import { PagesComponent } from './pages/pages.component';
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
       },
+    }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000',
     }),
   ],
   providers: [

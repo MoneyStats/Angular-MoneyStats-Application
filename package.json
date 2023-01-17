@@ -18,6 +18,7 @@
     "@angular/platform-browser": "~13.1.0",
     "@angular/platform-browser-dynamic": "~13.1.0",
     "@angular/router": "~13.1.0",
+    "@angular/service-worker": "~13.2.0",
     "@ionic/angular": "^6.3.9",
     "@ng-bootstrap/ng-bootstrap": "^12.1.2",
     "@ngx-translate/core": "^13.0.0",
