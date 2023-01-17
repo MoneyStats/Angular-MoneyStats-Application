@@ -50,6 +50,13 @@ import { CategoryComponent } from './pages/stats/category/category.component';
 import { HistoryComponent } from './pages/stats/history/history.component';
 import { NgChartsModule } from 'ng2-charts';
 import { AddStatsComponent } from './pages/stats/add-stats/add-stats.component';
+import { CategoryModalComponent } from './shared/components/modal/category/category.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { ForgotComponent } from './auth/forgot/forgot.component';
+import { AuthComponent } from './auth/auth.component';
+import { PagesComponent } from './pages/pages.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -87,6 +94,12 @@ import { AddStatsComponent } from './pages/stats/add-stats/add-stats.component';
     CategoryComponent,
     HistoryComponent,
     AddStatsComponent,
+    CategoryModalComponent,
+    LoginComponent,
+    RegisterComponent,
+    ForgotComponent,
+    AuthComponent,
+    PagesComponent,
   ],
   imports: [
     BrowserModule,
@@ -102,6 +115,12 @@ import { AddStatsComponent } from './pages/stats/add-stats/add-stats.component';
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
       },
+    }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000',
     }),
   ],
   providers: [

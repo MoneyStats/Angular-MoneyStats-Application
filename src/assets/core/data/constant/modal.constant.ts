@@ -10,10 +10,12 @@ export enum ModalConstant {
   PROFILESETTINGS = 'profileSettingsModal',
   LANGUAGES = 'languagesModal',
   ADDSTATS = 'addStatsPage',
+  CATEGORY = 'categoryModal',
 }
 
 export enum StorageConstant {
   GITHUBACCOUNT = 'github_account',
+  ACCESSTOKEN = 'accessToken',
 }
 
 export enum ProfileSettings {

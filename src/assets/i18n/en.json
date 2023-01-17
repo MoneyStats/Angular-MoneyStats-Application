@@ -1,4 +1,38 @@
 {
+  "auth": {
+    "login": {
+      "title": "Log In",
+      "subtitle": "Fill the form to log in",
+      "user": "Username",
+      "userPlaceholder": "Your username",
+      "password": "Password",
+      "passPlaceholder": "Your Password",
+      "register": "Register Now",
+      "forgot": "Forgot Password?",
+      "login": "Login"
+    },
+    "register": {
+      "title": "Register Now",
+      "subtitle": "Create an account",
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "surname": "Surname",
+      "surnamePlaceholder": "Your surname",
+      "email": "E-Mail",
+      "emailPlaceholder": "Your email",
+      "username": "Username",
+      "usernamePlaceholder": "Your username",
+      "password": "Password",
+      "passPlaceholder": "Your password",
+      "passwordAgain": "Password Again",
+      "passAgainPlaceholder": "Type password again",
+      "currency": "Currency",
+      "selectCurrency": "Select Currency",
+      "terms": "I agree",
+      "terms2": "terms and conditions",
+      "register": "Register"
+    }
+  },
   "headerMobile": {
     "options": "Menu Options",
     "delete": "Delete",
@@ -288,6 +322,11 @@
       "followers": "Followers",
       "following": "Following",
       "url": "URL"
+    },
+    "category": {
+      "title": "Category Avaiable",
+      "close": "Close",
+      "list": "List of all categories"
     },
     "version": {
       "title": "MoneyStats Version",

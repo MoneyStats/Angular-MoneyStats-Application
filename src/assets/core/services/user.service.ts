@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { Coin, CoinSymbol } from '../data/class/coin';
 import { Github, User } from '../data/class/user.class';
+import { StorageConstant } from '../data/constant/modal.constant';
 import { SwalService } from '../utils/swal.service';
 import { DashboardService } from './dashboard.service';
 import { WalletService } from './wallet.service';
@@ -21,7 +23,8 @@ export class UserService {
     private http: HttpClient,
     private dashboardService: DashboardService,
     private walletService: WalletService,
-    public swalService: SwalService
+    public swalService: SwalService,
+    private router: Router
   ) {}
 
   getUser(): Observable<User> {
@@ -54,5 +57,10 @@ export class UserService {
     } else {
       this.user!.profilePhoto = this.user.github.avatar_url!;
     }
+  }
+
+  logout() {
+    localStorage.removeItem(StorageConstant.ACCESSTOKEN);
+    this.router.navigate(['auth/login']);
   }
 }

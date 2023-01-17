@@ -46,4 +46,8 @@ export class SettingsComponent implements OnInit {
   availableSoon() {
     this.toast.availableSoon();
   }
+
+  logout() {
+    this.userService.logout();
+  }
 }
