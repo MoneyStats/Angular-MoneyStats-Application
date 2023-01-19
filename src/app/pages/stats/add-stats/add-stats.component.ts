@@ -52,13 +52,13 @@ export class AddStatsComponent implements OnInit {
 
   confirm() {
     this.walletsToSave.forEach((wallet) => {
-      if (wallet.allTimeHigh < wallet.balance) {
-        wallet.allTimeHigh = wallet.balance;
+      if (wallet.allTimeHigh < wallet.newBalance) {
+        wallet.allTimeHigh = wallet.newBalance;
         wallet.allTimeHighDate = new Date(this.dateStats);
       }
       let currentDate = new Date(this.dateStats);
-      if (wallet.highPrice < wallet.balance) {
-        wallet.highPrice = wallet.balance;
+      if (wallet.highPrice < wallet.newBalance) {
+        wallet.highPrice = wallet.newBalance;
         wallet.highPriceDate = currentDate;
       }
       if (wallet.highPriceDate) {
@@ -66,13 +66,13 @@ export class AddStatsComponent implements OnInit {
           new Date(wallet.highPriceDate).getFullYear() !=
           currentDate.getFullYear()
         ) {
-          wallet.highPrice = wallet.balance;
+          wallet.highPrice = wallet.newBalance;
           wallet.highPriceDate = currentDate;
         }
       }
 
-      if (wallet.lowPrice < wallet.balance) {
-        wallet.lowPrice = wallet.balance;
+      if (wallet.lowPrice < wallet.newBalance) {
+        wallet.lowPrice = wallet.newBalance;
         wallet.lowPriceDate = currentDate;
       }
       if (
@@ -81,8 +81,9 @@ export class AddStatsComponent implements OnInit {
         wallet.lowPrice = wallet.balance;
         wallet.lowPriceDate = currentDate;
       }
+      let fixedBalance = wallet.balance != 0 ? wallet.balance : 0.0001;
       let percentage = (
-        ((wallet.newBalance - wallet.balance) / wallet.balance) *
+        ((wallet.newBalance - fixedBalance) / fixedBalance) *
         100
       ).toFixed(2);
       wallet.performanceLastStats = parseFloat(percentage);

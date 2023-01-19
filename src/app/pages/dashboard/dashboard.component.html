@@ -3,11 +3,7 @@
     <div class="row">
       <!-- Wallet Card -->
       <div class="section wallet-card-section pt-1 col-xl-6">
-        <app-dashboard-wallet
-          [dashboard]="dashboard"
-          [value]="userService.coinSymbol"
-          [user]="user"
-        >
+        <app-dashboard-wallet [dashboard]="dashboard" [value]="userService.coinSymbol" [user]="user">
         </app-dashboard-wallet>
       </div>
       <!-- Wallet Card -->
@@ -16,55 +12,42 @@
       <div class="section stats-section col-xl-6">
         <div class="row mt-2">
           <div class="col-6">
-            <app-stats-card
-              [title]="'dashboard.dashboardCard.stats.title1' | translate"
-              [value]="performance"
-              [class]="
+            <app-stats-card [title]="'dashboard.dashboardCard.stats.title1' | translate" [value]="performance" [class]="
                 dashboard.performace === 0
                   ? 'text-warning'
                   : dashboard.performace > 0
                   ? 'text-success'
                   : 'text-danger'
-              "
-            >
+              ">
             </app-stats-card>
           </div>
           <div class="col-6">
-            <app-stats-card
-              [title]="'dashboard.dashboardCard.stats.title2' | translate"
-              [value]="performanceSince"
-              [class]="'date'"
-            >
+            <app-stats-card [title]="'dashboard.dashboardCard.stats.title2' | translate" [value]="performanceSince"
+              [class]="'date'">
             </app-stats-card>
           </div>
         </div>
         <div class="row mt-2">
           <div class="col-6">
-            <app-stats-card
-              [title]="'dashboard.dashboardCard.stats.title3' | translate"
-              [value]="lastStatsPerformance"
+            <app-stats-card [title]="'dashboard.dashboardCard.stats.title3' | translate" [value]="lastStatsPerformance"
               [class]="
                 dashboard.lastStatsPerformance === 0
                   ? 'text-warning'
                   : dashboard.lastStatsPerformance > 0
                   ? 'text-success'
                   : 'text-danger'
-              "
-            >
+              ">
             </app-stats-card>
           </div>
           <div class="col-6">
-            <app-stats-card
-              [title]="'dashboard.dashboardCard.stats.title3' | translate"
-              [value]="lastStatsBalanceDifference"
-              [class]="
+            <app-stats-card [title]="'dashboard.dashboardCard.stats.title3' | translate"
+              [value]="lastStatsBalanceDifference" [class]="
                 dashboard.lastStatsBalanceDifference === 0
                   ? 'text-warning'
                   : dashboard.lastStatsBalanceDifference > 0
                   ? 'text-success'
                   : 'text-danger'
-              "
-            >
+              ">
             </app-stats-card>
           </div>
         </div>
@@ -79,30 +62,23 @@
           <h2 class="title">{{ "dashboard.transaction.title" | translate }}</h2>
           <a href="#" routerLink="/transaction" class="link">{{
             "dashboard.transaction.view" | translate
-          }}</a>
+            }}</a>
         </div>
         <div class="transactions">
-          <app-content-box
-            *ngIf="!dashboard.wallets || !dashboard.wallets.length"
+          <app-content-box *ngIf="!dashboard.wallets || !dashboard.wallets.length"
             [header]="'dashboard.transaction.nodata.header' | translate"
             [body]="'dashboard.transaction.nodata.body' | translate"
-            [footer]="'dashboard.transaction.nodata.footer' | translate"
-          ></app-content-box>
+            [footer]="'dashboard.transaction.nodata.footer' | translate"></app-content-box>
           <div *ngFor="let wallet of dashboard.wallets; let i = index">
-            <app-transaction-card
-              *ngIf="i < 4"
-              [class]="
+            <app-transaction-card *ngIf="i < 4" [class]="
                 wallet.differenceLastStats === 0
                   ? 'text-warning'
                   : wallet.differenceLastStats > 0
                   ? 'text-success'
                   : 'text-danger'
-              "
-              [differenceLastStats]="
+              " [differenceLastStats]="
                 wallet.differenceLastStats + ' ' + userService.coinSymbol
-              "
-              [wallet]="wallet"
-            >
+              " [wallet]="wallet">
             </app-transaction-card>
           </div>
         </div>
@@ -117,32 +93,17 @@
           </h2>
           <a href="#" (click)="error()" class="link">{{
             "dashboard.graph.view" | translate
-          }}</a>
+            }}</a>
         </div>
-        <app-content-box
-          *ngIf="
+        <app-content-box *ngIf="
             !dashboard.statsWalletDays || !dashboard.statsWalletDays.length
-          "
-          [header]="'dashboard.graph.nodata.header' | translate"
-          [body]="'dashboard.graph.nodata.body' | translate"
-          [footer]="'dashboard.graph.nodata.footer' | translate"
-        ></app-content-box>
-        <div
-          *ngIf="dashboard.statsWalletDays && dashboard.statsWalletDays.length"
-          class="card"
-        >
+          " [header]="'dashboard.graph.nodata.header' | translate" [body]="'dashboard.graph.nodata.body' | translate"
+          [footer]="'dashboard.graph.nodata.footer' | translate"></app-content-box>
+        <div *ngIf="dashboard.statsWalletDays && dashboard.statsWalletDays.length" class="card">
           <div class="card-body">
-            <apx-chart
-              *ngIf="chartOptions"
-              [series]="chartOptions.series!"
-              [chart]="chartOptions.chart!"
-              [title]="chartOptions.title!"
-              [colors]="chartOptions.colors!"
-              [legend]="chartOptions.legend!"
-              [stroke]="chartOptions.stroke!"
-              [labels]="chartOptions.labels!"
-              type="area"
-            ></apx-chart>
+            <apx-chart *ngIf="chartOptions" [series]="chartOptions.series!" [chart]="chartOptions.chart!"
+              [title]="chartOptions.title!" [colors]="chartOptions.colors!" [legend]="chartOptions.legend!"
+              [stroke]="chartOptions.stroke!" [labels]="chartOptions.labels!" type="area"></apx-chart>
             <!--<div id="chart-line"></div>-->
           </div>
         </div>
@@ -156,24 +117,18 @@
         <h2 class="title">{{ "dashboard.wallet_splide.title" | translate }}</h2>
         <a href="#" routerLink="wallet" class="link">{{
           "dashboard.wallet_splide.view" | translate
-        }}</a>
+          }}</a>
       </div>
       <!-- carousel multiple -->
       <div class="carousel-multiple splide">
         <div class="splide__track">
-          <app-content-box
-            *ngIf="!dashboard.wallets || !dashboard.wallets.length"
+          <app-content-box *ngIf="!dashboard.wallets || !dashboard.wallets.length"
             [header]="'dashboard.wallet_splide.nodata.header' | translate"
             [body]="'dashboard.wallet_splide.nodata.body' | translate"
-            [footer]="'dashboard.wallet_splide.nodata.footer' | translate"
-          ></app-content-box>
+            [footer]="'dashboard.wallet_splide.nodata.footer' | translate"></app-content-box>
           <ul class="splide__list">
-            <app-splide-slide
-              class="splide__slide"
-              *ngFor="let wallet of walletFilter(dashboard.wallets)"
-              [wallet]="wallet"
-              [btn]="'Open'"
-            >
+            <app-splide-slide class="splide__slide" *ngFor="let wallet of walletFilter(dashboard.wallets)"
+              [wallet]="wallet" [btn]="'Open'">
             </app-splide-slide>
           </ul>
         </div>
@@ -184,7 +139,14 @@
   </section>
 
   <!-- app footer -->
-  <div class="appFooter">
+  <div class="appFooter hidden_desktop">
+    <div class="footer-title">
+      {{ "copyright" | translate }}
+    </div>
+  </div>
+  <!-- * app footer -->
+  <!-- app footer -->
+  <div class="appFooter hidden_mobile fixed">
     <div class="footer-title">
       {{ "copyright" | translate }}
     </div>
@@ -192,11 +154,5 @@
   <!-- * app footer -->
 </div>
 
-<app-add-wallet
-  [modalId]="modalConstant.ADDWALLET"
-  [categoriesInput]="dashboard.categories"
-></app-add-wallet>
-<app-category-modal
-  [modalId]="modalConstant.CATEGORY"
-  [categories]="dashboard.categories"
-></app-category-modal>
+<app-add-wallet [modalId]="modalConstant.ADDWALLET" [categoriesInput]="dashboard.categories"></app-add-wallet>
+<app-category-modal [modalId]="modalConstant.CATEGORY" [categories]="dashboard.categories"></app-category-modal>
