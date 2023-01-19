@@ -67,7 +67,7 @@ export class AddWalletComponent implements OnInit {
       walletToSave.img = this.walletImg;
     }
 
-    this.walletService.addWallet(walletToSave).subscribe((data) => {
+    this.walletService.addUpdateWallet(walletToSave).subscribe((data) => {
       // Save Wallet
       this.emitAddWallet.emit(data.data);
     });

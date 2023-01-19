@@ -58,12 +58,12 @@
       </h2>
     </div>
     <app-content-box
-      *ngIf="!dashboard.wallets || !dashboard.wallets.length"
+      *ngIf="!dashboard.statsWalletDays || !dashboard.statsWalletDays.length"
       [header]="'dashboard.graph.nodata.header' | translate"
       [body]="'dashboard.graph.nodata.body' | translate"
       [footer]="'dashboard.graph.nodata.footer' | translate"
     ></app-content-box>
-    <div *ngIf="dashboard.wallets.length" class="card">
+    <div *ngIf="dashboard.statsWalletDays" class="card">
       <div class="card-body">
         <apx-chart
           *ngIf="chartOptions"
@@ -88,12 +88,12 @@
       <h2 class="title" id="year">{{ "stats.data.graph2" | translate }}</h2>
     </div>
     <app-content-box
-      *ngIf="!dashboard.wallets || !dashboard.wallets.length"
+      *ngIf="!dashboard.statsWalletDays || !dashboard.statsWalletDays.length"
       [header]="'dashboard.graph.nodata.header' | translate"
       [body]="'dashboard.graph.nodata.body' | translate"
       [footer]="'dashboard.graph.nodata.footer' | translate"
     ></app-content-box>
-    <div *ngIf="dashboard.wallets.length" class="card">
+    <div *ngIf="dashboard.statsWalletDays" class="card">
       <div class="card-body">
         <apx-chart
           *ngIf="chartPie"
@@ -111,7 +111,13 @@
   <!-- App Capsule -->
   <div class="section mt-2 col-xl-12">
     <div class="section-title">{{ "stats.data.table" | translate }}</div>
-    <div class="card">
+    <app-content-box
+      *ngIf="!dashboard.statsWalletDays || !dashboard.statsWalletDays.length"
+      [header]="'dashboard.graph.nodata.header' | translate"
+      [body]="'dashboard.graph.nodata.body' | translate"
+      [footer]="'dashboard.graph.nodata.footer' | translate"
+    ></app-content-box>
+    <div *ngIf="dashboard.statsWalletDays" class="card">
       <div class="table-responsive">
         <table class="table">
           <thead>
@@ -134,7 +140,9 @@
           </thead>
           <tbody>
             <tr *ngFor="let balances of tableBalance; let i = index">
-              <th scope="row">{{ balances[6].date | date : "d MMM y" }}</th>
+              <th scope="row">
+                {{ balances[balances.length - 2].date | date : "d MMM y" }}
+              </th>
               <td
                 class="{{
                   balances.index != y
@@ -180,12 +188,12 @@
       </h2>
     </div>
     <app-content-box
-      *ngIf="!dashboard.wallets || !dashboard.wallets.length"
+      *ngIf="!dashboard.statsWalletDays || !dashboard.statsWalletDays.length"
       [header]="'dashboard.graph.nodata.header' | translate"
       [body]="'dashboard.graph.nodata.body' | translate"
       [footer]="'dashboard.graph.nodata.footer' | translate"
     ></app-content-box>
-    <div *ngIf="dashboard.wallets.length" class="card">
+    <div *ngIf="dashboard.statsWalletDays" class="card">
       <div class="card-body">
         <apx-chart
           *ngIf="chartBar"

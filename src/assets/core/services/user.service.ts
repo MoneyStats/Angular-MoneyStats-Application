@@ -10,6 +10,7 @@ import { Github, MockUser, User } from '../data/class/user.class';
 import { StorageConstant } from '../data/constant/modal.constant';
 import { SwalService } from '../utils/swal.service';
 import { DashboardService } from './dashboard.service';
+import { StatsService } from './stats.service';
 import { WalletService } from './wallet.service';
 
 @Injectable({
@@ -25,12 +26,24 @@ export class UserService {
     private dashboardService: DashboardService,
     private walletService: WalletService,
     public swalService: SwalService,
-    private router: Router
+    private router: Router,
+    private statsService: StatsService
   ) {}
 
   setValue() {
-    if (this.user?.currency === Coin.EUR) this.coinSymbol = CoinSymbol.EUR;
-    else if (this.user?.currency === Coin.EUR) this.coinSymbol = CoinSymbol.EUR;
+    switch (this.user?.currency) {
+      case Coin.EUR:
+        this.coinSymbol = CoinSymbol.EUR;
+        break;
+      case Coin.USD:
+        this.coinSymbol = CoinSymbol.USD;
+        break;
+      case Coin.GBP:
+        this.coinSymbol = CoinSymbol.GBP;
+        break;
+      default:
+        break;
+    }
 
     this.dashboardService.coinSymbol = this.coinSymbol;
     this.walletService.coinSymbol = this.coinSymbol;
@@ -38,6 +51,8 @@ export class UserService {
 
   setUserGlobally() {
     this.walletService.user = this.user;
+    this.dashboardService.user = this.user;
+    this.statsService.user = this.user;
   }
 
   syncGithubUser(user: string) {

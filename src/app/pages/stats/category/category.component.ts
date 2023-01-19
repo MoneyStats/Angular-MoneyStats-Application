@@ -50,13 +50,17 @@ export class CategoryComponent implements OnInit, OnChanges {
   constructor(private charts: ChartService, private chartsJS: ChartJSService) {}
 
   ngOnInit(): void {
-    this.generateData();
-    this.renderChart();
+    if (this.dashboard.statsWalletDays) {
+      this.generateData();
+      this.renderChart();
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.generateData();
-    this.renderChart();
+    if (this.dashboard.statsWalletDays) {
+      this.generateData();
+      this.renderChart();
+    }
   }
 
   renderChart() {

@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
       console.log(data);
       this.user = data.data;
       this.userService.user = data.data;
-      this.userService.setValue();
       localStorage.setItem(
         StorageConstant.GITHUBACCOUNT,
         JSON.stringify(data.data.github)
@@ -43,6 +42,7 @@ export class LoginComponent implements OnInit {
         StorageConstant.ACCESSTOKEN,
         data.data.authToken.accessToken
       );
+      this.userService.setValue();
       this.userService.setUserGlobally();
       this.router.navigate(['']);
     });

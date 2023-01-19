@@ -1,1015 +1,1019 @@
 {
-  "2021": {
-    "balance": 150000.0,
-    "value": "EUR",
-    "performace": 800,
-    "performanceValue": 1500,
-    "performanceSince": "01-01-2021",
-    "performanceLastDate": "12-01-2021",
-    "lastStatsPerformance": -10,
-    "lastStatsBalanceDifference": -3500,
-    "statsWalletDays": [
-      "2021-01-31",
-      "2021-02-28",
-      "2021-03-31",
-      "2021-04-30",
-      "2021-05-31",
-      "2021-06-30",
-      "2021-07-30",
-      "2021-08-30",
-      "2021-09-30",
-      "2021-10-30",
-      "2021-11-30",
-      "2021-12-31"
-    ],
-    "categories": [
-      {
-        "name": "Cash"
-      },
-      {
-        "name": "Credit Card"
-      },
-      {
-        "name": "Debit Card"
-      },
-      {
-        "name": "Recurrence"
-      },
-      {
-        "name": "Bank Account"
-      },
-      {
-        "name": "Save"
-      },
-      {
-        "name": "Coupon"
-      },
-      {
-        "name": "Check"
-      },
-      {
-        "name": "Investments"
-      },
-      {
-        "name": "Other"
-      }
-    ],
-    "wallets": [
-      {
-        "id": 1,
-        "name": "Coinbase",
-        "img": "https://avatars.githubusercontent.com/u/1885080?s=280&v=4",
-        "category": "Investments",
-        "differenceLastStats": 2500,
-        "dateLastStats": "12-01-2021 12:59",
-        "balance": 1000,
-        "history": [
-          {
-            "id": 1,
-            "date": "2021-01-31",
-            "balance": 1000,
-            "percentage": 10
-          },
-          {
-            "id": 2,
-            "date": "2021-02-28",
-            "balance": 1500,
-            "percentage": 20
-          },
-          {
-            "id": 3,
-            "date": "2021-03-31",
-            "balance": 1200,
-            "percentage": 1
-          },
-          {
-            "date": "2021-04-30",
-            "balance": 3000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-05-31",
-            "balance": 5000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-06-30",
-            "balance": 4000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-07-30",
-            "balance": 6000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-08-30",
-            "balance": 7000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-09-30",
-            "balance": 6000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-10-30",
-            "balance": 8000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-11-30",
-            "balance": 12000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-12-31",
-            "balance": 10000,
-            "percentage": 100
-          }
-        ]
-      },
-      {
-        "id": 2,
-        "name": "Binance",
-        "img": "https://public.bnbstatic.com/20190405/eb2349c3-b2f8-4a93-a286-8f86a62ea9d8.png",
-        "category": "Investments",
-        "differenceLastStats": 5000,
-        "dateLastStats": "12-01-2021 12:59",
-        "balance": 1300,
-        "history": [
-          {
-            "id": 1,
-            "date": "2021-01-31",
-            "balance": 1000,
-            "percentage": 10
-          },
-          {
-            "id": 2,
-            "date": "2021-02-28",
-            "balance": 1500,
-            "percentage": 20
-          },
-          {
-            "id": 3,
-            "date": "2021-03-31",
-            "balance": 1200,
-            "percentage": 1
-          },
-          {
-            "date": "2021-04-30",
-            "balance": 3000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-05-31",
-            "balance": 5000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-06-30",
-            "balance": 4000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-07-30",
-            "balance": 6000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-08-30",
-            "balance": 7000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-09-30",
-            "balance": 6000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-10-30",
-            "balance": 8000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-11-30",
-            "balance": 12000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-12-31",
-            "balance": 10000,
-            "percentage": 100
-          }
-        ]
-      },
-      {
-        "id": 3,
-        "name": "UniCredit",
-        "img": "https://s3-symbol-logo.tradingview.com/unicredit--600.png",
-        "category": "Bank Account",
-        "differenceLastStats": 0,
-        "dateLastStats": "12-01-2021 12:59",
-        "balance": 5000,
-        "history": [
-          {
-            "id": 1,
-            "date": "2021-01-31",
-            "balance": 1000,
-            "percentage": 10
-          },
-          {
-            "id": 2,
-            "date": "2021-02-28",
-            "balance": 1500,
-            "percentage": 20
-          },
-          {
-            "id": 3,
-            "date": "2021-03-31",
-            "balance": 1200,
-            "percentage": 1
-          },
-          {
-            "date": "2021-04-30",
-            "balance": -3000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-05-31",
-            "balance": 5000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-06-30",
-            "balance": 4000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-07-30",
-            "balance": 6000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-08-30",
-            "balance": -7000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-09-30",
-            "balance": 6000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-10-30",
-            "balance": 8000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-11-30",
-            "balance": 12000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-12-31",
-            "balance": 10000,
-            "percentage": 100
-          },
-          {
-            "id": 1,
-            "date": "2021-01-31",
-            "balance": 1000,
-            "percentage": 10
-          }
-        ]
-      },
-      {
-        "id": 4,
-        "name": "Revolut",
-        "img": "https://play-lh.googleusercontent.com/YciEyN9kE0EVsUrm28c23yf7LXMnhB35geLXJRCenAKBkOtUGNgdwA3mEArRSSu9bOM",
-        "category": "Bank Account",
-        "differenceLastStats": -500,
-        "dateLastStats": "12-01-2021 12:59",
-        "balance": 9000,
-        "history": [
-          {
-            "id": 1,
-            "date": "2021-01-31",
-            "balance": 1000,
-            "percentage": 10
-          },
-          {
-            "id": 2,
-            "date": "2021-02-28",
-            "balance": 1500,
-            "percentage": 20
-          },
-          {
-            "id": 3,
-            "date": "2021-03-31",
-            "balance": 1200,
-            "percentage": 1
-          },
-          {
-            "date": "2021-04-30",
-            "balance": -3000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-05-31",
-            "balance": 5000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-06-30",
-            "balance": 4000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-07-30",
-            "balance": 6000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-08-30",
-            "balance": 7000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-09-30",
-            "balance": 6000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-10-30",
-            "balance": 8000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-11-30",
-            "balance": -12000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-12-31",
-            "balance": 10000,
-            "percentage": 100
-          }
-        ]
-      },
-      {
-        "id": 5,
-        "name": "Crypto.com",
-        "img": "https://is5-ssl.mzstatic.com/image/thumb/Purple112/v4/ed/c7/fc/edc7fcc9-9f2f-d4ce-22b1-e049f55d8102/AppIcon-0-1x_U007emarketing-0-10-0-85-220.png/512x512bb.jpg",
-        "category": "Investments",
-        "differenceLastStats": 3460,
-        "dateLastStats": "12-01-2021 12:59",
-        "balance": 1300,
-        "history": [
-          {
-            "id": 1,
-            "date": "2021-01-31",
-            "balance": 1000,
-            "percentage": 10
-          },
-          {
-            "id": 2,
-            "date": "2021-02-28",
-            "balance": 1500,
-            "percentage": 20
-          },
-          {
-            "id": 3,
-            "date": "2021-03-31",
-            "balance": 1200,
-            "percentage": 1
-          },
-          {
-            "date": "2021-04-30",
-            "balance": 3000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-05-31",
-            "balance": 5000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-06-30",
-            "balance": 4000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-07-30",
-            "balance": 6000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-08-30",
-            "balance": 7000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-09-30",
-            "balance": 6000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-10-30",
-            "balance": 8000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-11-30",
-            "balance": 12000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-12-31",
-            "balance": 10000,
-            "percentage": 100
-          }
-        ]
-      },
-      {
-        "id": 6,
-        "name": "BNL",
-        "img": "https://it.dealiry.com/images/brands/BNL-codice-sconto-promozionale-coupon-buono-voucher.webp",
-        "category": "Bank Account",
-        "differenceLastStats": 295,
-        "dateLastStats": "12-01-2021 12:59",
-        "balance": 10000,
-        "history": [
-          {
-            "id": 1,
-            "date": "2021-01-31",
-            "balance": 1500,
-            "percentage": 20
-          },
-          {
-            "id": 2,
-            "date": "2021-02-28",
-            "balance": 1500,
-            "percentage": 20
-          },
-          {
-            "id": 3,
-            "date": "2021-03-31",
-            "balance": 1200,
-            "percentage": 1
-          },
-          {
-            "date": "2021-04-30",
-            "balance": 3000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-05-31",
-            "balance": 5000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-06-30",
-            "balance": 4000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-07-30",
-            "balance": 6000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-08-30",
-            "balance": 7000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-09-30",
-            "balance": 6000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-10-30",
-            "balance": 8000,
-            "percentage": -10
-          },
-          {
-            "date": "2021-11-30",
-            "balance": 12000,
-            "percentage": 10
-          },
-          {
-            "date": "2021-12-31",
-            "balance": 10000,
-            "percentage": 100
-          }
-        ]
-      }
-    ]
-  },
-  "2022": {
-    "balance": 1350000.0,
-    "value": "EUR",
-    "performace": 800,
-    "performanceValue": 15800,
-    "performanceSince": "01-01-2022",
-    "performanceLastDate": "12-01-2022",
-    "lastStatsPerformance": -10,
-    "lastStatsBalanceDifference": -3500,
-    "statsWalletDays": [
-      "2022-01-31",
-      "2022-02-28",
-      "2022-03-31",
-      "2022-04-30",
-      "2022-05-31",
-      "2022-06-30",
-      "2022-07-30",
-      "2022-08-30",
-      "2022-09-30",
-      "2022-10-30",
-      "2022-11-30",
-      "2022-12-31"
-    ],
-    "categories": [
-      {
-        "name": "Cash"
-      },
-      {
-        "name": "Credit Card"
-      },
-      {
-        "name": "Debit Card"
-      },
-      {
-        "name": "Recurrence"
-      },
-      {
-        "name": "Bank Account"
-      },
-      {
-        "name": "Save"
-      },
-      {
-        "name": "Save Account"
-      },
-      {
-        "name": "Coupon"
-      },
-      {
-        "name": "Check"
-      },
-      {
-        "name": "Investments"
-      },
-      {
-        "name": "Other"
-      }
-    ],
-    "wallets": [
-      {
-        "id": 1,
-        "name": "Coinbase",
-        "img": "https://avatars.githubusercontent.com/u/1885080?s=280&v=4",
-        "category": "Investments",
-        "differenceLastStats": 2500,
-        "dateLastStats": "12-01-2022 12:59",
-        "balance": 10000,
-        "history": [
-          {
-            "id": 1,
-            "date": "2022-01-31",
-            "balance": 1000,
-            "percentage": 10
-          },
-          {
-            "id": 2,
-            "date": "2022-02-28",
-            "balance": 1500,
-            "percentage": 20
-          },
-          {
-            "id": 3,
-            "date": "2022-03-31",
-            "balance": 1200,
-            "percentage": 1
-          },
-          {
-            "date": "2022-04-30",
-            "balance": 3000,
-            "percentage": -10
-          },
-          {
-            "date": "2022-05-31",
-            "balance": 5000,
-            "percentage": 10
-          },
-          {
-            "date": "2022-06-30",
-            "balance": 4000,
-            "percentage": -10
-          },
-          {
-            "date": "2022-07-30",
-            "balance": 6000,
-            "percentage": 10
-          },
-          {
-            "date": "2022-08-30",
-            "balance": 7000,
-            "percentage": -10
-          },
-          {
-            "date": "2022-09-30",
-            "balance": 6000,
-            "percentage": 10
-          },
-          {
-            "date": "2022-10-30",
-            "balance": 8000,
-            "percentage": -10
-          },
-          {
-            "date": "2022-11-30",
-            "balance": 12000,
-            "percentage": 10
-          },
-          {
-            "date": "2022-12-31",
-            "balance": 10000,
-            "percentage": 100
-          }
-        ]
-      },
-      {
-        "id": 2,
-        "name": "Binance",
-        "img": "https://public.bnbstatic.com/20190405/eb2349c3-b2f8-4a93-a286-8f86a62ea9d8.png",
-        "category": "Investments",
-        "differenceLastStats": 5000,
-        "dateLastStats": "12-01-2022 12:59",
-        "balance": 10000,
-        "history": [
-          {
-            "id": 1,
-            "date": "2022-01-31",
-            "balance": 1000,
-            "percentage": 10
-          },
-          {
-            "id": 2,
-            "date": "2022-02-28",
-            "balance": 1500,
-            "percentage": 20
-          },
-          {
-            "id": 3,
-            "date": "2022-03-31",
-            "balance": 1200,
-            "percentage": 1
-          },
-          {
-            "date": "2022-04-30",
-            "balance": 3000,
-            "percentage": -10
-          },
-          {
-            "date": "2022-05-31",
-            "balance": 5000,
-            "percentage": 10
-          },
-          {
-            "date": "2022-06-30",
-            "balance": 4000,
-            "percentage": -10
-          },
-          {
-            "date": "2022-07-30",
-            "balance": 6000,
-            "percentage": 10
-          },
-          {
-            "date": "2022-08-30",
-            "balance": 7000,
-            "percentage": -10
-          },
-          {
-            "date": "2022-09-30",
-            "balance": 6000,
-            "percentage": 10
-          },
-          {
-            "date": "2022-10-30",
-            "balance": 8000,
-            "percentage": -10
-          },
-          {
-            "date": "2022-11-30",
-            "balance": 12000,
-            "percentage": 10
-          },
-          {
-            "date": "2022-12-31",
-            "balance": 10000,
-            "percentage": 100
-          }
-        ]
-      },
-      {
-        "id": 3,
-        "name": "UniCredit",
-        "img": "https://s3-symbol-logo.tradingview.com/unicredit--600.png",
-        "category": "Bank Account",
-        "differenceLastStats": 0,
-        "dateLastStats": "12-01-2022 12:59",
-        "balance": 10000,
-        "history": [
-          {
-            "id": 1,
-            "date": "2022-01-31",
-            "balance": 1000,
-            "percentage": 10
-          },
-          {
-            "id": 2,
-            "date": "2022-02-28",
-            "balance": 1500,
-            "percentage": 20
-          },
-          {
-            "id": 3,
-            "date": "2022-03-31",
-            "balance": 12070,
-            "percentage": 1
-          },
-          {
-            "date": "2022-04-30",
-            "balance": 3000,
-            "percentage": -10
-          },
-          {
-            "date": "2022-05-31",
-            "balance": 50600,
-            "percentage": 10
-          },
-          {
-            "date": "2022-06-30",
-            "balance": 40050,
-            "percentage": -10
-          },
-          {
-            "date": "2022-07-30",
-            "balance": 60040,
-            "percentage": 10
-          },
-          {
-            "date": "2022-08-30",
-            "balance": 70400,
-            "percentage": -10
-          },
-          {
-            "date": "2022-09-30",
-            "balance": 60020,
-            "percentage": 10
-          },
-          {
-            "date": "2022-10-30",
-            "balance": 80400,
-            "percentage": -10
-          },
-          {
-            "date": "2022-11-30",
-            "balance": 1206400,
-            "percentage": 10
-          },
-          {
-            "date": "2022-12-31",
-            "balance": 1000660,
-            "percentage": 100
-          }
-        ]
-      },
-      {
-        "id": 4,
-        "name": "Revolut",
-        "img": "https://play-lh.googleusercontent.com/YciEyN9kE0EVsUrm28c23yf7LXMnhB35geLXJRCenAKBkOtUGNgdwA3mEArRSSu9bOM",
-        "category": "Bank Account",
-        "differenceLastStats": -500,
-        "dateLastStats": "12-01-2022 12:59",
-        "balance": 10000,
-        "history": [
-          {
-            "id": 1,
-            "date": "2022-01-31",
-            "balance": 10050,
-            "percentage": 10
-          },
-          {
-            "id": 2,
-            "date": "2022-02-28",
-            "balance": 15040,
-            "percentage": 20
-          },
-          {
-            "id": 3,
-            "date": "2022-03-31",
-            "balance": -12300,
-            "percentage": 1
-          },
-          {
-            "date": "2022-04-30",
-            "balance": 300320,
-            "percentage": -10
-          },
-          {
-            "date": "2022-05-31",
-            "balance": 50400,
-            "percentage": 10
-          },
-          {
-            "date": "2022-06-30",
-            "balance": -40080,
-            "percentage": -10
-          },
-          {
-            "date": "2022-07-30",
-            "balance": 60700,
-            "percentage": 10
-          },
-          {
-            "date": "2022-08-30",
-            "balance": 70600,
-            "percentage": -10
-          },
-          {
-            "date": "2022-09-30",
-            "balance": 60050,
-            "percentage": 10
-          },
-          {
-            "date": "2022-10-30",
-            "balance": 8000,
-            "percentage": -10
-          },
-          {
-            "date": "2022-11-30",
-            "balance": 120400,
-            "percentage": 10
-          },
-          {
-            "date": "2022-12-31",
-            "balance": 100100,
-            "percentage": 100
-          }
-        ]
-      },
-      {
-        "id": 5,
-        "name": "Crypto.com",
-        "img": "https://is5-ssl.mzstatic.com/image/thumb/Purple112/v4/ed/c7/fc/edc7fcc9-9f2f-d4ce-22b1-e049f55d8102/AppIcon-0-1x_U007emarketing-0-10-0-85-220.png/512x512bb.jpg",
-        "category": "Investments",
-        "differenceLastStats": 3460,
-        "dateLastStats": "12-01-2022 12:59",
-        "balance": 10000,
-        "history": [
-          {
-            "id": 1,
-            "date": "2022-01-31",
-            "balance": 10200,
-            "percentage": 10
-          },
-          {
-            "id": 2,
-            "date": "2022-02-28",
-            "balance": 15300,
-            "percentage": 20
-          },
-          {
-            "id": 3,
-            "date": "2022-03-31",
-            "balance": 132200,
-            "percentage": 1
-          },
-          {
-            "date": "2022-04-30",
-            "balance": -30001,
-            "percentage": -10
-          },
-          {
-            "date": "2022-05-31",
-            "balance": 500320,
-            "percentage": 10
-          },
-          {
-            "date": "2022-06-30",
-            "balance": 41000,
-            "percentage": -10
-          },
-          {
-            "date": "2022-07-30",
-            "balance": 60030,
-            "percentage": 10
-          },
-          {
-            "date": "2022-08-30",
-            "balance": 70100,
-            "percentage": -10
-          },
-          {
-            "date": "2022-09-30",
-            "balance": 60200,
-            "percentage": 10
-          },
-          {
-            "date": "2022-10-30",
-            "balance": 834000,
-            "percentage": -10
-          },
-          {
-            "date": "2022-11-30",
-            "balance": 1234000,
-            "percentage": 10
-          },
-          {
-            "date": "2022-12-31",
-            "balance": -120000,
-            "percentage": 100
-          }
-        ]
-      },
-      {
-        "id": 6,
-        "name": "BNL",
-        "img": "https://it.dealiry.com/images/brands/BNL-codice-sconto-promozionale-coupon-buono-voucher.webp",
-        "category": "Bank Account",
-        "differenceLastStats": 295,
-        "dateLastStats": "12-01-2022 12:59",
-        "balance": 10000,
-        "history": [
-          {
-            "id": 1,
-            "date": "2022-01-31",
-            "balance": -10200,
-            "percentage": 10
-          },
-          {
-            "id": 2,
-            "date": "2022-02-28",
-            "balance": 15040,
-            "percentage": 20
-          },
-          {
-            "id": 3,
-            "date": "2022-03-31",
-            "balance": 12300,
-            "percentage": 1
-          },
-          {
-            "date": "2022-04-30",
-            "balance": 32000,
-            "percentage": -10
-          },
-          {
-            "date": "2022-05-31",
-            "balance": 503400,
-            "percentage": 10
-          },
-          {
-            "date": "2022-06-30",
-            "balance": 403440,
-            "percentage": -10
-          },
-          {
-            "date": "2022-07-30",
-            "balance": 6040,
-            "percentage": 10
-          },
-          {
-            "date": "2022-08-30",
-            "balance": 7500,
-            "percentage": -10
-          },
-          {
-            "date": "2022-09-30",
-            "balance": 6400,
-            "percentage": 10
-          },
-          {
-            "date": "2022-10-30",
-            "balance": 8005,
-            "percentage": -10
-          },
-          {
-            "date": "2022-11-30",
-            "balance": 12400,
-            "percentage": 10
-          },
-          {
-            "date": "2022-12-31",
-            "balance": 12000,
-            "percentage": 100
-          }
-        ]
-      }
-    ]
+  "status": 200,
+  "message": "Data for Resume!",
+  "data": {
+    "2021": {
+      "balance": 150000.0,
+      "value": "EUR",
+      "performace": 800,
+      "performanceValue": 1500,
+      "performanceSince": "01-01-2021",
+      "performanceLastDate": "12-01-2021",
+      "lastStatsPerformance": -10,
+      "lastStatsBalanceDifference": -3500,
+      "statsWalletDays": [
+        "2021-01-31",
+        "2021-02-28",
+        "2021-03-31",
+        "2021-04-30",
+        "2021-05-31",
+        "2021-06-30",
+        "2021-07-30",
+        "2021-08-30",
+        "2021-09-30",
+        "2021-10-30",
+        "2021-11-30",
+        "2021-12-31"
+      ],
+      "categories": [
+        {
+          "name": "Cash"
+        },
+        {
+          "name": "Credit Card"
+        },
+        {
+          "name": "Debit Card"
+        },
+        {
+          "name": "Recurrence"
+        },
+        {
+          "name": "Bank Account"
+        },
+        {
+          "name": "Save"
+        },
+        {
+          "name": "Coupon"
+        },
+        {
+          "name": "Check"
+        },
+        {
+          "name": "Investments"
+        },
+        {
+          "name": "Other"
+        }
+      ],
+      "wallets": [
+        {
+          "id": 1,
+          "name": "Coinbase",
+          "img": "https://avatars.githubusercontent.com/u/1885080?s=280&v=4",
+          "category": "Investments",
+          "differenceLastStats": 2500,
+          "dateLastStats": "12-01-2021 12:59",
+          "balance": 1000,
+          "history": [
+            {
+              "id": 1,
+              "date": "2021-01-31",
+              "balance": 1000,
+              "percentage": 10
+            },
+            {
+              "id": 2,
+              "date": "2021-02-28",
+              "balance": 1500,
+              "percentage": 20
+            },
+            {
+              "id": 3,
+              "date": "2021-03-31",
+              "balance": 1200,
+              "percentage": 1
+            },
+            {
+              "date": "2021-04-30",
+              "balance": 3000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-05-31",
+              "balance": 5000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-06-30",
+              "balance": 4000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-07-30",
+              "balance": 6000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-08-30",
+              "balance": 7000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-09-30",
+              "balance": 6000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-10-30",
+              "balance": 8000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-11-30",
+              "balance": 12000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-12-31",
+              "balance": 10000,
+              "percentage": 100
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Binance",
+          "img": "https://public.bnbstatic.com/20190405/eb2349c3-b2f8-4a93-a286-8f86a62ea9d8.png",
+          "category": "Investments",
+          "differenceLastStats": 5000,
+          "dateLastStats": "12-01-2021 12:59",
+          "balance": 1300,
+          "history": [
+            {
+              "id": 1,
+              "date": "2021-01-31",
+              "balance": 1000,
+              "percentage": 10
+            },
+            {
+              "id": 2,
+              "date": "2021-02-28",
+              "balance": 1500,
+              "percentage": 20
+            },
+            {
+              "id": 3,
+              "date": "2021-03-31",
+              "balance": 1200,
+              "percentage": 1
+            },
+            {
+              "date": "2021-04-30",
+              "balance": 3000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-05-31",
+              "balance": 5000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-06-30",
+              "balance": 4000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-07-30",
+              "balance": 6000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-08-30",
+              "balance": 7000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-09-30",
+              "balance": 6000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-10-30",
+              "balance": 8000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-11-30",
+              "balance": 12000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-12-31",
+              "balance": 10000,
+              "percentage": 100
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "name": "UniCredit",
+          "img": "https://s3-symbol-logo.tradingview.com/unicredit--600.png",
+          "category": "Bank Account",
+          "differenceLastStats": 0,
+          "dateLastStats": "12-01-2021 12:59",
+          "balance": 5000,
+          "history": [
+            {
+              "id": 1,
+              "date": "2021-01-31",
+              "balance": 1000,
+              "percentage": 10
+            },
+            {
+              "id": 2,
+              "date": "2021-02-28",
+              "balance": 1500,
+              "percentage": 20
+            },
+            {
+              "id": 3,
+              "date": "2021-03-31",
+              "balance": 1200,
+              "percentage": 1
+            },
+            {
+              "date": "2021-04-30",
+              "balance": -3000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-05-31",
+              "balance": 5000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-06-30",
+              "balance": 4000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-07-30",
+              "balance": 6000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-08-30",
+              "balance": -7000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-09-30",
+              "balance": 6000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-10-30",
+              "balance": 8000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-11-30",
+              "balance": 12000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-12-31",
+              "balance": 10000,
+              "percentage": 100
+            },
+            {
+              "id": 1,
+              "date": "2021-01-31",
+              "balance": 1000,
+              "percentage": 10
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "name": "Revolut",
+          "img": "https://play-lh.googleusercontent.com/YciEyN9kE0EVsUrm28c23yf7LXMnhB35geLXJRCenAKBkOtUGNgdwA3mEArRSSu9bOM",
+          "category": "Bank Account",
+          "differenceLastStats": -500,
+          "dateLastStats": "12-01-2021 12:59",
+          "balance": 9000,
+          "history": [
+            {
+              "id": 1,
+              "date": "2021-01-31",
+              "balance": 1000,
+              "percentage": 10
+            },
+            {
+              "id": 2,
+              "date": "2021-02-28",
+              "balance": 1500,
+              "percentage": 20
+            },
+            {
+              "id": 3,
+              "date": "2021-03-31",
+              "balance": 1200,
+              "percentage": 1
+            },
+            {
+              "date": "2021-04-30",
+              "balance": -3000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-05-31",
+              "balance": 5000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-06-30",
+              "balance": 4000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-07-30",
+              "balance": 6000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-08-30",
+              "balance": 7000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-09-30",
+              "balance": 6000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-10-30",
+              "balance": 8000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-11-30",
+              "balance": -12000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-12-31",
+              "balance": 10000,
+              "percentage": 100
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "name": "Crypto.com",
+          "img": "https://is5-ssl.mzstatic.com/image/thumb/Purple112/v4/ed/c7/fc/edc7fcc9-9f2f-d4ce-22b1-e049f55d8102/AppIcon-0-1x_U007emarketing-0-10-0-85-220.png/512x512bb.jpg",
+          "category": "Investments",
+          "differenceLastStats": 3460,
+          "dateLastStats": "12-01-2021 12:59",
+          "balance": 1300,
+          "history": [
+            {
+              "id": 1,
+              "date": "2021-01-31",
+              "balance": 1000,
+              "percentage": 10
+            },
+            {
+              "id": 2,
+              "date": "2021-02-28",
+              "balance": 1500,
+              "percentage": 20
+            },
+            {
+              "id": 3,
+              "date": "2021-03-31",
+              "balance": 1200,
+              "percentage": 1
+            },
+            {
+              "date": "2021-04-30",
+              "balance": 3000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-05-31",
+              "balance": 5000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-06-30",
+              "balance": 4000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-07-30",
+              "balance": 6000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-08-30",
+              "balance": 7000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-09-30",
+              "balance": 6000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-10-30",
+              "balance": 8000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-11-30",
+              "balance": 12000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-12-31",
+              "balance": 10000,
+              "percentage": 100
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "name": "BNL",
+          "img": "https://it.dealiry.com/images/brands/BNL-codice-sconto-promozionale-coupon-buono-voucher.webp",
+          "category": "Bank Account",
+          "differenceLastStats": 295,
+          "dateLastStats": "12-01-2021 12:59",
+          "balance": 10000,
+          "history": [
+            {
+              "id": 1,
+              "date": "2021-01-31",
+              "balance": 1500,
+              "percentage": 20
+            },
+            {
+              "id": 2,
+              "date": "2021-02-28",
+              "balance": 1500,
+              "percentage": 20
+            },
+            {
+              "id": 3,
+              "date": "2021-03-31",
+              "balance": 1200,
+              "percentage": 1
+            },
+            {
+              "date": "2021-04-30",
+              "balance": 3000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-05-31",
+              "balance": 5000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-06-30",
+              "balance": 4000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-07-30",
+              "balance": 6000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-08-30",
+              "balance": 7000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-09-30",
+              "balance": 6000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-10-30",
+              "balance": 8000,
+              "percentage": -10
+            },
+            {
+              "date": "2021-11-30",
+              "balance": 12000,
+              "percentage": 10
+            },
+            {
+              "date": "2021-12-31",
+              "balance": 10000,
+              "percentage": 100
+            }
+          ]
+        }
+      ]
+    },
+    "2022": {
+      "balance": 1350000.0,
+      "value": "EUR",
+      "performace": 800,
+      "performanceValue": 15800,
+      "performanceSince": "01-01-2022",
+      "performanceLastDate": "12-01-2022",
+      "lastStatsPerformance": -10,
+      "lastStatsBalanceDifference": -3500,
+      "statsWalletDays": [
+        "2022-01-31",
+        "2022-02-28",
+        "2022-03-31",
+        "2022-04-30",
+        "2022-05-31",
+        "2022-06-30",
+        "2022-07-30",
+        "2022-08-30",
+        "2022-09-30",
+        "2022-10-30",
+        "2022-11-30",
+        "2022-12-31"
+      ],
+      "categories": [
+        {
+          "name": "Cash"
+        },
+        {
+          "name": "Credit Card"
+        },
+        {
+          "name": "Debit Card"
+        },
+        {
+          "name": "Recurrence"
+        },
+        {
+          "name": "Bank Account"
+        },
+        {
+          "name": "Save"
+        },
+        {
+          "name": "Save Account"
+        },
+        {
+          "name": "Coupon"
+        },
+        {
+          "name": "Check"
+        },
+        {
+          "name": "Investments"
+        },
+        {
+          "name": "Other"
+        }
+      ],
+      "wallets": [
+        {
+          "id": 1,
+          "name": "Coinbase",
+          "img": "https://avatars.githubusercontent.com/u/1885080?s=280&v=4",
+          "category": "Investments",
+          "differenceLastStats": 2500,
+          "dateLastStats": "12-01-2022 12:59",
+          "balance": 10000,
+          "history": [
+            {
+              "id": 1,
+              "date": "2022-01-31",
+              "balance": 1000,
+              "percentage": 10
+            },
+            {
+              "id": 2,
+              "date": "2022-02-28",
+              "balance": 1500,
+              "percentage": 20
+            },
+            {
+              "id": 3,
+              "date": "2022-03-31",
+              "balance": 1200,
+              "percentage": 1
+            },
+            {
+              "date": "2022-04-30",
+              "balance": 3000,
+              "percentage": -10
+            },
+            {
+              "date": "2022-05-31",
+              "balance": 5000,
+              "percentage": 10
+            },
+            {
+              "date": "2022-06-30",
+              "balance": 4000,
+              "percentage": -10
+            },
+            {
+              "date": "2022-07-30",
+              "balance": 6000,
+              "percentage": 10
+            },
+            {
+              "date": "2022-08-30",
+              "balance": 7000,
+              "percentage": -10
+            },
+            {
+              "date": "2022-09-30",
+              "balance": 6000,
+              "percentage": 10
+            },
+            {
+              "date": "2022-10-30",
+              "balance": 8000,
+              "percentage": -10
+            },
+            {
+              "date": "2022-11-30",
+              "balance": 12000,
+              "percentage": 10
+            },
+            {
+              "date": "2022-12-31",
+              "balance": 10000,
+              "percentage": 100
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Binance",
+          "img": "https://public.bnbstatic.com/20190405/eb2349c3-b2f8-4a93-a286-8f86a62ea9d8.png",
+          "category": "Investments",
+          "differenceLastStats": 5000,
+          "dateLastStats": "12-01-2022 12:59",
+          "balance": 10000,
+          "history": [
+            {
+              "id": 1,
+              "date": "2022-01-31",
+              "balance": 1000,
+              "percentage": 10
+            },
+            {
+              "id": 2,
+              "date": "2022-02-28",
+              "balance": 1500,
+              "percentage": 20
+            },
+            {
+              "id": 3,
+              "date": "2022-03-31",
+              "balance": 1200,
+              "percentage": 1
+            },
+            {
+              "date": "2022-04-30",
+              "balance": 3000,
+              "percentage": -10
+            },
+            {
+              "date": "2022-05-31",
+              "balance": 5000,
+              "percentage": 10
+            },
+            {
+              "date": "2022-06-30",
+              "balance": 4000,
+              "percentage": -10
+            },
+            {
+              "date": "2022-07-30",
+              "balance": 6000,
+              "percentage": 10
+            },
+            {
+              "date": "2022-08-30",
+              "balance": 7000,
+              "percentage": -10
+            },
+            {
+              "date": "2022-09-30",
+              "balance": 6000,
+              "percentage": 10
+            },
+            {
+              "date": "2022-10-30",
+              "balance": 8000,
+              "percentage": -10
+            },
+            {
+              "date": "2022-11-30",
+              "balance": 12000,
+              "percentage": 10
+            },
+            {
+              "date": "2022-12-31",
+              "balance": 10000,
+              "percentage": 100
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "name": "UniCredit",
+          "img": "https://s3-symbol-logo.tradingview.com/unicredit--600.png",
+          "category": "Bank Account",
+          "differenceLastStats": 0,
+          "dateLastStats": "12-01-2022 12:59",
+          "balance": 10000,
+          "history": [
+            {
+              "id": 1,
+              "date": "2022-01-31",
+              "balance": 1000,
+              "percentage": 10
+            },
+            {
+              "id": 2,
+              "date": "2022-02-28",
+              "balance": 1500,
+              "percentage": 20
+            },
+            {
+              "id": 3,
+              "date": "2022-03-31",
+              "balance": 12070,
+              "percentage": 1
+            },
+            {
+              "date": "2022-04-30",
+              "balance": 3000,
+              "percentage": -10
+            },
+            {
+              "date": "2022-05-31",
+              "balance": 50600,
+              "percentage": 10
+            },
+            {
+              "date": "2022-06-30",
+              "balance": 40050,
+              "percentage": -10
+            },
+            {
+              "date": "2022-07-30",
+              "balance": 60040,
+              "percentage": 10
+            },
+            {
+              "date": "2022-08-30",
+              "balance": 70400,
+              "percentage": -10
+            },
+            {
+              "date": "2022-09-30",
+              "balance": 60020,
+              "percentage": 10
+            },
+            {
+              "date": "2022-10-30",
+              "balance": 80400,
+              "percentage": -10
+            },
+            {
+              "date": "2022-11-30",
+              "balance": 1206400,
+              "percentage": 10
+            },
+            {
+              "date": "2022-12-31",
+              "balance": 1000660,
+              "percentage": 100
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "name": "Revolut",
+          "img": "https://play-lh.googleusercontent.com/YciEyN9kE0EVsUrm28c23yf7LXMnhB35geLXJRCenAKBkOtUGNgdwA3mEArRSSu9bOM",
+          "category": "Bank Account",
+          "differenceLastStats": -500,
+          "dateLastStats": "12-01-2022 12:59",
+          "balance": 10000,
+          "history": [
+            {
+              "id": 1,
+              "date": "2022-01-31",
+              "balance": 10050,
+              "percentage": 10
+            },
+            {
+              "id": 2,
+              "date": "2022-02-28",
+              "balance": 15040,
+              "percentage": 20
+            },
+            {
+              "id": 3,
+              "date": "2022-03-31",
+              "balance": -12300,
+              "percentage": 1
+            },
+            {
+              "date": "2022-04-30",
+              "balance": 300320,
+              "percentage": -10
+            },
+            {
+              "date": "2022-05-31",
+              "balance": 50400,
+              "percentage": 10
+            },
+            {
+              "date": "2022-06-30",
+              "balance": -40080,
+              "percentage": -10
+            },
+            {
+              "date": "2022-07-30",
+              "balance": 60700,
+              "percentage": 10
+            },
+            {
+              "date": "2022-08-30",
+              "balance": 70600,
+              "percentage": -10
+            },
+            {
+              "date": "2022-09-30",
+              "balance": 60050,
+              "percentage": 10
+            },
+            {
+              "date": "2022-10-30",
+              "balance": 8000,
+              "percentage": -10
+            },
+            {
+              "date": "2022-11-30",
+              "balance": 120400,
+              "percentage": 10
+            },
+            {
+              "date": "2022-12-31",
+              "balance": 100100,
+              "percentage": 100
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "name": "Crypto.com",
+          "img": "https://is5-ssl.mzstatic.com/image/thumb/Purple112/v4/ed/c7/fc/edc7fcc9-9f2f-d4ce-22b1-e049f55d8102/AppIcon-0-1x_U007emarketing-0-10-0-85-220.png/512x512bb.jpg",
+          "category": "Investments",
+          "differenceLastStats": 3460,
+          "dateLastStats": "12-01-2022 12:59",
+          "balance": 10000,
+          "history": [
+            {
+              "id": 1,
+              "date": "2022-01-31",
+              "balance": 10200,
+              "percentage": 10
+            },
+            {
+              "id": 2,
+              "date": "2022-02-28",
+              "balance": 15300,
+              "percentage": 20
+            },
+            {
+              "id": 3,
+              "date": "2022-03-31",
+              "balance": 132200,
+              "percentage": 1
+            },
+            {
+              "date": "2022-04-30",
+              "balance": -30001,
+              "percentage": -10
+            },
+            {
+              "date": "2022-05-31",
+              "balance": 500320,
+              "percentage": 10
+            },
+            {
+              "date": "2022-06-30",
+              "balance": 41000,
+              "percentage": -10
+            },
+            {
+              "date": "2022-07-30",
+              "balance": 60030,
+              "percentage": 10
+            },
+            {
+              "date": "2022-08-30",
+              "balance": 70100,
+              "percentage": -10
+            },
+            {
+              "date": "2022-09-30",
+              "balance": 60200,
+              "percentage": 10
+            },
+            {
+              "date": "2022-10-30",
+              "balance": 834000,
+              "percentage": -10
+            },
+            {
+              "date": "2022-11-30",
+              "balance": 1234000,
+              "percentage": 10
+            },
+            {
+              "date": "2022-12-31",
+              "balance": -120000,
+              "percentage": 100
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "name": "BNL",
+          "img": "https://it.dealiry.com/images/brands/BNL-codice-sconto-promozionale-coupon-buono-voucher.webp",
+          "category": "Bank Account",
+          "differenceLastStats": 295,
+          "dateLastStats": "12-01-2022 12:59",
+          "balance": 10000,
+          "history": [
+            {
+              "id": 1,
+              "date": "2022-01-31",
+              "balance": -10200,
+              "percentage": 10
+            },
+            {
+              "id": 2,
+              "date": "2022-02-28",
+              "balance": 15040,
+              "percentage": 20
+            },
+            {
+              "id": 3,
+              "date": "2022-03-31",
+              "balance": 12300,
+              "percentage": 1
+            },
+            {
+              "date": "2022-04-30",
+              "balance": 32000,
+              "percentage": -10
+            },
+            {
+              "date": "2022-05-31",
+              "balance": 503400,
+              "percentage": 10
+            },
+            {
+              "date": "2022-06-30",
+              "balance": 403440,
+              "percentage": -10
+            },
+            {
+              "date": "2022-07-30",
+              "balance": 6040,
+              "percentage": 10
+            },
+            {
+              "date": "2022-08-30",
+              "balance": 7500,
+              "percentage": -10
+            },
+            {
+              "date": "2022-09-30",
+              "balance": 6400,
+              "percentage": 10
+            },
+            {
+              "date": "2022-10-30",
+              "balance": 8005,
+              "percentage": -10
+            },
+            {
+              "date": "2022-11-30",
+              "balance": 12400,
+              "percentage": 10
+            },
+            {
+              "date": "2022-12-31",
+              "balance": 12000,
+              "percentage": 100
+            }
+          ]
+        }
+      ]
+    }
   }
 }

@@ -29,11 +29,19 @@ export class WalletService {
   user?: User;
   constructor(private http: HttpClient) {}
 
-  getWallet(): Observable<Wallet[]> {
-    return this.http.get<Wallet[]>(environment.getWalletDataUrl);
+  getWallet(): Observable<ResponseModel> {
+    if (this.user?.mockedUser) {
+      return this.http.get<ResponseModel>(environment.getWalletDataUrl);
+    } else {
+      const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
+      const headers = new HttpHeaders({ authToken: authToken! });
+      return this.http.get<ResponseModel>(environment.listWalletDataurl, {
+        headers: headers,
+      });
+    }
   }
 
-  addWallet(wallet: Wallet): Observable<ResponseModel> {
+  addUpdateWallet(wallet: Wallet): Observable<ResponseModel> {
     if (this.user?.mockedUser) {
       let response: ResponseModel = new ResponseModel();
       response.data = wallet;
@@ -42,7 +50,7 @@ export class WalletService {
       const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
       const headers = new HttpHeaders({ authToken: authToken! });
       return this.http.post<ResponseModel>(
-        environment.addWalletDataUrl,
+        environment.addUpdateWalletDataUrl,
         wallet,
         { headers: headers }
       );

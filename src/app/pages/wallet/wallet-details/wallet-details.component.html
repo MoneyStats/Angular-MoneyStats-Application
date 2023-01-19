@@ -5,7 +5,7 @@
     [backBtn]="'wallet.details.mobile_back' | translate"
     rightBtn="{{ 'wallet.details.mobile_edit' | translate }}"
     [dataBsTarget]="modalConstant.EDITWALLET"
-    [restore]="wallet?.deleted ? true : false"
+    [restore]="wallet?.deletedDate ? true : false"
   >
   </app-header-mobile>
 
@@ -35,7 +35,7 @@
           {{ "wallet.details.delete" | translate }}
         </button>
         <button
-          *ngIf="wallet?.deleted"
+          *ngIf="wallet?.deletedDate"
           type="button"
           class="btn btn-success me-1 mb-1"
           data-bs-toggle="modal"
@@ -80,7 +80,8 @@
                     ></ion-icon>
                   </span>
                   {{ coinSymbol }}{{ wallet?.differenceLastStats }}
-                  <strong>({{ percentageLastStats }})</strong>
+                  <strong>({{ wallet?.performanceLastStats }}%)</strong>
+                  <!--<strong>({{ percentageLastStats }})</strong>-->
                 </h4>
               </div>
             </div>
@@ -191,8 +192,10 @@
                   {{ "wallet.details.status" | translate }}
                 </div>
                 <strong
-                  class="{{ wallet?.deleted ? 'text-danger' : 'text-success' }}"
-                  >{{ wallet?.deleted ? "Deleted" : "Active" }}</strong
+                  class="{{
+                    wallet?.deletedDate ? 'text-danger' : 'text-success'
+                  }}"
+                  >{{ wallet?.deletedDate ? "Deleted" : "Active" }}</strong
                 >
               </li>
               <li>
@@ -201,21 +204,6 @@
                   {{ wallet?.allTimeHighDate | date : "d MMM y" }}
                 </div>
                 <strong>{{ coinSymbol }} {{ wallet?.allTimeHigh }}</strong>
-              </li>
-              <li>
-                <div class="text-muted">
-                  {{ "wallet.details.totalPerformance" | translate }}
-                </div>
-                <strong
-                  class="{{
-                    wallet?.totalPerformance === 0
-                      ? 'text-warning'
-                      : wallet!.totalPerformance > 0
-                      ? 'text-success'
-                      : 'text-danger'
-                  }}"
-                  >{{ wallet?.totalPerformance }}%</strong
-                >
               </li>
               <li>
                 <div class="text-muted">
@@ -295,7 +283,7 @@
     <div class="row mt-3 mb-3">
       <div class="col-md-6">
         <!-- History -->
-        <div class="section">
+        <div *ngIf="wallet!.history && wallet!.history.length" class="section">
           <div class="section-heading">
             <h2 class="title">
               {{ "wallet.details.transaction.title" | translate }}
@@ -340,7 +328,7 @@
   [wallet]="wallet!"
 ></app-delete-wallet>
 <app-delete-wallet
-  *ngIf="wallet?.deleted"
+  *ngIf="wallet?.deletedDate"
   [modalId]="modalConstant.RESTOREWALLET"
   [wallet]="wallet!"
 ></app-delete-wallet>

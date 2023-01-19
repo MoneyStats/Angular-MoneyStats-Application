@@ -5,6 +5,8 @@ import {
   Wallet,
 } from 'src/assets/core/data/class/dashboard.class';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
+import { StatsService } from 'src/assets/core/services/stats.service';
+import { WalletService } from 'src/assets/core/services/wallet.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
@@ -19,7 +21,8 @@ export class AddStatsComponent implements OnInit {
   walletsToSave: Wallet[] = [];
   constructor(
     public screenService: ScreenService,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private statsService: StatsService
   ) {}
 
   ngOnInit(): void {
@@ -30,15 +33,20 @@ export class AddStatsComponent implements OnInit {
 
   validate() {
     let validate = false;
-    this.walletsToSave.forEach((w) => {
-      if (!w.newBalance) {
-        validate = true;
-      }
-    });
+    if (this.walletsToSave) {
+      this.walletsToSave.forEach((w) => {
+        if (!w.newBalance) {
+          validate = true;
+        }
+      });
+    }
     return validate;
   }
   save() {
     this.saveValidation = false;
+    this.statsService.addStats(this.walletsToSave).subscribe((data) => {
+      console.log(data);
+    });
     this.getTodayAsString();
   }
 
@@ -53,15 +61,23 @@ export class AddStatsComponent implements OnInit {
         wallet.highPrice = wallet.balance;
         wallet.highPriceDate = currentDate;
       }
-      if (wallet.highPriceDate.getFullYear() != currentDate.getFullYear()) {
-        wallet.highPrice = wallet.balance;
-        wallet.highPriceDate = currentDate;
+      if (wallet.highPriceDate) {
+        if (
+          new Date(wallet.highPriceDate).getFullYear() !=
+          currentDate.getFullYear()
+        ) {
+          wallet.highPrice = wallet.balance;
+          wallet.highPriceDate = currentDate;
+        }
       }
+
       if (wallet.lowPrice < wallet.balance) {
         wallet.lowPrice = wallet.balance;
         wallet.lowPriceDate = currentDate;
       }
-      if (wallet.lowPriceDate.getFullYear() != currentDate.getFullYear()) {
+      if (
+        new Date(wallet.lowPriceDate).getFullYear() != currentDate.getFullYear()
+      ) {
         wallet.lowPrice = wallet.balance;
         wallet.lowPriceDate = currentDate;
       }

@@ -9,14 +9,20 @@ export const environment = {
   baseUrl: '../../',
   version: '1.0.0',
 
+  // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
-  getDashboardDataUrl: baseUrlApp + 'assets/core/mock/dashboard.mock.json',
+  getDashboardDataUrlMock: baseUrlApp + 'assets/core/mock/dashboard.mock.json',
   getWalletDataUrl: baseUrlApp + 'assets/core/mock/wallets.mock.json',
-  getResumeDataUrl: baseUrlApp + 'assets/core/mock/stats.mock.json',
+  getResumeDataUrlMock: baseUrlApp + 'assets/core/mock/stats.mock.json',
 
+  // Datas
   registerDataUrl: host + '/v1/auth/sign-up',
   loginDataUrl: host + '/v1/auth/login',
-  addWalletDataUrl: host + '/v1/wallet/insert',
+  addUpdateWalletDataUrl: host + '/v1/wallet/insert-update',
+  listWalletDataurl: host + '/v1/wallet/list',
+  getDashboardDataUrl: host + '/v1/app/dashboard',
+  getResumeDataUrl: host + '/v1/app/resume',
+  addStatsDataUrl: host + '/v1/app/add/stats',
   forgotPassword: false,
 };
 

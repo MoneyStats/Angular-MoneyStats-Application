@@ -1,6 +1,8 @@
 export class GenericModel {
   id?: number;
-  deleted?: string;
+  creationDate?: Date;
+  updateDate?: Date;
+  deletedDate?: Date;
 }
 
 export class ResponseModel {

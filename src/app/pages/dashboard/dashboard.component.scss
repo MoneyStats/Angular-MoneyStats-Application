@@ -2,25 +2,25 @@
 * Icon CSS Category
 *----------------------------------------------------------*/
 .icon {
-    width: 3rem;
-    height: 3rem;
+  width: 3rem;
+  height: 3rem;
 }
 
 .icon i {
-    font-size: 2.25rem;
+  font-size: 2.25rem;
 }
 
 .icon-shape {
-    display: inline-flex;
-    padding: 12px;
-    text-align: center;
-    border-radius: 50%;
-    align-items: center;
-    justify-content: center;
+  display: inline-flex;
+  padding: 12px;
+  text-align: center;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon-shape i {
-    font-size: 1.25rem;
+  font-size: 1.25rem;
 }
 
 /*----------------------------------------------------------
@@ -28,67 +28,76 @@
 *----------------------------------------------------------*/
 
 .captionCenter {
-    position: absolute;
-    margin: 0;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }
 
 @media screen and (min-width: 780px) {
-
-    #appCapsule:before {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 60px;
-        content: "";
-        display: block;
-        height: 150px;
-        background: #080957;
-        /*-webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0)));
+  #appCapsule:before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 60px;
+    content: "";
+    display: block;
+    height: 150px;
+    background: #080957;
+    /*-webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0)));
         mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));*/
-    }
+  }
 
-    .wallet-card-section, .stats-section{
-        max-width: 50%;
-    }
+  .wallet-card-section,
+  .stats-section {
+    max-width: 50%;
+  }
 
-    .stats-section{
-        padding-top: 10px;
-        z-index: 1;
-    }
+  .stats-section {
+    padding-top: 10px;
+    z-index: 1;
+  }
 
-    #appCapsule{
-        padding-top: 70px !important;
-    }
-    
-    .wallet-card-section:before {
-        background: none;
-    }
+  #appCapsule {
+    padding-top: 70px !important;
+  }
 
-    .appFooter {
-        margin-bottom: -55px !important;
-    }
+  .wallet-card-section:before {
+    background: none;
+  }
+
+  .appFooter {
+    margin-bottom: -55px !important;
+  }
 }
 
-.row{
-    margin-left: 0px;
-    margin-right: 0px;
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 .wallet-card-section:before {
-    -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0)));
-        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  -webkit-mask-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(rgba(0, 0, 0, 1)),
+    to(rgba(0, 0, 0, 0))
+  );
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
 }
 
 .appFooter {
-    margin-top: 20px;
-    margin-bottom: 0px;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  width: 100%;
+  position: fixed;
+  bottom: 50px;
 }
 
-.section-heading{
-    margin-left: 15px;
-    margin-right: 15px;
+.section-heading {
+  margin-left: 15px;
+  margin-right: 15px;
 }

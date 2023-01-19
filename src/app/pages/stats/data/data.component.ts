@@ -29,21 +29,24 @@ export class DataComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.tableBalance = [];
     this.balances = [];
-    this.dashboard.statsWalletDays.forEach((date) => {
-      console.log(date);
-      this.tableBalance.push(this.tableCreate(date));
-    });
-    this.renderChart();
+    if (this.dashboard.statsWalletDays) {
+      this.dashboard.statsWalletDays.forEach((date) => {
+        this.tableBalance.push(this.tableCreate(date));
+      });
+      this.renderChart();
+    }
+    console.log(this.tableBalance);
   }
 
   ngOnInit(): void {
     this.tableBalance = [];
     this.balances = [];
-    this.dashboard.statsWalletDays.forEach((date) => {
-      console.log(date);
-      this.tableBalance.push(this.tableCreate(date));
-    });
-    this.renderChart();
+    if (this.dashboard.statsWalletDays) {
+      this.dashboard.statsWalletDays.forEach((date) => {
+        this.tableBalance.push(this.tableCreate(date));
+      });
+      this.renderChart();
+    }
   }
 
   renderChart() {
