@@ -210,14 +210,14 @@
                   {{ "wallet.details.highPrice" | translate }}
                   {{ wallet?.highPriceDate | date : "d MMM y" }}
                 </div>
-                <strong>{{ wallet?.highPrice }}</strong>
+                <strong>{{ coinSymbol }} {{ wallet?.highPrice }}</strong>
               </li>
               <li>
                 <div class="text-muted">
                   {{ "wallet.details.lowPrice" | translate }}
                   {{ wallet?.lowPriceDate | date : "d MMM y" }}
                 </div>
-                <strong>{{ wallet?.lowPrice }}</strong>
+                <strong>{{ coinSymbol }} {{ wallet?.lowPrice }}</strong>
               </li>
               <li>
                 <div class="text-muted">

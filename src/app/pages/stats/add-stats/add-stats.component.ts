@@ -71,7 +71,7 @@ export class AddStatsComponent implements OnInit {
         }
       }
 
-      if (wallet.lowPrice < wallet.newBalance) {
+      if (wallet.lowPrice > wallet.newBalance) {
         wallet.lowPrice = wallet.newBalance;
         wallet.lowPriceDate = currentDate;
       }

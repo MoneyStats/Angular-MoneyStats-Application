@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
     private charts: ChartService,
     private toast: ToastService,
     private err: ErrorService,
-    private screenService: ScreenService,
+    public screenService: ScreenService,
     private walletService: WalletService
   ) {}
 
@@ -102,5 +102,9 @@ export class DashboardComponent implements OnInit {
     } else {
       return [];
     }
+  }
+
+  addWallet(wallet: Wallet) {
+    this.dashboard.wallets.push(wallet);
   }
 }
