@@ -7,7 +7,7 @@ RUN npm install --force && \
 FROM nginx:alpine
 COPY --from=builder /app/dist/* /usr/share/nginx/html/
 #COPY --from=builder /app/src/assets/ssl/* /etc/ssl/
-COPY /nginx.conf /etc/nginx/conf.d/default.conf
+#COPY /nginx.conf /etc/nginx/conf.d/default.conf
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
 
 #FROM node:16.13.2-alpine
