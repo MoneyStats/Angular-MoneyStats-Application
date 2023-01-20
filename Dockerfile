@@ -1,6 +1,7 @@
 FROM node:16.13.2-alpine AS builder
 WORKDIR '/app'
 COPY . .
+RUN npm install @angular/cli -g
 RUN npm install --force && \
   npm run build
 FROM nginx:alpine
