@@ -2,7 +2,7 @@ FROM node:16.13.2-alpine AS builder
 WORKDIR '/app'
 COPY . .
 RUN npm install --force && \
-  npm run build --configuration=development
+  npm run build
 FROM nginx:alpine
 COPY --from=builder /app/dist/* /usr/share/nginx/html/
 COPY --from=builder /app/src/assets/ssl/* /etc/ssl/
