@@ -74,7 +74,7 @@ jobs:
         run: npm install --force
 
       - name: Build
-        run: npm run build --configuration=development
+        run: npm run build
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
