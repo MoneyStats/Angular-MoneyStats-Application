@@ -42,7 +42,7 @@ jobs:
       - name: "📦 Dependency Injection"
         run: |
           npm install -g @angular/cli
-          npm install
+          npm install --force
   build:
     name: 📂 Build
     runs-on: ubuntu-latest
@@ -55,7 +55,7 @@ jobs:
       - name: 📂 Build
         run: |
           npm install -g @angular/cli
-          npm install
+          npm install --force
           npm run build --configuration=development
   deploy:
     name: 🚀 Deploy
@@ -71,7 +71,7 @@ jobs:
         run: docker build . --file Dockerfile --tag angular-moneystats:$(date +%s)
 
       - name: Install Dependency
-        run: npm install
+        run: npm install --force
 
       - name: Build
         run: npm run build --configuration=development
