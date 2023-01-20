@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Coin } from 'src/assets/core/data/class/coin';
 import { User } from 'src/assets/core/data/class/user.class';
+import { UserService } from 'src/assets/core/services/user.service';
+import { SwalService } from 'src/assets/core/utils/swal.service';
+import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +22,12 @@ export class RegisterComponent implements OnInit {
   currency: string = '';
   currencyList: string[] = [];
   check: boolean = false;
-  constructor(private location: Location) {}
+  constructor(
+    private location: Location,
+    private userService: UserService,
+    private swal: SwalService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.currencyList = Object.values(Coin);
@@ -43,7 +52,11 @@ export class RegisterComponent implements OnInit {
     user.password = this.password;
     user.surname = this.surname;
     user.username = this.username;
-    user.value = this.currency;
-    console.log(user);
+    user.currency = this.currency;
+
+    this.userService.register(user).subscribe((data) => {
+      this.swal.toastMessage(SwalIcon.SUCCESS, data.message!);
+      this.router.navigate(['auth/login']);
+    });
   }
 }

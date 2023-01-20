@@ -16,7 +16,6 @@ export class Dashboard implements DashboardInterface {
   lastStatsPerformance: number = 0;
   lastStatsBalanceDifference: number = 0;
   statsWalletDays: string[] = [];
-  statsBalances: number[] = [];
   categories: Category[] = [];
   wallets: Wallet[] = [];
 }
@@ -28,7 +27,6 @@ export class Wallet extends GenericModel implements WalletInterface {
   category!: string;
   allTimeHigh: number = 0;
   allTimeHighDate: Date = new Date();
-  totalPerformance: number = 0;
   highPrice: number = 0;
   highPriceDate: Date = new Date();
   lowPrice: number = 0;
@@ -41,15 +39,14 @@ export class Wallet extends GenericModel implements WalletInterface {
   history: Stats[] = [];
 }
 
-export class Stats implements StatsInterface {
-  id!: number;
+export class Stats extends GenericModel implements StatsInterface {
   date!: string;
   balance!: number;
   percentage!: number;
   trend!: number;
 }
 
-export class Category implements CategoryInterface {
+export class Category extends GenericModel implements CategoryInterface {
   name!: string;
   img!: string;
 }

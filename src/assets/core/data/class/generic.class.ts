@@ -1,4 +1,13 @@
 export class GenericModel {
   id?: number;
-  deleted?: string;
+  creationDate?: Date;
+  updateDate?: Date;
+  deletedDate?: Date;
+}
+
+export class ResponseModel {
+  status?: number;
+  message?: string;
+  correlationId?: string;
+  data: any;
 }

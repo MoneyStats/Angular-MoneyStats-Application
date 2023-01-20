@@ -21,7 +21,6 @@ export class WalletDetailsComponent implements OnInit {
   coinSymbol?: string;
   wallet?: Wallet;
   walletName?: string;
-  @Input('percentageLastStats') percentageLastStats?: string;
   constructor(
     public screenService: ScreenService,
     private route: ActivatedRoute,
@@ -41,15 +40,6 @@ export class WalletDetailsComponent implements OnInit {
     this.wallet = this.walletService.walletDetails?.find(
       (w) => w.name === this.walletName
     );
-    console.log(this.walletService.walletDetails);
-    if (this.wallet!.history.length > 0) {
-      this.percentageLastStats =
-        (this.wallet?.history[this.wallet?.history.length - 1].percentage! > 0
-          ? '+'
-          : '') +
-        this.wallet?.history[this.wallet?.history.length - 1].percentage! +
-        '%';
-    }
 
     this.renderGraph();
     if (this.screenService!.screenWidth! <= 780) {

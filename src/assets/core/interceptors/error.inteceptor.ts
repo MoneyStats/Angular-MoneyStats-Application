@@ -10,13 +10,18 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ErrorHandleComponent } from 'src/app/interceptors/error-handle/error-handle.component';
+import { UserService } from '../services/user.service';
 import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpErrorInterceptor implements HttpInterceptor {
-  constructor(private router: Router, private errorService: ErrorService) {}
+  constructor(
+    private router: Router,
+    private errorService: ErrorService,
+    private userService: UserService
+  ) {}
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -31,10 +36,17 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         } else {
           console.log('this is server side error');
           errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
-          this.errorService.throwException1(error);
-          this.router.navigateByUrl('error');
+          this.errorService.getError(error);
+
+          switch (this.errorService.exception.error?.exceptionCode) {
+            case 'ERR_AUTH_MSS_004':
+              this.userService.logout();
+              break;
+            default:
+              this.router.navigateByUrl('error');
+              break;
+          }
         }
-        console.log(errorMsg);
         return throwError(errorMsg);
       })
     );

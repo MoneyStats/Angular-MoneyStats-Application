@@ -25,19 +25,20 @@ export class WalletComponent implements OnInit {
     this.screenService.setupHeader();
     this.screenService.goToWallet();
     this.walletService.getWallet().subscribe((res) => {
-      this.wallets = res;
-      this.walletService.walletActive = this.walletActive(res);
-      this.walletService.walletDeleted = this.walletDeleted(res);
-      this.walletDetails(res);
+      this.wallets = res.data;
+      this.walletService.walletActive = this.walletActive(res.data);
+      this.walletService.walletDeleted = this.walletDeleted(res.data);
+      this.walletDetails(res.data);
+      console.log(this.wallets);
     });
   }
 
   walletActive(wallets: Wallet[]): Array<Wallet> {
-    return wallets.filter((w) => !w.deleted);
+    return wallets.filter((w) => !w.deletedDate);
   }
 
   walletDeleted(wallets: Wallet[]): Array<Wallet> {
-    return wallets.filter((w) => w.deleted);
+    return wallets.filter((w) => w.deletedDate);
   }
 
   walletDetails(res: Wallet[]) {

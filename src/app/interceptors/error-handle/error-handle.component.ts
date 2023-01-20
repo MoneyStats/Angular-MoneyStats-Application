@@ -25,8 +25,8 @@ export class ErrorHandleComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.screenService.setupHeader();
-    this.screenService.hideFooter();
+    //this.screenService.setupHeader();
+    //this.screenService.hideFooter();
     this.exception = this.errorService.exception;
   }
 

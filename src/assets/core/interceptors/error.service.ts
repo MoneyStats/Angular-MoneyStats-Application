@@ -15,9 +15,8 @@ export class ErrorService {
     return this.http.get<any>('environment.getDashboardDataUrl');
   }
 
-  throwException1(error: any) {
-    this.exception.statusCode = error.status;
-    this.exception.message = error.message;
-    this.exception.exceptionCode = error.name;
+  getError(error: any) {
+    this.exception = error.error;
+    this.exception.error!.statusCode = error.status;
   }
 }

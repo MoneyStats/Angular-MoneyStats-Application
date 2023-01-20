@@ -73,7 +73,7 @@
       [footer]="'stats.nodata.footer' | translate"
     ></app-content-box>
 
-    <div class="transactions row">
+    <div *ngIf="resumeData.statsWalletDays" class="transactions row">
       <div class="col-md-6 mt-2">
         <!-- item -->
         <a routerLink="/transaction" class="item">

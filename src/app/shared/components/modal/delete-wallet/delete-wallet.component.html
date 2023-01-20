@@ -26,16 +26,16 @@
             *ngIf="modalId != modalConstant.RESTOREWALLET"
             class="text-center p-2"
           >
-            <h3 *ngIf="!wallet?.deleted">
+            <h3 *ngIf="!wallet?.deletedDate">
               {{ "wallet.details.modal.delete.title" | translate }}
             </h3>
-            <h3 *ngIf="wallet?.deleted">
+            <h3 *ngIf="wallet?.deletedDate">
               {{ "wallet.details.modal.permanent.title" | translate }}
             </h3>
-            <p *ngIf="!wallet?.deleted">
+            <p *ngIf="!wallet?.deletedDate">
               {{ "wallet.details.modal.delete.text" | translate }}
             </p>
-            <p *ngIf="wallet?.deleted">
+            <p *ngIf="wallet?.deletedDate">
               {{ "wallet.details.modal.permanent.text" | translate }}
             </p>
           </div>

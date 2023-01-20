@@ -120,12 +120,17 @@
           }}</a>
         </div>
         <app-content-box
-          *ngIf="!dashboard.wallets || !dashboard.wallets.length"
+          *ngIf="
+            !dashboard.statsWalletDays || !dashboard.statsWalletDays.length
+          "
           [header]="'dashboard.graph.nodata.header' | translate"
           [body]="'dashboard.graph.nodata.body' | translate"
           [footer]="'dashboard.graph.nodata.footer' | translate"
         ></app-content-box>
-        <div *ngIf="dashboard.wallets.length" class="card">
+        <div
+          *ngIf="dashboard.statsWalletDays && dashboard.statsWalletDays.length"
+          class="card"
+        >
           <div class="card-body">
             <apx-chart
               *ngIf="chartOptions"
@@ -179,7 +184,17 @@
   </section>
 
   <!-- app footer -->
-  <div class="appFooter">
+  <div *ngIf="dashboard.wallets && dashboard.wallets.length" class="appFooter">
+    <div class="footer-title">
+      {{ "copyright" | translate }}
+    </div>
+  </div>
+  <!-- * app footer -->
+  <!-- app footer -->
+  <div
+    *ngIf="!dashboard.wallets || !dashboard.wallets.length"
+    class="appFooter hidden_mobile fixed"
+  >
     <div class="footer-title">
       {{ "copyright" | translate }}
     </div>
@@ -187,7 +202,7 @@
   <!-- * app footer -->
 </div>
 
-<app-add-wallet
+<app-add-wallet (emitAddWallet)="addWallet($event)"
   [modalId]="modalConstant.ADDWALLET"
   [categoriesInput]="dashboard.categories"
 ></app-add-wallet>

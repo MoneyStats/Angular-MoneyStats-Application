@@ -8,7 +8,6 @@ export interface DashboardInterface {
   lastStatsPerformance: number;
   lastStatsBalanceDifference: number;
   statsWalletDays: string[];
-  statsBalances: number[];
   wallets: WalletInterface[];
 }
 
@@ -18,7 +17,6 @@ export interface WalletInterface {
   category: string;
   allTimeHigh: number;
   allTimeHighDate: Date;
-  totalPerformance: number;
   highPrice: number;
   highPriceDate: Date;
   lowPrice: number;

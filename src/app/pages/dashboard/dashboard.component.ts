@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
     private charts: ChartService,
     private toast: ToastService,
     private err: ErrorService,
-    private screenService: ScreenService,
+    public screenService: ScreenService,
     private walletService: WalletService
   ) {}
 
@@ -48,8 +48,13 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.dashboardService.getData().subscribe((data) => {
-      this.dashboard = data;
-      this.dashboardService.dashboard = data;
+      if (!data.data.balance) {
+        this.dashboard.categories = data.data.categories;
+        this.dashboard.wallets = data.data.wallets;
+      } else {
+        this.dashboard = data.data;
+      }
+      this.dashboardService.dashboard = this.dashboard;
       this.performance = this.dashboard.performace + ' %';
       let date = this.datePipe
         .transform(this.dashboard.performanceSince, 'dd MMM y')
@@ -63,10 +68,12 @@ export class DashboardComponent implements OnInit {
         this.dashboard.lastStatsBalanceDifference +
         ' ' +
         this.userService.coinSymbol;
-      this.walletService.totalBalance = data.balance;
+      this.walletService.totalBalance = this.dashboard.balance;
       //this.chart.render(data);
       setTimeout(() => {
-        this.chartOptions = this.charts.renderChartLine(data);
+        if (this.dashboard.wallets) {
+          this.chartOptions = this.charts.renderChartLine(this.dashboard);
+        }
       }, 100);
     });
     setTimeout(() => {
@@ -90,6 +97,14 @@ export class DashboardComponent implements OnInit {
   }
 
   walletFilter(wallets: Wallet[]): Array<Wallet> {
-    return wallets.filter((w) => !w.deleted);
+    if (wallets) {
+      return wallets.filter((w) => !w.deletedDate);
+    } else {
+      return [];
+    }
+  }
+
+  addWallet(wallet: Wallet) {
+    this.dashboard.wallets.push(wallet);
   }
 }

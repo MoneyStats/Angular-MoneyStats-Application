@@ -5,6 +5,8 @@ import {
   Wallet,
 } from 'src/assets/core/data/class/dashboard.class';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
+import { StatsService } from 'src/assets/core/services/stats.service';
+import { WalletService } from 'src/assets/core/services/wallet.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
@@ -19,7 +21,8 @@ export class AddStatsComponent implements OnInit {
   walletsToSave: Wallet[] = [];
   constructor(
     public screenService: ScreenService,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private statsService: StatsService
   ) {}
 
   ngOnInit(): void {
@@ -30,43 +33,57 @@ export class AddStatsComponent implements OnInit {
 
   validate() {
     let validate = false;
-    this.walletsToSave.forEach((w) => {
-      if (!w.newBalance) {
-        validate = true;
-      }
-    });
+    if (this.walletsToSave) {
+      this.walletsToSave.forEach((w) => {
+        if (!w.newBalance) {
+          validate = true;
+        }
+      });
+    }
     return validate;
   }
   save() {
     this.saveValidation = false;
+    this.statsService.addStats(this.walletsToSave).subscribe((data) => {
+      console.log(data);
+    });
     this.getTodayAsString();
   }
 
   confirm() {
     this.walletsToSave.forEach((wallet) => {
-      if (wallet.allTimeHigh < wallet.balance) {
-        wallet.allTimeHigh = wallet.balance;
+      if (wallet.allTimeHigh < wallet.newBalance) {
+        wallet.allTimeHigh = wallet.newBalance;
         wallet.allTimeHighDate = new Date(this.dateStats);
       }
       let currentDate = new Date(this.dateStats);
-      if (wallet.highPrice < wallet.balance) {
-        wallet.highPrice = wallet.balance;
+      if (wallet.highPrice < wallet.newBalance) {
+        wallet.highPrice = wallet.newBalance;
         wallet.highPriceDate = currentDate;
       }
-      if (wallet.highPriceDate.getFullYear() != currentDate.getFullYear()) {
-        wallet.highPrice = wallet.balance;
-        wallet.highPriceDate = currentDate;
+      if (wallet.highPriceDate) {
+        if (
+          new Date(wallet.highPriceDate).getFullYear() !=
+          currentDate.getFullYear()
+        ) {
+          wallet.highPrice = wallet.newBalance;
+          wallet.highPriceDate = currentDate;
+        }
       }
-      if (wallet.lowPrice < wallet.balance) {
+
+      if (wallet.lowPrice > wallet.newBalance) {
+        wallet.lowPrice = wallet.newBalance;
+        wallet.lowPriceDate = currentDate;
+      }
+      if (
+        new Date(wallet.lowPriceDate).getFullYear() != currentDate.getFullYear()
+      ) {
         wallet.lowPrice = wallet.balance;
         wallet.lowPriceDate = currentDate;
       }
-      if (wallet.lowPriceDate.getFullYear() != currentDate.getFullYear()) {
-        wallet.lowPrice = wallet.balance;
-        wallet.lowPriceDate = currentDate;
-      }
+      let fixedBalance = wallet.balance != 0 ? wallet.balance : 0.0001;
       let percentage = (
-        ((wallet.newBalance - wallet.balance) / wallet.balance) *
+        ((wallet.newBalance - fixedBalance) / fixedBalance) *
         100
       ).toFixed(2);
       wallet.performanceLastStats = parseFloat(percentage);
