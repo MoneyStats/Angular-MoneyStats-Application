@@ -68,13 +68,23 @@ export class DataComponent implements OnInit, OnChanges {
     let array: any = [];
     this.dashboard.wallets.forEach((w) => {
       let history = w.history.find((h) => h.date === date);
+      if (!history) {
+        history = new Stats();
+        history.balance = 0;
+        history.date = date;
+        history.percentage = 0;
+        history.trend = 0;
+      }
       array.push(history);
     });
+    console.log(array);
     let total: Stats = new Stats();
     total.balance = 0;
     total.date = date;
     array.forEach((h: any) => {
-      total.balance = total.balance + h.balance;
+      if (h && h.balance != undefined && h.balance) {
+        total.balance = total.balance + h.balance;
+      }
     });
     let percentage = (
       ((total.balance - this.balances[this.balances.length - 1]) /
