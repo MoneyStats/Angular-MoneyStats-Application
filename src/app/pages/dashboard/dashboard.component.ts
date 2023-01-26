@@ -48,6 +48,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.dashboardService.getData().subscribe((data) => {
+      console.log(data);
       if (!data.data.balance) {
         this.dashboard.categories = data.data.categories;
         this.dashboard.wallets = data.data.wallets;

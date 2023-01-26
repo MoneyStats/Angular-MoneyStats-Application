@@ -27,7 +27,9 @@ export class AddStatsComponent implements OnInit {
 
   ngOnInit(): void {
     this.screenService.setupHeader();
-    this.walletsToSave = this.dashboardService.dashboard.wallets;
+    this.walletsToSave = this.dashboardService.dashboard.wallets.filter(
+      (w) => !w.deletedDate
+    );
     this.getTodayAsString();
   }
 

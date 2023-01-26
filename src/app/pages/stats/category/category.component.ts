@@ -142,7 +142,15 @@ export class CategoryComponent implements OnInit, OnChanges {
     let history: any = [];
 
     wallet.forEach((w: any) => {
-      history.push(w.history.find((h: any) => h.date === date));
+      let hist = w.history.find((h: any) => h.date === date);
+      if (!hist) {
+        hist = new Stats();
+        hist.balance = 0;
+        hist.date = date;
+        hist.percentage = 0;
+        hist.trend = 0;
+      }
+      history.push(hist);
     });
     let total: any = new Stats();
     total.balance = 0;
