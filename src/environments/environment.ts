@@ -3,8 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 const baseUrlApp: string = '../../';
 //const host: string = 'http://192.168.1.30:8080';
-//const host: string = 'http://synologynas.ddns.net:8000';
-const host: string = 'stg-moneystats-service';
+const host: string = 'http://synologynas.ddns.net:8000';
 
 export const environment = {
   production: false,
