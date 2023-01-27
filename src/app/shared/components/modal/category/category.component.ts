@@ -55,7 +55,7 @@ export class CategoryModalComponent implements OnInit {
         result.img = 'id-card-outline';
         result.color = 'bg-info';
         break;
-      case 'Other':
+      case 'Others':
         result.img = 'cube-outline';
         result.color = 'bg-secondary';
         break;

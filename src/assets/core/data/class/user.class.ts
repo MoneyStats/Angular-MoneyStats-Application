@@ -1,5 +1,6 @@
 import { GithubInterface, UserInterface } from '../interfaces/user.interface';
 
+import { environment } from 'src/environments/environment';
 export class User implements UserInterface {
   name: string = 'Name';
   surname: string = 'Surname';
@@ -7,8 +8,7 @@ export class User implements UserInterface {
   username: string = 'username';
   password: string = '';
   role: string = 'USER';
-  profilePhoto: string =
-    '../../../../assets/images/img/sample/avatar/avatar1.jpg';
+  profilePhoto: string = '../../../../assets/images/sample/avatar.png';
   currency: string = 'USD';
   authToken: any;
   mockedUser?: boolean;

@@ -27,6 +27,7 @@
           {{ "wallet.details.edit" | translate }}
         </button>
         <button
+          *ngIf="!wallet?.deletedDate"
           type="button"
           class="btn btn-danger me-1 mb-1"
           data-bs-toggle="modal"

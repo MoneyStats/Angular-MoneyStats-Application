@@ -9,7 +9,7 @@ import { GenericModel } from './generic.class';
 export class Dashboard implements DashboardInterface {
   balance: number = 0;
   value: string = 'USD';
-  performace: number = 0;
+  performance: number = 0;
   performanceValue: number = 0;
   performanceSince: Date = new Date();
   performanceLastDate: Date = new Date();
@@ -22,8 +22,7 @@ export class Dashboard implements DashboardInterface {
 
 export class Wallet extends GenericModel implements WalletInterface {
   name!: string;
-  img: string =
-    'https://scarpedimaremma.com/wp-content/uploads/2022/09/Sfondo-di-IMG_1265-rimosso-300x300.png';
+  img: string = '../../../../assets/images/sample/wallet.png';
   category!: string;
   allTimeHigh: number = 0;
   allTimeHighDate: Date = new Date();

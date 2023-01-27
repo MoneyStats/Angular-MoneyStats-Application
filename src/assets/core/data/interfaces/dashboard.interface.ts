@@ -1,7 +1,7 @@
 export interface DashboardInterface {
   balance: number;
   value: string;
-  performace: number;
+  performance: number;
   performanceValue: number;
   performanceSince: Date;
   performanceLastDate: Date;

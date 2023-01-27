@@ -1,10 +1,9 @@
 import { DatePipe } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { ModalConstant } from 'src/assets/core/data/constant/modal.constant';
-import { ErrorService } from 'src/assets/core/interceptors/error.service';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { UserService } from 'src/assets/core/services/user.service';
 import { WalletService } from 'src/assets/core/services/wallet.service';
@@ -21,7 +20,8 @@ import { ToastService } from 'src/assets/core/utils/toast.service';
 export class DashboardComponent implements OnInit {
   @Output('dashboard') dashboard: Dashboard = new Dashboard();
   @Output('user') user: User = new User();
-  @Output('performance') performance: string = this.dashboard.performace + ' %';
+  @Output('performance') performance: string =
+    this.dashboard.performance + ' %';
   @Output('performanceSince') performanceSince: string =
     this.dashboard.performanceSince.toString();
   @Output('lastStatsPerformance') lastStatsPerformance: string =
@@ -37,7 +37,6 @@ export class DashboardComponent implements OnInit {
     private splide: SplideService,
     private charts: ChartService,
     private toast: ToastService,
-    private err: ErrorService,
     public screenService: ScreenService,
     private walletService: WalletService
   ) {}
@@ -56,7 +55,8 @@ export class DashboardComponent implements OnInit {
         this.dashboard = data.data;
       }
       this.dashboardService.dashboard = this.dashboard;
-      this.performance = this.dashboard.performace + ' %';
+      console.log(this.dashboard.performance);
+      this.performance = this.dashboard.performance + ' %';
       let date = this.datePipe
         .transform(this.dashboard.performanceSince, 'dd MMM y')
         ?.toString();
@@ -91,10 +91,6 @@ export class DashboardComponent implements OnInit {
 
   currentYear(): string {
     return new Date().getFullYear().toString();
-  }
-
-  error() {
-    this.err.throwException().subscribe((res) => console.log(res));
   }
 
   walletFilter(wallets: Wallet[]): Array<Wallet> {
