@@ -17,8 +17,16 @@ export class ChartService {
     let series: Array<any> = [];
     dashboard.wallets.forEach((wallet) => {
       let historyBalance: Array<number> = [];
+      let index = 0;
       wallet.history.forEach((h) => {
+        let count = dashboard.statsWalletDays.indexOf(h.date);
+        if (count != index) {
+          Array.from(Array(count - index)).forEach((d) =>
+            historyBalance.push(0)
+          );
+        }
         historyBalance.push(h.balance);
+        index++;
       });
       let serie = {
         name: wallet.name,
@@ -38,7 +46,7 @@ export class ChartService {
         },
       },
       dataLabels: {
-        enabled: false
+        enabled: false,
       },
       stroke: {
         width: 2,
