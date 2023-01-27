@@ -20,9 +20,9 @@
               [title]="'dashboard.dashboardCard.stats.title1' | translate"
               [value]="performance"
               [class]="
-                dashboard.performace === 0
+                dashboard.performance === 0
                   ? 'text-warning'
-                  : dashboard.performace > 0
+                  : dashboard.performance > 0
                   ? 'text-success'
                   : 'text-danger'
               "
@@ -113,9 +113,9 @@
       <div class="section mt-4 col-xl-6">
         <div class="section-heading">
           <h2 class="title" id="year">
-            {{ "dashboard.graph.title" | translate }} {{ currentYear() }}
+            {{ "dashboard.graph.title" | translate }}
           </h2>
-          <a href="#" (click)="error()" class="link">{{
+          <a routerLink="stats" class="link">{{
             "dashboard.graph.view" | translate
           }}</a>
         </div>
@@ -202,7 +202,8 @@
   <!-- * app footer -->
 </div>
 
-<app-add-wallet (emitAddWallet)="addWallet($event)"
+<app-add-wallet
+  (emitAddWallet)="addWallet($event)"
   [modalId]="modalConstant.ADDWALLET"
   [categoriesInput]="dashboard.categories"
 ></app-add-wallet>

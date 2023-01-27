@@ -35,7 +35,7 @@ export class CategoryComponent implements OnInit, OnChanges {
   KEY_CAPITAL: string = 'Capital';
   KEY_SAVING: string = 'Saving';
   KEY_DEBITS: string = 'Recurrence';
-  KEY_OTHER: string = 'Other';
+  KEY_OTHER: string = 'Others';
   mapWalletCategory: Map<string, any> = new Map<string, any>();
 
   // categoryTableBalance used just to set data
