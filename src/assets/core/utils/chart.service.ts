@@ -24,6 +24,7 @@ export class ChartService {
           Array.from(Array(count - index)).forEach((d) =>
             historyBalance.push(0)
           );
+          index = count;
         }
         historyBalance.push(h.balance);
         index++;

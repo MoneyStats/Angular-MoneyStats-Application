@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -95,6 +95,17 @@ export class UserService {
       return this.http.get<ResponseModel>(environment.getUserUrl);
     } else {
       return this.http.post<ResponseModel>(url, {});
+    }
+  }
+
+  checkLogin(authToken: string): Observable<ResponseModel> {
+    if (this.user?.mockedUser) {
+      return this.http.get<ResponseModel>(environment.getUserUrl);
+    } else {
+      const headers = new HttpHeaders({ authToken: authToken! });
+      return this.http.get<ResponseModel>(environment.checkLoginDataUrl, {
+        headers: headers,
+      });
     }
   }
 }

@@ -8,6 +8,7 @@ import {
 } from '@angular/router';
 import { UserService } from 'src/assets/core/services/user.service';
 import { StorageConstant } from 'src/assets/core/data/constant/modal.constant';
+import { User } from 'src/assets/core/data/class/user.class';
 
 @Injectable({
   providedIn: 'root',
@@ -23,32 +24,29 @@ export class RouteGuardService implements CanActivate {
   ): boolean {
     let accessToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     if (accessToken != null) {
+      if (this.authService.user.name === 'DEFAULT_NAME') {
+        this.isUserLoggedIn(accessToken);
+      }
       return true;
     }
     this.router.navigate(['auth/login']);
     return false;
   }
 
-  // Method to check user logged
-  //isUserLoggedIn() {
-  //  let accessToken = localStorage.getItem('accessToken');
-  //  if (accessToken === null) {
-  //    this.router.navigate(['auth/login']);
-  //  } else {
-  //    this.isUserLoggedSubscribe = this.authService
-  //      .isUserLoggedIn(accessToken)
-  //      .subscribe({
-  //        next: (resp) => {
-  //          this.user = <AuthenticationUser>resp;
-  //        },
-  //        error: (error) => {
-  //          this.router.navigate(['auth/login']);
-  //        },
-  //      });
-  //  }
-  //}
-  //
-  //unsubscribe() {
-  //  this.isUserLoggedSubscribe.unsubscribe();
-  //}
+  isUserLoggedIn(accessToken: string) {
+    this.authService.checkLogin(accessToken).subscribe({
+      next: (resp) => {
+        this.authService.user = resp.data;
+        this.authService.setUserGlobally();
+        this.authService.setValue();
+      },
+      error: (error) => {
+        this.router.navigate(['auth/login']);
+      },
+    });
+  }
+
+  unsubscribe() {
+    this.isUserLoggedSubscribe.unsubscribe();
+  }
 }

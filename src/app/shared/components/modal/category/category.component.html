@@ -21,7 +21,8 @@
           <li *ngFor="let category of categories">
             <a class="item">
               <div class="icon-box {{ setResult(category).color }}">
-                <ion-icon name="{{ setResult(category).img }}"></ion-icon>
+                <!--<ion-icon name="{{ setResult(category).img }}"></ion-icon>-->
+                <ion-icon name="{{ category.img }}"></ion-icon>
               </div>
               <div class="in">{{ category.name }}</div>
             </a>

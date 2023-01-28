@@ -26,10 +26,13 @@ export class HeaderComponent implements OnInit {
     return ModalConstant;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.user = this.userService.user;
+  }
 
   updateData(): void {
     this.dashboard = this.dashboardService.dashboard;
+    this.user = this.userService.user;
   }
 
   availableSoon() {

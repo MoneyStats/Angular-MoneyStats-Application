@@ -19,6 +19,7 @@ export const environment = {
   // Datas
   registerDataUrl: host + '/v1/auth/sign-up',
   loginDataUrl: host + '/v1/auth/login',
+  checkLoginDataUrl: host + '/v1/auth/check-login',
   addUpdateWalletDataUrl: host + '/v1/wallet/insert-update',
   listWalletDataurl: host + '/v1/wallet/list',
   getDashboardDataUrl: host + '/v1/app/dashboard',
