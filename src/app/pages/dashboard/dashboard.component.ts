@@ -102,6 +102,10 @@ export class DashboardComponent implements OnInit {
   }
 
   addWallet(wallet: Wallet) {
-    this.dashboard.wallets.push(wallet);
+    if (this.dashboard.wallets) {
+      this.dashboard.wallets.push(wallet);
+    } else {
+      this.dashboard.wallets = [wallet];
+    }
   }
 }

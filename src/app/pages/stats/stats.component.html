@@ -183,6 +183,7 @@
         <div class="row">
           <app-category
             *ngIf="wallets && wallets.length"
+            [coinSymbol]="dashboardService.coinSymbol!"
             [dashboard]="resumeData"
           ></app-category>
         </div>

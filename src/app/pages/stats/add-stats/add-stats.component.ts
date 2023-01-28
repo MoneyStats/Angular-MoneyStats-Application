@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  Dashboard,
-  Stats,
-  Wallet,
-} from 'src/assets/core/data/class/dashboard.class';
+import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { StatsService } from 'src/assets/core/services/stats.service';
-import { WalletService } from 'src/assets/core/services/wallet.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
@@ -37,7 +32,9 @@ export class AddStatsComponent implements OnInit {
     let validate = false;
     if (this.walletsToSave) {
       this.walletsToSave.forEach((w) => {
-        if (!w.newBalance) {
+        if (w.newBalance === 0) {
+          validate = false;
+        } else if (!w.newBalance) {
           validate = true;
         }
       });
