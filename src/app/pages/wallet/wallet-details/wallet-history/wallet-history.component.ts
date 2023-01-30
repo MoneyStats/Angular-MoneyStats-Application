@@ -22,13 +22,13 @@ export class WalletHistoryComponent implements OnInit {
 
     let years: Array<string> = [];
     this.wallet?.history.forEach((histor) => {
-      years.push(histor.date.split('-')[0]);
+      years.push(histor.date.toString().split('-')[0]);
     });
     this.uniqueYears = [...new Set(years)];
     this.uniqueYears.forEach((year: string) => {
       this.walletMap?.set(
         year,
-        this.wallet!.history.filter((h) => h.date.includes(year))
+        this.wallet!.history.filter((h) => h.date.toString().includes(year))
       );
     });
   }
