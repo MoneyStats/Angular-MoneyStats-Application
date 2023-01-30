@@ -299,6 +299,7 @@
     "title": "Insert Data",
     "back": "Go back to previous page",
     "mobile_back": "Back",
+    "dataPresent": "Select different Data",
     "card_title": "Insert a new Stats",
     "card_subtitle": "Select a date to save the Stats and insert a Stats for each Wallet",
     "continue": "Continue",

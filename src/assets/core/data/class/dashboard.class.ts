@@ -39,7 +39,7 @@ export class Wallet extends GenericModel implements WalletInterface {
 }
 
 export class Stats extends GenericModel implements StatsInterface {
-  date!: string;
+  date!: Date;
   balance!: number;
   percentage!: number;
   trend!: number;

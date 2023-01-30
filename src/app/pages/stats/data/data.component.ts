@@ -67,11 +67,11 @@ export class DataComponent implements OnInit, OnChanges {
   tableCreate(date: string) {
     let array: any = [];
     this.dashboard.wallets.forEach((w) => {
-      let history = w.history.find((h) => h.date === date);
+      let history = w.history.find((h) => h.date.toString() === date);
       if (!history) {
         history = new Stats();
         history.balance = 0;
-        history.date = date;
+        history.date = new Date(date);
         history.percentage = 0;
         history.trend = 0;
       }
@@ -80,7 +80,7 @@ export class DataComponent implements OnInit, OnChanges {
     console.log(array);
     let total: Stats = new Stats();
     total.balance = 0;
-    total.date = date;
+    total.date = new Date(date);
     array.forEach((h: any) => {
       if (h && h.balance != undefined && h.balance) {
         total.balance = total.balance + h.balance;

@@ -29,7 +29,7 @@ export interface WalletInterface {
 }
 
 export interface StatsInterface {
-  date: string;
+  date: Date;
   balance: number;
   percentage: number;
   trend: number;
