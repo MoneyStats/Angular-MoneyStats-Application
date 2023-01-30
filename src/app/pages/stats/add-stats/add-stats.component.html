@@ -157,10 +157,13 @@
             <div class="form-group boxed hidden_desktop">
               <div class="input-wrapper">
                 <input
+                  name="date"
+                  [(ngModel)]="dateStats"
+                  #date="ngModel"
                   type="date"
                   class="form-control"
                   id="text4b"
-                  [value]="dateStats"
+                  required
                 />
                 <div
                   *ngIf="dateValidation"
