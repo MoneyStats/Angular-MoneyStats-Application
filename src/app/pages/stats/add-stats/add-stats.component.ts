@@ -75,6 +75,7 @@ export class AddStatsComponent implements OnInit {
       // Check Wallet Date if is before the current date to prevert the update of the data
 
       let stats: Stats = new Stats();
+      // Se data non presente o nuova data
       if (
         new Date(statsWalletDays[statsWalletDays.length - 1]) <
           new Date(this.dateStats) ||
@@ -96,6 +97,7 @@ export class AddStatsComponent implements OnInit {
         stats.percentage = wallet.performanceLastStats;
         stats.trend = wallet.differenceLastStats;
         wallet.history = [stats];
+        // Se data compresa tra ultimo e penultimo stats
       } else if (
         new Date(statsWalletDays[statsWalletDays.length - 1]) &&
         new Date(statsWalletDays[statsWalletDays.length - 2]) &&
