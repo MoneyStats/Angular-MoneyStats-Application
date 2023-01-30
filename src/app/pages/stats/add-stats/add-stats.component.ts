@@ -50,8 +50,9 @@ export class AddStatsComponent implements OnInit {
     // Previene inserimento di un anno non in dashboard wallet
     // TODO: Implementare call a DB
     if (
+      statsWalletDays.length &&
       parseInt(statsWalletDays[0].split('-')[0]) >
-      parseInt(this.dateStats.split('-')[0])
+        parseInt(this.dateStats.split('-')[0])
     ) {
       this.dateValidation = true;
       validate = true;
@@ -70,7 +71,6 @@ export class AddStatsComponent implements OnInit {
     let statsWalletDays = this.dashboardService.dashboard.statsWalletDays;
 
     this.walletsToSave.forEach((wallet) => {
-      console.log(wallet);
       wallet = this.setWalletHighAndLow(wallet);
       // Check Wallet Date if is before the current date to prevert the update of the data
 
@@ -219,7 +219,7 @@ export class AddStatsComponent implements OnInit {
     if (
       new Date(wallet.lowPriceDate).getFullYear() != currentDate.getFullYear()
     ) {
-      wallet.lowPrice = wallet.balance;
+      wallet.lowPrice = wallet.newBalance;
       wallet.lowPriceDate = currentDate;
     }
     return wallet;
