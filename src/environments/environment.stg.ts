@@ -1,9 +1,5 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
 const baseUrlApp: string = '../../';
-const host: string = 'http://192.168.1.30:8080';
-//const host: string = 'http://synologynas.ddns.net:8000';
+const host: string = 'http://synologynas.ddns.net:8000';
 
 export const environment = {
   production: false,
@@ -27,12 +23,3 @@ export const environment = {
   addStatsDataUrl: host + '/v1/app/add/stats',
   forgotPassword: false,
 };
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.

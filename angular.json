@@ -104,6 +104,20 @@
               ],
               "outputHashing": "all"
             },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.stg.ts"
+                }
+              ],
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            },
             "development": {
               "buildOptimizer": false,
               "optimization": false,
@@ -124,6 +138,9 @@
           "configurations": {
             "production": {
               "browserTarget": "angular-moneystats:build:production"
+            },
+            "staging": {
+              "browserTarget": "angular-moneystats:build:staging"
             },
             "development": {
               "browserTarget": "angular-moneystats:build:development"
