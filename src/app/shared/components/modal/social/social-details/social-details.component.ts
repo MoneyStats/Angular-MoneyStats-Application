@@ -46,6 +46,9 @@ export class SocialDetailsComponent implements OnInit {
 
   disconnectGithubAccount() {
     localStorage.removeItem(StorageConstant.GITHUBACCOUNT);
+    this.userService.user.github = new Github();
+    this.userService.user.githubUser = undefined;
+    this.userService.updateUserData(this.userService.user).subscribe();
   }
 
   updateGithubData() {
