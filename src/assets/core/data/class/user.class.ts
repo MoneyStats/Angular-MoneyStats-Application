@@ -13,6 +13,7 @@ export class User implements UserInterface {
   authToken: any;
   mockedUser?: boolean;
   github: Github = new Github();
+  githubUser?: string;
 }
 
 export class Github implements GithubInterface {
@@ -25,6 +26,13 @@ export class Github implements GithubInterface {
   followers?: number;
   following?: number;
   html_url?: string;
+}
+
+export class GithubIssues {
+  title?: string;
+  body?: string;
+  assignees?: string[];
+  labels?: string[];
 }
 
 export enum MockUser {

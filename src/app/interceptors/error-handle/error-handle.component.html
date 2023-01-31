@@ -39,7 +39,7 @@
 
     <div class="fixed-bar">
       <div class="row">
-        <div class="col-12 text-center">
+        <div class="col-6 text-center">
           <a
             href="#"
             (click)="goBack()"
@@ -47,8 +47,21 @@
             >Go Back</a
           >
         </div>
+        <div class="col-6 text-center">
+          <a
+            data-bs-toggle="modal"
+            attr.data-bs-target="#{{ modalConstant.REPORTBUG }}"
+            class="btn btn-lg btn-primary btn-block backBtn"
+            >Report Bug</a
+          >
+        </div>
       </div>
     </div>
   </div>
   <!-- * App Capsule -->
 </section>
+
+<app-report-bug
+  [modalId]="modalConstant.REPORTBUG"
+  [exception]="exception"
+></app-report-bug>

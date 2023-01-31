@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { Coin, CoinSymbol } from '../data/class/coin';
 import { ResponseModel } from '../data/class/generic.class';
-import { Github, MockUser, User } from '../data/class/user.class';
+import { Github, GithubIssues, MockUser, User } from '../data/class/user.class';
 import { StorageConstant } from '../data/constant/modal.constant';
 import { SwalService } from '../utils/swal.service';
 import { DashboardService } from './dashboard.service';
@@ -72,6 +72,11 @@ export class UserService {
       }, 100 * 10);
     } else {
       this.user!.profilePhoto = this.user.github.avatar_url!;
+      this.user.githubUser = JSON.stringify(this.user.github);
+      this.updateUserData(this.user).subscribe((res) => {
+        this.user = res.data;
+        this.user.github = JSON.parse(this.user.githubUser!);
+      });
     }
   }
 
@@ -107,5 +112,35 @@ export class UserService {
         headers: headers,
       });
     }
+  }
+
+  getTemplate(): Observable<any> {
+    return this.http.get<any>(environment.getTemplate);
+  }
+
+  openIssues(githubIssues: GithubIssues): Observable<ResponseModel> {
+    console.log(githubIssues);
+    const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    return this.http.post<ResponseModel>(
+      environment.openGithubIssues,
+      githubIssues,
+      {
+        headers: headers,
+      }
+    );
+  }
+
+  updateUserData(user: User): Observable<ResponseModel> {
+    const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      authToken: authToken!,
+    });
+    return this.http.post<ResponseModel>(environment.updateUserDataUrl, user, {
+      headers: headers,
+    });
   }
 }
