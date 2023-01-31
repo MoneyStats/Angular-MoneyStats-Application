@@ -31,12 +31,14 @@ export class LoginComponent implements OnInit {
   login() {
     const user = this.userService.login(this.username, this.password);
     user.subscribe((data) => {
-      console.log(data);
+      if (data.data.githubUser) {
+        data.data.github = JSON.parse(data.data.githubUser);
+      }
       this.user = data.data;
       this.userService.user = data.data;
       localStorage.setItem(
         StorageConstant.GITHUBACCOUNT,
-        JSON.stringify(data.data.github)
+        JSON.stringify(data.data.githubUser)
       );
       localStorage.setItem(
         StorageConstant.ACCESSTOKEN,
