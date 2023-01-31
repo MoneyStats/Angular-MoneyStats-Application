@@ -1,0 +1,3 @@
+{
+  "template": "<h1>Report Bug</h1> It was reported a bug by the application <br> <h2>Bug Details</h2>  <h4>Get all items</h4><code>$DATETIME$ | $URL$ </code> <br/> <br/> <table style='width:100%'><tr><th>Exception Code</th><th>Status</th><th>Description</th></tr> <tr><td>$EXCEPTION_CODE$</td><td>$STATUS$</td><td>$MESSAGE$</td></tr></table> <h4> Exception JSON</h4> <pre>$BODY$</pre> <h4>Message</h4> $DESCRIPTION$"
+}

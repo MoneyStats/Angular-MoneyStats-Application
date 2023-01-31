@@ -57,6 +57,7 @@ import { ForgotComponent } from './auth/forgot/forgot.component';
 import { AuthComponent } from './auth/auth.component';
 import { PagesComponent } from './pages/pages.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { ReportBugComponent } from './shared/components/modal/report-bug/report-bug.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     ForgotComponent,
     AuthComponent,
     PagesComponent,
+    ReportBugComponent,
   ],
   imports: [
     BrowserModule,

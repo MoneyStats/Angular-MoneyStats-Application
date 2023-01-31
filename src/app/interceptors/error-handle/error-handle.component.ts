@@ -3,6 +3,11 @@ import { UtilsException } from 'src/assets/core/data/class/error';
 import { ErrorService } from 'src/assets/core/interceptors/error.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { Location } from '@angular/common';
+import { SwalService } from 'src/assets/core/utils/swal.service';
+import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
+import { UserService } from 'src/assets/core/services/user.service';
+import { GithubIssues } from 'src/assets/core/data/class/user.class';
+import { ModalConstant } from 'src/assets/core/data/constant/modal.constant';
 
 @Component({
   selector: 'app-error-handle',
@@ -21,8 +26,12 @@ export class ErrorHandleComponent implements OnInit {
   constructor(
     public screenService: ScreenService,
     private errorService: ErrorService,
-    private location: Location
+    private location: Location,
   ) {}
+
+  public get modalConstant(): typeof ModalConstant {
+    return ModalConstant;
+  }
 
   ngOnInit(): void {
     //this.screenService.setupHeader();
@@ -33,4 +42,6 @@ export class ErrorHandleComponent implements OnInit {
   goBack() {
     this.location.back();
   }
+
+
 }

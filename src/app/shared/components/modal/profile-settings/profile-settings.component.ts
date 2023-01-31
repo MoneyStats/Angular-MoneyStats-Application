@@ -4,7 +4,9 @@ import {
   ModalConstant,
   ProfileSettings,
 } from 'src/assets/core/data/constant/modal.constant';
+import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { UserService } from 'src/assets/core/services/user.service';
+import { SwalService } from 'src/assets/core/utils/swal.service';
 
 @Component({
   selector: 'app-profile-settings',
@@ -22,7 +24,7 @@ export class ProfileSettingsComponent implements OnInit {
   repetePassword: string = '';
   warning: boolean = false;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private swal: SwalService) {}
 
   public get profileConstant(): typeof ProfileSettings {
     return ProfileSettings;
@@ -53,6 +55,13 @@ export class ProfileSettingsComponent implements OnInit {
         return;
       }
     }
+
+    this.userService.updateUserData(this.user!).subscribe((res) => {
+      this.userService.user! = res.data;
+      this.userService.setUserGlobally();
+      this.userService.setValue();
+      this.swal.toastMessage(SwalIcon.SUCCESS, res.message!);
+    });
     // DELETE PASSWORD
     this.user!.password = '';
 
@@ -68,16 +77,5 @@ export class ProfileSettingsComponent implements OnInit {
       this.newPassword = '';
       this.repetePassword = '';
     }, 100);
-  }
-
-  validate(): boolean {
-    let validate = false;
-    if (
-      this.oldPassword != '' &&
-      this.newPassword != '' &&
-      this.repetePassword != ''
-    )
-      validate = true;
-    return validate;
   }
 }

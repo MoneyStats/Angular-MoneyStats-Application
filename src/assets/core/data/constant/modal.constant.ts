@@ -11,6 +11,7 @@ export enum ModalConstant {
   LANGUAGES = 'languagesModal',
   ADDSTATS = 'addStatsPage',
   CATEGORY = 'categoryModal',
+  REPORTBUG = 'reportBugModal'
 }
 
 export enum StorageConstant {

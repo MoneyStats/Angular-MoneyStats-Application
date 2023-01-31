@@ -11,6 +11,7 @@ export const environment = {
   getDashboardDataUrlMock: baseUrlApp + 'assets/core/mock/dashboard.mock.json',
   getWalletDataUrl: baseUrlApp + 'assets/core/mock/wallets.mock.json',
   getResumeDataUrlMock: baseUrlApp + 'assets/core/mock/stats.mock.json',
+  getTemplate: baseUrlApp + 'assets/template/template.json',
 
   // Datas
   registerDataUrl: host + '/v1/auth/sign-up',
@@ -21,5 +22,7 @@ export const environment = {
   getDashboardDataUrl: host + '/v1/app/dashboard',
   getResumeDataUrl: host + '/v1/app/resume',
   addStatsDataUrl: host + '/v1/app/add/stats',
+  openGithubIssues: host + '/v1/app/report/bug',
+  updateUserDataUrl: host + '/v1/auth/update/user',
   forgotPassword: false,
 };

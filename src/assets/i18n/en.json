@@ -325,9 +325,15 @@
       "url": "URL"
     },
     "category": {
-      "title": "Category Avaiable",
+      "title": "Category Available",
       "close": "Close",
       "list": "List of all categories"
+    },
+    "reportBug": {
+      "title": "Report a Bug",
+      "subTitle": "Tell us more about the problem",
+      "text": "Write what you were doing before the error.",
+      "send": "Report"
     },
     "version": {
       "title": "MoneyStats Version",

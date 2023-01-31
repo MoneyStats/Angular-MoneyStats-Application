@@ -195,6 +195,7 @@
         <div class="row">
           <app-history
             *ngIf="wallets && wallets.length"
+            [coinSymbol]="dashboardService.coinSymbol!"
             [resume]="resume"
           ></app-history>
         </div>
