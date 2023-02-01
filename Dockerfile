@@ -3,7 +3,7 @@ WORKDIR '/app'
 COPY . .
 RUN npm install @angular/cli -g
 RUN npm install --force && \
-  npm run build --configuration=staging
+  npm run build --configuration=production
 FROM nginx:alpine
 COPY --from=builder /app/dist/* /usr/share/nginx/html/
 #COPY --from=builder /app/src/assets/ssl/* /etc/ssl/
