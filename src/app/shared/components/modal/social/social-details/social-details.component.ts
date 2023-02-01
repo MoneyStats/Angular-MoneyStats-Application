@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Github } from 'src/assets/core/data/class/user.class';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Github, User } from 'src/assets/core/data/class/user.class';
 import {
   ModalConstant,
   StorageConstant,
@@ -14,6 +14,7 @@ import { UserService } from 'src/assets/core/services/user.service';
 export class SocialDetailsComponent implements OnInit {
   @Input('username') username: string = '';
   @Input('modalId') modalId: string = '';
+  @Output('emitDisconnect') emitDisconnect = new EventEmitter<User>();
 
   @Input('github') github: Github = new Github();
   constructor(private userService: UserService) {}
@@ -50,7 +51,10 @@ export class SocialDetailsComponent implements OnInit {
       '../../../../assets/images/sample/avatar.png';
     this.userService.user.github = new Github();
     this.userService.user.githubUser = undefined;
-    this.userService.updateUserData(this.userService.user).subscribe();
+    this.userService.updateUserData(this.userService.user).subscribe((res) => {
+      this.userService.user = res.data;
+      this.emitDisconnect.emit(res.data);
+    });
   }
 
   updateGithubData() {

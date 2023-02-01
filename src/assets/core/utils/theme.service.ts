@@ -9,7 +9,7 @@ export class ThemeService {
   constructor() {}
 
   darkMode() {
-    localStorage.setItem('MoneyStatsDarkMode', '1');
+    //localStorage.setItem('MoneyStatsDarkMode', '1');
     darkMode();
   }
 
@@ -42,31 +42,35 @@ const MoneyStats = {
 var pageBody = document.querySelector('body');
 //-----------------------------------------------------------------------
 function darkMode() {
-  // Check if enable as default
-  if (MoneyStats.Dark_Mode.default) {
-    pageBody?.classList.add('dark-mode');
-  }
+  let darkModeStatus = localStorage.getItem('MoneyStatsDarkMode');
 
-  // Local Dark Mode
-  if (MoneyStats.Dark_Mode.local_mode.enable) {
-    var nightStart = MoneyStats.Dark_Mode.local_mode.start_time;
-    var nightEnd = MoneyStats.Dark_Mode.local_mode.end_time;
-    var currentDate = new Date();
-    var currentHour = currentDate.getHours();
-    if (currentHour >= nightStart || currentHour < nightEnd) {
-      // It is night time
+  if (darkModeStatus === '1') {
+    // Check if enable as default
+    if (MoneyStats.Dark_Mode.default) {
       pageBody?.classList.add('dark-mode');
     }
-  }
 
-  // Auto Detect Dark Mode
-  if (MoneyStats.Dark_Mode.auto_detect.enable)
-    if (
-      window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches
-    ) {
-      pageBody?.classList.add('dark-mode');
+    // Local Dark Mode
+    if (MoneyStats.Dark_Mode.local_mode.enable) {
+      var nightStart = MoneyStats.Dark_Mode.local_mode.start_time;
+      var nightEnd = MoneyStats.Dark_Mode.local_mode.end_time;
+      var currentDate = new Date();
+      var currentHour = currentDate.getHours();
+      if (currentHour >= nightStart || currentHour < nightEnd) {
+        // It is night time
+        pageBody?.classList.add('dark-mode');
+      }
     }
+
+    // Auto Detect Dark Mode
+    if (MoneyStats.Dark_Mode.auto_detect.enable)
+      if (
+        window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+      ) {
+        pageBody?.classList.add('dark-mode');
+      }
+  }
 }
 
 function switchDarkMode() {

@@ -48,6 +48,10 @@ export class SettingsComponent implements OnInit {
     }
   }
 
+  disconnect(user: User) {
+    this.user = user;
+  }
+
   openAccountSettings(profileConst: string) {
     this.profileConst = profileConst;
   }
