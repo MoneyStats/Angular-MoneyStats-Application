@@ -1,0 +1,17 @@
+/*.modal-content {
+  max-width: 1000px !important;
+  border-radius: 20px !important;
+  max-height: 550px !important;
+  height: max-content !important;
+  width: 95% !important;
+  margin-bottom: 5px;
+}*/
+
+.fileuploadInput,
+#fileUpload1 {
+  height: 150px;
+}
+
+::ng-deep.swal2-container {
+  z-index: 1000000;
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Cash"
+  },
+  {
+    "name": "Credit Card"
+  },
+  {
+    "name": "Debit Card"
+  },
+  {
+    "name": "Recurrence"
+  },
+  {
+    "name": "Bank Account"
+  },
+  {
+    "name": "Save"
+  },
+  {
+    "name": "Coupon"
+  },
+  {
+    "name": "Check"
+  },
+  {
+    "name": "Investments"
+  },
+  {
+    "name": "Other"
+  }
+]

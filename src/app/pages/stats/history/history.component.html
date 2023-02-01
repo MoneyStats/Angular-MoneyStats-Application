@@ -1,0 +1,126 @@
+<div class="row">
+  <app-content-box
+    *ngIf="!tableBalance || !tableBalance.length"
+    [header]="'dashboard.graph.nodata.header' | translate"
+    [body]="'dashboard.graph.nodata.body' | translate"
+    [footer]="'dashboard.graph.nodata.footer' | translate"
+  ></app-content-box>
+  <!-- App Capsule -->
+  <section *ngIf="tableBalance && tableBalance.length">
+    <div class="row">
+      <div class="section mt-2 col-xl-4 col-md-5">
+        <div class="section-title">{{ "stats.data.history" | translate }}</div>
+        <div class="card">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">{{ "stats.data.table_date" | translate }}</th>
+                  <th scope="col">
+                    {{ "stats.data.table_balance" | translate }}
+                  </th>
+                  <th scope="col" class="text-end">
+                    {{ "stats.data.table_performance" | translate }}
+                  </th>
+                  <th scope="col" class="text-end">
+                    {{ "stats.data.table_value" | translate }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                *ngFor="
+                  let balances of tableBalance.slice().reverse();
+                  let i = index
+                "
+              >
+                <tr
+                  class="topics"
+                  *ngFor="let balance of balances; let y = index"
+                >
+                  <th scope="row">
+                    {{ balances[balances.length - 1].date }}
+                  </th>
+
+                  <td
+                    class="{{
+                      balance.percentage === 0
+                        ? 'text-warning'
+                        : balance.percentage > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    }} {{ balance.index === y ? 'text-end' : '' }}"
+                  >
+                    {{ coinSymbol }} {{ balance.balance }}
+                  </td>
+                  <td
+                    class="{{
+                      balance.percentage === 0
+                        ? 'text-warning'
+                        : balance.percentage > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    }} text-end"
+                  >
+                    {{ balance.percentage }}%
+                  </td>
+                  <td
+                    class="{{
+                      balance.trend === 0
+                        ? 'text-warning'
+                        : balance.trend > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    }} text-end"
+                  >
+                    {{ coinSymbol }} {{ balance.trend }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Graph -->
+      <div class="section mt-4 col-xl-8 col-md-7">
+        <div class="section-heading">
+          <h2 class="title" id="year">
+            {{ "stats.data.graphHistory" | translate }}
+          </h2>
+        </div>
+        <app-content-box
+          *ngIf="!resume"
+          [header]="'dashboard.graph.nodata.header' | translate"
+          [body]="'dashboard.graph.nodata.body' | translate"
+          [footer]="'dashboard.graph.nodata.footer' | translate"
+        ></app-content-box>
+        <div *ngIf="resume" class="card">
+          <div class="card-body">
+            <canvas
+              baseChart
+              height="400"
+              [type]="'line'"
+              [data]="lineChartJS!.lineChartData"
+              [options]="lineChartJS!.lineChartOptions"
+              [legend]="lineChartJS!.lineChartLegend"
+            >
+            </canvas>
+            <!--<apx-chart
+          *ngIf="chartOptions"
+          [series]="chartOptions.series!"
+          [chart]="chartOptions.chart!"
+          [title]="chartOptions.title!"
+          [colors]="chartOptions.colors!"
+          [legend]="chartOptions.legend!"
+          [stroke]="chartOptions.stroke!"
+          [labels]="chartOptions.labels!"
+          type="area"
+        ></apx-chart>
+        <div id="chart-line"></div>-->
+          </div>
+        </div>
+      </div>
+      <!-- * Graph -->
+    </div>
+  </section>
+</div>

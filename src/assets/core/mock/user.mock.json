@@ -1,0 +1,22 @@
+{
+  "status": 200,
+  "message": "Login Successfully! Welcome back moneystats!",
+  "correlationId": "93b2a30d-732b-43c3-8cf5-d42e53131787",
+  "data": {
+    "id": 1,
+    "creationDate": "2023-01-17T19:33:14",
+    "updateDate": "2023-01-17T19:33:14",
+    "name": "Name",
+    "surname": "Surname",
+    "email": "gio.lamarmora@gmail.com",
+    "username": "giovannilamarmora",
+    "role": "ADMIN",
+    "profilePhoto": "../../../../assets/images/img/sample/avatar/avatar1.jpg",
+    "currency": "EUR",
+    "mockedUser": true,
+    "authToken": {
+      "expirationTime": 3600000,
+      "accessToken": "mockAccessToken"
+    }
+  }
+}

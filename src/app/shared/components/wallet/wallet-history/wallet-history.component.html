@@ -1,0 +1,48 @@
+<ul
+  class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1"
+>
+  <!-- item -->
+  <li>
+    <a class="item">
+      <div
+        class="icon-box {{
+          stats?.percentage === 0
+            ? 'bg-warning'
+            : stats!.percentage > 0
+            ? 'bg-success'
+            : 'bg-danger'
+        }}"
+      >
+        <ion-icon
+          name="{{
+            stats?.percentage! > 0 ? 'arrow-up-outline' : 'arrow-down-outline'
+          }}"
+        ></ion-icon>
+      </div>
+      <div class="in">
+        <div>
+          <strong>{{ coinSymbol }} {{ stats?.balance }}</strong>
+          <div class="text-small text-secondary">
+            Order #{{ stats?.id }} of
+            {{ stats?.date | date : "d MMM y" }}
+          </div>
+        </div>
+        <div class="text-end">
+          <strong
+            class="{{
+              stats?.percentage === 0
+                ? 'text-warning'
+                : stats!.percentage > 0
+                ? 'text-success'
+                : 'text-danger'
+            }}"
+            >{{ stats?.percentage }} %</strong
+          >
+          <div class="text-small">
+            {{ stats?.date | date : "d MMM y" }}
+          </div>
+        </div>
+      </div>
+    </a>
+  </li>
+</ul>

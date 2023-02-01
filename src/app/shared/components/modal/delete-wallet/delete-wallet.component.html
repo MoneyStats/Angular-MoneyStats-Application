@@ -1,0 +1,82 @@
+<!-- Alert Error Action Sheet -->
+<div
+  class="modal fade action-sheet"
+  id="{{ modalId }}"
+  tabindex="-1"
+  role="dialog"
+  data-bs-focus="false"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal-round mx-auto">
+      <div class="modal-body">
+        <div class="action-sheet-content">
+          <div
+            *ngIf="modalId != modalConstant.RESTOREWALLET"
+            class="iconbox text-danger"
+          >
+            <ion-icon name="alert-circle"></ion-icon>
+          </div>
+          <div
+            *ngIf="modalId === modalConstant.RESTOREWALLET"
+            class="iconbox text-success"
+          >
+            <ion-icon name="checkmark-circle"></ion-icon>
+          </div>
+          <div
+            *ngIf="modalId != modalConstant.RESTOREWALLET"
+            class="text-center p-2"
+          >
+            <h3 *ngIf="!wallet?.deletedDate">
+              {{ "wallet.details.modal.delete.title" | translate }}
+            </h3>
+            <h3 *ngIf="wallet?.deletedDate">
+              {{ "wallet.details.modal.permanent.title" | translate }}
+            </h3>
+            <p *ngIf="!wallet?.deletedDate">
+              {{ "wallet.details.modal.delete.text" | translate }}
+            </p>
+            <p *ngIf="wallet?.deletedDate">
+              {{ "wallet.details.modal.permanent.text" | translate }}
+            </p>
+          </div>
+          <div
+            *ngIf="modalId === modalConstant.RESTOREWALLET"
+            class="text-center p-2"
+          >
+            <h3>{{ "wallet.details.modal.restore.title" | translate }}</h3>
+            <p>{{ "wallet.details.modal.restore.text" | translate }}</p>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <a
+                href="#"
+                class="btn btn-primary btn-lg btn-block"
+                data-bs-dismiss="modal"
+                >{{ "wallet.details.modal.back" | translate }}</a
+              >
+            </div>
+            <div *ngIf="modalId != modalConstant.RESTOREWALLET" class="col-6">
+              <a
+                (click)="deleteWallet(wallet!)"
+                href="#"
+                class="btn btn-danger btn-lg btn-block"
+                data-bs-dismiss="modal"
+                >{{ "wallet.details.modal.confirm" | translate }}</a
+              >
+            </div>
+            <div *ngIf="modalId === modalConstant.RESTOREWALLET" class="col-6">
+              <a
+                (click)="restoreWallet(wallet!)"
+                href="#"
+                class="btn btn-primary btn-lg btn-block"
+                data-bs-dismiss="modal"
+                >{{ "wallet.details.modal.restoreBtn" | translate }}</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- * Alert Error Action Sheet -->

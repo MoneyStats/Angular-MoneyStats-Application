@@ -1,0 +1,16 @@
+<li class="splide__slide">
+  <div class="bill-box">
+    <div class="img-wrapper">
+      <img src="{{ wallet?.img }}" alt="img" class="image-block imaged w48" />
+    </div>
+    <div class="price">{{ wallet?.name }}</div>
+    <p>{{ wallet?.category }}</p>
+    <a
+      href="#"
+      [routerLink]="['wallet/details', wallet?.name]"
+      (click)="walletDetails()"
+      class="btn btn-primary btn-block btn-sm"
+      >{{ btn }}</a
+    >
+  </div>
+</li>

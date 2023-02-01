@@ -1,0 +1,221 @@
+<div class="mt-2">
+  <div class="section-title">{{ "stats.data.wallet" | translate }}</div>
+  <div class="transactions row">
+    <div class="col-xl-3 col-sm-6" *ngFor="let wallet of dashboard.wallets">
+      <div class="card card-stats mb-4 mb-xl-0">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h5 class="card-title text-uppercase text-muted mb-0">
+                {{ wallet.name }} ({{ wallet.category }})
+              </h5>
+              <span class="h2 font-weight-bold mb-0" id="tot1"
+                >€ {{ wallet.balance }}</span
+              >
+            </div>
+            <div class="col-auto">
+              <img
+                src="{{ wallet?.img }}"
+                alt="img"
+                class="image-block imaged w48 round-img"
+              />
+            </div>
+          </div>
+          <p class="mt-3 mb-0 text-muted text-sm">
+            <span class="performancesingle0 float-end"
+              ><span
+                *ngIf="!wallet.deletedDate"
+                class="{{
+                  wallet.performanceLastStats > 0
+                    ? 'text-success'
+                    : 'text-danger'
+                }} mr-2"
+                ><i
+                  class="fa {{
+                    wallet.performanceLastStats > 0
+                      ? 'fa-arrow-up'
+                      : 'fa-arrow-down'
+                  }}"
+                ></i>
+                {{ wallet.performanceLastStats }}%</span
+              >
+              <span
+                *ngIf="wallet.deletedDate"
+                class="badge badge-danger"
+                style="width: 70px"
+                >{{ "stats.data.deleted" | translate }}</span
+              ></span
+            >
+            <span class="text-nowrap sincetot"
+              >{{ "stats.since" | translate }}
+              {{ wallet.dateLastStats | date : "dd MMM y" }}</span
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <!-- Graph -->
+  <div class="section mt-4 col-xl-6">
+    <div class="section-heading">
+      <h2 class="title" id="year">
+        {{ "stats.data.graph1" | translate }}
+      </h2>
+    </div>
+    <app-content-box
+      *ngIf="!dashboard.statsWalletDays || !dashboard.statsWalletDays.length"
+      [header]="'dashboard.graph.nodata.header' | translate"
+      [body]="'dashboard.graph.nodata.body' | translate"
+      [footer]="'dashboard.graph.nodata.footer' | translate"
+    ></app-content-box>
+    <div *ngIf="dashboard.statsWalletDays" class="card">
+      <div class="card-body">
+        <apx-chart
+          *ngIf="chartOptions"
+          [series]="chartOptions.series!"
+          [chart]="chartOptions.chart!"
+          [title]="chartOptions.title!"
+          [colors]="chartOptions.colors!"
+          [legend]="chartOptions.legend!"
+          [stroke]="chartOptions.stroke!"
+          [labels]="chartOptions.labels!"
+          type="area"
+        ></apx-chart>
+        <!--<div id="chart-line"></div>-->
+      </div>
+    </div>
+  </div>
+  <!-- * Graph -->
+
+  <!-- Graph -->
+  <div class="section mt-4 col-xl-6">
+    <div class="section-heading">
+      <h2 class="title" id="year">{{ "stats.data.graph2" | translate }}</h2>
+    </div>
+    <app-content-box
+      *ngIf="!dashboard.statsWalletDays || !dashboard.statsWalletDays.length"
+      [header]="'dashboard.graph.nodata.header' | translate"
+      [body]="'dashboard.graph.nodata.body' | translate"
+      [footer]="'dashboard.graph.nodata.footer' | translate"
+    ></app-content-box>
+    <div *ngIf="dashboard.statsWalletDays" class="card">
+      <div class="card-body">
+        <apx-chart
+          *ngIf="chartPie"
+          [series]="chartPie.series!"
+          [chart]="chartPie.chart!"
+          [labels]="chartPie.labels!"
+          type="pie"
+        ></apx-chart>
+        <!--<div id="chart-line"></div>-->
+      </div>
+    </div>
+  </div>
+  <!-- * Graph -->
+
+  <!-- App Capsule -->
+  <div class="section mt-2 col-xl-12">
+    <div class="section-title">{{ "stats.data.table" | translate }}</div>
+    <app-content-box
+      *ngIf="!dashboard.statsWalletDays || !dashboard.statsWalletDays.length"
+      [header]="'dashboard.graph.nodata.header' | translate"
+      [body]="'dashboard.graph.nodata.body' | translate"
+      [footer]="'dashboard.graph.nodata.footer' | translate"
+    ></app-content-box>
+    <div *ngIf="dashboard.statsWalletDays" class="card">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">{{ "stats.data.table_date" | translate }}</th>
+              <th
+                scope="col"
+                class="text-center"
+                *ngFor="let wallet of dashboard.wallets"
+              >
+                {{ wallet.name }}
+              </th>
+              <th scope="col" class="text-end">
+                {{ "stats.data.table_balance" | translate }}
+              </th>
+              <th scope="col" class="text-end">
+                {{ "stats.data.table_trend" | translate }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let balances of tableBalance; let i = index">
+              <th scope="row">
+                {{ balances[balances.length - 2].date | date : "d MMM y" }}
+              </th>
+              <td
+                class="{{
+                  balances.index != y
+                    ? balance.percentage === 0
+                      ? 'text-warning'
+                      : balance.percentage > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                    : ''
+                }} {{
+                  balances.index - 1 === y || balances.index === y
+                    ? 'text-end'
+                    : 'text-center'
+                }}
+                {{
+                  balances.index === y
+                    ? balance.balance === 0
+                      ? 'text-warning'
+                      : balance.balance > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                    : ''
+                }}"
+                *ngFor="let balance of balances; let y = index"
+              >
+                {{ coinSymbol }} {{ balance.balance }}
+                <span *ngIf="balances.index != y"
+                  >({{ balance.percentage }}%)</span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Graph -->
+  <div class="section mt-4 col-xl-12">
+    <div class="section-heading">
+      <h2 class="title" id="year">
+        {{ "stats.data.graph3" | translate }}
+      </h2>
+    </div>
+    <app-content-box
+      *ngIf="!dashboard.statsWalletDays || !dashboard.statsWalletDays.length"
+      [header]="'dashboard.graph.nodata.header' | translate"
+      [body]="'dashboard.graph.nodata.body' | translate"
+      [footer]="'dashboard.graph.nodata.footer' | translate"
+    ></app-content-box>
+    <div *ngIf="dashboard.statsWalletDays" class="card">
+      <div class="card-body">
+        <apx-chart
+          *ngIf="chartBar"
+          [series]="chartBar.series!"
+          [chart]="chartBar.chart!"
+          [title]="chartBar.title!"
+          [colors]="chartBar.colors!"
+          [legend]="chartBar.legend!"
+          [stroke]="chartBar.stroke!"
+          [labels]="chartBar.labels!"
+          type="bar"
+        ></apx-chart>
+        <!--<div id="chart-line"></div>-->
+      </div>
+    </div>
+  </div>
+  <!-- * Graph -->
+</div>

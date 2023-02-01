@@ -1,0 +1,47 @@
+.title {
+  font-size: 24px !important;
+}
+
+@media screen and (max-width: 780px) {
+  .gradientSection {
+    margin-bottom: 40px;
+    background-position: center center;
+    background-size: cover;
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
+    margin-right: -7px;
+  }
+  .w100 {
+    width: 100%;
+  }
+  .section {
+    margin-right: -7px;
+  }
+  .editWallet {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 780px) {
+  .gradientSection {
+    margin-top: 20px;
+    margin-left: 10px;
+  }
+}
+
+.gradientSection {
+  border-radius: 20px;
+}
+
+.w50 {
+  width: 100px;
+  border-radius: 20px;
+}
+
+.row {
+  margin-right: 0px;
+}
+
+.editWallet {
+  margin-top: 65px;
+  padding-right: 20px;
+}
