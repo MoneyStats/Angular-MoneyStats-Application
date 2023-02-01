@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UtilsException } from 'src/assets/core/data/class/error';
 import { GithubIssues } from 'src/assets/core/data/class/user.class';
-import { ModalConstant } from 'src/assets/core/data/constant/modal.constant';
+import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { UserService } from 'src/assets/core/services/user.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';

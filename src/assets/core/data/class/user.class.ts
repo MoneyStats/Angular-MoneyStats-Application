@@ -3,7 +3,7 @@ import { GithubInterface, UserInterface } from '../interfaces/user.interface';
 import { environment } from 'src/environments/environment';
 export class User implements UserInterface {
   name: string = 'DEFAULT_NAME';
-  surname: string = 'Surname';
+  surname: string = 'DEFAULT_SURNAME';
   email: string = 'email@email.com';
   username: string = 'username';
   password: string = '';

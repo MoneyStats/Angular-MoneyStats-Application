@@ -1,11 +1,6 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { User } from 'src/assets/core/data/class/user.class';
-import {
-  LanguagesSettings,
-  StorageConstant,
-} from 'src/assets/core/data/constant/modal.constant';
-import { UserService } from 'src/assets/core/services/user.service';
+import { LanguagesSettings } from 'src/assets/core/data/constant/constant';
 import { ThemeService } from 'src/assets/core/utils/theme.service';
 
 @Component({

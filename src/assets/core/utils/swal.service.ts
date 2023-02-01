@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import Swal, { SweetAlertResult } from 'sweetalert2';
-import {
-  ModalConstant,
-  StorageConstant,
-} from '../data/constant/modal.constant';
+import { ModalConstant, StorageConstant } from '../data/constant/constant';
 import { SwalIcon } from '../data/constant/swal.icon';
 import { UserService } from '../services/user.service';
 

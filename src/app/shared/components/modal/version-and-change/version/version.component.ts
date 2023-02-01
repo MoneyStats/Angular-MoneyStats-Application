@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalConstant } from 'src/assets/core/data/constant/modal.constant';
+import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { environment } from 'src/environments/environment';
 
 @Component({

@@ -3,7 +3,7 @@ import { User } from 'src/assets/core/data/class/user.class';
 import {
   ModalConstant,
   ProfileSettings,
-} from 'src/assets/core/data/constant/modal.constant';
+} from 'src/assets/core/data/constant/constant';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { UserService } from 'src/assets/core/services/user.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';

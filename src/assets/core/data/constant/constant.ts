@@ -11,12 +11,13 @@ export enum ModalConstant {
   LANGUAGES = 'languagesModal',
   ADDSTATS = 'addStatsPage',
   CATEGORY = 'categoryModal',
-  REPORTBUG = 'reportBugModal'
+  REPORTBUG = 'reportBugModal',
 }
 
 export enum StorageConstant {
   GITHUBACCOUNT = 'github_account',
   ACCESSTOKEN = 'accessToken',
+  USERACCOUNT = 'userAccount',
 }
 
 export enum ProfileSettings {

@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Coin, CoinSymbol } from 'src/assets/core/data/class/coin';
 import { Dashboard } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
-import { ModalConstant } from 'src/assets/core/data/constant/modal.constant';
+import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { UserService } from 'src/assets/core/services/user.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
 

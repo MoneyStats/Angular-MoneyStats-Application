@@ -6,7 +6,7 @@ import { CoinSymbol } from '../data/class/coin';
 import { Dashboard, Stats, Wallet } from '../data/class/dashboard.class';
 import { ResponseModel } from '../data/class/generic.class';
 import { User } from '../data/class/user.class';
-import { StorageConstant } from '../data/constant/modal.constant';
+import { StorageConstant } from '../data/constant/constant';
 import { UserService } from './user.service';
 
 @Injectable({

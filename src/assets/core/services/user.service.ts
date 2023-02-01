@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import { Coin, CoinSymbol } from '../data/class/coin';
 import { ResponseModel } from '../data/class/generic.class';
 import { Github, GithubIssues, MockUser, User } from '../data/class/user.class';
-import { StorageConstant } from '../data/constant/modal.constant';
+import { StorageConstant } from '../data/constant/constant';
 import { SwalService } from '../utils/swal.service';
 import { DashboardService } from './dashboard.service';
 import { StatsService } from './stats.service';
@@ -119,8 +119,6 @@ export class UserService {
   }
 
   openIssues(githubIssues: GithubIssues): Observable<ResponseModel> {
-    console.log(githubIssues);
-    const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });

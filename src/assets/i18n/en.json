@@ -292,6 +292,7 @@
       "debits": "Debits",
       "saving": "Saving",
       "history": "History",
+      "deleted": "Deleted",
       "graphHistory": "Graph History Performance"
     }
   },
@@ -310,6 +311,7 @@
       "title": "Connect Social Account",
       "close": "Close",
       "select": "Please Select an account to Sync",
+      "connect": "Connected",
       "github": "Github"
     },
     "socialDetails": {
