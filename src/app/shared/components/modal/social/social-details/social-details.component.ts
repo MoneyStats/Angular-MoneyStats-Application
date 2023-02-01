@@ -3,7 +3,7 @@ import { Github } from 'src/assets/core/data/class/user.class';
 import {
   ModalConstant,
   StorageConstant,
-} from 'src/assets/core/data/constant/modal.constant';
+} from 'src/assets/core/data/constant/constant';
 import { UserService } from 'src/assets/core/services/user.service';
 
 @Component({
@@ -46,6 +46,8 @@ export class SocialDetailsComponent implements OnInit {
 
   disconnectGithubAccount() {
     localStorage.removeItem(StorageConstant.GITHUBACCOUNT);
+    this.userService.user.profilePhoto =
+      '../../../../assets/images/sample/avatar.png';
     this.userService.user.github = new Github();
     this.userService.user.githubUser = undefined;
     this.userService.updateUserData(this.userService.user).subscribe();

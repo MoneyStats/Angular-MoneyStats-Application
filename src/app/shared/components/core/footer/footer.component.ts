@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalConstant } from 'src/assets/core/data/constant/modal.constant';
+import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
 import { AvailableSoonComponent } from '../../modal/available-soon/available-soon.component';

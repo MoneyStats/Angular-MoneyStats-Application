@@ -3,7 +3,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
-import { ModalConstant } from 'src/assets/core/data/constant/modal.constant';
+import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { UserService } from 'src/assets/core/services/user.service';
 import { WalletService } from 'src/assets/core/services/wallet.service';

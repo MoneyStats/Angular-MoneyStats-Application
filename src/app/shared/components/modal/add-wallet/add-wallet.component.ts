@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Category, Wallet } from 'src/assets/core/data/class/dashboard.class';
-import { ModalConstant } from 'src/assets/core/data/constant/modal.constant';
+import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { WalletService } from 'src/assets/core/services/wallet.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';

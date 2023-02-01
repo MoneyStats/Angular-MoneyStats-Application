@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { Injectable, Output, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
@@ -7,8 +7,7 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { UserService } from 'src/assets/core/services/user.service';
-import { StorageConstant } from 'src/assets/core/data/constant/modal.constant';
-import { User } from 'src/assets/core/data/class/user.class';
+import { StorageConstant } from 'src/assets/core/data/constant/constant';
 
 @Injectable({
   providedIn: 'root',
@@ -36,9 +35,17 @@ export class RouteGuardService implements CanActivate {
   isUserLoggedIn(accessToken: string) {
     this.authService.checkLogin(accessToken).subscribe({
       next: (resp) => {
+        if (resp.data.githubUser) {
+          resp.data.github = JSON.parse(resp.data.githubUser);
+        }
         this.authService.user = resp.data;
         this.authService.setUserGlobally();
         this.authService.setValue();
+        localStorage.setItem(
+          StorageConstant.USERACCOUNT,
+          JSON.stringify(resp.data)
+        );
+        this.router.navigate(['']);
       },
       error: (error) => {
         this.router.navigate(['auth/login']);

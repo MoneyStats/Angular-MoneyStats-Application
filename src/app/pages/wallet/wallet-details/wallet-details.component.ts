@@ -5,7 +5,7 @@ import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { ChartService } from 'src/assets/core/utils/chart.service';
 import { WalletService } from 'src/assets/core/services/wallet.service';
-import { ModalConstant } from 'src/assets/core/data/constant/modal.constant';
+import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 
 @Component({
@@ -61,7 +61,8 @@ export class WalletDetailsComponent implements OnInit {
 
   graph1Y() {
     let lastYear = this.wallet?.history.filter(
-      (h) => h.date.toString().split('-')[0] === new Date().getFullYear().toString()
+      (h) =>
+        h.date.toString().split('-')[0] === new Date().getFullYear().toString()
     );
     setTimeout(() => {
       this.chart1Y = this.charts.renderChartWallet(

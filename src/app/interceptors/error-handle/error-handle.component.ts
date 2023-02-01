@@ -7,7 +7,7 @@ import { SwalService } from 'src/assets/core/utils/swal.service';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { UserService } from 'src/assets/core/services/user.service';
 import { GithubIssues } from 'src/assets/core/data/class/user.class';
-import { ModalConstant } from 'src/assets/core/data/constant/modal.constant';
+import { ModalConstant } from 'src/assets/core/data/constant/constant';
 
 @Component({
   selector: 'app-error-handle',
@@ -26,7 +26,7 @@ export class ErrorHandleComponent implements OnInit {
   constructor(
     public screenService: ScreenService,
     private errorService: ErrorService,
-    private location: Location,
+    private location: Location
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -42,6 +42,4 @@ export class ErrorHandleComponent implements OnInit {
   goBack() {
     this.location.back();
   }
-
-
 }

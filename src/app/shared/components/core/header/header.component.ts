@@ -1,12 +1,21 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Dashboard } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
-import { ModalConstant } from 'src/assets/core/data/constant/modal.constant';
+import {
+  ModalConstant,
+  StorageConstant,
+} from 'src/assets/core/data/constant/constant';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { UserService } from 'src/assets/core/services/user.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
-import { AvailableSoonComponent } from '../../modal/available-soon/available-soon.component';
 
 @Component({
   selector: 'app-header',
@@ -27,7 +36,14 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.user = this.userService.user;
+    if (this.user?.name === 'DEFAULT_NAME') {
+      this.user = this.userService.user;
+    }
+    if (this.user?.name === 'DEFAULT_NAME') {
+      this.user = JSON.parse(
+        localStorage.getItem(StorageConstant.USERACCOUNT)!
+      );
+    }
   }
 
   updateData(): void {

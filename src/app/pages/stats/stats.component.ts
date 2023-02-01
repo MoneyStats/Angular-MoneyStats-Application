@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
-import { ModalConstant } from 'src/assets/core/data/constant/modal.constant';
+import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { StatsService } from 'src/assets/core/services/stats.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';

@@ -24,6 +24,7 @@
           <p class="mt-3 mb-0 text-muted text-sm">
             <span class="performancesingle0 float-end"
               ><span
+                *ngIf="!wallet.deletedDate"
                 class="{{
                   wallet.performanceLastStats > 0
                     ? 'text-success'
@@ -37,6 +38,12 @@
                   }}"
                 ></i>
                 {{ wallet.performanceLastStats }}%</span
+              >
+              <span
+                *ngIf="wallet.deletedDate"
+                class="badge badge-danger"
+                style="width: 70px"
+                >{{ "stats.data.deleted" | translate }}</span
               ></span
             >
             <span class="text-nowrap sincetot"

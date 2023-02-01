@@ -2,7 +2,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { Location } from '@angular/common';
 import { UserService } from 'src/assets/core/services/user.service';
 import { User } from 'src/assets/core/data/class/user.class';
-import { StorageConstant } from 'src/assets/core/data/constant/modal.constant';
+import { StorageConstant } from 'src/assets/core/data/constant/constant';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
