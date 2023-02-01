@@ -1,0 +1,11 @@
+@media screen and (max-width: 780px) {
+  .badge {
+    width: 150px;
+  }
+}
+
+@media screen and (min-width: 780px) {
+  .badge {
+    width: 100px;
+  }
+}

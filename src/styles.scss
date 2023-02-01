@@ -61,3 +61,7 @@ span {
   width: 95% !important;
   margin-bottom: 5px;
 }
+
+body:not(.dark-mode) {
+  background-color: #EDEDF5 !important;
+}

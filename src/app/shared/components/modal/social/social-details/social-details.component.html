@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf="github || github != undefined">
+                        <div *ngIf="github?.avatar_url">
                             <div class="listview-title mt-1">{{"modal.socialDetails.details" |
                                 translate}}</div>
                             <ul class="listview image-listview text mb-2 inset">
@@ -89,13 +89,13 @@
                             </ul>
                         </div>
                         <div class="card-footer">
-                            <div *ngIf="!github || github === undefined" class="form-group basic">
+                            <div *ngIf="!github?.avatar_url" class="form-group basic">
                                 <button (click)="syncGithubAccount()" type="button"
                                     class="btn btn-primary btn-block btn-lg" data-bs-dismiss="modal">
                                     {{ "modal.socialDetails.connect" | translate }}
                                 </button>
                             </div>
-                            <div *ngIf="github || github != undefined" class="form-group basic">
+                            <div *ngIf="github?.avatar_url" class="form-group basic">
                                 <button (click)="disconnectGithubAccount()" type="button"
                                     class="btn btn-primary btn-block btn-lg" data-bs-dismiss="modal">
                                     {{ "modal.socialDetails.disconnect" | translate }}

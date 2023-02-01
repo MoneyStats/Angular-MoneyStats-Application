@@ -192,6 +192,7 @@
 </section>
 
 <app-social-list
+  (emitDisconnectSocial)="disconnect($event)"
   [modalId]="modalConstant.ACCOUNTLIST"
   [user]="user"
 ></app-social-list>

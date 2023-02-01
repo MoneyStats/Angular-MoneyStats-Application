@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Github, User } from 'src/assets/core/data/class/user.class';
 import {
   ModalConstant,
@@ -14,6 +14,8 @@ import { UserService } from 'src/assets/core/services/user.service';
 export class SocialListComponent implements OnInit {
   @Input('modalId') modalId: string = '';
   @Input('user') user?: User;
+  @Output('emitDisconnectSocial') emitDisconnectSocial =
+    new EventEmitter<User>();
 
   constructor(private userService: UserService) {}
 
@@ -25,5 +27,9 @@ export class SocialListComponent implements OnInit {
     if (this.user === undefined) {
       this.user = this.userService.user;
     }
+  }
+
+  disconnect(user: User) {
+    this.emitDisconnectSocial.emit(user);
   }
 }
