@@ -55,7 +55,9 @@ export class HistoryComponent implements OnInit {
         this.balances[this.balances.length - 1]) *
       100
     ).toFixed(2);
-    let trend = total.balance - this.balances[this.balances.length - 1];
+    let trend = parseFloat(
+      (total.balance - this.balances[this.balances.length - 1]).toFixed(2)
+    );
     total.percentage = parseFloat(percentage);
     total.trend = trend;
     array.push(total);

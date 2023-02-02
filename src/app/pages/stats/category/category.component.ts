@@ -156,14 +156,16 @@ export class CategoryComponent implements OnInit, OnChanges {
     total.balance = 0;
     total.date = date;
     history.forEach((h: any) => {
-      total.balance = total.balance + h.balance;
+      total.balance = parseFloat((total.balance + h.balance).toFixed(2));
     });
     let percentage = (
       ((total.balance - this.balances[this.balances.length - 1]) /
         this.balances[this.balances.length - 1]) *
       100
     ).toFixed(2);
-    let trend = total.balance - this.balances[this.balances.length - 1];
+    let trend = parseFloat(
+      (total.balance - this.balances[this.balances.length - 1]).toFixed(2)
+    );
     total.percentage = parseFloat(percentage);
     total.trend = trend;
     array.push(total);

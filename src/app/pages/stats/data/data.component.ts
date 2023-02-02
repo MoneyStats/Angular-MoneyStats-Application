@@ -83,7 +83,7 @@ export class DataComponent implements OnInit, OnChanges {
     total.date = new Date(date);
     array.forEach((h: any) => {
       if (h && h.balance != undefined && h.balance) {
-        total.balance = total.balance + h.balance;
+        total.balance = parseFloat((total.balance + h.balance).toFixed(2));
       }
     });
     let percentage = (
