@@ -1,5 +1,5 @@
 const baseUrlApp: string = '../../';
-const host: string = 'http://synologynas.ddns.net:8000';
+const host: string = 'http://synologynas.ddns.net:8800';
 
 export const environment = {
   production: true,
