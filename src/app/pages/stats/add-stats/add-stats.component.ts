@@ -90,7 +90,7 @@ export class AddStatsComponent implements OnInit {
         wallet.differenceLastStats = wallet.newBalance - wallet.balance;
 
         wallet.dateLastStats = new Date(this.dateStats);
-        wallet.balance = wallet.newBalance;
+        wallet.balance = parseFloat(wallet.newBalance.toFixed(2));
 
         stats.balance = wallet.balance;
         stats.date = new Date(this.dateStats);
@@ -117,7 +117,9 @@ export class AddStatsComponent implements OnInit {
         ).toFixed(2);
 
         statsToUpdate.percentage = parseFloat(percentage);
-        statsToUpdate.trend = wallet.balance - wallet.newBalance;
+        statsToUpdate.trend = parseFloat(
+          (wallet.balance - wallet.newBalance).toFixed(2)
+        );
 
         let oldStats: any = wallet.history.find(
           (w) =>
@@ -161,7 +163,6 @@ export class AddStatsComponent implements OnInit {
           );
         }
 
-        console.log(oldStats, indexDate, statsWalletDays);
         let percentage = (
           ((newStats.balance - wallet.newBalance) / wallet.newBalance) *
           100
