@@ -3,10 +3,12 @@
     <img src="{{ wallet?.img }}" alt="img" class="image-block imaged w48" />
   </div>
   <div class="price">
-    {{ wallet?.name }} <br />
-    {{ coinSymbol }} {{ wallet?.balance }}
+    {{ wallet?.name }}
   </div>
-  <p>{{ wallet?.category }}</p>
+  <mark *ngIf="!wallet?.deletedDate"
+    >{{ coinSymbol }} {{ wallet?.balance }}</mark
+  >
+  <p class="pt-1">{{ wallet?.category }}</p>
 
   <a
     href="#"
