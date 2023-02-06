@@ -78,6 +78,7 @@
                         ? categoriesInput
                         : categories
                     "
+                    [selected]="category.name === wallet.category"
                     value="{{ category.name }}"
                   >
                     {{ category.name }}
@@ -156,7 +157,7 @@
                 >{{ "wallet.modal.editWallet.default" | translate }}</label
               >
             </div>
-
+            <hr />
             <div class="form-group basic">
               <button
                 (click)="addUpdateWallet()"

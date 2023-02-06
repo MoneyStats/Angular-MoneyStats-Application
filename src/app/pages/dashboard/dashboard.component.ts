@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, Output } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
@@ -24,10 +25,13 @@ export class DashboardComponent implements OnInit {
     this.dashboard.performance + ' %';
   @Output('performanceSince') performanceSince: string =
     this.dashboard.performanceSince.toString();
+  @Output('performanceLastDate') performanceLastDate: string =
+    this.dashboard.performanceLastDate.toString();
   @Output('lastStatsPerformance') lastStatsPerformance: string =
     this.dashboard.lastStatsPerformance + ' %';
   @Output('lastStatsPerformance') lastStatsBalanceDifference: string =
     this.dashboard.lastStatsBalanceDifference.toString();
+  @Output('graphTitle') graphTitle: string = '';
   public chartOptions?: Partial<ApexOptions>;
 
   constructor(
@@ -38,7 +42,8 @@ export class DashboardComponent implements OnInit {
     private charts: ChartService,
     private toast: ToastService,
     public screenService: ScreenService,
-    private walletService: WalletService
+    private walletService: WalletService,
+    private translate: TranslateService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -55,7 +60,6 @@ export class DashboardComponent implements OnInit {
         this.dashboard = data.data;
       }
       this.dashboardService.dashboard = this.dashboard;
-      console.log(this.dashboard.performance);
       this.performance = this.dashboard.performance + ' %';
       let date = this.datePipe
         .transform(this.dashboard.performanceSince, 'dd MMM y')
@@ -64,6 +68,22 @@ export class DashboardComponent implements OnInit {
         this.dashboard.performanceSince != null
           ? date!
           : this.datePipe.transform(new Date(), 'dd MMM y')!;
+      let datelastStats = this.datePipe
+        .transform(this.dashboard.performanceLastDate, 'dd MMM y')
+        ?.toString();
+      this.performanceLastDate =
+        this.dashboard.performanceLastDate != null
+          ? datelastStats!
+          : this.datePipe.transform(new Date(), 'dd MMM y')!;
+      this.graphTitle =
+        this.performanceSince != this.performanceLastDate
+          ? this.translate
+              .instant('dashboard.graph.title')
+              .replace('&FROM&', this.performanceSince)
+              .replace('&TO&', this.performanceLastDate)
+          : this.translate
+              .instant('dashboard.graph.titleFirst')
+              .replace('&FROM&', this.performanceSince);
       this.lastStatsPerformance = this.dashboard.lastStatsPerformance + ' %';
       this.lastStatsBalanceDifference =
         this.dashboard.lastStatsBalanceDifference +
