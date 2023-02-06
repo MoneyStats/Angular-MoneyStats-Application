@@ -13,7 +13,7 @@ export class WalletComponent implements OnInit {
   wallets: Wallet[] = [];
 
   constructor(
-    private walletService: WalletService,
+    public walletService: WalletService,
     public screenService: ScreenService
   ) {}
 

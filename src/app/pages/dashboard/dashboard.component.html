@@ -17,7 +17,10 @@
         <div class="row mt-2">
           <div class="col-6">
             <app-stats-card
-              [title]="'dashboard.dashboardCard.stats.title1' | translate"
+              [title]="
+                ('dashboard.dashboardCard.stats.title1' | translate) +
+                performanceSince
+              "
               [value]="performance"
               [class]="
                 dashboard.performance === 0
@@ -32,7 +35,7 @@
           <div class="col-6">
             <app-stats-card
               [title]="'dashboard.dashboardCard.stats.title2' | translate"
-              [value]="performanceSince"
+              [value]="performanceLastDate"
               [class]="'date'"
             >
             </app-stats-card>
@@ -113,7 +116,7 @@
       <div class="section mt-4 col-xl-6">
         <div class="section-heading">
           <h2 class="title" id="year">
-            {{ "dashboard.graph.title" | translate }}
+            {{ graphTitle }}
           </h2>
           <a routerLink="stats" class="link">{{
             "dashboard.graph.view" | translate
@@ -181,6 +184,15 @@
       <!-- * carousel multiple -->
     </div>
     <!-- * Wallet -->
+    <div align="center">
+      <img
+        src="../../../assets/images/logos/logo_transparent_gray_land.png"
+        alt=""
+        srcset=""
+        style="width: 150px"
+        class="pb-1 pt-3"
+      />
+    </div>
   </section>
 
   <!-- app footer -->

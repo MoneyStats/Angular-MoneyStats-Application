@@ -2,8 +2,12 @@
   <div class="img-wrapper">
     <img src="{{ wallet?.img }}" alt="img" class="image-block imaged w48" />
   </div>
-  <div class="price">{{ wallet?.name }}</div>
+  <div class="price">
+    {{ wallet?.name }} <br />
+    {{ coinSymbol }} {{ wallet?.balance }}
+  </div>
   <p>{{ wallet?.category }}</p>
+
   <a
     href="#"
     [routerLink]="['details', wallet?.name]"

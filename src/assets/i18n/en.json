@@ -51,7 +51,7 @@
       "menu": {
         "title1": "Dashboard",
         "title2": "My Wallet",
-        "title3": "Resume"
+        "title3": "Resume Data"
       },
       "subMenuTitle": "Others",
       "subMenu": {
@@ -63,7 +63,7 @@
     "footer": {
       "title1": "Dashboard",
       "title2": "Resume",
-      "title3": "My Wallet",
+      "title3": "Wallets",
       "title4": "Settings"
     },
     "dashboardCard": {
@@ -72,11 +72,11 @@
         "title1": "Add Wallet",
         "title2": "Category",
         "title3": "Wallet",
-        "title4": "Statement on Date"
+        "title4": "Resume Data"
       },
       "stats": {
-        "title1": "Performance",
-        "title2": "Performance Since",
+        "title1": "Performance Since ",
+        "title2": "Day of the Last Stats",
         "title3": "Last Stats Performance",
         "title4": "Last Stats Difference"
       }
@@ -91,7 +91,8 @@
       }
     },
     "graph": {
-      "title": "Graph of the year",
+      "title": "Graph from &FROM& to &TO&",
+      "titleFirst": "Graph of &FROM&",
       "view": "View All",
       "nodata": {
         "header": "Graph",
@@ -133,6 +134,7 @@
     "mobile_add": "Add",
     "back": "Go back to previous page",
     "add": "Add new Wallet",
+    "open": "Open Wallet",
     "modal": {
       "title": "Add Wallet",
       "editWallet": {

@@ -99,8 +99,11 @@
   margin-right: 15px;
 }
 
-.fixed{
+.fixed {
   width: 100%;
   position: fixed;
   bottom: 50px;
+}
+.title {
+  max-width: 80%;
 }
