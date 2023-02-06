@@ -24,6 +24,7 @@ export class AddStatsComponent implements OnInit {
 
   ngOnInit(): void {
     this.screenService.setupHeader();
+    this.screenService.hideFooter();
     this.walletsToSave = this.dashboardService.dashboard.wallets.filter(
       (w) => !w.deletedDate
     );
@@ -87,7 +88,9 @@ export class AddStatsComponent implements OnInit {
           100
         ).toFixed(2);
         wallet.performanceLastStats = parseFloat(percentage);
-        wallet.differenceLastStats = wallet.newBalance - wallet.balance;
+        wallet.differenceLastStats = parseFloat(
+          (wallet.newBalance - wallet.balance).toFixed(2)
+        );
 
         wallet.dateLastStats = new Date(this.dateStats);
         wallet.balance = parseFloat(wallet.newBalance.toFixed(2));
@@ -137,7 +140,9 @@ export class AddStatsComponent implements OnInit {
         stats.balance = wallet.newBalance;
         stats.date = new Date(this.dateStats);
         stats.percentage = parseFloat(percentageOld);
-        stats.trend = wallet.newBalance - oldStats.balance;
+        stats.trend = parseFloat(
+          (wallet.newBalance - oldStats.balance).toFixed(2)
+        );
 
         wallet.history = [statsToUpdate, stats];
       } else if (
@@ -176,10 +181,14 @@ export class AddStatsComponent implements OnInit {
         stats.balance = wallet.newBalance;
         stats.date = new Date(this.dateStats);
         stats.percentage = parseFloat(percentageOld);
-        stats.trend = wallet.newBalance - oldStats.balance;
+        stats.trend = parseFloat(
+          (wallet.newBalance - oldStats.balance).toFixed(2)
+        );
 
         newStats.percentage = parseFloat(percentage);
-        newStats.trend = newStats.balance - wallet.newBalance;
+        newStats.trend = parseFloat(
+          (newStats.balance - wallet.newBalance).toFixed(2)
+        );
 
         wallet.history = [newStats, stats];
       }

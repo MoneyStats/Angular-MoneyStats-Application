@@ -47,7 +47,6 @@ export class AddWalletComponent implements OnInit {
       this.translate.instant('wallet.modal.imageModal.cancel')
     );
     this.updateImageData();
-    this.checkbox = false;
   }
 
   updateImageData() {
@@ -57,6 +56,7 @@ export class AddWalletComponent implements OnInit {
       }, 100 * 10);
     } else {
       this.walletImg = this.swalService.walletImg;
+      this.checkbox = false;
     }
   }
 

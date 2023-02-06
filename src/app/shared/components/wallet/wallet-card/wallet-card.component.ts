@@ -8,6 +8,7 @@ import { WalletService } from 'src/assets/core/services/wallet.service';
   styleUrls: ['./wallet-card.component.scss'],
 })
 export class WalletCardComponent implements OnInit {
+  @Input('coinSymbol') coinSymbol?: string;
   @Input('wallet') wallet?: Wallet;
   @Input('btn') btn?: string;
   constructor() {}
