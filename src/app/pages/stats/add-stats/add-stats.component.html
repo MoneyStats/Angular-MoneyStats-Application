@@ -17,7 +17,7 @@
         <div class="editWallet col-md-6">
           <button
             style="width: 150px"
-            *ngIf="!saveValidation"
+            *ngIf="!saveValidation && walletsToSave && walletsToSave.length"
             type="button"
             class="btn btn-primary ms-1 me-1 mb-1 float-end"
             [disabled]="f.invalid || validate()"
@@ -27,7 +27,7 @@
           </button>
           <button
             style="width: 150px"
-            *ngIf="saveValidation"
+            *ngIf="saveValidation && walletsToSave && walletsToSave.length"
             type="button"
             class="btn btn-primary ms-1 me-1 mb-1 float-end"
             [disabled]="f.invalid"
@@ -61,21 +61,34 @@
         </div>
       </div>
       <div class="section mt-2 mx-auto">
-        <div class="card box-shadow">
+        <div class="hidden_desktop mt-4">
+          <p class="text-start fs-2 title-page">
+            {{ "insertStats.card_title" | translate }}
+          </p>
+          <p class="card-subtitle text-start mb-1 fs-6">
+            <small>{{ "insertStats.card_subtitle" | translate }}</small>
+          </p>
+        </div>
+        <app-content-box
+          *ngIf="!walletsToSave || !walletsToSave.length"
+          [header]="'dashboard.wallet_splide.nodata.header' | translate"
+          [body]="'dashboard.wallet_splide.nodata.body' | translate"
+          [footer]="'dashboard.wallet_splide.nodata.footer' | translate"
+        ></app-content-box>
+        <div
+          *ngIf="walletsToSave && walletsToSave.length"
+          class="card box-shadow"
+        >
           <div class="card-body">
-            <h5 class="card-title text-center">
-              {{ "insertStats.card_title" | translate }}
-            </h5>
-            <h6 class="card-subtitle text-center mb-1">
-              {{ "insertStats.card_subtitle" | translate }}
-            </h6>
+            <div class="hidden_mobile m-3">
+              <p class="text-center fs-1" style="color: whitesmoke">
+                {{ "insertStats.card_title" | translate }}
+              </p>
+              <p class="card-subtitle text-center mb-1">
+                {{ "insertStats.card_subtitle" | translate }}
+              </p>
+            </div>
             <div class="transactions row m-4">
-              <app-content-box
-                *ngIf="!walletsToSave || !walletsToSave.length"
-                [header]="'dashboard.wallet_splide.nodata.header' | translate"
-                [body]="'dashboard.wallet_splide.nodata.body' | translate"
-                [footer]="'dashboard.wallet_splide.nodata.footer' | translate"
-              ></app-content-box>
               <div
                 class="col-xl-3 col-sm-6"
                 *ngFor="let wallet of walletsToSave"
@@ -182,16 +195,16 @@
             alt=""
             srcset=""
             style="width: 150px"
-            class="pb-1 pt-3"
+            class="pb-1 pt-3 logo"
           />
         </div>
-        <div class="card-footer hidden_desktop">
+        <div class="card-footer hidden_desktop card-btn">
           <div class="form-group basic">
             <button
               type="button"
               class="btn btn-primary btn-block btn-lg"
               [disabled]="f.invalid || validate()"
-              *ngIf="!saveValidation"
+              *ngIf="!saveValidation && walletsToSave && walletsToSave.length"
               (click)="confirm()"
             >
               {{ "insertStats.continue" | translate }}
@@ -200,7 +213,7 @@
           <div class="form-group basic">
             <button
               type="button"
-              *ngIf="saveValidation"
+              *ngIf="saveValidation && walletsToSave && walletsToSave.length"
               class="btn btn-primary btn-block btn-lg"
               [disabled]="f.invalid"
               (click)="save()"
@@ -211,6 +224,5 @@
         </div>
       </div>
     </form>
-
   </div>
 </section>
