@@ -15,7 +15,15 @@
 
     <!-- Transactions -->
     <div class="section mt-2 mb-2">
-      <div class="section-title">
+      <div class="hidden_desktop mt-4">
+        <p class="text-start fs-2 title-page">
+          {{ "transaction.title" | translate }}
+        </p>
+        <p class="card-subtitle text-start mb-1 fs-6">
+          <small>{{ "transaction.subTitle" | translate }}</small>
+        </p>
+      </div>
+      <div class="section-title mt-2">
         {{ dashboard?.performanceLastDate | date : "dd MMM y" }}
       </div>
       <div class="transactions">
@@ -44,6 +52,15 @@
       </div>
     </div>
     <!-- * Transactions -->
+    <div align="center">
+      <img
+        src="../../../assets/images/logos/logo_transparent_gray_land.png"
+        alt=""
+        srcset=""
+        style="width: 150px"
+        class="pb-1 pt-1"
+      />
+    </div>
   </div>
   <!-- * App Capsule -->
 </section>

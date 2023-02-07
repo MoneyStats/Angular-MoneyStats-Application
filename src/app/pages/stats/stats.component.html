@@ -46,6 +46,14 @@
         [title]="'stats.title' | translate"
         [back]="'stats.back' | translate"
       ></app-title-desktop>
+      <div class="hidden_desktop mt-4 ms-2">
+        <p class="text-start fs-2 title-page">
+          {{ "stats.title" | translate }}
+        </p>
+        <p class="card-subtitle text-start fs-6">
+          <small>{{ "stats.subTitle" | translate }}</small>
+        </p>
+      </div>
       <div class="addWallet col-md-6">
         <div class="form-group boxed">
           <div class="input-wrapper" style="max-width: 150px; margin-left: 80%">

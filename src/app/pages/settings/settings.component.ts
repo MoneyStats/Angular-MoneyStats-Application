@@ -35,6 +35,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.screenService.setupHeader();
+    this.screenService.showFooter();
     this.screenService.goToSettings();
     this.user = this.userService.user;
     this.themeService.switchDarkMode();

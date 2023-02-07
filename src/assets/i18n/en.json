@@ -113,6 +113,8 @@
   },
   "transaction": {
     "title": "Transactions",
+    "subTitle": "Wallets last performance",
+    "difference": "Difference",
     "back": "Go back to previous page",
     "mobile_back": "Back",
     "details": {
@@ -264,6 +266,7 @@
   },
   "stats": {
     "title": "Resume Data",
+    "subTitle": "Details of all transaction and performance",
     "back": "Go back to previous page",
     "mobile_back": "Back",
     "total": "Total Balance",
@@ -299,12 +302,12 @@
     }
   },
   "insertStats": {
-    "title": "Insert Data",
+    "title": "Payments",
     "back": "Go back to previous page",
     "mobile_back": "Back",
     "dataPresent": "Select different Data",
-    "card_title": "Insert a new Stats",
-    "card_subtitle": "Select a date to save the Stats and insert a Stats for each Wallet",
+    "card_title": "Add Stats",
+    "card_subtitle": "Needs to be done for all wallets, Could not save stats for existing data",
     "continue": "Continue",
     "save": "Save"
   },

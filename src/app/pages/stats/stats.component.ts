@@ -27,6 +27,7 @@ export class StatsComponent implements OnInit {
 
   ngOnInit(): void {
     this.screenService.setupHeader();
+    this.screenService.showFooter();
     this.screenService.goToStats();
     this.statsService.getResume().subscribe((res) => {
       console.log(res);

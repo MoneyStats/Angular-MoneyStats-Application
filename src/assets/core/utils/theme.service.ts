@@ -43,6 +43,10 @@ var pageBody = document.querySelector('body');
 //-----------------------------------------------------------------------
 function darkMode() {
   let darkModeStatus = localStorage.getItem('MoneyStatsDarkMode');
+  if (!darkModeStatus && MoneyStats.Dark_Mode.default) {
+    darkModeStatus = '1';
+    localStorage.setItem('MoneyStatsDarkMode', '1');
+  }
 
   if (darkModeStatus === '1') {
     // Check if enable as default

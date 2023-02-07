@@ -9,16 +9,21 @@
     margin-bottom: -50px !important;
   }
   .box-shadow {
-    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 1);
+    //margin-top: -20px !important;
+    //z-index: -1;
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 100%) !important;
   }
   .editWallet {
     display: none;
   }
   .transactions {
     margin: 0px !important;
-    margin-top: 20px !important;
+    margin-top: 0px !important;
     margin-left: -15px !important;
     margin-right: -15px !important;
+  }
+  .logo {
+    padding-top: 0px !important;
   }
 }
 

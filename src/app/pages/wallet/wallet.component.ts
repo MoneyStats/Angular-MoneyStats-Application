@@ -24,6 +24,7 @@ export class WalletComponent implements OnInit {
   ngOnInit(): void {
     this.screenService.setupHeader();
     this.screenService.goToWallet();
+    this.screenService.showFooter();
     this.walletService.getWallet().subscribe((res) => {
       this.wallets = res.data;
       this.walletService.walletActive = this.walletActive(res.data);
