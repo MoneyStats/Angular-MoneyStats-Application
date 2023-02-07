@@ -12,6 +12,7 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 export class TransactionDetailsComponent implements OnInit {
   @Input('wallet') wallet?: Wallet;
   @Input('class') class?: string;
+  coinSymbol: string = '';
   constructor(
     public screenService: ScreenService,
     public dashboardService: DashboardService
@@ -19,6 +20,7 @@ export class TransactionDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.screenService.setupHeader();
+    this.screenService.showFooter();
     this.wallet = this.dashboardService.wallet;
     this.class =
       this.wallet?.differenceLastStats === 0
@@ -26,5 +28,6 @@ export class TransactionDetailsComponent implements OnInit {
         : this.wallet!.differenceLastStats > 0
         ? 'text-success'
         : 'text-danger';
+    this.coinSymbol = this.dashboardService.coinSymbol!;
   }
 }

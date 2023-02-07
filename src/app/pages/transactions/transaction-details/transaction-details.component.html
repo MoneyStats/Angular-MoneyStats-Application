@@ -6,7 +6,7 @@
   >
   </app-header-mobile>
   <!-- App Capsule -->
-  <div id="appCapsule" class="full-height">
+  <div id="appCapsule" class="full-height color-grey">
     <app-title-desktop
       [title]="'transaction.details.title' | translate"
       [back]="'transaction.details.back' | translate"
@@ -41,7 +41,9 @@
         </li>
         <li>
           <strong>{{ "transaction.details.lastStats" | translate }}</strong>
-          <span class="{{ class }}">{{ wallet?.differenceLastStats }}</span>
+          <span class="{{ class }}"
+            >{{ wallet?.differenceLastStats }} {{ coinSymbol }}</span
+          >
         </li>
         <li>
           <strong>{{ "transaction.details.date" | translate }}</strong>
@@ -69,7 +71,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let history of wallet?.history; let i = index">
+              <tr
+                *ngFor="
+                  let history of wallet?.history!.slice().reverse();
+                  let i = index
+                "
+              >
                 <th scope="row">{{ history.date }}</th>
                 <td class="text-end text-primary">
                   {{ dashboardService.coinSymbol }} {{ history.balance }}

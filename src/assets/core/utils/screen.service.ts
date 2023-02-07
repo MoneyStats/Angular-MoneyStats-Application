@@ -34,6 +34,10 @@ export class ScreenService {
     const footer = document.getElementById('footer');
     footer!.style.display = 'none';
   }
+  showFooter() {
+    const footer = document.getElementById('footer');
+    footer!.style.display = 'flex';
+  }
 
   goToDashboard() {
     this.resetAllBtn();
