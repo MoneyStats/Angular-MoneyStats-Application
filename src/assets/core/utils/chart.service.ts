@@ -15,9 +15,30 @@ export class ChartService {
 
   renderChartLine(dashboard: Dashboard): Partial<ApexOptions> {
     let series: Array<any> = [];
+    let oldStats: any = new Stats();
+    let oldDate: any;
+    if (dashboard.statsWalletDays.length === 1) {
+      oldDate =
+        parseInt(
+          dashboard.statsWalletDays[dashboard.statsWalletDays.length - 1].split(
+            '-'
+          )[0]
+        ) - 1;
+      dashboard.statsWalletDays.splice(0, 0, oldDate.toString());
+    }
     dashboard.wallets.forEach((wallet) => {
+      let oldBalance =
+        wallet.differenceLastStats != 0
+          ? wallet.balance - wallet.differenceLastStats
+          : 0;
       let historyBalance: Array<number> = [];
       let index = 0;
+      if (wallet.history.length === 1) {
+        oldStats.balance = oldBalance;
+
+        oldStats.date = oldDate;
+        wallet.history.splice(0, 0, oldStats);
+      }
       wallet.history.forEach((h) => {
         let count = dashboard.statsWalletDays.indexOf(h.date.toString());
         if (count != index) {
@@ -145,8 +166,14 @@ export class ChartService {
     let series: Array<any> = [];
     let historyBalance: Array<number> = [];
     let historyDates: Array<string> = [];
+    let oldStats: any = new Stats();
+    if (stats.length === 1) {
+      oldStats.balance =
+        stats[0].trend != 0 ? stats[0].balance - stats[0].trend : 0;
+      oldStats.date = parseInt(stats[0].date.toString().split('-')[0]) - 1;
+      stats.splice(0, 0, oldStats);
+    }
     stats.forEach((s) => {
-      console.log(s.date);
       historyBalance.push(s.balance);
 
       historyDates.push(s.date.toString());

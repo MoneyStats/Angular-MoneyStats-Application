@@ -29,6 +29,7 @@
                     name="radioList2"
                     id="en"
                     [checked]="english"
+                    (click)="changeLanguages(languagesSettings.ENGLISH)"
                   />
 
                   <label class="form-check-label" for="en">
@@ -40,17 +41,23 @@
                   /></label>
                 </div>
 
-                <!-- Italian -->
-                <div *ngIf="false" class="form-check">
+                <div class="form-check">
                   <input
                     class="form-check-input"
                     type="radio"
                     name="radioList2"
-                    id="radioList2b"
+                    id="it"
+                    [checked]="italian"
+                    (click)="changeLanguages(languagesSettings.ITALIAN)"
                   />
-                  <label class="form-check-label" for="radioList2b"
-                    >Italian</label
-                  >
+
+                  <label class="form-check-label" for="it">
+                    {{ "settings.app.languages.it" | translate }}
+                    <img
+                      src="../../../../../assets/images/languages/Italy.png"
+                      class="sl-flag"
+                      alt=""
+                  /></label>
                 </div>
               </div>
             </div>

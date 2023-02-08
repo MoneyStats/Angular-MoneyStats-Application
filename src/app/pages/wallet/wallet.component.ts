@@ -30,7 +30,6 @@ export class WalletComponent implements OnInit {
       this.walletService.walletActive = this.walletActive(res.data);
       this.walletService.walletDeleted = this.walletDeleted(res.data);
       this.walletDetails(res.data);
-      console.log(this.wallets);
     });
   }
 

@@ -17,7 +17,6 @@ export class ErrorService {
   }
 
   getError(error: any) {
-    console.log(error);
     if (error.error.url) {
       this.exception = error.error;
       this.exception.error!.statusCode = error.status;

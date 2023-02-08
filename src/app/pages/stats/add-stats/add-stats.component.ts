@@ -67,15 +67,12 @@ export class AddStatsComponent implements OnInit {
     this.saveValidation = false;
     this.statsService.addStats(this.walletsToSave).subscribe((data) => {
       this.walletsToSave = data.data;
-
-      console.log(data);
     });
     this.getTodayAsString();
   }
 
   confirm() {
     let statsWalletDays = this.dashboardService.dashboard.statsWalletDays;
-    console.log('CONFIRM', this.walletsToSave);
 
     this.walletsToSave.forEach((wallet) => {
       wallet = this.setWalletHighAndLow(wallet);
@@ -83,128 +80,11 @@ export class AddStatsComponent implements OnInit {
 
       let stats: Stats = new Stats();
       this.setDataForNewStats(wallet, statsWalletDays, stats);
-      // Se data non presente o nuova data
-      /*if (
-        new Date(statsWalletDays[statsWalletDays.length - 1]) <
-          new Date(this.dateStats) ||
-        !statsWalletDays.length
-      ) {
-        let fixedBalance = wallet.balance != 0 ? wallet.balance : 0.0001;
-        let percentage = (
-          ((wallet.newBalance - fixedBalance) / fixedBalance) *
-          100
-        ).toFixed(2);
-        wallet.performanceLastStats = parseFloat(percentage);
-        wallet.differenceLastStats = parseFloat(
-          (wallet.newBalance - wallet.balance).toFixed(2)
-        );
-
-        wallet.dateLastStats = new Date(this.dateStats);
-        wallet.balance = parseFloat(wallet.newBalance.toFixed(2));
-
-        stats.balance = wallet.balance;
-        stats.date = new Date(this.dateStats);
-        stats.percentage = wallet.performanceLastStats;
-        stats.trend = wallet.differenceLastStats;
-        wallet.history = [stats];
-        // Se data compresa tra ultimo e penultimo stats
-      } else if (
-        new Date(statsWalletDays[statsWalletDays.length - 1]) &&
-        new Date(statsWalletDays[statsWalletDays.length - 2]) &&
-        new Date(this.dateStats) <
-          new Date(statsWalletDays[statsWalletDays.length - 1]) &&
-        new Date(this.dateStats) >
-          new Date(statsWalletDays[statsWalletDays.length - 2])
-      ) {
-        let statsToUpdate: any = wallet.history.find(
-          (w) =>
-            w.date.toString() === statsWalletDays[statsWalletDays.length - 1]
-        );
-        let fixedBalance = wallet.balance != 0 ? wallet.balance : 0.0001;
-        let percentage = (
-          ((fixedBalance - wallet.newBalance) / wallet.newBalance) *
-          100
-        ).toFixed(2);
-
-        statsToUpdate.percentage = parseFloat(percentage);
-        statsToUpdate.trend = parseFloat(
-          (wallet.balance - wallet.newBalance).toFixed(2)
-        );
-
-        let oldStats: any = wallet.history.find(
-          (w) =>
-            w.date.toString() === statsWalletDays[statsWalletDays.length - 2]
-        );
-
-        let percentageOld = (
-          ((wallet.newBalance - oldStats.balance) / oldStats.balance) *
-          100
-        ).toFixed(2);
-
-        wallet.performanceLastStats = statsToUpdate.percentage;
-        wallet.differenceLastStats = statsToUpdate.trend;
-
-        stats.balance = wallet.newBalance;
-        stats.date = new Date(this.dateStats);
-        stats.percentage = parseFloat(percentageOld);
-        stats.trend = parseFloat(
-          (wallet.newBalance - oldStats.balance).toFixed(2)
-        );
-
-        wallet.history = [statsToUpdate, stats];
-      } else if (
-        new Date(statsWalletDays[statsWalletDays.length - 1]) &&
-        new Date(this.dateStats) <
-          new Date(statsWalletDays[statsWalletDays.length - 1])
-      ) {
-        // trovo gli indici corrispondenti da analizzare
-        statsWalletDays.push(this.dateStats);
-        statsWalletDays.sort();
-        let indexDate = statsWalletDays.indexOf(this.dateStats);
-        // Mi servono gli stats subito prima e subito dopo da analizzare e modificare quello subito dopo
-        let newStats: any = wallet.history.find(
-          (w) => w.date.toString() === statsWalletDays[indexDate + 1]
-        );
-        let oldStats: any;
-        if (indexDate === 0) {
-          oldStats = new Stats();
-          oldStats.balance = 0.001;
-        } else {
-          oldStats = wallet.history.find(
-            (w) => w.date.toString() === statsWalletDays[indexDate - 1]
-          );
-        }
-
-        let percentage = (
-          ((newStats.balance - wallet.newBalance) / wallet.newBalance) *
-          100
-        ).toFixed(2);
-
-        let percentageOld = (
-          ((wallet.newBalance - oldStats.balance) / oldStats.balance) *
-          100
-        ).toFixed(2);
-
-        stats.balance = wallet.newBalance;
-        stats.date = new Date(this.dateStats);
-        stats.percentage = parseFloat(percentageOld);
-        stats.trend = parseFloat(
-          (wallet.newBalance - oldStats.balance).toFixed(2)
-        );
-
-        newStats.percentage = parseFloat(percentage);
-        newStats.trend = parseFloat(
-          (newStats.balance - wallet.newBalance).toFixed(2)
-        );
-
-        wallet.history = [newStats, stats];
-      }*/
 
       wallet.newBalance = parseFloat('');
     });
     this.dashboardService.dashboard.statsWalletDays.push(this.dateStats);
     this.dashboardService.dashboard.statsWalletDays.sort();
-    console.log(this.dashboardService.dashboard.statsWalletDays);
     this.saveValidation = true;
   }
 

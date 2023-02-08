@@ -20,7 +20,7 @@ export class TransactionDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.screenService.setupHeader();
-    this.screenService.showFooter();
+    this.screenService.hideFooter();
     this.wallet = this.dashboardService.wallet;
     this.class =
       this.wallet?.differenceLastStats === 0
