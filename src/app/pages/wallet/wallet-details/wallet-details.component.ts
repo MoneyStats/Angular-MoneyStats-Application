@@ -34,6 +34,7 @@ export class WalletDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.screenService.setupHeader();
+    this.screenService.hideFooter();
     this.route.params.subscribe((w: any) => {
       this.walletName = w.wallet;
     });

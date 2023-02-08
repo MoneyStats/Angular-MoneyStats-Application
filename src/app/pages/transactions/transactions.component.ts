@@ -22,6 +22,6 @@ export class TransactionsComponent implements OnInit {
   ngOnInit(): void {
     this.dashboard = this.dashService.dashboard;
     this.screenService.setupHeader();
-    this.screenService.showFooter();
+    this.screenService.hideFooter();
   }
 }

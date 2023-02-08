@@ -29,4 +29,5 @@ export enum ProfileSettings {
 export enum LanguagesSettings {
   ATTR_LANGUAGE = 'lang',
   ENGLISH = 'en',
+  ITALIAN = 'it',
 }

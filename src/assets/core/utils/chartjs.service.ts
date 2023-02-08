@@ -34,6 +34,7 @@ export class ChartJSService {
     totalMap.forEach((value: any, key: string) => {
       let historyBalance: Array<number> = [];
       let date: string = '';
+      let oldStats: any = new Stats();
 
       value.forEach((v: any) => {
         historyBalance.push(v.balance);

@@ -1,182 +1,182 @@
 {
   "auth": {
     "login": {
-      "title": "Log In",
-      "subtitle": "Fill the form to log in",
+      "title": "Accedi",
+      "subtitle": "Completa il form per accedere",
       "user": "Username",
-      "userPlaceholder": "Your username",
+      "userPlaceholder": "Il tuo username",
       "password": "Password",
-      "passPlaceholder": "Your Password",
-      "register": "Register Now",
-      "forgot": "Forgot Password?",
-      "login": "Login"
+      "passPlaceholder": "La tua Password",
+      "register": "Registrati",
+      "forgot": "Password Dimenticata?",
+      "login": "Accedi"
     },
     "register": {
-      "title": "Register Now",
-      "subtitle": "Create an account",
-      "name": "Name",
-      "namePlaceholder": "Your name",
-      "surname": "Surname",
-      "surnamePlaceholder": "Your surname",
+      "title": "Registrazione",
+      "subtitle": "Crea un account",
+      "name": "Nome",
+      "namePlaceholder": "Il tuo nome",
+      "surname": "Cognome",
+      "surnamePlaceholder": "Il tuo Cognome",
       "email": "E-Mail",
-      "emailPlaceholder": "Your email",
+      "emailPlaceholder": "La tua email",
       "username": "Username",
-      "usernamePlaceholder": "Your username",
+      "usernamePlaceholder": "Il tuo username",
       "password": "Password",
-      "passPlaceholder": "Your password",
-      "passwordAgain": "Password Again",
-      "passAgainPlaceholder": "Type password again",
-      "currency": "Currency",
-      "selectCurrency": "Select Currency",
-      "terms": "I agree",
-      "terms2": "terms and conditions",
-      "register": "Register"
+      "passPlaceholder": "La tua password",
+      "passwordAgain": "Ripeti Password",
+      "passAgainPlaceholder": "Digita password di nuovo",
+      "currency": "Moneta",
+      "selectCurrency": "Seleziona Moneta",
+      "terms": "Io accetto",
+      "terms2": "termini e condizioni",
+      "register": "Registrati"
     }
   },
   "headerMobile": {
-    "options": "Menu Options",
-    "delete": "Delete",
-    "restore": "Restore"
+    "options": "Opzioni Menu",
+    "delete": "Cancella",
+    "restore": "Ripristina"
   },
   "dashboard": {
     "sidebar": {
       "dropdown": {
-        "options": "Menu Options",
-        "version": "Version",
-        "settings": "Settings",
+        "options": "Opzioni Menu",
+        "version": "Versione",
+        "settings": "Impostazioni",
         "logout": "Log Out"
       },
-      "overviewTitle": "Balance",
+      "overviewTitle": "Saldo",
       "menuTitle": "Menu",
       "menu": {
         "title1": "Dashboard",
-        "title2": "My Wallet",
-        "title3": "Resume Data"
+        "title2": "Portafogli",
+        "title3": "Storico"
       },
-      "subMenuTitle": "Others",
+      "subMenuTitle": "Altro",
       "subMenu": {
-        "title1": "Settings",
-        "title2": "Support",
+        "title1": "Impostazioni",
+        "title2": "Supporto",
         "title3": "Log out"
       }
     },
     "footer": {
       "title1": "Dashboard",
-      "title2": "Resume",
-      "title3": "Wallets",
-      "title4": "Settings"
+      "title2": "Storico",
+      "title3": "Portafogli",
+      "title4": "Impostazioni"
     },
     "dashboardCard": {
-      "title": "Total Balance",
+      "title": "Saldo Totale",
       "footer": {
-        "title1": "Add Wallet",
-        "title2": "Category",
-        "title3": "Wallet",
-        "title4": "Resume Data"
+        "title1": "Aggiungi Portfoglio",
+        "title2": "Categorie",
+        "title3": "Portafoglio",
+        "title4": "Storico"
       },
       "stats": {
-        "title1": "Performance Since ",
-        "title2": "Day of the Last Stats",
-        "title3": "Last Stats Performance",
-        "title4": "Last Stats Difference"
+        "title1": "Performance Da ",
+        "title2": "Giorno dell'ultimo Stats",
+        "title3": "Performance Ultimo Stats",
+        "title4": "Differenza Ultimo Stats"
       }
     },
     "transaction": {
-      "title": "Transactions",
-      "view": "View All",
+      "title": "Transazioni",
+      "view": "Vedi",
       "nodata": {
-        "header": "Transaction",
-        "body": "Insert new data to get transaction History.",
+        "header": "Transazioni",
+        "body": "Inserisci dati per avere la lista transazioni.",
         "footer": "MoneyStats"
       }
     },
     "graph": {
-      "title": "Graph from &FROM& to &TO&",
-      "titleFirst": "Graph of &FROM&",
-      "view": "View All",
+      "title": "Grafico da &FROM& a &TO&",
+      "titleFirst": "Grafico del &FROM&",
+      "view": "Vedi",
       "nodata": {
-        "header": "Graph",
-        "body": "Insert new data to get graph.",
+        "header": "Grafico",
+        "body": "Inserisci dei dati per avere il grafico.",
         "footer": "MoneyStats"
       }
     },
     "wallet_splide": {
-      "title": "Wallet",
-      "view": "View All",
-      "btn": "Open Wallet",
+      "title": "Portafogli",
+      "view": "Vedi",
+      "btn": "Apri Portafoglio",
       "nodata": {
-        "header": "Wallet",
-        "body": "Insert new data to get wallet.",
+        "header": "Portafoglio",
+        "body": "Inserisci dei dati per avere i portafogli.",
         "footer": "MoneyStats"
       }
     }
   },
   "transaction": {
-    "title": "Transactions",
-    "subTitle": "Wallets last performance",
-    "difference": "Difference",
-    "back": "Go back to previous page",
-    "mobile_back": "Back",
+    "title": "Transazioni",
+    "subTitle": "Ultime performance",
+    "difference": "Differenza",
+    "back": "Torna alla pagina precendete",
+    "mobile_back": "Indietro",
     "details": {
-      "title": "Transaction Details",
-      "back": "Go back to previous page",
-      "status": "Status",
-      "success": "Success",
-      "category": "Category",
-      "lastStats": "Difference",
-      "date": "Date",
-      "amount": "Balance"
+      "title": "Dettagli Transazione",
+      "back": "Torna alla pagina precendete",
+      "status": "Stato",
+      "success": "Completato",
+      "category": "Categoria",
+      "lastStats": "Differenza",
+      "date": "Data",
+      "amount": "Saldo"
     }
   },
   "wallet": {
-    "active": "Active Wallet",
-    "deleted": "Deleted Wallet",
-    "title": "Wallet",
-    "mobile_back": "Back",
-    "mobile_add": "Add",
-    "back": "Go back to previous page",
-    "add": "Add new Wallet",
-    "open": "Open Wallet",
+    "active": "Portafogli Attivi",
+    "deleted": "Portafogli Cancellati",
+    "title": "Portafoglio",
+    "mobile_back": "Indietro",
+    "mobile_add": "Aggiungi",
+    "back": "Torna alla pagina precendete",
+    "add": "Aggiungi nuovo Portafoglio",
+    "open": "Apri Portafoglio",
     "modal": {
-      "title": "Add Wallet",
+      "title": "Aggiungi Portafoglio",
       "editWallet": {
-        "title": "Edit Wallet",
-        "default": "Keep same wallet image"
+        "title": "Modifica Portafoglio",
+        "default": "Mantieni la stessa immagine"
       },
-      "name": "Name",
-      "sub_name": "Enter Wallet Name",
-      "category": "Category",
-      "categoryText": "Choose a category",
-      "categoryTextEdit": "Leave to keep same category",
-      "img": "Add Image",
-      "imgContent": "Add Image from URL",
-      "image": "Image",
-      "default": "Use default wallet image",
+      "name": "Nome",
+      "sub_name": "Inserisci nome del wallet",
+      "category": "Categoria",
+      "categoryText": "Scegli una categoria",
+      "categoryTextEdit": "Lascia per mantenere la categoria",
+      "img": "Aggiungi immagine",
+      "imgContent": "Aggiungi immagine da URL",
+      "image": "Immagine",
+      "default": "Usa immagine di default",
       "imageModal": {
-        "title": "Add Image",
-        "subTitle": "Insert image URL and press continue",
-        "continue": "Continue",
-        "cancel": "Cancel"
+        "title": "Aggiungi immagine",
+        "subTitle": "Inserire immagine da URL e premi continua",
+        "continue": "Continua",
+        "cancel": "Cancella"
       },
-      "save": "Save"
+      "save": "Salva"
     },
     "nodata": {
-      "header": "Wallet",
-      "body": "Insert new data to get wallet.",
+      "header": "Portafoglio",
+      "body": "Inserisci dei dati per avere i portafogli.",
       "footer": "MoneyStats"
     },
     "details": {
-      "title": " Details",
-      "back": "Go back to previous page",
-      "mobile_back": "Back",
-      "mobile_edit": "Edit",
-      "mobile_delete": "Delete",
-      "status": "Status",
-      "allTimeHigh": "All Time High on ",
-      "totalPerformance": "Total Performance",
-      "highPrice": "High Price on ",
-      "lowPrice": "Low Price on ",
-      "category": "Category",
+      "title": " Dettagli",
+      "back": "Torna alla pagina precendete",
+      "mobile_back": "Indietro",
+      "mobile_edit": "Modifica",
+      "mobile_delete": "Cancella",
+      "status": "Stato",
+      "allTimeHigh": "Massimo Storico il ",
+      "totalPerformance": "Performance Totali",
+      "highPrice": "Massimo annuale il ",
+      "lowPrice": "Minimo annuale il ",
+      "category": "Categoria",
       "dateLastStats": "Date Last Stats",
       "edit": "Edit Wallet",
       "delete": "Delete Wallet",
@@ -194,27 +194,27 @@
           "title": "Restore Confirmation",
           "text": "Do you want to restore the current wallet?"
         },
-        "back": "Back",
+        "back": "Indietro",
         "confirm": "Confirm",
         "restoreBtn": "Restore"
       },
       "transaction": {
         "title": "Last Stats",
-        "mobile_back": "Back",
-        "view": "View All",
+        "mobile_back": "Indietro",
+        "view": "Vedi",
         "more": "Load more",
         "history": {
           "title": "Transaction History",
-          "mobile_back": "Back",
-          "back": "Go back to previous page"
+          "mobile_back": "Indietro",
+          "back": "Torna alla pagina precendete"
         }
       }
     }
   },
   "settings": {
-    "title": "Settings",
-    "back": "Go back to previous page",
-    "mobile_back": "Back",
+    "title": "Impostazioni",
+    "back": "Torna alla pagina precendete",
+    "mobile_back": "Indietro",
     "theme": {
       "title": "Theme",
       "dark": "Dark Mode"
@@ -268,8 +268,8 @@
   "stats": {
     "title": "Resume Data",
     "subTitle": "Details of all transaction and performance",
-    "back": "Go back to previous page",
-    "mobile_back": "Back",
+    "back": "Torna alla pagina precendete",
+    "mobile_back": "Indietro",
     "total": "Total Balance",
     "since": "Since",
     "performance": "Performance",
@@ -304,8 +304,8 @@
   },
   "insertStats": {
     "title": "Payments",
-    "back": "Go back to previous page",
-    "mobile_back": "Back",
+    "back": "Torna alla pagina precendete",
+    "mobile_back": "Indietro",
     "dataPresent": "Select different Data",
     "card_title": "Add Stats",
     "card_subtitle": "Needs to be done for all wallets, Could not save stats for existing data",
