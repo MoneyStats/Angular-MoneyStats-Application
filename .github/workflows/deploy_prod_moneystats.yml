@@ -66,9 +66,9 @@ jobs:
       - dependency
       - build
     steps:
-      #- uses: actions/checkout@v2
-      #- name: Build the Docker image
-      #  run: docker build . --file Dockerfile --build-arg config=prod --tag angular-moneystats:$(date +%s)
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --build-arg config=prod --tag angular-moneystats:$(date +%s)
 
       #- name: Install Dependency
       #  run: npm install --force
