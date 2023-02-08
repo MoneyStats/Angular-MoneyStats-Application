@@ -3,6 +3,7 @@ WORKDIR '/app'
 COPY . .
 ARG configuration
 ENV env_config $config
+RUN echo $env_config
 RUN npm install @angular/cli -g
 RUN npm install --force && \
   npm run build $env_config
