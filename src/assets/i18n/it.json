@@ -1,4 +1,24 @@
 {
+  "onboard": {
+    "tab1": {
+      "title": "Welcome to MoneyStats",
+      "text": "This is the first login thru the app. <br /> To continue the on-board process press Next."
+    },
+    "tab2": {
+      "title": "Why use it?",
+      "text": "The difference between MoneyStats and the others Money Management apps is that you don't need to keep track of you expences, once a week or once a month is needed and recommended to get the best performance."
+    },
+    "tab3": {
+      "title": "How it works?",
+      "text": "Almost all the application is touchable. <br /> After you get into the Dashboard to start having some data you should add a new Wallet. <br /> The process would be completed once you start adding new Stats, Graphic and Tables with details will be showed."
+    },
+    "tab4": {
+      "title": "Thanks for your time",
+      "text": "Let's having fun, press Try It to get into the Dashboard."
+    },
+    "next": "Next",
+    "try": "Try It"
+  },
   "auth": {
     "login": {
       "title": "Accedi",

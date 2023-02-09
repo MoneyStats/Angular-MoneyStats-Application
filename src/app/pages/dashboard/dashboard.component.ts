@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
@@ -43,7 +44,8 @@ export class DashboardComponent implements OnInit {
     private toast: ToastService,
     public screenService: ScreenService,
     private walletService: WalletService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -55,6 +57,10 @@ export class DashboardComponent implements OnInit {
       if (!data.data.balance) {
         this.dashboard.categories = data.data.categories;
         this.dashboard.wallets = data.data.wallets;
+        if (!this.dashboardService.isOnboarding) {
+          this.router.navigate(['on-boarding']);
+          this.dashboardService.isOnboarding = true;
+        }
       } else {
         this.dashboard = data.data;
       }

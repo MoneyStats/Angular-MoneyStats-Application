@@ -76,7 +76,8 @@
             ],
             "scripts": [
               "src/app/shared/js/splide.min.js",
-              "node_modules/apexcharts/dist/apexcharts.min.js"
+              "node_modules/apexcharts/dist/apexcharts.min.js",
+              "node_modules/jquery/dist/jquery.min.js"
             ],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"
