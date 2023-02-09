@@ -58,6 +58,7 @@ import { AuthComponent } from './auth/auth.component';
 import { PagesComponent } from './pages/pages.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ReportBugComponent } from './shared/components/modal/report-bug/report-bug.component';
+import { OnboardingComponent } from './pages/onboarding/onboarding.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +103,7 @@ import { ReportBugComponent } from './shared/components/modal/report-bug/report-
     AuthComponent,
     PagesComponent,
     ReportBugComponent,
+    OnboardingComponent,
   ],
   imports: [
     BrowserModule,

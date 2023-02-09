@@ -17,6 +17,7 @@ export class DashboardService {
   public wallet?: Wallet;
   public coinSymbol?: string;
   user?: User;
+  public isOnboarding = false;
   constructor(private http: HttpClient) {}
 
   getData(): Observable<ResponseModel> {
