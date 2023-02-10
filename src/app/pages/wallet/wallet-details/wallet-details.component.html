@@ -301,7 +301,7 @@
               "
             >
               <app-wallet-history-card
-                *ngIf="i < 6"
+                *ngIf="i < 6 && stats.id"
                 [stats]="stats"
               ></app-wallet-history-card>
             </div>

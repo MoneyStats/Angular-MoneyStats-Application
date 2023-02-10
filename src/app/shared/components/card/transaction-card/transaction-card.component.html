@@ -1,7 +1,7 @@
 <!-- item -->
 <a
   href="#"
-  [routerLink]="['/transaction/details', wallet?.name]"
+  [routerLink]="['/transaction/details', wallet?.id, wallet?.name]"
   (click)="parsingWallet()"
   class="item"
 >

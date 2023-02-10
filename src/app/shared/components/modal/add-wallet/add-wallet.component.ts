@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Category, Wallet } from 'src/assets/core/data/class/dashboard.class';
-import { ModalConstant } from 'src/assets/core/data/constant/constant';
+import {
+  AppConfigConst,
+  ModalConstant,
+} from 'src/assets/core/data/constant/constant';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { WalletService } from 'src/assets/core/services/wallet.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
@@ -56,6 +59,9 @@ export class AddWalletComponent implements OnInit {
       }, 100 * 10);
     } else {
       this.walletImg = this.swalService.walletImg;
+      if (this.walletImg === '') {
+        this.walletImg = AppConfigConst.DEFAULT_WALLET_IMG;
+      }
       this.checkbox = false;
     }
   }
@@ -65,6 +71,9 @@ export class AddWalletComponent implements OnInit {
 
     if (!this.defaultImg) {
       walletToSave.img = this.walletImg;
+    }
+    if (this.walletImg === '') {
+      walletToSave.img = AppConfigConst.DEFAULT_WALLET_IMG;
     }
 
     this.walletService.addUpdateWallet(walletToSave).subscribe((data) => {

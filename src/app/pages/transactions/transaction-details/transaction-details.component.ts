@@ -22,6 +22,14 @@ export class TransactionDetailsComponent implements OnInit {
     this.screenService.setupHeader();
     this.screenService.hideFooter();
     this.wallet = this.dashboardService.wallet;
+
+    if (this.wallet?.history.find((w) => w.id == undefined)) {
+      let index = this.wallet.history.indexOf(
+        this.wallet?.history.find((w) => w.id == undefined)!
+      );
+      this.wallet.history.splice(index, 1);
+    }
+
     this.class =
       this.wallet?.differenceLastStats === 0
         ? 'text-warning'

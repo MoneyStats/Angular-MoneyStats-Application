@@ -64,14 +64,14 @@
                   >
                     {{ "wallet.modal.categoryText" | translate }}
                   </option>
-                  <option
+                  <!--<option
                     *ngIf="wallet.id"
                     [value]="wallet.category"
                     selected
                     disabled
                   >
                     {{ "wallet.modal.categoryTextEdit" | translate }}
-                  </option>
+                  </option>-->
                   <option
                     *ngFor="
                       let category of categoriesInput != undefined
@@ -157,7 +157,6 @@
                 >{{ "wallet.modal.editWallet.default" | translate }}</label
               >
             </div>
-            <hr />
             <div class="form-group basic">
               <button
                 (click)="addUpdateWallet()"
