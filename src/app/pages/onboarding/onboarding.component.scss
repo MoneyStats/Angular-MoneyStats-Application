@@ -7,13 +7,20 @@
 @media screen and (max-width: 780px) {
   .carousel-inner {
     max-width: 500px;
-    margin-top: 20vh !important;
+    margin-top: 10vh !important;
   }
 }
 
 @media screen and (min-width: 780px) {
   .carousel-inner {
-    margin-top: 20vh;
+    margin-top: 20vh !important;
+    max-width: 500px;
+  }
+}
+
+@media screen and (max-height: 700px) {
+  .carousel-inner {
+    margin-top: 5vh !important;
     max-width: 500px;
   }
 }

@@ -1,3 +1,4 @@
+import { AppConfigConst } from '../constant/constant';
 import {
   CategoryInterface,
   DashboardInterface,
@@ -22,7 +23,7 @@ export class Dashboard implements DashboardInterface {
 
 export class Wallet extends GenericModel implements WalletInterface {
   name!: string;
-  img: string = '../../../../assets/images/sample/wallet.png';
+  img: string = AppConfigConst.DEFAULT_WALLET_IMG;
   category!: string;
   allTimeHigh: number = 0;
   allTimeHighDate: Date = new Date();

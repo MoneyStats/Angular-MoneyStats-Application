@@ -69,7 +69,7 @@ const routes: Routes = [
         component: TransactionsComponent,
       },
       {
-        path: 'transaction/details/:wallet',
+        path: 'transaction/details/:id/:wallet',
         component: TransactionDetailsComponent,
       },
       {
@@ -77,11 +77,11 @@ const routes: Routes = [
         component: WalletComponent,
       },
       {
-        path: 'wallet/details/:wallet',
+        path: 'wallet/details/:id/:wallet',
         component: WalletDetailsComponent,
       },
       {
-        path: 'wallet/details/:wallet/history',
+        path: 'wallet/details/:id/:wallet/history',
         component: WalletHistoryComponent,
       },
       {

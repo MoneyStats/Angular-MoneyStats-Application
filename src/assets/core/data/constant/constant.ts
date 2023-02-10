@@ -31,3 +31,8 @@ export enum LanguagesSettings {
   ENGLISH = 'en',
   ITALIAN = 'it',
 }
+
+export enum AppConfigConst {
+  DEFAULT_WALLET_IMG = '../../../../assets/images/sample/wallet.png',
+  DEFAULT_USER_IMG = '../../../../assets/images/sample/avatar.png',
+}

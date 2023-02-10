@@ -20,6 +20,12 @@ export class WalletHistoryComponent implements OnInit {
   ngOnInit(): void {
     this.wallet = this.walletService.walletHistory;
 
+    if (this.wallet?.history.find((w) => w.id == undefined)) {
+      let index = this.wallet.history.indexOf(
+        this.wallet?.history.find((w) => w.id == undefined)!
+      );
+      this.wallet.history.splice(index, 1);
+    }
     let years: Array<string> = [];
     this.wallet?.history.forEach((histor) => {
       years.push(histor.date.toString().split('-')[0]);

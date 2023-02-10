@@ -12,4 +12,5 @@ export class Error {
   status?: string;
   message?: string;
   exceptionMessage?: string;
+  stackTrace?: string;
 }
