@@ -59,6 +59,8 @@ import { PagesComponent } from './pages/pages.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ReportBugComponent } from './shared/components/modal/report-bug/report-bug.component';
 import { OnboardingComponent } from './pages/onboarding/onboarding.component';
+import { LoadingComponent } from './interceptors/loading/loading.component';
+import { LoaderInterceptor } from 'src/assets/core/interceptors/loader.interceptor';
 
 @NgModule({
   declarations: [
@@ -104,6 +106,7 @@ import { OnboardingComponent } from './pages/onboarding/onboarding.component';
     PagesComponent,
     ReportBugComponent,
     OnboardingComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
@@ -132,6 +135,11 @@ import { OnboardingComponent } from './pages/onboarding/onboarding.component';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
       multi: true,
     },
   ],

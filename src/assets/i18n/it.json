@@ -1,11 +1,11 @@
 {
   "onboard": {
     "tab1": {
-      "title": "Welcome to MoneyStats",
-      "text": "This is the first login thru the app. <br /> To continue the on-board process press Next."
+      "title": "Benvenuto su MoneyStats",
+      "text": "Questa è la prima login nell'app. <br /> Per continuare con l'onboard premi Avanti."
     },
     "tab2": {
-      "title": "Why use it?",
+      "title": "Perchè utilizzarla?",
       "text": "The difference between MoneyStats and the others Money Management apps is that you don't need to keep track of you expences, once a week or once a month is needed and recommended to get the best performance."
     },
     "tab3": {
