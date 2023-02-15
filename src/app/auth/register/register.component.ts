@@ -22,6 +22,7 @@ export class RegisterComponent implements OnInit {
   currency: string = '';
   currencyList: string[] = [];
   check: boolean = false;
+  invitationCode: string = '';
   constructor(
     private location: Location,
     private userService: UserService,
@@ -54,7 +55,7 @@ export class RegisterComponent implements OnInit {
     user.username = this.username;
     user.currency = this.currency;
 
-    this.userService.register(user).subscribe((data) => {
+    this.userService.register(user, this.invitationCode).subscribe((data) => {
       this.swal.toastMessage(SwalIcon.SUCCESS, data.message!);
       this.router.navigate(['auth/login']);
     });
