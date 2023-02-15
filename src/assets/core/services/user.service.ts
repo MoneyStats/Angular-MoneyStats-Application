@@ -86,11 +86,10 @@ export class UserService {
   }
 
   register(user: User, invitationCode: string): Observable<ResponseModel> {
-    let params: HttpParams = new HttpParams();
-    params.append('invitationCode', invitationCode);
-    return this.http.post<ResponseModel>(environment.registerDataUrl, user, {
-      params: params,
-    });
+    return this.http.post<ResponseModel>(
+      environment.registerDataUrl + '?invitationCode=' + invitationCode,
+      user
+    );
   }
 
   login(username: string, password: string): Observable<ResponseModel> {
