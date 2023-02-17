@@ -1,9 +1,9 @@
-const baseUrlApp: string = '../../';
+const baseUrlApp: string = 'https://moneystats.github.io/App';
 const host: string = 'https://prod-moneystats-service.up.railway.app';
 
 export const environment = {
   production: true,
-  baseUrl: '../../',
+  baseUrl: 'https://moneystats.github.io/App',
   version: '1.0.0',
 
   // Mock Data
