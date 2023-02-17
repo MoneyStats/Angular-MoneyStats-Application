@@ -181,10 +181,38 @@
                 <option selected disabled>
                   {{ "auth.register.selectCurrency" | translate }}
                 </option>
-                <option value="{{ coin }}" *ngFor="let coin of currencyList">
+                <option
+                  value="{{ coin }}"
+                  *ngFor="let coin of currencyList"
+                  [selected]="currency === coin"
+                >
                   {{ coin }}
                 </option>
               </select>
+            </div>
+          </div>
+
+          <div class="form-group basic">
+            <div class="input-wrapper">
+              <label class="label" for="invitationCode">{{
+                "auth.register.invitationCode" | translate
+              }}</label>
+              <input
+                name="invitationCode"
+                #invitationCode1="ngModel"
+                [(ngModel)]="invitationCode"
+                required
+                type="text"
+                class="form-control"
+                id="invitationCode"
+                autocomplete="off"
+                placeholder="{{
+                  'auth.register.invitationCodePlaceholder' | translate
+                }}"
+              />
+              <i class="clear-input">
+                <ion-icon name="close-circle"></ion-icon>
+              </i>
             </div>
           </div>
 

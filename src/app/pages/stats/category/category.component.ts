@@ -39,7 +39,7 @@ export class CategoryComponent implements OnInit, OnChanges {
   mapWalletCategory: Map<string, any> = new Map<string, any>();
 
   // categoryTableBalance used just to set data
-  categoryTableBalance: Array<any> = [];
+  categoryTableBalance: any = [];
   balances: Array<number> = [];
   totalMap: Map<string, any> = new Map<string, any>();
   totalList: Array<any> = [];
@@ -81,6 +81,11 @@ export class CategoryComponent implements OnInit, OnChanges {
     this.dashboard.statsWalletDays.forEach((date) => {
       this.categoryTableBalance.push(this.tableCreate(date, table));
     });
+    this.categoryTableBalance.forEach((c: any) => {
+      if (c.data) {
+        this.categoryTableBalance.data = true;
+      }
+    });
     this.mapWalletCategory.set(this.KEY_INVESTMENTS, this.categoryTableBalance);
     this.totalMap.set(this.KEY_INVESTMENTS, this.totalList);
 
@@ -93,6 +98,11 @@ export class CategoryComponent implements OnInit, OnChanges {
     );
     this.dashboard.statsWalletDays.forEach((date) => {
       this.categoryTableBalance.push(this.tableCreate(date, table));
+    });
+    this.categoryTableBalance.forEach((c: any) => {
+      if (c.data) {
+        this.categoryTableBalance.data = true;
+      }
     });
     this.mapWalletCategory.set(this.KEY_CAPITAL, this.categoryTableBalance);
     this.totalMap.set(this.KEY_CAPITAL, this.totalList);
@@ -107,6 +117,11 @@ export class CategoryComponent implements OnInit, OnChanges {
     this.dashboard.statsWalletDays.forEach((date) => {
       this.categoryTableBalance.push(this.tableCreate(date, table));
     });
+    this.categoryTableBalance.forEach((c: any) => {
+      if (c.data) {
+        this.categoryTableBalance.data = true;
+      }
+    });
     this.mapWalletCategory.set(this.KEY_SAVING, this.categoryTableBalance);
     this.totalMap.set(this.KEY_SAVING, this.totalList);
 
@@ -120,6 +135,11 @@ export class CategoryComponent implements OnInit, OnChanges {
     this.dashboard.statsWalletDays.forEach((date) => {
       this.categoryTableBalance.push(this.tableCreate(date, table));
     });
+    this.categoryTableBalance.forEach((c: any) => {
+      if (c.data) {
+        this.categoryTableBalance.data = true;
+      }
+    });
     this.mapWalletCategory.set(this.KEY_DEBITS, this.categoryTableBalance);
     this.totalMap.set(this.KEY_DEBITS, this.totalList);
 
@@ -132,6 +152,11 @@ export class CategoryComponent implements OnInit, OnChanges {
     );
     this.dashboard.statsWalletDays.forEach((date) => {
       this.categoryTableBalance.push(this.tableCreate(date, table));
+    });
+    this.categoryTableBalance.forEach((c: any) => {
+      if (c.data) {
+        this.categoryTableBalance.data = true;
+      }
     });
     this.mapWalletCategory.set(this.KEY_OTHER, this.categoryTableBalance);
     this.totalMap.set(this.KEY_OTHER, this.totalList);
@@ -167,11 +192,19 @@ export class CategoryComponent implements OnInit, OnChanges {
       (total.balance - this.balances[this.balances.length - 1]).toFixed(2)
     );
     total.percentage = parseFloat(percentage);
+    if (total.percentage === Infinity || Number.isNaN(total.percentage)) {
+      total.percentage = 0;
+    }
     total.trend = trend;
     array.push(total);
     this.totalList.push(total);
     this.balances.push(total.balance);
     array.index = array.length - 1;
+    array.data = true;
+
+    if (total.balance === 0) {
+      array.data = false;
+    }
     return array;
   }
 }

@@ -301,7 +301,7 @@
               "
             >
               <app-wallet-history-card
-                *ngIf="i < 6"
+                *ngIf="i < 6 && stats.id"
                 [stats]="stats"
               ></app-wallet-history-card>
             </div>
@@ -316,6 +316,15 @@
         </div>
         <!-- History -->
       </div>
+    </div>
+    <div align="center">
+      <img
+        src="../../../assets/images/logos/logo_transparent_gray_land.png"
+        alt=""
+        srcset=""
+        style="width: 150px"
+        class="pb-1"
+      />
     </div>
   </div>
 </section>

@@ -1,7 +1,7 @@
 <!-- item -->
 <a
   href="#"
-  [routerLink]="['/transaction/details', wallet?.name]"
+  [routerLink]="['/transaction/details', wallet?.id, wallet?.name]"
   (click)="parsingWallet()"
   class="item"
 >
@@ -14,7 +14,7 @@
   </div>
   <div class="right">
     <div class="text-end price {{ class }}">{{ differenceLastStats }}</div>
-    <p>{{ "transaction.difference" | translate }}</p>
+    <p class="text-end">{{ "transaction.difference" | translate }}</p>
   </div>
 </a>
 <!-- * item -->

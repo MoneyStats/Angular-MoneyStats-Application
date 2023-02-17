@@ -1,0 +1,37 @@
+.img {
+  width: 200px;
+  img {
+    border-radius: 50% !important;
+  }
+}
+@media screen and (max-width: 780px) {
+  .carousel-inner {
+    max-width: 500px;
+    margin-top: 10vh !important;
+  }
+}
+
+@media screen and (min-width: 780px) {
+  .carousel-inner {
+    margin-top: 20vh !important;
+    max-width: 500px;
+  }
+}
+
+@media screen and (max-height: 700px) {
+  .carousel-inner {
+    margin-top: 5vh !important;
+    max-width: 500px;
+  }
+}
+
+.carousel-indicators button {
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+}
+
+.carousel-indicators {
+  position: fixed;
+  bottom: 80px;
+}

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -85,8 +85,11 @@ export class UserService {
     this.router.navigate(['auth/login']);
   }
 
-  register(user: User): Observable<ResponseModel> {
-    return this.http.post<ResponseModel>(environment.registerDataUrl, user);
+  register(user: User, invitationCode: string): Observable<ResponseModel> {
+    return this.http.post<ResponseModel>(
+      environment.registerDataUrl + '?invitationCode=' + invitationCode,
+      user
+    );
   }
 
   login(username: string, password: string): Observable<ResponseModel> {

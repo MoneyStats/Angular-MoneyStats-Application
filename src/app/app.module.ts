@@ -58,6 +58,10 @@ import { AuthComponent } from './auth/auth.component';
 import { PagesComponent } from './pages/pages.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ReportBugComponent } from './shared/components/modal/report-bug/report-bug.component';
+import { OnboardingComponent } from './pages/onboarding/onboarding.component';
+import { LoadingComponent } from './interceptors/loading/loading.component';
+import { LoaderInterceptor } from 'src/assets/core/interceptors/loader.interceptor';
+import { JwtInterceptor } from './auth/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -102,6 +106,8 @@ import { ReportBugComponent } from './shared/components/modal/report-bug/report-
     AuthComponent,
     PagesComponent,
     ReportBugComponent,
+    OnboardingComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
@@ -132,6 +138,12 @@ import { ReportBugComponent } from './shared/components/modal/report-bug/report-
       useClass: HttpErrorInterceptor,
       multi: true,
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true,
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
   //schemas: [CUSTOM_ELEMENTS_SCHEMA],

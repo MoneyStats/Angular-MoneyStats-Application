@@ -21,6 +21,7 @@ export class WalletDetailsComponent implements OnInit {
   coinSymbol?: string;
   wallet?: Wallet;
   walletName?: string;
+  walletId?: number;
   constructor(
     public screenService: ScreenService,
     private route: ActivatedRoute,
@@ -34,12 +35,18 @@ export class WalletDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.screenService.setupHeader();
+    this.screenService.hideFooter();
     this.route.params.subscribe((w: any) => {
+      this.walletId = w.id;
       this.walletName = w.wallet;
     });
+
     this.wallet = this.walletService.walletDetails?.find(
-      (w) => w.name === this.walletName
+      (w: Wallet) => w.id == this.walletId && w.name === this.walletName
     );
+    if (this.wallet?.history.find((w) => w.id === undefined)) {
+      this.wallet?.history.splice(1, 1);
+    }
 
     this.renderGraph();
     if (this.screenService!.screenWidth! <= 780) {

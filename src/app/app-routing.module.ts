@@ -16,6 +16,7 @@ import { WalletHistoryComponent } from './pages/wallet/wallet-details/wallet-his
 import { WalletComponent } from './pages/wallet/wallet.component';
 import { ForgotComponent } from './auth/forgot/forgot.component';
 import { RouteGuardService } from './auth/route-guard.service';
+import { OnboardingComponent } from './pages/onboarding/onboarding.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
     path: 'auth/register',
     redirectTo: 'auth/register',
     pathMatch: 'full',
+  },
+  {
+    path: 'on-boarding',
+    component: OnboardingComponent,
   },
   {
     path: 'auth',
@@ -59,13 +64,12 @@ const routes: Routes = [
         path: '',
         component: DashboardComponent,
       },
-
       {
         path: 'transaction',
         component: TransactionsComponent,
       },
       {
-        path: 'transaction/details/:wallet',
+        path: 'transaction/details/:id/:wallet',
         component: TransactionDetailsComponent,
       },
       {
@@ -73,11 +77,11 @@ const routes: Routes = [
         component: WalletComponent,
       },
       {
-        path: 'wallet/details/:wallet',
+        path: 'wallet/details/:id/:wallet',
         component: WalletDetailsComponent,
       },
       {
-        path: 'wallet/details/:wallet/history',
+        path: 'wallet/details/:id/:wallet/history',
         component: WalletHistoryComponent,
       },
       {

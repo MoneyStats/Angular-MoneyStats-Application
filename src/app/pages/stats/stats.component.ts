@@ -30,7 +30,6 @@ export class StatsComponent implements OnInit {
     this.screenService.showFooter();
     this.screenService.goToStats();
     this.statsService.getResume().subscribe((res) => {
-      console.log(res);
       this.resume = new Map<string, Dashboard>(Object.entries(res.data));
       this.years = Array.from(this.resume.keys());
       this.updateData(this.years[this.years.length - 1]);

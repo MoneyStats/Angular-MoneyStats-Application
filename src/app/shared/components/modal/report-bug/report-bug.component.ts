@@ -47,7 +47,14 @@ export class ReportBugComponent implements OnInit {
             .replace('{', '{<br>')
             .replace('}', '}<br>')
         )
-        .replace('$DESCRIPTION$', this.description);
+        .replace(
+          '$DESCRIPTION$',
+          this.description +
+            (this.exception?.error?.stackTrace
+              ? '<hr> <h1>Stacktrace:</h1> <br>' +
+                this.exception.error.stackTrace
+              : '')
+        );
       githubIssues.body = template;
       this.userService.openIssues(githubIssues).subscribe((res) => {
         this.swal.toastMessage(SwalIcon.SUCCESS, res.message!);

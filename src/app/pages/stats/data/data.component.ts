@@ -35,7 +35,6 @@ export class DataComponent implements OnInit, OnChanges {
       });
       this.renderChart();
     }
-    console.log(this.tableBalance);
   }
 
   ngOnInit(): void {
@@ -77,7 +76,6 @@ export class DataComponent implements OnInit, OnChanges {
       }
       array.push(history);
     });
-    console.log(array);
     let total: Stats = new Stats();
     total.balance = 0;
     total.date = new Date(date);
@@ -93,11 +91,19 @@ export class DataComponent implements OnInit, OnChanges {
     ).toFixed(2);
     total.percentage = parseFloat(percentage);
 
+    if (total.percentage === Infinity || Number.isNaN(total.percentage)) {
+      total.percentage = 0;
+    }
+
     let trendStats: Stats = new Stats();
     let trend = (
       total.balance - this.balances[this.balances.length - 1]
     ).toFixed(2);
     trendStats.balance = parseFloat(trend);
+
+    if (Number.isNaN(trendStats.balance)) {
+      trendStats.balance = 0;
+    }
 
     array.push(total);
     array.push(trendStats);
