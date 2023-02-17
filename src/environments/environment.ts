@@ -8,6 +8,8 @@ const host: string = 'http://192.168.1.19:8080';
 export const environment = {
   production: false,
   baseUrl: '../../',
+  baseUrlHeader: '../../../../',
+  baseUrlSettings: "../../../../../",
   version: '1.0.0',
 
   // Mock Data

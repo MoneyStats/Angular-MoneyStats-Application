@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguagesSettings } from 'src/assets/core/data/constant/constant';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-languages',
@@ -11,6 +12,7 @@ export class LanguagesComponent implements OnInit {
   @Input('modalId') modalId: string = '';
   english: boolean = false;
   italian: boolean = false;
+  environment = environment;
 
   constructor(private translate: TranslateService) {}
 
