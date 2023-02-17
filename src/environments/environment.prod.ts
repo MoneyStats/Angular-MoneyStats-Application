@@ -4,6 +4,8 @@ const host: string = 'http://synologynas.ddns.net:8800';
 export const environment = {
   production: true,
   baseUrl: '../../',
+  baseUrlHeader: '../../../../',
+  baseUrlSettings: "../../../../../",
   version: '1.0.0',
 
   // Mock Data

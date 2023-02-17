@@ -35,7 +35,9 @@
                   <label class="form-check-label" for="en">
                     {{ "settings.app.languages.en" | translate }}
                     <img
-                      src="../../../../../assets/images/languages/English.png"
+                      src="{{
+                        environment.baseUrlSettings
+                      }}assets/images/languages/English.png"
                       class="sl-flag"
                       alt=""
                   /></label>
@@ -54,7 +56,9 @@
                   <label class="form-check-label" for="it">
                     {{ "settings.app.languages.it" | translate }}
                     <img
-                      src="../../../../../assets/images/languages/Italy.png"
+                      src="{{
+                        environment.baseUrlSettings
+                      }}assets/images/languages/Italy.png"
                       class="sl-flag"
                       alt=""
                   /></label>
