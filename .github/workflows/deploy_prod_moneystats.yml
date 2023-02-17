@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: "☁️ Checkout Repository"
         uses: actions/checkout@v2
-        with:ng
+        with:
           persist-credentials: false
 
   setting-up:
