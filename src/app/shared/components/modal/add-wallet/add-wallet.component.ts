@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { env } from 'process';
 import { Category, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import {
   AppConfigConst,
