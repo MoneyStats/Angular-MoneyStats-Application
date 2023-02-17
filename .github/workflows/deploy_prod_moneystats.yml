@@ -91,7 +91,7 @@ jobs:
           dockerfile: Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          buildArgs: config=production
+          buildArgs: config=prod
   deploy-github-pages:
     name: 🚀 Deploy on Github Pages
     runs-on: ubuntu-latest
@@ -109,7 +109,7 @@ jobs:
         run: |
           npm install -g @angular/cli
           npm install --force
-          ng build --configuration=production --output-hashing=none --base-href "https://${{ secrets.ORGANIZATION_USERNAME }}.github.io/${{ secrets.DESTINATION_REPOSITORY }}/"
+          ng build --configuration=railway --output-hashing=none --base-href "https://${{ secrets.ORGANIZATION_USERNAME }}.github.io/${{ secrets.DESTINATION_REPOSITORY }}/"
       - name: 🚀 Pushes to github pages
         uses: cpina/github-action-push-to-another-repository@main
         env:
