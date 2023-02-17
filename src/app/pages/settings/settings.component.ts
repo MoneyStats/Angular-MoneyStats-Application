@@ -9,6 +9,7 @@ import { UserService } from 'src/assets/core/services/user.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { ThemeService } from 'src/assets/core/utils/theme.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-settings',
@@ -16,6 +17,7 @@ import { ToastService } from 'src/assets/core/utils/toast.service';
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
+  environment = environment;
   @Output('profileConst') profileConst: string = '';
   user?: User;
   constructor(

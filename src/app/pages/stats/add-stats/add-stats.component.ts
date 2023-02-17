@@ -3,6 +3,7 @@ import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { StatsService } from 'src/assets/core/services/stats.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-add-stats',
@@ -10,6 +11,7 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
   styleUrls: ['./add-stats.component.scss'],
 })
 export class AddStatsComponent implements OnInit {
+  environment = environment;
   saveValidation: boolean = false;
   // Used for warning date
   dateValidation: boolean = false;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { Location } from '@angular/common';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-onboarding',
@@ -9,6 +10,7 @@ import { DashboardService } from 'src/assets/core/services/dashboard.service';
   styleUrls: ['./onboarding.component.scss'],
 })
 export class OnboardingComponent implements OnInit {
+  environment = environment;
   counter: number = 1;
 
   constructor(

@@ -3,9 +3,11 @@ const host: string = 'https://prod-moneystats-service.up.railway.app';
 
 export const environment = {
   production: true,
-  baseUrl: 'https://moneystats.github.io/App/',
+  baseUrl: baseUrlApp,
   baseUrlHeader: baseUrlApp,
   baseUrlSettings: baseUrlApp,
+  baseUrlDashboard: baseUrlApp,
+  baseUrlVersion: baseUrlApp,
   version: '1.0.0',
 
   // Mock Data

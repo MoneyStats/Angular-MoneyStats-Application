@@ -13,6 +13,7 @@ import { ChartService } from 'src/assets/core/utils/chart.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { SplideService } from 'src/assets/core/utils/splide.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,6 +21,7 @@ import { ToastService } from 'src/assets/core/utils/toast.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  environment = environment;
   @Output('dashboard') dashboard: Dashboard = new Dashboard();
   @Output('user') user: User = new User();
   @Output('performance') performance: string =

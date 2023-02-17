@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { WalletService } from 'src/assets/core/services/wallet.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-wallet-history',
@@ -9,6 +10,7 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
   styleUrls: ['./wallet-history.component.scss'],
 })
 export class WalletHistoryComponent implements OnInit {
+  environment = environment;
   wallet?: Wallet;
   walletMap?: Map<string, Stats[]> = new Map<string, Stats[]>();
   uniqueYears: any;

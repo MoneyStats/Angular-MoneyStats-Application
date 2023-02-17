@@ -10,6 +10,8 @@ export const environment = {
   baseUrl: '../../',
   baseUrlHeader: '../../../../',
   baseUrlSettings: "../../../../../",
+  baseUrlDashboard: "../../../",
+  baseUrlVersion: "../../../../../../",
   version: '1.0.0',
 
   // Mock Data
