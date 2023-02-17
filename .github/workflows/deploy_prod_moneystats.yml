@@ -57,8 +57,8 @@ jobs:
           npm install -g @angular/cli
           npm install --force
           npm run prod
-  deploy:
-    name: 🚀 Deploy
+  deploy-dockerhub:
+    name: 🚀 Deploy on DockerHub
     runs-on: ubuntu-latest
     environment:
       name: prod-moneystats-angular
@@ -92,3 +92,34 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           buildArgs: config=production
+
+  deploy-github-pages:
+    name: 🚀 Deploy on Github Pages
+    runs-on: ubuntu-latest
+    environment:
+      name: prod-moneystats-angular
+    needs:
+      - dependency
+      - build
+    steps:
+      - name: "☁️ Checkout Repository"
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: 📂 Build
+        run: |
+          npm install -g @angular/cli
+          npm install
+          ng build --prod --output-hashing=none --base-href "https://${{ secrets.ORGANIZATION_USERNAME }}.github.io/${{ secrets.DESTINATION_REPOSITORY }}/"
+      - name: 🚀 Pushes to github pages
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          name: angular-moneystats
+          url: https://MoneyStats.github.io/App/
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN }}
+        with:
+          source-directory: "dist/angular-moneystats"
+          destination-github-username: "${{ secrets.ORGANIZATION_USERNAME }}"
+          destination-repository-name: "${{ secrets.DESTINATION_REPOSITORY }}"
+          user-email: ${{ secrets.EMAIL }}
+          target-branch: main

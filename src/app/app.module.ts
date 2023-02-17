@@ -61,6 +61,7 @@ import { ReportBugComponent } from './shared/components/modal/report-bug/report-
 import { OnboardingComponent } from './pages/onboarding/onboarding.component';
 import { LoadingComponent } from './interceptors/loading/loading.component';
 import { LoaderInterceptor } from 'src/assets/core/interceptors/loader.interceptor';
+import { JwtInterceptor } from './auth/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -142,6 +143,7 @@ import { LoaderInterceptor } from 'src/assets/core/interceptors/loader.intercept
       useClass: LoaderInterceptor,
       multi: true,
     },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
   //schemas: [CUSTOM_ELEMENTS_SCHEMA],
