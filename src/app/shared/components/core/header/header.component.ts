@@ -16,6 +16,7 @@ import {
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { UserService } from 'src/assets/core/services/user.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -25,6 +26,7 @@ import { ToastService } from 'src/assets/core/utils/toast.service';
 export class HeaderComponent implements OnInit {
   @Input('user') user?: User;
   @Input() dashboard?: Dashboard;
+  environment = environment;
   constructor(
     private toast: ToastService,
     private dashboardService: DashboardService,
