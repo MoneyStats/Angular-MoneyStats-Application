@@ -1,10 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Github, User } from 'src/assets/core/data/class/user.class';
 import {
+  AppConfigConst,
   ModalConstant,
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
 import { UserService } from 'src/assets/core/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-social-details',
@@ -48,7 +50,7 @@ export class SocialDetailsComponent implements OnInit {
   disconnectGithubAccount() {
     localStorage.removeItem(StorageConstant.GITHUBACCOUNT);
     this.userService.user.profilePhoto =
-      '../../../../assets/images/sample/avatar.png';
+      environment.baseUrlHeader + AppConfigConst.DEFAULT_USER_IMG;
     this.userService.user.github = new Github();
     this.userService.user.githubUser = undefined;
     this.userService.updateUserData(this.userService.user).subscribe((res) => {

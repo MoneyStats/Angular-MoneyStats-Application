@@ -4,6 +4,7 @@ import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { UserService } from 'src/assets/core/services/user.service';
 import { Output, EventEmitter } from '@angular/core';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-transactions',
@@ -11,6 +12,7 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
   styleUrls: ['./transactions.component.scss'],
 })
 export class TransactionsComponent implements OnInit {
+  environment = environment;
   dashboard?: Dashboard;
 
   constructor(
