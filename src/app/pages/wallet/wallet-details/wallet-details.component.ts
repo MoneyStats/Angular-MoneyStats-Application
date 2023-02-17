@@ -7,6 +7,7 @@ import { ChartService } from 'src/assets/core/utils/chart.service';
 import { WalletService } from 'src/assets/core/services/wallet.service';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { SwalService } from 'src/assets/core/utils/swal.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-wallet-details',
@@ -14,6 +15,7 @@ import { SwalService } from 'src/assets/core/utils/swal.service';
   styleUrls: ['./wallet-details.component.scss'],
 })
 export class WalletDetailsComponent implements OnInit {
+  environment = environment;
   public chartAll?: Partial<ApexOptions>;
   public chart1Y?: Partial<ApexOptions>;
   public chart3Y?: Partial<ApexOptions>;

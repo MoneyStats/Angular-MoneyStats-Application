@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { env } from 'process';
 import { Category, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import {
   AppConfigConst,
@@ -8,6 +9,7 @@ import {
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { WalletService } from 'src/assets/core/services/wallet.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-add-wallet',
@@ -15,6 +17,7 @@ import { SwalService } from 'src/assets/core/utils/swal.service';
   styleUrls: ['./add-wallet.component.scss'],
 })
 export class AddWalletComponent implements OnInit {
+  environment = environment;
   @Input('modalId') modalId: string = '';
   @Output('emitAddWallet') emitAddWallet = new EventEmitter<Wallet>();
   @Input('categoriesInput') categoriesInput?: Category[];
@@ -60,7 +63,8 @@ export class AddWalletComponent implements OnInit {
     } else {
       this.walletImg = this.swalService.walletImg;
       if (this.walletImg === '') {
-        this.walletImg = AppConfigConst.DEFAULT_WALLET_IMG;
+        this.walletImg =
+          environment.baseUrlHeader + AppConfigConst.DEFAULT_WALLET_IMG;
       }
       this.checkbox = false;
     }
@@ -73,7 +77,8 @@ export class AddWalletComponent implements OnInit {
       walletToSave.img = this.walletImg;
     }
     if (this.walletImg === '') {
-      walletToSave.img = AppConfigConst.DEFAULT_WALLET_IMG;
+      walletToSave.img =
+        environment.baseUrlHeader + AppConfigConst.DEFAULT_WALLET_IMG;
     }
 
     this.walletService.addUpdateWallet(walletToSave).subscribe((data) => {

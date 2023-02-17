@@ -6,6 +6,7 @@ import {
   WalletInterface,
 } from '../interfaces/dashboard.interface';
 import { GenericModel } from './generic.class';
+import { environment } from 'src/environments/environment';
 
 export class Dashboard implements DashboardInterface {
   balance: number = 0;
@@ -23,7 +24,7 @@ export class Dashboard implements DashboardInterface {
 
 export class Wallet extends GenericModel implements WalletInterface {
   name!: string;
-  img: string = AppConfigConst.DEFAULT_WALLET_IMG;
+  img: string = environment.baseUrlHeader + AppConfigConst.DEFAULT_WALLET_IMG;
   category!: string;
   allTimeHigh: number = 0;
   allTimeHighDate: Date = new Date();

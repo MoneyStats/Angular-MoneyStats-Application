@@ -9,7 +9,8 @@ export class User implements UserInterface {
   username: string = 'username';
   password: string = '';
   role: string = 'USER';
-  profilePhoto: string = AppConfigConst.DEFAULT_USER_IMG;
+  profilePhoto: string =
+    environment.baseUrlHeader + AppConfigConst.DEFAULT_USER_IMG;
   currency: string = 'USD';
   authToken: any;
   mockedUser?: boolean;
