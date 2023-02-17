@@ -108,8 +108,8 @@ jobs:
       - name: 📂 Build
         run: |
           npm install -g @angular/cli
-          npm install
-          ng build --force --prod --output-hashing=none --base-href "https://${{ secrets.ORGANIZATION_USERNAME }}.github.io/${{ secrets.DESTINATION_REPOSITORY }}/"
+          npm install --force
+          ng build --prod --output-hashing=none --base-href "https://${{ secrets.ORGANIZATION_USERNAME }}.github.io/${{ secrets.DESTINATION_REPOSITORY }}/"
       - name: 🚀 Pushes to github pages
         uses: cpina/github-action-push-to-another-repository@main
         env:
