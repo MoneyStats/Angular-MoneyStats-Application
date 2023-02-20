@@ -79,6 +79,9 @@ export class AddWalletComponent implements OnInit {
       walletToSave.img =
         environment.baseUrlHeader + AppConfigConst.DEFAULT_WALLET_IMG;
     }
+    if (walletToSave.history.find((w) => w.id === undefined)) {
+      walletToSave?.history.splice(0, 1);
+    }
 
     this.walletService.addUpdateWallet(walletToSave).subscribe((data) => {
       // Save Wallet
