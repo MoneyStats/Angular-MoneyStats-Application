@@ -24,7 +24,6 @@ export class JwtInterceptor implements HttpInterceptor {
         if (httpEvent.type === 0) {
           return;
         }
-        console.log('response: ', httpEvent);
 
         let authToken: string;
         if (httpEvent instanceof HttpResponse) {
