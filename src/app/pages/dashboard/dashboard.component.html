@@ -161,16 +161,29 @@
           "dashboard.wallet_splide.view" | translate
         }}</a>
       </div>
-      <!-- carousel multiple -->
+      <div>
+        <app-content-box
+          *ngIf="!dashboard.wallets || !dashboard.wallets.length"
+          [header]="'dashboard.wallet_splide.nodata.header' | translate"
+          [body]="'dashboard.wallet_splide.nodata.body' | translate"
+          [footer]="'dashboard.wallet_splide.nodata.footer' | translate"
+        ></app-content-box>
+        <div id="slider" class="slider">
+          <app-wallet-card
+            *ngFor="let wallet of walletFilter(dashboard.wallets)"
+            [coinSymbol]="userService.coinSymbol"
+            [wallet]="wallet"
+            [btn]="'Open'"
+          ></app-wallet-card>
+        </div>
+      </div>
+
+      <!-- carousel multiple
       <div class="carousel-multiple splide">
         <div class="splide__track">
-          <app-content-box
-            *ngIf="!dashboard.wallets || !dashboard.wallets.length"
-            [header]="'dashboard.wallet_splide.nodata.header' | translate"
-            [body]="'dashboard.wallet_splide.nodata.body' | translate"
-            [footer]="'dashboard.wallet_splide.nodata.footer' | translate"
-          ></app-content-box>
-          <ul class="splide__list">
+
+
+          <ul *ngIf="false" class="splide__list">
             <app-splide-slide
               class="splide__slide"
               *ngFor="let wallet of walletFilter(dashboard.wallets)"
@@ -180,7 +193,7 @@
             </app-splide-slide>
           </ul>
         </div>
-      </div>
+      </div>-->
       <!-- * carousel multiple -->
     </div>
     <!-- * Wallet -->
@@ -192,7 +205,7 @@
         alt=""
         srcset=""
         style="width: 150px"
-        class="pb-1 pt-3"
+        class="pb-1 pt-1"
       />
     </div>
   </section>
