@@ -1,4 +1,4 @@
-<div class="bill-box">
+<div [style]="style" class="bill-box gradientSection">
   <div class="img-wrapper">
     <img src="{{ wallet?.img }}" alt="img" class="image-block imaged w48" />
   </div>
@@ -11,6 +11,7 @@
   <p class="pt-1">{{ wallet?.category }}</p>
 
   <a
+    *ngIf="btn"
     href="#"
     [routerLink]="['/wallet/details', wallet?.id, wallet?.name]"
     class="btn btn-primary btn-block btn-sm"

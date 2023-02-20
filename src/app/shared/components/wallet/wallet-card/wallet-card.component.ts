@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
-import { WalletService } from 'src/assets/core/services/wallet.service';
+import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 
 @Component({
   selector: 'app-wallet-card',
@@ -11,6 +10,7 @@ export class WalletCardComponent implements OnInit {
   @Input('coinSymbol') coinSymbol?: string;
   @Input('wallet') wallet?: Wallet;
   @Input('btn') btn?: string;
+  @Input('style') style: string = '';
   constructor() {}
 
   ngOnInit(): void {}

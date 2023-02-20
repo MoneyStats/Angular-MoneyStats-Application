@@ -171,6 +171,11 @@
         <div id="slider" class="slider">
           <app-wallet-card
             *ngFor="let wallet of walletFilter(dashboard.wallets)"
+            [style]="
+              'background-image: url(' +
+              wallet!.img +
+              ') !important; box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7)'
+            "
             [coinSymbol]="userService.coinSymbol"
             [wallet]="wallet"
             [btn]="'Open'"

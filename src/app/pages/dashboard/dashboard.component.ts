@@ -104,7 +104,7 @@ export class DashboardComponent implements OnInit {
           this.chartOptions = this.charts.renderChartLine(this.dashboard);
         }
       }, 100);
-      this.walletDetails(this.dashboard.wallets);
+      this.walletDetails(data.data.wallets);
     });
     this.scrollX();
     /*setTimeout(() => {
