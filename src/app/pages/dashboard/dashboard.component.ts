@@ -62,6 +62,7 @@ export class DashboardComponent implements OnInit {
         if (!this.dashboardService.isOnboarding) {
           this.router.navigate(['on-boarding']);
           this.dashboardService.isOnboarding = true;
+          return;
         }
       } else {
         this.dashboard = data.data;
@@ -103,10 +104,12 @@ export class DashboardComponent implements OnInit {
           this.chartOptions = this.charts.renderChartLine(this.dashboard);
         }
       }, 100);
+      this.walletDetails(this.dashboard.wallets);
     });
-    setTimeout(() => {
+    this.scrollX();
+    /*setTimeout(() => {
       this.splide.activeSplide();
-    }, 100);
+    }, 100);*/
 
     this.screenService.activeHeaderAndFooter();
     this.screenService.goToDashboard();
@@ -134,5 +137,17 @@ export class DashboardComponent implements OnInit {
     } else {
       this.dashboard.wallets = [wallet];
     }
+  }
+
+  scrollX() {
+    const scrollContainer = document.getElementById('slider')!;
+
+    scrollContainer.addEventListener('wheel', (evt) => {
+      evt.preventDefault();
+      scrollContainer.scrollLeft += evt.deltaY * 2;
+    });
+  }
+  walletDetails(res: Wallet[]) {
+    this.walletService.walletDetails = res;
   }
 }

@@ -112,3 +112,49 @@
   font-size: 13px !important;
   font-weight: 500 !important;
 }
+
+.slider {
+  /* line them up horizontally */
+  display: flex;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+  height: 270px;
+
+  /* allow for scrolling */
+  overflow-x: scroll !important;
+
+  scroll-snap-type: mandatory; /* for older browsers */
+  /* make it smooth on iOS */
+  -webkit-overflow-scrolling: touch !important;
+  /* each slide snaps into place */
+  scroll-snap-points-x: repeat(300px);
+  scroll-snap-type: x mandatory;
+}
+.slider > app-wallet-card {
+  /* make sure the width is honored */
+  flex-shrink: 0;
+  width: 300px;
+  height: 250px;
+}
+app-wallet-card {
+  /* make sure the width is honored */
+  margin: 10px;
+  width: 100vh;
+  scroll-snap-align: center;
+  position: relative;
+}
+@media screen and (max-width: 780px) {
+  .slider > app-wallet-card {
+    /* make sure the width is honored */
+    flex-shrink: 0;
+    width: 200px;
+    height: 250px;
+  }
+  app-wallet-card {
+    /* make sure the width is honored */
+    margin: 10px;
+    width: 200px;
+    scroll-snap-align: center;
+    position: relative;
+  }
+}

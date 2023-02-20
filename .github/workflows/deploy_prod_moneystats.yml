@@ -97,6 +97,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: prod-moneystats-angular
+      url: https://moneystats.github.io/App
     needs:
       - dependency
       - build

@@ -62,6 +62,7 @@ import { OnboardingComponent } from './pages/onboarding/onboarding.component';
 import { LoadingComponent } from './interceptors/loading/loading.component';
 import { LoaderInterceptor } from 'src/assets/core/interceptors/loader.interceptor';
 import { JwtInterceptor } from './auth/jwt.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import { JwtInterceptor } from './auth/jwt.interceptor';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     IonicModule.forRoot(),
     HttpClientModule,

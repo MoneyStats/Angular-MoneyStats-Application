@@ -59,11 +59,17 @@ export class HistoryComponent implements OnInit {
       (total.balance - this.balances[this.balances.length - 1]).toFixed(2)
     );
 
-    if (Number.isNaN(total.balance)) {
+    if (Number.isNaN(total.balance) || total.balance == undefined) {
       total.balance = 0;
     }
     total.percentage = parseFloat(percentage);
+    if (Number.isNaN(total.percentage)) {
+      total.percentage = 0;
+    }
     total.trend = trend;
+    if (Number.isNaN(total.trend)) {
+      total.trend = 0;
+    }
     array.push(total);
     this.totalList.push(total);
     this.balances.push(total.balance);
