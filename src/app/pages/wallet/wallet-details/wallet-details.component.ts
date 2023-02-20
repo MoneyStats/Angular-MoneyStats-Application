@@ -46,8 +46,9 @@ export class WalletDetailsComponent implements OnInit {
     this.wallet = this.walletService.walletDetails?.find(
       (w: Wallet) => w.id == this.walletId && w.name === this.walletName
     );
+
     if (this.wallet?.history.find((w) => w.id === undefined)) {
-      this.wallet?.history.splice(1, 1);
+      this.wallet?.history.splice(0, 1);
     }
 
     this.renderGraph();

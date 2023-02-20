@@ -207,27 +207,27 @@
       "modal": {
         "delete": {
           "title": "Conferma Cancellazione",
-          "text": "Are you sure you want to delete the current wallet? It would be logically deleted, always avaiable to restore it."
+          "text": "Sei sicuro di voler cancellare il portafoglio? Verrà cancellato logicamente, sempre disponibile per essere ripristinato."
         },
         "permanent": {
-          "title": "Permanent Delete",
-          "text": "Are you sure you want to delete the current wallet? It would be permanent deleted."
+          "title": "Cancellazione Permanente",
+          "text": "Sicuro di voler cancellare il portafoglio? Questa azione è irreversibile."
         },
         "restore": {
-          "title": "Restore Confirmation",
-          "text": "Do you want to restore the current wallet?"
+          "title": "Ripristina",
+          "text": "Vuoi ripritinare il wallet?"
         },
         "back": "Indietro",
-        "confirm": "Confirm",
-        "restoreBtn": "Restore"
+        "confirm": "Conferma",
+        "restoreBtn": "Ripristina"
       },
       "transaction": {
-        "title": "Last Stats",
+        "title": "Ultimo Stats",
         "mobile_back": "Indietro",
         "view": "Vedi",
-        "more": "Load more",
+        "more": "Vedi Tutto",
         "history": {
-          "title": "Transaction History",
+          "title": "Storico Transazioni",
           "mobile_back": "Indietro",
           "back": "Torna alla pagina precendete"
         }
@@ -239,26 +239,26 @@
     "back": "Torna alla pagina precendete",
     "mobile_back": "Indietro",
     "theme": {
-      "title": "Theme",
+      "title": "Tema",
       "dark": "Dark Mode"
     },
     "account": {
-      "title": "Account Settings",
-      "sync": "Sync Account",
-      "descriptionSync": "Sync your profile pictures with an existing social Account",
-      "open": "Open",
-      "username": "Change Username",
+      "title": "Impostazioni Account",
+      "sync": "Sincronizza Account",
+      "descriptionSync": "Sincronizza il tuo profilo con un Account Social",
+      "open": "Apri",
+      "username": "Cambia Username",
       "user_label": "Username",
-      "user_placeholder": "Digit your new username",
-      "email": "Update E-Mail",
+      "user_placeholder": "Digita username",
+      "email": "Aggiorna E-Mail",
       "email_label": "E-Mail",
-      "email_placeholder": "Digit your new email address",
-      "save": "Save"
+      "email_placeholder": "Digita email address",
+      "save": "Salva"
     },
     "security": {
-      "title": "Security",
-      "password": "Change Password",
-      "old_label": "Old Password",
+      "title": "Sicurezza",
+      "password": "Cambia Password",
+      "old_label": "Vecchia Password",
       "old_placeholder": "Digit your current password",
       "new_label": "New Password",
       "new_placeholder": "Digit your new password",
