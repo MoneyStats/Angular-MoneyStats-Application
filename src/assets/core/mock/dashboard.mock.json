@@ -1,490 +1,483 @@
 {
   "status": 200,
   "message": "Data for Dashboard!",
+  "correlationId": "5b95f29a-8866-4971-8227-bc15129066b2",
   "data": {
-    "balance": 1350000.0,
-    "value": "EUR",
-    "performace": 800,
-    "performanceSince": "01-01-2022",
-    "performanceLastDate": "12-01-2022",
-    "lastStatsPerformance": -10,
-    "lastStatsBalanceDifference": -3500,
+    "balance": 28201.5,
+    "performance": 135.47,
+    "performanceValue": 16225.0,
+    "performanceSince": "2023-01-01",
+    "performanceLastDate": "2023-02-22",
+    "lastStatsPerformance": 23.41,
+    "lastStatsBalanceDifference": 5349.5,
     "statsWalletDays": [
-      "31-01-2022",
-      "28-02-2022",
-      "31-03-2022",
-      "30-04-2022",
-      "31-05-2022",
-      "30-06-2022",
-      "31-07-2022",
-      "31-08-2022",
-      "30-09-2022",
-      "31-10-2022",
-      "30-11-2022",
-      "31-12-2022"
+      "2023-01-01",
+      "2023-02-01",
+      "2023-02-10",
+      "2023-02-21",
+      "2023-02-22"
     ],
     "categories": [
       {
-        "name": "Cash"
+        "id": 1,
+        "creationDate": "2023-02-21T14:43:45.804053",
+        "updateDate": "2023-02-21T14:43:45.804053",
+        "name": "Cash",
+        "img": "cash-outline"
       },
       {
-        "name": "Credit Card"
+        "id": 2,
+        "creationDate": "2023-02-21T14:43:45.805052",
+        "updateDate": "2023-02-21T14:43:45.805052",
+        "name": "Credit Card",
+        "img": "card-outline"
       },
       {
-        "name": "Debit Card"
+        "id": 3,
+        "creationDate": "2023-02-21T14:43:45.805052",
+        "updateDate": "2023-02-21T14:43:45.805052",
+        "name": "Debit Card",
+        "img": "card-outline"
       },
       {
-        "name": "Recurrence"
+        "id": 4,
+        "creationDate": "2023-02-21T14:43:45.806052",
+        "updateDate": "2023-02-21T14:43:45.806052",
+        "name": "Recurrence",
+        "img": "alarm-outline"
       },
       {
-        "name": "Bank Account"
+        "id": 5,
+        "creationDate": "2023-02-21T14:43:45.806052",
+        "updateDate": "2023-02-21T14:43:45.806052",
+        "name": "Bank Account",
+        "img": "wallet-outline"
       },
       {
-        "name": "Save"
+        "id": 6,
+        "creationDate": "2023-02-21T14:43:45.806052",
+        "updateDate": "2023-02-21T14:43:45.806052",
+        "name": "Save",
+        "img": "lock-closed-outline"
       },
       {
-        "name": "Coupon"
+        "id": 7,
+        "creationDate": "2023-02-21T14:43:45.806052",
+        "updateDate": "2023-02-21T14:43:45.806052",
+        "name": "Coupon",
+        "img": "ticket-outline"
       },
       {
-        "name": "Check"
+        "id": 8,
+        "creationDate": "2023-02-21T14:43:45.806052",
+        "updateDate": "2023-02-21T14:43:45.806052",
+        "name": "Check",
+        "img": "id-card-outline"
       },
       {
-        "name": "Investments"
+        "id": 9,
+        "creationDate": "2023-02-21T14:43:45.807051",
+        "updateDate": "2023-02-21T14:43:45.807051",
+        "name": "Investments",
+        "img": "bar-chart-outline"
       },
       {
-        "name": "Other"
+        "id": 10,
+        "creationDate": "2023-02-21T14:43:45.807051",
+        "updateDate": "2023-02-21T14:43:45.807051",
+        "name": "Others",
+        "img": "cube-outline"
       }
     ],
     "wallets": [
       {
         "id": 1,
+        "creationDate": "2023-02-21T14:46:44",
+        "updateDate": "2023-02-21T15:40:57",
         "name": "Coinbase",
-        "img": "https://avatars.githubusercontent.com/u/1885080?s=280&v=4",
+        "balance": 11000.0,
+        "img": "https://images.ctfassets.net/c5bd0wqjc7v0/3dFdY6GvgLgCIXmBiN6eiA/d4acc5d4c5d557566cf0e46f9b58de43/icon-buy-and-sell.svg",
+        "allTimeHigh": 11000.0,
+        "allTimeHighDate": "2023-02-22",
+        "highPrice": 11000.0,
+        "highPriceDate": "2023-02-22",
+        "lowPrice": 4250.5,
+        "lowPriceDate": "2023-01-01",
+        "performanceLastStats": 29.4,
+        "differenceLastStats": 2499.5,
+        "dateLastStats": "2023-02-22",
         "category": "Investments",
-        "performanceLastStats": 80,
-        "differenceLastStats": 2500,
-        "dateLastStats": "12-01-2022 12:59",
-        "balance": 10000,
         "history": [
           {
-            "date": "31-01-2022",
-            "balance": 1000,
-            "percentage": 10
+            "id": 145,
+            "creationDate": "2023-02-21T15:35:45",
+            "updateDate": "2023-02-21T15:35:45",
+            "date": "2023-01-01",
+            "balance": 4250.5,
+            "percentage": 22.4,
+            "trend": 777.8
           },
           {
-            "date": "28-02-2022",
-            "balance": 1500,
-            "percentage": 20
+            "id": 151,
+            "creationDate": "2023-02-21T15:36:30",
+            "updateDate": "2023-02-21T15:36:30",
+            "date": "2023-02-01",
+            "balance": 4840.3,
+            "percentage": 13.88,
+            "trend": 589.8
           },
           {
-            "date": "31-03-2022",
-            "balance": 1200,
-            "percentage": 1
+            "id": 157,
+            "creationDate": "2023-02-21T15:37:24",
+            "updateDate": "2023-02-21T15:37:24",
+            "date": "2023-02-10",
+            "balance": 6702.5,
+            "percentage": 38.47,
+            "trend": 1862.2
           },
           {
-            "date": "30-04-2022",
-            "balance": 3000,
-            "percentage": -10
+            "id": 163,
+            "creationDate": "2023-02-21T15:38:51",
+            "updateDate": "2023-02-21T15:38:51",
+            "date": "2023-02-21",
+            "balance": 8500.5,
+            "percentage": 26.83,
+            "trend": 1798.0
           },
           {
-            "date": "31-05-2022",
-            "balance": 5000,
-            "percentage": 10
-          },
-          {
-            "date": "30-06-2022",
-            "balance": 4000,
-            "percentage": -10
-          },
-          {
-            "date": "31-07-2022",
-            "balance": 6000,
-            "percentage": 10
-          },
-          {
-            "date": "31-08-2022",
-            "balance": 7000,
-            "percentage": -10
-          },
-          {
-            "date": "30-09-2022",
-            "balance": 6000,
-            "percentage": 10
-          },
-          {
-            "date": "31-10-2022",
-            "balance": 8000,
-            "percentage": -10
-          },
-          {
-            "date": "30-11-2022",
-            "balance": 12000,
-            "percentage": 10
-          },
-          {
-            "date": "31-12-2022",
-            "balance": 10000,
-            "percentage": 100
+            "id": 169,
+            "creationDate": "2023-02-21T15:40:57",
+            "updateDate": "2023-02-21T15:40:57",
+            "date": "2023-02-22",
+            "balance": 11000.0,
+            "percentage": 29.4,
+            "trend": 2499.5
           }
         ]
       },
       {
         "id": 2,
+        "creationDate": "2023-02-21T14:47:38",
+        "updateDate": "2023-02-21T15:40:57",
         "name": "Binance",
+        "balance": 11600.4,
         "img": "https://public.bnbstatic.com/20190405/eb2349c3-b2f8-4a93-a286-8f86a62ea9d8.png",
+        "allTimeHigh": 11600.4,
+        "allTimeHighDate": "2023-02-22",
+        "highPrice": 11600.4,
+        "highPriceDate": "2023-02-22",
+        "lowPrice": 5210.5,
+        "lowPriceDate": "2023-01-01",
+        "performanceLastStats": 24.73,
+        "differenceLastStats": 2300.0,
+        "dateLastStats": "2023-02-22",
         "category": "Investments",
-        "performanceLastStats": 80,
-        "differenceLastStats": 5000,
-        "dateLastStats": "12-01-2022 12:59",
-        "balance": 10000,
         "history": [
           {
-            "date": "31-01-2022",
-            "balance": 7557,
-            "percentage": 10
+            "id": 146,
+            "creationDate": "2023-02-21T15:35:45",
+            "updateDate": "2023-02-21T15:35:45",
+            "date": "2023-01-01",
+            "balance": 5210.5,
+            "percentage": 22.41,
+            "trend": 953.8
           },
           {
-            "date": "28-02-2022",
-            "balance": 75,
-            "percentage": 10
+            "id": 152,
+            "creationDate": "2023-02-21T15:36:30",
+            "updateDate": "2023-02-21T15:36:30",
+            "date": "2023-02-01",
+            "balance": 5920.0,
+            "percentage": 13.62,
+            "trend": 709.5
           },
           {
-            "date": "31-03-2022",
-            "balance": 242,
-            "percentage": 10
+            "id": 158,
+            "creationDate": "2023-02-21T15:37:24",
+            "updateDate": "2023-02-21T15:37:24",
+            "date": "2023-02-10",
+            "balance": 7304.7,
+            "percentage": 23.39,
+            "trend": 1384.7
           },
           {
-            "date": "30-04-2022",
-            "balance": 353,
-            "percentage": 10
+            "id": 164,
+            "creationDate": "2023-02-21T15:38:51",
+            "updateDate": "2023-02-21T15:38:51",
+            "date": "2023-02-21",
+            "balance": 9300.4,
+            "percentage": 27.32,
+            "trend": 1995.7
           },
           {
-            "date": "31-05-2022",
-            "balance": 46,
-            "percentage": 10
-          },
-          {
-            "date": "30-06-2022",
-            "balance": 64,
-            "percentage": 10
-          },
-          {
-            "date": "31-07-2022",
-            "balance": 5454,
-            "percentage": 10
-          },
-          {
-            "date": "31-08-2022",
-            "balance": 65,
-            "percentage": 10
-          },
-          {
-            "date": "30-09-2022",
-            "balance": 244,
-            "percentage": 10
-          },
-          {
-            "date": "31-10-2022",
-            "balance": 545,
-            "percentage": 10
-          },
-          {
-            "date": "30-11-2022",
-            "balance": 3535,
-            "percentage": 10
-          },
-          {
-            "date": "31-12-2022",
-            "balance": 289,
-            "percentage": 10
-          }
-        ]
-      },
-      {
-        "id": 3,
-        "name": "UniCredit",
-        "img": "https://s3-symbol-logo.tradingview.com/unicredit--600.png",
-        "category": "Bank Account",
-        "performanceLastStats": 80,
-        "differenceLastStats": 0,
-        "dateLastStats": "12-01-2022 12:59",
-        "balance": 10000,
-        "history": [
-          {
-            "date": "31-01-2022",
-            "balance": 1100,
-            "percentage": 10
-          },
-          {
-            "date": "28-02-2022",
-            "balance": 1100,
-            "percentage": 10
-          },
-          {
-            "date": "31-03-2022",
-            "balance": 1100,
-            "percentage": 10
-          },
-          {
-            "date": "30-04-2022",
-            "balance": 3100,
-            "percentage": 10
-          },
-          {
-            "date": "31-05-2022",
-            "balance": 5100,
-            "percentage": 10
-          },
-          {
-            "date": "30-06-2022",
-            "balance": 4100,
-            "percentage": 10
-          },
-          {
-            "date": "31-07-2022",
-            "balance": 6100,
-            "percentage": 10
-          },
-          {
-            "date": "31-08-2022",
-            "balance": 7100,
-            "percentage": 10
-          },
-          {
-            "date": "30-09-2022",
-            "balance": 6100,
-            "percentage": 10
-          },
-          {
-            "date": "31-10-2022",
-            "balance": 8100,
-            "percentage": 10
-          },
-          {
-            "date": "30-11-2022",
-            "balance": 11000,
-            "percentage": 10
-          },
-          {
-            "date": "31-12-2022",
-            "balance": 11000,
-            "percentage": 10
-          }
-        ]
-      },
-      {
-        "id": 4,
-        "name": "Revolut",
-        "img": "https://play-lh.googleusercontent.com/YciEyN9kE0EVsUrm28c23yf7LXMnhB35geLXJRCenAKBkOtUGNgdwA3mEArRSSu9bOM",
-        "category": "Bank Account",
-        "performanceLastStats": 80,
-        "differenceLastStats": -500,
-        "dateLastStats": "12-01-2022 12:59",
-        "balance": 10000,
-        "history": [
-          {
-            "date": "31-01-2022",
-            "balance": 1500,
-            "percentage": 10
-          },
-          {
-            "date": "28-02-2022",
-            "balance": 100,
-            "percentage": 10
-          },
-          {
-            "date": "31-03-2022",
-            "balance": 1500,
-            "percentage": 10
-          },
-          {
-            "date": "30-04-2022",
-            "balance": 3500,
-            "percentage": 10
-          },
-          {
-            "date": "31-05-2022",
-            "balance": 5500,
-            "percentage": 10
-          },
-          {
-            "date": "30-06-2022",
-            "balance": 4500,
-            "percentage": 10
-          },
-          {
-            "date": "31-07-2022",
-            "balance": 6500,
-            "percentage": 10
-          },
-          {
-            "date": "31-08-2022",
-            "balance": 7500,
-            "percentage": 10
-          },
-          {
-            "date": "30-09-2022",
-            "balance": 6500,
-            "percentage": 10
-          },
-          {
-            "date": "31-10-2022",
-            "balance": 8500,
-            "percentage": 10
-          },
-          {
-            "date": "30-11-2022",
-            "balance": 12500,
-            "percentage": 10
-          },
-          {
-            "date": "31-12-2022",
-            "balance": 10500,
-            "percentage": 10
-          }
-        ]
-      },
-      {
-        "id": 5,
-        "name": "Crypto.com",
-        "img": "https://is5-ssl.mzstatic.com/image/thumb/Purple112/v4/ed/c7/fc/edc7fcc9-9f2f-d4ce-22b1-e049f55d8102/AppIcon-0-1x_U007emarketing-0-10-0-85-220.png/512x512bb.jpg",
-        "category": "Investments",
-        "performanceLastStats": 80,
-        "differenceLastStats": 3460,
-        "dateLastStats": "12-01-2022 12:59",
-        "balance": 10000,
-        "history": [
-          {
-            "date": "31-01-2022",
-            "balance": 10,
-            "percentage": 10
-          },
-          {
-            "date": "28-02-2022",
-            "balance": 150,
-            "percentage": 10
-          },
-          {
-            "date": "31-03-2022",
-            "balance": 120,
-            "percentage": 10
-          },
-          {
-            "date": "30-04-2022",
-            "balance": 100,
-            "percentage": 10
-          },
-          {
-            "date": "31-05-2022",
-            "balance": 200,
-            "percentage": 10
-          },
-          {
-            "date": "30-06-2022",
-            "balance": 410,
-            "percentage": 10
-          },
-          {
-            "date": "31-07-2022",
-            "balance": 600,
-            "percentage": 10
-          },
-          {
-            "date": "31-08-2022",
-            "balance": 700,
-            "percentage": 10
-          },
-          {
-            "date": "30-09-2022",
-            "balance": 605,
-            "percentage": 10
-          },
-          {
-            "date": "31-10-2022",
-            "balance": 802,
-            "percentage": 10
-          },
-          {
-            "date": "30-11-2022",
-            "balance": 1209,
-            "percentage": 10
-          },
-          {
-            "date": "31-12-2022",
-            "balance": 1000,
-            "percentage": 10
+            "id": 170,
+            "creationDate": "2023-02-21T15:40:57",
+            "updateDate": "2023-02-21T15:40:57",
+            "date": "2023-02-22",
+            "balance": 11600.4,
+            "percentage": 24.73,
+            "trend": 2300.0
           }
         ]
       },
       {
         "id": 6,
-        "name": "BNL",
-        "img": "https://it.dealiry.com/images/brands/BNL-codice-sconto-promozionale-coupon-buono-voucher.webp",
+        "creationDate": "2023-02-21T14:56:02",
+        "updateDate": "2023-02-21T15:40:57",
+        "name": "Santander",
+        "balance": 3000.6,
+        "img": "https://play-lh.googleusercontent.com/sG0NHfFUJLcD7YhpZCw6OWgScMQFwvm5Ku64a-UQFXgyIk_qNW4VAtq1yQkuPl0MRG8",
+        "allTimeHigh": 3000.6,
+        "allTimeHighDate": "2023-02-22",
+        "highPrice": 3000.6,
+        "highPriceDate": "2023-02-22",
+        "lowPrice": 1500.0,
+        "lowPriceDate": "2023-01-01",
+        "performanceLastStats": 20.0,
+        "differenceLastStats": 500.1,
+        "dateLastStats": "2023-02-22",
         "category": "Bank Account",
-        "performanceLastStats": 80,
-        "differenceLastStats": 295,
-        "dateLastStats": "12-01-2022 12:59",
-        "balance": 10000,
         "history": [
           {
-            "date": "31-01-2022",
-            "balance": 100,
-            "percentage": 10
+            "id": 147,
+            "creationDate": "2023-02-21T15:35:45",
+            "updateDate": "2023-02-21T15:35:45",
+            "date": "2023-01-01",
+            "balance": 1500.0,
+            "percentage": 11.73,
+            "trend": 157.5
           },
           {
-            "date": "28-02-2022",
-            "balance": 150,
-            "percentage": 10
+            "id": 153,
+            "creationDate": "2023-02-21T15:36:30",
+            "updateDate": "2023-02-21T15:36:30",
+            "date": "2023-02-01",
+            "balance": 1930.4,
+            "percentage": 28.69,
+            "trend": 430.4
           },
           {
-            "date": "31-03-2022",
-            "balance": 120,
-            "percentage": 10
+            "id": 159,
+            "creationDate": "2023-02-21T15:37:24",
+            "updateDate": "2023-02-21T15:37:24",
+            "date": "2023-02-10",
+            "balance": 2335.6,
+            "percentage": 20.99,
+            "trend": 405.2
           },
           {
-            "date": "30-04-2022",
-            "balance": 300,
-            "percentage": 10
+            "id": 165,
+            "creationDate": "2023-02-21T15:38:51",
+            "updateDate": "2023-02-21T15:38:51",
+            "date": "2023-02-21",
+            "balance": 2500.5,
+            "percentage": 7.06,
+            "trend": 164.9
           },
           {
-            "date": "31-05-2022",
-            "balance": 500,
-            "percentage": 10
+            "id": 171,
+            "creationDate": "2023-02-21T15:40:57",
+            "updateDate": "2023-02-21T15:40:57",
+            "date": "2023-02-22",
+            "balance": 3000.6,
+            "percentage": 20.0,
+            "trend": 500.1
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "creationDate": "2023-02-21T14:58:49",
+        "updateDate": "2023-02-21T15:40:57",
+        "name": "Revolut",
+        "balance": 300.5,
+        "img": "https://play-lh.googleusercontent.com/YciEyN9kE0EVsUrm28c23yf7LXMnhB35geLXJRCenAKBkOtUGNgdwA3mEArRSSu9bOM",
+        "allTimeHigh": 350.1,
+        "allTimeHighDate": "2023-02-21",
+        "highPrice": 350.1,
+        "highPriceDate": "2023-02-21",
+        "lowPrice": 220.6,
+        "lowPriceDate": "2023-02-01",
+        "performanceLastStats": -14.17,
+        "differenceLastStats": -49.6,
+        "dateLastStats": "2023-02-22",
+        "category": "Debit Card",
+        "history": [
+          {
+            "id": 148,
+            "creationDate": "2023-02-21T15:35:45",
+            "updateDate": "2023-02-21T15:35:45",
+            "date": "2023-01-01",
+            "balance": 225.5,
+            "percentage": -1.96,
+            "trend": -4.5
           },
           {
-            "date": "30-06-2022",
-            "balance": 400,
-            "percentage": 10
+            "id": 154,
+            "creationDate": "2023-02-21T15:36:30",
+            "updateDate": "2023-02-21T15:36:30",
+            "date": "2023-02-01",
+            "balance": 220.6,
+            "percentage": -2.17,
+            "trend": -4.9
           },
           {
-            "date": "31-07-2022",
-            "balance": 600,
-            "percentage": 10
+            "id": 160,
+            "creationDate": "2023-02-21T15:37:24",
+            "updateDate": "2023-02-21T15:37:24",
+            "date": "2023-02-10",
+            "balance": 230.5,
+            "percentage": 4.49,
+            "trend": 9.9
           },
           {
-            "date": "31-08-2022",
-            "balance": 700,
-            "percentage": 10
+            "id": 166,
+            "creationDate": "2023-02-21T15:38:51",
+            "updateDate": "2023-02-21T15:38:51",
+            "date": "2023-02-21",
+            "balance": 350.1,
+            "percentage": 51.89,
+            "trend": 119.6
           },
           {
-            "date": "30-09-2022",
-            "balance": 600,
-            "percentage": 10
+            "id": 172,
+            "creationDate": "2023-02-21T15:40:57",
+            "updateDate": "2023-02-21T15:40:57",
+            "date": "2023-02-22",
+            "balance": 300.5,
+            "percentage": -14.17,
+            "trend": -49.6
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "creationDate": "2023-02-21T15:14:19",
+        "updateDate": "2023-02-21T15:40:57",
+        "name": "Saving",
+        "balance": 2300.0,
+        "img": "../../../../assets/images/sample/wallet.png",
+        "allTimeHigh": 2300.0,
+        "allTimeHighDate": "2023-02-22",
+        "highPrice": 2300.0,
+        "highPriceDate": "2023-02-22",
+        "lowPrice": 600.0,
+        "lowPriceDate": "2023-01-01",
+        "performanceLastStats": 15.0,
+        "differenceLastStats": 300.0,
+        "dateLastStats": "2023-02-22",
+        "category": "Save",
+        "history": [
+          {
+            "id": 149,
+            "creationDate": "2023-02-21T15:35:45",
+            "updateDate": "2023-02-21T15:35:45",
+            "date": "2023-01-01",
+            "balance": 600.0,
+            "percentage": 11.11,
+            "trend": 60.0
           },
           {
-            "date": "31-10-2022",
-            "balance": 800,
-            "percentage": 10
+            "id": 155,
+            "creationDate": "2023-02-21T15:36:30",
+            "updateDate": "2023-02-21T15:36:30",
+            "date": "2023-02-01",
+            "balance": 800.0,
+            "percentage": 33.33,
+            "trend": 200.0
           },
           {
-            "date": "30-11-2022",
-            "balance": 1200,
-            "percentage": 10
+            "id": 161,
+            "creationDate": "2023-02-21T15:37:24",
+            "updateDate": "2023-02-21T15:37:24",
+            "date": "2023-02-10",
+            "balance": 1100.0,
+            "percentage": 37.5,
+            "trend": 300.0
           },
           {
-            "date": "31-12-2022",
-            "balance": 1000,
-            "percentage": 10
+            "id": 167,
+            "creationDate": "2023-02-21T15:38:51",
+            "updateDate": "2023-02-21T15:38:51",
+            "date": "2023-02-21",
+            "balance": 2000.0,
+            "percentage": 81.82,
+            "trend": 900.0
+          },
+          {
+            "id": 173,
+            "creationDate": "2023-02-21T15:40:57",
+            "updateDate": "2023-02-21T15:40:57",
+            "date": "2023-02-22",
+            "balance": 2300.0,
+            "percentage": 15.0,
+            "trend": 300.0
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "creationDate": "2023-02-21T15:17:31",
+        "updateDate": "2023-02-21T15:41:05",
+        "deletedDate": "2023-02-21T14:41:05.317",
+        "name": "N26",
+        "balance": 0.0,
+        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/N26_logo.svg/1246px-N26_logo.svg.png",
+        "allTimeHigh": 200.5,
+        "allTimeHighDate": "2023-02-21",
+        "highPrice": 200.5,
+        "highPriceDate": "2023-02-21",
+        "lowPrice": 0.0,
+        "lowPriceDate": "2023-02-22",
+        "performanceLastStats": -100.0,
+        "differenceLastStats": -200.5,
+        "dateLastStats": "2023-02-22",
+        "category": "Debit Card",
+        "history": [
+          {
+            "id": 150,
+            "creationDate": "2023-02-21T15:35:45",
+            "updateDate": "2023-02-21T15:35:45",
+            "date": "2023-01-01",
+            "balance": 190.0,
+            "percentage": 18.45,
+            "trend": 29.6
+          },
+          {
+            "id": 156,
+            "creationDate": "2023-02-21T15:36:30",
+            "updateDate": "2023-02-21T15:36:30",
+            "date": "2023-02-01",
+            "balance": 150.0,
+            "percentage": -21.05,
+            "trend": -40.0
+          },
+          {
+            "id": 162,
+            "creationDate": "2023-02-21T15:37:24",
+            "updateDate": "2023-02-21T15:37:24",
+            "date": "2023-02-10",
+            "balance": 120.0,
+            "percentage": -20.0,
+            "trend": -30.0
+          },
+          {
+            "id": 168,
+            "creationDate": "2023-02-21T15:38:51",
+            "updateDate": "2023-02-21T15:38:51",
+            "date": "2023-02-21",
+            "balance": 200.5,
+            "percentage": 67.08,
+            "trend": 80.5
+          },
+          {
+            "id": 174,
+            "creationDate": "2023-02-21T15:40:57",
+            "updateDate": "2023-02-21T15:40:57",
+            "date": "2023-02-22",
+            "balance": 0.0,
+            "percentage": -100.0,
+            "trend": -200.5
           }
         ]
       }

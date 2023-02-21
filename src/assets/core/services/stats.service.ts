@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CoinSymbol } from '../data/class/coin';
 import { Dashboard, Wallet } from '../data/class/dashboard.class';
@@ -35,8 +35,18 @@ export class StatsService {
   addStats(wallets: Wallet[]): Observable<ResponseModel> {
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({ authToken: authToken! });
-    return this.http.post<ResponseModel>(environment.addStatsDataUrl, wallets, {
-      headers: headers,
-    });
+    if (this.user?.mockedUser) {
+      let response: ResponseModel = new ResponseModel();
+      response.data = wallets;
+      return of(response);
+    } else {
+      return this.http.post<ResponseModel>(
+        environment.addStatsDataUrl,
+        wallets,
+        {
+          headers: headers,
+        }
+      );
+    }
   }
 }

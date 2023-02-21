@@ -55,16 +55,23 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.user = this.userService.user;
     this.dashboardService.getData().subscribe((data) => {
       if (!data.data.balance) {
         this.dashboard.categories = data.data.categories;
         this.dashboard.wallets = data.data.wallets;
+
         if (!this.dashboardService.isOnboarding) {
           this.router.navigate(['on-boarding']);
           this.dashboardService.isOnboarding = true;
           return;
         }
       } else {
+        if (!this.dashboardService.isOnboarding && this.user.mockedUser) {
+          this.router.navigate(['on-boarding']);
+          this.dashboardService.isOnboarding = true;
+          return;
+        }
         this.dashboard = data.data;
       }
       this.dashboardService.dashboard = this.dashboard;

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { Coin, CoinSymbol } from '../data/class/coin';
@@ -140,8 +140,18 @@ export class UserService {
       'Content-Type': 'application/json',
       authToken: authToken!,
     });
-    return this.http.post<ResponseModel>(environment.updateUserDataUrl, user, {
-      headers: headers,
-    });
+    if (this.user?.mockedUser) {
+      let response: ResponseModel = new ResponseModel();
+      response.data = user;
+      return of(response);
+    } else {
+      return this.http.post<ResponseModel>(
+        environment.updateUserDataUrl,
+        user,
+        {
+          headers: headers,
+        }
+      );
+    }
   }
 }
