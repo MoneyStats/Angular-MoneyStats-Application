@@ -75,6 +75,10 @@ export class AddWalletComponent implements OnInit {
     if (!this.defaultImg) {
       walletToSave.img = this.walletImg;
     }
+    // Edit Wallet keep same image
+    if (this.defaultImg && walletToSave.id) {
+      this.walletImg = walletToSave.img;
+    }
     if (this.walletImg === '') {
       walletToSave.img =
         environment.baseUrlHeader + AppConfigConst.DEFAULT_WALLET_IMG;
@@ -87,10 +91,13 @@ export class AddWalletComponent implements OnInit {
       // Save Wallet
       this.emitAddWallet.emit(data.data);
     });
-    this.wallet = new Wallet();
+    if (!walletToSave.id) {
+      this.wallet = new Wallet();
+    }
     this.defaultImg = false;
     this.checkbox = true;
     this.walletImg = '';
+    this.swalService.walletImg = undefined;
   }
 
   validateBtn(): boolean {

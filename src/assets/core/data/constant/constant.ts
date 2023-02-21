@@ -12,6 +12,7 @@ export enum ModalConstant {
   ADDSTATS = 'addStatsPage',
   CATEGORY = 'categoryModal',
   REPORTBUG = 'reportBugModal',
+  INFOAPP = 'infoAppModal',
 }
 
 export enum StorageConstant {
@@ -28,8 +29,8 @@ export enum ProfileSettings {
 
 export enum LanguagesSettings {
   ATTR_LANGUAGE = 'lang',
-  ENGLISH = 'en',
-  ITALIAN = 'it',
+  ENGLISH = 'en-GB',
+  ITALIAN = 'it-IT',
 }
 
 export enum AppConfigConst {

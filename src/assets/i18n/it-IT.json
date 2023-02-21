@@ -7,18 +7,18 @@
     },
     "tab2": {
       "title": "Perchè utilizzarla?",
-      "text": "The difference between MoneyStats and the others Money Management apps is that you don't need to keep track of you expences, once a week or once a month is needed and recommended to get the best performance."
+      "text": "La differenza tra MoneyStats e le altre app di gestione del denaro è che non è necessario tenere traccia delle tue spese giorno per giorno, basta uno Stats una volta alla settimana o una volta al mese, consigliato, per ottenere le migliori prestazioni."
     },
     "tab3": {
-      "title": "How it works?",
-      "text": "Almost all the application is touchable. <br /> After you get into the Dashboard to start having some data you should add a new Wallet. <br /> The process would be completed once you start adding new Stats, Graphic and Tables with details will be showed."
+      "title": "Come funziona?",
+      "text": "Quasi tutta l'applicazione è toccabile. <br /> Dopo essere entrato nella Dashboard per iniziare ad avere alcuni dati, dovresti aggiungere un nuovo Portafoglio. <br /> Il processo sarà completato una volta che inizi ad aggiungere nuovi Stats, grafici e tabelle con i dettagli verranno visualizzati."
     },
     "tab4": {
-      "title": "Thanks for your time",
-      "text": "Let's having fun, press Try It to get into the Dashboard."
+      "title": "Grazie per il tuo tempo",
+      "text": "Divertiamoci insieme, premi Prova ora e vai alla dashboard."
     },
-    "next": "Next",
-    "try": "Try It"
+    "next": "Avanti",
+    "try": "Prova ora"
   },
   "auth": {
     "login": {
@@ -259,117 +259,122 @@
       "title": "Sicurezza",
       "password": "Cambia Password",
       "old_label": "Vecchia Password",
-      "old_placeholder": "Digit your current password",
-      "new_label": "New Password",
-      "new_placeholder": "Digit your new password",
-      "repete_label": "Repete Password",
-      "repete_placeholder": "Digit your new password again",
-      "warning": "The Password do not match!"
+      "old_placeholder": "Digita la tua password corrente",
+      "new_label": "Nuova Password",
+      "new_placeholder": "Digita la tua nuova password",
+      "repete_label": "Ripeti Password",
+      "repete_placeholder": "Digita la tua nuova password di nuovo",
+      "warning": "Le password non coincidono!"
     },
     "app": {
-      "title": "App Settings",
+      "title": "Impostazioni",
       "wallet": {
-        "title": "Edit Wallet",
-        "open": "Open"
+        "title": "Modifica Portafoglio",
+        "open": "Apri"
       },
       "languages": {
-        "title": "Languages",
-        "open": "Edit",
-        "en": "English",
-        "it": "Italian",
-        "change": "Change Languages"
+        "title": "Lingue",
+        "open": "Modifica",
+        "en": "Inglese",
+        "it": "Italiano",
+        "change": "Cambia lingua"
       }
     },
     "info": {
       "title": "Info",
       "logout": "Log Out",
-      "support": "Support",
-      "howItWorks": "How it works",
-      "version": "MoneyStats Version",
-      "version_open": "Open"
+      "support": "Supporto",
+      "howItWorks": "Come funziona?",
+      "version": "Versione MoneyStats",
+      "version_open": "Apri"
     }
   },
   "stats": {
-    "title": "Resume Data",
-    "subTitle": "Details of all transaction and performance",
+    "title": "Storico",
+    "subTitle": "Dettagli delle transazioni e performance",
     "back": "Torna alla pagina precendete",
     "mobile_back": "Indietro",
-    "total": "Total Balance",
-    "since": "Since",
+    "total": "Saldo Totale",
+    "since": "Da",
     "performance": "Performance",
-    "tab_stats": "Stats Resume",
-    "tab_category": "Category Resume",
-    "tab_history": "History",
+    "tab_stats": "Storico Stats",
+    "tab_category": "Storico per Categoria",
+    "tab_history": "Storico",
     "nodata": {
-      "header": "Resume",
-      "body": "Insert new data to get resume.",
+      "header": "Storico",
+      "body": "Inserisci dei dati per avere lo storico.",
       "footer": "MoneyStats"
     },
     "data": {
-      "wallet": "Current Wallet",
-      "graph1": "Graph wallet performance",
-      "graph2": "Graph wallet quantity",
-      "graph3": "Graph bar wallet performance",
-      "table": "List Stats of the Year",
-      "table_date": "Date",
-      "table_balance": "Balance",
+      "wallet": "Portafoglio Corrente",
+      "graph1": "Grafico delle performance",
+      "graph2": "Grafico proporsioni portafogli",
+      "graph3": "Grafico performance dei portafogli",
+      "table": "Lista degli Stats dell'anno",
+      "table_date": "Data",
+      "table_balance": "Saldo",
       "table_trend": "Trend",
       "table_performance": "Performance",
-      "table_value": "Value Trend",
-      "investments": "Investments",
-      "capital": "Capital",
-      "others": "Others",
-      "debits": "Debits",
-      "saving": "Saving",
-      "history": "History",
-      "deleted": "Deleted",
-      "graphHistory": "Graph History Performance"
+      "table_value": "Saldo Trend",
+      "investments": "Investimenti",
+      "capital": "Capitali",
+      "others": "Altro",
+      "debits": "Debiti",
+      "saving": "Risparmi",
+      "history": "Storico",
+      "deleted": "Cancellato",
+      "graphHistory": "Grafico delle performance"
     }
   },
   "insertStats": {
-    "title": "Payments",
+    "title": "Pagamenti",
     "back": "Torna alla pagina precendete",
     "mobile_back": "Indietro",
-    "dataPresent": "Select different Data",
-    "card_title": "Add Stats",
-    "card_subtitle": "Needs to be done for all wallets, Could not save stats for existing data",
-    "continue": "Continue",
-    "save": "Save"
+    "dataPresent": "Seleziona una data diversa",
+    "card_title": "Aggiungi Stats",
+    "card_subtitle": "Richiede tutti i wallet compilati con date diverse da Stats precedentemente inseriti.",
+    "continue": "Continua",
+    "save": "Salva"
   },
   "modal": {
+    "infoApp": {
+      "title": "Info Registrazione",
+      "text": "Per la registrazione su MoneyStats occorre il codice invito. <br> Se non si ha il codice potete chiederlo direttamente a <a href='https://giovannilamarmoraproject.github.io/Portfolio/' target='_blank'>Giovanni</a> nella sezione contattami. <br>Nel frattempo potete dare un'occhiata all'applicazione utilizzando i seguenti dati: <br>&bull; Username: moneystats<br>&bull; Password: moneystats<br>Questo account vi darà la possibilità di vedere come appare l'app.<br>Attenzione: Non vi sarà possibile modificare o aggiungere nuovi dati.",
+      "close": "Chiudi"
+    },
     "socialList": {
-      "title": "Connect Social Account",
-      "close": "Close",
-      "select": "Please Select an account to Sync",
-      "connect": "Connected",
+      "title": "Connetti Account Social",
+      "close": "Chiudi",
+      "select": "Seleziona un Account da sincronizzare",
+      "connect": "Connesso",
       "github": "Github"
     },
     "socialDetails": {
       "user": "User ID",
-      "details": "Account Details",
-      "connect": "Connect",
-      "disconnect": "Disconnect",
+      "details": "Dettagli Account",
+      "connect": "Connetti",
+      "disconnect": "Disconnetti",
       "githubId": "Github ID",
-      "created": "Created On",
-      "updated": "Updated On",
-      "followers": "Followers",
-      "following": "Following",
+      "created": "Creato il",
+      "updated": "Aggiornato il",
+      "followers": "Seguaci",
+      "following": "Seguiti",
       "url": "URL"
     },
     "category": {
-      "title": "Category Available",
-      "close": "Close",
-      "list": "List of all categories"
+      "title": "Categorie disponibili",
+      "close": "Chiudi",
+      "list": "List di tutte le categorie"
     },
     "reportBug": {
-      "title": "Report a Bug",
-      "subTitle": "Tell us more about the problem",
-      "text": "Write what you were doing before the error.",
-      "send": "Report"
+      "title": "Segnala Bug",
+      "subTitle": "Dicci di più sul tuo problema",
+      "text": "Scrivici cosa stavi facendo quando è apparso l'errore.",
+      "send": "Segnala"
     },
     "version": {
-      "title": "MoneyStats Version",
-      "close": "Close",
+      "title": "Versione MoneyStats",
+      "close": "Chiudi",
       "moneystats": "MoneyStats",
       "changelog": {
         "title": "Changelog",
@@ -379,16 +384,16 @@
             "version_date": "2023-01-01",
             "version_title": "MoneyStats V1.0.0",
             "version": "V1.0.0",
-            "changelog": "&#183; Initial release"
+            "changelog": "&#183; Vesione iniziale"
           }
         ]
       }
     }
   },
   "github": {
-    "title": "Get data from Github for ",
-    "connect": "Connect",
-    "confirm": "Confirm"
+    "title": "Acquisizione dati github per ",
+    "connect": "Connetti",
+    "confirm": "Conferma"
   },
   "error": {
     "title": ""
