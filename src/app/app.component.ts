@@ -21,8 +21,18 @@ export class AppComponent implements OnInit {
   }
   setLanguages() {
     let languages = localStorage.getItem(LanguagesSettings.ATTR_LANGUAGE);
-    if (!languages) languages = LanguagesSettings.ENGLISH;
+    if (!languages) {
+      languages = this.changeLanguages(navigator.language);
+    }
     this.translate.setDefaultLang(languages);
     localStorage.setItem(LanguagesSettings.ATTR_LANGUAGE, languages);
+  }
+
+  changeLanguages(lan: string): LanguagesSettings {
+    if (lan == LanguagesSettings.ENGLISH) {
+      return LanguagesSettings.ENGLISH;
+    } else if (lan == LanguagesSettings.ITALIAN) {
+      return LanguagesSettings.ITALIAN;
+    } else return LanguagesSettings.ENGLISH;
   }
 }

@@ -2,7 +2,10 @@ import { Component, OnInit, Output } from '@angular/core';
 import { Location } from '@angular/common';
 import { UserService } from 'src/assets/core/services/user.service';
 import { User } from 'src/assets/core/data/class/user.class';
-import { StorageConstant } from 'src/assets/core/data/constant/constant';
+import {
+  ModalConstant,
+  StorageConstant,
+} from 'src/assets/core/data/constant/constant';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
@@ -23,6 +26,10 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+
+  public get modalConstant(): typeof ModalConstant {
+    return ModalConstant;
+  }
 
   goBack() {
     this.location.back();

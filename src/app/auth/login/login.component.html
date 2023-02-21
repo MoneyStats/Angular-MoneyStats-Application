@@ -64,7 +64,6 @@
           </div>
         </div>
       </div>
-
       <div class="form-links mt-2">
         <div>
           <a routerLink="/auth/register">{{
@@ -76,8 +75,15 @@
             "auth.login.forgot" | translate
           }}</a>
         </div>
+        <div>
+          <a
+            class="text-muted"
+            data-bs-toggle="modal"
+            attr.data-bs-target="#{{ modalConstant.INFOAPP }}"
+            >{{ "modal.infoApp.title" | translate }}</a
+          >
+        </div>
       </div>
-
       <div class="form-button-group transparent section-width mx-auto">
         <button
           [disabled]="f.invalid"
@@ -92,3 +98,4 @@
   </div>
 </div>
 <!-- * App Capsule -->
+<app-info-app [modalId]="modalConstant.INFOAPP"></app-info-app>

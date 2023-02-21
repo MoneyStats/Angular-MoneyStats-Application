@@ -63,6 +63,7 @@ import { LoadingComponent } from './interceptors/loading/loading.component';
 import { LoaderInterceptor } from 'src/assets/core/interceptors/loader.interceptor';
 import { JwtInterceptor } from './auth/jwt.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InfoAppComponent } from './shared/components/modal/info-app/info-app.component';
 
 @NgModule({
   declarations: [
@@ -109,6 +110,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReportBugComponent,
     OnboardingComponent,
     LoadingComponent,
+    InfoAppComponent,
   ],
   imports: [
     BrowserModule,
