@@ -15,6 +15,14 @@ export class ToastService {
   closeToast() {
     closeToastBox('soon');
   }
+
+  updateAvaiable() {
+    toastbox('update');
+  }
+
+  closeUpdateToast() {
+    closeToastBox('update');
+  }
 }
 
 var toastBoxes = document.querySelectorAll('.toast-box');

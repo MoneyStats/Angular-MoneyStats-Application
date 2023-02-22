@@ -180,6 +180,18 @@
 
         <li>
           <a
+            class="item"
+            data-bs-toggle="modal"
+            attr.data-bs-target="#{{ modalConstant.UPDATEAPP }}"
+          >
+            <div class="in">
+              <div>{{ "modal.update.title" | translate }}</div>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a
             href="#"
             class="item"
             data-bs-toggle="modal"
@@ -196,7 +208,9 @@
       </ul>
       <div align="center">
         <img
-          src="{{environment.baseUrlDashboard}}assets/images/logos/logo_transparent_gray_land.png"
+          src="{{
+            environment.baseUrlDashboard
+          }}assets/images/logos/logo_transparent_gray_land.png"
           alt=""
           srcset=""
           style="width: 150px"
@@ -220,3 +234,4 @@
   [user]="user"
 ></app-profile-settings>
 <app-languages [modalId]="modalConstant.LANGUAGES"></app-languages>
+<app-update [modalId]="modalConstant.UPDATEAPP" #content></app-update>
