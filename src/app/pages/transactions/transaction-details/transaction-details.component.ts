@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { slideUp } from 'src/app/shared/animations/route-animations';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';

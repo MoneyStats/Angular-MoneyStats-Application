@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { fader } from 'src/app/shared/animations/route-animations';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { WalletService } from 'src/assets/core/services/wallet.service';
