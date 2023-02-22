@@ -9,7 +9,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ErrorHandleComponent } from 'src/app/interceptors/error-handle/error-handle.component';
 import { UserService } from '../services/user.service';
 import { ErrorService } from './error.service';
 

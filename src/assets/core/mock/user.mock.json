@@ -11,7 +11,7 @@
     "email": "email@email.com",
     "username": "moneystats",
     "role": "MOCK",
-    "profilePhoto": "../../../../assets/images/sample/avatar.png",
+    "profilePhoto": "https://moneystats.github.io/App/assets/images/sample/avatar.png",
     "currency": "EUR",
     "mockedUser": true,
     "authToken": {
