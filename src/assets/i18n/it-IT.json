@@ -337,6 +337,13 @@
     "save": "Salva"
   },
   "modal": {
+    "update": {
+      "avaiable": "Aggiornamento Disponibile, vai nelle impotazioni ed aggiorna l'app!",
+      "title": "Aggiorna App",
+      "text": "Premi aggiorna per aggiornare, cancella per tornare indietro",
+      "update": "Aggiorna",
+      "close": "Cancella"
+    },
     "infoApp": {
       "title": "Info Registrazione",
       "text": "Per la registrazione su MoneyStats occorre il codice invito. <br> Se non si ha il codice potete chiederlo direttamente a <a href='https://giovannilamarmoraproject.github.io/Portfolio/' target='_blank'>Giovanni</a> nella sezione contattami. <br>Nel frattempo potete dare un'occhiata all'applicazione utilizzando i seguenti dati: <br>&bull; Username: moneystats<br>&bull; Password: moneystats<br>Questo account vi darà la possibilità di vedere come appare l'app.<br>Attenzione: Non vi sarà possibile modificare o aggiungere nuovi dati.",

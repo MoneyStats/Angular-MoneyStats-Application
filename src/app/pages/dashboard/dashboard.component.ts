@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { SwUpdate } from '@angular/service-worker';
 import { TranslateService } from '@ngx-translate/core';
 import { fader } from 'src/app/shared/animations/route-animations';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
@@ -37,6 +38,7 @@ export class DashboardComponent implements OnInit {
     this.dashboard.lastStatsBalanceDifference.toString();
   @Output('graphTitle') graphTitle: string = '';
   public chartOptions?: Partial<ApexOptions>;
+  @ViewChild('content') content: any;
 
   constructor(
     private dashboardService: DashboardService,
@@ -48,8 +50,13 @@ export class DashboardComponent implements OnInit {
     public screenService: ScreenService,
     private walletService: WalletService,
     private translate: TranslateService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private readonly updates: SwUpdate
+  ) {
+    this.updates.versionUpdates.subscribe((event) => {
+      toast.updateAvaiable();
+    });
+  }
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
