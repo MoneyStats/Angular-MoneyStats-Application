@@ -17,6 +17,7 @@ import { WalletComponent } from './pages/wallet/wallet.component';
 import { ForgotComponent } from './auth/forgot/forgot.component';
 import { RouteGuardService } from './auth/route-guard.service';
 import { OnboardingComponent } from './pages/onboarding/onboarding.component';
+import { fader, slideUp } from './shared/animations/route-animations';
 
 const routes: Routes = [
   {
@@ -67,34 +68,42 @@ const routes: Routes = [
       {
         path: 'transaction',
         component: TransactionsComponent,
+        data: { animation: fader },
       },
       {
         path: 'transaction/details/:id/:wallet',
         component: TransactionDetailsComponent,
+        data: { animation: slideUp },
       },
       {
         path: 'wallet',
         component: WalletComponent,
+        data: { animation: fader },
       },
       {
         path: 'wallet/details/:id/:wallet',
         component: WalletDetailsComponent,
+        data: { animation: slideUp },
       },
       {
         path: 'wallet/details/:id/:wallet/history',
         component: WalletHistoryComponent,
+        data: { animation: fader },
       },
       {
         path: 'settings',
         component: SettingsComponent,
+        data: { animation: fader },
       },
       {
         path: 'stats',
         component: StatsComponent,
+        data: { animation: fader },
       },
       {
         path: 'stats/insert',
         component: AddStatsComponent,
+        data: { animation: fader },
       },
     ],
   },

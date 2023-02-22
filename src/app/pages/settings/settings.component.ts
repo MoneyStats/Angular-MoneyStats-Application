@@ -1,4 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
+import { fader } from 'src/app/shared/animations/route-animations';
 import { User } from 'src/assets/core/data/class/user.class';
 import {
   ModalConstant,
@@ -15,6 +16,7 @@ import { environment } from 'src/environments/environment';
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
+  animations: [fader],
 })
 export class SettingsComponent implements OnInit {
   environment = environment;
