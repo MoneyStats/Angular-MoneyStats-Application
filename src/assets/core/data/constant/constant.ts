@@ -13,6 +13,7 @@ export enum ModalConstant {
   CATEGORY = 'categoryModal',
   REPORTBUG = 'reportBugModal',
   INFOAPP = 'infoAppModal',
+  UPDATEAPP = 'updateAppModal',
 }
 
 export enum StorageConstant {

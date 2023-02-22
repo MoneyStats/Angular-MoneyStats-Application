@@ -64,6 +64,7 @@ import { LoaderInterceptor } from 'src/assets/core/interceptors/loader.intercept
 import { JwtInterceptor } from './auth/jwt.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InfoAppComponent } from './shared/components/modal/info-app/info-app.component';
+import { UpdateComponent } from './shared/components/modal/update/update.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import { InfoAppComponent } from './shared/components/modal/info-app/info-app.co
     OnboardingComponent,
     LoadingComponent,
     InfoAppComponent,
+    UpdateComponent,
   ],
   imports: [
     BrowserModule,

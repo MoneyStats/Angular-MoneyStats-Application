@@ -1,0 +1,47 @@
+<!-- Alert Error Action Sheet -->
+<div
+  #content
+  class="modal fade action-sheet"
+  id="{{ modalId }}"
+  tabindex="-1"
+  role="dialog"
+  data-bs-focus="false"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal-round mx-auto">
+      <div class="modal-body">
+        <div class="action-sheet-content">
+          <div class="iconbox text-success">
+            <ion-icon name="alert-circle"></ion-icon>
+          </div>
+          <div class="text-center p-2">
+            <h3>
+              {{ "modal.update.title" | translate }}
+            </h3>
+            <p [innerHTML]="'modal.update.text' | translate"></p>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <a
+                href="#"
+                class="btn btn-primary btn-lg btn-block"
+                data-bs-dismiss="modal"
+                >{{ "modal.update.close" | translate }}</a
+              >
+            </div>
+            <div class="col-6">
+              <a
+                href="#"
+                class="btn btn-primary btn-lg btn-block"
+                data-bs-dismiss="modal"
+                (click)="doAppUpdate()"
+                >{{ "modal.update.update" | translate }}</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- * Alert Error Action Sheet -->
