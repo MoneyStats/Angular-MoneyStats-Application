@@ -17,7 +17,7 @@ export class ErrorService {
   }
 
   getError(error: any) {
-    if (error.error.url) {
+    if (error.error instanceof UtilsException) {
       this.exception = error.error;
       this.exception.error!.statusCode = error.status;
     } else {
