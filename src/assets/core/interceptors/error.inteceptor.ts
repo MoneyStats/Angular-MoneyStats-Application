@@ -35,14 +35,17 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         } else {
           console.log('this is server side error');
           errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
+          console.log(errorMsg);
           this.errorService.getError(error);
 
           switch (this.errorService.exception.error?.exceptionCode) {
             case 'ERR_AUTH_MSS_004':
+              console.log('logout');
               this.userService.logout();
               break;
             default:
-              this.router.navigateByUrl('error');
+              console.log('default_error');
+              this.router.navigate(['error']);
               break;
           }
         }
