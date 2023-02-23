@@ -8,7 +8,7 @@ export const environment = {
   baseUrlSettings: baseUrlApp,
   baseUrlDashboard: baseUrlApp,
   baseUrlVersion: baseUrlApp,
-  version: '1.0.0',
+  version: 'Beta 0.9.8',
 
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
