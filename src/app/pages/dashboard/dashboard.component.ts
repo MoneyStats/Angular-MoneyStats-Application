@@ -83,6 +83,12 @@ export class DashboardComponent implements OnInit {
         this.dashboard = data.data;
       }
       this.dashboardService.dashboard = this.dashboard;
+      if (this.dashboard.wallets && this.dashboard.wallets.length) {
+        this.scrollX();
+      } else {
+        const slider = document.getElementById('slider');
+        slider!.style.display = 'none';
+      }
       this.performance = this.dashboard.performance + ' %';
       let date = this.datePipe
         .transform(this.dashboard.performanceSince, 'dd MMM y')
@@ -121,7 +127,7 @@ export class DashboardComponent implements OnInit {
       }, 100);
       this.walletDetails(data.data.wallets);
     });
-    this.scrollX();
+
     /*setTimeout(() => {
       this.splide.activeSplide();
     }, 100);*/

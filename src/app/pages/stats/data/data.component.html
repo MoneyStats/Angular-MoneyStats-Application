@@ -10,7 +10,7 @@
                 {{ wallet.name }} ({{ wallet.category }})
               </h5>
               <span class="h2 font-weight-bold mb-0" id="tot1"
-                >€ {{ wallet.balance }}</span
+                >{{ coinSymbol }} {{ wallet.balance }}</span
               >
             </div>
             <div class="col-auto">
@@ -26,7 +26,9 @@
               ><span
                 *ngIf="!wallet.deletedDate"
                 class="{{
-                  wallet.performanceLastStats > 0
+                  wallet.performanceLastStats == 0
+                    ? 'text-warning'
+                    : wallet.performanceLastStats > 0
                     ? 'text-success'
                     : 'text-danger'
                 }} mr-2"
@@ -36,7 +38,8 @@
                       ? 'fa-arrow-up'
                       : 'fa-arrow-down'
                   }}"
-                ></i>
+                ></i
+                >{{ wallet.performanceLastStats >= 1000 ? "+" : "" }}
                 {{ wallet.performanceLastStats }}%</span
               >
               <span
@@ -177,7 +180,9 @@
               >
                 {{ coinSymbol }} {{ balance.balance }}
                 <span *ngIf="balances.index != y"
-                  >({{ balance.percentage }}%)</span
+                  >({{
+                    balance.percentage >= 1000 ? "+1000" : balance.percentage
+                  }}%)</span
                 >
               </td>
             </tr>

@@ -30,8 +30,10 @@ export class DataComponent implements OnInit, OnChanges {
     this.tableBalance = [];
     this.balances = [];
     if (this.dashboard.statsWalletDays) {
+      let index = 0;
       this.dashboard.statsWalletDays.forEach((date) => {
-        this.tableBalance.push(this.tableCreate(date));
+        this.tableBalance.push(this.tableCreate(date, index));
+        index++;
       });
       this.renderChart();
     }
@@ -41,8 +43,10 @@ export class DataComponent implements OnInit, OnChanges {
     this.tableBalance = [];
     this.balances = [];
     if (this.dashboard.statsWalletDays) {
+      let index = 0;
       this.dashboard.statsWalletDays.forEach((date) => {
-        this.tableBalance.push(this.tableCreate(date));
+        this.tableBalance.push(this.tableCreate(date, index));
+        index++;
       });
       this.renderChart();
     }
@@ -63,7 +67,7 @@ export class DataComponent implements OnInit, OnChanges {
     return new Date().getFullYear().toString();
   }
 
-  tableCreate(date: string) {
+  tableCreate(date: string, index: number) {
     let array: any = [];
     this.dashboard.wallets.forEach((w) => {
       let history = w.history.find((h) => h.date.toString() === date);
@@ -91,7 +95,11 @@ export class DataComponent implements OnInit, OnChanges {
     ).toFixed(2);
     total.percentage = parseFloat(percentage);
 
-    if (total.percentage === Infinity || Number.isNaN(total.percentage)) {
+    if (
+      total.percentage === Infinity ||
+      Number.isNaN(total.percentage) ||
+      index == 0
+    ) {
       total.percentage = 0;
     }
 
