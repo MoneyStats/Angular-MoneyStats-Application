@@ -108,7 +108,9 @@
             <div class="price performancetot">
               <span
                 class="{{
-                  resumeData.lastStatsPerformance > 0
+                  resumeData.lastStatsPerformance == 0
+                    ? 'text-warning'
+                    : resumeData.lastStatsPerformance > 0
                     ? 'text-success'
                     : 'text-danger'
                 }} mr-2"
@@ -148,7 +150,11 @@
           <div class="right">
             <div
               class="price {{
-                resumeData.performanceValue > 0 ? 'text-success' : 'text-danger'
+                resumeData.performanceValue == 0
+                  ? 'text-warning'
+                  : resumeData.performanceValue > 0
+                  ? 'text-success'
+                  : 'text-danger'
               }}"
               id="pil"
             >
@@ -158,7 +164,11 @@
             <div class="price performancetot">
               <span
                 class="{{
-                  resumeData.performance > 0 ? 'text-success' : 'text-danger'
+                  resumeData.performance == 0
+                    ? 'text-warning'
+                    : resumeData.performance > 0
+                    ? 'text-success'
+                    : 'text-danger'
                 }} mr-2"
                 ><i
                   class="fa {{

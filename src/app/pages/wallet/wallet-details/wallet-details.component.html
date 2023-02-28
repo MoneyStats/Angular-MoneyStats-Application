@@ -67,7 +67,9 @@
                 <h4 class="caption">
                   <span
                     class="iconbox {{
-                      wallet!.differenceLastStats > 0
+                      wallet!.differenceLastStats == 0
+                        ? 'text-warning'
+                        : wallet!.differenceLastStats > 0
                         ? 'text-success'
                         : 'text-danger'
                     }}"
@@ -81,7 +83,10 @@
                     ></ion-icon>
                   </span>
                   {{ coinSymbol }}{{ wallet?.differenceLastStats }}
-                  <strong>({{ wallet?.performanceLastStats }}%)</strong>
+                  <strong
+                    >({{ wallet?.performanceLastStats! >= 1000 ? "+" : ""
+                    }}{{ wallet?.performanceLastStats }}%)</strong
+                  >
                   <!--<strong>({{ percentageLastStats }})</strong>-->
                 </h4>
               </div>
@@ -319,7 +324,9 @@
     </div>
     <div align="center">
       <img
-        src="{{environment.baseUrlDashboard}}assets/images/logos/logo_transparent_gray_land.png"
+        src="{{
+          environment.baseUrlDashboard
+        }}assets/images/logos/logo_transparent_gray_land.png"
         alt=""
         srcset=""
         style="width: 150px"
