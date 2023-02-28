@@ -33,6 +33,10 @@ export class AppComponent implements OnInit {
     if (!languages) {
       languages = this.changeLanguages(navigator.language);
     }
+    // Fix old lang settings
+    if (languages == 'en' || languages == 'it') {
+      languages = LanguagesSettings.ENGLISH;
+    }
     this.translate.setDefaultLang(languages);
     localStorage.setItem(LanguagesSettings.ATTR_LANGUAGE, languages);
   }
@@ -44,7 +48,7 @@ export class AppComponent implements OnInit {
       return LanguagesSettings.ITALIAN;
     } else return LanguagesSettings.ENGLISH;
   }
-  
+
   getRouteAnimationData() {
     return this.contexts.getContext('primary')?.route?.snapshot?.data?.[
       'animation'

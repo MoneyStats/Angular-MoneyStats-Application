@@ -5,10 +5,10 @@ export const environment = {
   production: true,
   baseUrl: '../../',
   baseUrlHeader: '../../../../',
-  baseUrlSettings: "../../../../../",
-  baseUrlDashboard: "../../../",
-  baseUrlVersion: "../../../../../../",
-  version: 'Beta 0.9.8.2',
+  baseUrlSettings: '../../../../../',
+  baseUrlDashboard: '../../../',
+  baseUrlVersion: '../../../../../../',
+  version: 'Beta 0.9.8.3',
 
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',

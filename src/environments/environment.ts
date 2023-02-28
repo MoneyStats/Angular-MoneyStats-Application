@@ -9,10 +9,10 @@ export const environment = {
   production: false,
   baseUrl: '../../',
   baseUrlHeader: '../../../../',
-  baseUrlSettings: "../../../../../",
-  baseUrlDashboard: "../../../",
-  baseUrlVersion: "../../../../../../",
-  version: 'Beta 0.9.8.2 (Local)',
+  baseUrlSettings: '../../../../../',
+  baseUrlDashboard: '../../../',
+  baseUrlVersion: '../../../../../../',
+  version: 'Beta 0.9.8.3 (Local)',
 
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
