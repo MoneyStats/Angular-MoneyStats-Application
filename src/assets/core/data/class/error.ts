@@ -14,3 +14,7 @@ export class Error {
   exceptionMessage?: string;
   stackTrace?: string;
 }
+
+export enum ExceptionCode {
+  Authentication = 'ERR_AUTH_MSS_004',
+}

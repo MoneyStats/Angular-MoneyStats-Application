@@ -4,11 +4,13 @@ import {
   HttpHandler,
   HttpRequest,
   HttpErrorResponse,
+  HttpStatusCode,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ExceptionCode } from '../data/class/error';
 import { UserService } from '../services/user.service';
 import { ErrorService } from './error.service';
 
@@ -37,15 +39,15 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
           console.log(errorMsg);
           this.errorService.getError(error);
-          switch (this.errorService.exception.error?.exceptionCode) {
-            case 'ERR_AUTH_MSS_004':
-              console.log('logout');
-              this.userService.logout();
-              break;
-            default:
-              console.log('default_error');
-              this.router.navigate(['error']);
-              break;
+          let exceptionCode = this.errorService.exception.error?.exceptionCode;
+
+          if (
+            exceptionCode == ExceptionCode.Authentication ||
+            error.status == HttpStatusCode.GatewayTimeout
+          ) {
+            this.userService.logout();
+          } else {
+            this.router.navigate(['error']);
           }
         }
         return throwError(errorMsg);

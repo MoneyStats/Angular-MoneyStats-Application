@@ -102,10 +102,10 @@
             </div>
           </div>
           <div class="right">
-            <div class="price" id="totale">
+            <div class="price float-end" id="totale">
               {{ dashboardService.coinSymbol }} {{ resumeData.balance }}
             </div>
-            <div class="price performancetot">
+            <div class="price performancetot float-end">
               <span
                 class="{{
                   resumeData.lastStatsPerformance == 0
@@ -147,7 +147,7 @@
               </p>
             </div>
           </div>
-          <div class="right">
+          <div class="right float-end">
             <div
               class="price {{
                 resumeData.performanceValue == 0
@@ -161,7 +161,7 @@
               {{ dashboardService.coinSymbol }}
               {{ resumeData.performanceValue }}
             </div>
-            <div class="price performancetot">
+            <div class="price float-end performancetot">
               <span
                 class="{{
                   resumeData.performance == 0

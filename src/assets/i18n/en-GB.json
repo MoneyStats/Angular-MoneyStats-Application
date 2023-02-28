@@ -307,9 +307,9 @@
     },
     "data": {
       "wallet": "Current Wallet",
-      "graph1": "Graph wallet performance",
-      "graph2": "Graph wallet quantity",
-      "graph3": "Graph bar wallet performance",
+      "graph1": "Wallet performance",
+      "graph2": "Wallet quantity",
+      "graph3": "Wallet bar performance",
       "table": "List Stats of the Year",
       "table_date": "Date",
       "table_balance": "Balance",
@@ -323,7 +323,7 @@
       "saving": "Saving",
       "history": "History",
       "deleted": "Deleted",
-      "graphHistory": "Graph History Performance"
+      "graphHistory": "History Performance"
     }
   },
   "insertStats": {
