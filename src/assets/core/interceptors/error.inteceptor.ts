@@ -37,7 +37,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
           console.log(errorMsg);
           this.errorService.getError(error);
-
           switch (this.errorService.exception.error?.exceptionCode) {
             case 'ERR_AUTH_MSS_004':
               console.log('logout');

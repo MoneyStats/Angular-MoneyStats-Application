@@ -36,7 +36,8 @@
                 ? 'text-success'
                 : 'text-danger'
             }}"
-            >{{ stats?.percentage }} %</strong
+            >{{ stats?.percentage! >= 1000 ? "+" : ""
+            }}{{ stats?.percentage }} %</strong
           >
           <div class="text-small">
             {{ stats?.date | date : "d MMM y" }}

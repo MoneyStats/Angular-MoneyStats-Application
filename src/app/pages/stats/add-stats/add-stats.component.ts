@@ -18,6 +18,7 @@ export class AddStatsComponent implements OnInit {
   dateStats: string = '';
 
   walletsToSave: Wallet[] = [];
+  coinSymbol?: string;
 
   constructor(
     public screenService: ScreenService,
@@ -33,6 +34,7 @@ export class AddStatsComponent implements OnInit {
         (w) => !w.deletedDate
       );
     }
+    this.coinSymbol = this.dashboardService.coinSymbol;
     this.getTodayAsString();
   }
 
@@ -119,15 +121,22 @@ export class AddStatsComponent implements OnInit {
           (wallet.newBalance != 0 ? wallet.newBalance : 0.001)) *
         100
       ).toFixed(2);
-      afterThisStats.percentage = parseFloat(percentageAfterThisStats);
+      afterThisStats.percentage =
+        parseFloat(percentageAfterThisStats) > 10000
+          ? 1000
+          : parseFloat(percentageAfterThisStats);
       afterThisStats.trend = parseFloat(
         (afterThisStats.balance - wallet.newBalance).toFixed(2)
       );
     }
     if (days[indexDate - 1]) {
       beforeThisStats = wallet.history.find(
-        (w) => w.date.toString() === days[indexDate - 1]
+        (w) => w.date != undefined && w.date.toString() === days[indexDate - 1]
       )!;
+      if (beforeThisStats == undefined) {
+        beforeThisStats = new Stats();
+        beforeThisStats.balance = 0.001;
+      }
     }
     let percentageThisStats = (
       ((wallet.newBalance - beforeThisStats.balance) /
@@ -137,7 +146,10 @@ export class AddStatsComponent implements OnInit {
 
     stats.balance = wallet.newBalance;
     stats.date = new Date(this.dateStats);
-    stats.percentage = parseFloat(percentageThisStats);
+    stats.percentage =
+      parseFloat(percentageThisStats) > 10000
+        ? 1000
+        : parseFloat(percentageThisStats);
     stats.trend = parseFloat(
       (
         stats.balance -
@@ -145,7 +157,12 @@ export class AddStatsComponent implements OnInit {
       ).toFixed(2)
     );
 
+    // Ultimo
     if (!afterThisStats.balance) {
+      if (!beforeThisStats.date) {
+        stats.percentage = 0;
+      }
+
       wallet.performanceLastStats = stats.percentage;
       wallet.differenceLastStats = stats.trend;
 
