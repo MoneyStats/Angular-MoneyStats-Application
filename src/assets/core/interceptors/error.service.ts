@@ -12,10 +12,6 @@ export class ErrorService {
   environment = environment;
   constructor(private http: HttpClient) {}
 
-  throwException() {
-    return this.http.get<any>('environment.getDashboardDataUrl');
-  }
-
   getError(error: any) {
     if (error.error.error) {
       this.exception = error.error;

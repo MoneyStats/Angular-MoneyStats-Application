@@ -307,9 +307,9 @@
     },
     "data": {
       "wallet": "Portafoglio Corrente",
-      "graph1": "Grafico delle performance",
-      "graph2": "Grafico proporsioni portafogli",
-      "graph3": "Grafico performance dei portafogli",
+      "graph1": "Performance portafogli",
+      "graph2": "Proporsioni portafogli",
+      "graph3": "Performance dei portafogli",
       "table": "Lista degli Stats dell'anno",
       "table_date": "Data",
       "table_balance": "Saldo",

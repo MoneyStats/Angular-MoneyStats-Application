@@ -356,7 +356,7 @@
         "updateDate": "2023-02-21T15:40:57",
         "name": "Saving",
         "balance": 2300.0,
-        "img": "../../../../assets/images/sample/wallet.png",
+        "img": "https://moneystats.github.io/App/assets/images/sample/wallet.png",
         "allTimeHigh": 2300.0,
         "allTimeHighDate": "2023-02-22",
         "highPrice": 2300.0,

@@ -15,9 +15,9 @@ export class JwtInterceptor implements HttpInterceptor {
   constructor(private userService: UserService) {}
 
   intercept(
-    req: import('@angular/common/http').HttpRequest<any>,
-    next: import('@angular/common/http').HttpHandler
-  ): import('rxjs').Observable<import('@angular/common/http').HttpEvent<any>> {
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       tap((httpEvent: HttpEvent<any>) => {
         // Skip request
