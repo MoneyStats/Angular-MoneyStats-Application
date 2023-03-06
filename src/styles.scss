@@ -63,16 +63,16 @@ span {
 }
 
 body:not(.dark-mode) {
-  background-color: #ededf5 !important;
+  background-color: #e5e5e5 !important;
   .box-shadow {
-    background-color: #ededf5 !important;
+    background-color: #e5e5e5 !important;
     box-shadow: none !important;
   }
   .title-page {
     color: #161129;
   }
   .card-btn {
-    background-color: #ededf5;
+    background-color: #e5e5e5;
   }
 }
 
@@ -81,6 +81,6 @@ body.dark-mode {
     background-color: #161129;
   }
   .title-page {
-    color: #ededf5;
+    color: #e5e5e5;
   }
 }
