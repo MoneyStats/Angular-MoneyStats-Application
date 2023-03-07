@@ -4,7 +4,7 @@
     <a
       href="#"
       (click)="updateData()"
-      class="headerButton"
+      class="headerButton hedBtn"
       data-bs-toggle="modal"
       data-bs-target="#sidebarPanel"
     >
@@ -86,11 +86,11 @@
         <!-- * profile box -->
         <!-- balance -->
         <div class="sidebar-balance">
-          <div class="listview-title">
+          <div class="listview-title title-page">
             {{ "dashboard.sidebar.overviewTitle" | translate }}
           </div>
           <div class="in">
-            <h1 id="reportStatement1" class="amount">
+            <h1 id="reportStatement1" class="amount title-page">
               {{ userService.coinSymbol }} {{ dashboard?.balance | number }}
             </h1>
           </div>

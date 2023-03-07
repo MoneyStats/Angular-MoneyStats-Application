@@ -68,11 +68,30 @@ body:not(.dark-mode) {
     background-color: #e5e5e5 !important;
     box-shadow: none !important;
   }
-  .title-page {
-    color: #161129;
+  .title-page,
+  .link,
+  .hedBtn,
+  .logo {
+    color: #161129 !important;
   }
   .card-btn {
     background-color: #e5e5e5;
+  }
+  .link:hover {
+    color: #71698f !important;
+  }
+  .walleName {
+    color: #e5e5e5;
+  }
+
+  /* Header Chiaro */
+  #header,
+  #appCapsule::before,
+  .wallet-card-section:before {
+    background: #e5e5e5 !important;
+  }
+  .sidebar-balance {
+    background: #e5e5e5;
   }
 }
 

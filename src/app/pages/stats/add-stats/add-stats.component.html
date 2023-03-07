@@ -82,7 +82,7 @@
         >
           <div class="card-body">
             <div class="hidden_mobile m-3">
-              <p class="text-center fs-1" style="color: whitesmoke">
+              <p class="text-center fs-1">
                 {{ "insertStats.card_title" | translate }}
               </p>
               <p class="card-subtitle text-center mb-1">
@@ -110,7 +110,9 @@
                               type="number"
                               class="form-control"
                               id="text4b"
-                              placeholder="Please insert new balance"
+                              placeholder="{{
+                                'insertStats.newBal' | translate
+                              }}"
                               required
                             />
                             <i class="clear-input">
@@ -123,7 +125,10 @@
                             </i>
                           </div>
                           <div class="input-info">
-                            {{ wallet.name }} balance: {{ wallet.balance }}
+                            {{ wallet.name }}
+                            {{ "insertStats.balance" | translate }}
+                            {{ wallet.balance }}
+                            {{ coinSymbol }}
                           </div>
                         </div>
                         <span
