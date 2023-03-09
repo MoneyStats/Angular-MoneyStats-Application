@@ -54,6 +54,20 @@
       "terms": "Io accetto",
       "terms2": "termini e condizioni",
       "register": "Registrati"
+    },
+    "forgot": {
+      "title": "Password Dimenticata?",
+      "subtitle": "Inserisci la tua email per resettare la password",
+      "place": "Inserisci la tua email",
+      "forgot": "Resetta Password"
+    },
+    "reset": {
+      "title": "Reset password",
+      "subtitle": "Inserisci la nuova password",
+      "passPlace": "Inserisci di nuovo la nuova password",
+      "pass2": "Digita Password",
+      "passPlace2": "Digita nuovamente la Password",
+      "reset": "Reset Password"
     }
   },
   "headerMobile": {

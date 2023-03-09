@@ -12,7 +12,7 @@ export const environment = {
   baseUrlSettings: '../../../../../',
   baseUrlDashboard: '../../../',
   baseUrlVersion: '../../../../../../',
-  version: 'Beta 0.9.10 (Local)',
+  version: 'Beta 0.9.11 (Local)',
 
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
@@ -24,6 +24,8 @@ export const environment = {
   // Datas
   registerDataUrl: host + '/v1/auth/sign-up',
   loginDataUrl: host + '/v1/auth/login',
+  forgotPasswordUrl: host + '/v1/auth/forgot-password',
+  resetPasswordUrl: host + '/v1/auth/reset-password',
   checkLoginDataUrl: host + '/v1/auth/check-login',
   addUpdateWalletDataUrl: host + '/v1/wallet/insert-update',
   listWalletDataurl: host + '/v1/wallet/list',
@@ -32,7 +34,7 @@ export const environment = {
   addStatsDataUrl: host + '/v1/app/add/stats',
   openGithubIssues: host + '/v1/app/report/bug',
   updateUserDataUrl: host + '/v1/auth/update/user',
-  forgotPassword: false,
+  forgotPassword: true,
 };
 
 /*

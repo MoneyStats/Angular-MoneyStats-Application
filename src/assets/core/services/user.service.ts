@@ -106,6 +106,21 @@ export class UserService {
     }
   }
 
+  forgotPassword(email: string): Observable<ResponseModel> {
+    const url = environment.forgotPasswordUrl + '?email=' + email;
+    return this.http.post<ResponseModel>(url, {});
+  }
+
+  resetPassword(password: string, token: string): Observable<ResponseModel> {
+    const url =
+      environment.resetPasswordUrl +
+      '?password=' +
+      password +
+      '&token=' +
+      token;
+    return this.http.post<ResponseModel>(url, {});
+  }
+
   checkLogin(authToken: string): Observable<ResponseModel> {
     if (this.user?.mockedUser) {
       return this.http.get<ResponseModel>(environment.getUserUrl);

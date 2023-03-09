@@ -18,6 +18,7 @@ import { ForgotComponent } from './auth/forgot/forgot.component';
 import { RouteGuardService } from './auth/route-guard.service';
 import { OnboardingComponent } from './pages/onboarding/onboarding.component';
 import { fader, slideUp } from './shared/animations/route-animations';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -53,6 +54,10 @@ const routes: Routes = [
       {
         path: 'forgot',
         component: ForgotComponent, // another child route component that the router renders
+      },
+      {
+        path: 'resetPassword/token/:token',
+        component: ResetPasswordComponent, // another child route component that the router renders
       },
     ],
   },
