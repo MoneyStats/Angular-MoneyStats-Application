@@ -301,7 +301,8 @@
       "howItWorks": "How it works",
       "version": "MoneyStats Version",
       "version_open": "Open"
-    }
+    },
+    "develop": "Info Develop & Contact"
   },
   "stats": {
     "title": "Resume Data",
@@ -391,6 +392,8 @@
     },
     "reportBug": {
       "title": "Report a Bug",
+      "titleBug": "Bug Description",
+      "titleBugSub": "Write a short title about the bug",
       "subTitle": "Tell us more about the problem",
       "text": "Write what you were doing before the error.",
       "send": "Report"

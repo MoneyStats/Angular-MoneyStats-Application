@@ -159,7 +159,7 @@
       </ul>
 
       <div class="listview-title mt-1">
-        {{ "settings.info.title" | translate }}
+        {{ "settings.develop" | translate }}
       </div>
       <ul class="listview border_round image-listview text inset mb-2">
         <li>
@@ -170,6 +170,23 @@
           </a>
         </li>
 
+        <li>
+          <a
+            class="item"
+            data-bs-toggle="modal"
+            attr.data-bs-target="#{{ modalConstant.OPENBUG }}"
+          >
+            <div class="in">
+              <div>{{ "modal.reportBug.title" | translate }}</div>
+            </div>
+          </a>
+        </li>
+      </ul>
+
+      <div class="listview-title mt-1">
+        {{ "settings.info.title" | translate }}
+      </div>
+      <ul class="listview border_round image-listview text inset mb-2">
         <li>
           <a class="item" routerLink="/on-boarding">
             <div class="in">
@@ -235,3 +252,4 @@
 ></app-profile-settings>
 <app-languages [modalId]="modalConstant.LANGUAGES"></app-languages>
 <app-update [modalId]="modalConstant.UPDATEAPP" #content></app-update>
+<app-open-bug [modalId]="modalConstant.OPENBUG"></app-open-bug>
