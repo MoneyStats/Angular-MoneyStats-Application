@@ -54,6 +54,20 @@
       "terms": "I agree",
       "terms2": "terms and conditions",
       "register": "Register"
+    },
+    "forgot": {
+      "title": "Forgot password?",
+      "subtitle": "Type your email to reset your password",
+      "place": "Type your current email",
+      "forgot": "Reset Password"
+    },
+    "reset": {
+      "title": "Reset password",
+      "subtitle": "Type your new password",
+      "passPlace": "Insert your new password",
+      "pass2": "Type Password Again",
+      "passPlace2": "Insert your password again",
+      "reset": "Reset Password"
     }
   },
   "headerMobile": {

@@ -13,13 +13,17 @@
 </div>
 <!-- * toast danger -->
 <!-- toast warning -->
-<div id="update" class="toast-box toast-bottom bg-warning">
+<div id="update" class="toast-box toast-bottom bg-success">
   <div class="in">
     <div class="text">
       {{ "modal.update.avaiable" | translate }}
     </div>
   </div>
-  <button (click)="closingModal()" type="button" class="btn btn-sm btn-text-light close-button">
+  <button
+    (click)="closingModal()"
+    type="button"
+    class="btn btn-sm btn-text-light close-button"
+  >
     OK
   </button>
 </div>
