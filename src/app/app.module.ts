@@ -66,6 +66,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InfoAppComponent } from './shared/components/modal/info-app/info-app.component';
 import { UpdateComponent } from './shared/components/modal/update/update.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { OpenBugComponent } from './shared/components/modal/open-bug/open-bug.component';
 
 @NgModule({
   declarations: [
@@ -115,6 +116,7 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
     InfoAppComponent,
     UpdateComponent,
     ResetPasswordComponent,
+    OpenBugComponent,
   ],
   imports: [
     BrowserModule,

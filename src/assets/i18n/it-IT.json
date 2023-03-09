@@ -301,7 +301,8 @@
       "howItWorks": "Come funziona?",
       "version": "Versione MoneyStats",
       "version_open": "Apri"
-    }
+    },
+    "develop": "Info Sviluppi & Contatti"
   },
   "stats": {
     "title": "Storico",
@@ -392,6 +393,8 @@
     "reportBug": {
       "title": "Segnala Bug",
       "subTitle": "Dicci di più sul tuo problema",
+      "titleBug": "Descrizione Bug",
+      "titleBugSub": "Scrivici un breve titolo per il bug",
       "text": "Scrivici cosa stavi facendo quando è apparso l'errore.",
       "send": "Segnala"
     },
