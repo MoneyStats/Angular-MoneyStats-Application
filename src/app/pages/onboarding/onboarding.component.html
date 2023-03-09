@@ -2,6 +2,7 @@
 <div class="appHeader no-border transparent position-absolute">
   <div class="left">
     <a
+      *ngIf="counter != 1"
       class="headerButton goBack"
       data-bs-target="#carouselExampleFade"
       data-bs-slide="prev"
@@ -55,7 +56,9 @@
       <div class="carousel-item active">
         <div class="img mx-auto">
           <img
-            src="{{environment.baseUrlDashboard}}assets/images/logos/favicon_trasparent.png"
+            src="{{
+              environment.baseUrlDashboard
+            }}assets/images/logos/favicon_trasparent.png"
             class="d-block w-100"
             alt="..."
           />
@@ -68,7 +71,7 @@
       <div class="carousel-item">
         <div class="img mx-auto">
           <img
-            src="{{environment.baseUrlDashboard}}assets/images/sample/why.png"
+            src="{{ environment.baseUrlDashboard }}assets/images/sample/why.png"
             class="d-block w-100"
             alt="..."
           />
@@ -81,7 +84,9 @@
       <div class="carousel-item">
         <div class="img mx-auto">
           <img
-            src="{{environment.baseUrlDashboard}}assets/images/sample/add-wallet.png"
+            src="{{
+              environment.baseUrlDashboard
+            }}assets/images/sample/add-wallet.png"
             class="d-block w-100"
             alt="..."
           />
@@ -94,7 +99,9 @@
       <div class="carousel-item">
         <div class="img mx-auto">
           <img
-            src="{{environment.baseUrlDashboard}}assets/images/sample/checked.png.png"
+            src="{{
+              environment.baseUrlDashboard
+            }}assets/images/sample/checked.png.png"
             class="d-block w-100"
             alt="..."
           />
