@@ -6,7 +6,11 @@
     </a>
   </div>
   <div class="pageTitle"></div>
-  <div class="right"></div>
+  <div class="right">
+    <a routerLink="/auth/register" class="headerButton">{{
+      "auth.login.register" | translate
+    }}</a>
+  </div>
 </div>
 <!-- * App Header -->
 
@@ -65,16 +69,11 @@
         </div>
       </div>
       <div class="form-links mt-2">
-        <div>
+        <!--<div>
           <a routerLink="/auth/register">{{
             "auth.login.register" | translate
           }}</a>
-        </div>
-        <div *ngIf="environment.forgotPassword">
-          <a routerLink="/auth/forgot" class="text-muted">{{
-            "auth.login.forgot" | translate
-          }}</a>
-        </div>
+        </div>-->
         <div>
           <a
             class="text-muted"
@@ -82,6 +81,11 @@
             attr.data-bs-target="#{{ modalConstant.INFOAPP }}"
             >{{ "modal.infoApp.title" | translate }}</a
           >
+        </div>
+        <div *ngIf="environment.forgotPassword">
+          <a routerLink="/auth/forgot" class="text-muted">{{
+            "auth.login.forgot" | translate
+          }}</a>
         </div>
       </div>
       <div class="form-button-group transparent section-width mx-auto">

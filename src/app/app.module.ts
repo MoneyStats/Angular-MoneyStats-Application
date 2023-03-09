@@ -65,6 +65,7 @@ import { JwtInterceptor } from './auth/jwt.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InfoAppComponent } from './shared/components/modal/info-app/info-app.component';
 import { UpdateComponent } from './shared/components/modal/update/update.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -113,6 +114,7 @@ import { UpdateComponent } from './shared/components/modal/update/update.compone
     LoadingComponent,
     InfoAppComponent,
     UpdateComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

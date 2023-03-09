@@ -13,8 +13,8 @@
 <!-- App Capsule -->
 <div id="appCapsule" class="section-width mx-auto">
   <div class="section mt-2 text-center">
-    <h1>Forgot password</h1>
-    <h4>Type your e-mail to reset your password</h4>
+    <h1>{{ "auth.forgot.title" | translate }}</h1>
+    <h4>{{ "auth.forgot.subtitle" | translate }}</h4>
   </div>
   <div class="section mb-5 p-2">
     <form action="index.html">
@@ -22,12 +22,16 @@
         <div class="card-body pb-1">
           <div class="form-group basic">
             <div class="input-wrapper">
-              <label class="label" for="email1">E-mail</label>
+              <label class="label" for="email1">Email</label>
               <input
+                name="email"
+                #email1="ngModel"
+                [(ngModel)]="email"
+                required
                 type="email"
                 class="form-control"
                 id="email1"
-                placeholder="Your e-mail"
+                placeholder="{{ 'auth.forgot.place' | translate }}"
               />
               <i class="clear-input">
                 <ion-icon name="close-circle"></ion-icon>
@@ -38,8 +42,12 @@
       </div>
 
       <div class="form-button-group transparent section-width mx-auto">
-        <button type="submit" class="btn btn-primary btn-block btn-lg">
-          Reset Password
+        <button
+          type="submit"
+          (click)="resetPassword()"
+          class="btn btn-primary btn-block btn-lg"
+        >
+          {{ "auth.forgot.forgot" | translate }}
         </button>
       </div>
     </form>
