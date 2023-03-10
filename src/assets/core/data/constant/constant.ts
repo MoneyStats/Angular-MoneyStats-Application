@@ -21,6 +21,7 @@ export enum StorageConstant {
   GITHUBACCOUNT = 'github_account',
   ACCESSTOKEN = 'accessToken',
   USERACCOUNT = 'userAccount',
+  HIDDENAMOUNT = 'hiddenAmount',
 }
 
 export enum ProfileSettings {
