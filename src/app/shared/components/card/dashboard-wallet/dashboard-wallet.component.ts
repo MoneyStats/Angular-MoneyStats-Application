@@ -3,7 +3,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Coin, CoinSymbol } from 'src/assets/core/data/class/coin';
 import { Dashboard } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
-import { ModalConstant } from 'src/assets/core/data/constant/constant';
+import {
+  ModalConstant,
+  StorageConstant,
+} from 'src/assets/core/data/constant/constant';
 import { UserService } from 'src/assets/core/services/user.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
 
@@ -16,6 +19,8 @@ export class DashboardWalletComponent implements OnInit {
   @Input('dashboard') dashboard?: Dashboard;
   @Input('user') user?: User;
   @Input('value') value?: string;
+  amount: string = '******';
+  hidden: boolean = false;
 
   constructor(private toast: ToastService, private us: UserService) {}
 
@@ -23,9 +28,25 @@ export class DashboardWalletComponent implements OnInit {
     return ModalConstant;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let isHidden = JSON.parse(
+      localStorage.getItem(StorageConstant.HIDDENAMOUNT)!
+    );
+    if (isHidden != null) {
+      this.hidden = isHidden;
+    }
+  }
 
   availableSoon() {
     this.toast.availableSoon();
+  }
+
+  hiddenShowAmount() {
+    if (this.hidden) {
+      this.hidden = false;
+    } else {
+      this.hidden = true;
+    }
+    localStorage.setItem(StorageConstant.HIDDENAMOUNT, this.hidden.toString());
   }
 }

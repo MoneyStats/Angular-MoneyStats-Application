@@ -2,11 +2,42 @@
   <!-- Balance -->
   <div class="balance">
     <div class="left">
-      <span class="title">{{
-        "dashboard.dashboardCard.title" | translate
-      }}</span>
-      <h1 id="reportStatement" class="total">
+      <a class="clickable" (click)="hiddenShowAmount()">
+        <span class="title"
+          >{{ "dashboard.dashboardCard.title" | translate }}
+          <ion-icon
+            *ngIf="!hidden"
+            name="eye-outline"
+            style="
+              height: 20px;
+              width: 20px;
+              align-self: center;
+              position: absolute;
+              top: 28px;
+              color: aliceblue;
+            "
+            class="ps-1"
+          ></ion-icon>
+          <ion-icon
+            *ngIf="hidden"
+            name="eye-off-outline"
+            style="
+              height: 20px;
+              width: 20px;
+              align-self: center;
+              position: absolute;
+              top: 28px;
+              color: aliceblue;
+            "
+            class="ps-1"
+          ></ion-icon> </span
+      ></a>
+
+      <h1 *ngIf="!hidden" id="reportStatement" class="total">
         {{ value }} {{ dashboard?.balance | number }}
+      </h1>
+      <h1 *ngIf="hidden" id="reportStatement" class="total">
+        {{ value }} {{ amount }}
       </h1>
     </div>
     <div class="right">
