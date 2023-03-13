@@ -13,9 +13,7 @@ export class ErrorService {
   constructor(private http: HttpClient) {}
 
   getError(error: any) {
-    console.log('getError');
     if (error.error != null) {
-      console.log('getError != null');
       this.exception = error.error;
       this.exception.error!.statusCode = error.status;
     } else {
@@ -24,7 +22,6 @@ export class ErrorService {
   }
 
   getUnknowError(error: any) {
-    console.log('getError = null');
     this.exception.url = error.url;
     this.exception.dateTime = new Date();
     let errorModel: Error = new Error();
@@ -33,6 +30,5 @@ export class ErrorService {
     errorModel.statusCode = HttpStatusCode.InternalServerError;
     errorModel.exceptionName = error.statusText;
     this.exception.error = errorModel;
-    console.log(this.exception);
   }
 }
