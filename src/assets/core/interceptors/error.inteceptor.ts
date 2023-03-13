@@ -57,11 +57,14 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             console.log(window.location.href, 'logout');
             this.userService.logout();
             console.log(window.location.href, this.router.url);
+            return throwError(() => new Error(errorMsg));
           } else {
             console.log('Error', error);
             this.router.navigate(['error']);
+            return throwError(() => new Error(errorMsg));
           }
         }
+        this.userService.logout();
         return throwError(() => new Error(errorMsg));
       })
     );
