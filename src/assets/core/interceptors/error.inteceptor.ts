@@ -35,11 +35,16 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           errorMsg = `Error: ${error.error.message}`;
           this.router.navigateByUrl('error');
         } else {
-          console.log('this is server side error');
+          console.log('this is server side error', 'New Update');
           errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
-          console.log(errorMsg);
+          console.log(errorMsg, error);
           this.errorService.getError(error);
           let exceptionCode = this.errorService.exception.error?.exceptionCode;
+          console.log(
+            'Exception Code',
+            exceptionCode,
+            this.errorService.exception
+          );
 
           if (error.status == HttpStatusCode.GatewayTimeout) {
             console.log('Number');
