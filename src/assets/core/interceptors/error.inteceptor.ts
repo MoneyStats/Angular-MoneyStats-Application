@@ -40,26 +40,14 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           console.log(errorMsg, error);
           this.errorService.getError(error);
           let exceptionCode = this.errorService.exception.error?.exceptionCode;
-          console.log(
-            'Exception Code',
-            exceptionCode,
-            this.errorService.exception
-          );
-
-          if (error.status == HttpStatusCode.GatewayTimeout) {
-            console.log('Number');
-          }
 
           if (
             exceptionCode == ExceptionCode.Authentication ||
             error.status == HttpStatusCode.GatewayTimeout
           ) {
-            console.log(window.location.href, 'logout');
             this.userService.logout();
-            console.log(window.location.href, this.router.url);
             return throwError(() => new Error(errorMsg));
           } else {
-            console.log('Error', error);
             this.router.navigate(['error']);
             return throwError(() => new Error(errorMsg));
           }
