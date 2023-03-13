@@ -2,9 +2,9 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 const baseUrlApp: string = '../../';
-//const host: string = 'http://192.168.1.19:8080';
+const host: string = 'http://192.168.1.19:8080';
 //const host: string = 'http://synologynas.ddns.net:8000';
-const host: string = 'https://prod-moneystats-service.up.railway.app';
+//const host: string = 'https://prod-moneystats-service.up.railway.app';
 
 export const environment = {
   production: false,
@@ -13,7 +13,7 @@ export const environment = {
   baseUrlSettings: '../../../../../',
   baseUrlDashboard: '../../../',
   baseUrlVersion: '../../../../../../',
-  version: 'Beta 0.9.12.2 (Local)',
+  version: 'Beta 0.9.13 (Local)',
 
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
