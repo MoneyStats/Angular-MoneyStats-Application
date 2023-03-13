@@ -14,7 +14,7 @@ export class ErrorService {
 
   getError(error: any) {
     console.log('getError');
-    if (error.error.error != null) {
+    if (error.error != null) {
       console.log('getError != null');
       this.exception = error.error;
       this.exception.error!.statusCode = error.status;
