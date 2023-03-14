@@ -353,6 +353,21 @@
     "continue": "Continue",
     "save": "Save"
   },
+  "support": {
+    "title": "Contact Support",
+    "mobile_back": "Back",
+    "back": "Go back to previous page",
+    "subtitle": "Contact us by sending and email",
+    "formTitle": "Get in Touch",
+    "formSubTitle": "Fill the form to contact us",
+    "name": "Your name",
+    "namePlace": "Insert your name",
+    "email": "Email",
+    "emailPlace": "Insert your email",
+    "message": "Message",
+    "messagePlace": "Insert your message",
+    "send": "Send"
+  },
   "modal": {
     "update": {
       "avaiable": "Update avaiable, go to settings and update it!",

@@ -36,7 +36,6 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   resetPassword() {
-    console.log(this.token, this.password);
     const user = this.userService.resetPassword(this.password, this.token);
     user.subscribe((data) => {
       this.swal.toastMessage(SwalIcon.SUCCESS, data.message!);
