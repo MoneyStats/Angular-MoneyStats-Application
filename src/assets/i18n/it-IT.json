@@ -353,6 +353,21 @@
     "continue": "Continua",
     "save": "Salva"
   },
+  "support": {
+    "title": "Contatta Supporto",
+    "mobile_back": "Indietro",
+    "back": "Torna alla pagina precendete",
+    "subtitle": "Contattaci inviandoci un'email",
+    "formTitle": "Contattaci",
+    "formSubTitle": "Completa il form per contattarci",
+    "name": "Il tuo Nome",
+    "namePlace": "Inserisci il tuo nome",
+    "email": "Email",
+    "emailPlace": "Inserisci la tua email",
+    "message": "Messaggio",
+    "messagePlace": "Inserisci il tuo messaggio",
+    "send": "Invia"
+  },
   "modal": {
     "update": {
       "avaiable": "Aggiornamento Disponibile, vai nelle impotazioni ed aggiorna l'app!",

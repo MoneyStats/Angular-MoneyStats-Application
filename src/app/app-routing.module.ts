@@ -19,6 +19,7 @@ import { RouteGuardService } from './auth/route-guard.service';
 import { OnboardingComponent } from './pages/onboarding/onboarding.component';
 import { fader, slideUp } from './shared/animations/route-animations';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { SupportComponent } from './pages/support/support.component';
 
 const routes: Routes = [
   {
@@ -109,6 +110,10 @@ const routes: Routes = [
         path: 'stats/insert',
         component: AddStatsComponent,
         data: { animation: fader },
+      },
+      {
+        path: 'support',
+        component: SupportComponent,
       },
     ],
   },

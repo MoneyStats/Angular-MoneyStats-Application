@@ -67,6 +67,7 @@ import { InfoAppComponent } from './shared/components/modal/info-app/info-app.co
 import { UpdateComponent } from './shared/components/modal/update/update.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { OpenBugComponent } from './shared/components/modal/open-bug/open-bug.component';
+import { SupportComponent } from './pages/support/support.component';
 
 @NgModule({
   declarations: [
@@ -117,6 +118,7 @@ import { OpenBugComponent } from './shared/components/modal/open-bug/open-bug.co
     UpdateComponent,
     ResetPasswordComponent,
     OpenBugComponent,
+    SupportComponent,
   ],
   imports: [
     BrowserModule,
