@@ -31,4 +31,18 @@ export class DashboardService {
       });
     }
   }
+
+  contactUs(
+    name: string,
+    email: string,
+    message: string
+  ): Observable<ResponseModel> {
+    const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
+    const support = {
+      name: name,
+      email: email,
+      message: message,
+    };
+    return this.http.post<ResponseModel>(environment.contactSupport, support);
+  }
 }

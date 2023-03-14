@@ -13,7 +13,7 @@ export const environment = {
   baseUrlSettings: '../../../../../',
   baseUrlDashboard: '../../../',
   baseUrlVersion: '../../../../../../',
-  version: 'Beta 0.9.13 (Local)',
+  version: 'Beta 0.9.14 (Local)',
 
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
@@ -34,6 +34,7 @@ export const environment = {
   getResumeDataUrl: host + '/v1/app/resume',
   addStatsDataUrl: host + '/v1/app/add/stats',
   openGithubIssues: host + '/v1/app/report/bug',
+  contactSupport: host + '/v1/app/contact',
   updateUserDataUrl: host + '/v1/auth/update/user',
   forgotPassword: true,
 };
