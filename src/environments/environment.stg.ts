@@ -29,6 +29,7 @@ export const environment = {
   getResumeDataUrl: host + '/v1/app/resume',
   addStatsDataUrl: host + '/v1/app/add/stats',
   openGithubIssues: host + '/v1/app/report/bug',
+  contactSupport: host + '/v1/app/contact',
   updateUserDataUrl: host + '/v1/auth/update/user',
   forgotPassword: true,
 };
