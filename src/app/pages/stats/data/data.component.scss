@@ -14,3 +14,9 @@
 .round-img {
   border-radius: 50%;
 }
+
+@media screen and (max-width: 780px) {
+  .row {
+    margin-right: -15px !important;
+  }
+}

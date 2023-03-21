@@ -8,6 +8,10 @@ canvas {
     width: 600px !important;
     max-width: 100% !important;
   }
+
+  .row {
+    margin-right: -15px !important;
+  }
 }
 
 @media screen and (max-width: 500px) {

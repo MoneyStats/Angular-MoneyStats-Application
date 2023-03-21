@@ -23,31 +23,38 @@ export class DataComponent implements OnInit, OnChanges {
   @Input('coinSymbol') coinSymbol: string = '';
   balances: Array<number> = [];
   tableBalance: Array<any> = [];
+  filterDateHistory: string[] = [];
 
   constructor(private charts: ChartService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.tableBalance = [];
-    this.balances = [];
-    if (this.dashboard.statsWalletDays) {
-      let index = 0;
-      this.dashboard.statsWalletDays.forEach((date) => {
-        this.tableBalance.push(this.tableCreate(date, index));
-        index++;
-      });
-      this.renderChart();
-    }
+    this.renderTable();
   }
 
   ngOnInit(): void {
+    this.renderTable();
+  }
+
+  renderTable() {
     this.tableBalance = [];
     this.balances = [];
     if (this.dashboard.statsWalletDays) {
-      let index = 0;
-      this.dashboard.statsWalletDays.forEach((date) => {
-        this.tableBalance.push(this.tableCreate(date, index));
-        index++;
+      let moreThanOneInAMonth: Array<string> = [];
+      this.dashboard.statsWalletDays.forEach((date, index) => {
+        let yearMonth: string = date.split('-')[0] + '-' + date.split('-')[1];
+
+        let find = moreThanOneInAMonth.find((d) => d.includes(yearMonth));
+        if (find && moreThanOneInAMonth.includes(find)) {
+          moreThanOneInAMonth.pop();
+          moreThanOneInAMonth.push(date);
+        } else {
+          moreThanOneInAMonth.push(date);
+        }
       });
+      moreThanOneInAMonth.forEach((date, index) => {
+        this.tableBalance.push(this.tableColumsCreate(date, index));
+      });
+      //this.dashboard.statsWalletDays = moreThanOneInAMonth;
       this.renderChart();
     }
   }
@@ -67,9 +74,10 @@ export class DataComponent implements OnInit, OnChanges {
     return new Date().getFullYear().toString();
   }
 
-  tableCreate(date: string, index: number) {
+  tableColumsCreate(date: string, index: number) {
     let array: any = [];
-    this.dashboard.wallets.forEach((w) => {
+
+    this.dashboard.wallets.forEach((w, index) => {
       let history = w.history.find((h) => h.date.toString() === date);
       if (!history) {
         history = new Stats();
@@ -77,6 +85,29 @@ export class DataComponent implements OnInit, OnChanges {
         history.date = new Date(date);
         history.percentage = 0;
         history.trend = 0;
+      } else {
+        let beforeThis = w.history.find(
+          (h) =>
+            h.date.toString() ===
+            this.filterDateHistory[this.filterDateHistory.length - 1]
+        );
+        if (beforeThis) {
+          history.percentage = parseFloat(
+            (
+              ((history.balance - beforeThis.balance) / beforeThis.balance) *
+              100
+            ).toFixed(2)
+          );
+          history.trend = parseFloat(
+            (history.balance - beforeThis.balance).toFixed(2)
+          );
+        } else {
+          history.percentage = 0;
+          history.trend = 0;
+        }
+        if (index === this.dashboard.wallets.length - 1) {
+          this.filterDateHistory.push(history.date.toString());
+        }
       }
       array.push(history);
     });
