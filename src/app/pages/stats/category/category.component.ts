@@ -71,6 +71,20 @@ export class CategoryComponent implements OnInit, OnChanges {
   }
 
   generateData() {
+    let moreThanOneInAMonth: Array<string> = [];
+    if (this.dashboard.statsWalletDays) {
+      this.dashboard.statsWalletDays.forEach((date) => {
+        let yearMonth: string = date.split('-')[0] + '-' + date.split('-')[1];
+
+        let find = moreThanOneInAMonth.find((d) => d.includes(yearMonth));
+        if (find && moreThanOneInAMonth.includes(find)) {
+          moreThanOneInAMonth.pop();
+          moreThanOneInAMonth.push(date);
+        } else {
+          moreThanOneInAMonth.push(date);
+        }
+      });
+    }
     // INVESTMENTS
     this.categoryTableBalance = [];
     this.totalList = [];
@@ -78,7 +92,7 @@ export class CategoryComponent implements OnInit, OnChanges {
     let table = this.dashboard.wallets.filter((wallet) =>
       this.INVESTMENTS.includes(wallet.category)
     );
-    this.dashboard.statsWalletDays.forEach((date) => {
+    moreThanOneInAMonth.forEach((date) => {
       this.categoryTableBalance.push(this.tableCreate(date, table));
     });
     this.categoryTableBalance.forEach((c: any) => {
@@ -96,7 +110,7 @@ export class CategoryComponent implements OnInit, OnChanges {
     table = this.dashboard.wallets.filter((wallet) =>
       this.CAPITAL.includes(wallet.category)
     );
-    this.dashboard.statsWalletDays.forEach((date) => {
+    moreThanOneInAMonth.forEach((date) => {
       this.categoryTableBalance.push(this.tableCreate(date, table));
     });
     this.categoryTableBalance.forEach((c: any) => {
@@ -114,7 +128,7 @@ export class CategoryComponent implements OnInit, OnChanges {
     table = this.dashboard.wallets.filter((wallet) =>
       this.SAVING.includes(wallet.category)
     );
-    this.dashboard.statsWalletDays.forEach((date) => {
+    moreThanOneInAMonth.forEach((date) => {
       this.categoryTableBalance.push(this.tableCreate(date, table));
     });
     this.categoryTableBalance.forEach((c: any) => {
@@ -132,7 +146,7 @@ export class CategoryComponent implements OnInit, OnChanges {
     table = this.dashboard.wallets.filter((wallet) =>
       this.DEBITS.includes(wallet.category)
     );
-    this.dashboard.statsWalletDays.forEach((date) => {
+    moreThanOneInAMonth.forEach((date) => {
       this.categoryTableBalance.push(this.tableCreate(date, table));
     });
     this.categoryTableBalance.forEach((c: any) => {
@@ -150,7 +164,7 @@ export class CategoryComponent implements OnInit, OnChanges {
     table = this.dashboard.wallets.filter((wallet) =>
       this.OTHER.includes(wallet.category)
     );
-    this.dashboard.statsWalletDays.forEach((date) => {
+    moreThanOneInAMonth.forEach((date) => {
       this.categoryTableBalance.push(this.tableCreate(date, table));
     });
     this.categoryTableBalance.forEach((c: any) => {

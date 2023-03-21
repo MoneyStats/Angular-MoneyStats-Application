@@ -26,6 +26,14 @@ export class ChartService {
         ) - 1;
       dashboard.statsWalletDays.splice(0, 0, oldDate.toString());
     }
+    /**let filterDate: string[] = [];
+    dashboard.statsWalletDays.forEach((d, index) => {
+      if (d.split('-')[1]) {
+        filterDate.push(d);
+      }
+    });
+    console.log(filterDate, dashboard);
+    dashboard.statsWalletDays = filterDate;**/
     dashboard.wallets.forEach((wallet) => {
       let oldBalance =
         wallet.differenceLastStats != 0
