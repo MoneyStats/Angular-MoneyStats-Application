@@ -1,5 +1,5 @@
 const baseUrlApp: string = '../../';
-const host: string = 'http://synologynas.ddns.net:8000';
+const host: string = 'http://synologynas.ddns.net:8000/stg-moneystats-service';
 const subDomain = 'stg-moneystats/';
 
 export const environment = {
@@ -9,7 +9,7 @@ export const environment = {
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: 'Beta 0.9.15 (Staging)',
+  version: 'Beta 0.9.20 (Staging)',
 
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
