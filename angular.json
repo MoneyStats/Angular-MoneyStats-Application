@@ -84,6 +84,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/moneystats/",
               "budgets": [
                 {
                   "type": "initial",
@@ -113,6 +114,7 @@
               ]
             },
             "staging": {
+              "baseHref": "/stg-moneystats/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -121,6 +123,7 @@
               ]
             },
             "development": {
+              "baseHref": "/moneystats/",
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,

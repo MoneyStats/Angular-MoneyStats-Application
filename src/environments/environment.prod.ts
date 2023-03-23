@@ -1,13 +1,14 @@
 const baseUrlApp: string = '../../';
 const host: string = 'http://synologynas.ddns.net:8800';
+const subDomain = 'moneystats';
 
 export const environment = {
   production: true,
-  baseUrl: '../../',
-  baseUrlHeader: '../../../../',
-  baseUrlSettings: '../../../../../',
-  baseUrlDashboard: '../../../',
-  baseUrlVersion: '../../../../../../',
+  baseUrl: '../../' + subDomain,
+  baseUrlHeader: '../../../../' + subDomain,
+  baseUrlSettings: '../../../../../' + subDomain,
+  baseUrlDashboard: '../../../' + subDomain,
+  baseUrlVersion: '../../../../../../' + subDomain,
   version: 'Beta 0.9.15',
 
   // Mock Data

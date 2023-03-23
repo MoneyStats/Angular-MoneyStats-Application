@@ -1,13 +1,14 @@
 const baseUrlApp: string = '../../';
 const host: string = 'http://synologynas.ddns.net:8000';
+const subDomain = 'stg-moneystats';
 
 export const environment = {
   production: false,
-  baseUrl: '../../',
-  baseUrlHeader: '../../../../',
-  baseUrlSettings: '../../../../../',
-  baseUrlDashboard: '../../../',
-  baseUrlVersion: '../../../../../../',
+  baseUrl: '../../' + subDomain,
+  baseUrlHeader: '../../../../' + subDomain,
+  baseUrlSettings: '../../../../../' + subDomain,
+  baseUrlDashboard: '../../../' + subDomain,
+  baseUrlVersion: '../../../../../../' + subDomain,
   version: 'Beta 0.9.15 (Staging)',
 
   // Mock Data
