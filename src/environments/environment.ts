@@ -5,14 +5,15 @@ const baseUrlApp: string = '../../';
 const host: string = 'http://192.168.1.19:8080';
 //const host: string = 'http://synologynas.ddns.net:8000';
 //const host: string = 'https://prod-moneystats-service.up.railway.app';
+const subDomain = 'moneystats';
 
 export const environment = {
   production: false,
-  baseUrl: '../../',
-  baseUrlHeader: '../../../../',
-  baseUrlSettings: '../../../../../',
-  baseUrlDashboard: '../../../',
-  baseUrlVersion: '../../../../../../',
+  baseUrl: '../../' + subDomain,
+  baseUrlHeader: '../../../../' + subDomain,
+  baseUrlSettings: '../../../../../' + subDomain,
+  baseUrlDashboard: '../../../' + subDomain,
+  baseUrlVersion: '../../../../../../' + subDomain,
   version: 'Beta 0.9.15 (Local)',
 
   // Mock Data
