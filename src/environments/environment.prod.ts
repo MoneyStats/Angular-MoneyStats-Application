@@ -1,6 +1,6 @@
 const baseUrlApp: string = '../../';
 const host: string = 'http://synologynas.ddns.net:8800';
-const subDomain = 'moneystats';
+const subDomain = 'moneystats/';
 
 export const environment = {
   production: true,
