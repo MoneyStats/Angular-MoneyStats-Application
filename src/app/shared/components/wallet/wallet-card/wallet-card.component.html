@@ -5,8 +5,11 @@
   <div class="price walleName">
     {{ wallet?.name }}
   </div>
-  <mark *ngIf="!wallet?.deletedDate"
+  <mark *ngIf="!wallet?.deletedDate && !hiddenAmount"
     >{{ coinSymbol }} {{ wallet?.balance }}</mark
+  >
+  <mark *ngIf="!wallet?.deletedDate && hiddenAmount"
+    >{{ coinSymbol }} {{ amount }}</mark
   >
   <p class="pt-1">{{ wallet?.category }}</p>
 

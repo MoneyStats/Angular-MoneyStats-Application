@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { fader } from 'src/app/shared/animations/route-animations';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
-import { ModalConstant } from 'src/assets/core/data/constant/constant';
+import {
+  ModalConstant,
+  StorageConstant,
+} from 'src/assets/core/data/constant/constant';
 import { WalletService } from 'src/assets/core/services/wallet.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
@@ -12,6 +15,8 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 })
 export class WalletComponent implements OnInit {
   wallets: Wallet[] = [];
+  amount: string = '******';
+  hidden: boolean = false;
 
   constructor(
     public walletService: WalletService,
@@ -31,6 +36,12 @@ export class WalletComponent implements OnInit {
       this.walletService.walletActive = this.walletActive(res.data);
       this.walletService.walletDeleted = this.walletDeleted(res.data);
       this.walletDetails(res.data);
+      let isHidden = JSON.parse(
+        localStorage.getItem(StorageConstant.HIDDENAMOUNT)!
+      );
+      if (isHidden != null) {
+        this.hidden = isHidden;
+      }
     });
   }
 

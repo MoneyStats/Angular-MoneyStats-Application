@@ -11,6 +11,8 @@ export class WalletCardComponent implements OnInit {
   @Input('wallet') wallet?: Wallet;
   @Input('btn') btn?: string;
   @Input('style') style: string = '';
+  @Input('hiddenAmount') hiddenAmount: boolean = false;
+  amount: string = '******';
   constructor() {}
 
   ngOnInit(): void {}

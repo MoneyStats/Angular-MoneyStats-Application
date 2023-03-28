@@ -40,6 +40,8 @@ export class DashboardComponent implements OnInit {
   public chartOptions?: Partial<ApexOptions>;
   @ViewChild('content') content: any;
 
+  @Output() hidden?: boolean;
+
   constructor(
     private dashboardService: DashboardService,
     public userService: UserService,
@@ -170,5 +172,9 @@ export class DashboardComponent implements OnInit {
   }
   walletDetails(res: Wallet[]) {
     this.walletService.walletDetails = res;
+  }
+
+  changeAmountStatus(hidden: boolean) {
+    this.hidden = hidden;
   }
 }
