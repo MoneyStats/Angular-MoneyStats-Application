@@ -5473,7 +5473,11 @@ textarea,
 }
 
 .bill-box .img-wrapper img {
+  width: 48px;
+  height: 48px;
   margin: auto;
+  object-position: center center;
+  object-fit: cover;
 }
 
 .bill-box .img-wrapper .iconbox {
@@ -5661,6 +5665,13 @@ textarea,
 .avatar-section .imaged {
   border: 5px solid #fff;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.09);
+}
+
+.avatar-section img {
+  width: 100px !important;
+  height: 100px !important;
+  object-position: center center !important;
+  object-fit: cover !important;
 }
 
 .avatar-section .button {

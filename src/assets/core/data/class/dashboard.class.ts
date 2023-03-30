@@ -24,6 +24,8 @@ export class Dashboard implements DashboardInterface {
 
 export class Wallet extends GenericModel implements WalletInterface {
   name!: string;
+  imgName!: string;
+  fileImage!: File;
   img: string = environment.baseUrlHeader + AppConfigConst.DEFAULT_WALLET_IMG;
   category!: string;
   allTimeHigh: number = 0;

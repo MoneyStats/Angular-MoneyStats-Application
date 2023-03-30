@@ -48,7 +48,9 @@ export class WalletService {
       return of(response);
     } else {
       const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
-      const headers = new HttpHeaders({ authToken: authToken! });
+      const headers = new HttpHeaders({
+        authToken: authToken!,
+      });
       return this.http.post<ResponseModel>(
         environment.addUpdateWalletDataUrl,
         wallet,
@@ -56,4 +58,6 @@ export class WalletService {
       );
     }
   }
+
+  
 }

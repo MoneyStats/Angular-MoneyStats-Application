@@ -18,7 +18,7 @@
       </div>
       <div class="modal-body">
         <div class="action-sheet-content">
-          <form #f="ngForm" type="submit">
+          <form #f="ngForm" type="submit" enctype="multipart/form-data">
             <div class="form-group boxed">
               <div class="input-wrapper">
                 <label class="label" for="text11">{{
@@ -96,15 +96,15 @@
                   "wallet.modal.img" | translate
                 }}</label>
                 <div class="custom-file-upload mt-1" id="fileUpload1">
-                  <!--<input
+                  <input
                     type="file"
                     id="fileuploadInput"
                     accept=".png, .jpg, .jpeg"
-                  />-->
+                    (change)="onFileSelected($event)"
+                  />
                   <label
                     class="fileuploadInput clickable"
                     for="fileuploadInput"
-                    (click)="importimage()"
                   >
                     <span>
                       <strong>
@@ -114,9 +114,20 @@
                     </span>
                   </label>
                 </div>
+                <span class="float-end clickable" (click)="importimage()">{{
+                  "wallet.modal.imgFromURL" | translate
+                }}</span>
                 <i class="clear-input">
                   <ion-icon name="close-circle"></ion-icon>
                 </i>
+              </div>
+              <div
+                *ngIf="warning"
+                class="alert alert-danger mb-1 mt-3"
+                role="alert"
+              >
+                {{ "wallet.modal.sizeToBig" | translate }}
+                {{ environment.imageSizeMax / 1000 }}kb
               </div>
             </div>
 

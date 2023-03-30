@@ -14,7 +14,7 @@ export const environment = {
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: 'Beta 0.9.20 (Local)',
+  version: 'Beta 0.9.30 (Local)',
 
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
@@ -30,6 +30,8 @@ export const environment = {
   resetPasswordUrl: host + '/v1/auth/reset-password',
   checkLoginDataUrl: host + '/v1/auth/check-login',
   addUpdateWalletDataUrl: host + '/v1/wallet/insert-update',
+  uploadImage: host + '/v1/upload/attachment',
+  imageSizeMax: 10000000,
   listWalletDataurl: host + '/v1/wallet/list',
   getDashboardDataUrl: host + '/v1/app/dashboard',
   getResumeDataUrl: host + '/v1/app/resume',
