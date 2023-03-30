@@ -2,6 +2,17 @@
   max-width: 1000px !important;
 }
 
+.avatar-section img {
+  width: 100px !important;
+  height: 100px !important;
+  object-position: center center !important;
+  object-fit: cover !important;
+}
+
 .text {
   color: gray;
+}
+
+.alert {
+  max-width: 500px;
 }

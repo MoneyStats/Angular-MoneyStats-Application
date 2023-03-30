@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Coin, CoinSymbol } from 'src/assets/core/data/class/coin';
 import { Dashboard } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
@@ -21,6 +21,8 @@ export class DashboardWalletComponent implements OnInit {
   @Input('value') value?: string;
   amount: string = '******';
   hidden: boolean = false;
+  @Output('changeAmountStatus') changeAmountStatus =
+    new EventEmitter<boolean>();
 
   constructor(private toast: ToastService, private us: UserService) {}
 
@@ -48,5 +50,6 @@ export class DashboardWalletComponent implements OnInit {
       this.hidden = true;
     }
     localStorage.setItem(StorageConstant.HIDDENAMOUNT, this.hidden.toString());
+    this.changeAmountStatus.emit(this.hidden);
   }
 }

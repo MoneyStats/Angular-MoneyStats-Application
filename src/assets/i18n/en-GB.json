@@ -186,7 +186,9 @@
       "categoryText": "Choose a category",
       "categoryTextEdit": "Leave to keep same category",
       "img": "Add Image",
-      "imgContent": "Add Image from URL",
+      "imgContent": "Upload Image",
+      "imgFromURL": "Add Image from URL",
+      "sizeToBig": "Image Size is to big, max size is ",
       "image": "Image",
       "default": "Use default wallet image",
       "imageModal": {

@@ -150,6 +150,7 @@ export class UserService {
   }
 
   updateUserData(user: User): Observable<ResponseModel> {
+    console.log(this.user);
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -167,6 +168,22 @@ export class UserService {
           headers: headers,
         }
       );
+    }
+  }
+
+  uploadImage(file: File): Observable<ResponseModel> {
+    if (this.user?.mockedUser) {
+      let response: ResponseModel = new ResponseModel();
+      return of(response);
+    } else {
+      const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
+      const headers = new HttpHeaders({
+        authToken: authToken!,
+        'Content-Type': 'multipart/form-data',
+      });
+      const formData: FormData = new FormData();
+      formData.append('file', file, file.name);
+      return this.http.post<ResponseModel>(environment.uploadImage, formData);
     }
   }
 }
