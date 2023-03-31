@@ -1,5 +1,5 @@
 const baseUrlApp: string = '../../';
-const host: string = 'http://stg-moneystats-service:8080/stg-moneystats-service';
+const host: string = 'http://synologynas.ddns.net:7006/stg-moneystats-service';
 const subDomain = 'stg-moneystats/';
 
 export const environment = {
