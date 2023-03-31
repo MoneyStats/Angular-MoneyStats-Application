@@ -94,6 +94,7 @@ export class SettingsComponent implements OnInit {
       this.user!.imgName = file.name;
 
       this.userService.uploadImage(file).subscribe((data) => {
+        this.user!.imgName = undefined;
         this.userService.updateUserData(this.user!).subscribe((res) => {
           this.userService.user! = res.data;
           this.userService.setUserGlobally();

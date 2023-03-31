@@ -150,7 +150,6 @@ export class UserService {
   }
 
   updateUserData(user: User): Observable<ResponseModel> {
-    console.log(this.user);
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

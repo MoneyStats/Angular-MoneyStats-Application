@@ -1,5 +1,5 @@
 const baseUrlApp: string = '../../';
-const host: string = 'http://synologynas.ddns.net:8000/stg-moneystats-service';
+const host: string = 'http://stg-moneystats-service:8080/stg-moneystats-service';
 const subDomain = 'stg-moneystats/';
 
 export const environment = {
@@ -26,7 +26,7 @@ export const environment = {
   resetPasswordUrl: host + '/v1/auth/reset-password',
   addUpdateWalletDataUrl: host + '/v1/wallet/insert-update',
   uploadImage: host + '/v1/upload/attachment',
-  imageSizeMax: 10000000,
+  imageSizeMax: 2000000,
   listWalletDataurl: host + '/v1/wallet/list',
   getDashboardDataUrl: host + '/v1/app/dashboard',
   getResumeDataUrl: host + '/v1/app/resume',
