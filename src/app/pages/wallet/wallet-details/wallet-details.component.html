@@ -284,10 +284,204 @@
         </div>
         <!-- Stats -->
       </div>
-    </div>
-
-    <div class="row mt-3 mb-3">
       <div class="col-md-6">
+        <!-- Stats -->
+        <div class="section mt-2 mb-4">
+          <div class="section-heading">
+            <h2 class="title">
+              {{ "wallet.details.info.title" | translate }}
+            </h2>
+            <a
+              *ngIf="
+                wallet?.infoString != undefined || wallet?.info != undefined
+              "
+              (click)="
+                editShow == true ? (editShow = false) : (editShow = true)
+              "
+              class="link clickable"
+              >{{ "wallet.details.info.edit" | translate }}</a
+            >
+          </div>
+          <div class="card">
+            <ul class="listview no-line transparent flush simple-listview">
+              <li
+                *ngIf="
+                  (wallet?.infoString == undefined ||
+                    wallet?.infoString == '') &&
+                  wallet?.info == undefined
+                "
+              >
+                <div class="text-muted">
+                  {{ "wallet.details.info.subTitle" | translate }}
+                </div>
+              </li>
+              <li *ngFor="let key of infoKeys">
+                <div class="text-muted">
+                  {{ key }}
+                </div>
+                <strong (click)="copyMessage(mapInfo.get(key)!)"
+                  >{{ mapInfo.get(key) }}
+                  <button
+                    *ngIf="editShow"
+                    (click)="editInput(key)"
+                    type="button"
+                    class="btn btn-icon btn-secondary ms-1 rounded"
+                    style="height: 30px; width: 30px"
+                  >
+                    <ion-icon name="create-outline"></ion-icon></button
+                  ><button
+                    *ngIf="editShow"
+                    (click)="deleteInfo(key)"
+                    type="button"
+                    class="btn btn-icon btn-danger ms-1 rounded"
+                    style="height: 30px; width: 30px"
+                  >
+                    <ion-icon name="close-circle-outline"></ion-icon></button
+                ></strong>
+              </li>
+              <li *ngIf="addInput">
+                <form #f="ngForm" type="submit">
+                  <div class="row ms-2">
+                    <div class="col-md-4">
+                      <div class="form-group basic">
+                        <div class="input-wrapper">
+                          <input
+                            name="infoKey1"
+                            [(ngModel)]="infoKey"
+                            #infoKey1="ngModel"
+                            required
+                            type="text"
+                            class="form-control"
+                            id="text4"
+                            placeholder="{{
+                              'wallet.details.info.key' | translate
+                            }}"
+                          />
+                          <i class="clear-input">
+                            <ion-icon name="close-circle"></ion-icon>
+                          </i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-5">
+                      <div class="form-group basic">
+                        <div class="input-wrapper">
+                          <input
+                            name="infoValue1"
+                            [(ngModel)]="infoValue"
+                            #infoValue1="ngModel"
+                            required
+                            type="text"
+                            class="form-control"
+                            id="text4"
+                            placeholder="{{
+                              'wallet.details.info.value' | translate
+                            }}"
+                          />
+                          <i class="clear-input">
+                            <ion-icon name="close-circle"></ion-icon>
+                          </i>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="col-md-2 me-2 text-center"
+                      style="display: inline"
+                    >
+                      <div class="row">
+                        <div class="col-6">
+                          <button
+                            *ngIf="!editBtn"
+                            (click)="addInfo()"
+                            [disabled]="f.invalid"
+                            type="button"
+                            class="btn btn-icon btn-danger ms-1 rounded"
+                            style="
+                              height: 30px;
+                              width: 30px;
+                              vertical-align: -20px;
+                            "
+                          >
+                            <ion-icon name="save-outline"></ion-icon>
+                          </button>
+                        </div>
+                        <div class="col-6">
+                          <button
+                            *ngIf="!editBtn"
+                            (click)="addInput = false"
+                            type="button"
+                            class="btn btn-icon btn-secondary ms-1 rounded"
+                            style="
+                              height: 30px;
+                              width: 30px;
+                              vertical-align: -20px;
+                            "
+                          >
+                            <ion-icon name="close-outline"></ion-icon>
+                          </button>
+                        </div>
+
+                        <div class="col-6">
+                          <button
+                            *ngIf="editBtn"
+                            (click)="saveEdit()"
+                            [disabled]="f.invalid"
+                            type="button"
+                            class="btn btn-icon btn-warning ms-1 rounded"
+                            style="
+                              height: 30px;
+                              width: 30px;
+                              vertical-align: -20px;
+                            "
+                          >
+                            <ion-icon name="create-outline"></ion-icon>
+                          </button>
+                        </div>
+                      </div>
+                      <!--<button
+                        *ngIf="!editBtn"
+                        (click)="addInfo()"
+                        [disabled]="f.invalid"
+                        type="button"
+                        style="max-width: 90px; vertical-align: -20px"
+                        class="btn btn-primary rounded me-1 mx-auto"
+                      >
+                        {{ "wallet.details.info.save" | translate }}
+                      </button>
+                      <button
+                        *ngIf="editBtn"
+                        (click)="saveEdit()"
+                        [disabled]="f.invalid"
+                        type="button"
+                        style="max-width: 90px; vertical-align: -20px"
+                        class="btn btn-primary rounded me-1 mx-auto"
+                      >
+                        {{ "wallet.details.info.editBtn" | translate }}
+                      </button>-->
+                    </div>
+                  </div>
+                </form>
+              </li>
+              <li *ngIf="!addInput">
+                <div class="text-muted mx-auto">
+                  <a class="text-primary clickable" (click)="addInput = true"
+                    ><ion-icon
+                      name="add-circle-outline"
+                      style="vertical-align: -1px"
+                    ></ion-icon>
+                    <span style="margin-left: 2px">{{
+                      "wallet.details.info.addNew" | translate
+                    }}</span></a
+                  >
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- Stats -->
+      </div>
+
+      <div class="col-md-6 mt-2 mb-4">
         <!-- History -->
         <div *ngIf="wallet!.history && wallet!.history.length" class="section">
           <div class="section-heading">
@@ -337,6 +531,7 @@
 </section>
 
 <app-add-wallet
+  (emitAddWallet)="editWallet($event)"
   [wallet]="wallet!"
   [modalId]="modalConstant.EDITWALLET"
 ></app-add-wallet>

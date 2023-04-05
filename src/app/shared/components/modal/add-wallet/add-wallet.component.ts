@@ -90,11 +90,12 @@ export class AddWalletComponent implements OnInit {
       walletToSave?.history.splice(0, 1);
     }
 
-    if (walletToSave.fileImage.name) {
+    if (walletToSave.fileImage != undefined && walletToSave.fileImage.name) {
       walletToSave.imgName = walletToSave.fileImage.name;
 
       this.userService.uploadImage(walletToSave.fileImage).subscribe((data) => {
         this.walletService.addUpdateWallet(walletToSave).subscribe((data) => {
+          this.wallet.img = data.data.img;
           // Save Wallet
           this.emitAddWallet.emit(data.data);
         });

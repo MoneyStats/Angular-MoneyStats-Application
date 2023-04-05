@@ -220,6 +220,16 @@
       "edit": "Edit Wallet",
       "delete": "Delete Wallet",
       "restore": "Restore Wallet",
+      "info": {
+        "title": "Info",
+        "subTitle": "You can add any info you need (ex IBAN for Bank account)",
+        "addNew": "Add New",
+        "edit": "Edit Info",
+        "key": "Info Title",
+        "value": "Info Value",
+        "save": "Save",
+        "editBtn":"Edit"
+      },
       "modal": {
         "delete": {
           "title": "Delete Confirmation",
@@ -376,7 +386,8 @@
       "title": "Check for Update",
       "text": "Press update to get it, or cancel to go back.",
       "update": "Update",
-      "close": "Cancel"
+      "close": "Cancel",
+      "copied": "Value Copied to Clipboard"
     },
     "infoApp": {
       "title": "Info Registration",

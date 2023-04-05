@@ -32,4 +32,16 @@ export class ErrorService {
     errorModel.exceptionName = error.statusText;
     this.exception.error = errorModel;
   }
+
+  handleWalletStatsError() {
+    this.exception.url = '/stats/insert';
+    this.exception.dateTime = new Date();
+    let errorModel: Error = new Error();
+    errorModel.exceptionCode = 'WALLET_DATA_ERROR';
+    errorModel.message =
+      'This error appeared cause you have been try to add a Stats with a date before a wallet was created, try different date!';
+    errorModel.statusCode = HttpStatusCode.BadRequest;
+    //errorModel.exceptionName = 'error.statusText';
+    this.exception.error = errorModel;
+  }
 }

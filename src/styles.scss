@@ -1,3 +1,6 @@
+$whiteBg: #e5e5e5;
+$darkBg: #161129;
+
 @media screen and (min-width: 780px) {
   app-footer {
     display: none;
@@ -63,9 +66,14 @@ span {
 }
 
 body:not(.dark-mode) {
-  background-color: #e5e5e5 !important;
+  app-loading {
+    .overlay {
+      background-color: rgba(229, 229, 229, 0.9);
+    }
+  }
+  background-color: $whiteBg !important;
   .box-shadow {
-    background-color: #e5e5e5 !important;
+    background-color: $whiteBg !important;
     box-shadow: none !important;
   }
   .title-page,
@@ -74,32 +82,33 @@ body:not(.dark-mode) {
   .logo {
     color: #161129 !important;
   }
-  .card-btn {
-    background-color: #e5e5e5;
+  .card-btn,
+  .error-section {
+    background-color: $whiteBg !important;
   }
   .link:hover {
     color: #71698f !important;
   }
   .walleName {
-    color: #e5e5e5;
+    color: $whiteBg;
   }
 
   /* Header Chiaro */
   #header,
   #appCapsule::before,
   .wallet-card-section:before {
-    background: #e5e5e5 !important;
+    background: $whiteBg !important;
   }
   .sidebar-balance {
-    background: #e5e5e5;
+    background: $whiteBg;
   }
 }
 
 body.dark-mode {
   .color-grey {
-    background-color: #161129;
+    background-color: $darkBg;
   }
   .title-page {
-    color: #e5e5e5;
+    color: $whiteBg;
   }
 }
