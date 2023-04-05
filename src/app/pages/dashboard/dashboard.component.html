@@ -4,6 +4,7 @@
       <!-- Wallet Card -->
       <div class="section wallet-card-section pt-1 col-xl-6">
         <app-dashboard-wallet
+          (changeAmountStatus)="changeAmountStatus($event)"
           [dashboard]="dashboard"
           [value]="userService.coinSymbol"
           [user]="user"
@@ -178,7 +179,8 @@
             "
             [coinSymbol]="userService.coinSymbol"
             [wallet]="wallet"
-            [btn]="'Open'"
+            [btn]="'wallet.open' | translate"
+            [hiddenAmount]="hidden!"
           ></app-wallet-card>
         </div>
       </div>

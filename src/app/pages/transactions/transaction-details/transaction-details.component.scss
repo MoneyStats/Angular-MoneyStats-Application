@@ -7,3 +7,11 @@
 .section-title {
   margin-left: 20px;
 }
+
+.imaged {
+  width: 100px !important;
+  height: 100px !important;
+  border-radius: 50%;
+  object-position: center center !important;
+  object-fit: cover !important;
+}

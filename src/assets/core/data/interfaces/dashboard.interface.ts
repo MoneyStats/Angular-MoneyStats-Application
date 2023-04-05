@@ -13,6 +13,7 @@ export interface DashboardInterface {
 
 export interface WalletInterface {
   name: string;
+  imgName: string;
   img: string;
   category: string;
   allTimeHigh: number;

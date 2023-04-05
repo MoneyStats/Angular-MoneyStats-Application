@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { ErrorService } from 'src/assets/core/interceptors/error.service';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { StatsService } from 'src/assets/core/services/stats.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
@@ -23,7 +25,9 @@ export class AddStatsComponent implements OnInit {
   constructor(
     public screenService: ScreenService,
     private dashboardService: DashboardService,
-    private statsService: StatsService
+    private statsService: StatsService,
+    private errorService: ErrorService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -110,6 +114,14 @@ export class AddStatsComponent implements OnInit {
     beforeThisStats.balance = 0.001;
     // Check se si hanno stats dopo quello che stiamo inserendo
     if (days[indexDate + 1]) {
+      if (
+        afterThisStats == undefined ||
+        wallet.history.find((w) => w.date == undefined)!
+      ) {
+        this.errorService.handleWalletStatsError();
+        this.router.navigate(['error']);
+      }
+
       afterThisStats = wallet.history.find(
         (w) => w.date.toString() === days[indexDate + 1]
       )!;

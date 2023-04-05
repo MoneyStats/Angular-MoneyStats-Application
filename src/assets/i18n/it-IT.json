@@ -186,7 +186,9 @@
       "categoryText": "Scegli una categoria",
       "categoryTextEdit": "Lascia per mantenere la categoria",
       "img": "Aggiungi immagine",
-      "imgContent": "Aggiungi immagine da URL",
+      "imgContent": "Upload Immagine",
+      "imgFromURL": "Aggiungi immagine da URL",
+      "sizeToBig": "Immagine troppo grande, la massima grandezza è ",
       "image": "Immagine",
       "default": "Usa immagine di default",
       "imageModal": {

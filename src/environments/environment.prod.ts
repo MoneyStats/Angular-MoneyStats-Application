@@ -1,14 +1,16 @@
 const baseUrlApp: string = '../../';
-const host: string = 'http://synologynas.ddns.net:8800';
+const host: string =
+  'http://synologynas.ddns.net:8800/prod-moneystats-service';
+const subDomain = 'moneystats/';
 
 export const environment = {
   production: true,
-  baseUrl: '../../',
-  baseUrlHeader: '../../../../',
-  baseUrlSettings: '../../../../../',
-  baseUrlDashboard: '../../../',
-  baseUrlVersion: '../../../../../../',
-  version: 'Beta 0.9.15',
+  baseUrl: '../../' + subDomain,
+  baseUrlHeader: '../../../../' + subDomain,
+  baseUrlSettings: '../../../../../' + subDomain,
+  baseUrlDashboard: '../../../' + subDomain,
+  baseUrlVersion: '../../../../../../' + subDomain,
+  version: 'Beta 0.9.30',
 
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
@@ -24,6 +26,8 @@ export const environment = {
   forgotPasswordUrl: host + '/v1/auth/forgot-password',
   resetPasswordUrl: host + '/v1/auth/reset-password',
   addUpdateWalletDataUrl: host + '/v1/wallet/insert-update',
+  uploadImage: host + '/v1/upload/attachment',
+  imageSizeMax: 2000000,
   listWalletDataurl: host + '/v1/wallet/list',
   getDashboardDataUrl: host + '/v1/app/dashboard',
   getResumeDataUrl: host + '/v1/app/resume',

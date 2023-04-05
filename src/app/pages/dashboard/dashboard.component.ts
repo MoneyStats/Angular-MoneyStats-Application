@@ -7,7 +7,10 @@ import { fader } from 'src/app/shared/animations/route-animations';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
-import { ModalConstant } from 'src/assets/core/data/constant/constant';
+import {
+  ModalConstant,
+  StorageConstant,
+} from 'src/assets/core/data/constant/constant';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { UserService } from 'src/assets/core/services/user.service';
 import { WalletService } from 'src/assets/core/services/wallet.service';
@@ -39,6 +42,8 @@ export class DashboardComponent implements OnInit {
   @Output('graphTitle') graphTitle: string = '';
   public chartOptions?: Partial<ApexOptions>;
   @ViewChild('content') content: any;
+
+  @Output() hidden?: boolean;
 
   constructor(
     private dashboardService: DashboardService,
@@ -131,7 +136,7 @@ export class DashboardComponent implements OnInit {
     /*setTimeout(() => {
       this.splide.activeSplide();
     }, 100);*/
-
+    this.isWalletBalanceHidden();
     this.screenService.activeHeaderAndFooter();
     this.screenService.goToDashboard();
   }
@@ -170,5 +175,18 @@ export class DashboardComponent implements OnInit {
   }
   walletDetails(res: Wallet[]) {
     this.walletService.walletDetails = res;
+  }
+
+  changeAmountStatus(hidden: boolean) {
+    this.hidden = hidden;
+  }
+
+  isWalletBalanceHidden() {
+    let isHidden = JSON.parse(
+      localStorage.getItem(StorageConstant.HIDDENAMOUNT)!
+    );
+    if (isHidden != null) {
+      this.hidden = isHidden;
+    }
   }
 }

@@ -15,5 +15,6 @@ export class AvailableSoonComponent implements OnInit {
   closingModal() {
     this.toast.closeToast();
     this.toast.closeUpdateToast();
+    this.toast.closeCopiedToast();
   }
 }

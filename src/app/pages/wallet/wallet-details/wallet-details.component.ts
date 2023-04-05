@@ -9,6 +9,7 @@ import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 import { environment } from 'src/environments/environment';
 import { fader } from 'src/app/shared/animations/route-animations';
+import { ToastService } from 'src/assets/core/utils/toast.service';
 
 @Component({
   selector: 'app-wallet-details',
@@ -21,6 +22,17 @@ export class WalletDetailsComponent implements OnInit {
   public chart1Y?: Partial<ApexOptions>;
   public chart3Y?: Partial<ApexOptions>;
 
+  // INFO VARIABLES
+  infoKey: string = '';
+  infoValue: string = '';
+  addInput: boolean = false;
+  editShow: boolean = false;
+  editBtn: boolean = false;
+  mapInfo: Map<string, string> = new Map();
+  infoKeys: Array<string> = [];
+  oldKey: string = '';
+  oldKeyIndex: number = 0;
+
   coinSymbol?: string;
   wallet?: Wallet;
   walletName?: string;
@@ -29,7 +41,8 @@ export class WalletDetailsComponent implements OnInit {
     public screenService: ScreenService,
     private route: ActivatedRoute,
     private charts: ChartService,
-    public walletService: WalletService
+    public walletService: WalletService,
+    private toast: ToastService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -48,19 +61,32 @@ export class WalletDetailsComponent implements OnInit {
       (w: Wallet) => w.id == this.walletId && w.name === this.walletName
     );
 
-    if (this.wallet?.history.find((w) => w.id === undefined)) {
-      this.wallet?.history.splice(0, 1);
+    this.renderGraph();
+
+    if (this.wallet?.info != undefined) {
+      this.mapInfo = new Map<string, string>(Object.entries(this.wallet.info));
+      this.infoKeys = Array.from(this.mapInfo.keys());
     }
 
-    this.renderGraph();
+    if (
+      this.wallet?.history != undefined &&
+      this.wallet?.history.find((w) => w.id === undefined)
+    ) {
+      this.wallet?.history.splice(0, 1);
+    } else {
+      this.wallet!.history = [];
+    }
+
+    this.renderImage();
+    this.walletService.walletHistory = this.wallet;
+    this.coinSymbol = this.walletService.coinSymbol;
+  }
+  renderImage() {
     if (this.screenService!.screenWidth! <= 780) {
       const image = document.getElementById('gradientSection');
       image!.style.backgroundImage = 'url(' + this.wallet!.img + ')';
     }
-    this.walletService.walletHistory = this.wallet;
-    this.coinSymbol = this.walletService.coinSymbol;
   }
-
   renderGraph() {
     setTimeout(() => {
       this.chartAll = this.charts.renderChartWallet(
@@ -102,5 +128,96 @@ export class WalletDetailsComponent implements OnInit {
 
   percentageWalletInTotal(): number {
     return (this.wallet!.balance * 100) / this.walletService?.totalBalance!;
+  }
+
+  addInfo() {
+    this.mapInfo.set(this.infoKey, this.infoValue);
+    this.infoKeys.push(this.infoKey);
+    this.wallet!.infoString = JSON.stringify(Object.fromEntries(this.mapInfo));
+
+    if (this.wallet?.history.find((w) => w.id === undefined)) {
+      this.wallet?.history.splice(0, 1);
+    }
+    this.walletService.addUpdateWallet(this.wallet!).subscribe((data) => {
+      this.infoKey = '';
+      this.infoValue = '';
+      this.addInput = false;
+    });
+  }
+
+  editInput(key: string) {
+    this.addInput = true;
+    this.infoKey = key;
+    this.infoValue = this.mapInfo.get(key)!.toString();
+    this.editBtn = true;
+    this.oldKey = key;
+    this.oldKeyIndex = this.infoKeys.indexOf(this.oldKey);
+    this.infoKeys.splice(this.oldKeyIndex, 1);
+  }
+
+  saveEdit() {
+    this.mapInfo.set(this.infoKey, this.infoValue);
+    this.infoKeys.splice(this.oldKeyIndex, 0, this.infoKey);
+    if (this.infoKey != this.oldKey) {
+      this.mapInfo.delete(this.oldKey);
+    }
+
+    let stringify: string = JSON.stringify(Object.fromEntries(this.mapInfo));
+    this.wallet!.info = undefined;
+    this.wallet!.infoString = stringify == '{}' ? undefined : stringify;
+
+    if (this.wallet?.history.find((w) => w.id === undefined)) {
+      this.wallet?.history.splice(0, 1);
+    }
+
+    this.walletService.addUpdateWallet(this.wallet!).subscribe((data) => {
+      this.infoKey = '';
+      this.infoValue = '';
+      this.addInput = false;
+      this.editBtn = false;
+      this.editShow = false;
+    });
+  }
+
+  deleteInfo(key: string) {
+    this.mapInfo.delete(key);
+    let index = this.infoKeys.indexOf(key);
+    this.infoKeys.splice(index, 1);
+    let stringify: string = JSON.stringify(Object.fromEntries(this.mapInfo));
+    this.wallet!.info = undefined;
+    this.wallet!.infoString = stringify == '{}' ? undefined : stringify;
+
+    if (this.wallet?.history.find((w) => w.id === undefined)) {
+      this.wallet?.history.splice(0, 1);
+    }
+    this.walletService.addUpdateWallet(this.wallet!).subscribe((data) => {
+      this.infoKey = '';
+      this.infoValue = '';
+      this.editShow = false;
+    });
+  }
+  editWallet(wallet: Wallet) {
+    console.log(wallet);
+    this.wallet = wallet;
+    this.renderImage();
+  }
+
+  copyMessage(val: string) {
+    const selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = val;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+    /*navigator['clipboard']
+      .writeText(val)
+      .then()
+      .catch((e) => console.error(e));*/
+    this.toast.copiedAvaiable();
   }
 }

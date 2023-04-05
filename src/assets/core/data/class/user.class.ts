@@ -9,6 +9,7 @@ export class User implements UserInterface {
   username: string = 'username';
   password: string = '';
   role: string = 'USER';
+  imgName?: string;
   profilePhoto: string =
     environment.baseUrlHeader + AppConfigConst.DEFAULT_USER_IMG;
   currency: string = 'USD';

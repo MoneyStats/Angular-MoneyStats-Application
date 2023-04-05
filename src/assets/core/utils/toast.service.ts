@@ -23,6 +23,14 @@ export class ToastService {
   closeUpdateToast() {
     closeToastBox('update');
   }
+
+  copiedAvaiable() {
+    toastbox('copied');
+  }
+
+  closeCopiedToast() {
+    closeToastBox('copied');
+  }
 }
 
 var toastBoxes = document.querySelectorAll('.toast-box');
