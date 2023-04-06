@@ -15,6 +15,7 @@ export enum ModalConstant {
   INFOAPP = 'infoAppModal',
   UPDATEAPP = 'updateAppModal',
   OPENBUG = 'openBugModal',
+  BACKUPDATA = 'backupDataModal',
 }
 
 export enum StorageConstant {
