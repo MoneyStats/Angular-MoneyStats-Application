@@ -9,7 +9,7 @@ export const environment = {
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: 'Beta 0.9.30 (Staging)',
+  version: 'Beta 0.9.31 (Staging)',
 
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',

@@ -220,6 +220,16 @@
       "edit": "Modifica Portafoglio",
       "delete": "Cancella Portafoglio",
       "restore": "Riristina Portafoglio",
+      "info": {
+        "title": "Info",
+        "subTitle": "Puoi aggiungere ogni info di cui hai bisogno (es IBAN per una Banca)",
+        "addNew": "Aggiungi",
+        "edit": "Modifica",
+        "key": "Titolo Info",
+        "value": "Valore Info",
+        "save": "Salva",
+        "editBtn": "Modifica"
+      },
       "modal": {
         "delete": {
           "title": "Conferma Cancellazione",
@@ -371,12 +381,19 @@
     "send": "Invia"
   },
   "modal": {
+    "backup": {
+      "title": "Backup e Ripristino",
+      "text": "Usalo per fare il Backup o Ripristino dei dati!",
+      "backup": "Backup Data",
+      "restore": "Restore Data"
+    },
     "update": {
       "avaiable": "Aggiornamento Disponibile, vai nelle impotazioni ed aggiorna l'app!",
       "title": "Aggiorna App",
       "text": "Premi aggiorna per aggiornare, cancella per tornare indietro",
       "update": "Aggiorna",
-      "close": "Cancella"
+      "close": "Cancella",
+      "copied": "Valore copiato nella Clipboard"
     },
     "infoApp": {
       "title": "Info Registrazione",
