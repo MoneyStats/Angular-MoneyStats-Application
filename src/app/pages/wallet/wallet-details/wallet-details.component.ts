@@ -73,13 +73,14 @@ export class WalletDetailsComponent implements OnInit {
       this.wallet?.history.find((w) => w.id === undefined)
     ) {
       this.wallet?.history.splice(0, 1);
-    } else {
+    } else if (this.wallet?.history == undefined) {
       this.wallet!.history = [];
     }
 
     this.renderImage();
     this.walletService.walletHistory = this.wallet;
     this.coinSymbol = this.walletService.coinSymbol;
+    console.log(this.wallet);
   }
   renderImage() {
     if (this.screenService!.screenWidth! <= 780) {

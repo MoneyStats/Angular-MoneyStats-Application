@@ -163,6 +163,9 @@ export class DashboardComponent implements OnInit {
     } else {
       this.dashboard.wallets = [wallet];
     }
+    const slider = document.getElementById('slider');
+    slider!.style.display = 'flex';
+    this.scrollX();
   }
 
   scrollX() {
