@@ -34,5 +34,7 @@ export const environment = {
   openGithubIssues: host + '/v1/app/report/bug',
   contactSupport: host + '/v1/app/contact',
   updateUserDataUrl: host + '/v1/auth/update/user',
+  backupDataUrl: host + '/v1/app/backup',
+  restoreDataUrl: host + '/v1/app/restore',
   forgotPassword: true,
 };
