@@ -145,6 +145,18 @@
             </div>
           </a>
         </li>
+
+        <li>
+          <a
+            class="item"
+            data-bs-toggle="modal"
+            attr.data-bs-target="#{{ modalConstant.BACKUPDATA }}"
+          >
+            <div class="in">
+              <div>{{ "modal.backup.title" | translate }}</div>
+            </div>
+          </a>
+        </li>
       </ul>
 
       <div class="listview-title mt-1">
@@ -269,3 +281,4 @@
 <app-languages [modalId]="modalConstant.LANGUAGES"></app-languages>
 <app-update [modalId]="modalConstant.UPDATEAPP" #content></app-update>
 <app-open-bug [modalId]="modalConstant.OPENBUG"></app-open-bug>
+<app-backup-data [modalId]="modalConstant.BACKUPDATA"></app-backup-data>

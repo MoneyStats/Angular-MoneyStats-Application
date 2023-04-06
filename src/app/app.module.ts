@@ -68,6 +68,7 @@ import { UpdateComponent } from './shared/components/modal/update/update.compone
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { OpenBugComponent } from './shared/components/modal/open-bug/open-bug.component';
 import { SupportComponent } from './pages/support/support.component';
+import { BackupDataComponent } from './shared/components/modal/backup-data/backup-data.component';
 
 @NgModule({
   declarations: [
@@ -119,6 +120,7 @@ import { SupportComponent } from './pages/support/support.component';
     ResetPasswordComponent,
     OpenBugComponent,
     SupportComponent,
+    BackupDataComponent,
   ],
   imports: [
     BrowserModule,

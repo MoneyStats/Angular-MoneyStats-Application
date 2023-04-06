@@ -228,7 +228,7 @@
         "key": "Info Title",
         "value": "Info Value",
         "save": "Save",
-        "editBtn":"Edit"
+        "editBtn": "Edit"
       },
       "modal": {
         "delete": {
@@ -381,6 +381,12 @@
     "send": "Send"
   },
   "modal": {
+    "backup": {
+      "title": "Backup and Restore",
+      "text": "Used to backup and restore your wallets!",
+      "backup": "Backup Data",
+      "restore": "Restore Data"
+    },
     "update": {
       "avaiable": "Update avaiable, go to settings and update it!",
       "title": "Check for Update",

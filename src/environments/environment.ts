@@ -14,7 +14,7 @@ export const environment = {
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: 'Beta 0.9.30 (Local)',
+  version: 'Beta 0.9.31 (Local)',
 
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
@@ -39,6 +39,8 @@ export const environment = {
   openGithubIssues: host + '/v1/app/report/bug',
   contactSupport: host + '/v1/app/contact',
   updateUserDataUrl: host + '/v1/auth/update/user',
+  backupDataUrl: host + '/v1/app/backup',
+  restoreDataUrl: host + '/v1/app/restore',
   forgotPassword: true,
 };
 

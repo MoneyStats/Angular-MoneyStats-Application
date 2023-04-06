@@ -1,0 +1,55 @@
+<!-- Alert Error Action Sheet -->
+<div
+  #content
+  class="modal fade action-sheet"
+  id="{{ modalId }}"
+  tabindex="-1"
+  role="dialog"
+  data-bs-focus="false"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal-round mx-auto">
+      <div class="modal-body">
+        <div class="action-sheet-content">
+          <div class="iconbox text-success">
+            <ion-icon name="alert-circle"></ion-icon>
+          </div>
+          <div class="text-center p-2">
+            <h3>
+              {{ "modal.backup.title" | translate }}
+            </h3>
+            <p [innerHTML]="'modal.backup.text' | translate"></p>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <a
+                (click)="backupData()"
+                href="#"
+                class="btn btn-primary btn-lg btn-block"
+                data-bs-dismiss="modal"
+                >{{ "modal.backup.backup" | translate }}</a
+              >
+            </div>
+            <div class="col-6">
+              <input
+                type="file"
+                style="display: none"
+                accept=".json"
+                (change)="restoreData($event)"
+                #restore
+              />
+              <a
+                href="#"
+                (click)="restore.click()"
+                class="btn btn-primary btn-lg btn-block"
+                data-bs-dismiss="modal"
+                >{{ "modal.backup.restore" | translate }}</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- * Alert Error Action Sheet -->
