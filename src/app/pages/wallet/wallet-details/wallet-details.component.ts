@@ -80,7 +80,6 @@ export class WalletDetailsComponent implements OnInit {
     this.renderImage();
     this.walletService.walletHistory = this.wallet;
     this.coinSymbol = this.walletService.coinSymbol;
-    console.log(this.wallet);
   }
   renderImage() {
     if (this.screenService!.screenWidth! <= 780) {
@@ -198,7 +197,6 @@ export class WalletDetailsComponent implements OnInit {
     });
   }
   editWallet(wallet: Wallet) {
-    console.log(wallet);
     this.wallet = wallet;
     this.renderImage();
   }

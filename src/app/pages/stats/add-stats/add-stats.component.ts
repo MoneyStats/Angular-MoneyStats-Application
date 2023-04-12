@@ -72,6 +72,7 @@ export class AddStatsComponent implements OnInit {
     return validate;
   }
   save() {
+    console.log(this.walletsToSave);
     this.saveValidation = false;
     this.statsService.addStats(this.walletsToSave).subscribe((data) => {
       this.walletsToSave = data.data;

@@ -13,7 +13,6 @@ export class ErrorService {
   constructor(private http: HttpClient) {}
 
   getError(error: any) {
-    console.log(error);
     if (error.error != null && error.error.error) {
       this.exception = error.error;
       this.exception.error!.statusCode = error.status;
