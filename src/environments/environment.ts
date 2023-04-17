@@ -5,7 +5,8 @@ const baseUrlApp: string = '../../';
 const host: string = 'http://192.168.1.19:8080/moneystats-service';
 //const host: string = 'http://synologynas.ddns.net:8000';
 //const host: string = 'https://prod-moneystats-service.up.railway.app';
-const subDomain = 'moneystats/';
+const subDomain = '';
+//const subDomain = 'moneystats/';
 
 export const environment = {
   production: false,
@@ -14,7 +15,7 @@ export const environment = {
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: 'Beta 0.9.31 (Local)',
+  version: '1.0.0',
 
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
