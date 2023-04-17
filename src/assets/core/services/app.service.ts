@@ -53,7 +53,6 @@ export class AppService {
       'Content-Type': 'application/json',
       authToken: authToken!,
     });
-    console.log(wallets);
     if (this.user?.mockedUser) {
       let response: ResponseModel = new ResponseModel();
       return of(response);
