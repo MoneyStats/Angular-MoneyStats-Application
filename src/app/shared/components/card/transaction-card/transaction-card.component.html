@@ -1,20 +1,64 @@
 <!-- item -->
 <a
+  *ngIf="wallet"
   href="#"
-  [routerLink]="['/transaction/details', wallet?.id, wallet?.name]"
+  [routerLink]="['/transaction/details', wallet.id, wallet.name]"
   (click)="parsingWallet()"
   class="item"
 >
   <div class="detail">
-    <img src="{{ wallet?.img }}" alt="img" class="image-block imaged w48" />
+    <img src="{{ wallet.img }}" alt="img" class="image-block imaged w48" />
     <div>
-      <strong>{{ wallet?.name }}</strong>
-      <p>{{ wallet?.category }}</p>
+      <strong>{{ wallet.name }}</strong>
+      <p>{{ wallet.category }}</p>
     </div>
   </div>
   <div class="right">
     <div class="text-end price {{ class }}">{{ differenceLastStats }}</div>
     <p class="text-end">{{ "transaction.difference" | translate }}</p>
+  </div>
+</a>
+<!-- * item -->
+
+<!-- item -->
+<a
+  *ngIf="asset"
+  href="#"
+  [routerLink]="['/transaction/details', wallet?.id]"
+  (click)="parsingWallet()"
+  class="item"
+>
+  <div class="detail">
+    <img src="{{ asset.icon }}" alt="img" class="image-block imaged w48" />
+    <div>
+      <strong>{{ asset.name }}</strong>
+      <div class="text-small text-secondary">
+        <small>{{ asset.balance }} {{ asset.shortName }}</small>
+      </div>
+    </div>
+  </div>
+  <div class="text-end">
+    <p class="fs-6 text-white">
+      <strong>{{ currency }} {{ asset.value }}</strong>
+    </p>
+    <div class="text-small">
+      <span
+        class="badge {{
+          asset.performance! == 0
+            ? 'badge-warning'
+            : asset.performance! > 0
+            ? 'badge-success'
+            : 'badge-danger'
+        }}"
+      >
+        <ion-icon
+          name="{{
+            asset.performance! > 0 ? 'arrow-up-outline' : 'arrow-down-outline'
+          }}"
+        ></ion-icon>
+        {{ asset.performance }}%
+      </span>
+    </div>
   </div>
 </a>
 <!-- * item -->

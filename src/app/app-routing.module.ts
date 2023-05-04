@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ErrorHandleComponent } from './interceptors/error-handle/error-handle.component';
 import { AuthComponent } from './auth/auth.component';
@@ -20,6 +20,9 @@ import { OnboardingComponent } from './pages/onboarding/onboarding.component';
 import { fader, slideUp } from './shared/animations/route-animations';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { SupportComponent } from './pages/support/support.component';
+import { CryptoDashboardComponent } from './pages/crypto/crypto-dashboard/crypto-dashboard.component';
+import { CryptoComponent } from './pages/crypto/crypto.component';
+import { combineLatest } from 'rxjs';
 
 const routes: Routes = [
   {
@@ -39,6 +42,16 @@ const routes: Routes = [
   {
     path: 'on-boarding',
     component: OnboardingComponent,
+  },
+  {
+    path: 'crypto',
+    component: CryptoComponent,
+    children: [
+      {
+        path: 'dashboard',
+        component: CryptoDashboardComponent,
+      },
+    ],
   },
   {
     path: 'auth',

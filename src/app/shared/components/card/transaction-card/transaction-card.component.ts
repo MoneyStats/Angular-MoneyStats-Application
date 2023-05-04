@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Asset } from 'src/assets/core/data/class/crypto.class';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 
@@ -8,6 +9,8 @@ import { DashboardService } from 'src/assets/core/services/dashboard.service';
   styleUrls: ['./transaction-card.component.scss'],
 })
 export class TransactionCardComponent implements OnInit {
+  @Input('assets') asset?: Asset;
+  @Input('currency') currency?: string;
   @Input('wallet') wallet?: Wallet;
   @Input('differenceLastStats') differenceLastStats?: string;
   @Input('class') class?: string;

@@ -1,5 +1,6 @@
 $whiteBg: #e5e5e5;
-$darkBg: #161129;
+$darkBg: #161129; //#161129
+$darkColor: #121212;
 
 @media screen and (min-width: 780px) {
   app-footer {
@@ -105,6 +106,7 @@ body:not(.dark-mode) {
 }
 
 body.dark-mode {
+  background-color: $darkColor !important;
   .color-grey {
     background-color: $darkBg;
   }

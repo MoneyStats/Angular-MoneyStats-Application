@@ -1,0 +1,68 @@
+{
+  "status": 200,
+  "message": "Data for Dashboard!",
+  "correlationId": "5b95f29a-8866-4971-8227-bc15129066b2",
+  "data": {
+    "balance": 10000,
+    "currency": "USD",
+    "btcBalance": 0.23456789,
+    "lastUpdate": "2023-01-01",
+    "holdingLong": {
+      "balance": 6000,
+      "performance": 2.53,
+      "lastUpdate": "2023-01-01"
+    },
+    "holdingMid": {
+      "balance": 3000,
+      "performance": -1.53,
+      "lastUpdate": "2023-01-01"
+    },
+    "trading": {
+      "balance": 1000,
+      "performance": 10.53,
+      "lastUpdate": "2023-01-01"
+    },
+    "assets": [
+      {
+        "name": "Bitcoin",
+        "shortName": "BTC",
+        "value": 13585,
+        "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/800px-Bitcoin.svg.png",
+        "balance": 0.2659379,
+        "performance": 10.34
+      },
+      {
+        "name": "Bitcoin",
+        "shortName": "BTC",
+        "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/800px-Bitcoin.svg.png",
+        "value": 13585,
+        "balance": 0.2659379,
+        "performance": 10.34
+      },
+      {
+        "name": "Ethereum",
+        "shortName": "ETH",
+        "value": 13585,
+        "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Ethereum_logo_2014.svg/628px-Ethereum_logo_2014.svg.png",
+        "balance": 2.532579,
+        "performance": 10.34
+      },
+      {
+        "name": "Crypto.com",
+        "shortName": "CRO",
+        "value": 13585,
+        "icon": "https://altcoinsbox.com/wp-content/uploads/2023/01/crypto.com-logo.png",
+        "balance": 2340.2659379,
+        "performance": 10.34
+      },
+      {
+        "name": "Binance Coin",
+        "shortName": "BNB",
+        "value": 13585,
+        "icon": "https://seeklogo.com/images/B/binance-coin-bnb-logo-CD94CC6D31-seeklogo.com.png",
+        "balance": 10.2659379,
+        "performance": 10.34
+      }
+    ]
+  }
+}
