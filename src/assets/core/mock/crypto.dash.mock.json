@@ -29,7 +29,61 @@
         "value": 13585,
         "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/800px-Bitcoin.svg.png",
         "balance": 0.2659379,
-        "performance": 10.34
+        "invested": 1000,
+        "performance": 10.34,
+        "operation": [
+          {
+            "type": "BUY",
+            "status": "CLOSED",
+            "entryDate": "2023-01-01",
+            "entryCoin": "USDT",
+            "entryPrice": 28800,
+            "entryValue": 500,
+            "entryFees": 1.23,
+            "quantity": 0.05,
+            "exitDate": "2023-01-02",
+            "exitCoin": "BTC",
+            "exitPrice": 29000,
+            "exitValue": 500,
+            "exitFees": 1.35,
+            "performance": 1.25,
+            "trend": 50
+          },
+          {
+            "type": "BUY",
+            "status": "PARTIALLY_CLOSED",
+            "entryDate": "2023-01-01",
+            "entryCoin": "USDT",
+            "entryPrice": 28800,
+            "entryValue": 500,
+            "entryFees": 1.23,
+            "quantity": 0.05,
+            "exitDate": "2023-01-02",
+            "exitCoin": "BTC",
+            "exitPrice": 29000,
+            "exitValue": 500,
+            "exitFees": 1.35,
+            "performance": 1.25,
+            "trend": 50
+          },
+          {
+            "type": "BUY",
+            "status": "PARTIALLY_CLOSED",
+            "entryDate": "2023-01-01",
+            "entryCoin": "USDT",
+            "entryPrice": 28800,
+            "entryValue": 500,
+            "entryFees": 1.23,
+            "quantity": 0.05,
+            "exitDate": "2023-01-02",
+            "exitCoin": "BTC",
+            "exitPrice": 29000,
+            "exitValue": 500,
+            "exitFees": 1.35,
+            "performance": 1.25,
+            "trend": 50
+          }
+        ]
       },
       {
         "name": "Bitcoin",

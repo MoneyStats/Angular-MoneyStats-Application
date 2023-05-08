@@ -1,6 +1,24 @@
 {
   "loading": "Caricamento...",
   "onboard": {
+    "crypto": {
+      "tab1": {
+        "title": "Benvenuto su Crypto",
+        "text": "Questa è la prima login nell'app. <br /> Per continuare con l'onboard premi Avanti."
+      },
+      "tab2": {
+        "title": "Come funziona?",
+        "text": "Crea o importa il tuo wallet crypto, aggiungi i tuoi asset completanto il form ed ottieni dettagli, statistiche ed altro."
+      },
+      "tab3": {
+        "title": "Operazioni",
+        "text": "Apri operazioni di Holding o trading tramite la nostra sezione operazioni."
+      },
+      "tab4": {
+        "title": "Grazie per il tuo tempo",
+        "text": "Premi Prova ora e vai alla dashboard."
+      }
+    },
     "tab1": {
       "title": "Benvenuto su MoneyStats",
       "text": "Questa è la prima login nell'app. <br /> Per continuare con l'onboard premi Avanti."
@@ -457,6 +475,26 @@
   },
   "error": {
     "title": ""
+  },
+  "crypto": {
+    "requirements": {
+      "headerTitle": "Verifica Crypto",
+      "title": "Crypto: Ci sei quasi",
+      "subTitle": "Prima di accedere alla dashboard crypto, la nuova funzionalità di MoneyStats, abbiamo bisogno di verificare che tu rispecchi alcuni requisiti, altrimenti non ti sarà possibile accedere.",
+      "req1": {
+        "title": "Avere un Wallet",
+        "subTitle": "Avere creato un wallet"
+      },
+      "req2": {
+        "title": "Creare o importare n crypto wallet",
+        "subTitle": "creare un nuovo crypto wallet o importare un wallet esistente"
+      },
+      "req3": {
+        "title": "Avere un Crypto Wallet",
+        "subTitle": "Avere creato un crypto wallet"
+      },
+      "next": "Vai alla Dashboard"
+    }
   },
   "copyright": "Copyright © MoneyStats 2023. All Rights Reserved."
 }

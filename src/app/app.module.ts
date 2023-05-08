@@ -71,6 +71,8 @@ import { SupportComponent } from './pages/support/support.component';
 import { BackupDataComponent } from './shared/components/modal/backup-data/backup-data.component';
 import { CryptoDashboardComponent } from './pages/crypto/crypto-dashboard/crypto-dashboard.component';
 import { CryptoComponent } from './pages/crypto/crypto.component';
+import { RequirementsComponent } from './pages/crypto/requirements/requirements.component';
+import { CryptoHeaderComponent } from './shared/components/core/crypto-header/crypto-header.component';
 
 @NgModule({
   declarations: [
@@ -125,6 +127,8 @@ import { CryptoComponent } from './pages/crypto/crypto.component';
     BackupDataComponent,
     CryptoDashboardComponent,
     CryptoComponent,
+    RequirementsComponent,
+    CryptoHeaderComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,24 @@
 {
   "loading": "Loading...",
   "onboard": {
+    "crypto": {
+      "tab1": {
+        "title": "Welcome to Crypto",
+        "text": "This is the first login thru the section. <br /> To continue the on-board process press Next."
+      },
+      "tab2": {
+        "title": "How it works?",
+        "text": "Create o import a cryptocurrency wallet, add your asset by filling the form with all the coin details."
+      },
+      "tab3": {
+        "title": "Operations",
+        "text": "Open Holding o trading position by using the operation section to manage your crypto wallet."
+      },
+      "tab4": {
+        "title": "Thanks for your time",
+        "text": "Press Try It to get into the Dashboard."
+      }
+    },
     "tab1": {
       "title": "Welcome to MoneyStats",
       "text": "This is the first login thru the app. <br /> To continue the on-board process press Next."
@@ -457,6 +475,27 @@
   },
   "error": {
     "title": ""
+  },
+
+  "crypto": {
+    "requirements": {
+      "headerTitle": "Crypto Requirements",
+      "title": "Crypto: You are almost there",
+      "subTitle": "Before to access to the crypto dashboard, the new features of MoneyStats, you need to ensure that all the requirements are respected otherwise you can't go on with it.",
+      "req1": {
+        "title": "Having a Wallet",
+        "subTitle": "Already have a existing wallet"
+      },
+      "req2": {
+        "title": "Create o Import a crypto wallet",
+        "subTitle": "Create a new crypto wallet or import an existing wallet"
+      },
+      "req3": {
+        "title": "Having a Crypto Wallet",
+        "subTitle": "Already have a existing crypto wallet"
+      },
+      "next": "Go to Dashboard"
+    }
   },
   "copyright": "Copyright © MoneyStats 2023. All Rights Reserved."
 }

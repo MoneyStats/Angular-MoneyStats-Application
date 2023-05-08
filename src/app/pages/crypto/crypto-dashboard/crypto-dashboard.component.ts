@@ -6,8 +6,10 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { CryptoDashboard } from 'src/assets/core/data/class/crypto.class';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
+import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 declare const TradingView: any;
@@ -30,8 +32,8 @@ export class CryptoDashboardComponent implements OnInit {
     public screenService: ScreenService,
     private _renderer2: Renderer2,
     private cryptoService: CryptoService,
-    private cdref: ChangeDetectorRef,
-    private host: ElementRef
+    private dashboardService: DashboardService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -97,16 +99,16 @@ export class CryptoDashboardComponent implements OnInit {
           "title": "Binance Coin"
         },
         {
+          "proName": "CROUSDT",
+          "title": "Crypto.com"
+        },
+        {
+          "proName": "BINANCE:SANDUSDT",
+          "title": "Sandbox"
+        },
+        {
           "proName": "FX_IDC:EURUSD",
           "title": "EUR/USD"
-        },
-        {
-          "proName": "BITSTAMP:BTCUSD",
-          "title": "Bitcoin"
-        },
-        {
-          "proName": "BITSTAMP:ETHUSD",
-          "title": "Ethereum"
         }
       ],
       "colorTheme": "dark",

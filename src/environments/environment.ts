@@ -2,7 +2,7 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 const baseUrlApp: string = '../../';
-const host: string = 'http://localhost:8080/moneystats-service';
+const host: string = 'http://192.168.1.24:8080/moneystats-service';
 //const host: string = 'http://synologynas.ddns.net:8000';
 //const host: string = 'https://prod-moneystats-service.up.railway.app';
 const subDomain = '';

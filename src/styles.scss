@@ -19,25 +19,25 @@ $darkColor: #121212;
   .hidden_mobile {
     display: none;
   }
+
+  .text-not-selected,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 a,
+  div,
+  span {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+  }
 }
 
 .clickable {
   pointer-events: visible;
   cursor: pointer;
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+/Edge */
-  user-select: none; /* Standard */
-}
-
-.text-not-selected,
-h1,
-h2,
-h3,
-h4,
-h5 a,
-div,
-span {
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */

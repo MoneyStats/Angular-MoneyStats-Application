@@ -3,6 +3,7 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { Location } from '@angular/common';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { environment } from 'src/environments/environment';
+import { AppService } from 'src/assets/core/services/app.service';
 
 @Component({
   selector: 'app-onboarding',
@@ -10,18 +11,25 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./onboarding.component.scss'],
 })
 export class OnboardingComponent implements OnInit {
+  isCrypto: boolean = false;
   environment = environment;
   counter: number = 1;
 
   constructor(
     public screenService: ScreenService,
     private location: Location,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private appService: AppService
   ) {}
 
   ngOnInit(): void {
-    this.screenService.setupHeader();
-    this.dashboardService.isOnboarding = true;
+    //this.screenService.setupHeader();
+    if (this.appService.isOnboardingCrypto) {
+      this.isCrypto = true;
+      this.appService.isOnboardingCrypto = true;
+    } else {
+      this.dashboardService.isOnboarding = true;
+    }
   }
 
   next() {
