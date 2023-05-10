@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { OnboardingComponent } from '../onboarding/onboarding.component';
 import { AppService } from 'src/assets/core/services/app.service';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 
