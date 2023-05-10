@@ -12,7 +12,7 @@ export class CryptoHeaderComponent implements OnInit {
   @Input('routerLinks') routerLinks?: string;
   @Input('title') title: string = 'Crypto';
 
-  isRequirementActive: boolean = false;
+  @Input('isMenuActive') isMenuActive: boolean = true;
 
   constructor(
     private location: Location,
@@ -21,8 +21,8 @@ export class CryptoHeaderComponent implements OnInit {
   ) {
     router.events.subscribe((data: any) => {
       if (data.url == '/crypto/requirements') {
-        this.isRequirementActive = true;
-      } else this.isRequirementActive = false;
+        this.isMenuActive = false;
+      } else this.isMenuActive = true;
     });
   }
 

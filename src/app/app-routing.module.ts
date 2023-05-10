@@ -22,9 +22,7 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
 import { SupportComponent } from './pages/support/support.component';
 import { CryptoDashboardComponent } from './pages/crypto/crypto-dashboard/crypto-dashboard.component';
 import { CryptoComponent } from './pages/crypto/crypto.component';
-import { combineLatest } from 'rxjs';
 import { RequirementsComponent } from './pages/crypto/requirements/requirements.component';
-
 const routes: Routes = [
   {
     path: 'error',

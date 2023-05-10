@@ -7,7 +7,11 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { CryptoDashboard } from 'src/assets/core/data/class/crypto.class';
+import {
+  Asset,
+  CryptoDashboard,
+} from 'src/assets/core/data/class/crypto.class';
+import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
@@ -27,6 +31,7 @@ export class CryptoDashboardComponent implements OnInit {
   selectedSymbol: string = 'BTCUSDT';
 
   cryptoDashboard: CryptoDashboard = new CryptoDashboard();
+  assets: Asset[] = [];
 
   constructor(
     public screenService: ScreenService,
@@ -50,7 +55,34 @@ export class CryptoDashboardComponent implements OnInit {
   getDashboard() {
     this.cryptoService.getCryptoDashboard().subscribe((data) => {
       this.cryptoDashboard = data.data;
+      this.assets = this.getAssetList(this.cryptoDashboard.wallets);
     });
+  }
+
+  getAssetList(wallets: Wallet[]): Asset[] {
+    let allAssets: Array<Asset> = [];
+    wallets.forEach((wallet) => {
+      wallet.assets.forEach((asset) => {
+        if (allAssets.find((a) => a.name == asset.name)) {
+          const index = allAssets.indexOf(
+            allAssets.find((a) => a.name == asset.name)!
+          );
+          allAssets[index].balance! += asset.balance!;
+          allAssets[index].value! += asset.value!;
+          allAssets[index].performance! =
+            (allAssets[index].performance! + asset.performance!) / 2;
+
+          // TODO: Add also operation
+          asset.operations.forEach((o) => {
+            allAssets[index].operations.push(o);
+          });
+          allAssets[index].operations.sort((o) =>
+            o.exitDate != undefined ? o.exitDate : o.entryDate
+          );
+        } else allAssets.push(asset);
+      });
+    });
+    return allAssets;
   }
 
   onChange(symbol: string) {

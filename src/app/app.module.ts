@@ -73,6 +73,7 @@ import { CryptoDashboardComponent } from './pages/crypto/crypto-dashboard/crypto
 import { CryptoComponent } from './pages/crypto/crypto.component';
 import { RequirementsComponent } from './pages/crypto/requirements/requirements.component';
 import { CryptoHeaderComponent } from './shared/components/core/crypto-header/crypto-header.component';
+import { AddAssetModalComponent } from './shared/components/modal/crypto/add-asset-modal/add-asset-modal.component';
 
 @NgModule({
   declarations: [
@@ -129,6 +130,7 @@ import { CryptoHeaderComponent } from './shared/components/core/crypto-header/cr
     CryptoComponent,
     RequirementsComponent,
     CryptoHeaderComponent,
+    AddAssetModalComponent,
   ],
   imports: [
     BrowserModule,

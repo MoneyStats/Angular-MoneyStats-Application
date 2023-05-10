@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Dashboard } from 'dist/angular-moneystats/assets/core/data/class/dashboard.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
+import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
@@ -14,9 +15,11 @@ export class RequirementsComponent implements OnInit {
   isCryptoWalletCreated: boolean = false;
   dashboard?: Dashboard;
 
+  enableModalCrypto: boolean = false;
+
   constructor(
     public screenService: ScreenService,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -42,14 +45,8 @@ export class RequirementsComponent implements OnInit {
     }
   }
 
-  createImportCryptoWallet() {
-    this.isCryptoWalletCreated = true;
-  }
-
   validateBtn(): boolean {
     let validate = this.isCryptoWalletCreated && this.isWalletCreated;
     return validate;
   }
-
-
 }

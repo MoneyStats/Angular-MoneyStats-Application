@@ -194,8 +194,10 @@
     "open": "Open Wallet",
     "modal": {
       "title": "Add Wallet",
+      "cryptoTitle": "Add Crypto Wallet",
       "editWallet": {
         "title": "Edit Wallet",
+        "cryptoTitle": "Edit Crypto Wallet",
         "default": "Keep same wallet image"
       },
       "name": "Name",
@@ -203,6 +205,10 @@
       "category": "Category",
       "categoryText": "Choose a category",
       "categoryTextEdit": "Leave to keep same category",
+      "balance": "Balance",
+      "balanceText": "Enter Balance",
+      "type": "Wallet Type",
+      "typeText": "Choose your wallet type",
       "img": "Add Image",
       "imgContent": "Upload Image",
       "imgFromURL": "Add Image from URL",
@@ -484,17 +490,42 @@
       "subTitle": "Before to access to the crypto dashboard, the new features of MoneyStats, you need to ensure that all the requirements are respected otherwise you can't go on with it.",
       "req1": {
         "title": "Having a Wallet",
-        "subTitle": "Already have a existing wallet"
+        "subTitle": "Having a wallet or create one"
       },
       "req2": {
-        "title": "Create o Import a crypto wallet",
-        "subTitle": "Create a new crypto wallet or import an existing wallet"
+        "title": "Having a Crypto Wallet",
+        "subTitle": "Having a crypto wallet or create one"
       },
       "req3": {
-        "title": "Having a Crypto Wallet",
-        "subTitle": "Already have a existing crypto wallet"
+        "title": "Having an Asset",
+        "subTitle": "Having a Crypto Asset like BTC, ETH"
       },
       "next": "Go to Dashboard"
+    },
+    "dashboard": {
+      "title": "Crypto Dashboard",
+      "cardRes": {
+        "title": "Total Balance",
+        "lastUpdate": "Last updated"
+      },
+      "performanceCard": {
+        "title": "Resume Performance",
+        "view": "View All",
+        "holding": "Holding Long Term",
+        "trading": "Trading Performance",
+        "performance": "Performance",
+        "lastUpdate": "Last updated"
+      },
+      "assetsCard": {
+        "title": "My Assets",
+        "view": "View All",
+        "assetGraph": "Cryptocurrency Graph"
+      }
+    },
+    "cryptoModal": {
+      "addAsset": {
+        "title": "Import an Asset"
+      }
     }
   },
   "copyright": "Copyright © MoneyStats 2023. All Rights Reserved."

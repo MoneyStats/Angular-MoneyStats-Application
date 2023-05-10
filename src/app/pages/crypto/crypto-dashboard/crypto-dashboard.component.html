@@ -4,7 +4,7 @@
   <!-- App Capsule -->
   <div id="appCapsule">
     <div class="title-section">
-      <h2 class="title">Crypto Dashboard</h2>
+      <h2 class="title">{{ "crypto.dashboard.title" | translate }}</h2>
     </div>
     <div class="row mx-auto">
       <div class="col-xl-4 col-md-6">
@@ -18,13 +18,15 @@
             <div class="card-body">
               <div class="d-flex float-end">
                 <img
-                  src="https://cdn.logojoy.com/wp-content/uploads/20200305144650/Bitcoin-icon.png"
+                  src="../../../../assets/images/crypto/Bitcoin-icon.png"
                   width="100px"
                   alt=""
                   srcset=""
                 />
               </div>
-              <p class="card-title">Total Amount</p>
+              <p class="card-title">
+                {{ "crypto.dashboard.cardRes.title" | translate }}
+              </p>
               <h5 class="card-text fs-3">
                 {{ cryptoDashboard.balance }} {{ cryptoDashboard.currency }}
               </h5>
@@ -33,7 +35,7 @@
               </p>
               <p style="margin-top: -15px" class="card-text">
                 <small
-                  >Last updated
+                  >{{ "crypto.dashboard.cardRes.lastUpdate" | translate }}
                   {{ cryptoDashboard.lastUpdate | date : "d MMM y" }}</small
                 >
               </p>
@@ -105,15 +107,23 @@
       <div class="col-md-12 col-xl-8">
         <div class="section section-performance">
           <div class="section-heading">
-            <h2 class="title">Performance</h2>
-            <a href="crypto-portfolio.html" class="link">View All</a>
+            <h2 class="title">
+              {{ "crypto.dashboard.performanceCard.title" | translate }}
+            </h2>
+            <a href="crypto-portfolio.html" class="link">{{
+              "crypto.dashboard.performanceCard.view" | translate
+            }}</a>
           </div>
           <div class="card">
             <div class="card-body text-center mx-auto">
               <div class="row">
                 <div class="col-6 col-md-4">
                   <div class="inline-block">
-                    <p class="title">Holding Long Term</p>
+                    <p class="title">
+                      {{
+                        "crypto.dashboard.performanceCard.holding" | translate
+                      }}
+                    </p>
                     <h5 class="card-text fs-3">
                       {{ cryptoDashboard.holdingLong.balance }}
                       {{ cryptoDashboard.currency }}
@@ -124,7 +134,10 @@
                     </span>
                     <p class="card-text">
                       <small
-                        >Last updated
+                        >{{
+                          "crypto.dashboard.performanceCard.lastUpdate"
+                            | translate
+                        }}
                         {{
                           cryptoDashboard.holdingLong.lastUpdate
                             | date : "d MMM y"
@@ -135,30 +148,11 @@
                 </div>
                 <div class="line col-6 col-md-4">
                   <div class="inline-block">
-                    <p class="title">Holding Mid Term</p>
-                    <h5 class="card-text fs-3">
-                      {{ cryptoDashboard.holdingMid.balance }}
-                      {{ cryptoDashboard.currency }}
-                    </h5>
-                    <span class="badge badge-success">
-                      <ion-icon name="arrow-up-outline"></ion-icon>
-                      {{ cryptoDashboard.holdingMid.performance }}%
-                    </span>
-                    <p class="card-text">
-                      <small
-                        >Last updated
-                        {{
-                          cryptoDashboard.holdingMid.lastUpdate
-                            | date : "d MMM y"
-                        }}</small
-                      >
+                    <p class="title">
+                      {{
+                        "crypto.dashboard.performanceCard.trading" | translate
+                      }}
                     </p>
-                  </div>
-                </div>
-                <div class="line col-12 col-md-4">
-                  <div class="inline-block">
-                    <hr class="hidden_desktop" />
-                    <p class="title">Trading</p>
                     <h5 class="card-text fs-3">
                       {{ cryptoDashboard.trading.balance }}
                       {{ cryptoDashboard.currency }}
@@ -169,9 +163,43 @@
                     </span>
                     <p class="card-text">
                       <small
-                        >Last updated
+                        >{{
+                          "crypto.dashboard.performanceCard.lastUpdate"
+                            | translate
+                        }}
                         {{
                           cryptoDashboard.trading.lastUpdate | date : "d MMM y"
+                        }}</small
+                      >
+                    </p>
+                  </div>
+                </div>
+                <div class="line col-12 col-md-4">
+                  <div class="inline-block">
+                    <hr class="hidden_desktop" />
+                    <p class="title">
+                      {{
+                        "crypto.dashboard.performanceCard.performance"
+                          | translate
+                      }}
+                    </p>
+                    <h5 class="card-text fs-3">
+                      {{ cryptoDashboard.performance.balance }}
+                      {{ cryptoDashboard.currency }}
+                    </h5>
+                    <span class="badge badge-success">
+                      <ion-icon name="arrow-up-outline"></ion-icon>
+                      {{ cryptoDashboard.performance.performance }}%
+                    </span>
+                    <p class="card-text">
+                      <small
+                        >{{
+                          "crypto.dashboard.performanceCard.lastUpdate"
+                            | translate
+                        }}
+                        {{
+                          cryptoDashboard.performance.lastUpdate
+                            | date : "d MMM y"
                         }}</small
                       >
                     </p>
@@ -188,12 +216,20 @@
       <!-- Portfolio -->
       <div class="section mt-5 col-xl-6">
         <div class="section-heading">
-          <h2 class="title ms-2">My Assets</h2>
-          <a href="crypto-portfolio.html" class="link">View All</a>
+          <h2 class="title ms-2">
+            {{ "crypto.dashboard.assetsCard.title" | translate }}
+          </h2>
+          <a href="crypto-portfolio.html" class="link">{{
+            "crypto.dashboard.assetsCard.view" | translate
+          }}</a>
         </div>
         <div class="transactions">
-          <div *ngFor="let asset of cryptoDashboard.assets; let i = index">
-            <app-transaction-card *ngIf="i < 4" [assets]="asset">
+          <div *ngFor="let asset of assets; let i = index">
+            <app-transaction-card
+              *ngIf="i < 4"
+              [assets]="asset"
+              [currency]="cryptoDashboard.currency"
+            >
             </app-transaction-card>
           </div>
         </div>
@@ -202,7 +238,9 @@
         <!-- Portfolio -->
         <div class="section mt-4">
           <div class="section-heading">
-            <h2 class="title">Assets Graph</h2>
+            <h2 class="title">
+              {{ "crypto.dashboard.assetsCard.assetGraph" | translate }}
+            </h2>
             <div
               class="form-group boxed"
               style="width: 150px; margin-bottom: -10px; margin-top: -20px"

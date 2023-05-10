@@ -1,0 +1,112 @@
+<!-- Send Action Sheet -->
+<div
+  class="modal fade action-sheet"
+  id="{{ modalId }}"
+  tabindex="-1"
+  role="dialog"
+  data-bs-focus="false"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal-round mx-auto">
+      <div class="modal-header">
+        <h5 *ngIf="!asset.id" class="modal-title">
+          {{ "crypto.cryptoModal.addAsset.title" | translate }}
+        </h5>
+        <h5 *ngIf="asset.id" class="modal-title">
+          {{ "wallet.modal.editWallet.cryptoTitle" | translate }}
+        </h5>
+      </div>
+      <div class="modal-body">
+        <div class="action-sheet-content">
+          <form #f="ngForm" type="submit">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card-title">
+                  <img
+                    src="../../../../../../assets/images/sample/avatar.png"
+                    alt="avatar"
+                    class="imaged d-inline w30 rounded"
+                  />
+                  <h2 class="modal-title d-inline" style="vertical-align: -4px">
+                    Coinbase
+                  </h2>
+                  <p><small>Current Balance is USD 10000</small></p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-5">
+                    <div class="form-group basic">
+                      <div class="input-wrapper">
+                        <input
+                          name="name"
+                          class="form-control"
+                          rows="5"
+                          [(ngModel)]="search"
+                          #name="ngModel"
+                          type="text"
+                          class="form-control"
+                          id="text11"
+                          (keyup)="onKeySearch($event)"
+                          placeholder="🔍 {{
+                            'wallet.modal.sub_name' | translate
+                          }}"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-7">
+                    <div class="select" tabindex="1">
+                      <div *ngFor="let asset of filterCryptoPrices">
+                        <input
+                          class="selectopt"
+                          name="test"
+                          type="radio"
+                          id="{{ asset.identifier }}"
+                          checked
+                          (click)="search = ''"
+                        />
+                        <label for="{{ asset.identifier }}" class="option"
+                          ><img
+                            src="{{ asset.icon }}"
+                            alt="avatar"
+                            class="imaged d-inline w30 rounded me-1"
+                          />
+                          {{ asset.name }} - {{ asset.symbol }}</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="addWallet text-end hidden_mobile">
+              <button
+                [disabled]="f.invalid"
+                type="button"
+                class="btn btn-primary me-1 mb-1"
+                data-bs-toggle="modal"
+                attr.data-bs-target="#{{ modalConstant.ADDWALLET }}"
+              >
+                {{ "wallet.add" | translate }}
+              </button>
+            </div>
+
+            <div class="form-group basic hidden_desktop">
+              <button
+                [disabled]="f.invalid"
+                type="button"
+                class="btn btn-primary btn-block btn-lg"
+                data-bs-dismiss="modal"
+              >
+                {{ "wallet.modal.save" | translate }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- * Send Action Sheet -->

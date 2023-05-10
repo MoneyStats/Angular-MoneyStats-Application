@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Category, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import {
@@ -16,12 +24,15 @@ import { environment } from 'src/environments/environment';
   templateUrl: './add-wallet.component.html',
   styleUrls: ['./add-wallet.component.scss'],
 })
-export class AddWalletComponent implements OnInit {
+export class AddWalletComponent implements OnInit, OnChanges {
   environment = environment;
   @Input('modalId') modalId: string = '';
   @Output('emitAddWallet') emitAddWallet = new EventEmitter<Wallet>();
   @Input('categoriesInput') categoriesInput?: Category[];
   @Input('wallet') wallet: Wallet = new Wallet();
+  @Input('isCrypto') isCrypto: boolean = false;
+
+  cryptoTypes: string[] = ['Holding', 'Trading'];
   categories: Category[] = [];
 
   categorySelect: string = 'Select Category';
@@ -45,6 +56,12 @@ export class AddWalletComponent implements OnInit {
 
   ngOnInit(): void {
     this.categories = this.dashboardService.dashboard.categories;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.isCrypto) {
+      this.wallet.category = 'Crypto';
+    }
   }
 
   importimage() {

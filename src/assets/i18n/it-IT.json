@@ -194,8 +194,10 @@
     "open": "Apri Portafoglio",
     "modal": {
       "title": "Aggiungi Portafoglio",
+      "cryptoTitle": "Aggiungi Portafoglio Crypto",
       "editWallet": {
         "title": "Modifica Portafoglio",
+        "cryptoTitle": "Modifica Portafoglio Crypto",
         "default": "Mantieni la stessa immagine"
       },
       "name": "Nome",
@@ -203,6 +205,10 @@
       "category": "Categoria",
       "categoryText": "Scegli una categoria",
       "categoryTextEdit": "Lascia per mantenere la categoria",
+      "balance": "Salndo",
+      "balanceText": "Inserisci Saldo",
+      "type": "Tipo di wallet",
+      "typeText": "Scegli il tipo di wallet",
       "img": "Aggiungi immagine",
       "imgContent": "Upload Immagine",
       "imgFromURL": "Aggiungi immagine da URL",
@@ -486,12 +492,12 @@
         "subTitle": "Avere creato un wallet"
       },
       "req2": {
-        "title": "Creare o importare n crypto wallet",
-        "subTitle": "creare un nuovo crypto wallet o importare un wallet esistente"
-      },
-      "req3": {
         "title": "Avere un Crypto Wallet",
         "subTitle": "Avere creato un crypto wallet"
+      },
+      "req3": {
+        "title": "Avere un Asset",
+        "subTitle": "Avere un Crypto Asset tipo BTC, ETH"
       },
       "next": "Vai alla Dashboard"
     }

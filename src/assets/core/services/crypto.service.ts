@@ -32,4 +32,8 @@ export class CryptoService {
   getCryptoDashboard(): Observable<ResponseModel> {
     return this.http.get<any>(environment.getCryptoDashboardMock);
   }
+
+  getCryptoPrice(): Observable<ResponseModel> {
+    return this.http.get<any>(environment.getCryptoPriceMock);
+  }
 }

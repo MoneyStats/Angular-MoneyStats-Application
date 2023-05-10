@@ -25,6 +25,7 @@
               data-bs-toggle="modal"
               attr.data-bs-target="#{{ modalConstant.ADDWALLET }}"
               class="item clickable"
+              (click)="enableModalCrypto = false"
             >
               <div class="icon-box">
                 <ion-icon
@@ -54,7 +55,12 @@
           <!-- * item -->
           <!-- item -->
           <li>
-            <a class="item clickable" (click)="createImportCryptoWallet()">
+            <a
+              data-bs-toggle="modal"
+              attr.data-bs-target="#{{ modalConstant.ADDWALLET }}"
+              class="item clickable"
+              (click)="enableModalCrypto = true"
+            >
               <div class="icon-box">
                 <ion-icon
                   *ngIf="!isCryptoWalletCreated"
@@ -83,7 +89,11 @@
           <!-- * item -->
           <!-- item -->
           <li>
-            <a class="item">
+            <a
+              class="item"
+              data-bs-toggle="modal"
+              attr.data-bs-target="#{{ modalConstant.ADDASSET }}"
+            >
               <div class="icon-box">
                 <ion-icon
                   *ngIf="!isCryptoWalletCreated"
@@ -130,4 +140,12 @@
   (emitAddWallet)="isWalletCreated = true"
   [modalId]="modalConstant.ADDWALLET"
   [categoriesInput]="dashboard?.categories"
+  [isCrypto]="enableModalCrypto"
 ></app-add-wallet>
+
+<app-add-asset-modal
+  (emitAddWallet)="isWalletCreated = true"
+  [modalId]="modalConstant.ADDASSET"
+  [categoriesInput]="dashboard?.categories"
+  [isCrypto]="enableModalCrypto"
+></app-add-asset-modal>

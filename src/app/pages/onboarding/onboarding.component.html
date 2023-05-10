@@ -8,7 +8,8 @@
       data-bs-slide="prev"
       (click)="prev()"
     >
-      <ion-icon name="chevron-back-outline"></ion-icon>
+      <!--<ion-icon name="chevron-back-outline"></ion-icon>-->
+      <ion-icon name="arrow-back-outline"></ion-icon>
     </a>
   </div>
   <div class="pageTitle"></div>
@@ -116,7 +117,9 @@
       <div class="carousel-item active">
         <div class="img mx-auto">
           <img
-            src="https://cdn.logojoy.com/wp-content/uploads/20200305144650/Bitcoin-icon.png"
+            src="{{
+              environment.baseUrlDashboard
+            }}assets/images/crypto/Bitcoin-icon.png"
             class="d-block w-100"
             alt="..."
           />
