@@ -12,7 +12,6 @@ const routes: Routes = [
     redirectTo: 'auth/register',
     pathMatch: 'full',
   },
-
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),

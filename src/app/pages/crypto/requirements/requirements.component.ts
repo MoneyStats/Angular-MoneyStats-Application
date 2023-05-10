@@ -17,18 +17,13 @@ export class RequirementsComponent implements OnInit {
 
   enableModalCrypto: boolean = false;
 
-  constructor(
-    public screenService: ScreenService,
-    private dashboardService: DashboardService,
-  ) {}
+  constructor(private dashboardService: DashboardService) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
   }
 
   ngOnInit(): void {
-    this.screenService.hideFooter();
-
     this.dashboard = this.dashboardService.dashboard;
 
     if (

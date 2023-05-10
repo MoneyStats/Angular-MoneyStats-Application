@@ -1,19 +1,8 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Asset } from 'src/assets/core/data/class/crypto.class';
 import { Category, Wallet } from 'src/assets/core/data/class/dashboard.class';
-import {
-  AppConfigConst,
-  ModalConstant,
-} from 'src/assets/core/data/constant/constant';
+import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { UserService } from 'src/assets/core/services/user.service';
@@ -32,9 +21,13 @@ export class AddAssetModalComponent implements OnInit {
   @Output('emitAddWallet') emitAddWallet = new EventEmitter<Wallet>();
   @Input('categoriesInput') categoriesInput?: Category[];
 
-  @Input('wallet') wallet: Wallet = new Wallet();
   @Input('asset') asset: Asset = new Asset();
   @Input('isCrypto') isCrypto: boolean = false;
+
+  @Input('wallets') wallets: Wallet[] = [];
+  wallet?: Wallet;
+  modelWallet: string = '';
+  isWalletSelected: boolean = false;
 
   cryptoTypes: string[] = ['Holding', 'Trading'];
   cryptoPrices: Asset[] = [];
@@ -46,7 +39,7 @@ export class AddAssetModalComponent implements OnInit {
   falseIf: boolean = false;
 
   constructor(
-    private dashboardService: DashboardService,
+    public dashboardService: DashboardService,
     private swalService: SwalService,
     private translate: TranslateService,
     private walletService: WalletService,
@@ -59,10 +52,11 @@ export class AddAssetModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.wallet);
     this.categories = this.dashboardService.dashboard.categories;
+    this.wallets = this.dashboardService.dashboard.wallets;
     this.getCryptoPrices();
   }
-
 
   getCryptoPrices() {
     this.cryptoService.getCryptoPrice().subscribe((data) => {
@@ -83,5 +77,8 @@ export class AddAssetModalComponent implements OnInit {
     }, 1000);
   }
 
-
+  selectWallet() {
+    this.wallet = this.wallets.find((w) => w.name == this.modelWallet);
+    this.isWalletSelected = true;
+  }
 }

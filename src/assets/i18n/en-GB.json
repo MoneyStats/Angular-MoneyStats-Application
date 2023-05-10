@@ -524,7 +524,15 @@
     },
     "cryptoModal": {
       "addAsset": {
-        "title": "Import an Asset"
+        "title": "Import an Asset",
+        "selectWalletTitle": "Select Wallet",
+        "selectWalletSubTitle": "Select a Wallet to add a new asset",
+        "currentBalance": "The current balance is ",
+        "searchAsset": "Filter an Asset",
+        "add": "Add Asset"
+      },
+      "editAsset": {
+        "title": "Edit Asset "
       }
     }
   },

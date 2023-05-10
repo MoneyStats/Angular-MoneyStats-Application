@@ -13,24 +13,75 @@
           {{ "crypto.cryptoModal.addAsset.title" | translate }}
         </h5>
         <h5 *ngIf="asset.id" class="modal-title">
-          {{ "wallet.modal.editWallet.cryptoTitle" | translate }}
+          {{ "crypto.cryptoModal.editAsset.title" | translate }}
         </h5>
       </div>
       <div class="modal-body">
         <div class="action-sheet-content">
           <form #f="ngForm" type="submit">
-            <div class="row">
+            <div *ngIf="!isWalletSelected" class="row">
+              <div class="col-md-6">
+                <div class="card-title">
+                  <h2 class="modal-title d-inline" style="vertical-align: -4px">
+                    {{
+                      "crypto.cryptoModal.addAsset.selectWalletTitle"
+                        | translate
+                    }}
+                  </h2>
+                  <p>
+                    <small>{{
+                      "crypto.cryptoModal.addAsset.selectWalletSubTitle"
+                        | translate
+                    }}</small>
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group boxed">
+                  <div class="input-wrapper">
+                    <select
+                      class="form-control custom-select"
+                      id="wallet"
+                      name="wallet"
+                      class="form-control"
+                      rows="5"
+                      [(ngModel)]="modelWallet"
+                      #wallet1="ngModel"
+                    >
+                      <option [selected]="this" disabled>
+                        {{
+                          "crypto.cryptoModal.addAsset.selectWalletTitle"
+                            | translate
+                        }}
+                      </option>
+                      <option *ngFor="let w of wallets" value="{{ w.name }}">
+                        {{ w.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="isWalletSelected" class="row">
               <div class="col-md-6">
                 <div class="card-title">
                   <img
-                    src="../../../../../../assets/images/sample/avatar.png"
+                    src="{{ wallet?.img }}"
                     alt="avatar"
                     class="imaged d-inline w30 rounded"
                   />
                   <h2 class="modal-title d-inline" style="vertical-align: -4px">
-                    Coinbase
+                    {{ wallet?.name }}
                   </h2>
-                  <p><small>Current Balance is USD 10000</small></p>
+                  <p>
+                    <small
+                      >{{
+                        "crypto.cryptoModal.addAsset.currentBalance" | translate
+                      }}
+                      {{ dashboardService.coinSymbol }}
+                      {{ wallet?.balance }}</small
+                    >
+                  </p>
                 </div>
               </div>
               <div class="col-md-6">
@@ -49,7 +100,8 @@
                           id="text11"
                           (keyup)="onKeySearch($event)"
                           placeholder="🔍 {{
-                            'wallet.modal.sub_name' | translate
+                            'crypto.cryptoModal.addAsset.searchAsset'
+                              | translate
                           }}"
                         />
                       </div>
@@ -79,9 +131,32 @@
                   </div>
                 </div>
               </div>
+              <div class="col-md-6">
+                
+              </div>
             </div>
 
-            <div class="addWallet text-end hidden_mobile">
+            <!-- Desktop Button -->
+            <div
+              *ngIf="!isWalletSelected"
+              class="addWallet text-end hidden_mobile"
+            >
+              <button
+                [disabled]="modelWallet == ''"
+                type="button"
+                class="btn btn-primary me-1 mb-1"
+                (click)="selectWallet()"
+              >
+                {{
+                  "crypto.cryptoModal.addAsset.selectWalletTitle" | translate
+                }}
+              </button>
+            </div>
+
+            <div
+              *ngIf="isWalletSelected"
+              class="addWallet text-end hidden_mobile"
+            >
               <button
                 [disabled]="f.invalid"
                 type="button"
@@ -89,18 +164,38 @@
                 data-bs-toggle="modal"
                 attr.data-bs-target="#{{ modalConstant.ADDWALLET }}"
               >
-                {{ "wallet.add" | translate }}
+                {{ "crypto.cryptoModal.addAsset.add" | translate }}
               </button>
             </div>
 
-            <div class="form-group basic hidden_desktop">
+            <!-- Mobile Button -->
+            <div
+              *ngIf="!isWalletSelected"
+              class="mt-1 form-group basic hidden_desktop"
+            >
+              <button
+                [disabled]="modelWallet == ''"
+                type="button"
+                class="btn btn-primary btn-block btn-lg"
+                (click)="selectWallet()"
+              >
+                {{
+                  "crypto.cryptoModal.addAsset.selectWalletTitle" | translate
+                }}
+              </button>
+            </div>
+
+            <div
+              *ngIf="isWalletSelected"
+              class="mt-1 form-group basic hidden_desktop"
+            >
               <button
                 [disabled]="f.invalid"
                 type="button"
                 class="btn btn-primary btn-block btn-lg"
                 data-bs-dismiss="modal"
               >
-                {{ "wallet.modal.save" | translate }}
+                {{ "crypto.cryptoModal.addAsset.add" | translate }}
               </button>
             </div>
           </form>

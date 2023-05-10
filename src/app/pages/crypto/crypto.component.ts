@@ -9,11 +9,18 @@ import { DashboardService } from 'src/assets/core/services/dashboard.service';
   styleUrls: ['./crypto.component.scss'],
 })
 export class CryptoComponent implements OnInit {
+  isFooterActive: boolean = false;
   constructor(
     private router: Router,
     private appService: AppService,
     private dashboardService: DashboardService
-  ) {}
+  ) {
+    router.events.subscribe((data: any) => {
+      if (data.url == '/crypto/requirements') {
+        this.isFooterActive = false;
+      } else this.isFooterActive = true;
+    });
+  }
 
   ngOnInit(): void {
     let dashboard = this.dashboardService.dashboard;
@@ -32,6 +39,6 @@ export class CryptoComponent implements OnInit {
     if (!this.appService.isOnboardingCrypto) {
       this.appService.isOnboardingCrypto = true;
       this.router.navigate(['on-boarding']);
-    } //else this.router.navigate(['crypto/requirements']);
+    } else this.router.navigate(['crypto/requirements']);
   }
 }
