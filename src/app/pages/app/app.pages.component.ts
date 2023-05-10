@@ -1,21 +1,20 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { ChildrenOutletContexts, RouterOutlet } from '@angular/router';
+import { fader, slideUp } from 'src/app/shared/animations/route-animations';
 import { User } from 'src/assets/core/data/class/user.class';
-import { StorageConstant } from 'src/assets/core/data/constant/constant';
 import { UserService } from 'src/assets/core/services/user.service';
-import { fader, slideUp } from '../shared/animations/route-animations';
 
 @Component({
   selector: 'app-pages',
-  templateUrl: './pages.component.html',
-  styleUrls: ['./pages.component.scss'],
+  templateUrl: './app.pages.component.html',
+  styleUrls: ['./app.pages.component.scss'],
   animations: [
     // <-- add your animations here
     fader,
     slideUp,
   ],
 })
-export class PagesComponent implements OnInit {
+export class AppPagesComponent implements OnInit {
   @Output('user') user?: User = new User();
 
   constructor(

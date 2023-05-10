@@ -4,22 +4,22 @@ import { ErrorHandleComponent } from './interceptors/error-handle/error-handle.c
 import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { PagesComponent } from './pages/pages.component';
-import { SettingsComponent } from './pages/settings/settings.component';
-import { AddStatsComponent } from './pages/stats/add-stats/add-stats.component';
-import { StatsComponent } from './pages/stats/stats.component';
-import { TransactionDetailsComponent } from './pages/transactions/transaction-details/transaction-details.component';
-import { TransactionsComponent } from './pages/transactions/transactions.component';
-import { WalletDetailsComponent } from './pages/wallet/wallet-details/wallet-details.component';
-import { WalletHistoryComponent } from './pages/wallet/wallet-details/wallet-history/wallet-history.component';
-import { WalletComponent } from './pages/wallet/wallet.component';
+import { DashboardComponent } from './pages/app/dashboard/dashboard.component';
+import { AppPagesComponent } from './pages/app/app.pages.component';
+import { SettingsComponent } from './pages/app/settings/settings.component';
+import { AddStatsComponent } from './pages/app/stats/add-stats/add-stats.component';
+import { StatsComponent } from './pages/app/stats/stats.component';
+import { TransactionDetailsComponent } from './pages/app/transactions/transaction-details/transaction-details.component';
+import { TransactionsComponent } from './pages/app/transactions/transactions.component';
+import { WalletDetailsComponent } from './pages/app/wallet/wallet-details/wallet-details.component';
+import { WalletHistoryComponent } from './pages/app/wallet/wallet-details/wallet-history/wallet-history.component';
+import { WalletComponent } from './pages/app/wallet/wallet.component';
 import { ForgotComponent } from './auth/forgot/forgot.component';
 import { RouteGuardService } from './auth/route-guard.service';
-import { OnboardingComponent } from './pages/onboarding/onboarding.component';
+import { OnboardingComponent } from './interceptors/onboarding/onboarding.component';
 import { fader, slideUp } from './shared/animations/route-animations';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
-import { SupportComponent } from './pages/support/support.component';
+import { SupportComponent } from './pages/app/support/support.component';
 import { CryptoDashboardComponent } from './pages/crypto/crypto-dashboard/crypto-dashboard.component';
 import { CryptoComponent } from './pages/crypto/crypto.component';
 import { RequirementsComponent } from './pages/crypto/requirements/requirements.component';
@@ -80,7 +80,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: PagesComponent,
+    component: AppPagesComponent,
     canActivate: [RouteGuardService],
     children: [
       {
