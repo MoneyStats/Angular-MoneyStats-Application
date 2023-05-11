@@ -500,6 +500,43 @@
         "subTitle": "Avere un Crypto Asset tipo BTC, ETH"
       },
       "next": "Vai alla Dashboard"
+    },
+    "dashboard": {
+      "title": "Crypto Dashboard",
+      "cardRes": {
+        "title": "Saldo Totale",
+        "lastUpdate": "Ultimo aggiornameneto"
+      },
+      "performanceCard": {
+        "title": "Storico Performance",
+        "view": "Vedi",
+        "holding": "Holding Performance",
+        "trading": "Trading Performance",
+        "performance": "Performance",
+        "lastUpdate": "Ultimo aggiornameneto"
+      },
+      "assetsCard": {
+        "title": "I miei Assets",
+        "view": "Vedi",
+        "assetGraph": "Grafico Cryptocurrency"
+      }
+    },
+    "cryptoModal": {
+      "addAsset": {
+        "title": "Importa un Asset",
+        "selectWalletTitle": "Seleziona Wallet",
+        "selectWalletSubTitle": "Seleziona un Wallet su cui aggiungere un Asset",
+        "selectedWallet": "Wallet Selezionato",
+        "currentBalance": "Il Saldo corrente è ",
+        "searchAsset": "Filtra un Asset",
+        "selectAsset": "Seleziona un Asset",
+        "selectedAsset": "Asset Selezionato",
+        "add": "Aggiungi Asset",
+        "warning": "L'Asset selezionato esiste già"
+      },
+      "editAsset": {
+        "title": "Modifica Asset "
+      }
     }
   },
   "copyright": "Copyright © MoneyStats 2023. All Rights Reserved."

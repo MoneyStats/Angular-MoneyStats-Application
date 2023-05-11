@@ -23,6 +23,7 @@ export class Asset {
   name?: string;
   symbol?: string;
   value?: number;
+  current_price?: number;
   icon?: string;
   balance?: number;
   performance?: number;

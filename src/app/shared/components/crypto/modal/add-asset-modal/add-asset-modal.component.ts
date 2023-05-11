@@ -1,13 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { Asset } from 'src/assets/core/data/class/crypto.class';
 import { Category, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
-import { UserService } from 'src/assets/core/services/user.service';
-import { WalletService } from 'src/assets/core/services/wallet.service';
-import { SwalService } from 'src/assets/core/utils/swal.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -18,11 +14,12 @@ import { environment } from 'src/environments/environment';
 export class AddAssetModalComponent implements OnInit {
   environment = environment;
   @Input('modalId') modalId: string = '';
-  @Output('emitAddWallet') emitAddWallet = new EventEmitter<Wallet>();
-  @Input('categoriesInput') categoriesInput?: Category[];
+  @Output('emitAddAsset') emitAddAsset = new EventEmitter<Wallet>();
 
-  @Input('asset') asset: Asset = new Asset();
-  @Input('isCrypto') isCrypto: boolean = false;
+  asset?: Asset;
+  modelAsset: string = '';
+  isAssetSelected: boolean = false;
+  warning: boolean = false;
 
   @Input('wallets') wallets: Wallet[] = [];
   wallet?: Wallet;
@@ -40,10 +37,6 @@ export class AddAssetModalComponent implements OnInit {
 
   constructor(
     public dashboardService: DashboardService,
-    private swalService: SwalService,
-    private translate: TranslateService,
-    private walletService: WalletService,
-    private userService: UserService,
     private cryptoService: CryptoService
   ) {}
 
@@ -52,9 +45,13 @@ export class AddAssetModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.wallet);
     this.categories = this.dashboardService.dashboard.categories;
-    this.wallets = this.dashboardService.dashboard.wallets;
+    if (this.wallets == undefined) {
+      this.wallets = this.dashboardService.dashboard.wallets.filter(
+        (w) => w.category == 'Crypto'
+      );
+    } else this.wallets;
+
     this.getCryptoPrices();
   }
 
@@ -80,5 +77,50 @@ export class AddAssetModalComponent implements OnInit {
   selectWallet() {
     this.wallet = this.wallets.find((w) => w.name == this.modelWallet);
     this.isWalletSelected = true;
+  }
+
+  selectAsset() {
+    if (
+      !this.wallet?.assets ||
+      (this.wallet?.assets.length > 0 &&
+        !this.wallet?.assets.find((a) => a.name == this.modelAsset))
+    ) {
+      this.warning = false;
+      this.asset = this.cryptoPrices.find((c) => c.name == this.modelAsset);
+      this.isAssetSelected = true;
+    } else this.warning = true;
+  }
+
+  selectAssetInput(name: string) {
+    this.search = '';
+    this.modelAsset = name;
+  }
+
+  saveAsset() {
+    if (
+      !this.wallet?.assets ||
+      (this.wallet?.assets.length > 0 &&
+        !this.wallet?.assets.find((a) => a.name == this.asset?.name))
+    ) {
+      this.warning = false;
+      if (this.wallet?.assets == undefined) {
+        this.wallet!.assets = [];
+      }
+      this.wallet?.assets.push(this.asset!);
+      this.emitAddAsset.emit(this.wallet);
+      this.resetModal();
+    } else {
+      this.isAssetSelected = false;
+      this.modelAsset = '';
+      this.warning = true;
+    }
+  }
+
+  resetModal() {
+    this.warning = false;
+    this.isAssetSelected = false;
+    this.isWalletSelected = false;
+    this.modelAsset = '';
+    this.modelWallet = '';
   }
 }

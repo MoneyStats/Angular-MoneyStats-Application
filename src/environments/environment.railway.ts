@@ -17,6 +17,8 @@ export const environment = {
   getWalletDataUrl: baseUrlApp + 'assets/core/mock/wallets.mock.json',
   getResumeDataUrlMock: baseUrlApp + 'assets/core/mock/stats.mock.json',
   getTemplate: baseUrlApp + 'assets/template/template.json',
+  getCryptoDashboardMock: baseUrlApp + 'assets/core/mock/crypto.dash.mock.json',
+  getCryptoPriceMock: baseUrlApp + 'assets/core/mock/crypto.price.mock.json',
 
   // Datas
   registerDataUrl: host + '/v1/auth/sign-up',

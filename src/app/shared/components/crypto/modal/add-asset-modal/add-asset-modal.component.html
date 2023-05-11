@@ -9,10 +9,10 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content modal-round mx-auto">
       <div class="modal-header">
-        <h5 *ngIf="!asset.id" class="modal-title">
+        <h5 *ngIf="!asset?.id" class="modal-title">
           {{ "crypto.cryptoModal.addAsset.title" | translate }}
         </h5>
-        <h5 *ngIf="asset.id" class="modal-title">
+        <h5 *ngIf="asset?.id" class="modal-title">
           {{ "crypto.cryptoModal.editAsset.title" | translate }}
         </h5>
       </div>
@@ -64,28 +64,63 @@
             </div>
             <div *ngIf="isWalletSelected" class="row">
               <div class="col-md-6">
-                <div class="card-title">
-                  <img
-                    src="{{ wallet?.img }}"
-                    alt="avatar"
-                    class="imaged d-inline w30 rounded"
-                  />
-                  <h2 class="modal-title d-inline" style="vertical-align: -4px">
-                    {{ wallet?.name }}
-                  </h2>
-                  <p>
-                    <small
-                      >{{
-                        "crypto.cryptoModal.addAsset.currentBalance" | translate
-                      }}
-                      {{ dashboardService.coinSymbol }}
-                      {{ wallet?.balance }}</small
+                <div class="card-title row">
+                  <div class="col-8">
+                    <img
+                      src="{{ wallet?.img }}"
+                      alt="avatar"
+                      class="imaged d-inline w30 rounded"
+                    />
+                    <h2
+                      class="modal-title d-inline"
+                      style="vertical-align: -4px"
                     >
-                  </p>
+                      {{ wallet?.name }}
+                    </h2>
+                    <p>
+                      <small
+                        >{{
+                          "crypto.cryptoModal.addAsset.currentBalance"
+                            | translate
+                        }}
+                        {{ dashboardService.coinSymbol }}
+                        {{ wallet?.balance }}</small
+                      >
+                    </p>
+                  </div>
+                  <div class="col-4">
+                    <span class="mt-2 badge badge-info float-end">{{
+                      "crypto.cryptoModal.addAsset.selectedWallet" | translate
+                    }}</span>
+                  </div>
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="row">
+                <hr class="hidden_desktop hr" />
+                <div *ngIf="isAssetSelected" class="card-title row">
+                  <div class="col-8">
+                    <img
+                      src="{{ asset?.icon }}"
+                      alt="avatar"
+                      class="imaged d-inline w30 rounded"
+                    />
+                    <h2
+                      class="modal-title d-inline"
+                      style="vertical-align: -4px"
+                    >
+                      {{ asset?.name }}
+                    </h2>
+                    <p>
+                      <small>USD {{ asset?.current_price }}</small>
+                    </p>
+                  </div>
+                  <div class="col-4">
+                    <span class="mt-2 badge badge-info float-end">{{
+                      "crypto.cryptoModal.addAsset.selectedAsset" | translate
+                    }}</span>
+                  </div>
+                </div>
+                <div *ngIf="!isAssetSelected" class="row">
                   <div class="col-md-5">
                     <div class="form-group basic">
                       <div class="input-wrapper">
@@ -116,7 +151,7 @@
                           type="radio"
                           id="{{ asset.identifier }}"
                           checked
-                          (click)="search = ''"
+                          (click)="selectAssetInput(asset.name!)"
                         />
                         <label for="{{ asset.identifier }}" class="option"
                           ><img
@@ -130,9 +165,47 @@
                     </div>
                   </div>
                 </div>
+                <div
+                  *ngIf="warning"
+                  class="mx-auto alert alert-danger mb-1 mt-2"
+                  role="alert"
+                >
+                  {{ "crypto.cryptoModal.addAsset.warning" | translate }}
+                </div>
+              </div>
+            </div>
+            <div *ngIf="isAssetSelected" class="row">
+              <div class="col-md-6">
+                <div class="form-group boxed">
+                  <div class="input-wrapper">
+                    <label class="label" for="text4b">Balance</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="text4b"
+                      placeholder="Insert current balance"
+                    />
+                    <i class="clear-input">
+                      <ion-icon name="close-circle"></ion-icon>
+                    </i>
+                  </div>
+                </div>
               </div>
               <div class="col-md-6">
-                
+                <div class="form-group boxed">
+                  <div class="input-wrapper">
+                    <label class="label" for="text4b">Invested</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="text4b"
+                      placeholder="Invested Amount"
+                    />
+                    <i class="clear-input">
+                      <ion-icon name="close-circle"></ion-icon>
+                    </i>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -154,15 +227,29 @@
             </div>
 
             <div
-              *ngIf="isWalletSelected"
+              *ngIf="isWalletSelected && !isAssetSelected"
               class="addWallet text-end hidden_mobile"
             >
               <button
-                [disabled]="f.invalid"
+                [disabled]="modelAsset == ''"
                 type="button"
                 class="btn btn-primary me-1 mb-1"
-                data-bs-toggle="modal"
-                attr.data-bs-target="#{{ modalConstant.ADDWALLET }}"
+                (click)="selectAsset()"
+              >
+                {{ "crypto.cryptoModal.addAsset.selectAsset" | translate }}
+              </button>
+            </div>
+
+            <div
+              *ngIf="isAssetSelected"
+              class="addWallet text-end hidden_mobile"
+            >
+              <button
+                [disabled]="f.invalid || warning"
+                type="button"
+                class="btn btn-primary me-1 mb-1"
+                data-bs-dismiss="modal"
+                (click)="saveAsset()"
               >
                 {{ "crypto.cryptoModal.addAsset.add" | translate }}
               </button>
@@ -186,14 +273,29 @@
             </div>
 
             <div
-              *ngIf="isWalletSelected"
+              *ngIf="isWalletSelected && !isAssetSelected"
               class="mt-1 form-group basic hidden_desktop"
             >
               <button
-                [disabled]="f.invalid"
+                [disabled]="modelAsset == ''"
+                type="button"
+                class="btn btn-primary btn-block btn-lg"
+                (click)="selectAsset()"
+              >
+                {{ "crypto.cryptoModal.addAsset.selectAsset" | translate }}
+              </button>
+            </div>
+
+            <div
+              *ngIf="isAssetSelected"
+              class="mt-1 form-group basic hidden_desktop"
+            >
+              <button
+                [disabled]="f.invalid || warning"
                 type="button"
                 class="btn btn-primary btn-block btn-lg"
                 data-bs-dismiss="modal"
+                (click)="saveAsset()"
               >
                 {{ "crypto.cryptoModal.addAsset.add" | translate }}
               </button>

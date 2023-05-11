@@ -25,7 +25,101 @@
         </h5>
       </div>
       <div class="modal-body">
-        <div class="action-sheet-content">
+        <div *ngIf="!isNewWallet && isCrypto" class="action-sheet-content">
+          <h2 class="modal-title d-inline" style="vertical-align: -4px">
+            {{ "wallet.modal.crypto.title" | translate }}
+          </h2>
+          <p *ngIf="!isImportWallet">
+            <small>{{ "wallet.modal.crypto.subTitle" | translate }}</small>
+          </p>
+          <p *ngIf="isImportWallet">
+            <small>{{ "wallet.modal.crypto.subTitle2" | translate }}</small>
+          </p>
+
+          <div *ngIf="!isImportWallet" class="addWallet text-end hidden_mobile">
+            <button
+              (click)="isNewWallet = true"
+              type="button"
+              class="btn btn-primary me-1 mb-1"
+            >
+              {{ "wallet.modal.crypto.new" | translate }}
+            </button>
+            <button
+              (click)="isImportWallet = true"
+              type="button"
+              class="btn btn-primary me-1 mb-1"
+            >
+              {{ "wallet.modal.crypto.import" | translate }}
+            </button>
+          </div>
+          <div *ngIf="isImportWallet">
+            <div class="form-group boxed">
+              <div class="input-wrapper">
+                <label class="label" for="walletName">Select Wallet</label>
+                <select
+                  id="walletName"
+                  name="walletName"
+                  rows="5"
+                  [(ngModel)]="walletName"
+                  #walletName1="ngModel"
+                  class="form-control custom-select"
+                >
+                  <option [value]="wallet.name" *ngFor="let wallet of notCryptoWallets">
+                    {{ wallet.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="addWallet text-end hidden_mobile">
+              <button
+                (click)="importWallet()"
+                type="button"
+                class="btn btn-primary me-1 mb-1"
+              >
+                {{ "wallet.modal.crypto.import" | translate }}
+              </button>
+            </div>
+            <div class="form-group basic hidden_desktop">
+              <button
+                (click)="importWallet()"
+                type="button"
+                class="btn btn-primary btn-block btn-lg"
+              >
+                {{ "wallet.modal.crypto.import" | translate }}
+              </button>
+            </div>
+          </div>
+          <div *ngIf="!isImportWallet" class="hidden_desktop">
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group basic">
+                  <button
+                    (click)="isNewWallet = true"
+                    type="button"
+                    class="btn btn-primary btn-block btn-lg"
+                  >
+                    {{ "wallet.modal.crypto.new" | translate }}
+                  </button>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group basic">
+                  <button
+                    (click)="isImportWallet = true"
+                    type="button"
+                    class="btn btn-primary btn-block btn-lg"
+                  >
+                    {{ "wallet.modal.crypto.import" | translate }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          *ngIf="!isCrypto || (isCrypto && isNewWallet)"
+          class="action-sheet-content"
+        >
           <form #f="ngForm" type="submit" enctype="multipart/form-data">
             <div *ngIf="walletImg != ''" class="section mt-3 text-center">
               <div class="avatar-section mb-2">
@@ -183,6 +277,7 @@
                     <select
                       class="form-control custom-select"
                       id="type"
+                      required
                       name="type"
                       class="form-control"
                       rows="5"

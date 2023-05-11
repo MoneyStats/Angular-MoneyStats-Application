@@ -42,6 +42,12 @@ export class AddWalletComponent implements OnInit, OnChanges {
   walletImg: string = '';
   warning: boolean = false;
 
+  isImportWallet: boolean = false;
+  isNewWallet: boolean = false;
+  wallets: Wallet[] = [];
+  walletName: string = '';
+  notCryptoWallets: Wallet[] = [];
+
   constructor(
     private dashboardService: DashboardService,
     private swalService: SwalService,
@@ -56,6 +62,8 @@ export class AddWalletComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.categories = this.dashboardService.dashboard.categories;
+    this.wallets = this.dashboardService.dashboard.wallets;
+    this.notCryptoWallets = this.wallets.filter((w) => w.category != 'Crypto');
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -127,10 +135,7 @@ export class AddWalletComponent implements OnInit, OnChanges {
     if (!walletToSave.id) {
       this.wallet = new Wallet();
     }
-    this.defaultImg = false;
-    this.checkbox = true;
-    this.walletImg = '';
-    this.swalService.walletImg = undefined;
+    this.resetForm();
   }
 
   validateBtn(): boolean {
@@ -163,5 +168,24 @@ export class AddWalletComponent implements OnInit, OnChanges {
     } else if (file.size > environment.imageSizeMax) {
       this.warning = true;
     }
+  }
+
+  importWallet() {
+    this.wallet = this.wallets.find((w) => w.name == this.walletName)!;
+    this.wallet.category = 'Crypto';
+    this.walletImg = this.wallet.img;
+    this.isNewWallet = true;
+  }
+
+  resetForm() {
+    this.walletName = '';
+    this.isNewWallet = false;
+    this.isImportWallet = false;
+    this.warning = false;
+    this.walletImg = '';
+    this.checkbox = true;
+    this.defaultImg = false;
+    this.swalService.walletImg = undefined;
+    this.wallet = new Wallet();
   }
 }

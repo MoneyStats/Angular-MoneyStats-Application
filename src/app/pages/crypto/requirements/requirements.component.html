@@ -90,18 +90,18 @@
           <!-- item -->
           <li>
             <a
-              class="item"
+              class="item clickable"
               data-bs-toggle="modal"
               attr.data-bs-target="#{{ modalConstant.ADDASSET }}"
             >
               <div class="icon-box">
                 <ion-icon
-                  *ngIf="!isCryptoWalletCreated"
+                  *ngIf="!isAssetCreated"
                   class="icon-medium bg-orange"
                   name="alert-circle-outline"
                 ></ion-icon>
                 <ion-icon
-                  *ngIf="isCryptoWalletCreated"
+                  *ngIf="isAssetCreated"
                   class="icon-medium bg-blue"
                   name="checkmark-circle"
                 ></ion-icon>
@@ -137,15 +137,14 @@
   </div>
 </div>
 <app-add-wallet
-  (emitAddWallet)="isWalletCreated = true"
+  (emitAddWallet)="saveWallet($event)"
   [modalId]="modalConstant.ADDWALLET"
   [categoriesInput]="dashboard?.categories"
   [isCrypto]="enableModalCrypto"
 ></app-add-wallet>
 
 <app-add-asset-modal
-  (emitAddWallet)="isWalletCreated = true"
+  (emitAddAsset)="saveWallet($event)"
   [modalId]="modalConstant.ADDASSET"
-  [categoriesInput]="dashboard?.categories"
-  [isCrypto]="enableModalCrypto"
+  [wallets]="cryptoWallet!"
 ></app-add-asset-modal>

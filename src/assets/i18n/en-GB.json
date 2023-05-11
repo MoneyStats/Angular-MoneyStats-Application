@@ -195,6 +195,13 @@
     "modal": {
       "title": "Add Wallet",
       "cryptoTitle": "Add Crypto Wallet",
+      "crypto": {
+        "title": "Wallet: Choose Options",
+        "subTitle": "You wanna add a new Wallet or import an existing wallet?",
+        "subTitle2": "Choose a Wallet to import",
+        "new": "New Wallet",
+        "import": "Import Wallet"
+      },
       "editWallet": {
         "title": "Edit Wallet",
         "cryptoTitle": "Edit Crypto Wallet",
@@ -482,7 +489,6 @@
   "error": {
     "title": ""
   },
-
   "crypto": {
     "requirements": {
       "headerTitle": "Crypto Requirements",
@@ -527,9 +533,13 @@
         "title": "Import an Asset",
         "selectWalletTitle": "Select Wallet",
         "selectWalletSubTitle": "Select a Wallet to add a new asset",
+        "selectedWallet": "Wallet Selected",
         "currentBalance": "The current balance is ",
         "searchAsset": "Filter an Asset",
-        "add": "Add Asset"
+        "selectAsset": "Select Asset",
+        "selectedAsset": "Asset Selected",
+        "add": "Add Asset",
+        "warning": "The asset selected alredy exist"
       },
       "editAsset": {
         "title": "Edit Asset "
