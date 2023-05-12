@@ -195,6 +195,7 @@
     "modal": {
       "title": "Add Wallet",
       "cryptoTitle": "Add Crypto Wallet",
+      "selectWallet": "Select Wallet",
       "crypto": {
         "title": "Wallet: Choose Options",
         "subTitle": "You wanna add a new Wallet or import an existing wallet?",
@@ -512,7 +513,8 @@
       "title": "Crypto Dashboard",
       "cardRes": {
         "title": "Total Balance",
-        "lastUpdate": "Last updated"
+        "lastUpdate": "Last updated",
+        "opt1": "Add Asset"
       },
       "performanceCard": {
         "title": "Resume Performance",
@@ -539,7 +541,11 @@
         "selectAsset": "Select Asset",
         "selectedAsset": "Asset Selected",
         "add": "Add Asset",
-        "warning": "The asset selected alredy exist"
+        "warning": "The asset selected alredy exist",
+        "balance": "Balance",
+        "balancePla": "Type your current balance in ",
+        "invested": "Invested",
+        "investedPla": "Type the amount of money you invested"
       },
       "editAsset": {
         "title": "Edit Asset "

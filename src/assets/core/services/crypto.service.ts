@@ -22,6 +22,7 @@ export class CryptoService {
   environment = environment;
   public user: User = new User();
   public currency: string = Coin.USD;
+  public cryptoDashboard: CryptoDashboard = new CryptoDashboard();
 
   constructor(
     private http: HttpClient,

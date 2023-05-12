@@ -12,6 +12,7 @@ import {
   CryptoDashboard,
 } from 'src/assets/core/data/class/crypto.class';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
@@ -31,6 +32,7 @@ export class CryptoDashboardComponent implements OnInit {
   selectedSymbol: string = 'BTCUSDT';
 
   cryptoDashboard: CryptoDashboard = new CryptoDashboard();
+  cryptoWallet?: Wallet[];
   assets: Asset[] = [];
 
   constructor(
@@ -40,6 +42,10 @@ export class CryptoDashboardComponent implements OnInit {
     private dashboardService: DashboardService,
     private router: Router
   ) {}
+
+  public get modalConstant(): typeof ModalConstant {
+    return ModalConstant;
+  }
 
   ngOnInit(): void {
     this.getDashboard();
@@ -55,7 +61,11 @@ export class CryptoDashboardComponent implements OnInit {
   getDashboard() {
     this.cryptoService.getCryptoDashboard().subscribe((data) => {
       this.cryptoDashboard = data.data;
+      this.cryptoService.cryptoDashboard = data.data;
       this.assets = this.getAssetList(this.cryptoDashboard.wallets);
+      this.cryptoWallet = this.cryptoDashboard.wallets.filter(
+        (w) => w.category == 'Crypto'
+      );
     });
   }
 
@@ -180,4 +190,5 @@ export class CryptoDashboardComponent implements OnInit {
     this._renderer2.appendChild(this.selectGraph?.nativeElement, div);
     //this.selectGraph?.nativeElement.appendChild(script);
   }
+  saveWallet(wallet: Wallet) {}
 }

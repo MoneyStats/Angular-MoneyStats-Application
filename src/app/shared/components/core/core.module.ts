@@ -12,8 +12,6 @@ import { CryptoHeaderComponent } from './crypto-header/crypto-header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderMobileComponent } from './header-mobile/header-mobile.component';
 import { TitleDesktopComponent } from './title-desktop/title-desktop.component';
-import { AppRoutingModule } from '../../../app-routing.module';
-import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { AppComponentsModule } from '../app/app-components.module';
 

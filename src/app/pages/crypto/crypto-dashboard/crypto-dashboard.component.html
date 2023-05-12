@@ -40,15 +40,31 @@
                 >
               </p>
               <hr />
-              <div class="row text-center">
-                <div class="clickable" class="col-6">
+              <div class="row text-center" style="height: 25px">
+                <div
+                  data-bs-toggle="modal"
+                  attr.data-bs-target="#{{ modalConstant.ADDASSET }}"
+                  style="
+                    position: absolute;
+                    left: 0px;
+                    z-index: 99;
+                    pointer-events: visible;
+                    cursor: pointer;
+                  "
+                  class="col-6"
+                >
                   <ion-icon
                     class="icon-size icon-color"
-                    name="add-circle-outline"
+                    name="add-circle"
                   ></ion-icon>
-                  <a style="vertical-align: -1px">Add Stats</a>
+                  <a style="vertical-align: -1px">{{
+                    "crypto.dashboard.cardRes.opt1" | translate
+                  }}</a>
                 </div>
-                <div class="line col-6">
+                <div
+                  style="position: absolute; right: 0px; border-left: solid 1px"
+                  class="col-6"
+                >
                   <ion-icon
                     class="icon-size icon-color"
                     name="albums-outline"
@@ -62,27 +78,35 @@
       </div>
       <div class="hidden_desktop mt-4 text-center">
         <div class="row">
-          <div class="col-3">
-            <a href="#" class="inline-block quick-action">
+          <div class="col-3" style="margin-left: -1px">
+            <a
+              data-bs-toggle="modal"
+              attr.data-bs-target="#{{ modalConstant.ADDWALLET }}"
+              class="inline-block quick-action clickable"
+            >
               <div class="user-card">
                 <div class="icon-wrapper bg-danger">
-                  <ion-icon name="add-circle-outline"></ion-icon>
+                  <ion-icon name="duplicate"></ion-icon>
                 </div>
-                <strong>Quick 1</strong>
+                <strong class="title_text">Add Crypto Wallet</strong>
               </div>
             </a>
           </div>
-          <div class="col-3">
-            <a href="#" class="inline-block quick-action">
+          <div class="col-3" style="margin-left: -1px">
+            <a
+              routerLink="/crypto/asset"
+              class="inline-block quick-action clickable"
+            >
               <div class="user-card">
                 <div class="icon-wrapper bg-success">
-                  <ion-icon name="logo-electron"></ion-icon>
+                  <!--<ion-icon name="logo-electron"></ion-icon>-->
+                  <ion-icon name="server"></ion-icon>
                 </div>
-                <strong>Quick 2</strong>
+                <strong class="title_text">Assets</strong>
               </div>
             </a>
           </div>
-          <div class="col-3">
+          <div class="col-3" style="margin-left: -1px">
             <a href="#" class="inline-block quick-action">
               <div class="user-card">
                 <div class="icon-wrapper bg-warning">
@@ -92,7 +116,7 @@
               </div>
             </a>
           </div>
-          <div class="col-3">
+          <div class="col-3" style="margin-left: -1px">
             <a href="#" class="inline-block quick-action">
               <div class="user-card">
                 <div class="icon-wrapper bg-primary">
@@ -110,9 +134,6 @@
             <h2 class="title">
               {{ "crypto.dashboard.performanceCard.title" | translate }}
             </h2>
-            <a href="crypto-portfolio.html" class="link">{{
-              "crypto.dashboard.performanceCard.view" | translate
-            }}</a>
           </div>
           <div class="card">
             <div class="card-body text-center mx-auto">
@@ -219,7 +240,7 @@
           <h2 class="title ms-2">
             {{ "crypto.dashboard.assetsCard.title" | translate }}
           </h2>
-          <a href="crypto-portfolio.html" class="link">{{
+          <a routerLink="/crypto/asset" class="link">{{
             "crypto.dashboard.assetsCard.view" | translate
           }}</a>
         </div>
@@ -428,3 +449,14 @@
     </div>
   </div>
 </div>
+
+<app-add-wallet
+  (emitAddWallet)="saveWallet($event)"
+  [modalId]="modalConstant.ADDWALLET"
+  [isCrypto]="true"
+></app-add-wallet>
+<app-add-asset-modal
+  (emitAddAsset)="saveWallet($event)"
+  [modalId]="modalConstant.ADDASSET"
+  [wallets]="cryptoWallet!"
+></app-add-asset-modal>

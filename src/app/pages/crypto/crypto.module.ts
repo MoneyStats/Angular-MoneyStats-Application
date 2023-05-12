@@ -13,21 +13,26 @@ import { CryptoComponent } from './crypto.component';
 import { RequirementsComponent } from './requirements/requirements.component';
 import { CryptoComponentsModule } from 'src/app/shared/components/crypto/crypto-components.module';
 import { SharedModule } from 'src/app/shared/components/shared/shared.module';
-import { RouterModule } from '@angular/router';
 import { CoreModule } from 'src/app/shared/components/core/core.module';
 import { CryptoRoutingModule } from './crypto-routing.module';
+import { CryptoAssetComponent } from './crypto-asset/crypto-asset.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
     CryptoDashboardComponent,
     CryptoComponent,
     RequirementsComponent,
+    CryptoAssetComponent,
   ],
   imports: [
     CryptoRoutingModule,
     CommonModule,
     CoreModule,
     CryptoComponentsModule,
+    NgApexchartsModule,
+    NgChartsModule,
     SharedModule,
     IonicModule.forRoot(),
     FormsModule,

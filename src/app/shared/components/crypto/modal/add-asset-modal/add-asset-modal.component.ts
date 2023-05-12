@@ -20,6 +20,8 @@ export class AddAssetModalComponent implements OnInit {
   modelAsset: string = '';
   isAssetSelected: boolean = false;
   warning: boolean = false;
+  balance?: number;
+  invested?: number;
 
   @Input('wallets') wallets: Wallet[] = [];
   wallet?: Wallet;

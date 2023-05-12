@@ -43,6 +43,6 @@ export class CryptoComponent implements OnInit {
     if (!this.appService.isOnboardingCrypto) {
       this.appService.isOnboardingCrypto = true;
       this.router.navigate(['on-boarding']);
-    } else this.router.navigate(['crypto/requirements']);
+    } //else this.router.navigate(['crypto/requirements']);
   }
 }

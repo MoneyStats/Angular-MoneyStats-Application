@@ -1,0 +1,33 @@
+<div class="mx-auto section-width">
+  <app-crypto-header [title]="'Crypto Asset'"></app-crypto-header>
+
+  <!-- App Capsule -->
+  <div id="appCapsule">
+    <div class="title-section">
+      <h2 class="title">{{ "crypto.dashboard.title" | translate }}</h2>
+    </div>
+    <apx-chart
+      *ngIf="chartOptions"
+      [series]="chartOptions.series!"
+      [chart]="chartOptions.chart!"
+      [title]="chartOptions.title!"
+      [colors]="chartOptions.colors!"
+      [legend]="chartOptions.legend!"
+      [stroke]="chartOptions.stroke!"
+      [labels]="chartOptions.labels!"
+      type="area"
+    ></apx-chart>
+    <!-- Portfolio -->
+    <div class="section mt-5">
+      <div class="transactions">
+        <div *ngFor="let asset of assets; let i = index">
+          <app-transaction-card
+            [assets]="asset"
+            [currency]="cryptoDashboard.currency"
+          >
+          </app-transaction-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

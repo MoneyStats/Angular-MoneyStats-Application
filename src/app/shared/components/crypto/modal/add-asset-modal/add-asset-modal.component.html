@@ -17,8 +17,8 @@
         </h5>
       </div>
       <div class="modal-body">
-        <div class="action-sheet-content">
-          <form #f="ngForm" type="submit">
+        <form #f="ngForm" type="submit">
+          <div class="action-sheet-content">
             <div *ngIf="!isWalletSelected" class="row">
               <div class="col-md-6">
                 <div class="card-title">
@@ -44,6 +44,7 @@
                       id="wallet"
                       name="wallet"
                       class="form-control"
+                      required
                       rows="5"
                       [(ngModel)]="modelWallet"
                       #wallet1="ngModel"
@@ -149,6 +150,7 @@
                           class="selectopt"
                           name="test"
                           type="radio"
+                          required
                           id="{{ asset.identifier }}"
                           checked
                           (click)="selectAssetInput(asset.name!)"
@@ -178,32 +180,63 @@
               <div class="col-md-6">
                 <div class="form-group boxed">
                   <div class="input-wrapper">
-                    <label class="label" for="text4b">Balance</label>
+                    <label
+                      style="margin-left: 5px"
+                      class="label"
+                      for="balance"
+                      >{{
+                        "crypto.cryptoModal.addAsset.balance" | translate
+                      }}</label
+                    >
                     <input
                       type="text"
+                      name="balance"
+                      [(ngModel)]="balance"
+                      #balance1="ngModel"
                       class="form-control"
-                      id="text4b"
-                      placeholder="Insert current balance"
+                      id="balance"
+                      placeholder="{{
+                        'crypto.cryptoModal.addAsset.balancePla' | translate
+                      }}{{ asset?.symbol }}"
                     />
-                    <i class="clear-input">
-                      <ion-icon name="close-circle"></ion-icon>
-                    </i>
+                    <p style="margin-left: 5px">
+                      <small
+                        >{{
+                          "crypto.cryptoModal.addAsset.balancePla" | translate
+                        }}{{ asset?.symbol }}</small
+                      >
+                    </p>
                   </div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group boxed">
                   <div class="input-wrapper">
-                    <label class="label" for="text4b">Invested</label>
+                    <label
+                      class="label"
+                      style="margin-left: 5px"
+                      for="invested"
+                      >{{
+                        "crypto.cryptoModal.addAsset.invested" | translate
+                      }}</label
+                    >
                     <input
                       type="text"
+                      required
+                      name="invested"
+                      #invested1="ngModel"
+                      [(ngModel)]="invested"
                       class="form-control"
-                      id="text4b"
-                      placeholder="Invested Amount"
+                      id="invested"
+                      placeholder="{{
+                        'crypto.cryptoModal.addAsset.investedPla' | translate
+                      }}"
                     />
-                    <i class="clear-input">
-                      <ion-icon name="close-circle"></ion-icon>
-                    </i>
+                    <p style="margin-left: 5px">
+                      <small>{{
+                        "crypto.cryptoModal.addAsset.investedPla" | translate
+                      }}</small>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -300,8 +333,8 @@
                 {{ "crypto.cryptoModal.addAsset.add" | translate }}
               </button>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>

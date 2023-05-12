@@ -195,6 +195,14 @@
     "modal": {
       "title": "Aggiungi Portafoglio",
       "cryptoTitle": "Aggiungi Portafoglio Crypto",
+      "selectWallet": "Seleziona Wallet",
+      "crypto": {
+        "title": "Portafoglio: Seleziona un'opzione",
+        "subTitle": "Vuoi aggiungere un nuovo portafoglio o importarne uno esistente?",
+        "subTitle2": "Seleziona il wallet",
+        "new": "Nuovo Wallet",
+        "import": "Importa Wallet"
+      },
       "editWallet": {
         "title": "Modifica Portafoglio",
         "cryptoTitle": "Modifica Portafoglio Crypto",
@@ -532,7 +540,11 @@
         "selectAsset": "Seleziona un Asset",
         "selectedAsset": "Asset Selezionato",
         "add": "Aggiungi Asset",
-        "warning": "L'Asset selezionato esiste già"
+        "warning": "L'Asset selezionato esiste già",
+        "balance": "Saldo",
+        "balancePla": "Inserisci il tuo saldo in ",
+        "invested": "Investito",
+        "investedPla": "Inserisci il saldo investito"
       },
       "editAsset": {
         "title": "Modifica Asset "

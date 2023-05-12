@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CryptoComponent } from './crypto.component';
 import { CryptoDashboardComponent } from './crypto-dashboard/crypto-dashboard.component';
 import { RequirementsComponent } from './requirements/requirements.component';
+import { CryptoAssetComponent } from './crypto-asset/crypto-asset.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: 'requirements',
         component: RequirementsComponent,
+      },
+      {
+        path: 'asset',
+        component: CryptoAssetComponent,
       },
     ],
   },

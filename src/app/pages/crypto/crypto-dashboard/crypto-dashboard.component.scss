@@ -6,7 +6,8 @@
   position: absolute;
   right: 0;
   top: 0;
-  z-index: 1;
+  //z-index: 1;
+  border-radius: 20px;
 }
 .imgCover {
   display: block;
@@ -85,14 +86,24 @@
   .user-card {
     background-color: transparent;
   }
+  .title_text {
+    width: 70px;
+    margin-left: calc(50% - 34px);
+    text-align: center;
+  }
   .icon-wrapper {
     border-radius: 50px;
     width: 60px;
     height: 60px;
     ion-icon {
-      width: 40px !important;
-      height: 40px !important;
-      margin-top: calc(50% - 20px);
+      width: 30px !important;
+      height: 30px !important;
+      margin-top: calc(50% - 15px);
     }
   }
+}
+
+.priority {
+  position: absolute;
+  z-index: 999 !important;
 }
