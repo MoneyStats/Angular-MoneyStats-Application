@@ -18,6 +18,7 @@ import { CryptoRoutingModule } from './crypto-routing.module';
 import { CryptoAssetComponent } from './crypto-asset/crypto-asset.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { NgChartsModule } from 'ng2-charts';
+import { CryptoDetailsComponent } from './crypto-asset/crypto-details/crypto-details.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { NgChartsModule } from 'ng2-charts';
     CryptoComponent,
     RequirementsComponent,
     CryptoAssetComponent,
+    CryptoDetailsComponent,
   ],
   imports: [
     CryptoRoutingModule,

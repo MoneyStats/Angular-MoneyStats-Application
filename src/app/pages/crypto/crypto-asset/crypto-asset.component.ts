@@ -7,6 +7,7 @@ import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
+import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
   selector: 'app-crypto-asset',
@@ -20,44 +21,20 @@ export class CryptoAssetComponent implements OnInit {
 
   constructor(
     private cryptoService: CryptoService,
-    private charts: ChartService
+    private charts: ChartService,
+    private screenService: ScreenService
   ) {}
 
   ngOnInit(): void {
+    this.screenService.hideFooter();
     this.cryptoDashboard = this.cryptoService.cryptoDashboard;
-    this.assets = this.getAssetList(this.cryptoDashboard.wallets);
-    let dashboard: Dashboard = new Dashboard();
-    dashboard.wallets = this.cryptoDashboard.wallets;
+    this.assets = this.cryptoService.getAssetList(this.cryptoDashboard.wallets);
+    let dashboard: CryptoDashboard = this.cryptoDashboard;
+    dashboard.assets = this.assets;
     setTimeout(() => {
       if (this.cryptoDashboard.wallets) {
-        this.chartOptions = this.charts.renderChartLine(dashboard);
+        this.chartOptions = this.charts.renderCryptoAsset(dashboard);
       }
     }, 100);
-  }
-
-  getAssetList(wallets: Wallet[]): Asset[] {
-    let allAssets: Array<Asset> = [];
-    wallets.forEach((wallet) => {
-      wallet.assets.forEach((asset) => {
-        if (allAssets.find((a) => a.name == asset.name)) {
-          const index = allAssets.indexOf(
-            allAssets.find((a) => a.name == asset.name)!
-          );
-          allAssets[index].balance! += asset.balance!;
-          allAssets[index].value! += asset.value!;
-          allAssets[index].performance! =
-            (allAssets[index].performance! + asset.performance!) / 2;
-
-          // TODO: Add also operation
-          asset.operations.forEach((o) => {
-            allAssets[index].operations.push(o);
-          });
-          allAssets[index].operations.sort((o) =>
-            o.exitDate != undefined ? o.exitDate : o.entryDate
-          );
-        } else allAssets.push(asset);
-      });
-    });
-    return allAssets;
   }
 }

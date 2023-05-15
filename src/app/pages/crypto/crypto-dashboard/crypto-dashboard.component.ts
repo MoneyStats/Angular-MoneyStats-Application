@@ -50,6 +50,7 @@ export class CryptoDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getDashboard();
     this.screenService.setupHeader();
+    this.screenService.showFooter();
   }
 
   ngAfterViewInit(): void {
@@ -62,37 +63,14 @@ export class CryptoDashboardComponent implements OnInit {
     this.cryptoService.getCryptoDashboard().subscribe((data) => {
       this.cryptoDashboard = data.data;
       this.cryptoService.cryptoDashboard = data.data;
-      this.assets = this.getAssetList(this.cryptoDashboard.wallets);
+      this.assets = this.cryptoService.getAssetList(
+        this.cryptoDashboard.wallets
+      );
+      console.log(this.assets);
       this.cryptoWallet = this.cryptoDashboard.wallets.filter(
         (w) => w.category == 'Crypto'
       );
     });
-  }
-
-  getAssetList(wallets: Wallet[]): Asset[] {
-    let allAssets: Array<Asset> = [];
-    wallets.forEach((wallet) => {
-      wallet.assets.forEach((asset) => {
-        if (allAssets.find((a) => a.name == asset.name)) {
-          const index = allAssets.indexOf(
-            allAssets.find((a) => a.name == asset.name)!
-          );
-          allAssets[index].balance! += asset.balance!;
-          allAssets[index].value! += asset.value!;
-          allAssets[index].performance! =
-            (allAssets[index].performance! + asset.performance!) / 2;
-
-          // TODO: Add also operation
-          asset.operations.forEach((o) => {
-            allAssets[index].operations.push(o);
-          });
-          allAssets[index].operations.sort((o) =>
-            o.exitDate != undefined ? o.exitDate : o.entryDate
-          );
-        } else allAssets.push(asset);
-      });
-    });
-    return allAssets;
   }
 
   onChange(symbol: string) {

@@ -23,10 +23,8 @@
 <!-- item -->
 <a
   *ngIf="asset"
-  href="#"
-  [routerLink]="['/transaction/details', wallet?.id]"
-  (click)="parsingWallet()"
-  class="item crypto"
+  [routerLink]="['/crypto/asset/details', asset.identifier]"
+  class="item crypto clickable"
 >
   <div class="detail">
     <img src="{{ asset.icon }}" alt="img" class="image-block imaged w48" />

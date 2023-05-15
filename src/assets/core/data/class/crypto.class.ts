@@ -1,13 +1,15 @@
-import { Wallet } from './dashboard.class';
+import { Stats, Wallet } from './dashboard.class';
 
 export class CryptoDashboard {
   balance: number = 0;
   currency: string = 'USD';
   btcBalance: number = 0;
   lastUpdate: Date = new Date();
+  statsAssetsDays: string[] = [];
   holdingLong: TradingStatus = new TradingStatus();
   trading: TradingStatus = new TradingStatus();
   performance: TradingStatus = new TradingStatus();
+  assets: Asset[] = []; // Usata solo per i grafici
   wallets: Wallet[] = [];
 }
 
@@ -27,5 +29,7 @@ export class Asset {
   icon?: string;
   balance?: number;
   performance?: number;
+  trend?: number;
+  history?: Stats[] = [];
   operations: Array<any> = [];
 }

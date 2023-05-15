@@ -4,6 +4,7 @@ import { CryptoComponent } from './crypto.component';
 import { CryptoDashboardComponent } from './crypto-dashboard/crypto-dashboard.component';
 import { RequirementsComponent } from './requirements/requirements.component';
 import { CryptoAssetComponent } from './crypto-asset/crypto-asset.component';
+import { CryptoDetailsComponent } from './crypto-asset/crypto-details/crypto-details.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: 'asset',
         component: CryptoAssetComponent,
+      },
+      {
+        path: 'asset/details/:identifier',
+        component: CryptoDetailsComponent,
       },
     ],
   },

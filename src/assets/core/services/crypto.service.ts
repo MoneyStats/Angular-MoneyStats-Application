@@ -13,7 +13,7 @@ import { DashboardService } from './dashboard.service';
 import { StatsService } from './stats.service';
 import { WalletService } from './wallet.service';
 import { Wallet } from '../data/class/dashboard.class';
-import { CryptoDashboard } from '../data/class/crypto.class';
+import { Asset, CryptoDashboard } from '../data/class/crypto.class';
 
 @Injectable({
   providedIn: 'root',
@@ -36,5 +36,48 @@ export class CryptoService {
 
   getCryptoPrice(): Observable<ResponseModel> {
     return this.http.get<any>(environment.getCryptoPriceMock);
+  }
+
+  getAssetList(wallets: Wallet[]): Asset[] {
+    let allAssets: Array<Asset> = [];
+    wallets.forEach((wallet) => {
+      wallet.assets.forEach((asset) => {
+        if (allAssets.find((a) => a.name == asset.name)) {
+          const index = allAssets.indexOf(
+            allAssets.find((a) => a.name == asset.name)!
+          );
+          allAssets[index].balance! += asset.balance!;
+          allAssets[index].value! += asset.value!;
+          allAssets[index].performance! =
+            (allAssets[index].performance! + asset.performance!) / 2;
+
+          allAssets[index].trend! = allAssets[index].trend! + asset.trend!;
+
+          asset.history?.forEach((history) => {
+            let hist = allAssets[index].history!.find(
+              (h) => h.date == history.date
+            )!;
+            allAssets[index].history!.find(
+              (h) => h.date == history.date
+            )!.balance += history.balance;
+            allAssets[index].history!.find(
+              (h) => h.date == history.date
+            )!.trend += history.trend;
+            allAssets[index].history!.find(
+              (h) => h.date == history.date
+            )!.percentage = (hist.percentage + history.percentage) / 2;
+          });
+
+          asset.operations.forEach((o) => {
+            allAssets[index].operations.push(o);
+          });
+          allAssets[index].operations.sort((o) =>
+            o.exitDate != undefined ? o.exitDate : o.entryDate
+          );
+        } else allAssets.push(asset);
+      });
+    });
+    console.log(allAssets);
+    return allAssets;
   }
 }

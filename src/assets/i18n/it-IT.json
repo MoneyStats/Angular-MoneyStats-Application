@@ -529,6 +529,10 @@
         "assetGraph": "Grafico Cryptocurrency"
       }
     },
+    "asset": {
+      "title": "Crypto Assets",
+      "assetList": "Lista Asset"
+    },
     "cryptoModal": {
       "addAsset": {
         "title": "Importa un Asset",
