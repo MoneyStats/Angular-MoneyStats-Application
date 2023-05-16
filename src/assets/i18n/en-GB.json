@@ -532,7 +532,8 @@
     },
     "asset": {
       "title": "Crypto Assets",
-      "assetList": "Asset List"
+      "assetList": "Asset List",
+      "assetGraph": "Asset Graph"
     },
     "cryptoModal": {
       "addAsset": {

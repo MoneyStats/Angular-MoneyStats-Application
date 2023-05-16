@@ -284,7 +284,10 @@ export class ChartService {
     return chartExample1;
   }
 
-  renderCryptoAsset(cryptoDashboard: CryptoDashboard): Partial<ApexOptions> {
+  renderCryptoAsset(
+    cryptoDashboard: CryptoDashboard,
+    ...height: number[]
+  ): Partial<ApexOptions> {
     let series: Array<any> = [];
     let oldStats: any = new Stats();
     let oldDate: any;
@@ -328,12 +331,16 @@ export class ChartService {
       series.push(serie);
       historyBalance = [];
     });
+    let h = 350;
+    if (height[0]) {
+      h = height[0];
+    }
     let chartOptions: Partial<ApexOptions> = {
       series: series,
       chart: {
         type: 'area',
         width: '100%',
-        height: 350,
+        height: h,
         sparkline: {
           enabled: true,
         },

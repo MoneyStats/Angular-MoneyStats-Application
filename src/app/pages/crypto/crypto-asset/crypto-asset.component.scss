@@ -1,18 +1,21 @@
-.title-section {
-  margin-left: 30px;
-  margin-top: 45px;
-}
-
 #appCapsule {
   margin-top: 10px;
-  max-width: 1000px;
+  //max-width: 1000px;
 }
 
 @media screen and (max-width: 780px) {
   .title-section {
     margin-left: 20px;
-    margin-top: 30px !important;
-    margin-bottom: 20px !important;
+    margin-bottom: 0px !important;
+  }
+  .row {
+    margin-right: 0px !important;
+    .card {
+      margin-right: -8px;
+    }
+    .transactions {
+      margin-right: -20px !important;
+    }
   }
 }
 

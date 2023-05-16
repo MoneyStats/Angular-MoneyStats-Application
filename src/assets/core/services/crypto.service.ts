@@ -77,7 +77,6 @@ export class CryptoService {
         } else allAssets.push(asset);
       });
     });
-    console.log(allAssets);
     return allAssets;
   }
 }

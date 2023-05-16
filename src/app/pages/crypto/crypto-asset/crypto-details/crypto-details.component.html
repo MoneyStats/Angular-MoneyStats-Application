@@ -5,8 +5,98 @@
 
   <!-- App Capsule -->
   <div id="appCapsule" class="mx-auto">
-    <div class="title-section">
-      <h3 class="title">{{ "crypto.asset.assetList" | translate }}</h3>
+    <div class="row">
+      <div class="title-section col-6">
+        <h3 class="title">
+          <img
+            src="{{ asset.icon }}"
+            alt="avatar"
+            class="imaged d-inline w30 rounded me-1"
+          />{{ asset.name }} ({{ asset.symbol }})
+        </h3>
+      </div>
+      <div class="title-section col-6 text-end">
+        <h5 class="card-text fs-3">
+          <span style="vertical-align: 3px" class="badge badge-success">
+            <ion-icon name="arrow-up-outline"></ion-icon>
+            {{ cryptoDashboard.performance.performance }}%
+          </span>
+          {{ cryptoDashboard.balance }}
+          {{ cryptoDashboard.currency }}
+        </h5>
+        <p style="margin-top: -15px">{{ cryptoDashboard.btcBalance }} BTC</p>
+      </div>
+    </div>
+    <div class="section mt-3">
+      <div class="card transparent">
+        <div class="card-body">
+          <ul class="nav nav-tabs capsuled" role="tablist">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                data-bs-toggle="tab"
+                href="#overview"
+                role="tab"
+              >
+                Overview
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" href="#card" role="tab">
+                Cards
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                data-bs-toggle="tab"
+                href="#settings"
+                role="tab"
+              >
+                Settings
+              </a>
+            </li>
+          </ul>
+          <div class="tab-content mt-1">
+            <div
+              class="tab-pane fade show active"
+              id="overview"
+              role="tabpanel"
+            >
+              <app-details-overview
+                [asset]="asset"
+                [cryptoDashboard]="cryptoDashboard"
+              ></app-details-overview>
+            </div>
+            <div class="tab-pane fade" id="card" role="tabpanel">
+              <div class="row">
+                <div class="col-md-7">
+                  <!-- Portfolio -->
+                  <div class="section">
+                    <div class="card">
+                      <div class="card-body">
+                        <!-- TradingView Widget BEGIN -->
+                        <div class="tradingview-widget-container">
+                          <div
+                            class="tradingview-widget-container__widget"
+                          ></div>
+                          <div #tradingView style="height: 360px"></div>
+                        </div>
+                        <!-- TradingView Widget END -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="settings" role="tabpanel">
+              Vestibulum sed facilisis diam, vel sodales leo. Aenean lacinia,
+              nisi sit amet iaculis maximus, nibh orci iaculis risus, vitae
+              faucibus dui orci quis elit.
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

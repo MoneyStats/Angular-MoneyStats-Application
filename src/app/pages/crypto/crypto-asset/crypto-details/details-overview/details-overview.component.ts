@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Renderer2 } from '@angular/core';
 import {
   Asset,
   CryptoDashboard,
@@ -9,29 +9,26 @@ import { ChartService } from 'src/assets/core/utils/chart.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
-  selector: 'app-crypto-asset',
-  templateUrl: './crypto-asset.component.html',
-  styleUrls: ['./crypto-asset.component.scss'],
+  selector: 'app-details-overview',
+  templateUrl: './details-overview.component.html',
+  styleUrls: ['./details-overview.component.scss'],
 })
-export class CryptoAssetComponent implements OnInit {
+export class DetailsOverviewComponent implements OnInit {
   public chartOptions?: Partial<ApexOptions>;
   public chart1Y?: Partial<ApexOptions>;
   public chart3Y?: Partial<ApexOptions>;
-  cryptoDashboard: CryptoDashboard = new CryptoDashboard();
-  assets: Asset[] = [];
+  @Input('asset') asset: Asset = new Asset();
+  @Input('cryptoDashboard') cryptoDashboard: CryptoDashboard =
+    new CryptoDashboard();
 
-  constructor(
-    private cryptoService: CryptoService,
+  constructor(private cryptoService: CryptoService,
+    private screenService: ScreenService,
     private charts: ChartService,
-    private screenService: ScreenService
-  ) {}
+    private _renderer2: Renderer2) {}
 
   ngOnInit(): void {
-    this.screenService.hideFooter();
-    this.cryptoDashboard = this.cryptoService.cryptoDashboard;
-    this.assets = this.cryptoService.getAssetList(this.cryptoDashboard.wallets);
     let dashboard: CryptoDashboard = this.cryptoDashboard;
-    dashboard.assets = this.assets;
+    dashboard.assets = [this.asset];
     setTimeout(() => {
       if (this.cryptoDashboard.wallets) {
         if (this.screenService?.screenWidth! <= 780) {
@@ -42,15 +39,12 @@ export class CryptoAssetComponent implements OnInit {
   }
 
   graph1Y() {
-    this.assets.forEach((asset) => {
-      asset.history?.filter(
-        (h) =>
-          h.date.toString().split('-')[0] ===
-          new Date().getFullYear().toString()
-      );
-    });
+    this.asset.history?.filter(
+      (h) =>
+        h.date.toString().split('-')[0] === new Date().getFullYear().toString()
+    );
     let dashboard: CryptoDashboard = this.cryptoDashboard;
-    dashboard.assets = this.assets;
+    dashboard.assets = [this.asset];
     setTimeout(() => {
       this.chart1Y = this.charts.renderCryptoAsset(dashboard);
     }, 200);
@@ -62,13 +56,11 @@ export class CryptoAssetComponent implements OnInit {
       (new Date().getFullYear() - 1).toString(),
       (new Date().getFullYear() - 2).toString(),
     ];
-    let last3Year = this.assets.forEach((asset) => {
-      asset.history?.filter((h) =>
-        last3.includes(h.date.toString().split('-')[0])
-      );
-    });
+    this.asset.history?.filter((h) =>
+      last3.includes(h.date.toString().split('-')[0])
+    );
     let dashboard: CryptoDashboard = this.cryptoDashboard;
-    dashboard.assets = this.assets;
+    dashboard.assets = [this.asset];
     setTimeout(() => {
       this.chart3Y = this.charts.renderCryptoAsset(dashboard);
     }, 200);
