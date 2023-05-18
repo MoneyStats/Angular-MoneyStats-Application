@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
@@ -9,6 +9,8 @@ import { ToastService } from 'src/assets/core/utils/toast.service';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
+  @Input('isCrypto') isCrypto: boolean = false;
+
   constructor(
     public toast: ToastService,
     private screenService: ScreenService

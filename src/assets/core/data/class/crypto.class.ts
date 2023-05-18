@@ -24,10 +24,12 @@ export class Asset {
   identifier?: string;
   name?: string;
   symbol?: string;
+  rank?: number;
   value?: number;
   current_price?: number;
   icon?: string;
   balance?: number;
+  invested?: number;
   performance?: number;
   trend?: number;
   history?: Stats[] = [];

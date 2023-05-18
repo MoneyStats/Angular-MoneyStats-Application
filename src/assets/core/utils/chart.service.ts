@@ -5,8 +5,6 @@ import * as ApexCharts from 'apexcharts';
 import { ApexOptions } from '../data/constant/apex.chart';
 import { CryptoDashboard } from '../data/class/crypto.class';
 
-//declare var ApexCharts: any;
-
 @Injectable({
   providedIn: 'root',
 })
@@ -335,6 +333,7 @@ export class ChartService {
     if (height[0]) {
       h = height[0];
     }
+
     let chartOptions: Partial<ApexOptions> = {
       series: series,
       chart: {
@@ -379,48 +378,4 @@ export class ChartService {
     return chartOptions;
     //chartLine(series, dashboard.statsWalletDays);
   }
-}
-
-// Obsolete
-function chartLine(series: any, data: Array<string>) {
-  var optionChartLine = {
-    series: series,
-    chart: {
-      type: 'area',
-      width: '100%',
-      height: '350px',
-      sparkline: {
-        enabled: true,
-      },
-    },
-    stroke: {
-      width: 2,
-    },
-    colors: [
-      '#6236FF',
-      '#d119d0',
-      '#bb9df7',
-      '#de3454',
-      '#407306',
-      '#9c413c',
-      '#f2ed0a',
-      '#fa5c42',
-      '#57cb54',
-      '#500295',
-      '#f7eedc',
-    ],
-    labels: data,
-    legend: {
-      show: true,
-      position: 'top',
-      horizontalAlign: 'center',
-      floating: false,
-      fontFamily: 'Helvetica, Arial',
-    },
-  };
-  var chartLine = new ApexCharts(
-    document.querySelector('#chart-line'),
-    optionChartLine
-  );
-  chartLine.render();
 }

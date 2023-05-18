@@ -20,6 +20,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { NgChartsModule } from 'ng2-charts';
 import { CryptoDetailsComponent } from './crypto-asset/crypto-details/crypto-details.component';
 import { DetailsOverviewComponent } from './crypto-asset/crypto-details/details-overview/details-overview.component';
+import { TradingviewDataComponent } from './crypto-asset/crypto-details/tradingview-data/tradingview-data.component';
+import { AdvancedGraphComponent } from './crypto-asset/crypto-details/advanced-graph/advanced-graph.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { DetailsOverviewComponent } from './crypto-asset/crypto-details/details-
     CryptoAssetComponent,
     CryptoDetailsComponent,
     DetailsOverviewComponent,
+    TradingviewDataComponent,
+    AdvancedGraphComponent,
   ],
   imports: [
     CryptoRoutingModule,

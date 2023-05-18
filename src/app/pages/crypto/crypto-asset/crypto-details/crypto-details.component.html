@@ -6,7 +6,7 @@
   <!-- App Capsule -->
   <div id="appCapsule" class="mx-auto">
     <div class="row">
-      <div class="title-section col-6">
+      <div class="title-section col-md-6 col-sm-12">
         <h3 class="title">
           <img
             src="{{ asset.icon }}"
@@ -14,17 +14,39 @@
             class="imaged d-inline w30 rounded me-1"
           />{{ asset.name }} ({{ asset.symbol }})
         </h3>
+        <div class="hidden_desktop">
+          <div class="row" style="margin-top: -10px">
+            <div class="col-6">
+              <h5 class="card-text fs-3">
+                {{ asset.value }}
+                {{ cryptoDashboard.currency }}
+              </h5>
+              <p style="margin-top: -15px">
+                {{ asset.balance }} {{ asset.symbol }}
+              </p>
+            </div>
+            <div class="col-6 text-end">
+              <span
+                style="margin-right: 40px; margin-top: 30px"
+                class="badge badge-success"
+              >
+                <ion-icon name="arrow-up-outline"></ion-icon>
+                {{ asset.performance }}%
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="title-section col-6 text-end">
+      <div class="title-section col-6 text-end hidden_mobile">
         <h5 class="card-text fs-3">
           <span style="vertical-align: 3px" class="badge badge-success">
             <ion-icon name="arrow-up-outline"></ion-icon>
-            {{ cryptoDashboard.performance.performance }}%
+            {{ asset.performance }}%
           </span>
-          {{ cryptoDashboard.balance }}
+          {{ asset.value }}
           {{ cryptoDashboard.currency }}
         </h5>
-        <p style="margin-top: -15px">{{ cryptoDashboard.btcBalance }} BTC</p>
+        <p style="margin-top: -15px">{{ asset.balance }} {{ asset.symbol }}</p>
       </div>
     </div>
     <div class="section mt-3">
@@ -43,21 +65,21 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="tab" href="#card" role="tab">
-                Cards
+                TradingView Datas
               </a>
             </li>
-            <li class="nav-item">
+            <li style="display: none" class="nav-item">
               <a
                 class="nav-link"
                 data-bs-toggle="tab"
                 href="#settings"
                 role="tab"
               >
-                Settings
+                Advanced Graph
               </a>
             </li>
           </ul>
-          <div class="tab-content mt-1">
+          <div class="tab-content mt-1 margin-bottom-size">
             <div
               class="tab-pane fade show active"
               id="overview"
@@ -69,30 +91,12 @@
               ></app-details-overview>
             </div>
             <div class="tab-pane fade" id="card" role="tabpanel">
-              <div class="row">
-                <div class="col-md-7">
-                  <!-- Portfolio -->
-                  <div class="section">
-                    <div class="card">
-                      <div class="card-body">
-                        <!-- TradingView Widget BEGIN -->
-                        <div class="tradingview-widget-container">
-                          <div
-                            class="tradingview-widget-container__widget"
-                          ></div>
-                          <div #tradingView style="height: 360px"></div>
-                        </div>
-                        <!-- TradingView Widget END -->
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <app-tradingview-data
+                [assetSymbol]="asset.symbol!"
+              ></app-tradingview-data>
             </div>
             <div class="tab-pane fade" id="settings" role="tabpanel">
-              Vestibulum sed facilisis diam, vel sodales leo. Aenean lacinia,
-              nisi sit amet iaculis maximus, nibh orci iaculis risus, vitae
-              faucibus dui orci quis elit.
+              <app-advanced-graph></app-advanced-graph>
             </div>
           </div>
         </div>

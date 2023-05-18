@@ -63,15 +63,15 @@ export class CryptoDashboardComponent implements OnInit {
     this.cryptoService.getCryptoDashboard().subscribe((data) => {
       this.cryptoDashboard = data.data;
       this.cryptoService.cryptoDashboard = data.data;
-      this.assets = this.cryptoService.getAssetList(
-        this.cryptoDashboard.wallets
-      );
-      console.log(this.assets);
+      this.assets = this.getAssetList(data.data.wallets);
+      this.cryptoService.cryptoDashboard.assets = this.assets;
+      this.cryptoDashboard.assets = this.assets;
       this.cryptoWallet = this.cryptoDashboard.wallets.filter(
         (w) => w.category == 'Crypto'
       );
     });
   }
+
 
   onChange(symbol: string) {
     document.getElementById('selectSymbol')?.remove();
@@ -169,4 +169,46 @@ export class CryptoDashboardComponent implements OnInit {
     //this.selectGraph?.nativeElement.appendChild(script);
   }
   saveWallet(wallet: Wallet) {}
+
+  getAssetList(wallets: Wallet[]): Asset[] {
+    const allAssets: Array<Asset> = [];
+    wallets.forEach((wallet) => {
+      wallet.assets.forEach((asset) => {
+        if (allAssets.find((a) => a.name == asset.name)) {
+          const index = allAssets.indexOf(
+            allAssets.find((a) => a.name == asset.name)!
+          );
+          allAssets[index].balance! += asset.balance!;
+          allAssets[index].value! += asset.value!;
+          allAssets[index].performance! =
+            (allAssets[index].performance! + asset.performance!) / 2;
+
+          allAssets[index].trend! = allAssets[index].trend! + asset.trend!;
+
+          asset.history?.forEach((history) => {
+            let hist = allAssets[index].history!.find(
+              (h) => h.date == history.date
+            )!;
+            allAssets[index].history!.find(
+              (h) => h.date == history.date
+            )!.balance += history.balance;
+            allAssets[index].history!.find(
+              (h) => h.date == history.date
+            )!.trend += history.trend;
+            allAssets[index].history!.find(
+              (h) => h.date == history.date
+            )!.percentage = (hist.percentage + history.percentage) / 2;
+          });
+
+          asset.operations.forEach((o) => {
+            allAssets[index].operations.push(o);
+          });
+          allAssets[index].operations.sort((o) =>
+            o.exitDate != undefined ? o.exitDate : o.entryDate
+          );
+        } else allAssets.push(asset);
+      });
+    });
+    return allAssets;
+  }
 }

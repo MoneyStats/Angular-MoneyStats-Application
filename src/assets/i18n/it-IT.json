@@ -513,7 +513,8 @@
       "title": "Crypto Dashboard",
       "cardRes": {
         "title": "Saldo Totale",
-        "lastUpdate": "Ultimo aggiornameneto"
+        "lastUpdate": "Ultimo aggiornameneto",
+        "opt1": "Aggiungi Asset"
       },
       "performanceCard": {
         "title": "Storico Performance",
@@ -531,7 +532,19 @@
     },
     "asset": {
       "title": "Crypto Assets",
-      "assetList": "Lista Asset"
+      "assetList": "Lista Asset",
+      "assetGraph": "Grafico Asset",
+      "details": {
+        "overview": {
+          "rank": "Rank",
+          "identifier": "Identificativo",
+          "balance": "Saldo",
+          "value": "Saldo Totale in ",
+          "invested": "Saldo Investito",
+          "performance": "Performance dall'inizio",
+          "trend": "Trend dall'inizio"
+        }
+      }
     },
     "cryptoModal": {
       "addAsset": {

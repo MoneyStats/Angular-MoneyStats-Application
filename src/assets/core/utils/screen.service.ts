@@ -30,6 +30,12 @@ export class ScreenService {
       header!.style.display = 'none';
     }
   }
+
+  hideCryptoHeader() {
+    const header2 = document.getElementById('cryptoHeader');
+    header2!.style.display = 'none';
+  }
+
   hideFooter() {
     const footer = document.getElementById('footer');
     footer!.style.display = 'none';

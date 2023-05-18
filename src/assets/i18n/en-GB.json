@@ -533,7 +533,18 @@
     "asset": {
       "title": "Crypto Assets",
       "assetList": "Asset List",
-      "assetGraph": "Asset Graph"
+      "assetGraph": "Asset Graph",
+      "details": {
+        "overview": {
+          "rank": "Rank",
+          "identifier": "Identifier",
+          "balance": "Balance",
+          "value": "Total Balance in ",
+          "invested": "Money Invested",
+          "performance": "Performance since beginning",
+          "trend": "Trend since beginning"
+        }
+      }
     },
     "cryptoModal": {
       "addAsset": {

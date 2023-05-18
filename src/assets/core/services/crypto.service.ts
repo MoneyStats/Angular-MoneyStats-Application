@@ -39,7 +39,7 @@ export class CryptoService {
   }
 
   getAssetList(wallets: Wallet[]): Asset[] {
-    let allAssets: Array<Asset> = [];
+    const allAssets: Array<Asset> = [];
     wallets.forEach((wallet) => {
       wallet.assets.forEach((asset) => {
         if (allAssets.find((a) => a.name == asset.name)) {

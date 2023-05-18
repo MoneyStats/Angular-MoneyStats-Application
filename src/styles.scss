@@ -66,6 +66,10 @@ $darkColor: #121212;
   margin-bottom: 5px;
 }
 
+.margin-bottom-size {
+  margin-bottom: -50px !important;
+}
+
 body:not(.dark-mode) {
   app-loading {
     .overlay {

@@ -29,14 +29,19 @@ export class CryptoAssetComponent implements OnInit {
   ngOnInit(): void {
     this.screenService.hideFooter();
     this.cryptoDashboard = this.cryptoService.cryptoDashboard;
-    this.assets = this.cryptoService.getAssetList(this.cryptoDashboard.wallets);
-    let dashboard: CryptoDashboard = this.cryptoDashboard;
-    dashboard.assets = this.assets;
+    this.assets = this.cryptoDashboard.assets;
+
     setTimeout(() => {
       if (this.cryptoDashboard.wallets) {
         if (this.screenService?.screenWidth! <= 780) {
-          this.chartOptions = this.charts.renderCryptoAsset(dashboard, 200);
-        } else this.chartOptions = this.charts.renderCryptoAsset(dashboard);
+          this.chartOptions = this.charts.renderCryptoAsset(
+            this.cryptoDashboard,
+            200
+          );
+        } else
+          this.chartOptions = this.charts.renderCryptoAsset(
+            this.cryptoDashboard
+          );
       }
     }, 100);
   }
@@ -49,10 +54,8 @@ export class CryptoAssetComponent implements OnInit {
           new Date().getFullYear().toString()
       );
     });
-    let dashboard: CryptoDashboard = this.cryptoDashboard;
-    dashboard.assets = this.assets;
     setTimeout(() => {
-      this.chart1Y = this.charts.renderCryptoAsset(dashboard);
+      this.chart1Y = this.charts.renderCryptoAsset(this.cryptoDashboard);
     }, 200);
   }
 
@@ -67,10 +70,8 @@ export class CryptoAssetComponent implements OnInit {
         last3.includes(h.date.toString().split('-')[0])
       );
     });
-    let dashboard: CryptoDashboard = this.cryptoDashboard;
-    dashboard.assets = this.assets;
     setTimeout(() => {
-      this.chart3Y = this.charts.renderCryptoAsset(dashboard);
+      this.chart3Y = this.charts.renderCryptoAsset(this.cryptoDashboard);
     }, 200);
   }
 }
