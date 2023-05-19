@@ -38,6 +38,10 @@ export class CryptoService {
     return this.http.get<any>(environment.getCryptoPriceMock);
   }
 
+  getCryptoResume(): Observable<ResponseModel> {
+    return this.http.get<any>(environment.getCryptoResumeMock);
+  }
+
   getAssetList(wallets: Wallet[]): Asset[] {
     const allAssets: Array<Asset> = [];
     wallets.forEach((wallet) => {

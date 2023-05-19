@@ -45,7 +45,6 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.screenService.setupHeader();
-    this.screenService.hideCryptoHeader();
     this.screenService.showFooter();
     this.screenService.goToSettings();
     this.user = this.userService.user;

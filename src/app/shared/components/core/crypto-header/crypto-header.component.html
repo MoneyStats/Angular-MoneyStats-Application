@@ -6,13 +6,14 @@
       <ion-icon name="arrow-back-outline"></ion-icon>
     </a>
   </div>
-  <div class="pageTitle">{{ title }}</div>
+  <div routerLink="/crypto/dashboard" class="pageTitle clickable">
+    {{ title }}
+  </div>
   <div *ngIf="isMenuActive" class="right">
     <div class="menu hidden_mobile">
       <a routerLink="/crypto/asset" class="d-inline me-2 title-page">Assets</a>
-      <p class="d-inline me-2">Operations</p>
-      <p class="d-inline me-2">Menu 3</p>
-      <p class="d-inline me-2">Menu 4</p>
+      <p aria-disabled="true" class="d-inline me-2">Operations</p>
+      <a routerLink="/crypto/resume" class="d-inline me-2 title-page">Resume</a>
     </div>
     <div class="dropdown">
       <a href="#" class="headerButton" data-bs-toggle="dropdown">
@@ -27,12 +28,12 @@
         <h6 class="dropdown-header">
           {{ "dashboard.sidebar.dropdown.options" | translate }}
         </h6>
-        <a class="dropdown-item" href="#" routerLink="settings">
+        <a class="dropdown-item" routerLink="/settings">
           {{ "dashboard.sidebar.dropdown.settings" | translate }}</a
         >
-        <a class="dropdown-item" href="#">
+        <!--<a class="dropdown-item" href="#">
           {{ "dashboard.sidebar.dropdown.version" | translate }}</a
-        >
+        >-->
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" (click)="logout()">{{
           "dashboard.sidebar.dropdown.logout" | translate

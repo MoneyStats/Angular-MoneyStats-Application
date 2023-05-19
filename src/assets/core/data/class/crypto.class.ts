@@ -16,6 +16,7 @@ export class CryptoDashboard {
 export class TradingStatus {
   balance: number = 0;
   performance: number = 0;
+  trend: number = 0;
   lastUpdate: Date = new Date();
 }
 

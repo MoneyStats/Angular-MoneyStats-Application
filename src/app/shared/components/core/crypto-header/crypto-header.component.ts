@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { UserService } from 'src/assets/core/services/user.service';
+import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
   selector: 'app-crypto-header',
@@ -17,7 +18,8 @@ export class CryptoHeaderComponent implements OnInit {
   constructor(
     private location: Location,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+
   ) {
     router.events.subscribe((data: any) => {
       if (data.url == '/crypto/requirements') {

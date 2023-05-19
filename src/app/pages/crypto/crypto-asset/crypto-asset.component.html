@@ -6,7 +6,121 @@
   <!-- App Capsule -->
   <div id="appCapsule" class="mx-auto">
     <div class="section hidden_mobile mt-2">
-      <div class="card">
+      <div
+        *ngIf="cryptoDashboard.statsAssetsDays"
+        class="transactions row"
+        style="
+          margin-top: -15px;
+          margin-left: 5px !important;
+          margin-right: 5px !important;
+        "
+      >
+        <div class="col-md-6 mt-2">
+          <!-- item -->
+          <a routerLink="/crypto/asset" class="item">
+            <div class="detail">
+              <div class="col-auto" style="padding-right: 20px">
+                <div
+                  class="icon icon-shape bg-danger text-white rounded-circle shadow"
+                >
+                  <i class="fas fa-chart-bar"></i>
+                </div>
+              </div>
+              <div>
+                <strong>{{ "stats.total" | translate }}</strong>
+                <p class="sincetot">
+                  {{ "stats.since" | translate }}
+                  {{ cryptoDashboard.lastUpdate | date : "dd MMM y" }}
+                </p>
+              </div>
+            </div>
+            <div class="right float-end">
+              <div class="price" id="totale">
+                {{ cryptoDashboard.currency }} {{ cryptoDashboard.balance }}
+              </div>
+              <div class="price performancetot float-end">
+                <span
+                  class="{{
+                    cryptoDashboard.performance.performance == 0
+                      ? 'text-warning'
+                      : cryptoDashboard.performance.performance > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  }} mr-2"
+                  ><i
+                    class="fa {{
+                      cryptoDashboard.performance.performance > 0
+                        ? 'fa-arrow-up'
+                        : 'fa-arrow-down'
+                    }}"
+                  ></i>
+                  {{ cryptoDashboard.performance.performance }}%</span
+                >
+              </div>
+            </div>
+          </a>
+          <!-- * item -->
+        </div>
+        <div class="col-md-6 mt-2">
+          <!-- item -->
+          <a routerLink="/crypto/asset" class="item">
+            <div class="detail">
+              <div class="col-auto" style="padding-right: 20px">
+                <div
+                  class="icon icon-shape bg-warning text-white rounded-circle shadow"
+                >
+                  <i class="fas fa-poll"></i>
+                </div>
+              </div>
+              <div>
+                <strong>{{ "stats.performance" | translate }}</strong>
+                <p class="sincetot">
+                  {{ "stats.since" | translate }}
+                  {{
+                    cryptoDashboard.holdingLong.lastUpdate | date : "dd MMM y"
+                  }}
+                </p>
+              </div>
+            </div>
+            <div class="right float-end">
+              <div
+                class="price {{
+                  cryptoDashboard.holdingLong.balance == 0
+                    ? 'text-warning'
+                    : cryptoDashboard.holdingLong.balance > 0
+                    ? 'text-success'
+                    : 'text-danger'
+                }}"
+                id="pil"
+              >
+                {{ cryptoDashboard.currency }}
+                {{ cryptoDashboard.holdingLong.balance }}
+              </div>
+              <div class="price float-end performancetot">
+                <span
+                  class="{{
+                    cryptoDashboard.holdingLong.performance == 0
+                      ? 'text-warning'
+                      : cryptoDashboard.holdingLong.performance > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  }} mr-2"
+                  ><i
+                    class="fa {{
+                      cryptoDashboard.holdingLong.performance > 0
+                        ? 'fa-arrow-up'
+                        : 'fa-arrow-down'
+                    }}"
+                  ></i>
+                  {{ cryptoDashboard.holdingLong.performance }}%</span
+                >
+              </div>
+            </div>
+          </a>
+          <!-- * item -->
+        </div>
+      </div>
+      <!--<div class="card">
         <div class="card-body">
           <div class="row">
             <div
@@ -64,7 +178,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
     </div>
     <div class="row margin-bottom-size">
       <div class="col-md-7">

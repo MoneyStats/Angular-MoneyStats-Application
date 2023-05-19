@@ -1,4 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
@@ -13,14 +20,16 @@ export class FooterComponent implements OnInit {
 
   constructor(
     public toast: ToastService,
-    private screenService: ScreenService
-  ) {}
+    private screenService: ScreenService,
+  ) {
+  }
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   availableSoon() {
     this.toast.availableSoon();

@@ -1,0 +1,58 @@
+.title-section {
+  margin-left: 30px;
+  margin-top: 10px;
+  margin-right: -85px;
+  margin-bottom: -60px;
+}
+
+@media screen and (max-width: 780px) {
+  .title-section {
+    margin-left: 20px;
+    margin-top: 10px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .input-wrapper {
+    max-width: 90% !important;
+    margin-left: 8% !important;
+  }
+  .transactions {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+  }
+  #appCapsule {
+    overflow-x: hidden;
+  }
+}
+.transparent {
+  background-color: transparent !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+.addWallet {
+  padding-right: 30px;
+}
+
+.icon-shape {
+  display: inline-flex;
+  padding: 12px;
+  text-align: center;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+}
+.icon {
+  width: 3rem;
+  height: 3rem;
+}
+
+.round-img {
+  border-radius: 50%;
+}
+
+.transactions {
+  margin: 15px;
+}
+.item {
+  border-radius: 20px;
+}

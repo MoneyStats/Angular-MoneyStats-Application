@@ -8,6 +8,7 @@ export class ScreenService {
   screenHeight?: number;
   screenWidth?: number;
   environment = environment;
+  isCrypto: boolean = false;
   constructor() {}
 
   @HostListener('window:resize', ['$event'])
@@ -29,11 +30,6 @@ export class ScreenService {
       const header = document.getElementById('header');
       header!.style.display = 'none';
     }
-  }
-
-  hideCryptoHeader() {
-    const header2 = document.getElementById('cryptoHeader');
-    header2!.style.display = 'none';
   }
 
   hideFooter() {
