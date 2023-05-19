@@ -62,14 +62,25 @@
                   }}</a>
                 </div>
                 <div
-                  style="position: absolute; right: 0px; border-left: solid 1px"
+                  style="
+                    position: absolute;
+                    right: 0px;
+                    border-left: solid 1px;
+                    z-index: 99;
+                    pointer-events: visible;
+                    cursor: pointer;
+                  "
                   class="col-6"
                 >
                   <ion-icon
                     class="icon-size icon-color"
                     name="albums-outline"
                   ></ion-icon>
-                  <a style="vertical-align: -1px">View Stats</a>
+                  <a
+                    routerLink="/crypto/asset"
+                    style="vertical-align: -1px; color: #958d9e"
+                    >View Assets</a
+                  >
                 </div>
               </div>
             </div>
@@ -100,9 +111,9 @@
               <div class="user-card">
                 <div class="icon-wrapper bg-success">
                   <!--<ion-icon name="logo-electron"></ion-icon>-->
-                  <ion-icon name="server"></ion-icon>
+                  <ion-icon name="swap-horizontal"></ion-icon>
                 </div>
-                <strong class="title_text">Assets</strong>
+                <strong class="title_text">Operations</strong>
               </div>
             </a>
           </div>
@@ -117,12 +128,12 @@
             </a>
           </div>
           <div class="col-3" style="margin-left: -1px">
-            <a href="#" class="inline-block quick-action">
+            <a routerLink="/settings" class="inline-block quick-action">
               <div class="user-card">
-                <div class="icon-wrapper bg-primary">
-                  <ion-icon name="qr-code-outline"></ion-icon>
+                <div class="icon-wrapper" style="background: #337ab7">
+                  <ion-icon name="settings" style="color: aliceblue"></ion-icon>
                 </div>
-                <strong>Quick 4</strong>
+                <strong>Settings</strong>
               </div>
             </a>
           </div>
