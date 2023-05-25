@@ -9,13 +9,216 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content modal-round mx-auto">
       <div class="modal-header">
-        <h5 class="modal-title">
-          {{ "crypto.cryptoModal.addAsset.title" | translate }}
-        </h5>
+        <h5 class="modal-title">Add Operations</h5>
       </div>
       <div class="modal-body">
         <form #f="ngForm" type="submit">
-          <div class="action-sheet-content"></div>
+          <div class="action-sheet-content">
+            <div *ngIf="!isAddStatsSelected" class="card-title">
+              <h2 class="modal-title d-inline" style="vertical-align: -4px">
+                Add Operations
+              </h2>
+              <p>
+                <small>Select what do you want to do</small>
+              </p>
+            </div>
+            <div *ngIf="isAddStatsSelected" class="card-title">
+              <h2 class="modal-title d-inline" style="vertical-align: -4px">
+                Add Stats
+              </h2>
+              <p>
+                <small
+                  >Add new stats for the current asset in all your
+                  wallets</small
+                >
+              </p>
+            </div>
+            <div
+              *ngIf="!isAddStatsSelected"
+              class="addWallet text-end hidden_mobile"
+            >
+              <button
+                (click)="isAddStatsSelected = true"
+                type="button"
+                class="btn btn-primary me-1 mb-1"
+              >
+                Add Stats
+              </button>
+            </div>
+            <!-- Add Stats -->
+            <div *ngIf="isAddStatsSelected" class="transactions row">
+              <hr />
+              <div *ngFor="let asset of assets; let i = index">
+                <div *ngIf="i == currentIndex">
+                  <div
+                    class="card-body"
+                    style="margin-top: -30px; margin-bottom: -20px"
+                  >
+                    <div class="row">
+                      <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-0">
+                          {{ asset.name }} ({{ asset.symbol }})
+                        </h5>
+                        <span class="h2 font-weight-bold mb-0" id="tot1"
+                          >{{ currency }} {{ asset.value }}</span
+                        >
+                        <div class="input-info">
+                          <small>
+                            {{ asset.name }}
+                            {{ "insertStats.balance" | translate }}
+                            {{ asset.balance }}
+                            {{ asset.symbol }}</small
+                          >
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <img
+                          src="{{ asset?.icon }}"
+                          alt="img"
+                          class="image-block imaged round-img"
+                        />
+                      </div>
+                    </div>
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                      <span class="performancesingle0 float-end"
+                        ><span
+                          class="{{
+                            asset.history![asset.history!.length - 1]
+                              .percentage == 0
+                              ? 'text-warning'
+                              : asset.history![asset.history!.length - 1]
+                                  .percentage > 0
+                              ? 'text-success'
+                              : 'text-danger'
+                          }} mr-2"
+                          ><i
+                            class="fa {{
+                              asset.history![asset.history!.length - 1]
+                                .percentage > 0
+                                ? 'fa-arrow-up'
+                                : 'fa-arrow-down'
+                            }}"
+                          ></i
+                          >{{
+                            asset.history![asset.history!.length - 1]
+                              .percentage == 1000
+                              ? " +"
+                              : ""
+                          }}
+                          {{
+                            asset.history![asset.history!.length - 1]
+                              .percentage
+                          }}%</span
+                        ></span
+                      >
+                      <span class="text-nowrap sincetot"
+                        >{{ "stats.since" | translate }}
+                        {{
+                          asset.history![asset.history!.length - 1].date
+                            | date : "dd MMM y"
+                        }}</span
+                      >
+                    </p>
+                    <hr />
+                  </div>
+                  <div class="row" style="margin-top: -45px">
+                    <div
+                      *ngFor="let wallet of filterWallets(wallets, asset.name!)"
+                      class="card-body col-md-4"
+                    >
+                      <div class="row">
+                        <div class="col">
+                          <h5 class="card-title text-uppercase text-muted mb-0">
+                            {{ wallet.name }} ({{ wallet.category }})
+                          </h5>
+                          <div class="form-group boxed">
+                            <div class="input-wrapper">
+                              <input
+                                name="balance"
+                                [(ngModel)]="wallet.newBalance"
+                                #balance="ngModel"
+                                type="number"
+                                class="form-control"
+                                id="text4b"
+                                placeholder="{{
+                                  'insertStats.newBal' | translate
+                                }}"
+                                required
+                              />
+                              <i class="clear-input">
+                                <ion-icon
+                                  name="close-circle"
+                                  role="img"
+                                  class="md hydrated"
+                                  aria-label="close circle"
+                                ></ion-icon>
+                              </i>
+                            </div>
+                            <div class="input-info">
+                              {{ wallet.name }}
+                              {{ "insertStats.balance" | translate }}
+                              {{ wallet.balance }}
+                              {{ currency }}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-auto">
+                          <img
+                            src="{{ wallet?.img }}"
+                            alt="img"
+                            class="image-block imaged round-img"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Riepilogo Add Stats -->
+              <!-- End Riepilogo Add Stats -->
+              <!-- Bottoni Add Stats Desktop -->
+              <div class="addWallet text-end hidden_mobile">
+                <button
+                  *ngIf="currentIndex != assets.length"
+                  (click)="changeAsset()"
+                  type="button"
+                  class="btn btn-primary me-1 mb-1"
+                >
+                  Next Asset
+                </button>
+              </div>
+              <!-- End Bottoni Add Stats Desktop -->
+            </div>
+            <!-- End Add Stats -->
+
+            <!-- Bottoni Desktop -->
+            <div class="hidden_desktop">
+              <div *ngIf="!isAddStatsSelected" class="row">
+                <div class="col-6">
+                  <div class="form-group basic">
+                    <button
+                      (click)="isAddStatsSelected = true"
+                      type="button"
+                      class="btn btn-primary btn-block btn-lg"
+                    >
+                      Add Stats
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="isAddStatsSelected" class="form-group basic">
+                <button
+                  *ngIf="currentIndex != assets.length"
+                  (click)="changeAsset()"
+                  type="button"
+                  class="btn btn-primary btn-block btn-lg"
+                >
+                  Next Asset
+                </button>
+              </div>
+            </div>
+            <!-- End Bottoni Desktop -->
+          </div>
         </form>
       </div>
     </div>
