@@ -37,8 +37,11 @@ export class ScreenService {
     footer!.style.display = 'none';
   }
   showFooter() {
-    const footer = document.getElementById('footer');
-    footer!.style.display = 'flex';
+    this.getScreenSize();
+    if (this.screenWidth! <= 780) {
+      const footer = document.getElementById('footer');
+      footer!.style.display = 'flex';
+    } else this.hideFooter();
   }
 
   goToDashboard() {

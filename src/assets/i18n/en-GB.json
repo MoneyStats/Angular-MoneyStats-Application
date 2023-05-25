@@ -477,6 +477,13 @@
             "version_title": "MoneyStats V1.0.0",
             "version": "V1.0.0",
             "changelog": "&#183; Initial release"
+          },
+          {
+            "modalId": "v2",
+            "version_date": "2023-09-01",
+            "version_title": "MoneyStats V2.0.0",
+            "version": "V2.0.0",
+            "changelog": "&#183; Added new Crypto Section <br> &#183; Updated Add and Edit Wallets"
           }
         ]
       }

@@ -5,6 +5,7 @@ import {
 } from 'src/assets/core/data/class/crypto.class';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
+import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
   selector: 'app-crypto-resume',
@@ -17,9 +18,13 @@ export class CryptoResumeComponent implements OnInit {
   resume: Map<string, CryptoDashboard> = new Map<string, CryptoDashboard>();
   years: Array<string> = [];
 
-  constructor(private cryptoService: CryptoService) {}
+  constructor(
+    private cryptoService: CryptoService,
+    private screenService: ScreenService
+  ) {}
 
   ngOnInit(): void {
+    this.screenService.hideFooter();
     this.cryptoService.getCryptoResume().subscribe((res) => {
       this.resume = new Map<string, CryptoDashboard>(Object.entries(res.data));
       this.years = Array.from(this.resume.keys());

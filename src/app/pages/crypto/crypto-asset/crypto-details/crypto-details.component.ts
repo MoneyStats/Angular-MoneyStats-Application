@@ -5,6 +5,7 @@ import {
   CryptoDashboard,
 } from 'src/assets/core/data/class/crypto.class';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
+import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
   selector: 'app-crypto-details',
@@ -17,10 +18,12 @@ export class CryptoDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private cryptoService: CryptoService
+    private cryptoService: CryptoService,
+    private screenService: ScreenService
   ) {}
 
   ngOnInit(): void {
+    this.screenService.hideFooter();
     this.cryptoDashboard = this.cryptoService.cryptoDashboard;
     let assets = this.cryptoDashboard.assets;
     this.route.params.subscribe((a: any) => {

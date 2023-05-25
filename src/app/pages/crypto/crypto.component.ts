@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { AppService } from 'src/assets/core/services/app.service';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 
@@ -20,6 +21,10 @@ export class CryptoComponent implements OnInit {
         this.isFooterActive = false;
       } else this.isFooterActive = true;
     });
+  }
+
+  public get modalConstant(): typeof ModalConstant {
+    return ModalConstant;
   }
 
   ngOnInit(): void {

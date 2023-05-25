@@ -27,7 +27,7 @@ export class CryptoAssetComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //this.screenService.hideFooter();
+    this.screenService.hideFooter();
     this.cryptoDashboard = this.cryptoService.cryptoDashboard;
     this.assets = this.cryptoDashboard.assets;
 

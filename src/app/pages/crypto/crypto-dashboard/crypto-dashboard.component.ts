@@ -49,7 +49,7 @@ export class CryptoDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDashboard();
-    this.screenService.setupHeader();
+    //this.screenService.setupHeader();
     this.screenService.showFooter();
   }
 
@@ -71,7 +71,6 @@ export class CryptoDashboardComponent implements OnInit {
       );
     });
   }
-
 
   onChange(symbol: string) {
     document.getElementById('selectSymbol')?.remove();
