@@ -23,6 +23,7 @@ import { DetailsOverviewComponent } from './crypto-asset/crypto-details/details-
 import { TradingviewDataComponent } from './crypto-asset/crypto-details/tradingview-data/tradingview-data.component';
 import { AdvancedGraphComponent } from './crypto-asset/crypto-details/advanced-graph/advanced-graph.component';
 import { CryptoResumeComponent } from './crypto-resume/crypto-resume.component';
+import { ResumeAssetsComponent } from './crypto-resume/resume-assets/resume-assets.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { CryptoResumeComponent } from './crypto-resume/crypto-resume.component';
     TradingviewDataComponent,
     AdvancedGraphComponent,
     CryptoResumeComponent,
+    ResumeAssetsComponent,
   ],
   imports: [
     CryptoRoutingModule,

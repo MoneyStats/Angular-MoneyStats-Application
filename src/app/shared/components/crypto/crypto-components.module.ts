@@ -9,10 +9,11 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from 'src/environments/environment';
 import { RouterModule } from '@angular/router';
 import { AddAssetModalComponent } from './modal/add-asset-modal/add-asset-modal.component';
+import { OperationsModalComponent } from './modal/operations-modal/operations-modal.component';
 
 @NgModule({
-  declarations: [AddAssetModalComponent],
-  exports: [AddAssetModalComponent],
+  declarations: [AddAssetModalComponent, OperationsModalComponent],
+  exports: [AddAssetModalComponent, OperationsModalComponent],
   imports: [
     RouterModule,
     CommonModule,

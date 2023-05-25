@@ -126,7 +126,7 @@
           </li>
           <li>
             <div class="text-muted">
-              {{ "crypto.asset.details.overview.trend" | translate }}
+              {{ "crypto.asset.details.overview.performance" | translate }}
             </div>
             <strong
               ><span
@@ -147,11 +147,11 @@
           </li>
           <li>
             <div class="text-muted">
-              {{ "crypto.asset.details.overview.performance" | translate }}
+              {{ "crypto.asset.details.overview.trend" | translate }}
             </div>
             <strong
               class="{{ asset.trend! > 0 ? 'text-success' : 'text-danger' }}"
-              >{{ asset.trend }}</strong
+              >{{ cryptoDashboard.currency }} {{ asset.trend }}</strong
             >
           </li>
         </ul>
@@ -282,6 +282,7 @@
                   >
                 </div>
               </div>
+              <hr />
               <div class="card section-3">
                 <ul
                   class="listview flush transparent no-line image-listview detailed-list"

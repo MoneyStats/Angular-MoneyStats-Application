@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { UserService } from 'src/assets/core/services/user.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
+import { ModalConstant } from 'src/assets/core/data/constant/constant';
 
 @Component({
   selector: 'app-crypto-header',
@@ -26,6 +27,10 @@ export class CryptoHeaderComponent implements OnInit {
         this.isMenuActive = false;
       } else this.isMenuActive = true;
     });
+  }
+
+  public get modalConstant(): typeof ModalConstant {
+    return ModalConstant;
   }
 
   ngOnInit(): void {}

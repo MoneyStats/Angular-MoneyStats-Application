@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CryptoDashboard } from 'src/assets/core/data/class/crypto.class';
+import {
+  Asset,
+  CryptoDashboard,
+} from 'src/assets/core/data/class/crypto.class';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
 
@@ -9,12 +12,10 @@ import { CryptoService } from 'src/assets/core/services/crypto.service';
   styleUrls: ['./crypto-resume.component.scss'],
 })
 export class CryptoResumeComponent implements OnInit {
-  wallets: Wallet[] = [];
+  assets: Asset[] = [];
   resumeData: CryptoDashboard = new CryptoDashboard();
   resume: Map<string, CryptoDashboard> = new Map<string, CryptoDashboard>();
   years: Array<string> = [];
-
-  tableBalance: Array<any> = [];
 
   constructor(private cryptoService: CryptoService) {}
 
@@ -33,6 +34,6 @@ export class CryptoResumeComponent implements OnInit {
 
   updateData(year: string) {
     this.resumeData = this.resume.get(year)!;
-    this.wallets = this.resumeData.wallets;
+    this.assets = this.resumeData.assets;
   }
 }

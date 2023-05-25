@@ -1,4 +1,5 @@
 import { Stats, Wallet } from './dashboard.class';
+import { GenericModel } from './generic.class';
 
 export class CryptoDashboard {
   balance: number = 0;
@@ -20,8 +21,7 @@ export class TradingStatus {
   lastUpdate: Date = new Date();
 }
 
-export class Asset {
-  id?: number;
+export class Asset extends GenericModel {
   identifier?: string;
   name?: string;
   symbol?: string;

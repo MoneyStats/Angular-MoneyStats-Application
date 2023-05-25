@@ -105,7 +105,8 @@
           </div>
           <div class="col-3" style="margin-left: -1px">
             <a
-              routerLink="/crypto/asset"
+              data-bs-toggle="modal"
+              attr.data-bs-target="#{{ modalConstant.ADDOPERATIONS }}"
               class="inline-block quick-action clickable"
             >
               <div class="user-card">
@@ -471,3 +472,6 @@
   [modalId]="modalConstant.ADDASSET"
   [wallets]="cryptoWallet!"
 ></app-add-asset-modal>
+<app-operations-modal
+  [modalId]="modalConstant.ADDOPERATIONS"
+></app-operations-modal>

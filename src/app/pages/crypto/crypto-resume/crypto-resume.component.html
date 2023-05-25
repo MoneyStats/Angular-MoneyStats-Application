@@ -1,6 +1,6 @@
 <div class="mx-auto section-width">
   <app-crypto-header
-    title="{{ 'crypto.asset.title' | translate }}"
+    title="{{ 'crypto.resume.title' | translate }}"
   ></app-crypto-header>
 
   <!-- App Capsule -->
@@ -8,7 +8,7 @@
     <div class="row" style="margin-top: 10px; margin-bottom: -60px">
       <div class="col-md-6">
         <div class="title-section">
-          <h2 class="title">Crypto Resume</h2>
+          <h2 class="title">{{ "crypto.resume.title" | translate }}</h2>
         </div>
       </div>
       <div class="addWallet col-md-6">
@@ -41,203 +41,26 @@
             href="#overview"
             role="tab"
           >
-            Holding
+            {{ "crypto.resume.tab.tab1" | translate }}
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" data-bs-toggle="tab" href="#card" role="tab">
-            Trading
+            {{ "crypto.resume.tab.tab2" | translate }}
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" data-bs-toggle="tab" href="#settings" role="tab">
-            Investments
+            {{ "crypto.resume.tab.tab3" | translate }}
           </a>
         </li>
       </ul>
       <div class="tab-content mt-1 margin-bottom-size">
         <div class="tab-pane fade show active" id="overview" role="tabpanel">
-          <div *ngIf="resumeData.statsAssetsDays" class="transactions row">
-            <div class="col-md-6 mt-2">
-              <!-- item -->
-              <a routerLink="/crypto/asset" class="item">
-                <div class="detail">
-                  <div class="col-auto" style="padding-right: 20px">
-                    <div
-                      class="icon icon-shape bg-danger text-white rounded-circle shadow"
-                    >
-                      <i class="fas fa-chart-bar"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <strong>{{ "stats.total" | translate }}</strong>
-                    <p class="sincetot">
-                      {{ "stats.since" | translate }}
-                      {{ resumeData.lastUpdate | date : "dd MMM y" }}
-                    </p>
-                  </div>
-                </div>
-                <div class="right float-end">
-                  <div class="price" id="totale">
-                    {{ resumeData.currency }} {{ resumeData.balance }}
-                  </div>
-                  <div class="price performancetot float-end">
-                    <span
-                      class="{{
-                        resumeData.performance.performance == 0
-                          ? 'text-warning'
-                          : resumeData.performance.performance > 0
-                          ? 'text-success'
-                          : 'text-danger'
-                      }} mr-2"
-                      ><i
-                        class="fa {{
-                          resumeData.performance.performance > 0
-                            ? 'fa-arrow-up'
-                            : 'fa-arrow-down'
-                        }}"
-                      ></i>
-                      {{ resumeData.performance.performance }}%</span
-                    >
-                  </div>
-                </div>
-              </a>
-              <!-- * item -->
-            </div>
-            <div class="col-md-6 mt-2">
-              <!-- item -->
-              <a routerLink="/crypto/asset" class="item">
-                <div class="detail">
-                  <div class="col-auto" style="padding-right: 20px">
-                    <div
-                      class="icon icon-shape bg-warning text-white rounded-circle shadow"
-                    >
-                      <i class="fas fa-poll"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <strong>{{ "stats.performance" | translate }}</strong>
-                    <p class="sincetot">
-                      {{ "stats.since" | translate }}
-                      {{
-                        resumeData.holdingLong.lastUpdate | date : "dd MMM y"
-                      }}
-                    </p>
-                  </div>
-                </div>
-                <div class="right float-end">
-                  <div
-                    class="price {{
-                      resumeData.holdingLong.balance == 0
-                        ? 'text-warning'
-                        : resumeData.holdingLong.balance > 0
-                        ? 'text-success'
-                        : 'text-danger'
-                    }}"
-                    id="pil"
-                  >
-                    {{ resumeData.currency }}
-                    {{ resumeData.holdingLong.balance }}
-                  </div>
-                  <div class="price float-end performancetot">
-                    <span
-                      class="{{
-                        resumeData.holdingLong.performance == 0
-                          ? 'text-warning'
-                          : resumeData.holdingLong.performance > 0
-                          ? 'text-success'
-                          : 'text-danger'
-                      }} mr-2"
-                      ><i
-                        class="fa {{
-                          resumeData.holdingLong.performance > 0
-                            ? 'fa-arrow-up'
-                            : 'fa-arrow-down'
-                        }}"
-                      ></i>
-                      {{ resumeData.holdingLong.performance }}%</span
-                    >
-                  </div>
-                </div>
-              </a>
-              <!-- * item -->
-            </div>
-          </div>
-          <!-- App Capsule -->
-          <div class="section mt-2 col-xl-12">
-            <div class="section-title">
-              {{ "stats.data.table" | translate }}
-            </div>
-            <div *ngIf="resumeData.statsAssetsDays" class="card">
-              <div class="table-responsive">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">
-                        {{ "stats.data.table_date" | translate }}
-                      </th>
-                      <th
-                        scope="col"
-                        class="text-center"
-                        *ngFor="let wallet of resumeData.assets"
-                      >
-                        {{ wallet.name }}
-                      </th>
-                      <th scope="col" class="text-end">
-                        {{ "stats.data.table_balance" | translate }}
-                      </th>
-                      <th scope="col" class="text-end">
-                        {{ "stats.data.table_trend" | translate }}
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let balances of tableBalance; let i = index">
-                      <th scope="row">
-                        {{
-                          balances[balances.length - 2].date | date : "d MMM y"
-                        }}
-                      </th>
-                      <td
-                        class="{{
-                          balances.index != y
-                            ? balance.percentage === 0
-                              ? 'text-warning'
-                              : balance.percentage > 0
-                              ? 'text-success'
-                              : 'text-danger'
-                            : ''
-                        }} {{
-                          balances.index - 1 === y || balances.index === y
-                            ? 'text-end'
-                            : 'text-center'
-                        }}
-                {{
-                          balances.index === y
-                            ? balance.balance === 0
-                              ? 'text-warning'
-                              : balance.balance > 0
-                              ? 'text-success'
-                              : 'text-danger'
-                            : ''
-                        }}"
-                        *ngFor="let balance of balances; let y = index"
-                      >
-                        {{ resumeData.currency }} {{ balance.balance }}
-                        <span *ngIf="balances.index != y"
-                          >({{
-                            balance.percentage >= 1000
-                              ? "+1000"
-                              : balance.percentage
-                          }}%)</span
-                        >
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+          <app-resume-assets
+            *ngIf="assets && assets.length"
+            [resumeData]="resumeData"
+          ></app-resume-assets>
         </div>
         <div class="tab-pane fade" id="card" role="tabpanel">
           <app-tradingview-data></app-tradingview-data>

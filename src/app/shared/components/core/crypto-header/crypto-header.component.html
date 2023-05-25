@@ -12,7 +12,14 @@
   <div *ngIf="isMenuActive" class="right">
     <div class="menu hidden_mobile">
       <a routerLink="/crypto/asset" class="d-inline me-2 title-page">Assets</a>
-      <p aria-disabled="true" class="d-inline me-2">Operations</p>
+      <a
+        data-bs-toggle="modal"
+        attr.data-bs-target="#{{ modalConstant.ADDOPERATIONS }}"
+        aria-disabled="true"
+        class="d-inline me-2 title-page clickable"
+      >
+        Operations
+      </a>
       <a routerLink="/crypto/resume" class="d-inline me-2 title-page">Resume</a>
     </div>
     <div class="dropdown">

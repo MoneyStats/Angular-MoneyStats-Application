@@ -546,6 +546,17 @@
         }
       }
     },
+    "resume": {
+      "title": "Crypto Resume",
+      "tab": {
+        "tab1": "Holding",
+        "tab2": "Trading",
+        "tab3": "Investments"
+      },
+      "assetList": "Current Asset",
+      "graphAsset": "Performance",
+      "tableAsset": "Resume performance of the year"
+    },
     "cryptoModal": {
       "addAsset": {
         "title": "Import an Asset",

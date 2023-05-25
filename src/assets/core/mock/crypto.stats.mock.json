@@ -30,6 +30,448 @@
         "performance": 10.53,
         "lastUpdate": "2023-05-01"
       },
+      "assets": [
+        {
+          "identifier": "bitcoin",
+          "name": "Bitcoin",
+          "symbol": "BTC",
+          "rank": 1,
+          "value": 10000,
+          "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/800px-Bitcoin.svg.png",
+          "balance": 0.5,
+          "invested": 1000,
+          "performance": 10,
+          "trend": 100,
+          "history": [
+            {
+              "id": 1,
+              "creationDate": "2023-02-21T15:19:14",
+              "updateDate": "2023-02-21T15:19:14",
+              "date": "2023-01-01",
+              "balance": 10.0,
+              "percentage": 999900.0,
+              "trend": 10.0
+            },
+            {
+              "id": 7,
+              "creationDate": "2023-02-21T15:20:35",
+              "updateDate": "2023-02-21T15:20:35",
+              "date": "2023-02-01",
+              "balance": 21.4,
+              "percentage": 114.0,
+              "trend": 11.4
+            },
+            {
+              "id": 13,
+              "creationDate": "2023-02-21T15:21:10",
+              "updateDate": "2023-02-21T15:21:10",
+              "date": "2023-03-01",
+              "balance": 20.2,
+              "percentage": -5.61,
+              "trend": -1.2
+            },
+            {
+              "id": 19,
+              "creationDate": "2023-02-21T15:21:44",
+              "updateDate": "2023-02-21T15:21:44",
+              "date": "2023-04-01",
+              "balance": 25.4,
+              "percentage": 25.74,
+              "trend": 5.2
+            },
+            {
+              "id": 25,
+              "creationDate": "2023-02-21T15:22:30",
+              "updateDate": "2023-02-21T15:22:30",
+              "date": "2023-05-01",
+              "balance": 50.2,
+              "percentage": 97.64,
+              "trend": 24.8
+            }
+          ],
+          "operations": [
+            {
+              "type": "BUY",
+              "status": "CLOSED",
+              "entryDate": "2023-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2023-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            },
+            {
+              "type": "BUY",
+              "status": "PARTIALLY_CLOSED",
+              "entryDate": "2023-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2023-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            },
+            {
+              "type": "BUY",
+              "status": "PARTIALLY_CLOSED",
+              "entryDate": "2023-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2023-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            }
+          ]
+        },
+        {
+          "identifier": "ethereum",
+          "name": "Ethereum",
+          "symbol": "ETH",
+          "value": 13585,
+          "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Ethereum_logo_2014.svg/628px-Ethereum_logo_2014.svg.png",
+          "balance": 2.2659379,
+          "invested": 1000,
+          "performance": 10.34,
+          "history": [
+            {
+              "id": 1,
+              "creationDate": "2023-02-21T15:19:14",
+              "updateDate": "2023-02-21T15:19:14",
+              "date": "2023-01-01",
+              "balance": 10.0,
+              "percentage": 999900.0,
+              "trend": 10.0
+            },
+            {
+              "id": 7,
+              "creationDate": "2023-02-21T15:20:35",
+              "updateDate": "2023-02-21T15:20:35",
+              "date": "2023-02-01",
+              "balance": 21.4,
+              "percentage": 114.0,
+              "trend": 11.4
+            },
+            {
+              "id": 13,
+              "creationDate": "2023-02-21T15:21:10",
+              "updateDate": "2023-02-21T15:21:10",
+              "date": "2023-03-01",
+              "balance": 20.2,
+              "percentage": -5.61,
+              "trend": -1.2
+            },
+            {
+              "id": 19,
+              "creationDate": "2023-02-21T15:21:44",
+              "updateDate": "2023-02-21T15:21:44",
+              "date": "2023-04-01",
+              "balance": 25.4,
+              "percentage": 25.74,
+              "trend": 5.2
+            },
+            {
+              "id": 25,
+              "creationDate": "2023-02-21T15:22:30",
+              "updateDate": "2023-02-21T15:22:30",
+              "date": "2023-05-01",
+              "balance": 50.2,
+              "percentage": 97.64,
+              "trend": 24.8
+            }
+          ],
+          "operations": [
+            {
+              "type": "BUY",
+              "status": "CLOSED",
+              "entryDate": "2023-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2023-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            },
+            {
+              "type": "BUY",
+              "status": "PARTIALLY_CLOSED",
+              "entryDate": "2023-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2023-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            },
+            {
+              "type": "BUY",
+              "status": "PARTIALLY_CLOSED",
+              "entryDate": "2023-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2023-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            }
+          ]
+        },
+        {
+          "identifier": "crypto.com",
+          "name": "Crypto.com",
+          "symbol": "CRO",
+          "value": 13585,
+          "icon": "https://altcoinsbox.com/wp-content/uploads/2023/01/crypto.com-logo.png",
+          "balance": 2340.2659379,
+          "performance": 10.34,
+          "history": [
+            {
+              "id": 1,
+              "creationDate": "2023-02-21T15:19:14",
+              "updateDate": "2023-02-21T15:19:14",
+              "date": "2023-01-01",
+              "balance": 10.0,
+              "percentage": 999900.0,
+              "trend": 10.0
+            },
+            {
+              "id": 7,
+              "creationDate": "2023-02-21T15:20:35",
+              "updateDate": "2023-02-21T15:20:35",
+              "date": "2023-02-01",
+              "balance": 21.4,
+              "percentage": 114.0,
+              "trend": 11.4
+            },
+            {
+              "id": 13,
+              "creationDate": "2023-02-21T15:21:10",
+              "updateDate": "2023-02-21T15:21:10",
+              "date": "2023-03-01",
+              "balance": 20.2,
+              "percentage": -5.61,
+              "trend": -1.2
+            },
+            {
+              "id": 19,
+              "creationDate": "2023-02-21T15:21:44",
+              "updateDate": "2023-02-21T15:21:44",
+              "date": "2023-04-01",
+              "balance": 25.4,
+              "percentage": 25.74,
+              "trend": 5.2
+            },
+            {
+              "id": 25,
+              "creationDate": "2023-02-21T15:22:30",
+              "updateDate": "2023-02-21T15:22:30",
+              "date": "2023-05-01",
+              "balance": 50.2,
+              "percentage": 97.64,
+              "trend": 24.8
+            }
+          ],
+          "operations": [
+            {
+              "type": "BUY",
+              "status": "CLOSED",
+              "entryDate": "2023-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2023-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            },
+            {
+              "type": "BUY",
+              "status": "PARTIALLY_CLOSED",
+              "entryDate": "2023-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2023-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            },
+            {
+              "type": "BUY",
+              "status": "PARTIALLY_CLOSED",
+              "entryDate": "2023-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2023-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            }
+          ]
+        },
+        {
+          "identifier": "binance coin",
+          "name": "Binance Coin",
+          "symbol": "BNB",
+          "value": 13585,
+          "icon": "https://seeklogo.com/images/B/binance-coin-bnb-logo-CD94CC6D31-seeklogo.com.png",
+          "balance": 10.2659379,
+          "performance": 10.34,
+          "history": [
+            {
+              "id": 1,
+              "creationDate": "2023-02-21T15:19:14",
+              "updateDate": "2023-02-21T15:19:14",
+              "date": "2023-01-01",
+              "balance": 10.0,
+              "percentage": 999900.0,
+              "trend": 10.0
+            },
+            {
+              "id": 7,
+              "creationDate": "2023-02-21T15:20:35",
+              "updateDate": "2023-02-21T15:20:35",
+              "date": "2023-02-01",
+              "balance": 21.4,
+              "percentage": 114.0,
+              "trend": 11.4
+            },
+            {
+              "id": 13,
+              "creationDate": "2023-02-21T15:21:10",
+              "updateDate": "2023-02-21T15:21:10",
+              "date": "2023-03-01",
+              "balance": 20.2,
+              "percentage": -5.61,
+              "trend": -1.2
+            },
+            {
+              "id": 19,
+              "creationDate": "2023-02-21T15:21:44",
+              "updateDate": "2023-02-21T15:21:44",
+              "date": "2023-04-01",
+              "balance": 25.4,
+              "percentage": 25.74,
+              "trend": 5.2
+            },
+            {
+              "id": 25,
+              "creationDate": "2023-02-21T15:22:30",
+              "updateDate": "2023-02-21T15:22:30",
+              "date": "2023-05-01",
+              "balance": 50.2,
+              "percentage": 97.64,
+              "trend": 24.8
+            }
+          ],
+          "operations": [
+            {
+              "type": "BUY",
+              "status": "CLOSED",
+              "entryDate": "2023-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2023-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            },
+            {
+              "type": "BUY",
+              "status": "PARTIALLY_CLOSED",
+              "entryDate": "2023-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2023-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            },
+            {
+              "type": "BUY",
+              "status": "PARTIALLY_CLOSED",
+              "entryDate": "2023-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2023-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            }
+          ]
+        }
+      ],
       "wallets": [
         {
           "id": 1,
@@ -940,6 +1382,1398 @@
                   "entryFees": 1.23,
                   "quantity": 0.05,
                   "exitDate": "2023-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "2022": {
+      "balance": 1000,
+      "currency": "USD",
+      "btcBalance": 0.13456789,
+      "lastUpdate": "2022-05-01",
+      "statsAssetsDays": [
+        "2022-01-01",
+        "2022-02-01",
+        "2022-03-01",
+        "2022-04-01",
+        "2022-05-01"
+      ],
+      "holdingLong": {
+        "balance": 6000,
+        "performance": 2.53,
+        "lastUpdate": "2022-05-01"
+      },
+      "trading": {
+        "balance": 3000,
+        "performance": -1.53,
+        "lastUpdate": "2022-05-01"
+      },
+      "performance": {
+        "balance": 1000,
+        "performance": 10.53,
+        "lastUpdate": "2022-05-01"
+      },
+      "assets": [
+        {
+          "identifier": "bitcoin",
+          "name": "Bitcoin",
+          "symbol": "BTC",
+          "rank": 1,
+          "value": 10000,
+          "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/800px-Bitcoin.svg.png",
+          "balance": 0.5,
+          "invested": 1000,
+          "performance": 10,
+          "trend": 100,
+          "history": [
+            {
+              "id": 1,
+              "creationDate": "2022-02-21T15:19:14",
+              "updateDate": "2022-02-21T15:19:14",
+              "date": "2022-01-01",
+              "balance": 10.0,
+              "percentage": 999900.0,
+              "trend": 10.0
+            },
+            {
+              "id": 7,
+              "creationDate": "2022-02-21T15:20:35",
+              "updateDate": "2022-02-21T15:20:35",
+              "date": "2022-02-01",
+              "balance": 21.4,
+              "percentage": 114.0,
+              "trend": 11.4
+            },
+            {
+              "id": 13,
+              "creationDate": "2022-02-21T15:21:10",
+              "updateDate": "2022-02-21T15:21:10",
+              "date": "2022-03-01",
+              "balance": 20.2,
+              "percentage": -5.61,
+              "trend": -1.2
+            },
+            {
+              "id": 19,
+              "creationDate": "2022-02-21T15:21:44",
+              "updateDate": "2022-02-21T15:21:44",
+              "date": "2022-04-01",
+              "balance": 25.4,
+              "percentage": 25.74,
+              "trend": 5.2
+            },
+            {
+              "id": 25,
+              "creationDate": "2022-02-21T15:22:30",
+              "updateDate": "2022-02-21T15:22:30",
+              "date": "2022-05-01",
+              "balance": 50.2,
+              "percentage": 97.64,
+              "trend": 24.8
+            }
+          ],
+          "operations": [
+            {
+              "type": "BUY",
+              "status": "CLOSED",
+              "entryDate": "2022-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2022-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            },
+            {
+              "type": "BUY",
+              "status": "PARTIALLY_CLOSED",
+              "entryDate": "2022-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2022-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            },
+            {
+              "type": "BUY",
+              "status": "PARTIALLY_CLOSED",
+              "entryDate": "2022-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2022-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            }
+          ]
+        },
+        {
+          "identifier": "ethereum",
+          "name": "Ethereum",
+          "symbol": "ETH",
+          "value": 13585,
+          "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Ethereum_logo_2014.svg/628px-Ethereum_logo_2014.svg.png",
+          "balance": 2.2659379,
+          "invested": 1000,
+          "performance": 10.34,
+          "history": [
+            {
+              "id": 1,
+              "creationDate": "2022-02-21T15:19:14",
+              "updateDate": "2022-02-21T15:19:14",
+              "date": "2022-01-01",
+              "balance": 10.0,
+              "percentage": 999900.0,
+              "trend": 10.0
+            },
+            {
+              "id": 7,
+              "creationDate": "2022-02-21T15:20:35",
+              "updateDate": "2022-02-21T15:20:35",
+              "date": "2022-02-01",
+              "balance": 21.4,
+              "percentage": 114.0,
+              "trend": 11.4
+            },
+            {
+              "id": 13,
+              "creationDate": "2022-02-21T15:21:10",
+              "updateDate": "2022-02-21T15:21:10",
+              "date": "2022-03-01",
+              "balance": 20.2,
+              "percentage": -5.61,
+              "trend": -1.2
+            },
+            {
+              "id": 19,
+              "creationDate": "2022-02-21T15:21:44",
+              "updateDate": "2022-02-21T15:21:44",
+              "date": "2022-04-01",
+              "balance": 25.4,
+              "percentage": 25.74,
+              "trend": 5.2
+            },
+            {
+              "id": 25,
+              "creationDate": "2022-02-21T15:22:30",
+              "updateDate": "2022-02-21T15:22:30",
+              "date": "2022-05-01",
+              "balance": 50.2,
+              "percentage": 97.64,
+              "trend": 24.8
+            }
+          ],
+          "operations": [
+            {
+              "type": "BUY",
+              "status": "CLOSED",
+              "entryDate": "2022-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2022-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            },
+            {
+              "type": "BUY",
+              "status": "PARTIALLY_CLOSED",
+              "entryDate": "2022-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2022-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            },
+            {
+              "type": "BUY",
+              "status": "PARTIALLY_CLOSED",
+              "entryDate": "2022-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2022-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            }
+          ]
+        },
+        {
+          "identifier": "crypto.com",
+          "name": "Crypto.com",
+          "symbol": "CRO",
+          "value": 13585,
+          "icon": "https://altcoinsbox.com/wp-content/uploads/2022/01/crypto.com-logo.png",
+          "balance": 2340.2659379,
+          "performance": 10.34,
+          "history": [
+            {
+              "id": 1,
+              "creationDate": "2022-02-21T15:19:14",
+              "updateDate": "2022-02-21T15:19:14",
+              "date": "2022-01-01",
+              "balance": 10.0,
+              "percentage": 999900.0,
+              "trend": 10.0
+            },
+            {
+              "id": 7,
+              "creationDate": "2022-02-21T15:20:35",
+              "updateDate": "2022-02-21T15:20:35",
+              "date": "2022-02-01",
+              "balance": 21.4,
+              "percentage": 114.0,
+              "trend": 11.4
+            },
+            {
+              "id": 13,
+              "creationDate": "2022-02-21T15:21:10",
+              "updateDate": "2022-02-21T15:21:10",
+              "date": "2022-03-01",
+              "balance": 20.2,
+              "percentage": -5.61,
+              "trend": -1.2
+            },
+            {
+              "id": 19,
+              "creationDate": "2022-02-21T15:21:44",
+              "updateDate": "2022-02-21T15:21:44",
+              "date": "2022-04-01",
+              "balance": 25.4,
+              "percentage": 25.74,
+              "trend": 5.2
+            },
+            {
+              "id": 25,
+              "creationDate": "2022-02-21T15:22:30",
+              "updateDate": "2022-02-21T15:22:30",
+              "date": "2022-05-01",
+              "balance": 50.2,
+              "percentage": 97.64,
+              "trend": 24.8
+            }
+          ],
+          "operations": [
+            {
+              "type": "BUY",
+              "status": "CLOSED",
+              "entryDate": "2022-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2022-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            },
+            {
+              "type": "BUY",
+              "status": "PARTIALLY_CLOSED",
+              "entryDate": "2022-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2022-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            },
+            {
+              "type": "BUY",
+              "status": "PARTIALLY_CLOSED",
+              "entryDate": "2022-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2022-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            }
+          ]
+        },
+        {
+          "identifier": "binance coin",
+          "name": "Binance Coin",
+          "symbol": "BNB",
+          "value": 13585,
+          "icon": "https://seeklogo.com/images/B/binance-coin-bnb-logo-CD94CC6D31-seeklogo.com.png",
+          "balance": 10.2659379,
+          "performance": 10.34,
+          "history": [
+            {
+              "id": 1,
+              "creationDate": "2022-02-21T15:19:14",
+              "updateDate": "2022-02-21T15:19:14",
+              "date": "2022-01-01",
+              "balance": 10.0,
+              "percentage": 999900.0,
+              "trend": 10.0
+            },
+            {
+              "id": 7,
+              "creationDate": "2022-02-21T15:20:35",
+              "updateDate": "2022-02-21T15:20:35",
+              "date": "2022-02-01",
+              "balance": 21.4,
+              "percentage": 114.0,
+              "trend": 11.4
+            },
+            {
+              "id": 13,
+              "creationDate": "2022-02-21T15:21:10",
+              "updateDate": "2022-02-21T15:21:10",
+              "date": "2022-03-01",
+              "balance": 20.2,
+              "percentage": -5.61,
+              "trend": -1.2
+            },
+            {
+              "id": 19,
+              "creationDate": "2022-02-21T15:21:44",
+              "updateDate": "2022-02-21T15:21:44",
+              "date": "2022-04-01",
+              "balance": 25.4,
+              "percentage": 25.74,
+              "trend": 5.2
+            },
+            {
+              "id": 25,
+              "creationDate": "2022-02-21T15:22:30",
+              "updateDate": "2022-02-21T15:22:30",
+              "date": "2022-05-01",
+              "balance": 50.2,
+              "percentage": 97.64,
+              "trend": 24.8
+            }
+          ],
+          "operations": [
+            {
+              "type": "BUY",
+              "status": "CLOSED",
+              "entryDate": "2022-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2022-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            },
+            {
+              "type": "BUY",
+              "status": "PARTIALLY_CLOSED",
+              "entryDate": "2022-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2022-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            },
+            {
+              "type": "BUY",
+              "status": "PARTIALLY_CLOSED",
+              "entryDate": "2022-01-01",
+              "entryCoin": "USDT",
+              "entryPrice": 28800,
+              "entryValue": 500,
+              "entryFees": 1.23,
+              "quantity": 0.05,
+              "exitDate": "2022-01-02",
+              "exitCoin": "BTC",
+              "exitPrice": 29000,
+              "exitValue": 500,
+              "exitFees": 1.35,
+              "performance": 1.25,
+              "trend": 50
+            }
+          ]
+        }
+      ],
+      "wallets": [
+        {
+          "id": 1,
+          "creationDate": "2022-02-21T14:46:44",
+          "updateDate": "2022-05-01T15:40:57",
+          "name": "Coinbase",
+          "balance": 10000.0,
+          "img": "https://images.ctfassets.net/c5bd0wqjc7v0/3dFdY6GvgLgCIXmBiN6eiA/d4acc5d4c5d557566cf0e46f9b58de43/icon-buy-and-sell.svg",
+          "allTimeHigh": 11000.0,
+          "allTimeHighDate": "2022-05-01",
+          "highPrice": 11000.0,
+          "highPriceDate": "2022-02-22",
+          "lowPrice": 4250.5,
+          "lowPriceDate": "2022-01-01",
+          "performanceLastStats": 29.4,
+          "differenceLastStats": 2499.5,
+          "dateLastStats": "2022-05-01",
+          "category": "Crypto",
+          "assets": [
+            {
+              "identifier": "bitcoin",
+              "name": "Bitcoin",
+              "symbol": "BTC",
+              "rank": 1,
+              "value": 10000,
+              "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/800px-Bitcoin.svg.png",
+              "balance": 0.5,
+              "invested": 1000,
+              "performance": 10,
+              "trend": 100,
+              "history": [
+                {
+                  "id": 1,
+                  "creationDate": "2022-02-21T15:19:14",
+                  "updateDate": "2022-02-21T15:19:14",
+                  "date": "2022-01-01",
+                  "balance": 10.0,
+                  "percentage": 999900.0,
+                  "trend": 10.0
+                },
+                {
+                  "id": 7,
+                  "creationDate": "2022-02-21T15:20:35",
+                  "updateDate": "2022-02-21T15:20:35",
+                  "date": "2022-02-01",
+                  "balance": 21.4,
+                  "percentage": 114.0,
+                  "trend": 11.4
+                },
+                {
+                  "id": 13,
+                  "creationDate": "2022-02-21T15:21:10",
+                  "updateDate": "2022-02-21T15:21:10",
+                  "date": "2022-03-01",
+                  "balance": 20.2,
+                  "percentage": -5.61,
+                  "trend": -1.2
+                },
+                {
+                  "id": 19,
+                  "creationDate": "2022-02-21T15:21:44",
+                  "updateDate": "2022-02-21T15:21:44",
+                  "date": "2022-04-01",
+                  "balance": 25.4,
+                  "percentage": 25.74,
+                  "trend": 5.2
+                },
+                {
+                  "id": 25,
+                  "creationDate": "2022-02-21T15:22:30",
+                  "updateDate": "2022-02-21T15:22:30",
+                  "date": "2022-05-01",
+                  "balance": 50.2,
+                  "percentage": 97.64,
+                  "trend": 24.8
+                }
+              ],
+              "operations": [
+                {
+                  "type": "BUY",
+                  "status": "CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                },
+                {
+                  "type": "BUY",
+                  "status": "PARTIALLY_CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                },
+                {
+                  "type": "BUY",
+                  "status": "PARTIALLY_CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                }
+              ]
+            },
+            {
+              "identifier": "ethereum",
+              "name": "Ethereum",
+              "symbol": "ETH",
+              "value": 13585,
+              "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Ethereum_logo_2014.svg/628px-Ethereum_logo_2014.svg.png",
+              "balance": 2.2659379,
+              "invested": 1000,
+              "performance": 10.34,
+              "history": [
+                {
+                  "id": 1,
+                  "creationDate": "2022-02-21T15:19:14",
+                  "updateDate": "2022-02-21T15:19:14",
+                  "date": "2022-01-01",
+                  "balance": 10.0,
+                  "percentage": 999900.0,
+                  "trend": 10.0
+                },
+                {
+                  "id": 7,
+                  "creationDate": "2022-02-21T15:20:35",
+                  "updateDate": "2022-02-21T15:20:35",
+                  "date": "2022-02-01",
+                  "balance": 21.4,
+                  "percentage": 114.0,
+                  "trend": 11.4
+                },
+                {
+                  "id": 13,
+                  "creationDate": "2022-02-21T15:21:10",
+                  "updateDate": "2022-02-21T15:21:10",
+                  "date": "2022-03-01",
+                  "balance": 20.2,
+                  "percentage": -5.61,
+                  "trend": -1.2
+                },
+                {
+                  "id": 19,
+                  "creationDate": "2022-02-21T15:21:44",
+                  "updateDate": "2022-02-21T15:21:44",
+                  "date": "2022-04-01",
+                  "balance": 25.4,
+                  "percentage": 25.74,
+                  "trend": 5.2
+                },
+                {
+                  "id": 25,
+                  "creationDate": "2022-02-21T15:22:30",
+                  "updateDate": "2022-02-21T15:22:30",
+                  "date": "2022-05-01",
+                  "balance": 50.2,
+                  "percentage": 97.64,
+                  "trend": 24.8
+                }
+              ],
+              "operations": [
+                {
+                  "type": "BUY",
+                  "status": "CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                },
+                {
+                  "type": "BUY",
+                  "status": "PARTIALLY_CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                },
+                {
+                  "type": "BUY",
+                  "status": "PARTIALLY_CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                }
+              ]
+            },
+            {
+              "identifier": "crypto.com",
+              "name": "Crypto.com",
+              "symbol": "CRO",
+              "value": 13585,
+              "icon": "https://altcoinsbox.com/wp-content/uploads/2022/01/crypto.com-logo.png",
+              "balance": 2340.2659379,
+              "performance": 10.34,
+              "history": [
+                {
+                  "id": 1,
+                  "creationDate": "2022-02-21T15:19:14",
+                  "updateDate": "2022-02-21T15:19:14",
+                  "date": "2022-01-01",
+                  "balance": 10.0,
+                  "percentage": 999900.0,
+                  "trend": 10.0
+                },
+                {
+                  "id": 7,
+                  "creationDate": "2022-02-21T15:20:35",
+                  "updateDate": "2022-02-21T15:20:35",
+                  "date": "2022-02-01",
+                  "balance": 21.4,
+                  "percentage": 114.0,
+                  "trend": 11.4
+                },
+                {
+                  "id": 13,
+                  "creationDate": "2022-02-21T15:21:10",
+                  "updateDate": "2022-02-21T15:21:10",
+                  "date": "2022-03-01",
+                  "balance": 20.2,
+                  "percentage": -5.61,
+                  "trend": -1.2
+                },
+                {
+                  "id": 19,
+                  "creationDate": "2022-02-21T15:21:44",
+                  "updateDate": "2022-02-21T15:21:44",
+                  "date": "2022-04-01",
+                  "balance": 25.4,
+                  "percentage": 25.74,
+                  "trend": 5.2
+                },
+                {
+                  "id": 25,
+                  "creationDate": "2022-02-21T15:22:30",
+                  "updateDate": "2022-02-21T15:22:30",
+                  "date": "2022-05-01",
+                  "balance": 50.2,
+                  "percentage": 97.64,
+                  "trend": 24.8
+                }
+              ],
+              "operations": [
+                {
+                  "type": "BUY",
+                  "status": "CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                },
+                {
+                  "type": "BUY",
+                  "status": "PARTIALLY_CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                },
+                {
+                  "type": "BUY",
+                  "status": "PARTIALLY_CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                }
+              ]
+            },
+            {
+              "identifier": "binance coin",
+              "name": "Binance Coin",
+              "symbol": "BNB",
+              "value": 13585,
+              "icon": "https://seeklogo.com/images/B/binance-coin-bnb-logo-CD94CC6D31-seeklogo.com.png",
+              "balance": 10.2659379,
+              "performance": 10.34,
+              "history": [
+                {
+                  "id": 1,
+                  "creationDate": "2022-02-21T15:19:14",
+                  "updateDate": "2022-02-21T15:19:14",
+                  "date": "2022-01-01",
+                  "balance": 10.0,
+                  "percentage": 999900.0,
+                  "trend": 10.0
+                },
+                {
+                  "id": 7,
+                  "creationDate": "2022-02-21T15:20:35",
+                  "updateDate": "2022-02-21T15:20:35",
+                  "date": "2022-02-01",
+                  "balance": 21.4,
+                  "percentage": 114.0,
+                  "trend": 11.4
+                },
+                {
+                  "id": 13,
+                  "creationDate": "2022-02-21T15:21:10",
+                  "updateDate": "2022-02-21T15:21:10",
+                  "date": "2022-03-01",
+                  "balance": 20.2,
+                  "percentage": -5.61,
+                  "trend": -1.2
+                },
+                {
+                  "id": 19,
+                  "creationDate": "2022-02-21T15:21:44",
+                  "updateDate": "2022-02-21T15:21:44",
+                  "date": "2022-04-01",
+                  "balance": 25.4,
+                  "percentage": 25.74,
+                  "trend": 5.2
+                },
+                {
+                  "id": 25,
+                  "creationDate": "2022-02-21T15:22:30",
+                  "updateDate": "2022-02-21T15:22:30",
+                  "date": "2022-05-01",
+                  "balance": 50.2,
+                  "percentage": 97.64,
+                  "trend": 24.8
+                }
+              ],
+              "operations": [
+                {
+                  "type": "BUY",
+                  "status": "CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                },
+                {
+                  "type": "BUY",
+                  "status": "PARTIALLY_CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                },
+                {
+                  "type": "BUY",
+                  "status": "PARTIALLY_CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "creationDate": "2022-02-21T14:47:38",
+          "updateDate": "2022-02-21T15:40:57",
+          "name": "Binance",
+          "balance": 11600.4,
+          "img": "https://public.bnbstatic.com/20190405/eb2349c3-b2f8-4a93-a286-8f86a62ea9d8.png",
+          "allTimeHigh": 11600.4,
+          "allTimeHighDate": "2022-02-22",
+          "highPrice": 11600.4,
+          "highPriceDate": "2022-02-22",
+          "lowPrice": 5210.5,
+          "lowPriceDate": "2022-01-01",
+          "performanceLastStats": 24.73,
+          "differenceLastStats": 2300.0,
+          "dateLastStats": "2022-02-22",
+          "category": "Investments",
+          "assets": [
+            {
+              "identifier": "bitcoin",
+              "name": "Bitcoin",
+              "symbol": "BTC",
+              "rank": 1,
+              "value": 10000,
+              "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/800px-Bitcoin.svg.png",
+              "balance": 0.5,
+              "invested": 1000,
+              "performance": 10,
+              "trend": 100,
+              "history": [
+                {
+                  "id": 1,
+                  "creationDate": "2022-02-21T15:19:14",
+                  "updateDate": "2022-02-21T15:19:14",
+                  "date": "2022-01-01",
+                  "balance": 10.0,
+                  "percentage": 999900.0,
+                  "trend": 10.0
+                },
+                {
+                  "id": 7,
+                  "creationDate": "2022-02-21T15:20:35",
+                  "updateDate": "2022-02-21T15:20:35",
+                  "date": "2022-02-01",
+                  "balance": 21.4,
+                  "percentage": 114.0,
+                  "trend": 11.4
+                },
+                {
+                  "id": 13,
+                  "creationDate": "2022-02-21T15:21:10",
+                  "updateDate": "2022-02-21T15:21:10",
+                  "date": "2022-03-01",
+                  "balance": 20.2,
+                  "percentage": -5.61,
+                  "trend": -1.2
+                },
+                {
+                  "id": 19,
+                  "creationDate": "2022-02-21T15:21:44",
+                  "updateDate": "2022-02-21T15:21:44",
+                  "date": "2022-04-01",
+                  "balance": 25.4,
+                  "percentage": 25.74,
+                  "trend": 5.2
+                },
+                {
+                  "id": 25,
+                  "creationDate": "2022-02-21T15:22:30",
+                  "updateDate": "2022-02-21T15:22:30",
+                  "date": "2022-05-01",
+                  "balance": 50.2,
+                  "percentage": 97.64,
+                  "trend": 24.8
+                }
+              ],
+              "operations": [
+                {
+                  "type": "BUY",
+                  "status": "CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                },
+                {
+                  "type": "BUY",
+                  "status": "PARTIALLY_CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                },
+                {
+                  "type": "BUY",
+                  "status": "PARTIALLY_CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                }
+              ]
+            },
+            {
+              "identifier": "ethereum",
+              "name": "Ethereum",
+              "symbol": "ETH",
+              "value": 13585,
+              "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Ethereum_logo_2014.svg/628px-Ethereum_logo_2014.svg.png",
+              "balance": 2.2659379,
+              "invested": 1000,
+              "performance": 10.34,
+              "history": [
+                {
+                  "id": 1,
+                  "creationDate": "2022-02-21T15:19:14",
+                  "updateDate": "2022-02-21T15:19:14",
+                  "date": "2022-01-01",
+                  "balance": 10.0,
+                  "percentage": 999900.0,
+                  "trend": 10.0
+                },
+                {
+                  "id": 7,
+                  "creationDate": "2022-02-21T15:20:35",
+                  "updateDate": "2022-02-21T15:20:35",
+                  "date": "2022-02-01",
+                  "balance": 21.4,
+                  "percentage": 114.0,
+                  "trend": 11.4
+                },
+                {
+                  "id": 13,
+                  "creationDate": "2022-02-21T15:21:10",
+                  "updateDate": "2022-02-21T15:21:10",
+                  "date": "2022-03-01",
+                  "balance": 20.2,
+                  "percentage": -5.61,
+                  "trend": -1.2
+                },
+                {
+                  "id": 19,
+                  "creationDate": "2022-02-21T15:21:44",
+                  "updateDate": "2022-02-21T15:21:44",
+                  "date": "2022-04-01",
+                  "balance": 25.4,
+                  "percentage": 25.74,
+                  "trend": 5.2
+                },
+                {
+                  "id": 25,
+                  "creationDate": "2022-02-21T15:22:30",
+                  "updateDate": "2022-02-21T15:22:30",
+                  "date": "2022-05-01",
+                  "balance": 50.2,
+                  "percentage": 97.64,
+                  "trend": 24.8
+                }
+              ],
+              "operations": [
+                {
+                  "type": "BUY",
+                  "status": "CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                },
+                {
+                  "type": "BUY",
+                  "status": "PARTIALLY_CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                },
+                {
+                  "type": "BUY",
+                  "status": "PARTIALLY_CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                }
+              ]
+            },
+            {
+              "identifier": "crypto.com",
+              "name": "Crypto.com",
+              "symbol": "CRO",
+              "value": 13585,
+              "icon": "https://altcoinsbox.com/wp-content/uploads/2022/01/crypto.com-logo.png",
+              "balance": 2340.2659379,
+              "performance": 10.34,
+              "history": [
+                {
+                  "id": 1,
+                  "creationDate": "2022-02-21T15:19:14",
+                  "updateDate": "2022-02-21T15:19:14",
+                  "date": "2022-01-01",
+                  "balance": 10.0,
+                  "percentage": 999900.0,
+                  "trend": 10.0
+                },
+                {
+                  "id": 7,
+                  "creationDate": "2022-02-21T15:20:35",
+                  "updateDate": "2022-02-21T15:20:35",
+                  "date": "2022-02-01",
+                  "balance": 21.4,
+                  "percentage": 114.0,
+                  "trend": 11.4
+                },
+                {
+                  "id": 13,
+                  "creationDate": "2022-02-21T15:21:10",
+                  "updateDate": "2022-02-21T15:21:10",
+                  "date": "2022-03-01",
+                  "balance": 20.2,
+                  "percentage": -5.61,
+                  "trend": -1.2
+                },
+                {
+                  "id": 19,
+                  "creationDate": "2022-02-21T15:21:44",
+                  "updateDate": "2022-02-21T15:21:44",
+                  "date": "2022-04-01",
+                  "balance": 25.4,
+                  "percentage": 25.74,
+                  "trend": 5.2
+                },
+                {
+                  "id": 25,
+                  "creationDate": "2022-02-21T15:22:30",
+                  "updateDate": "2022-02-21T15:22:30",
+                  "date": "2022-05-01",
+                  "balance": 50.2,
+                  "percentage": 97.64,
+                  "trend": 24.8
+                }
+              ],
+              "operations": [
+                {
+                  "type": "BUY",
+                  "status": "CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                },
+                {
+                  "type": "BUY",
+                  "status": "PARTIALLY_CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                },
+                {
+                  "type": "BUY",
+                  "status": "PARTIALLY_CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                }
+              ]
+            },
+            {
+              "identifier": "binance coin",
+              "name": "Binance Coin",
+              "symbol": "BNB",
+              "value": 13585,
+              "icon": "https://seeklogo.com/images/B/binance-coin-bnb-logo-CD94CC6D31-seeklogo.com.png",
+              "balance": 10.2659379,
+              "performance": 10.34,
+              "history": [
+                {
+                  "id": 1,
+                  "creationDate": "2022-02-21T15:19:14",
+                  "updateDate": "2022-02-21T15:19:14",
+                  "date": "2022-01-01",
+                  "balance": 10.0,
+                  "percentage": 999900.0,
+                  "trend": 10.0
+                },
+                {
+                  "id": 7,
+                  "creationDate": "2022-02-21T15:20:35",
+                  "updateDate": "2022-02-21T15:20:35",
+                  "date": "2022-02-01",
+                  "balance": 21.4,
+                  "percentage": 114.0,
+                  "trend": 11.4
+                },
+                {
+                  "id": 13,
+                  "creationDate": "2022-02-21T15:21:10",
+                  "updateDate": "2022-02-21T15:21:10",
+                  "date": "2022-03-01",
+                  "balance": 20.2,
+                  "percentage": -5.61,
+                  "trend": -1.2
+                },
+                {
+                  "id": 19,
+                  "creationDate": "2022-02-21T15:21:44",
+                  "updateDate": "2022-02-21T15:21:44",
+                  "date": "2022-04-01",
+                  "balance": 25.4,
+                  "percentage": 25.74,
+                  "trend": 5.2
+                },
+                {
+                  "id": 25,
+                  "creationDate": "2022-02-21T15:22:30",
+                  "updateDate": "2022-02-21T15:22:30",
+                  "date": "2022-05-01",
+                  "balance": 50.2,
+                  "percentage": 97.64,
+                  "trend": 24.8
+                }
+              ],
+              "operations": [
+                {
+                  "type": "BUY",
+                  "status": "CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                },
+                {
+                  "type": "BUY",
+                  "status": "PARTIALLY_CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
+                  "exitCoin": "BTC",
+                  "exitPrice": 29000,
+                  "exitValue": 500,
+                  "exitFees": 1.35,
+                  "performance": 1.25,
+                  "trend": 50
+                },
+                {
+                  "type": "BUY",
+                  "status": "PARTIALLY_CLOSED",
+                  "entryDate": "2022-01-01",
+                  "entryCoin": "USDT",
+                  "entryPrice": 28800,
+                  "entryValue": 500,
+                  "entryFees": 1.23,
+                  "quantity": 0.05,
+                  "exitDate": "2022-01-02",
                   "exitCoin": "BTC",
                   "exitPrice": 29000,
                   "exitValue": 500,

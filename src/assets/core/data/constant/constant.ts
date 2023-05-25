@@ -17,6 +17,7 @@ export enum ModalConstant {
   OPENBUG = 'openBugModal',
   BACKUPDATA = 'backupDataModal',
   ADDASSET = 'addAssetModal',
+  ADDOPERATIONS = 'addOperationsModal',
 }
 
 export enum StorageConstant {
