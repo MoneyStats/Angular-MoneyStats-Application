@@ -26,15 +26,45 @@
               *ngIf="isAddStatsSelected && !isResumeAddAssets"
               class="card-title"
             >
-              <h2 class="modal-title d-inline" style="vertical-align: -4px">
-                Add Stats
-              </h2>
-              <p>
-                <small
-                  >Add new stats for the current asset in all your
-                  wallets</small
-                >
-              </p>
+              <div class="row">
+                <div class="col-md-6">
+                  <h2 class="modal-title d-inline" style="vertical-align: -4px">
+                    Add Stats
+                  </h2>
+                  <p>
+                    <small
+                      >Add new stats for the current asset in all your
+                      wallets</small
+                    >
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <div
+                    class="form-group boxed float-end ms-1 me-1"
+                    style="max-width: 200px"
+                  >
+                    <div class="input-wrapper">
+                      <input
+                        name="date"
+                        [(ngModel)]="dateStats"
+                        #date="ngModel"
+                        type="date"
+                        class="form-control"
+                        id="text4b"
+                        required
+                        [disabled]="currentIndex > 0"
+                      />
+                      <div
+                        *ngIf="dateValidation"
+                        class="alert alert-danger mb-1"
+                        role="alert"
+                      >
+                        {{ "insertStats.dataPresent" | translate }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div *ngIf="isResumeAddAssets" class="card-title">
               <h2 class="modal-title d-inline" style="vertical-align: -4px">
@@ -60,7 +90,7 @@
             <div *ngIf="isAddStatsSelected" class="transactions row">
               <hr />
               <div *ngFor="let asset of assets; let i = index">
-                <div *ngIf="i == currentIndex">
+                <div *ngIf="i == currentIndex && !isResumeAddAssets">
                   <div
                     class="card-body"
                     style="margin-top: -30px; margin-bottom: -20px"
@@ -132,6 +162,7 @@
                     </p>
                     <hr />
                   </div>
+                  <!-- Input Add Asset -->
                   <div class="row" style="margin-top: -45px">
                     <div
                       *ngFor="let wallet of filterWallets(wallets, asset.name!)"
@@ -145,16 +176,18 @@
                           <div class="form-group boxed">
                             <div class="input-wrapper">
                               <input
-                                name="balance"
-                                [(ngModel)]="wallet.newBalance"
-                                #balance="ngModel"
+                                name="balance{{ wallet.name }}"
+                                [(ngModel)]="
+                                  filterAsset(wallet, asset.name!).newValue
+                                "
+                                required
+                                #balance1="ngModel"
                                 type="number"
                                 class="form-control"
                                 id="text4b"
                                 placeholder="{{
                                   'insertStats.newBal' | translate
                                 }}"
-                                required
                               />
                               <i class="clear-input">
                                 <ion-icon
@@ -166,9 +199,9 @@
                               </i>
                             </div>
                             <div class="input-info">
-                              {{ wallet.name }}
+                              {{ asset.name }}
                               {{ "insertStats.balance" | translate }}
-                              {{ wallet.balance }}
+                              {{ filterAsset(wallet, asset.name!).value }}
                               {{ currency }}
                             </div>
                           </div>
@@ -183,6 +216,7 @@
                       </div>
                     </div>
                   </div>
+                  <!-- END Input Add Asset -->
                 </div>
               </div>
               <!-- Riepilogo Add Stats -->
@@ -234,7 +268,53 @@
                             <div>
                               <strong>{{ wallet.name }}</strong>
                               <div class="text-small text-secondary">
-                                Sell Order #7893
+                                <strong
+                                  ><span
+                                    class="badge me-1 {{
+                                      filterAsset(wallet, asset.name!).history![
+                                        filterAsset(wallet, asset.name!)
+                                          .history!.length - 1
+                                      ].percentage > 0
+                                        ? 'badge-success'
+                                        : 'badge-danger'
+                                    }}"
+                                  >
+                                    <ion-icon
+                                      name="{{
+                                        filterAsset(wallet, asset.name!)
+                                          .history![
+                                          filterAsset(wallet, asset.name!)
+                                            .history!.length - 1
+                                        ].percentage > 0
+                                          ? 'arrow-up-outline'
+                                          : 'arrow-down-outline'
+                                      }}"
+                                    ></ion-icon>
+                                    {{
+                                      filterAsset(wallet, asset.name!).history![
+                                        filterAsset(wallet, asset.name!)
+                                          .history!.length - 1
+                                      ].percentage.toFixed(2)
+                                    }}%
+                                  </span></strong
+                                >
+                                <strong
+                                  class="{{
+                                    filterAsset(wallet, asset.name!).history![
+                                      filterAsset(wallet, asset.name!).history!
+                                        .length - 1
+                                    ].trend > 0
+                                      ? 'text-success'
+                                      : 'text-danger'
+                                  }}"
+                                  >{{ currency }}
+                                  {{
+                                    filterAsset(wallet, asset.name!).history![
+                                      filterAsset(wallet, asset.name!).history!
+                                        .length - 1
+                                    ].trend
+                                  }}</strong
+                                >
                               </div>
                             </div>
                             <div class="text-end">
@@ -266,6 +346,7 @@
                 <button
                   *ngIf="currentIndex != assets.length"
                   (click)="changeAsset()"
+                  [disabled]="f.invalid && !validateDate()"
                   type="button"
                   class="btn btn-primary me-1 mb-1"
                 >
@@ -275,6 +356,8 @@
                   *ngIf="isResumeAddAssets"
                   type="button"
                   class="btn btn-primary me-1 mb-1"
+                  (click)="save()"
+                  data-bs-dismiss="modal"
                 >
                   Save Asset
                 </button>
@@ -302,6 +385,7 @@
                 <button
                   *ngIf="currentIndex != assets.length"
                   (click)="changeAsset()"
+                  [disabled]="f.invalid && !validateDate()"
                   type="button"
                   class="btn btn-primary btn-block btn-lg"
                 >
@@ -311,6 +395,8 @@
                   *ngIf="isResumeAddAssets"
                   type="button"
                   class="btn btn-primary btn-block btn-lg"
+                  (click)="save()"
+                  data-bs-dismiss="modal"
                 >
                   Save Asset
                 </button>

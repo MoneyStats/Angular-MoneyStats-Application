@@ -6,3 +6,16 @@
 .action-sheet-content {
   overflow-x: hidden !important;
 }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: rgba(255, 255, 255, 1) !important;
+  opacity: 1;
+  display: block;
+  //background: url(/*yourURLHere*/) no-repeat;
+  background-color: rgba(240, 248, 255, 0.466);
+  border-radius: 20px;
+  width: 25px;
+  height: 25px;
+  margin-right: -25px;
+  border-width: thin;
+}
