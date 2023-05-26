@@ -13,7 +13,7 @@
       </div>
       <div class="modal-body">
         <form #f="ngForm" type="submit">
-          <div class="action-sheet-content">
+          <div class="action-sheet-content" id="action-scheet">
             <div *ngIf="!isAddStatsSelected" class="card-title">
               <h2 class="modal-title d-inline" style="vertical-align: -4px">
                 Add Operations
@@ -22,7 +22,10 @@
                 <small>Select what do you want to do</small>
               </p>
             </div>
-            <div *ngIf="isAddStatsSelected" class="card-title">
+            <div
+              *ngIf="isAddStatsSelected && !isResumeAddAssets"
+              class="card-title"
+            >
               <h2 class="modal-title d-inline" style="vertical-align: -4px">
                 Add Stats
               </h2>
@@ -31,6 +34,14 @@
                   >Add new stats for the current asset in all your
                   wallets</small
                 >
+              </p>
+            </div>
+            <div *ngIf="isResumeAddAssets" class="card-title">
+              <h2 class="modal-title d-inline" style="vertical-align: -4px">
+                Resume Stats
+              </h2>
+              <p>
+                <small>Resume all stats, save to confirm</small>
               </p>
             </div>
             <div
@@ -175,6 +186,80 @@
                 </div>
               </div>
               <!-- Riepilogo Add Stats -->
+              <div *ngIf="isResumeAddAssets" style="margin-top: -20px">
+                <div
+                  *ngFor="let asset of assets; let i = index"
+                  style="margin-top: -20px"
+                >
+                  <h5 class="card-title text-uppercase text-muted mb-0 ms-2">
+                    <img
+                      src="{{ asset?.icon }}"
+                      alt="img"
+                      class="image-block imaged round-img me-1"
+                      style="
+                        width: 30px !important;
+                        height: 30px !important;
+                        vertical-align: -11px;
+                      "
+                    />
+                    {{ asset.name }} ({{ asset.symbol }})
+                  </h5>
+                  <div class="input-info ms-2">
+                    <small>
+                      {{ asset.name }}
+                      {{ "insertStats.balance" | translate }}
+                      {{ asset.balance }}
+                      {{ asset.symbol }}</small
+                    >
+                  </div>
+                  <div class="card">
+                    <ul
+                      class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1"
+                    >
+                      <!-- item -->
+                      <li
+                        *ngFor="
+                          let wallet of filterWallets(wallets, asset.name!)
+                        "
+                      >
+                        <a class="item">
+                          <div class="icon-box">
+                            <img
+                              src="{{ wallet.img }}"
+                              alt=""
+                              style="border-radius: 50%"
+                            />
+                          </div>
+                          <div class="in">
+                            <div>
+                              <strong>{{ wallet.name }}</strong>
+                              <div class="text-small text-secondary">
+                                Sell Order #7893
+                              </div>
+                            </div>
+                            <div class="text-end">
+                              <strong
+                                >{{ currency }}
+                                {{
+                                  filterAsset(wallet, asset.name!).value
+                                }}</strong
+                              >
+                              <div class="text-small">
+                                {{
+                                  filterAsset(wallet, asset.name!).lastUpdate
+                                    | date : "d MMM y"
+                                }}
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <!-- * item -->
+                    </ul>
+                  </div>
+                  <hr style="margin-top: -10px" *ngIf="i < assets.length - 1" />
+                </div>
+              </div>
               <!-- End Riepilogo Add Stats -->
               <!-- Bottoni Add Stats Desktop -->
               <div class="addWallet text-end hidden_mobile">
@@ -185,6 +270,13 @@
                   class="btn btn-primary me-1 mb-1"
                 >
                   Next Asset
+                </button>
+                <button
+                  *ngIf="isResumeAddAssets"
+                  type="button"
+                  class="btn btn-primary me-1 mb-1"
+                >
+                  Save Asset
                 </button>
               </div>
               <!-- End Bottoni Add Stats Desktop -->
@@ -214,6 +306,13 @@
                   class="btn btn-primary btn-block btn-lg"
                 >
                   Next Asset
+                </button>
+                <button
+                  *ngIf="isResumeAddAssets"
+                  type="button"
+                  class="btn btn-primary btn-block btn-lg"
+                >
+                  Save Asset
                 </button>
               </div>
             </div>

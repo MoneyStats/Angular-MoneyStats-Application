@@ -131,17 +131,27 @@
             <strong
               ><span
                 class="badge {{
-                  asset.performance! > 0 ? 'badge-success' : 'badge-success'
+                  ((asset.value! - asset.invested!) / asset.invested!) * 100! >
+                  0
+                    ? 'badge-success'
+                    : 'badge-success'
                 }}"
               >
                 <ion-icon
                   name="{{
-                    asset.performance! > 0
+                    ((asset.value! - asset.invested!) / asset.invested!) *
+                      100! >
+                    0
                       ? 'arrow-up-outline'
                       : 'arrow-down-outline'
                   }}"
                 ></ion-icon>
-                {{ asset.performance }}%
+                {{
+                  (
+                    ((asset.value! - asset.invested!) / asset.invested!) *
+                    100!
+                  ).toFixed(2)
+                }}%
               </span></strong
             >
           </li>
@@ -150,8 +160,13 @@
               {{ "crypto.asset.details.overview.trend" | translate }}
             </div>
             <strong
-              class="{{ asset.trend! > 0 ? 'text-success' : 'text-danger' }}"
-              >{{ cryptoDashboard.currency }} {{ asset.trend }}</strong
+              class="{{
+                (asset.value! - asset.invested!)! > 0
+                  ? 'text-success'
+                  : 'text-danger'
+              }}"
+              >{{ cryptoDashboard.currency }}
+              {{ asset.value! - asset.invested! }}</strong
             >
           </li>
         </ul>
@@ -260,24 +275,36 @@
                   </div>
                   <strong
                     class="{{
-                      asset.trend! > 0 ? 'text-success' : 'text-danger'
+                      asset.value! - asset.invested! > 0
+                        ? 'text-success'
+                        : 'text-danger'
                     }}"
-                    >{{ asset.trend }} {{ cryptoDashboard.currency }}
+                    >{{ asset.value! - asset.invested! }}
+                    {{ cryptoDashboard.currency }}
                     <span
                       class="badge {{
-                        asset.performance! > 0
+                        ((asset.value! - asset.invested!) / asset.invested!) *
+                          100! >
+                        0
                           ? 'badge-success'
                           : 'badge-success'
                       }}"
                     >
                       <ion-icon
                         name="{{
-                          asset.performance! > 0
+                          ((asset.value! - asset.invested!) / asset.invested!) *
+                            100! >
+                          0
                             ? 'arrow-up-outline'
                             : 'arrow-down-outline'
                         }}"
                       ></ion-icon>
-                      {{ asset.performance }}%
+                      {{
+                        (
+                          ((asset.value! - asset.invested!) / asset.invested!) *
+                          100!
+                        ).toFixed(2)
+                      }}%
                     </span></strong
                   >
                 </div>

@@ -31,6 +31,7 @@ export class Asset extends GenericModel {
   icon?: string;
   balance?: number;
   invested?: number;
+  lastUpdate: Date = new Date();
   performance?: number;
   trend?: number;
   history?: Stats[] = [];

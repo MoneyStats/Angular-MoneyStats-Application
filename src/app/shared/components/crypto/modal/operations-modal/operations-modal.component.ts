@@ -19,7 +19,9 @@ export class OperationsModalComponent implements OnInit {
   @Input('assets') assets: Asset[] = [];
   @Input('currency') currency: string = '';
 
+  // Boolean per bottoni e titoli Add Stats
   isAddStatsSelected: boolean = false;
+  isResumeAddAssets: boolean = false;
 
   currentIndex: number = 0;
 
@@ -29,6 +31,9 @@ export class OperationsModalComponent implements OnInit {
 
   changeAsset() {
     this.currentIndex += 1;
+    if (this.currentIndex == this.assets.length) this.isResumeAddAssets = true;
+    let element = document.getElementById('action-scheet');
+    element?.scrollTo(0, 0);
   }
 
   filterWallets(wallets: Wallet[], assetName: string): Wallet[] {
@@ -39,5 +44,9 @@ export class OperationsModalComponent implements OnInit {
       w.assets = w.assets.filter((a) => a.name == assetName);
     });*/
     return wallAsset;
+  }
+
+  filterAsset(wallet: Wallet, assetName: string): Asset {
+    return wallet.assets.find((a) => a.name == assetName)!;
   }
 }
