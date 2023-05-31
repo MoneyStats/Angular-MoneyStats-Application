@@ -1,5 +1,6 @@
 const baseUrlApp: string = '../../';
-const host: string = 'http://synologynas.ddns.net:7006/stg-moneystats-service';
+//const host: string = 'http://synologynas.ddns.net:7006/stg-moneystats-service';
+const host: string = 'https://oracleserverit.ddns.net/stg-moneystats-service';
 const subDomain = 'stg-moneystats/';
 
 export const environment = {

@@ -1,0 +1,15 @@
+version: '3.1'
+
+services:
+  backend-service:
+    container_name: ${CONTAINER_NAME}
+    image: ${DOCKER_REPOSITORY}:latest
+    hostname: ${HOSTNAME}
+    ports:
+      - "10000:80"
+    networks:
+      - docker-network
+
+networks:
+  docker-network:
+    external: true
