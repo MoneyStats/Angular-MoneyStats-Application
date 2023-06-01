@@ -1,4 +1,4 @@
-FROM node:16.13.2-alpine AS builder
+FROM node:16.14-alpine AS builder
 WORKDIR '/app'
 COPY . .
 ARG config

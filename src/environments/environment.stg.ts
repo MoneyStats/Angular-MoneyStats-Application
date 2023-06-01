@@ -1,5 +1,6 @@
 const baseUrlApp: string = '../../';
-const host: string = 'http://synologynas.ddns.net:7006/stg-moneystats-service';
+//const host: string = 'http://synologynas.ddns.net:7006/stg-moneystats-service';
+const host: string = 'https://oracleservergio.ddns.net/stg-moneystats-service';
 const subDomain = 'stg-moneystats/';
 
 export const environment = {
@@ -9,7 +10,7 @@ export const environment = {
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: '1.0.0',
+  version: '1.0.1',
 
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
@@ -26,7 +27,7 @@ export const environment = {
   resetPasswordUrl: host + '/v1/auth/reset-password',
   addUpdateWalletDataUrl: host + '/v1/wallet/insert-update',
   uploadImage: host + '/v1/upload/attachment',
-  imageSizeMax: 2000000,
+  imageSizeMax: 1000000,
   listWalletDataurl: host + '/v1/wallet/list',
   getDashboardDataUrl: host + '/v1/app/dashboard',
   getResumeDataUrl: host + '/v1/app/resume',
