@@ -445,6 +445,13 @@
             "version_title": "MoneyStats V1.0.0",
             "version": "V1.0.0",
             "changelog": "&#183; Vesione iniziale"
+          },
+          {
+            "modalId": "v101",
+            "version_date": "2023-06-01",
+            "version_title": "MoneyStats V1.0.1",
+            "version": "V1.0.1",
+            "changelog": "&#183; Migrazione Servizi su Oracle Cloud. <br /> &#183; Bug Fixed."
           }
         ]
       }
