@@ -1,14 +1,20 @@
-const baseUrlApp: string = '../../';
+//const baseUrlApp: string = '../../';
+const baseUrlApp: string = 'https://moneystats.github.io/App/';
 const host: string = 'https://oracleservergio.ddns.net/prod-moneystats-service';
 const subDomain = '';
 
 export const environment = {
   production: true,
-  baseUrl: '../../' + subDomain,
-  baseUrlHeader: '../../../../' + subDomain,
-  baseUrlSettings: '../../../../../' + subDomain,
-  baseUrlDashboard: '../../../' + subDomain,
-  baseUrlVersion: '../../../../../../' + subDomain,
+  baseUrl: baseUrlApp,
+  baseUrlHeader: baseUrlApp,
+  baseUrlSettings: baseUrlApp,
+  baseUrlDashboard: baseUrlApp,
+  baseUrlVersion: baseUrlApp,
+  //baseUrl: '../../' + subDomain,
+  //baseUrlHeader: '../../../../' + subDomain,
+  //baseUrlSettings: '../../../../../' + subDomain,
+  //baseUrlDashboard: '../../../' + subDomain,
+  //baseUrlVersion: '../../../../../../' + subDomain,
   version: '1.0.1',
 
   // Mock Data

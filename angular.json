@@ -134,9 +134,6 @@
             "production": {
               "browserTarget": "angular-moneystats:build:production"
             },
-            "railway": {
-              "browserTarget": "angular-moneystats:build:railway"
-            },
             "staging": {
               "browserTarget": "angular-moneystats:build:staging"
             },
