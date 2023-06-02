@@ -1,6 +1,6 @@
 //const baseUrlApp: string = '../../';
 const baseUrlApp: string = 'https://moneystats.github.io/App/';
-const host: string = 'https://oracleservergio.ddns.net/prod-moneystats-service';
+const host: string = 'https://oraclewebserver.ddns.net/prod-moneystats-service';
 const subDomain = '';
 
 export const environment = {
