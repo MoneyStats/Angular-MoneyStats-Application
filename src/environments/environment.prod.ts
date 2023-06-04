@@ -1,14 +1,20 @@
-const baseUrlApp: string = '../../';
-const host: string = 'http://synologynas.ddns.net:8800/prod-moneystats-service';
-const subDomain = 'moneystats/';
+//const baseUrlApp: string = '../../';
+const baseUrlApp: string = 'https://moneystats.github.io/App/';
+const host: string = 'https://oraclewebserver.ddns.net/prod-moneystats-service';
+const subDomain = '';
 
 export const environment = {
   production: true,
-  baseUrl: '../../' + subDomain,
-  baseUrlHeader: '../../../../' + subDomain,
-  baseUrlSettings: '../../../../../' + subDomain,
-  baseUrlDashboard: '../../../' + subDomain,
-  baseUrlVersion: '../../../../../../' + subDomain,
+  baseUrl: baseUrlApp,
+  baseUrlHeader: baseUrlApp,
+  baseUrlSettings: baseUrlApp,
+  baseUrlDashboard: baseUrlApp,
+  baseUrlVersion: baseUrlApp,
+  //baseUrl: '../../' + subDomain,
+  //baseUrlHeader: '../../../../' + subDomain,
+  //baseUrlSettings: '../../../../../' + subDomain,
+  //baseUrlDashboard: '../../../' + subDomain,
+  //baseUrlVersion: '../../../../../../' + subDomain,
   version: '2.0.0',
 
   // Mock Data
@@ -28,7 +34,7 @@ export const environment = {
   resetPasswordUrl: host + '/v1/auth/reset-password',
   addUpdateWalletDataUrl: host + '/v1/wallet/insert-update',
   uploadImage: host + '/v1/upload/attachment',
-  imageSizeMax: 2000000,
+  imageSizeMax: 1000000,
   listWalletDataurl: host + '/v1/wallet/list',
   getDashboardDataUrl: host + '/v1/app/dashboard',
   getResumeDataUrl: host + '/v1/app/resume',
