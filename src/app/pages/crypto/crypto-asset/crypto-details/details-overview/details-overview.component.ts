@@ -34,7 +34,9 @@ export class DetailsOverviewComponent implements OnInit {
   ngOnInit(): void {
     let dashboard: CryptoDashboard = new CryptoDashboard();
     dashboard.statsAssetsDays = this.cryptoDashboard.statsAssetsDays;
-    dashboard.assets = [this.asset];
+    dashboard.assets = [
+      this.asset.name == undefined ? this.cryptoService.asset! : this.asset,
+    ];
     setTimeout(() => {
       if (this.cryptoDashboard.wallets) {
         if (this.screenService?.screenWidth! <= 780) {
@@ -74,15 +76,16 @@ export class DetailsOverviewComponent implements OnInit {
   }
 
   filterWallets(): Wallet[] {
-    console.log(this.cryptoService.cryptoDashboard);
+    let name =
+      this.asset.name == undefined
+        ? this.cryptoService.asset?.name
+        : this.asset.name;
     let wallAsset = this.cryptoDashboard.wallets.filter((w) =>
-      w.assets.find((a) => a.name == this.asset.name)
+      w.assets.find((a) => a.name == name)
     );
-    console.log(wallAsset);
     wallAsset.forEach((w) => {
-      w.assets = w.assets.filter((a) => a.name == this.asset.name);
+      w.assets = w.assets.filter((a) => a.name == name);
     });
-    console.log(wallAsset);
     return wallAsset;
   }
 }

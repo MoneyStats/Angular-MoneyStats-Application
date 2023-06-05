@@ -6,6 +6,7 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
+import { CryptoService } from 'src/assets/core/services/crypto.service';
 
 @Component({
   selector: 'app-tradingview-data',
@@ -22,9 +23,15 @@ export class TradingviewDataComponent implements OnInit {
 
   @Input('assetSymbol') assetSymbol: string = 'BTC';
 
-  constructor(private _renderer2: Renderer2) {}
+  constructor(
+    private _renderer2: Renderer2,
+    private cryptoService: CryptoService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.assetSymbol == undefined)
+      this.assetSymbol = this.cryptoService.asset?.symbol!;
+  }
 
   ngAfterViewInit(): void {
     this.appendGraph();

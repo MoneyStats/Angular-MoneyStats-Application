@@ -23,6 +23,10 @@ export class CryptoService {
   public user: User = new User();
   public currency: string = Coin.USD;
   public cryptoDashboard: CryptoDashboard = new CryptoDashboard();
+  public assets: Asset[] = [];
+
+  // Used for details
+  public asset?: Asset;
 
   constructor(
     private http: HttpClient,
@@ -40,6 +44,18 @@ export class CryptoService {
 
   getCryptoResume(): Observable<ResponseModel> {
     return this.http.get<any>(environment.getCryptoResumeMock);
+  }
+
+  getCryptoAssets(): Observable<ResponseModel> {
+    return this.http.get<any>(environment.getCryptoAssetsMock);
+  }
+
+  getCryptoDetails(identifier: string): Observable<ResponseModel> {
+    //if (this.user.mockedUser) {
+    return this.http.get<any>(environment.getCryptoDetailsMock);
+    //} else {
+    //  return this.http.get<any>(environment.getCryptoAssetsMock);
+    //}
   }
 
   getAssetList(wallets: Wallet[]): Asset[] {

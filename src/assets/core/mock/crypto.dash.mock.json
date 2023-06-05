@@ -29,6 +29,30 @@
       "performance": 10.53,
       "lastUpdate": "2023-05-01"
     },
+    "assets": [
+      {
+        "identifier": "bitcoin",
+        "name": "Bitcoin",
+        "symbol": "BTC",
+        "rank": 1,
+        "value": 10000,
+        "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/800px-Bitcoin.svg.png",
+        "balance": 0.5,
+        "invested": 1000,
+        "performance": 10,
+        "trend": 100,
+        "history": [
+          {
+            "creationDate": "2023-02-21T15:19:14",
+            "updateDate": "2023-02-21T15:19:14",
+            "date": "2023-01-01",
+            "balance": 10.0,
+            "percentage": 999900.0,
+            "trend": 10.0
+          }
+        ]
+      }
+    ],
     "wallets": [
       {
         "id": 1,

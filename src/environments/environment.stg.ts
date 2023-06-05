@@ -20,6 +20,10 @@ export const environment = {
   getTemplate: baseUrlApp + 'assets/template/template.json',
   getCryptoDashboardMock: baseUrlApp + 'assets/core/mock/crypto.dash.mock.json',
   getCryptoPriceMock: baseUrlApp + 'assets/core/mock/crypto.price.mock.json',
+  getCryptoResumeMock: baseUrlApp + 'assets/core/mock/crypto.stats.mock.json',
+  getCryptoAssetsMock: baseUrlApp + 'assets/core/mock/crypto.assets.mock.json',
+  getCryptoDetailsMock:
+    baseUrlApp + 'assets/core/mock/crypto.details.mock.json',
 
   // Datas
   registerDataUrl: host + '/v1/auth/sign-up',

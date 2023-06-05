@@ -2,7 +2,7 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 const baseUrlApp: string = '../../';
-const host: string = 'http://192.168.1.24:8080/moneystats-service';
+const host: string = 'http://192.168.1.26:8080/moneystats-service';
 //const host: string = 'http://synologynas.ddns.net:8000';
 //const host: string = 'https://prod-moneystats-service.up.railway.app';
 const subDomain = '';
@@ -26,6 +26,9 @@ export const environment = {
   getCryptoDashboardMock: baseUrlApp + 'assets/core/mock/crypto.dash.mock.json',
   getCryptoPriceMock: baseUrlApp + 'assets/core/mock/crypto.price.mock.json',
   getCryptoResumeMock: baseUrlApp + 'assets/core/mock/crypto.stats.mock.json',
+  getCryptoAssetsMock: baseUrlApp + 'assets/core/mock/crypto.assets.mock.json',
+  getCryptoDetailsMock:
+    baseUrlApp + 'assets/core/mock/crypto.details.mock.json',
 
   // Datas
   registerDataUrl: host + '/v1/auth/sign-up',

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   Asset,
@@ -14,7 +14,7 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 })
 export class CryptoDetailsComponent implements OnInit {
   cryptoDashboard: CryptoDashboard = new CryptoDashboard();
-  asset: Asset = new Asset();
+  @Output() asset: Asset = new Asset();
 
   constructor(
     private route: ActivatedRoute,
@@ -25,9 +25,17 @@ export class CryptoDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.screenService.hideFooter();
     this.cryptoDashboard = this.cryptoService.cryptoDashboard;
-    let assets = this.cryptoDashboard.assets;
+    let assets = this.cryptoService.assets;
+    console.log(assets);
     this.route.params.subscribe((a: any) => {
-      this.asset = assets.find((as) => as.identifier == a.identifier)!;
+      if (assets.length != 0) {
+        this.asset = assets.find((as) => as.identifier == a.identifier)!;
+      } else {
+        this.cryptoService.getCryptoDetails(a.id).subscribe((details) => {
+          this.asset = details.data;
+          this.cryptoService.asset = details.data;
+        });
+      }
     });
   }
 }

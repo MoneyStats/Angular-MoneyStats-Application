@@ -1,0 +1,64 @@
+{
+  "status": 200,
+  "message": "Data for Assets!",
+  "correlationId": "13eb2dbb-db06-44fb-98b6-e2e6b3a8dc74",
+  "data": {
+    "identifier": "bitcoin",
+    "name": "Bitcoin",
+    "symbol": "BTC",
+    "rank": 1,
+    "value": 10000,
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/800px-Bitcoin.svg.png",
+    "balance": 0.5,
+    "invested": 1000,
+    "performance": 10,
+    "trend": 100,
+    "history": [
+      {
+        "id": 1,
+        "creationDate": "2023-02-21T15:19:14",
+        "updateDate": "2023-02-21T15:19:14",
+        "date": "2023-01-01",
+        "balance": 10.0,
+        "percentage": 999900.0,
+        "trend": 10.0
+      },
+      {
+        "id": 7,
+        "creationDate": "2023-02-21T15:20:35",
+        "updateDate": "2023-02-21T15:20:35",
+        "date": "2023-02-01",
+        "balance": 21.4,
+        "percentage": 114.0,
+        "trend": 11.4
+      },
+      {
+        "id": 13,
+        "creationDate": "2023-02-21T15:21:10",
+        "updateDate": "2023-02-21T15:21:10",
+        "date": "2023-03-01",
+        "balance": 20.2,
+        "percentage": -5.61,
+        "trend": -1.2
+      },
+      {
+        "id": 19,
+        "creationDate": "2023-02-21T15:21:44",
+        "updateDate": "2023-02-21T15:21:44",
+        "date": "2023-04-01",
+        "balance": 25.4,
+        "percentage": 25.74,
+        "trend": 5.2
+      },
+      {
+        "id": 25,
+        "creationDate": "2023-02-21T15:22:30",
+        "updateDate": "2023-02-21T15:22:30",
+        "date": "2023-05-01",
+        "balance": 50.2,
+        "percentage": 97.64,
+        "trend": 24.8
+      }
+    ]
+  }
+}

@@ -29,7 +29,11 @@ export class CryptoAssetComponent implements OnInit {
   ngOnInit(): void {
     this.screenService.hideFooter();
     this.cryptoDashboard = this.cryptoService.cryptoDashboard;
-    this.assets = this.cryptoDashboard.assets;
+    this.cryptoService.getCryptoAssets().subscribe((data) => {
+      this.assets = data.data;
+      this.cryptoService.assets = data.data;
+      this.cryptoDashboard.assets = data.data;
+    });
 
     setTimeout(() => {
       if (this.cryptoDashboard.wallets) {
