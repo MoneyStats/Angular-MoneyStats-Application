@@ -521,6 +521,10 @@
         "title": "Having an Asset",
         "subTitle": "Having a Crypto Asset like BTC, ETH"
       },
+      "req4": {
+        "title": "Having an Crypto Currency",
+        "subTitle": "Set the Crypto Currency for the transaction like USD, EUR, GBP..."
+      },
       "next": "Go to Dashboard"
     },
     "dashboard": {
@@ -590,6 +594,11 @@
       },
       "editAsset": {
         "title": "Edit Asset "
+      },
+      "selectCurrency": {
+        "title": "Select Crypto Currency",
+        "subtitle": "Fill the form by selecting a Crypto currency",
+        "save": "Save"
       }
     }
   },

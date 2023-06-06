@@ -12,6 +12,7 @@ import { SwalService } from '../utils/swal.service';
 import { DashboardService } from './dashboard.service';
 import { StatsService } from './stats.service';
 import { WalletService } from './wallet.service';
+import { AppService } from './app.service';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +28,8 @@ export class UserService {
     private walletService: WalletService,
     public swalService: SwalService,
     private router: Router,
-    private statsService: StatsService
+    private statsService: StatsService,
+    private appService: AppService
   ) {}
 
   setValue() {
@@ -53,6 +55,7 @@ export class UserService {
     this.walletService.user = this.user;
     this.dashboardService.user = this.user;
     this.statsService.user = this.user;
+    this.appService.user = this.user;
   }
 
   syncGithubUser(user: string) {

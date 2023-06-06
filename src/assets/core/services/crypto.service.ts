@@ -58,6 +58,23 @@ export class CryptoService {
     //}
   }
 
+  addOrUpdateCryptoAsset(wallet: Wallet): Observable<ResponseModel> {
+    const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      authToken: authToken!,
+    });
+    if (this.user.mockedUser) {
+      let response: ResponseModel = new ResponseModel();
+      response.data = wallet;
+      return of(response);
+    } else {
+      return this.http.post<any>(environment.addCryptoAssetDataUrl, wallet, {
+        headers: headers,
+      });
+    }
+  }
+
   getAssetList(wallets: Wallet[]): Asset[] {
     const allAssets: Array<Asset> = [];
     wallets.forEach((wallet) => {

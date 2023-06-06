@@ -521,6 +521,10 @@
         "title": "Avere un Asset",
         "subTitle": "Avere un Crypto Asset tipo BTC, ETH"
       },
+      "req4": {
+        "title": "Avere una Crypto Currency",
+        "subTitle": "Seleziona una Crypto Currency tipo USD, EUR, GBP..."
+      },
       "next": "Vai alla Dashboard"
     },
     "dashboard": {
@@ -590,6 +594,11 @@
       },
       "editAsset": {
         "title": "Modifica Asset "
+      },
+      "selectCurrency": {
+        "title": "Seleziona Crypto Currency",
+        "subtitle": "Completa il form selzionando una Crypto currency",
+        "save": "Salva"
       }
     }
   },

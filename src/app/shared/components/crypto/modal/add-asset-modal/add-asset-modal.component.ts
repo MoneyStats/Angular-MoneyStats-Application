@@ -47,8 +47,9 @@ export class AddAssetModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.wallets);
     this.categories = this.dashboardService.dashboard.categories;
-    if (this.wallets == undefined) {
+    if (this.wallets == undefined && this.dashboardService.dashboard.wallets) {
       this.wallets = this.dashboardService.dashboard.wallets.filter(
         (w) => w.category == 'Crypto'
       );
@@ -87,6 +88,7 @@ export class AddAssetModalComponent implements OnInit {
       (this.wallet?.assets.length > 0 &&
         !this.wallet?.assets.find((a) => a.name == this.modelAsset))
     ) {
+      console.log('SONO ASSET');
       this.warning = false;
       this.asset = this.cryptoPrices.find((c) => c.name == this.modelAsset);
       this.isAssetSelected = true;
@@ -108,9 +110,17 @@ export class AddAssetModalComponent implements OnInit {
       if (this.wallet?.assets == undefined) {
         this.wallet!.assets = [];
       }
+      this.asset!.balance = this.balance;
+      this.asset!.invested = this.invested;
+      this.asset!.lastUpdate = new Date();
       this.wallet?.assets.push(this.asset!);
-      this.emitAddAsset.emit(this.wallet);
-      this.resetModal();
+      this.cryptoService
+        .addOrUpdateCryptoAsset(this.wallet!)
+        .subscribe((data) => {
+          console.log(data);
+          this.emitAddAsset.emit(data.data);
+          this.resetModal();
+        });
     } else {
       this.isAssetSelected = false;
       this.modelAsset = '';

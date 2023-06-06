@@ -18,6 +18,7 @@ export enum ModalConstant {
   BACKUPDATA = 'backupDataModal',
   ADDASSET = 'addAssetModal',
   ADDOPERATIONS = 'addOperationsModal',
+  ADDCRYPTOCURRENCY = 'addCryptoCurrencyModal',
 }
 
 export enum StorageConstant {

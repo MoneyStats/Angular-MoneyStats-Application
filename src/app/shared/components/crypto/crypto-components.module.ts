@@ -10,10 +10,19 @@ import { environment } from 'src/environments/environment';
 import { RouterModule } from '@angular/router';
 import { AddAssetModalComponent } from './modal/add-asset-modal/add-asset-modal.component';
 import { OperationsModalComponent } from './modal/operations-modal/operations-modal.component';
+import { SelectCryptoCurrencyComponent } from './modal/select-crypto-currency/select-crypto-currency.component';
 
 @NgModule({
-  declarations: [AddAssetModalComponent, OperationsModalComponent],
-  exports: [AddAssetModalComponent, OperationsModalComponent],
+  declarations: [
+    AddAssetModalComponent,
+    OperationsModalComponent,
+    SelectCryptoCurrencyComponent,
+  ],
+  exports: [
+    AddAssetModalComponent,
+    OperationsModalComponent,
+    SelectCryptoCurrencyComponent,
+  ],
   imports: [
     RouterModule,
     CommonModule,

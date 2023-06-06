@@ -6,7 +6,10 @@
       <ion-icon name="arrow-back-outline"></ion-icon>
     </a>
   </div>
-  <div routerLink="/crypto/dashboard" class="pageTitle clickable">
+  <div
+    routerLink="{{ isMenuActive ? '/crypto/dashboard' : '' }}"
+    class="pageTitle clickable"
+  >
     {{ title }}
   </div>
   <div *ngIf="isMenuActive" class="right">

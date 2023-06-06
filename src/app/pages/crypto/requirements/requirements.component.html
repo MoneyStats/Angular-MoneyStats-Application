@@ -15,7 +15,7 @@
 
     <!-- Transactions -->
     <div class="section mt-3 mx-auto" style="max-width: 600px">
-      <div class="card border_round">
+      <div class="card border_round mb-3">
         <ul
           class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1"
         >
@@ -120,6 +120,39 @@
             </a>
           </li>
           <!-- * item -->
+          <!-- item -->
+          <li>
+            <a
+              class="item clickable"
+              data-bs-toggle="modal"
+              attr.data-bs-target="#{{ modalConstant.ADDCRYPTOCURRENCY }}"
+            >
+              <div class="icon-box">
+                <ion-icon
+                  *ngIf="!isCurrencyAdded"
+                  class="icon-medium bg-orange"
+                  name="alert-circle-outline"
+                ></ion-icon>
+                <ion-icon
+                  *ngIf="isCurrencyAdded"
+                  class="icon-medium bg-blue"
+                  name="checkmark-circle"
+                ></ion-icon>
+              </div>
+              <div class="in">
+                <div>
+                  <strong>
+                    {{ "crypto.requirements.req4.title" | translate }}</strong
+                  >
+                  <div class="text-small text-secondary">
+                    {{ "crypto.requirements.req4.subTitle" | translate }}
+                  </div>
+                </div>
+                <div class="text-end"></div>
+              </div>
+            </a>
+          </li>
+          <!-- * item -->
         </ul>
       </div>
     </div>
@@ -148,3 +181,8 @@
   [modalId]="modalConstant.ADDASSET"
   [wallets]="cryptoWallet!"
 ></app-add-asset-modal>
+
+<app-select-crypto-currency
+  (emitAddCurrency)="selectCurrency($event)"
+  [modalId]="modalConstant.ADDCRYPTOCURRENCY"
+></app-select-crypto-currency>

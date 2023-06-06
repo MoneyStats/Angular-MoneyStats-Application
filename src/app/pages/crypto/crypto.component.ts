@@ -39,15 +39,15 @@ export class CryptoComponent implements OnInit {
         wallets.length == 0 ||
         wallets.find((w) => w.assets == undefined || w.assets.length == 0)
       ) {
-        //this.onBoard();
+        this.onBoard();
       }
-    } //else this.onBoard();
+    } else this.onBoard();
   }
 
   onBoard() {
     if (!this.appService.isOnboardingCrypto) {
       this.appService.isOnboardingCrypto = true;
       this.router.navigate(['on-boarding']);
-    } //else this.router.navigate(['crypto/requirements']);
+    } else this.router.navigate(['crypto/requirements']);
   }
 }

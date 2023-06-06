@@ -63,7 +63,12 @@ export class AddWalletComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.categories = this.dashboardService.dashboard.categories;
     this.wallets = this.dashboardService.dashboard.wallets;
-    this.notCryptoWallets = this.wallets.filter((w) => w.category != 'Crypto');
+    console.log(!this.wallets);
+    if (this.wallets) {
+      this.notCryptoWallets = this.wallets.filter(
+        (w) => w.category != 'Crypto'
+      );
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
