@@ -48,7 +48,8 @@ export const environment = {
   updateUserDataUrl: host + '/v1/auth/update/user',
   backupDataUrl: host + '/v1/app/backup',
   restoreDataUrl: host + '/v1/app/restore',
-  addCryptoAssetDataUrl: host + '/v1/asset/addOrUpdate',
+  addCryptoAssetDataUrl: host + '/v1/crypto/asset/addOrUpdate',
+  getCryptoAssetDataUrl: host + '/v1/crypto/asset/getAll',
   forgotPassword: true,
 };
 

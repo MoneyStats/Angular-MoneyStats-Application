@@ -47,7 +47,18 @@ export class CryptoService {
   }
 
   getCryptoAssets(): Observable<ResponseModel> {
-    return this.http.get<any>(environment.getCryptoAssetsMock);
+    const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      authToken: authToken!,
+    });
+    if (this.user.mockedUser) {
+      return this.http.get<any>(environment.getCryptoAssetsMock);
+    } else {
+      return this.http.get<any>(environment.getCryptoAssetDataUrl, {
+        headers: headers,
+      });
+    }
   }
 
   getCryptoDetails(identifier: string): Observable<ResponseModel> {

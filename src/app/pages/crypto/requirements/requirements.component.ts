@@ -54,7 +54,10 @@ export class RequirementsComponent implements OnInit {
 
   validateBtn(): boolean {
     let validate =
-      this.isCryptoWalletCreated && this.isWalletCreated && this.isAssetCreated;
+      this.isCryptoWalletCreated &&
+      this.isWalletCreated &&
+      this.isAssetCreated &&
+      this.isCurrencyAdded;
     return validate;
   }
 
