@@ -59,20 +59,35 @@ export class RequirementsComponent implements OnInit {
   }
 
   saveWallet(wallet: Wallet) {
-    let index = this.wallets?.indexOf(
-      this.wallets.find((w) => w.name == wallet.name)!
-    );
-    this.wallets![index!] = wallet!;
-    this.cryptoWallet = this.wallets!.filter((w) => w.category == this.CRYPTO);
-    this.isWalletCreated = true;
-    if (this.wallets![index!].category == this.CRYPTO) {
+    if (this.wallets != undefined) {
+      let index = this.wallets?.indexOf(
+        this.wallets.find((w) => w.name == wallet.name)!
+      );
+      this.wallets![index!] = wallet!;
+      this.isWalletCreated = true;
+      this.cryptoWallet = this.wallets!.filter(
+        (w) => w.category == this.CRYPTO
+      );
+      if (this.wallets![index!].category == this.CRYPTO) {
+        this.isCryptoWalletCreated = true;
+      }
+      if (
+        this.wallets![index!].assets != undefined &&
+        this.wallets![index!].assets.length != 0
+      )
+        this.isAssetCreated = true;
+    } else if (this.wallets == undefined && wallet.category == this.CRYPTO) {
       this.isCryptoWalletCreated = true;
+      this.dashboardService.dashboard.wallets = [wallet];
+      this.cryptoWallet = [wallet];
+      this.wallets = [wallet];
+      console.log(this.cryptoWallet);
+      this.isWalletCreated = true;
+    } else {
+      this.dashboardService.dashboard.wallets = [wallet];
+      this.wallets = [wallet];
+      this.isWalletCreated = true;
     }
-    if (
-      this.wallets![index!].assets != undefined &&
-      this.wallets![index!].assets.length != 0
-    )
-      this.isAssetCreated = true;
   }
 
   selectCurrency(currency: string) {

@@ -167,5 +167,15 @@ export class CryptoDashboardComponent implements OnInit {
     this._renderer2.appendChild(this.selectGraph?.nativeElement, div);
     //this.selectGraph?.nativeElement.appendChild(script);
   }
-  saveWallet(wallet: Wallet) {}
+  saveWallet(wallet: Wallet) {
+    if (this.cryptoWallet?.find((w) => w.id == wallet.id)) {
+      let index = this.cryptoWallet?.indexOf(wallet);
+      console.log(index);
+      this.cryptoWallet[index] = wallet;
+      this.cryptoDashboard.wallets[index] = wallet;
+    } else {
+      this.cryptoDashboard.wallets.push(wallet);
+      this.cryptoWallet?.push(wallet);
+    }
+  }
 }

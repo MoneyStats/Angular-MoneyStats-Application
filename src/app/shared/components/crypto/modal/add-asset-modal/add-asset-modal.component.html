@@ -49,13 +49,16 @@
                       [(ngModel)]="modelWallet"
                       #wallet1="ngModel"
                     >
-                      <option [selected]="this" disabled>
+                      <option selected disabled>
                         {{
                           "crypto.cryptoModal.addAsset.selectWalletTitle"
                             | translate
                         }}
                       </option>
-                      <option *ngFor="let w of wallets" value="{{ w.name }}">
+                      <option
+                        *ngFor="let w of wallets"
+                        value="{{ w.name }}"
+                      >
                         {{ w.name }}
                       </option>
                     </select>

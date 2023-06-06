@@ -70,7 +70,7 @@
                     pointer-events: visible;
                     cursor: pointer;
                   "
-                  class="col-6"
+                  class="col-6 hidden_desktop"
                 >
                   <ion-icon
                     class="icon-size icon-color"
@@ -80,6 +80,27 @@
                     routerLink="/crypto/asset"
                     style="vertical-align: -1px; color: #958d9e"
                     >View Assets</a
+                  >
+                </div>
+                <div
+                  data-bs-toggle="modal"
+                  attr.data-bs-target="#{{ modalConstant.ADDWALLET }}"
+                  style="
+                    position: absolute;
+                    right: 0px;
+                    border-left: solid 1px;
+                    z-index: 99;
+                    pointer-events: visible;
+                    cursor: pointer;
+                  "
+                  class="col-6 hidden_mobile"
+                >
+                  <ion-icon
+                    class="icon-size icon-color"
+                    name="add-circle"
+                  ></ion-icon>
+                  <a style="vertical-align: -1px; color: #958d9e"
+                    >Add Crypto Wallet</a
                   >
                 </div>
               </div>

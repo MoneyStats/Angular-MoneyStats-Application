@@ -44,7 +44,7 @@ export class AddWalletComponent implements OnInit, OnChanges {
 
   isImportWallet: boolean = false;
   isNewWallet: boolean = false;
-  wallets: Wallet[] = [];
+  @Input('wallets') wallets: Wallet[] = [];
   walletName: string = '';
   notCryptoWallets: Wallet[] = [];
 
@@ -62,18 +62,24 @@ export class AddWalletComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.categories = this.dashboardService.dashboard.categories;
-    this.wallets = this.dashboardService.dashboard.wallets;
-    console.log(!this.wallets);
-    if (this.wallets) {
-      this.notCryptoWallets = this.wallets.filter(
-        (w) => w.category != 'Crypto'
-      );
+    if (this.wallets && this.wallets.length == 0) {
+      this.wallets = this.dashboardService.dashboard.wallets;
     }
+    this.filterWallet();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.isCrypto) {
       this.wallet.category = 'Crypto';
+    }
+    this.filterWallet();
+  }
+
+  filterWallet() {
+    if (this.wallets) {
+      this.notCryptoWallets = this.wallets.filter(
+        (w) => w.category != 'Crypto'
+      );
     }
   }
 
@@ -116,7 +122,10 @@ export class AddWalletComponent implements OnInit, OnChanges {
       walletToSave.img =
         environment.baseUrlHeader + AppConfigConst.DEFAULT_WALLET_IMG;
     }
-    if (walletToSave.history.find((w) => w.id === undefined)) {
+    if (
+      walletToSave.history &&
+      walletToSave.history.find((w) => w.id === undefined)
+    ) {
       walletToSave?.history.splice(0, 1);
     }
 
@@ -192,5 +201,6 @@ export class AddWalletComponent implements OnInit, OnChanges {
     this.defaultImg = false;
     this.swalService.walletImg = undefined;
     this.wallet = new Wallet();
+    this.wallets = [];
   }
 }
