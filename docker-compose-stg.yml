@@ -4,13 +4,13 @@ services:
   backend-service:
     container_name: ${CONTAINER_NAME}
     image: ${DOCKER_REPOSITORY}:latest
-    hostname: prod.moneystats.angular
+    hostname: stg.moneystats.angular
     ports:
       - "10000:80"
     networks:
       docker-network:
         aliases:
-          - prod.moneystats.angular
+          - stg.moneystats.angular
 
 networks:
   docker-network:
