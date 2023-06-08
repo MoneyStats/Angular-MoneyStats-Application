@@ -79,7 +79,7 @@
               class="addWallet text-end hidden_mobile"
             >
               <button
-                (click)="isAddStatsSelected = true"
+                (click)="addStatsClick()"
                 type="button"
                 class="btn btn-primary me-1 mb-1"
               >
@@ -274,7 +274,13 @@
                                       filterAsset(wallet, asset.name!).history![
                                         filterAsset(wallet, asset.name!)
                                           .history!.length - 1
-                                      ].percentage > 0
+                                      ].percentage == 0
+                                        ? 'badge-warning'
+                                        : filterAsset(wallet, asset.name!)
+                                            .history![
+                                            filterAsset(wallet, asset.name!)
+                                              .history!.length - 1
+                                          ].percentage > 0
                                         ? 'badge-success'
                                         : 'badge-danger'
                                     }}"
@@ -303,7 +309,13 @@
                                     filterAsset(wallet, asset.name!).history![
                                       filterAsset(wallet, asset.name!).history!
                                         .length - 1
-                                    ].trend > 0
+                                    ].trend == 0
+                                      ? 'text-warning'
+                                      : filterAsset(wallet, asset.name!)
+                                          .history![
+                                          filterAsset(wallet, asset.name!)
+                                            .history!.length - 1
+                                        ].trend > 0
                                       ? 'text-success'
                                       : 'text-danger'
                                   }}"
@@ -372,7 +384,7 @@
                 <div class="col-6">
                   <div class="form-group basic">
                     <button
-                      (click)="isAddStatsSelected = true"
+                      (click)="addStatsClick()"
                       type="button"
                       class="btn btn-primary btn-block btn-lg"
                     >

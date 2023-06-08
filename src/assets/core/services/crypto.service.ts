@@ -35,7 +35,18 @@ export class CryptoService {
   ) {}
 
   getCryptoDashboard(): Observable<ResponseModel> {
-    return this.http.get<any>(environment.getCryptoDashboardMock);
+    const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      authToken: authToken!,
+    });
+    if (this.user.mockedUser) {
+      return this.http.get<any>(environment.getCryptoDashboardMock);
+    } else {
+      return this.http.get<any>(environment.getCryptoDashboardDataUrl, {
+        headers: headers,
+      });
+    }
   }
 
   getCryptoPrice(): Observable<ResponseModel> {
@@ -43,7 +54,18 @@ export class CryptoService {
   }
 
   getCryptoResume(): Observable<ResponseModel> {
-    return this.http.get<any>(environment.getCryptoResumeMock);
+    const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      authToken: authToken!,
+    });
+    if (this.user.mockedUser) {
+      return this.http.get<any>(environment.getCryptoResumeMock);
+    } else {
+      return this.http.get<any>(environment.getCryptoResumeDataUrl, {
+        headers: headers,
+      });
+    }
   }
 
   getCryptoAssets(): Observable<ResponseModel> {

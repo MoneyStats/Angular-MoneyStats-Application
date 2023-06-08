@@ -22,9 +22,42 @@
           <!-- item -->
           <li>
             <a
+              class="item clickable"
+              data-bs-toggle="modal"
+              attr.data-bs-target="#{{ modalConstant.ADDCRYPTOCURRENCY }}"
+            >
+              <div class="icon-box">
+                <ion-icon
+                  *ngIf="!isCurrencyAdded"
+                  class="icon-medium bg-orange"
+                  name="alert-circle-outline"
+                ></ion-icon>
+                <ion-icon
+                  *ngIf="isCurrencyAdded"
+                  class="icon-medium bg-blue"
+                  name="checkmark-circle"
+                ></ion-icon>
+              </div>
+              <div class="in">
+                <div>
+                  <strong>
+                    {{ "crypto.requirements.req4.title" | translate }}</strong
+                  >
+                  <div class="text-small text-secondary">
+                    {{ "crypto.requirements.req4.subTitle" | translate }}
+                  </div>
+                </div>
+                <div class="text-end"></div>
+              </div>
+            </a>
+          </li>
+          <!-- * item -->
+          <!-- item -->
+          <li>
+            <a
               data-bs-toggle="modal"
               attr.data-bs-target="#{{ modalConstant.ADDWALLET }}"
-              class="item clickable"
+              class="item clickable {{ isCurrencyAdded ? '' : 'disabled' }}"
               (click)="enableModalCrypto = false"
             >
               <div class="icon-box">
@@ -58,7 +91,7 @@
             <a
               data-bs-toggle="modal"
               attr.data-bs-target="#{{ modalConstant.ADDWALLET }}"
-              class="item clickable"
+              class="item clickable {{ isCurrencyAdded ? '' : 'disabled' }}"
               (click)="enableModalCrypto = true"
             >
               <div class="icon-box">
@@ -87,10 +120,11 @@
             </a>
           </li>
           <!-- * item -->
+
           <!-- item -->
           <li>
             <a
-              class="item clickable"
+              class="item clickable {{ isCurrencyAdded ? '' : 'disabled' }}"
               data-bs-toggle="modal"
               attr.data-bs-target="#{{ modalConstant.ADDASSET }}"
             >
@@ -113,39 +147,6 @@
                   >
                   <div class="text-small text-secondary">
                     {{ "crypto.requirements.req3.subTitle" | translate }}
-                  </div>
-                </div>
-                <div class="text-end"></div>
-              </div>
-            </a>
-          </li>
-          <!-- * item -->
-          <!-- item -->
-          <li>
-            <a
-              class="item clickable"
-              data-bs-toggle="modal"
-              attr.data-bs-target="#{{ modalConstant.ADDCRYPTOCURRENCY }}"
-            >
-              <div class="icon-box">
-                <ion-icon
-                  *ngIf="!isCurrencyAdded"
-                  class="icon-medium bg-orange"
-                  name="alert-circle-outline"
-                ></ion-icon>
-                <ion-icon
-                  *ngIf="isCurrencyAdded"
-                  class="icon-medium bg-blue"
-                  name="checkmark-circle"
-                ></ion-icon>
-              </div>
-              <div class="in">
-                <div>
-                  <strong>
-                    {{ "crypto.requirements.req4.title" | translate }}</strong
-                  >
-                  <div class="text-small text-secondary">
-                    {{ "crypto.requirements.req4.subTitle" | translate }}
                   </div>
                 </div>
                 <div class="text-end"></div>
@@ -181,6 +182,7 @@
   (emitAddAsset)="saveWallet($event)"
   [modalId]="modalConstant.ADDASSET"
   [wallets]="cryptoWallet!"
+  [cryptoCurrency]="currency"
 ></app-add-asset-modal>
 
 <app-select-crypto-currency

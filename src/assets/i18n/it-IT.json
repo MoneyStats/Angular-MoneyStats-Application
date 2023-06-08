@@ -590,7 +590,7 @@
         "balance": "Saldo",
         "balancePla": "Inserisci il tuo saldo in ",
         "invested": "Investito",
-        "investedPla": "Inserisci il saldo investito"
+        "investedPla": "Inserisci il saldo investito in "
       },
       "editAsset": {
         "title": "Modifica Asset "

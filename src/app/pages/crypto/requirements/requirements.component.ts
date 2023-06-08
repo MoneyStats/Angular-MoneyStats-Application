@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
@@ -19,11 +20,16 @@ export class RequirementsComponent implements OnInit {
   wallets?: Wallet[];
   cryptoWallet?: Wallet[];
 
+  currency: string = '';
+
   private CRYPTO: string = 'Crypto';
 
   enableModalCrypto: boolean = false;
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(
+    private dashboardService: DashboardService,
+    private router: Router
+  ) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -49,7 +55,9 @@ export class RequirementsComponent implements OnInit {
     }
     if (user?.cryptoCurrency) {
       this.isCurrencyAdded = true;
+      this.currency = user.cryptoCurrency;
     }
+    //if (this.validateBtn()) this.router.navigate(['/crypto/dashboard']);
   }
 
   validateBtn(): boolean {
@@ -95,5 +103,6 @@ export class RequirementsComponent implements OnInit {
 
   selectCurrency(currency: string) {
     this.isCurrencyAdded = true;
+    this.currency = currency;
   }
 }

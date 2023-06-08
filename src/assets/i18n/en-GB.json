@@ -590,7 +590,7 @@
         "balance": "Balance",
         "balancePla": "Type your current balance in ",
         "invested": "Invested",
-        "investedPla": "Type the amount of money you invested"
+        "investedPla": "Type the amount of money you invested in "
       },
       "editAsset": {
         "title": "Edit Asset "

@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 export class AddAssetModalComponent implements OnInit {
   environment = environment;
   @Input('modalId') modalId: string = '';
+  @Input('cryptoCurrency') cryptoCurrency: string = '';
   @Output('emitAddAsset') emitAddAsset = new EventEmitter<Wallet>();
 
   asset?: Asset;
@@ -39,7 +40,7 @@ export class AddAssetModalComponent implements OnInit {
 
   constructor(
     public dashboardService: DashboardService,
-    private cryptoService: CryptoService
+    public cryptoService: CryptoService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -112,6 +113,8 @@ export class AddAssetModalComponent implements OnInit {
       }
       this.asset!.balance = this.balance;
       this.asset!.invested = this.invested;
+      this.asset!.performance = 0;
+      this.asset!.trend = 0;
       this.asset!.lastUpdate = new Date();
       this.wallet?.assets.push(this.asset!);
       this.cryptoService

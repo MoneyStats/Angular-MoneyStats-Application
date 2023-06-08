@@ -80,11 +80,16 @@ export class DetailsOverviewComponent implements OnInit {
       this.asset.name == undefined
         ? this.cryptoService.asset?.name
         : this.asset.name;
-    let wallAsset = this.cryptoDashboard.wallets.filter((w) =>
-      w.assets.find((a) => a.name == name)
-    );
+    let wallAsset = this.cryptoDashboard.wallets.filter((w) => {
+      if (w.assets != undefined && w.assets.length != 0)
+        return w.assets.find((a) => a.name == name);
+      return null;
+    });
     wallAsset.forEach((w) => {
       w.assets = w.assets.filter((a) => a.name == name);
+      if (w.assets[0].history == undefined) {
+        w.assets[0].history = [];
+      }
     });
     return wallAsset;
   }

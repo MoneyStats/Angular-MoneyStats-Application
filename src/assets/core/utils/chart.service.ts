@@ -289,7 +289,10 @@ export class ChartService {
     let series: Array<any> = [];
     let oldStats: any = new Stats();
     let oldDate: any;
-    if (cryptoDashboard.statsAssetsDays.length === 1) {
+    if (
+      cryptoDashboard.statsAssetsDays &&
+      cryptoDashboard.statsAssetsDays.length === 1
+    ) {
       oldDate =
         parseInt(
           cryptoDashboard.statsAssetsDays[
@@ -302,26 +305,41 @@ export class ChartService {
       let oldBalance = 0;
       let historyBalance: Array<number> = [];
       let index = 0;
-      if (asset.history!.length === 1) {
-        oldStats.balance = oldBalance;
+      if (asset.history && asset.history.length != 0) {
+        if (asset.history.length === 1) {
+          oldStats.balance = oldBalance;
 
-        oldStats.date = oldDate;
-        asset.history!.splice(0, 0, oldStats);
-      }
-      asset.history!.forEach((h) => {
-        if (h.date == undefined) {
-          return;
+          oldStats.date = oldDate;
+          asset.history!.splice(0, 0, oldStats);
         }
-        let count = cryptoDashboard.statsAssetsDays.indexOf(h.date.toString());
-        if (count != index) {
-          Array.from(Array(count - index)).forEach((d) =>
-            historyBalance.push(0)
+        asset.history!.forEach((h) => {
+          if (h.date == undefined) {
+            return;
+          }
+          let count = cryptoDashboard.statsAssetsDays.indexOf(
+            h.date.toString()
           );
-          index = count;
-        }
-        historyBalance.push(h.balance);
-        index++;
-      });
+          if (count != index) {
+            Array.from(Array(count - index)).forEach((d) =>
+              historyBalance.push(0)
+            );
+            index = count;
+          }
+          historyBalance.push(h.balance);
+          index++;
+        });
+        historyBalance.push(asset.value!);
+        let today = new Date();
+        cryptoDashboard.statsAssetsDays.push(today.toDateString());
+      } else {
+        historyBalance.push(0);
+        historyBalance.push(asset.value!);
+        let today = new Date();
+        let yesterday = new Date();
+        yesterday.setDate(today.getDate() - 1);
+        cryptoDashboard.statsAssetsDays = [yesterday.toDateString()];
+        cryptoDashboard.statsAssetsDays.push(today.toDateString());
+      }
       let serie = {
         name: asset.name,
         data: historyBalance,

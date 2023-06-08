@@ -55,10 +55,7 @@
                             | translate
                         }}
                       </option>
-                      <option
-                        *ngFor="let w of wallets"
-                        value="{{ w.name }}"
-                      >
+                      <option *ngFor="let w of wallets" value="{{ w.name }}">
                         {{ w.name }}
                       </option>
                     </select>
@@ -215,13 +212,11 @@
               <div class="col-md-6">
                 <div class="form-group boxed">
                   <div class="input-wrapper">
-                    <label
-                      class="label"
-                      style="margin-left: 5px"
-                      for="invested"
+                    <label class="label" style="margin-left: 5px" for="invested"
                       >{{
                         "crypto.cryptoModal.addAsset.invested" | translate
-                      }}</label
+                      }}
+                      ({{ cryptoCurrency }})</label
                     >
                     <input
                       type="text"
@@ -233,12 +228,14 @@
                       id="invested"
                       placeholder="{{
                         'crypto.cryptoModal.addAsset.investedPla' | translate
-                      }}"
+                      }}{{ cryptoCurrency }}"
                     />
                     <p style="margin-left: 5px">
-                      <small>{{
-                        "crypto.cryptoModal.addAsset.investedPla" | translate
-                      }}</small>
+                      <small
+                        >{{
+                          "crypto.cryptoModal.addAsset.investedPla" | translate
+                        }}{{ cryptoCurrency }}</small
+                      >
                     </p>
                   </div>
                 </div>

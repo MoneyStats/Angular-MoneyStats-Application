@@ -42,11 +42,27 @@ export class OperationsModalComponent implements OnInit {
     private statsService: StatsService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('INIT');
+  }
 
   /**
    * ADD STATS METHODS
    */
+  addStatsClick() {
+    this.isAddStatsSelected = true;
+    // Ho bisogno di fare un check della history perchè se non c'è una history devo crearne una vuota
+    let stats = new Stats();
+    stats.balance = 0;
+    stats.date = new Date();
+    stats.percentage = 0;
+    stats.trend = 0;
+    this.assets.forEach((asset) => {
+      if (asset.history == undefined || asset.history.length == 0) {
+        asset.history = [stats];
+      }
+    });
+  }
   changeAsset() {
     this.currentIndex += 1;
     let element = document.getElementById('action-scheet');
@@ -58,9 +74,11 @@ export class OperationsModalComponent implements OnInit {
   }
 
   filterWallets(wallets: Wallet[], assetName: string): Wallet[] {
-    let wallAsset = wallets.filter((w) =>
-      w.assets.find((a) => a.name == assetName)
-    );
+    let wallAsset = wallets.filter((w) => {
+      if (w.assets != undefined && w.assets.length > 0)
+        return w.assets.find((a) => a.name == assetName);
+      return null;
+    });
     /*wallAsset.forEach((w) => {
       w.assets = w.assets.filter((a) => a.name == assetName);
     });*/
@@ -76,13 +94,14 @@ export class OperationsModalComponent implements OnInit {
     this.dateValidation = false;
     let validate = false;
     let statsWalletDays = this.statsAssetsDays;
-    if (statsWalletDays.find((d) => d === this.dateStats)) {
+    if (statsWalletDays && statsWalletDays.find((d) => d === this.dateStats)) {
       this.dateValidation = true;
       validate = true;
     }
     // Previene inserimento di un anno non in dashboard wallet
     // TODO: Implementare call a DB
     if (
+      statsWalletDays &&
       statsWalletDays.length &&
       parseInt(statsWalletDays[0].split('-')[0]) >
         parseInt(this.dateStats.split('-')[0])
@@ -115,9 +134,11 @@ export class OperationsModalComponent implements OnInit {
      * all'interno della lista di date e trovo l'indice della mia data
      */
     const days: any = [];
-    statsWalletDays.forEach((d) => {
-      days.push(d);
-    });
+    if (statsWalletDays && statsWalletDays.length > 0) {
+      statsWalletDays.forEach((d) => {
+        days.push(d);
+      });
+    }
 
     days.push(this.dateStats);
     days.sort();
@@ -175,12 +196,14 @@ export class OperationsModalComponent implements OnInit {
       parseFloat(percentageThisStats) > 10000
         ? 1000
         : parseFloat(percentageThisStats);
-    stats.trend = parseFloat(
-      (
-        stats.balance -
-        (beforeThisStats.balance != 0.001 ? beforeThisStats.balance : 0)
-      ).toFixed(2)
-    );
+    if (days.length > 1) {
+      stats.trend = parseFloat(
+        (
+          stats.balance -
+          (beforeThisStats.balance != 0.001 ? beforeThisStats.balance : 0)
+        ).toFixed(2)
+      );
+    } else stats.trend = 0;
 
     // Ultimo
     if (!afterThisStats.balance) {

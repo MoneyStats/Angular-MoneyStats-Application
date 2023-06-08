@@ -34,11 +34,12 @@ export class CryptoComponent implements OnInit {
       let wallets = this.dashboardService.dashboard.wallets.filter(
         (wallet) => wallet.category == 'Crypto'
       );
-      console.log(wallets);
       if (
         wallets == undefined ||
         wallets.length == 0 ||
-        wallets.find((w) => w.assets == undefined || w.assets.length == 0)
+        wallets[0].assets == undefined ||
+        wallets[0].assets.length == 0
+        //wallets.find((w) => w.assets == undefined || w.assets.length == 0)
       ) {
         this.onBoard();
       }

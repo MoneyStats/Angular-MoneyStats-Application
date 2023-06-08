@@ -182,8 +182,22 @@
                       {{ cryptoDashboard.holdingLong.balance }}
                       {{ cryptoDashboard.currency }}
                     </h5>
-                    <span class="badge badge-success">
-                      <ion-icon name="arrow-up-outline"></ion-icon>
+                    <span
+                      class="badge {{
+                        cryptoDashboard.holdingLong.performance == 0
+                          ? 'badge-warning'
+                          : cryptoDashboard.holdingLong.performance > 0
+                          ? 'badge-success'
+                          : 'badge-danger'
+                      }}"
+                    >
+                      <ion-icon
+                        name="{{
+                          cryptoDashboard.holdingLong.performance > 0
+                            ? 'arrow-up-outline'
+                            : 'arrow-down-outline'
+                        }}"
+                      ></ion-icon>
                       {{ cryptoDashboard.holdingLong.performance }}%
                     </span>
                     <p class="card-text">
@@ -211,8 +225,22 @@
                       {{ cryptoDashboard.trading.balance }}
                       {{ cryptoDashboard.currency }}
                     </h5>
-                    <span class="badge badge-success">
-                      <ion-icon name="arrow-up-outline"></ion-icon>
+                    <span
+                      class="badge {{
+                        cryptoDashboard.trading.performance == 0
+                          ? 'badge-warning'
+                          : cryptoDashboard.trading.performance > 0
+                          ? 'badge-success'
+                          : 'badge-danger'
+                      }}"
+                    >
+                      <ion-icon
+                        name="{{
+                          cryptoDashboard.trading.performance > 0
+                            ? 'arrow-up-outline'
+                            : 'arrow-down-outline'
+                        }}"
+                      ></ion-icon>
                       {{ cryptoDashboard.trading.performance }}%
                     </span>
                     <p class="card-text">
@@ -241,8 +269,22 @@
                       {{ cryptoDashboard.performance.balance }}
                       {{ cryptoDashboard.currency }}
                     </h5>
-                    <span class="badge badge-success">
-                      <ion-icon name="arrow-up-outline"></ion-icon>
+                    <span
+                      class="badge {{
+                        cryptoDashboard.performance.performance == 0
+                          ? 'badge-warning'
+                          : cryptoDashboard.performance.performance > 0
+                          ? 'badge-success'
+                          : 'badge-danger'
+                      }}"
+                    >
+                      <ion-icon
+                        name="{{
+                          cryptoDashboard.performance.performance > 0
+                            ? 'arrow-up-outline'
+                            : 'arrow-down-outline'
+                        }}"
+                      ></ion-icon>
                       {{ cryptoDashboard.performance.performance }}%
                     </span>
                     <p class="card-text">
