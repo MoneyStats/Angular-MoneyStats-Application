@@ -105,7 +105,10 @@
   <div class="mt-2 sec1">
     <div class="section-title">{{ "crypto.resume.assetList" | translate }}</div>
     <div class="transactions row">
-      <div class="col-xl-3 col-sm-6 mobile-size" *ngFor="let asset of resumeData.assets">
+      <div
+        class="col-xl-3 col-sm-6 mobile-size"
+        *ngFor="let asset of resumeData.assets"
+      >
         <div class="card border_round card-stats mb-4 mb-xl-0">
           <div class="card-body">
             <div class="row">
@@ -134,26 +137,36 @@
                 ><span
                   *ngIf="!asset.deletedDate"
                   class="{{
-                    asset.history![asset.history!.length - 1].percentage == 0
-                      ? 'text-warning'
-                      : asset.history![asset.history!.length - 1].percentage > 0
-                      ? 'text-success'
-                      : 'text-danger'
+                    asset.history != undefined
+                      ? asset.history![asset.history!.length - 1].percentage ==
+                        0
+                        ? 'text-warning'
+                        : asset.history![asset.history!.length - 1].percentage >
+                          0
+                        ? 'text-success'
+                        : 'text-danger'
+                      : 'text-warning'
                   }} mr-2"
                   ><i
                     class="fa {{
+                      asset.history != undefined &&
                       asset.history![asset.history!.length - 1].percentage > 0
                         ? 'fa-arrow-up'
                         : 'fa-arrow-down'
                     }}"
                   ></i
                   >{{
-                    asset.history![asset.history!.length - 1].percentage >= 1000
-                      ? "+"
+                    asset.history != undefined
+                      ? asset.history![asset.history!.length - 1].percentage >=
+                        1000
+                        ? "+"
+                        : ""
                       : ""
                   }}
                   {{
-                    asset.history![asset.history!.length - 1].percentage
+                    asset.history != undefined
+                      ? asset.history![asset.history!.length - 1].percentage
+                      : 0
                   }}%</span
                 >
                 <span
@@ -166,8 +179,9 @@
               <span class="text-nowrap sincetot"
                 >{{ "stats.since" | translate }}
                 {{
-                  asset.history![asset.history!.length - 1].date
-                    | date : "dd MMM y"
+                  asset.history != undefined
+                    ? asset.history![asset.history!.length - 1].date
+                    : ("" | date : "dd MMM y")
                 }}</span
               >
             </p>
