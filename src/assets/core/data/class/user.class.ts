@@ -13,6 +13,7 @@ export class User implements UserInterface {
   profilePhoto: string =
     environment.baseUrlHeader + AppConfigConst.DEFAULT_USER_IMG;
   currency: string = 'USD';
+  cryptoCurrency: string = 'USD';
   authToken: any;
   mockedUser?: boolean;
   github: Github = new Github();

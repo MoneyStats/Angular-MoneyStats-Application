@@ -1,8 +1,12 @@
 $whiteBg: #e5e5e5;
-$darkBg: #161129;
+$darkBg: #161129; //#161129
+$darkColor: #121212;
 
 @media screen and (min-width: 780px) {
   app-footer {
+    display: none;
+  }
+  #footer {
     display: none;
   }
   .section-width {
@@ -18,25 +22,25 @@ $darkBg: #161129;
   .hidden_mobile {
     display: none;
   }
+
+  .text-not-selected,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 a,
+  div,
+  span {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+  }
 }
 
 .clickable {
   pointer-events: visible;
   cursor: pointer;
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+/Edge */
-  user-select: none; /* Standard */
-}
-
-.text-not-selected,
-h1,
-h2,
-h3,
-h4,
-h5 a,
-div,
-span {
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
@@ -63,6 +67,10 @@ span {
   height: auto !important;
   width: 95% !important;
   margin-bottom: 5px;
+}
+
+.margin-bottom-size {
+  margin-bottom: -50px !important;
 }
 
 body:not(.dark-mode) {
@@ -105,6 +113,7 @@ body:not(.dark-mode) {
 }
 
 body.dark-mode {
+  background-color: $darkColor !important;
   .color-grey {
     background-color: $darkBg;
   }

@@ -10,7 +10,7 @@ export const environment = {
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: '1.0.1',
+  version: '1.5.0 (Alpha)',
 
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
@@ -18,6 +18,12 @@ export const environment = {
   getWalletDataUrl: baseUrlApp + 'assets/core/mock/wallets.mock.json',
   getResumeDataUrlMock: baseUrlApp + 'assets/core/mock/stats.mock.json',
   getTemplate: baseUrlApp + 'assets/template/template.json',
+  getCryptoDashboardMock: baseUrlApp + 'assets/core/mock/crypto.dash.mock.json',
+  getCryptoPriceMock: baseUrlApp + 'assets/core/mock/crypto.price.mock.json',
+  getCryptoResumeMock: baseUrlApp + 'assets/core/mock/crypto.stats.mock.json',
+  getCryptoAssetsMock: baseUrlApp + 'assets/core/mock/crypto.assets.mock.json',
+  getCryptoDetailsMock:
+    baseUrlApp + 'assets/core/mock/crypto.details.mock.json',
 
   // Datas
   registerDataUrl: host + '/v1/auth/sign-up',
@@ -37,5 +43,10 @@ export const environment = {
   updateUserDataUrl: host + '/v1/auth/update/user',
   backupDataUrl: host + '/v1/app/backup',
   restoreDataUrl: host + '/v1/app/restore',
+  addCryptoAssetDataUrl: host + '/v1/crypto/asset/addOrUpdate',
+  getCryptoAssetDataUrl: host + '/v1/crypto/asset/getAll',
+  getCryptoDashboardDataUrl: host + '/v1/crypto/dashboard',
+  getCryptoResumeDataUrl: host + '/v1/crypto/resume',
+  getMarketDataUrl: host + '/v1/market-data/get',
   forgotPassword: true,
 };

@@ -5,6 +5,7 @@ import {
   StatsInterface,
   WalletInterface,
 } from '../interfaces/dashboard.interface';
+import { Asset } from './crypto.class';
 import { GenericModel } from './generic.class';
 import { environment } from 'src/environments/environment';
 
@@ -24,6 +25,7 @@ export class Dashboard implements DashboardInterface {
 
 export class Wallet extends GenericModel implements WalletInterface {
   name!: string;
+  type!: string;
   imgName!: string;
   info?: Map<string, string>;
   infoString?: string;
@@ -41,6 +43,7 @@ export class Wallet extends GenericModel implements WalletInterface {
   dateLastStats: Date = new Date();
   balance: number = 0;
   newBalance!: number; // Local Variable, used just for save
+  assets: Asset[] = [];
   history: Stats[] = [];
 }
 

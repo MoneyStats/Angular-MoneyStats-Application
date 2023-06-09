@@ -1,6 +1,24 @@
 {
   "loading": "Caricamento...",
   "onboard": {
+    "crypto": {
+      "tab1": {
+        "title": "Benvenuto su Crypto",
+        "text": "Questa è la prima login nell'app. <br /> Per continuare con l'onboard premi Avanti."
+      },
+      "tab2": {
+        "title": "Come funziona?",
+        "text": "Crea o importa il tuo wallet crypto, aggiungi i tuoi asset completanto il form ed ottieni dettagli, statistiche ed altro."
+      },
+      "tab3": {
+        "title": "Operazioni",
+        "text": "Apri operazioni di Holding o trading tramite la nostra sezione operazioni."
+      },
+      "tab4": {
+        "title": "Grazie per il tuo tempo",
+        "text": "Premi Prova ora e vai alla dashboard."
+      }
+    },
     "tab1": {
       "title": "Benvenuto su MoneyStats",
       "text": "Questa è la prima login nell'app. <br /> Per continuare con l'onboard premi Avanti."
@@ -176,8 +194,18 @@
     "open": "Apri Portafoglio",
     "modal": {
       "title": "Aggiungi Portafoglio",
+      "cryptoTitle": "Aggiungi Portafoglio Crypto",
+      "selectWallet": "Seleziona Wallet",
+      "crypto": {
+        "title": "Portafoglio: Seleziona un'opzione",
+        "subTitle": "Vuoi aggiungere un nuovo portafoglio o importarne uno esistente?",
+        "subTitle2": "Seleziona il wallet",
+        "new": "Nuovo Wallet",
+        "import": "Importa Wallet"
+      },
       "editWallet": {
         "title": "Modifica Portafoglio",
+        "cryptoTitle": "Modifica Portafoglio Crypto",
         "default": "Mantieni la stessa immagine"
       },
       "name": "Nome",
@@ -185,6 +213,10 @@
       "category": "Categoria",
       "categoryText": "Scegli una categoria",
       "categoryTextEdit": "Lascia per mantenere la categoria",
+      "balance": "Salndo",
+      "balanceText": "Inserisci Saldo",
+      "type": "Tipo di wallet",
+      "typeText": "Scegli il tipo di wallet",
       "img": "Aggiungi immagine",
       "imgContent": "Upload Immagine",
       "imgFromURL": "Aggiungi immagine da URL",
@@ -452,6 +484,13 @@
             "version_title": "MoneyStats V1.0.1",
             "version": "V1.0.1",
             "changelog": "&#183; Migrazione Servizi su Oracle Cloud. <br /> &#183; Bug Fixed."
+          },
+          {
+            "modalId": "v2",
+            "version_date": "2023-09-01",
+            "version_title": "MoneyStats V2.0.0",
+            "version": "V2.0.0",
+            "changelog": "&#183; Aggiunta Sezione Crypto <br> &#183; Aggiornata la sezione aggiungi e modifica wallet"
           }
         ]
       }
@@ -464,6 +503,104 @@
   },
   "error": {
     "title": ""
+  },
+  "crypto": {
+    "requirements": {
+      "headerTitle": "Verifica Crypto",
+      "title": "Crypto: Ci sei quasi",
+      "subTitle": "Prima di accedere alla dashboard crypto, la nuova funzionalità di MoneyStats, abbiamo bisogno di verificare che tu rispecchi alcuni requisiti, altrimenti non ti sarà possibile accedere.",
+      "req1": {
+        "title": "Avere un Wallet",
+        "subTitle": "Avere creato un wallet"
+      },
+      "req2": {
+        "title": "Avere un Crypto Wallet",
+        "subTitle": "Avere creato un crypto wallet"
+      },
+      "req3": {
+        "title": "Avere un Asset",
+        "subTitle": "Avere un Crypto Asset tipo BTC, ETH"
+      },
+      "req4": {
+        "title": "Avere una Crypto Currency",
+        "subTitle": "Seleziona una Crypto Currency tipo USD, EUR, GBP..."
+      },
+      "next": "Vai alla Dashboard"
+    },
+    "dashboard": {
+      "title": "Crypto Dashboard",
+      "cardRes": {
+        "title": "Saldo Totale",
+        "lastUpdate": "Ultimo aggiornameneto",
+        "opt1": "Aggiungi Asset"
+      },
+      "performanceCard": {
+        "title": "Storico Performance",
+        "view": "Vedi",
+        "holding": "Holding Performance",
+        "trading": "Trading Performance",
+        "performance": "Performance",
+        "lastUpdate": "Ultimo aggiornameneto"
+      },
+      "assetsCard": {
+        "title": "I miei Assets",
+        "view": "Vedi",
+        "assetGraph": "Grafico Cryptocurrency"
+      }
+    },
+    "asset": {
+      "title": "Crypto Assets",
+      "assetList": "Lista Asset",
+      "assetGraph": "Grafico Asset",
+      "details": {
+        "overview": {
+          "rank": "Rank",
+          "identifier": "Identificativo",
+          "balance": "Saldo",
+          "value": "Saldo Totale in ",
+          "invested": "Saldo Investito",
+          "performance": "Performance dall'inizio",
+          "trend": "Trend dall'inizio"
+        }
+      }
+    },
+    "resume": {
+      "title": "Crypto Resume",
+      "tab": {
+        "tab1": "Holding",
+        "tab2": "Trading",
+        "tab3": "Investimenti"
+      },
+      "assetList": "Asset in possesso",
+      "graphAsset": "Performance",
+      "tableAsset": "Storico performance annuale"
+    },
+    "cryptoModal": {
+      "addAsset": {
+        "title": "Importa un Asset",
+        "selectWalletTitle": "Seleziona Wallet",
+        "selectWalletSubTitle": "Seleziona un Wallet su cui aggiungere un Asset",
+        "selectedWallet": "Wallet Selezionato",
+        "currentBalance": "Il Saldo corrente è ",
+        "searchAsset": "Filtra un Asset",
+        "selectAsset": "Seleziona un Asset",
+        "selectedAsset": "Asset Selezionato",
+        "add": "Aggiungi Asset",
+        "warning": "L'Asset selezionato esiste già",
+        "balance": "Saldo",
+        "balancePla": "Inserisci il tuo saldo in ",
+        "invested": "Investito",
+        "investedPla": "Inserisci il saldo investito in "
+      },
+      "editAsset": {
+        "title": "Modifica Asset "
+      },
+      "selectCurrency": {
+        "title": "Seleziona Crypto Currency",
+        "subtitle": "Completa il form selzionando una Crypto currency",
+        "save": "Salva"
+      }
+    }
   },
   "copyright": "Copyright © MoneyStats 2023. All Rights Reserved."
 }

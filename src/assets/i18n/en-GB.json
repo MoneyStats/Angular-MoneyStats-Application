@@ -1,6 +1,24 @@
 {
   "loading": "Loading...",
   "onboard": {
+    "crypto": {
+      "tab1": {
+        "title": "Welcome to Crypto",
+        "text": "This is the first login thru the section. <br /> To continue the on-board process press Next."
+      },
+      "tab2": {
+        "title": "How it works?",
+        "text": "Create o import a cryptocurrency wallet, add your asset by filling the form with all the coin details."
+      },
+      "tab3": {
+        "title": "Operations",
+        "text": "Open Holding o trading position by using the operation section to manage your crypto wallet."
+      },
+      "tab4": {
+        "title": "Thanks for your time",
+        "text": "Press Try It to get into the Dashboard."
+      }
+    },
     "tab1": {
       "title": "Welcome to MoneyStats",
       "text": "This is the first login thru the app. <br /> To continue the on-board process press Next."
@@ -176,8 +194,18 @@
     "open": "Open Wallet",
     "modal": {
       "title": "Add Wallet",
+      "cryptoTitle": "Add Crypto Wallet",
+      "selectWallet": "Select Wallet",
+      "crypto": {
+        "title": "Wallet: Choose Options",
+        "subTitle": "You wanna add a new Wallet or import an existing wallet?",
+        "subTitle2": "Choose a Wallet to import",
+        "new": "New Wallet",
+        "import": "Import Wallet"
+      },
       "editWallet": {
         "title": "Edit Wallet",
+        "cryptoTitle": "Edit Crypto Wallet",
         "default": "Keep same wallet image"
       },
       "name": "Name",
@@ -185,6 +213,10 @@
       "category": "Category",
       "categoryText": "Choose a category",
       "categoryTextEdit": "Leave to keep same category",
+      "balance": "Balance",
+      "balanceText": "Enter Balance",
+      "type": "Wallet Type",
+      "typeText": "Choose your wallet type",
       "img": "Add Image",
       "imgContent": "Upload Image",
       "imgFromURL": "Add Image from URL",
@@ -452,6 +484,13 @@
             "version_title": "MoneyStats V1.0.1",
             "version": "V1.0.1",
             "changelog": "&#183; Service Migration on Oracle Cloud. <br /> &#183; Bug Fixed."
+          },
+          {
+            "modalId": "v2",
+            "version_date": "2023-09-01",
+            "version_title": "MoneyStats V2.0.0",
+            "version": "V2.0.0",
+            "changelog": "&#183; Added new Crypto Section <br> &#183; Updated Add and Edit Wallets"
           }
         ]
       }
@@ -464,6 +503,104 @@
   },
   "error": {
     "title": ""
+  },
+  "crypto": {
+    "requirements": {
+      "headerTitle": "Crypto Requirements",
+      "title": "Crypto: You are almost there",
+      "subTitle": "Before to access to the crypto dashboard, the new features of MoneyStats, you need to ensure that all the requirements are respected otherwise you can't go on with it.",
+      "req1": {
+        "title": "Having a Wallet",
+        "subTitle": "Having a wallet or create one"
+      },
+      "req2": {
+        "title": "Having a Crypto Wallet",
+        "subTitle": "Having a crypto wallet or create one"
+      },
+      "req3": {
+        "title": "Having an Asset",
+        "subTitle": "Having a Crypto Asset like BTC, ETH"
+      },
+      "req4": {
+        "title": "Having an Crypto Currency",
+        "subTitle": "Set the Crypto Currency for the transaction like USD, EUR, GBP..."
+      },
+      "next": "Go to Dashboard"
+    },
+    "dashboard": {
+      "title": "Crypto Dashboard",
+      "cardRes": {
+        "title": "Total Balance",
+        "lastUpdate": "Last updated",
+        "opt1": "Add Asset"
+      },
+      "performanceCard": {
+        "title": "Resume Performance",
+        "view": "View All",
+        "holding": "Holding Long Term",
+        "trading": "Trading Performance",
+        "performance": "Performance",
+        "lastUpdate": "Last updated"
+      },
+      "assetsCard": {
+        "title": "My Assets",
+        "view": "View All",
+        "assetGraph": "Cryptocurrency Graph"
+      }
+    },
+    "asset": {
+      "title": "Crypto Assets",
+      "assetList": "Asset List",
+      "assetGraph": "Asset Graph",
+      "details": {
+        "overview": {
+          "rank": "Rank",
+          "identifier": "Identifier",
+          "balance": "Balance",
+          "value": "Total Balance in ",
+          "invested": "Money Invested",
+          "performance": "Performance since beginning",
+          "trend": "Trend since beginning"
+        }
+      }
+    },
+    "resume": {
+      "title": "Crypto Resume",
+      "tab": {
+        "tab1": "Holding",
+        "tab2": "Trading",
+        "tab3": "Investments"
+      },
+      "assetList": "Current Asset",
+      "graphAsset": "Performance",
+      "tableAsset": "Resume performance of the year"
+    },
+    "cryptoModal": {
+      "addAsset": {
+        "title": "Import an Asset",
+        "selectWalletTitle": "Select Wallet",
+        "selectWalletSubTitle": "Select a Wallet to add a new asset",
+        "selectedWallet": "Wallet Selected",
+        "currentBalance": "The current balance is ",
+        "searchAsset": "Filter an Asset",
+        "selectAsset": "Select Asset",
+        "selectedAsset": "Asset Selected",
+        "add": "Add Asset",
+        "warning": "The asset selected alredy exist",
+        "balance": "Balance",
+        "balancePla": "Type your current balance in ",
+        "invested": "Invested",
+        "investedPla": "Type the amount of money you invested in "
+      },
+      "editAsset": {
+        "title": "Edit Asset "
+      },
+      "selectCurrency": {
+        "title": "Select Crypto Currency",
+        "subtitle": "Fill the form by selecting a Crypto currency",
+        "save": "Save"
+      }
+    }
   },
   "copyright": "Copyright © MoneyStats 2023. All Rights Reserved."
 }

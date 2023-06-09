@@ -19,6 +19,7 @@ import { Wallet } from '../data/class/dashboard.class';
 })
 export class AppService {
   environment = environment;
+  isOnboardingCrypto: boolean = false;
   public user: User = new User();
   public coinSymbol: string = CoinSymbol.USD;
 

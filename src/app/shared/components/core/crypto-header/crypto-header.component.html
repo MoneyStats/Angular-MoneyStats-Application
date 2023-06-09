@@ -1,0 +1,55 @@
+<!-- App Header -->
+<div id="cryptoHeader" class="appHeader no-border">
+  <div class="left">
+    <a (click)="goBack()" class="headerButton goBack clickable">
+      <!--<ion-icon name="chevron-back-outline"></ion-icon>-->
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </a>
+  </div>
+  <div
+    routerLink="{{ isMenuActive ? '/crypto/dashboard' : '' }}"
+    class="pageTitle clickable"
+  >
+    {{ title }}
+  </div>
+  <div *ngIf="isMenuActive" class="right">
+    <div class="menu hidden_mobile">
+      <a routerLink="/crypto/asset" class="d-inline me-2 title-page">Assets</a>
+      <a
+        data-bs-toggle="modal"
+        attr.data-bs-target="#{{ modalConstant.ADDOPERATIONS }}"
+        aria-disabled="true"
+        class="d-inline me-2 title-page clickable"
+      >
+        Operations
+      </a>
+      <a routerLink="/crypto/resume" class="d-inline me-2 title-page">Resume</a>
+    </div>
+    <div class="dropdown">
+      <a href="#" class="headerButton" data-bs-toggle="dropdown">
+        <img
+          src="../../../../../assets/images/sample/avatar.png"
+          alt="image"
+          class="imaged w32"
+        />
+        <span class="badge badge-danger"></span>
+      </a>
+      <div class="dropdown-menu dropdown-menu-end">
+        <h6 class="dropdown-header">
+          {{ "dashboard.sidebar.dropdown.options" | translate }}
+        </h6>
+        <a class="dropdown-item" routerLink="/settings">
+          {{ "dashboard.sidebar.dropdown.settings" | translate }}</a
+        >
+        <!--<a class="dropdown-item" href="#">
+          {{ "dashboard.sidebar.dropdown.version" | translate }}</a
+        >-->
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" (click)="logout()">{{
+          "dashboard.sidebar.dropdown.logout" | translate
+        }}</a>
+      </div>
+    </div>
+  </div>
+  <!-- * App Header -->
+</div>

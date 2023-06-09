@@ -13,6 +13,7 @@ export class HeaderMobileComponent implements OnInit {
   @Input('rightBtn') rightBtn: string = '';
   @Input('dataBsTarget') dataBsTarget: string = '';
   @Input('restore') restore: boolean = false;
+  @Input('headerClass') headerClass: string = '';
 
   constructor(private location: Location) {}
 

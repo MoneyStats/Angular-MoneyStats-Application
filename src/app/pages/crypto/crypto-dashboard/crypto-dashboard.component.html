@@ -1,0 +1,544 @@
+<div class="mx-auto section-width">
+  <app-crypto-header [routerLinks]="''"></app-crypto-header>
+
+  <!-- App Capsule -->
+  <div id="appCapsule">
+    <div class="title-section">
+      <h2 class="title">{{ "crypto.dashboard.title" | translate }}</h2>
+    </div>
+    <div class="row mx-auto">
+      <div class="col-xl-4 col-md-6">
+        <div class="section mt-2">
+          <div class="card border_round d-flex" style="margin: -10px">
+            <img
+              class="cover imgCover"
+              src="../../../../assets/images/crypto/card.svg"
+              alt="media"
+            />
+            <div class="card-body">
+              <div class="d-flex float-end">
+                <img
+                  src="../../../../assets/images/crypto/Bitcoin-icon.png"
+                  width="100px"
+                  alt=""
+                  srcset=""
+                />
+              </div>
+              <p class="card-title">
+                {{ "crypto.dashboard.cardRes.title" | translate }}
+              </p>
+              <h5 class="card-text fs-3">
+                {{ cryptoDashboard.balance }} {{ cryptoDashboard.currency }}
+              </h5>
+              <p style="margin-top: -15px">
+                {{ cryptoDashboard.btcBalance }} BTC
+              </p>
+              <p style="margin-top: -15px" class="card-text">
+                <small
+                  >{{ "crypto.dashboard.cardRes.lastUpdate" | translate }}
+                  {{ cryptoDashboard.lastUpdate | date : "d MMM y" }}</small
+                >
+              </p>
+              <hr />
+              <div class="row text-center" style="height: 25px">
+                <div
+                  data-bs-toggle="modal"
+                  attr.data-bs-target="#{{ modalConstant.ADDASSET }}"
+                  style="
+                    position: absolute;
+                    left: 0px;
+                    z-index: 99;
+                    pointer-events: visible;
+                    cursor: pointer;
+                  "
+                  class="col-6"
+                >
+                  <ion-icon
+                    class="icon-size icon-color"
+                    name="add-circle"
+                  ></ion-icon>
+                  <a style="vertical-align: -1px">{{
+                    "crypto.dashboard.cardRes.opt1" | translate
+                  }}</a>
+                </div>
+                <div
+                  style="
+                    position: absolute;
+                    right: 0px;
+                    border-left: solid 1px;
+                    z-index: 99;
+                    pointer-events: visible;
+                    cursor: pointer;
+                  "
+                  class="col-6 hidden_desktop"
+                >
+                  <ion-icon
+                    class="icon-size icon-color"
+                    name="albums-outline"
+                  ></ion-icon>
+                  <a
+                    routerLink="/crypto/asset"
+                    style="vertical-align: -1px; color: #958d9e"
+                    >View Assets</a
+                  >
+                </div>
+                <div
+                  data-bs-toggle="modal"
+                  attr.data-bs-target="#{{ modalConstant.ADDWALLET }}"
+                  style="
+                    position: absolute;
+                    right: 0px;
+                    border-left: solid 1px;
+                    z-index: 99;
+                    pointer-events: visible;
+                    cursor: pointer;
+                  "
+                  class="col-6 hidden_mobile"
+                >
+                  <ion-icon
+                    class="icon-size icon-color"
+                    name="add-circle"
+                  ></ion-icon>
+                  <a style="vertical-align: -1px; color: #958d9e"
+                    >Add Crypto Wallet</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hidden_desktop mt-4 text-center">
+        <div class="row">
+          <div class="col-3" style="margin-left: -1px">
+            <a
+              data-bs-toggle="modal"
+              attr.data-bs-target="#{{ modalConstant.ADDWALLET }}"
+              class="inline-block quick-action clickable"
+            >
+              <div class="user-card">
+                <div class="icon-wrapper bg-danger">
+                  <ion-icon name="duplicate"></ion-icon>
+                </div>
+                <strong class="title_text">Add Crypto Wallet</strong>
+              </div>
+            </a>
+          </div>
+          <div class="col-3" style="margin-left: -1px">
+            <a
+              data-bs-toggle="modal"
+              attr.data-bs-target="#{{ modalConstant.ADDOPERATIONS }}"
+              class="inline-block quick-action clickable"
+            >
+              <div class="user-card">
+                <div class="icon-wrapper bg-success">
+                  <!--<ion-icon name="logo-electron"></ion-icon>-->
+                  <ion-icon name="swap-horizontal"></ion-icon>
+                </div>
+                <strong class="title_text">Operations</strong>
+              </div>
+            </a>
+          </div>
+          <div class="col-3" style="margin-left: -1px">
+            <a routerLink="/crypto/resume" class="inline-block quick-action">
+              <div class="user-card">
+                <div class="icon-wrapper bg-warning">
+                  <ion-icon name="bar-chart"></ion-icon>
+                </div>
+                <strong>Crypto Resume</strong>
+              </div>
+            </a>
+          </div>
+          <div class="col-3" style="margin-left: -1px">
+            <a routerLink="/settings" class="inline-block quick-action">
+              <div class="user-card">
+                <div class="icon-wrapper" style="background: #337ab7">
+                  <ion-icon name="settings" style="color: aliceblue"></ion-icon>
+                </div>
+                <strong>Settings</strong>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 col-xl-8">
+        <div class="section section-performance">
+          <div class="section-heading">
+            <h2 class="title">
+              {{ "crypto.dashboard.performanceCard.title" | translate }}
+            </h2>
+          </div>
+          <div class="card">
+            <div class="card-body text-center mx-auto">
+              <div class="row">
+                <div class="col-6 col-md-4">
+                  <div class="inline-block">
+                    <p class="title">
+                      {{
+                        "crypto.dashboard.performanceCard.holding" | translate
+                      }}
+                    </p>
+                    <h5 class="card-text fs-3">
+                      {{ cryptoDashboard.holdingLong.balance }}
+                      {{ cryptoDashboard.currency }}
+                    </h5>
+                    <span
+                      class="badge {{
+                        cryptoDashboard.holdingLong.performance == 0
+                          ? 'badge-warning'
+                          : cryptoDashboard.holdingLong.performance > 0
+                          ? 'badge-success'
+                          : 'badge-danger'
+                      }}"
+                    >
+                      <ion-icon
+                        name="{{
+                          cryptoDashboard.holdingLong.performance > 0
+                            ? 'arrow-up-outline'
+                            : 'arrow-down-outline'
+                        }}"
+                      ></ion-icon>
+                      {{ cryptoDashboard.holdingLong.performance }}%
+                    </span>
+                    <p class="card-text">
+                      <small
+                        >{{
+                          "crypto.dashboard.performanceCard.lastUpdate"
+                            | translate
+                        }}
+                        {{
+                          cryptoDashboard.holdingLong.lastUpdate
+                            | date : "d MMM y"
+                        }}</small
+                      >
+                    </p>
+                  </div>
+                </div>
+                <div class="line col-6 col-md-4">
+                  <div class="inline-block">
+                    <p class="title">
+                      {{
+                        "crypto.dashboard.performanceCard.trading" | translate
+                      }}
+                    </p>
+                    <h5 class="card-text fs-3">
+                      {{ cryptoDashboard.trading.balance }}
+                      {{ cryptoDashboard.currency }}
+                    </h5>
+                    <span
+                      class="badge {{
+                        cryptoDashboard.trading.performance == 0
+                          ? 'badge-warning'
+                          : cryptoDashboard.trading.performance > 0
+                          ? 'badge-success'
+                          : 'badge-danger'
+                      }}"
+                    >
+                      <ion-icon
+                        name="{{
+                          cryptoDashboard.trading.performance > 0
+                            ? 'arrow-up-outline'
+                            : 'arrow-down-outline'
+                        }}"
+                      ></ion-icon>
+                      {{ cryptoDashboard.trading.performance }}%
+                    </span>
+                    <p class="card-text">
+                      <small
+                        >{{
+                          "crypto.dashboard.performanceCard.lastUpdate"
+                            | translate
+                        }}
+                        {{
+                          cryptoDashboard.trading.lastUpdate | date : "d MMM y"
+                        }}</small
+                      >
+                    </p>
+                  </div>
+                </div>
+                <div class="line col-12 col-md-4">
+                  <div class="inline-block">
+                    <hr class="hidden_desktop" />
+                    <p class="title">
+                      {{
+                        "crypto.dashboard.performanceCard.performance"
+                          | translate
+                      }}
+                    </p>
+                    <h5 class="card-text fs-3">
+                      {{ cryptoDashboard.performance.balance }}
+                      {{ cryptoDashboard.currency }}
+                    </h5>
+                    <span
+                      class="badge {{
+                        cryptoDashboard.performance.performance == 0
+                          ? 'badge-warning'
+                          : cryptoDashboard.performance.performance > 0
+                          ? 'badge-success'
+                          : 'badge-danger'
+                      }}"
+                    >
+                      <ion-icon
+                        name="{{
+                          cryptoDashboard.performance.performance > 0
+                            ? 'arrow-up-outline'
+                            : 'arrow-down-outline'
+                        }}"
+                      ></ion-icon>
+                      {{ cryptoDashboard.performance.performance }}%
+                    </span>
+                    <p class="card-text">
+                      <small
+                        >{{
+                          "crypto.dashboard.performanceCard.lastUpdate"
+                            | translate
+                        }}
+                        {{
+                          cryptoDashboard.performance.lastUpdate
+                            | date : "d MMM y"
+                        }}</small
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Portfolio -->
+      <div class="section mt-5 col-xl-6">
+        <div class="section-heading">
+          <h2 class="title ms-2">
+            {{ "crypto.dashboard.assetsCard.title" | translate }}
+          </h2>
+          <a routerLink="/crypto/asset" class="link">{{
+            "crypto.dashboard.assetsCard.view" | translate
+          }}</a>
+        </div>
+        <div class="transactions">
+          <div *ngFor="let asset of assets; let i = index">
+            <app-transaction-card
+              *ngIf="i < 4"
+              [assets]="asset"
+              [currency]="cryptoDashboard.currency"
+            >
+            </app-transaction-card>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6">
+        <!-- Portfolio -->
+        <div class="section mt-4">
+          <div class="section-heading">
+            <h2 class="title">
+              {{ "crypto.dashboard.assetsCard.assetGraph" | translate }}
+            </h2>
+            <div
+              class="form-group boxed"
+              style="width: 150px; margin-bottom: -10px; margin-top: -20px"
+            >
+              <div class="input-wrapper">
+                <select
+                  [ngModel]="selectedSymbol"
+                  (ngModelChange)="onChange($event)"
+                  class="form-control custom-select"
+                >
+                  <option value="BTCUSDT">BTC-USDT</option>
+                  <option value="ETHUSDT">ETH-USDT</option>
+                  <option value="CROUSDT">CRO-USDT</option>
+                  <option value="BNBUSDT">BNB-USDT</option>
+                  <option value="SANDUSDT">SAND-USDT</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body" style="height: 380px">
+              <!-- TradingView Widget BEGIN -->
+              <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <div #selectGraph style="height: 360px"></div>
+              </div>
+              <!-- TradingView Widget END -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Portfolio -->
+    <div class="row">
+      <div class="col-12">
+        <div class="section mt-4">
+          <div class="card">
+            <div class="card-body">
+              <!-- TradingView Widget BEGIN -->
+              <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <div #tradingViewPrices></div>
+              </div>
+              <!-- TradingView Widget END -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" hidden>
+      <div class="col-md-6">
+        <!-- Transactions -->
+        <div class="section mt-4">
+          <div class="section-heading">
+            <h2 class="title">Operazioni</h2>
+            <a href="crypto-transactions.html" class="link">View All</a>
+          </div>
+          <div class="card">
+            <ul
+              class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1"
+            >
+              <!-- item -->
+              <li>
+                <a href="#" class="item">
+                  <div class="icon-box bg-success">
+                    <ion-icon name="arrow-up-outline"></ion-icon>
+                  </div>
+                  <div class="in">
+                    <div>
+                      <strong>Bitcoin</strong>
+                      <div class="text-small text-secondary">Sell</div>
+                    </div>
+                    <div class="text-end">
+                      <strong>$855,24</strong>
+                      <div class="text-small">Today 11:38 AM</div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <!-- * item -->
+              <!-- item -->
+              <li>
+                <a href="#" class="item">
+                  <div class="icon-box bg-warning">
+                    <ion-icon name="arrow-down-outline"></ion-icon>
+                  </div>
+                  <div class="in">
+                    <div>
+                      <strong>Etherium</strong>
+                      <div class="text-small text-secondary">Buy</div>
+                    </div>
+                    <div class="text-end">
+                      <strong>$40,68</strong>
+                      <div class="text-small">March 8, 2021</div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <!-- * item -->
+              <!-- item -->
+              <li>
+                <a href="#" class="item">
+                  <div class="icon-box bg-warning">
+                    <ion-icon name="arrow-down-outline"></ion-icon>
+                  </div>
+                  <div class="in">
+                    <div>
+                      <strong>Bitcoin</strong>
+                      <div class="text-small text-secondary">Send</div>
+                    </div>
+                    <div class="text-end">
+                      <strong>$100,00</strong>
+                      <div class="text-small">March 4, 2021</div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <!-- * item -->
+              <!-- item -->
+              <li>
+                <a href="#" class="item">
+                  <div class="icon-box bg-secondary">
+                    <ion-icon name="swap-vertical-outline"></ion-icon>
+                  </div>
+                  <div class="in">
+                    <div>
+                      <strong>Tether</strong>
+                      <div class="text-small text-secondary">Trade</div>
+                    </div>
+                    <div class="text-end">
+                      <strong>$2.405,48</strong>
+                      <div class="text-small">February 24, 2021</div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <!-- * item -->
+              <!-- item -->
+              <li>
+                <a href="#" class="item">
+                  <div class="icon-box bg-secondary">
+                    <ion-icon name="swap-vertical-outline"></ion-icon>
+                  </div>
+                  <div class="in">
+                    <div>
+                      <strong>Tether</strong>
+                      <div class="text-small text-secondary">Trade</div>
+                    </div>
+                    <div class="text-end">
+                      <strong>$2.405,48</strong>
+                      <div class="text-small">February 24, 2021</div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <!-- * item -->
+            </ul>
+          </div>
+        </div>
+        <!-- Transactions -->
+      </div>
+      <div class="col-md-6">
+        <!-- Portfolio -->
+        <div class="section mt-4">
+          <div class="section-heading">
+            <h2 class="title">
+              Grafico BTC con select per modificare con ETH etc
+            </h2>
+            <a href="crypto-portfolio.html" class="link">View All</a>
+          </div>
+          <div class="card">
+            <div class="card-body" style="height: 380px">
+              <!-- TradingView Widget BEGIN -->
+              <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <div #tradingViewListCrypto style="height: 360px"></div>
+              </div>
+              <!-- TradingView Widget END -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-add-wallet
+  (emitAddWallet)="saveWallet($event)"
+  [modalId]="modalConstant.ADDWALLET"
+  [isCrypto]="true"
+></app-add-wallet>
+<app-add-asset-modal
+  (emitAddAsset)="saveWallet($event)"
+  [modalId]="modalConstant.ADDASSET"
+  [wallets]="cryptoWallet!"
+></app-add-asset-modal>
+<app-operations-modal
+  [modalId]="modalConstant.ADDOPERATIONS"
+  [wallets]="cryptoDashboard.wallets"
+  [assets]="cryptoDashboard.assets"
+  [currency]="cryptoDashboard.currency"
+  [statsAssetsDays]="cryptoDashboard.statsAssetsDays"
+></app-operations-modal>

@@ -1,23 +1,43 @@
 <!-- App Bottom Menu -->
 <div id="footer" class="appBottomMenu">
-  <a id="dashboard" (click)="goToDashboard()" routerLink="" class="item active">
+  <a
+    id="dashboard"
+    (click)="goToDashboard()"
+    routerLink="{{ isCrypto ? '/crypto/dashboard' : '' }}"
+    class="item active"
+  >
     <div class="col">
       <ion-icon name="home"></ion-icon>
       <strong>{{ "dashboard.footer.title1" | translate }}</strong>
     </div>
   </a>
-  <a id="stats" class="item" (click)="goToStats()" routerLink="stats">
+  <a id="stats" class="item" (click)="goToStats()" routerLink="/stats">
     <div class="col">
       <ion-icon name="bar-chart"></ion-icon>
       <strong>{{ "dashboard.footer.title2" | translate }}</strong>
     </div>
   </a>
-  <a routerLink="stats/insert" class="item">
+  <a *ngIf="!isCrypto" routerLink="crypto/dashboard" class="item">
     <!-- href="#" data-bs-toggle="modal"
     attr.data-bs-target="#{{ modalConstant.VERSION }}"-->
     <div class="col">
       <div class="action-button large">
-        <ion-icon name="add-circle"></ion-icon>
+        <ion-icon name="logo-bitcoin"></ion-icon>
+        <!--<ion-icon name="arrow-up"></ion-icon>-->
+      </div>
+    </div>
+  </a>
+  <a *ngIf="isCrypto" routerLink="" class="item">
+    <!-- href="#" data-bs-toggle="modal"
+    attr.data-bs-target="#{{ modalConstant.VERSION }}"-->
+    <div class="col">
+      <div class="action-button large">
+        <img
+          src="../../../../../assets/images/logos/favicon_trasparent.png"
+          alt=""
+          width="60"
+          height="60"
+        />
         <!--<ion-icon name="arrow-up"></ion-icon>-->
       </div>
     </div>
@@ -28,7 +48,7 @@
       <strong>{{ "dashboard.footer.title3" | translate }}</strong>
     </div>
   </a>
-  <a id="settings" (click)="goToSettings()" routerLink="settings" class="item">
+  <a id="settings" (click)="goToSettings()" routerLink="/settings" class="item">
     <div class="col">
       <ion-icon name="settings"></ion-icon>
       <strong>{{ "dashboard.footer.title4" | translate }}</strong>

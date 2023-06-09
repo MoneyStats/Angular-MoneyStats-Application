@@ -1,0 +1,20 @@
+.item {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 20px;
+}
+.price {
+  margin-bottom: -5px;
+}
+
+.imaged {
+  width: 48px !important;
+  height: 48px !important;
+  object-position: center center !important;
+  object-fit: cover !important;
+}
+
+.crypto {
+  height: 85px;
+}

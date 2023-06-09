@@ -3,8 +3,7 @@ import { environment } from 'src/environments/environment';
 import { Dashboard, Stats, Wallet } from '../data/class/dashboard.class';
 import * as ApexCharts from 'apexcharts';
 import { ApexOptions } from '../data/constant/apex.chart';
-
-//declare var ApexCharts: any;
+import { CryptoDashboard } from '../data/class/crypto.class';
 
 @Injectable({
   providedIn: 'root',
@@ -282,48 +281,119 @@ export class ChartService {
     series = [];
     return chartExample1;
   }
-}
 
-// Obsolete
-function chartLine(series: any, data: Array<string>) {
-  var optionChartLine = {
-    series: series,
-    chart: {
-      type: 'area',
-      width: '100%',
-      height: '350px',
-      sparkline: {
-        enabled: true,
+  renderCryptoAsset(
+    cryptoDashboard: CryptoDashboard,
+    ...height: number[]
+  ): Partial<ApexOptions> {
+    let series: Array<any> = [];
+    let oldStats: any = new Stats();
+    let oldDate: any;
+    if (
+      cryptoDashboard.statsAssetsDays &&
+      cryptoDashboard.statsAssetsDays.length === 1
+    ) {
+      oldDate =
+        parseInt(
+          cryptoDashboard.statsAssetsDays[
+            cryptoDashboard.statsAssetsDays.length - 1
+          ].split('-')[0]
+        ) - 1;
+      cryptoDashboard.statsAssetsDays.splice(0, 0, oldDate.toString());
+    }
+    cryptoDashboard.assets.forEach((asset) => {
+      let oldBalance = 0;
+      let historyBalance: Array<number> = [];
+      let index = 0;
+      if (asset.history && asset.history.length != 0) {
+        if (asset.history.length === 1) {
+          oldStats.balance = oldBalance;
+
+          oldStats.date = oldDate;
+          asset.history!.splice(0, 0, oldStats);
+        }
+        asset.history!.forEach((h) => {
+          if (h.date == undefined) {
+            return;
+          }
+          let count = cryptoDashboard.statsAssetsDays.indexOf(
+            h.date.toString()
+          );
+          if (count != index) {
+            Array.from(Array(count - index)).forEach((d) =>
+              historyBalance.push(0)
+            );
+            index = count;
+          }
+          historyBalance.push(h.balance);
+          index++;
+        });
+        historyBalance.push(asset.value!);
+        let today = new Date();
+        cryptoDashboard.statsAssetsDays.push(today.toDateString());
+      } else {
+        historyBalance.push(0);
+        historyBalance.push(asset.value!);
+        let today = new Date();
+        let yesterday = new Date();
+        yesterday.setDate(today.getDate() - 1);
+        cryptoDashboard.statsAssetsDays = [yesterday.toDateString()];
+        cryptoDashboard.statsAssetsDays.push(today.toDateString());
+      }
+      let serie = {
+        name: asset.name,
+        data: historyBalance,
+      };
+      series.push(serie);
+      historyBalance = [];
+    });
+    let h = 350;
+    if (height[0]) {
+      h = height[0];
+    }
+
+    let chartOptions: Partial<ApexOptions> = {
+      series: series,
+      chart: {
+        type: 'area',
+        width: '100%',
+        height: h,
+        sparkline: {
+          enabled: true,
+        },
       },
-    },
-    stroke: {
-      width: 2,
-    },
-    colors: [
-      '#6236FF',
-      '#d119d0',
-      '#bb9df7',
-      '#de3454',
-      '#407306',
-      '#9c413c',
-      '#f2ed0a',
-      '#fa5c42',
-      '#57cb54',
-      '#500295',
-      '#f7eedc',
-    ],
-    labels: data,
-    legend: {
-      show: true,
-      position: 'top',
-      horizontalAlign: 'center',
-      floating: false,
-      fontFamily: 'Helvetica, Arial',
-    },
-  };
-  var chartLine = new ApexCharts(
-    document.querySelector('#chart-line'),
-    optionChartLine
-  );
-  chartLine.render();
+      dataLabels: {
+        enabled: false,
+        background: {
+          borderRadius: 20,
+        },
+      },
+      stroke: {
+        width: 2,
+      },
+      colors: [
+        '#6236FF',
+        '#d119d0',
+        '#bb9df7',
+        '#de3454',
+        '#407306',
+        '#9c413c',
+        '#f2ed0a',
+        '#fa5c42',
+        '#57cb54',
+        '#500295',
+        '#f7eedc',
+      ],
+      labels: cryptoDashboard.statsAssetsDays,
+      legend: {
+        show: true,
+        position: 'top',
+        horizontalAlign: 'center',
+        floating: false,
+        fontFamily: 'Helvetica, Arial',
+      },
+    };
+    return chartOptions;
+    //chartLine(series, dashboard.statsWalletDays);
+  }
 }
