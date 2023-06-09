@@ -60,7 +60,7 @@ export class AddAssetModalComponent implements OnInit {
   }
 
   getCryptoPrices() {
-    this.cryptoService.getCryptoPrice().subscribe((data) => {
+    this.cryptoService.getCryptoPrice(this.cryptoCurrency).subscribe((data) => {
       this.cryptoPrices = data.data;
       this.filterCryptoPrices = data.data;
     });

@@ -49,8 +49,20 @@ export class CryptoService {
     }
   }
 
-  getCryptoPrice(): Observable<ResponseModel> {
-    return this.http.get<any>(environment.getCryptoPriceMock);
+  getCryptoPrice(currency: string): Observable<ResponseModel> {
+    const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      authToken: authToken!,
+    });
+    if (this.user.mockedUser) {
+      return this.http.get<any>(environment.getCryptoPriceMock);
+    } else {
+      const url = environment.getMarketDataUrl + '?currency=' + currency;
+      return this.http.get<any>(url, {
+        headers: headers,
+      });
+    }
   }
 
   getCryptoResume(): Observable<ResponseModel> {

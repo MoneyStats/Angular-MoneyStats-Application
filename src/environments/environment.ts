@@ -52,6 +52,7 @@ export const environment = {
   getCryptoAssetDataUrl: host + '/v1/crypto/asset/getAll',
   getCryptoDashboardDataUrl: host + '/v1/crypto/dashboard',
   getCryptoResumeDataUrl: host + '/v1/crypto/resume',
+  getMarketDataUrl: host + '/v1/market-data/get',
   forgotPassword: true,
 };
 
