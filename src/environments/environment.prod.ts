@@ -25,6 +25,10 @@ export const environment = {
   getTemplate: baseUrlApp + 'assets/template/template.json',
   getCryptoDashboardMock: baseUrlApp + 'assets/core/mock/crypto.dash.mock.json',
   getCryptoPriceMock: baseUrlApp + 'assets/core/mock/crypto.price.mock.json',
+  getCryptoResumeMock: baseUrlApp + 'assets/core/mock/crypto.stats.mock.json',
+  getCryptoAssetsMock: baseUrlApp + 'assets/core/mock/crypto.assets.mock.json',
+  getCryptoDetailsMock:
+    baseUrlApp + 'assets/core/mock/crypto.details.mock.json',
 
   // Datas
   registerDataUrl: host + '/v1/auth/sign-up',
@@ -44,5 +48,10 @@ export const environment = {
   updateUserDataUrl: host + '/v1/auth/update/user',
   backupDataUrl: host + '/v1/app/backup',
   restoreDataUrl: host + '/v1/app/restore',
+  addCryptoAssetDataUrl: host + '/v1/crypto/asset/addOrUpdate',
+  getCryptoAssetDataUrl: host + '/v1/crypto/asset/getAll',
+  getCryptoDashboardDataUrl: host + '/v1/crypto/dashboard',
+  getCryptoResumeDataUrl: host + '/v1/crypto/resume',
+  getMarketDataUrl: host + '/v1/market-data/get',
   forgotPassword: true,
 };
