@@ -1,15 +1,9 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
-import { Route, Router } from '@angular/router';
-import { CryptoService } from 'dist/angular-moneystats/assets/core/services/crypto.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Asset } from 'src/assets/core/data/class/crypto.class';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ErrorService } from 'src/assets/core/interceptors/error.service';
+import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { StatsService } from 'src/assets/core/services/stats.service';
 
 @Component({
