@@ -19,7 +19,7 @@ export class CryptoHeaderComponent implements OnInit {
   constructor(
     private location: Location,
     private router: Router,
-    private userService: UserService,
+    public userService: UserService,
 
   ) {
     router.events.subscribe((data: any) => {

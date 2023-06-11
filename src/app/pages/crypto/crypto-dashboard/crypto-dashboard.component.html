@@ -4,7 +4,9 @@
   <!-- App Capsule -->
   <div id="appCapsule">
     <div class="title-section">
-      <h2 class="title">{{ "crypto.dashboard.title" | translate }}</h2>
+      <h2 class="title hidden_mobile">
+        {{ "crypto.dashboard.title" | translate }}
+      </h2>
     </div>
     <div class="row mx-auto">
       <div class="col-xl-4 col-md-6">
@@ -12,13 +14,17 @@
           <div class="card border_round d-flex" style="margin: -10px">
             <img
               class="cover imgCover"
-              src="../../../../assets/images/crypto/card.svg"
+              src="{{
+                environment.baseUrlHeader
+              }}/assets/images/crypto/card.svg"
               alt="media"
             />
             <div class="card-body">
               <div class="d-flex float-end">
                 <img
-                  src="../../../../assets/images/crypto/Bitcoin-icon.png"
+                  src="{{
+                    environment.baseUrlHeader
+                  }}/assets/images/crypto/Bitcoin-icon.png"
                   width="100px"
                   alt=""
                   srcset=""
