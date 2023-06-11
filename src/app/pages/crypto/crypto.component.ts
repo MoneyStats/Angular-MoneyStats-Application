@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { AppService } from 'src/assets/core/services/app.service';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-crypto',
@@ -10,6 +11,7 @@ import { DashboardService } from 'src/assets/core/services/dashboard.service';
   styleUrls: ['./crypto.component.scss'],
 })
 export class CryptoComponent implements OnInit {
+  environment = environment;
   isFooterActive: boolean = false;
   constructor(
     private router: Router,
