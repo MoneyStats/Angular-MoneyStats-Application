@@ -16,6 +16,7 @@ import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
+import { environment } from 'src/environments/environment';
 
 declare const TradingView: any;
 
@@ -25,6 +26,7 @@ declare const TradingView: any;
   styleUrls: ['./crypto-dashboard.component.scss'],
 })
 export class CryptoDashboardComponent implements OnInit {
+  environment = environment;
   @ViewChild('tradingViewListCrypto') tradingViewListCrypto?: ElementRef;
   @ViewChild('tradingViewPrices') tradingViewPrices?: ElementRef;
   @ViewChild('selectGraph') selectGraph?: ElementRef;
