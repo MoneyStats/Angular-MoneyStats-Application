@@ -54,6 +54,10 @@ export class AddAssetModalComponent implements OnInit {
       this.wallets = this.dashboardService.dashboard.wallets.filter(
         (w) => w.category == 'Crypto'
       );
+      if (this.wallets && this.wallets.length == 1) {
+        this.modelWallet = this.wallets[0].name;
+        console.log(this.cryptoCurrency);
+      }
     } else this.wallets;
 
     this.getCryptoPrices();
@@ -111,6 +115,7 @@ export class AddAssetModalComponent implements OnInit {
       if (this.wallet?.assets == undefined) {
         this.wallet!.assets = [];
       }
+      this.asset!.id = undefined;
       this.asset!.balance = this.balance;
       this.asset!.invested = this.invested;
       this.asset!.performance = 0;

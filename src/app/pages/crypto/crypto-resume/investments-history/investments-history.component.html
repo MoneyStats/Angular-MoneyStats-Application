@@ -1,0 +1,156 @@
+<div class="row">
+  <div class="section mt-2 col-xl-8 col-md-7">
+    <div class="section-title">Price Average Purchase Currency</div>
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Asset</th>
+              <th scope="col" class="text-end">Quantity</th>
+              <th scope="col" class="text-end">Invested</th>
+              <th scope="col" class="text-end">Asset Mid Balance</th>
+              <th scope="col" class="text-end">MarketData Balance</th>
+              <th scope="col" class="text-end">Actual Balance</th>
+              <th scope="col" class="text-end">Trend +/-</th>
+              <th scope="col" class="text-end">Performance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let asset of assets">
+              <th scope="row">
+                <img
+                  src="{{ asset.icon }}"
+                  width="30"
+                  height="30"
+                  alt=""
+                  srcset=""
+                  class="me-1"
+                />
+                {{ asset.name }}
+              </th>
+              <td class="text-end">{{ asset.balance }} {{ asset.symbol }}</td>
+              <td class="text-end">
+                {{ asset.invested }} {{ cryptoCurrency }}
+              </td>
+              <td class="text-end text-primary">
+                {{ asset.invested! / asset.balance! }}
+                {{ cryptoCurrency }}
+              </td>
+              <td class="text-end">
+                {{ asset.current_price }} {{ cryptoCurrency }}
+              </td>
+              <td class="text-end text-secondary">
+                {{ asset.value }} {{ cryptoCurrency }}
+              </td>
+              <td
+                class="text-end {{
+                  asset.value! - asset.invested! == 0
+                    ? 'text-warning'
+                    : asset.value! - asset.invested! > 0
+                    ? 'text-success'
+                    : 'text-danger'
+                }}"
+              >
+                {{ asset.value! - asset.invested! }}
+                {{ cryptoCurrency }}
+              </td>
+              <td
+                class="text-end {{
+                  ((asset.value! - asset.invested!) / asset.invested!) * 100 ==
+                  0
+                    ? 'text-warning'
+                    : ((asset.value! - asset.invested!) / asset.invested!) *
+                        100 >
+                      0
+                    ? 'text-success'
+                    : 'text-danger'
+                }}"
+              >
+                {{
+                  (
+                    ((asset.value! - asset.invested!) / asset.invested!) *
+                    100
+                  ).toFixed(2)
+                }}%
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="section mt-2 col-xl-4 col-md-5">
+    <div class="section-title">
+      {{ "stats.data.history" | translate }}
+    </div>
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">
+                {{ "stats.data.table_date" | translate }}
+              </th>
+              <th scope="col">
+                {{ "stats.data.table_balance" | translate }}
+              </th>
+              <th scope="col" class="text-end">
+                {{ "stats.data.table_performance" | translate }}
+              </th>
+              <th scope="col" class="text-end">
+                {{ "stats.data.table_value" | translate }}
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            *ngFor="
+              let balances of tableBalance.slice().reverse();
+              let i = index
+            "
+          >
+            <tr class="topics" *ngFor="let balance of balances; let y = index">
+              <th scope="row">
+                {{ balances[balances.length - 1].date }}
+              </th>
+
+              <td
+                class="{{
+                  balance.percentage === 0
+                    ? 'text-warning'
+                    : balance.percentage > 0
+                    ? 'text-success'
+                    : 'text-danger'
+                }} {{ balance.index === y ? 'text-end' : '' }}"
+              >
+                {{ cryptoCurrency }} {{ balance.balance }}
+              </td>
+              <td
+                class="{{
+                  balance.percentage === 0
+                    ? 'text-warning'
+                    : balance.percentage > 0
+                    ? 'text-success'
+                    : 'text-danger'
+                }} text-end"
+              >
+                {{ balance.percentage }}%
+              </td>
+              <td
+                class="{{
+                  balance.trend === 0
+                    ? 'text-warning'
+                    : balance.trend > 0
+                    ? 'text-success'
+                    : 'text-danger'
+                }} text-end"
+              >
+                {{ cryptoCurrency }} {{ balance.trend }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

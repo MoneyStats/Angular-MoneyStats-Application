@@ -14,9 +14,7 @@
           <div class="card border_round d-flex" style="margin: -10px">
             <img
               class="cover imgCover"
-              src="{{
-                environment.baseUrlHeader
-              }}/assets/images/crypto/card.svg"
+              src="{{ environment.baseUrlHeader }}assets/images/crypto/card.svg"
               alt="media"
             />
             <div class="card-body">
@@ -24,7 +22,7 @@
                 <img
                   src="{{
                     environment.baseUrlHeader
-                  }}/assets/images/crypto/Bitcoin-icon.png"
+                  }}assets/images/crypto/Bitcoin-icon.png"
                   width="100px"
                   alt=""
                   srcset=""
@@ -85,7 +83,7 @@
                   <a
                     routerLink="/crypto/asset"
                     style="vertical-align: -1px; color: #958d9e"
-                    >View Assets</a
+                    >{{ "crypto.dashboard.cardRes.opt2" | translate }}</a
                   >
                 </div>
                 <div
@@ -105,9 +103,9 @@
                     class="icon-size icon-color"
                     name="add-circle"
                   ></ion-icon>
-                  <a style="vertical-align: -1px; color: #958d9e"
-                    >Add Crypto Wallet</a
-                  >
+                  <a style="vertical-align: -1px; color: #958d9e">{{
+                    "crypto.dashboard.cardRes.opt3" | translate
+                  }}</a>
                 </div>
               </div>
             </div>
@@ -126,7 +124,9 @@
                 <div class="icon-wrapper bg-danger">
                   <ion-icon name="duplicate"></ion-icon>
                 </div>
-                <strong class="title_text">Add Crypto Wallet</strong>
+                <strong class="title_text">{{
+                  "crypto.dashboard.mobileBtn.opt1" | translate
+                }}</strong>
               </div>
             </a>
           </div>
@@ -141,7 +141,9 @@
                   <!--<ion-icon name="logo-electron"></ion-icon>-->
                   <ion-icon name="swap-horizontal"></ion-icon>
                 </div>
-                <strong class="title_text">Operations</strong>
+                <strong class="title_text">{{
+                  "crypto.dashboard.mobileBtn.opt2" | translate
+                }}</strong>
               </div>
             </a>
           </div>
@@ -151,7 +153,9 @@
                 <div class="icon-wrapper bg-warning">
                   <ion-icon name="bar-chart"></ion-icon>
                 </div>
-                <strong>Crypto Resume</strong>
+                <strong>{{
+                  "crypto.dashboard.mobileBtn.opt3" | translate
+                }}</strong>
               </div>
             </a>
           </div>
@@ -161,7 +165,9 @@
                 <div class="icon-wrapper" style="background: #337ab7">
                   <ion-icon name="settings" style="color: aliceblue"></ion-icon>
                 </div>
-                <strong>Settings</strong>
+                <strong>{{
+                  "crypto.dashboard.mobileBtn.opt4" | translate
+                }}</strong>
               </div>
             </a>
           </div>
@@ -538,6 +544,7 @@
 ></app-add-wallet>
 <app-add-asset-modal
   (emitAddAsset)="saveWallet($event)"
+  [cryptoCurrency]="cryptoDashboard.currency"
   [modalId]="modalConstant.ADDASSET"
   [wallets]="cryptoWallet!"
 ></app-add-asset-modal>
