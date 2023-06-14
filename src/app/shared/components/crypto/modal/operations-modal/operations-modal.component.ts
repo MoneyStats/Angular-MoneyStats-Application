@@ -118,7 +118,11 @@ export class OperationsModalComponent implements OnInit {
         asset.newValue = parseFloat('');
       });
     });
-    this.cryptoService.cryptoDashboard.statsAssetsDays.push(this.dateStats);
+    if (this.cryptoService.cryptoDashboard.statsAssetsDays) {
+      this.cryptoService.cryptoDashboard.statsAssetsDays.push(this.dateStats);
+    } else
+      this.cryptoService.cryptoDashboard.statsAssetsDays = [this.dateStats];
+
     this.cryptoService.cryptoDashboard.statsAssetsDays.sort();
     this.saveValidation = true;
   }

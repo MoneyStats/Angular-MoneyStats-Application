@@ -117,7 +117,8 @@
                   {{ asset.name }} ({{ asset.symbol }})
                 </h5>
                 <span class="h2 font-weight-bold mb-0" id="tot1"
-                  >{{ resumeData.currency }} {{ asset.value }}</span
+                  ><small>{{ resumeData.currency }}</small>
+                  {{ asset.value }}</span
                 >
                 <br />
                 <span style="margin-left: 1px"
@@ -212,7 +213,7 @@
     </div>
   </div>
   <!-- App Capsule -->
-  <div class="section mt-2 col-xl-12">
+  <div class="section mt-2 mb-1 col-xl-12">
     <div class="section-title">
       {{ "crypto.resume.tableAsset" | translate }}
     </div>
@@ -285,6 +286,13 @@
             </tr>
           </tbody>
         </table>
+        <div
+          *ngIf="tableBalance.length == 0"
+          class="mx-auto text-center alert alert-danger mb-1"
+          role="alert"
+        >
+          {{ "crypto.resume.warning" | translate }}
+        </div>
       </div>
     </div>
   </div>

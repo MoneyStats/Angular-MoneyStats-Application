@@ -29,6 +29,7 @@ export class CryptoResumeComponent implements OnInit {
       this.resume = new Map<string, CryptoDashboard>(Object.entries(res.data));
       this.years = Array.from(this.resume.keys());
       this.updateData(this.years[this.years.length - 1]);
+      this.cryptoService.cryptoResume = this.resume;
     });
     this.resumeData = this.cryptoService.cryptoDashboard;
   }

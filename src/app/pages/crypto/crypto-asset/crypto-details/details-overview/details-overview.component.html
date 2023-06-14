@@ -219,7 +219,10 @@
   </div>
   <div class="col-md-12">
     <div class="section inset mb-2">
-      <div class="section-title">Wallets</div>
+      <div class="section-title">
+        {{ "crypto.asset.details.overview.wallets" | translate
+        }}{{ asset.name }}
+      </div>
 
       <div class="accordion" id="accordionExample2">
         <div class="accordion-item" *ngFor="let wallet of walletsAsset">

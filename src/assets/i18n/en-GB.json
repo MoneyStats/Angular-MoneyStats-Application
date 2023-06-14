@@ -532,7 +532,15 @@
       "cardRes": {
         "title": "Total Balance",
         "lastUpdate": "Last updated",
-        "opt1": "Add Asset"
+        "opt1": "Add Asset",
+        "opt2": "View Assets",
+        "opt3": "Add Crypto Wallet"
+      },
+      "mobileBtn": {
+        "opt1": "Add Crypto Wallet",
+        "opt2": "Operations",
+        "opt3": "Crypto Resume",
+        "opt4": "Settings"
       },
       "performanceCard": {
         "title": "Resume Performance",
@@ -552,6 +560,9 @@
       "title": "Crypto Assets",
       "assetList": "Asset List",
       "assetGraph": "Asset Graph",
+      "tab1": "Overview",
+      "tab2": "TradingView Datas",
+      "tab3": "Advanced Graph",
       "details": {
         "overview": {
           "rank": "Rank",
@@ -560,7 +571,8 @@
           "value": "Total Balance in ",
           "invested": "Money Invested",
           "performance": "Performance since beginning",
-          "trend": "Trend since beginning"
+          "trend": "Trend since beginning",
+          "wallets": "Wallet with "
         }
       }
     },
@@ -573,7 +585,8 @@
       },
       "assetList": "Current Asset",
       "graphAsset": "Performance",
-      "tableAsset": "Resume performance of the year"
+      "tableAsset": "Resume performance of the year",
+      "warning": "Add a new Stats to get the table data"
     },
     "cryptoModal": {
       "addAsset": {

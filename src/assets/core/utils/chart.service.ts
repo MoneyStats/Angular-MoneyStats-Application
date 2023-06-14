@@ -308,8 +308,10 @@ export class ChartService {
       if (asset.history && asset.history.length != 0) {
         if (asset.history.length === 1) {
           oldStats.balance = oldBalance;
-
-          oldStats.date = oldDate;
+          let today = new Date();
+          let yesterday = new Date();
+          yesterday.setDate(today.getDate() - 1);
+          oldStats.date = yesterday.toISOString();
           asset.history!.splice(0, 0, oldStats);
         }
         asset.history!.forEach((h) => {
@@ -319,7 +321,7 @@ export class ChartService {
           let count = cryptoDashboard.statsAssetsDays.indexOf(
             h.date.toString()
           );
-          if (count != index) {
+          if (count != -1 && count != index) {
             Array.from(Array(count - index)).forEach((d) =>
               historyBalance.push(0)
             );
@@ -328,9 +330,17 @@ export class ChartService {
           historyBalance.push(h.balance);
           index++;
         });
-        historyBalance.push(asset.value!);
+        //historyBalance.push(asset.value!);
         let today = new Date();
-        cryptoDashboard.statsAssetsDays.push(today.toDateString());
+        const lastDay: Date = new Date(
+          cryptoDashboard.statsAssetsDays[
+            cryptoDashboard.statsAssetsDays.length - 1
+          ]
+        );
+        if (lastDay.getDate() < today.getDate()) {
+          historyBalance.push(asset.value!);
+          cryptoDashboard.statsAssetsDays.push(today.toDateString());
+        }
       } else {
         historyBalance.push(0);
         historyBalance.push(asset.value!);

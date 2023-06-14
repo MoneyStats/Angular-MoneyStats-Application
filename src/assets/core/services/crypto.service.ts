@@ -25,6 +25,12 @@ export class CryptoService {
   public cryptoDashboard: CryptoDashboard = new CryptoDashboard();
   public assets: Asset[] = [];
 
+  // Used for history table
+  public cryptoResume: Map<string, CryptoDashboard> = new Map<
+    string,
+    CryptoDashboard
+  >();
+
   // Used for details
   public asset?: Asset;
 

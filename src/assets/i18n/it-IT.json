@@ -532,7 +532,15 @@
       "cardRes": {
         "title": "Saldo Totale",
         "lastUpdate": "Ultimo aggiornameneto",
-        "opt1": "Aggiungi Asset"
+        "opt1": "Aggiungi Asset",
+        "opt2": "Vedi Assets",
+        "opt3": "Aggiungi Crypto Wallet"
+      },
+      "mobileBtn": {
+        "opt1": "Aggiungi Crypto Wallet",
+        "opt2": "Operazioni",
+        "opt3": "Crypto Resume",
+        "opt4": "Impostazioni"
       },
       "performanceCard": {
         "title": "Storico Performance",
@@ -552,6 +560,9 @@
       "title": "Crypto Assets",
       "assetList": "Lista Asset",
       "assetGraph": "Grafico Asset",
+      "tab1": "Overview",
+      "tab2": "Dati TradingView",
+      "tab3": "Grafico Avanzato",
       "details": {
         "overview": {
           "rank": "Rank",
@@ -560,7 +571,8 @@
           "value": "Saldo Totale in ",
           "invested": "Saldo Investito",
           "performance": "Performance dall'inizio",
-          "trend": "Trend dall'inizio"
+          "trend": "Trend dall'inizio",
+          "wallets": "Wallet possedenti "
         }
       }
     },
@@ -573,7 +585,8 @@
       },
       "assetList": "Asset in possesso",
       "graphAsset": "Performance",
-      "tableAsset": "Storico performance annuale"
+      "tableAsset": "Storico performance annuale",
+      "warning": "Aggiungi un nuovo crypto stats per ottenere dei dati"
     },
     "cryptoModal": {
       "addAsset": {

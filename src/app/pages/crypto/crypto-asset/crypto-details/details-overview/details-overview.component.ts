@@ -37,6 +37,13 @@ export class DetailsOverviewComponent implements OnInit {
     dashboard.assets = [
       this.asset.name == undefined ? this.cryptoService.asset! : this.asset,
     ];
+    if (this.asset.history?.find((h) => h.id == undefined)) {
+      let indexOf = this.asset.history?.indexOf(
+        this.asset.history?.find((h) => h.id == undefined)!
+      );
+      this.asset.history.splice(indexOf, 1);
+    }
+    console.log(dashboard);
     setTimeout(() => {
       if (this.cryptoDashboard.wallets) {
         if (this.screenService?.screenWidth! <= 780) {
