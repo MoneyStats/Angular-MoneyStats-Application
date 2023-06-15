@@ -30,8 +30,9 @@ export class CryptoResumeComponent implements OnInit {
       this.years = Array.from(this.resume.keys());
       this.updateData(this.years[this.years.length - 1]);
       this.cryptoService.cryptoResume = this.resume;
+      console.log(this.resumeData);
     });
-    this.resumeData = this.cryptoService.cryptoDashboard;
+    //this.resumeData = this.cryptoService.cryptoDashboard;
   }
 
   onChange(e: any) {
