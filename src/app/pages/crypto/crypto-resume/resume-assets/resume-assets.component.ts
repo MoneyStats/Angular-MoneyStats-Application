@@ -13,7 +13,7 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 export class ResumeAssetsComponent implements OnInit {
   public chartOptions?: Partial<ApexOptions>;
   @Input('resumeData') resumeData: CryptoDashboard = new CryptoDashboard();
-  resume: Map<string, CryptoDashboard> = new Map<string, CryptoDashboard>();
+  //resume: Map<string, CryptoDashboard> = new Map<string, CryptoDashboard>();
   years: Array<string> = [];
   balances: Array<number> = [];
   filterDateHistory: string[] = [];
@@ -25,6 +25,8 @@ export class ResumeAssetsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log(this.resumeData);
+    // TODO: ix lato BE
     setTimeout(() => {
       if (this.resumeData.assets) {
         if (this.screenService?.screenWidth! <= 780) {
@@ -42,21 +44,22 @@ export class ResumeAssetsComponent implements OnInit {
     this.tableBalance = [];
     this.balances = [];
     if (this.resumeData.statsAssetsDays) {
-      let moreThanOneInAMonth: Array<string> = [];
+      //let moreThanOneInAMonth: Array<string> = [];
       this.resumeData.statsAssetsDays.forEach((date, index) => {
         let yearMonth: string = date.split('-')[0] + '-' + date.split('-')[1];
 
-        let find = moreThanOneInAMonth.find((d) => d.includes(yearMonth));
-        if (find && moreThanOneInAMonth.includes(find)) {
-          moreThanOneInAMonth.pop();
-          moreThanOneInAMonth.push(date);
-        } else {
-          moreThanOneInAMonth.push(date);
-        }
-      });
-      moreThanOneInAMonth.forEach((date, index) => {
+        //let find = moreThanOneInAMonth.find((d) => d.includes(yearMonth));
+        //if (find && moreThanOneInAMonth.includes(find)) {
+        //  moreThanOneInAMonth.pop();
+        //  moreThanOneInAMonth.push(date);
+        //} else {
+        //  moreThanOneInAMonth.push(date);
+        //}
         this.tableBalance.push(this.tableColumsCreate(date, index));
       });
+      //moreThanOneInAMonth.forEach((date, index) => {
+      //  this.tableBalance.push(this.tableColumsCreate(date, index));
+      //});
       //this.dashboard.statsWalletDays = moreThanOneInAMonth;
     }
   }
@@ -66,6 +69,7 @@ export class ResumeAssetsComponent implements OnInit {
 
     this.resumeData.assets.forEach((a, index) => {
       let history = a.history?.find((h) => h.date.toString() === date);
+      console.log(history, date, a);
       if (!history) {
         history = new Stats();
         history.balance = 0;

@@ -330,6 +330,7 @@ export class ChartService {
           historyBalance.push(h.balance);
           index++;
         });
+
         //historyBalance.push(asset.value!);
         let today = new Date();
         const lastDay: Date = new Date(
