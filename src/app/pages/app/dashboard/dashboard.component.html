@@ -133,9 +133,10 @@
         ></app-content-box>
         <div
           *ngIf="dashboard.statsWalletDays && dashboard.statsWalletDays.length"
-          class="card"
+          class="card border_round"
         >
-          <div class="card-body">
+          <!--<div class="card-body">-->
+          <div class="inner-round">
             <apx-chart
               *ngIf="chartOptions"
               [series]="chartOptions.series!"
@@ -147,8 +148,9 @@
               [labels]="chartOptions.labels!"
               type="area"
             ></apx-chart>
-            <!--<div id="chart-line"></div>-->
           </div>
+          <!--<div id="chart-line"></div>-->
+          <!--</div>-->
         </div>
       </div>
       <!-- * Graph -->

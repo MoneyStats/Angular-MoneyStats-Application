@@ -32,7 +32,8 @@
                 {{ "crypto.dashboard.cardRes.title" | translate }}
               </p>
               <h5 class="card-text fs-3">
-                {{ cryptoDashboard.balance }} {{ cryptoDashboard.currency }}
+                {{ cryptoDashboard.balance }}
+                <small>{{ cryptoDashboard.currency }}</small>
               </h5>
               <p style="margin-top: -15px">
                 {{ cryptoDashboard.btcBalance }} BTC
@@ -192,7 +193,7 @@
                     </p>
                     <h5 class="card-text fs-3">
                       {{ cryptoDashboard.holdingLong.balance }}
-                      {{ cryptoDashboard.currency }}
+                      <small>{{ cryptoDashboard.currency }}</small>
                     </h5>
                     <span
                       class="badge {{
@@ -235,7 +236,7 @@
                     </p>
                     <h5 class="card-text fs-3">
                       {{ cryptoDashboard.trading.balance }}
-                      {{ cryptoDashboard.currency }}
+                      <small>{{ cryptoDashboard.currency }}</small>
                     </h5>
                     <span
                       class="badge {{
@@ -279,7 +280,7 @@
                     </p>
                     <h5 class="card-text fs-3">
                       {{ cryptoDashboard.performance.balance }}
-                      {{ cryptoDashboard.currency }}
+                      <small>{{ cryptoDashboard.currency }}</small>
                     </h5>
                     <span
                       class="badge {{
@@ -554,4 +555,5 @@
   [assets]="cryptoDashboard.assets"
   [currency]="cryptoDashboard.currency"
   [statsAssetsDays]="cryptoDashboard.statsAssetsDays"
+  (emitAddStats)="getDashboard()"
 ></app-operations-modal>

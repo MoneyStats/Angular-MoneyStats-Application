@@ -47,8 +47,23 @@ $darkColor: #121212;
   user-select: none; /* Standard */
 }
 
+// Border Round Funtions
 .border_round {
   border-radius: 20px !important;
+}
+// Border Round Funtions for Graphic
+.inner-round {
+  mask-image: radial-gradient();
+  -webkit-mask-image: radial-gradient(
+    circle 0px at 0 0,
+    transparent 0,
+    transparent 0px,
+    black 0px
+  );
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  -webkit-border-bottom-left-radius: 20px;
+  -webkit-border-bottom-right-radius: 20px;
 }
 
 .rounded-pill {

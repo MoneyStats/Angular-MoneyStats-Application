@@ -63,7 +63,7 @@
         }}</strong>
       </a>
     </div>
-    <div class="item">
+    <div class="item hidden_desktop">
       <a
         href="#"
         data-bs-toggle="modal"
@@ -75,6 +75,20 @@
         <strong>{{
           "dashboard.dashboardCard.footer.title2" | translate
         }}</strong>
+      </a>
+    </div>
+    <div class="item hidden_mobile">
+      <a routerLink="/crypto/dashboard">
+        <div class="icon-wrapper bg-primary">
+          <img
+            src="{{
+              environment.baseUrlVersion
+            }}assets/images/crypto/Bitcoin-icon.png"
+            alt=""
+            srcset=""
+          />
+        </div>
+        <strong>{{ "crypto.dashboard.title" | translate }}</strong>
       </a>
     </div>
     <div class="item">

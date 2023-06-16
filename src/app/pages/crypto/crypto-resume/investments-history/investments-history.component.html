@@ -34,7 +34,7 @@
                 {{ asset.invested }} {{ cryptoCurrency }}
               </td>
               <td class="text-end text-primary">
-                {{ asset.invested! / asset.balance! }}
+                {{ (asset.invested! / asset.balance!).toFixed(2) }}
                 {{ cryptoCurrency }}
               </td>
               <td class="text-end">

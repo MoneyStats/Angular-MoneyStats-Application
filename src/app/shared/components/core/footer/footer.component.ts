@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-footer',
@@ -16,20 +17,18 @@ import { ToastService } from 'src/assets/core/utils/toast.service';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-  @Input('isCrypto') isCrypto: boolean = false;
+  environment = environment;
 
   constructor(
     public toast: ToastService,
-    private screenService: ScreenService,
-  ) {
-  }
+    private screenService: ScreenService
+  ) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   availableSoon() {
     this.toast.availableSoon();

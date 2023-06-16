@@ -195,21 +195,19 @@
     <div class="section-title">
       {{ "crypto.resume.graphAsset" | translate }}
     </div>
-    <div class="card">
-      <div class="card-body">
-        <apx-chart
-          *ngIf="chartOptions"
-          [series]="chartOptions.series!"
-          [chart]="chartOptions.chart!"
-          [title]="chartOptions.title!"
-          [colors]="chartOptions.colors!"
-          [legend]="chartOptions.legend!"
-          [stroke]="chartOptions.stroke!"
-          [labels]="chartOptions.labels!"
-          type="area"
-          class="border_round"
-        ></apx-chart>
-      </div>
+    <div class="card inner-round border_round">
+      <apx-chart
+        *ngIf="chartOptions"
+        [series]="chartOptions.series!"
+        [chart]="chartOptions.chart!"
+        [title]="chartOptions.title!"
+        [colors]="chartOptions.colors!"
+        [legend]="chartOptions.legend!"
+        [stroke]="chartOptions.stroke!"
+        [labels]="chartOptions.labels!"
+        type="area"
+        class="border_round"
+      ></apx-chart>
     </div>
   </div>
   <!-- App Capsule -->

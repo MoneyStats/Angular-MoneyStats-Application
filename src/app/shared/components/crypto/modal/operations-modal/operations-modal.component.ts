@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Asset } from 'src/assets/core/data/class/crypto.class';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
@@ -17,6 +17,7 @@ export class OperationsModalComponent implements OnInit {
   @Input('assets') assets: Asset[] = [];
   @Input('currency') currency: string = '';
   @Input('statsAssetsDays') statsAssetsDays: string[] = [];
+  @Output('emitAddStats') emitAddStats = new EventEmitter<Wallet[]>();
 
   // Boolean per bottoni e titoli Add Stats
   isAddStatsSelected: boolean = false;
@@ -111,12 +112,12 @@ export class OperationsModalComponent implements OnInit {
 
     this.wallets.forEach((wallet) => {
       // Check Wallet Date if is before the current date to prevert the update of the data
-
-      wallet.assets.forEach((asset) => {
-        let stats: Stats = new Stats();
-        this.setDataForNewStats(asset, statsWalletDays, stats);
-        asset.newValue = parseFloat('');
-      });
+      if (wallet.assets)
+        wallet.assets.forEach((asset) => {
+          let stats: Stats = new Stats();
+          this.setDataForNewStats(asset, statsWalletDays, stats);
+          asset.newValue = parseFloat('');
+        });
     });
     if (this.cryptoService.cryptoDashboard.statsAssetsDays) {
       this.cryptoService.cryptoDashboard.statsAssetsDays.push(this.dateStats);
@@ -225,6 +226,7 @@ export class OperationsModalComponent implements OnInit {
     this.saveValidation = false;
     this.statsService.addStats(this.wallets).subscribe((data) => {
       this.wallets = data.data;
+      this.emitAddStats.emit(this.wallets);
     });
     this.getTodayAsString();
     this.resetForm();

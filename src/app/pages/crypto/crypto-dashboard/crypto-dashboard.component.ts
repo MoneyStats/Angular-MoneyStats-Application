@@ -171,7 +171,8 @@ export class CryptoDashboardComponent implements OnInit {
   }
   saveWallet(wallet: Wallet) {
     console.log(wallet);
-    if (wallet.assets != undefined && wallet.assets.length != 0) {
+    this.getDashboard();
+    /*if (wallet.assets != undefined && wallet.assets.length != 0) {
       wallet.assets.forEach((asset) => {
         if (wallet.type == 'Holding') {
           this.cryptoDashboard.holdingLong.balance += asset.value!;
@@ -191,6 +192,6 @@ export class CryptoDashboardComponent implements OnInit {
     } else {
       this.cryptoDashboard.wallets.push(wallet);
       this.cryptoWallet?.push(wallet);
-    }
+    }*/
   }
 }

@@ -74,7 +74,7 @@
       [footer]="'dashboard.graph.nodata.footer' | translate"
     ></app-content-box>
     <div *ngIf="dashboard.statsWalletDays" class="card border_round">
-      <div class="card-body">
+      <div class="inner-round">
         <apx-chart
           *ngIf="chartOptions"
           [series]="chartOptions.series!"

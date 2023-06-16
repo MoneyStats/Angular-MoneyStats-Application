@@ -34,7 +34,10 @@ export class CryptoAssetComponent implements OnInit {
       this.cryptoService.assets = data.data;
       this.cryptoDashboard.assets = data.data;
     });
+    this.graph1Y();
+  }
 
+  graphAll() {
     setTimeout(() => {
       if (this.cryptoDashboard.wallets) {
         if (this.screenService?.screenWidth! <= 780) {
@@ -59,7 +62,9 @@ export class CryptoAssetComponent implements OnInit {
       );
     });
     setTimeout(() => {
-      this.chart1Y = this.charts.renderCryptoAsset(this.cryptoDashboard);
+      if (this.screenService?.screenWidth! <= 780)
+        this.chart1Y = this.charts.renderCryptoAsset(this.cryptoDashboard, 200);
+      else this.chart1Y = this.charts.renderCryptoAsset(this.cryptoDashboard);
     }, 200);
   }
 
@@ -69,13 +74,15 @@ export class CryptoAssetComponent implements OnInit {
       (new Date().getFullYear() - 1).toString(),
       (new Date().getFullYear() - 2).toString(),
     ];
-    let last3Year = this.assets.forEach((asset) => {
+    this.assets.forEach((asset) => {
       asset.history?.filter((h) =>
         last3.includes(h.date.toString().split('-')[0])
       );
     });
     setTimeout(() => {
-      this.chart3Y = this.charts.renderCryptoAsset(this.cryptoDashboard);
+      if (this.screenService?.screenWidth! <= 780)
+        this.chart3Y = this.charts.renderCryptoAsset(this.cryptoDashboard, 200);
+      else this.chart3Y = this.charts.renderCryptoAsset(this.cryptoDashboard);
     }, 200);
   }
 }
