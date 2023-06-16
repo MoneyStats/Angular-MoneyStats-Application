@@ -72,7 +72,7 @@ export class ChartService {
       chart: {
         type: 'area',
         width: '100%',
-        height: 350,
+        height: 380,
         sparkline: {
           enabled: true,
         },

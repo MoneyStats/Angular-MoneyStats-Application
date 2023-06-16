@@ -1,13 +1,13 @@
 <div class="row">
   <div class="col-md-7">
     <div class="section mt-2">
-      <div class="card">
+      <div class="card border_round">
         <div class="card-body pt-1">
           <!-- tabs -->
           <ul class="nav nav-tabs lined" role="tablist">
             <li class="nav-item">
               <a
-                class="nav-link"
+                class="nav-link active"
                 data-bs-toggle="tab"
                 href="#tab-1y"
                 role="tab"
@@ -29,10 +29,11 @@
             </li>
             <li class="nav-item">
               <a
-                class="nav-link active"
+                class="nav-link"
                 data-bs-toggle="tab"
                 href="#tab-all"
                 role="tab"
+                (click)="graphAll()"
               >
                 All
               </a>
@@ -43,45 +44,51 @@
 
         <!-- tab content -->
         <div class="tab-content">
-          <div class="tab-pane fade" id="tab-1y" role="tabpanel">
-            <apx-chart
-              *ngIf="chart1Y"
-              [series]="chart1Y.series!"
-              [chart]="chart1Y.chart!"
-              [title]="chart1Y.title!"
-              [colors]="chart1Y.colors!"
-              [legend]="chart1Y.legend!"
-              [stroke]="chart1Y.stroke!"
-              [labels]="chart1Y.labels!"
-              type="area"
-            ></apx-chart>
+          <div class="tab-pane fade show active" id="tab-1y" role="tabpanel">
+            <div class="inner-round">
+              <apx-chart
+                *ngIf="chart1Y"
+                [series]="chart1Y.series!"
+                [chart]="chart1Y.chart!"
+                [title]="chart1Y.title!"
+                [colors]="chart1Y.colors!"
+                [legend]="chart1Y.legend!"
+                [stroke]="chart1Y.stroke!"
+                [labels]="chart1Y.labels!"
+                type="area"
+              ></apx-chart>
+            </div>
           </div>
           <div class="tab-pane fade" id="tab-3y" role="tabpanel">
-            <apx-chart
-              *ngIf="chart3Y"
-              [series]="chart3Y.series!"
-              [chart]="chart3Y.chart!"
-              [title]="chart3Y.title!"
-              [colors]="chart3Y.colors!"
-              [legend]="chart3Y.legend!"
-              [stroke]="chart3Y.stroke!"
-              [labels]="chart3Y.labels!"
-              type="area"
-            ></apx-chart>
+            <div class="inner-round">
+              <apx-chart
+                *ngIf="chart3Y"
+                [series]="chart3Y.series!"
+                [chart]="chart3Y.chart!"
+                [title]="chart3Y.title!"
+                [colors]="chart3Y.colors!"
+                [legend]="chart3Y.legend!"
+                [stroke]="chart3Y.stroke!"
+                [labels]="chart3Y.labels!"
+                type="area"
+              ></apx-chart>
+            </div>
           </div>
-          <div class="tab-pane fade show active" id="tab-all" role="tabpanel">
-            <apx-chart
-              *ngIf="chartOptions"
-              [series]="chartOptions.series!"
-              [chart]="chartOptions.chart!"
-              [title]="chartOptions.title!"
-              [colors]="chartOptions.colors!"
-              [legend]="chartOptions.legend!"
-              [stroke]="chartOptions.stroke!"
-              [labels]="chartOptions.labels!"
-              type="area"
-              class="border_round"
-            ></apx-chart>
+          <div class="tab-pane fade" id="tab-all" role="tabpanel">
+            <div class="inner-round">
+              <apx-chart
+                *ngIf="chartOptions"
+                [series]="chartOptions.series!"
+                [chart]="chartOptions.chart!"
+                [title]="chartOptions.title!"
+                [colors]="chartOptions.colors!"
+                [legend]="chartOptions.legend!"
+                [stroke]="chartOptions.stroke!"
+                [labels]="chartOptions.labels!"
+                type="area"
+                class="border_round"
+              ></apx-chart>
+            </div>
           </div>
         </div>
         <!-- * tab content -->
@@ -91,7 +98,7 @@
   <div class="col-md-5">
     <!-- Stats -->
     <div class="section mt-2 mb-4">
-      <div class="card">
+      <div class="card border_round">
         <ul class="listview no-line transparent flush simple-listview">
           <li>
             <div class="text-muted">
@@ -134,7 +141,7 @@
                   ((asset.value! - asset.invested!) / asset.invested!) * 100! >
                   0
                     ? 'badge-success'
-                    : 'badge-success'
+                    : 'badge-danger'
                 }}"
               >
                 <ion-icon
@@ -171,7 +178,7 @@
           </li>
         </ul>
       </div>
-      <div class="card mt-2">
+      <div class="card border_round mt-2">
         <div class="card-body">
           <div class="row mb-05 fontsize-sub">
             <div class="col text-success">
@@ -224,7 +231,7 @@
         }}{{ asset.name }}
       </div>
 
-      <div class="accordion" id="accordionExample2">
+      <div class="accordion border_round" id="accordionExample2">
         <div class="accordion-item" *ngFor="let wallet of walletsAsset">
           <h2 class="accordion-header">
             <button
@@ -241,7 +248,8 @@
               {{ wallet.name }}
               <div class="title-section text-end accordion-right-title">
                 <h5 class="card-text fs-3">
-                  {{ wallet.assets[0].value }} {{ cryptoDashboard.currency }}
+                  {{ wallet.assets[0].value }}
+                  <small>{{ cryptoDashboard.currency }}</small>
                 </h5>
                 <p style="margin-top: -15px">
                   <small
@@ -290,7 +298,7 @@
                           100! >
                         0
                           ? 'badge-success'
-                          : 'badge-success'
+                          : 'badge-danger'
                       }}"
                     >
                       <ion-icon

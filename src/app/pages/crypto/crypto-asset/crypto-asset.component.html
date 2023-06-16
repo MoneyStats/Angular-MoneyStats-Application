@@ -195,13 +195,13 @@
           <div class="section-title hidden_mobile">
             {{ "crypto.asset.assetGraph" | translate }}
           </div>
-          <div class="card">
+          <div class="card border_round">
             <div class="card-body pt-1">
               <!-- tabs -->
               <ul class="nav nav-tabs lined" role="tablist">
                 <li class="nav-item">
                   <a
-                    class="nav-link"
+                    class="nav-link active"
                     data-bs-toggle="tab"
                     href="#tab-1y"
                     role="tab"
@@ -223,10 +223,11 @@
                 </li>
                 <li class="nav-item">
                   <a
-                    class="nav-link active"
+                    class="nav-link"
                     data-bs-toggle="tab"
                     href="#tab-all"
                     role="tab"
+                    (click)="graphAll()"
                   >
                     All
                   </a>
@@ -237,49 +238,55 @@
 
             <!-- tab content -->
             <div class="tab-content">
-              <div class="tab-pane fade" id="tab-1y" role="tabpanel">
-                <apx-chart
-                  *ngIf="chart1Y"
-                  [series]="chart1Y.series!"
-                  [chart]="chart1Y.chart!"
-                  [title]="chart1Y.title!"
-                  [colors]="chart1Y.colors!"
-                  [legend]="chart1Y.legend!"
-                  [stroke]="chart1Y.stroke!"
-                  [labels]="chart1Y.labels!"
-                  type="area"
-                ></apx-chart>
-              </div>
-              <div class="tab-pane fade" id="tab-3y" role="tabpanel">
-                <apx-chart
-                  *ngIf="chart3Y"
-                  [series]="chart3Y.series!"
-                  [chart]="chart3Y.chart!"
-                  [title]="chart3Y.title!"
-                  [colors]="chart3Y.colors!"
-                  [legend]="chart3Y.legend!"
-                  [stroke]="chart3Y.stroke!"
-                  [labels]="chart3Y.labels!"
-                  type="area"
-                ></apx-chart>
-              </div>
               <div
                 class="tab-pane fade show active"
-                id="tab-all"
+                id="tab-1y"
                 role="tabpanel"
               >
-                <apx-chart
-                  *ngIf="chartOptions"
-                  [series]="chartOptions.series!"
-                  [chart]="chartOptions.chart!"
-                  [title]="chartOptions.title!"
-                  [colors]="chartOptions.colors!"
-                  [legend]="chartOptions.legend!"
-                  [stroke]="chartOptions.stroke!"
-                  [labels]="chartOptions.labels!"
-                  type="area"
-                  class="border_round"
-                ></apx-chart>
+                <div class="inner-round">
+                  <apx-chart
+                    *ngIf="chart1Y"
+                    [series]="chart1Y.series!"
+                    [chart]="chart1Y.chart!"
+                    [title]="chart1Y.title!"
+                    [colors]="chart1Y.colors!"
+                    [legend]="chart1Y.legend!"
+                    [stroke]="chart1Y.stroke!"
+                    [labels]="chart1Y.labels!"
+                    type="area"
+                  ></apx-chart>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="tab-3y" role="tabpanel">
+                <div class="inner-round">
+                  <apx-chart
+                    *ngIf="chart3Y"
+                    [series]="chart3Y.series!"
+                    [chart]="chart3Y.chart!"
+                    [title]="chart3Y.title!"
+                    [colors]="chart3Y.colors!"
+                    [legend]="chart3Y.legend!"
+                    [stroke]="chart3Y.stroke!"
+                    [labels]="chart3Y.labels!"
+                    type="area"
+                  ></apx-chart>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="tab-all" role="tabpanel">
+                <div class="inner-round">
+                  <apx-chart
+                    *ngIf="chartOptions"
+                    [series]="chartOptions.series!"
+                    [chart]="chartOptions.chart!"
+                    [title]="chartOptions.title!"
+                    [colors]="chartOptions.colors!"
+                    [legend]="chartOptions.legend!"
+                    [stroke]="chartOptions.stroke!"
+                    [labels]="chartOptions.labels!"
+                    type="area"
+                    class="border_round"
+                  ></apx-chart>
+                </div>
               </div>
             </div>
             <!-- * tab content -->

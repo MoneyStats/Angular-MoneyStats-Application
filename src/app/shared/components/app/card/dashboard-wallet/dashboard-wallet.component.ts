@@ -9,6 +9,7 @@ import {
 } from 'src/assets/core/data/constant/constant';
 import { UserService } from 'src/assets/core/services/user.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dashboard-wallet',
@@ -16,6 +17,7 @@ import { ToastService } from 'src/assets/core/utils/toast.service';
   styleUrls: ['./dashboard-wallet.component.scss'],
 })
 export class DashboardWalletComponent implements OnInit {
+  environment = environment;
   @Input('dashboard') dashboard?: Dashboard;
   @Input('user') user?: User;
   @Input('value') value?: string;

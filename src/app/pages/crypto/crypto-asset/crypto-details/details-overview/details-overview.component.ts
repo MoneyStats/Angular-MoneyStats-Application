@@ -32,26 +32,35 @@ export class DetailsOverviewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    let dashboard: CryptoDashboard = new CryptoDashboard();
+    /*let dashboard: CryptoDashboard = new CryptoDashboard();
     dashboard.statsAssetsDays = this.cryptoDashboard.statsAssetsDays;
     dashboard.assets = [
       this.asset.name == undefined ? this.cryptoService.asset! : this.asset,
-    ];
+    ];*/
     if (this.asset.history?.find((h) => h.id == undefined)) {
       let indexOf = this.asset.history?.indexOf(
         this.asset.history?.find((h) => h.id == undefined)!
       );
       this.asset.history.splice(indexOf, 1);
     }
-    console.log(dashboard);
+    this.graph1Y();
+    this.walletsAsset = this.filterWallets();
+  }
+
+  graphAll() {
     setTimeout(() => {
       if (this.cryptoDashboard.wallets) {
         if (this.screenService?.screenWidth! <= 780) {
-          this.chartOptions = this.charts.renderCryptoAsset(dashboard, 200);
-        } else this.chartOptions = this.charts.renderCryptoAsset(dashboard);
+          this.chartOptions = this.charts.renderCryptoAsset(
+            this.cryptoDashboard,
+            200
+          );
+        } else
+          this.chartOptions = this.charts.renderCryptoAsset(
+            this.cryptoDashboard
+          );
       }
     }, 100);
-    this.walletsAsset = this.filterWallets();
   }
 
   graph1Y() {
@@ -60,7 +69,9 @@ export class DetailsOverviewComponent implements OnInit {
         h.date.toString().split('-')[0] === new Date().getFullYear().toString()
     );
     setTimeout(() => {
-      this.chart1Y = this.charts.renderCryptoAsset(this.cryptoDashboard);
+      if (this.screenService?.screenWidth! <= 780)
+        this.chart1Y = this.charts.renderCryptoAsset(this.cryptoDashboard, 200);
+      else this.chart1Y = this.charts.renderCryptoAsset(this.cryptoDashboard);
     }, 200);
   }
 
@@ -74,7 +85,9 @@ export class DetailsOverviewComponent implements OnInit {
       last3.includes(h.date.toString().split('-')[0])
     );
     setTimeout(() => {
-      this.chart3Y = this.charts.renderCryptoAsset(this.cryptoDashboard);
+      if (this.screenService?.screenWidth! <= 780)
+        this.chart3Y = this.charts.renderCryptoAsset(this.cryptoDashboard, 200);
+      else this.chart3Y = this.charts.renderCryptoAsset(this.cryptoDashboard);
     }, 200);
   }
 
