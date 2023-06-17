@@ -28,9 +28,23 @@
             <div class="col-6 text-end">
               <span
                 style="margin-right: 40px; margin-top: 30px"
-                class="badge badge-success"
+                class="badge {{
+                  asset.performance == 0
+                    ? 'badge-warning'
+                    : asset.performance! > 0
+                    ? 'badge-success'
+                    : 'badge-danger'
+                }}"
               >
-                <ion-icon name="arrow-up-outline"></ion-icon>
+                <ion-icon
+                  name="{{
+                    asset.performance == 0
+                      ? 'arrow-down-outline'
+                      : asset.performance! > 0
+                      ? 'arrow-up-outline'
+                      : 'arrow-down-outline'
+                  }}"
+                ></ion-icon>
                 {{ asset.performance }}%
               </span>
             </div>
@@ -39,8 +53,25 @@
       </div>
       <div class="title-section col-6 text-end hidden_mobile">
         <h5 class="card-text fs-3">
-          <span style="vertical-align: 3px" class="badge badge-success">
-            <ion-icon name="arrow-up-outline"></ion-icon>
+          <span
+            style="vertical-align: 3px"
+            class="badge {{
+              asset.performance == 0
+                ? 'badge-warning'
+                : asset.performance! > 0
+                ? 'badge-success'
+                : 'badge-danger'
+            }}"
+          >
+            <ion-icon
+              name="{{
+                asset.performance == 0
+                  ? 'arrow-down-outline'
+                  : asset.performance! > 0
+                  ? 'arrow-up-outline'
+                  : 'arrow-down-outline'
+              }}"
+            ></ion-icon>
             {{ asset.performance }}%
           </span>
           {{ asset.value }}

@@ -52,7 +52,7 @@
                     : 'text-danger'
                 }}"
               >
-                {{ asset.value! - asset.invested! }}
+                {{ (asset.value! - asset.invested!).toFixed(2) }}
                 {{ cryptoCurrency }}
               </td>
               <td
