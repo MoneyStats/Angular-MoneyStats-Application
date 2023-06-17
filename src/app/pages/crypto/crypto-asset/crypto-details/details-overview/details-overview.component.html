@@ -173,7 +173,7 @@
                   : 'text-danger'
               }}"
               >{{ cryptoDashboard.currency }}
-              {{ asset.value! - asset.invested! }}</strong
+              {{ (asset.value! - asset.invested!).toFixed(2) }}</strong
             >
           </li>
         </ul>
@@ -290,7 +290,7 @@
                         ? 'text-success'
                         : 'text-danger'
                     }}"
-                    >{{ asset.value! - asset.invested! }}
+                    >{{ (asset.value! - asset.invested!).toFixed(2) }}
                     {{ cryptoDashboard.currency }}
                     <span
                       class="badge {{

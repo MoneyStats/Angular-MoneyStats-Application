@@ -42,7 +42,7 @@
     <div class="text-small">
       <span
         class="badge {{
-          asset.performance! == 0
+          asset.performance == 0
             ? 'badge-warning'
             : asset.performance! > 0
             ? 'badge-success'
@@ -51,7 +51,11 @@
       >
         <ion-icon
           name="{{
-            asset.performance! > 0 ? 'arrow-up-outline' : 'arrow-down-outline'
+            asset.performance! == 0
+              ? 'arrow-down-outline'
+              : asset.performance! > 0
+              ? 'arrow-up-outline'
+              : 'arrow-down-outline'
           }}"
         ></ion-icon>
         {{ asset.performance }}%
