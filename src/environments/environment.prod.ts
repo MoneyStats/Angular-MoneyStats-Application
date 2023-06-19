@@ -50,6 +50,7 @@ export const environment = {
   restoreDataUrl: host + '/v1/app/restore',
   addCryptoAssetDataUrl: host + '/v1/crypto/asset/addOrUpdate',
   getCryptoAssetDataUrl: host + '/v1/crypto/asset/getAll',
+  getCryptoDetailsDataUrl: host + '/v1/crypto/asset/get',
   getCryptoDashboardDataUrl: host + '/v1/crypto/dashboard',
   getCryptoResumeDataUrl: host + '/v1/crypto/resume',
   getMarketDataUrl: host + '/v1/market-data/get',

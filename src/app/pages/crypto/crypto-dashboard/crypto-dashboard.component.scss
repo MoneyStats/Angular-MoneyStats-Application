@@ -67,6 +67,9 @@
 }
 
 @media screen and (max-width: 780px) {
+  .balance {
+    font-size: xx-large !important;
+  }
   .section-performance {
     margin-top: 30px;
   }
@@ -106,4 +109,16 @@
 .priority {
   position: absolute;
   z-index: 999 !important;
+}
+
+@media screen and (min-width: 780px) and (max-width: 1200px) {
+  .section-performance {
+    margin-top: 40px;
+  }
+}
+
+@media screen and (min-width: 580px) and (max-width: 770px) {
+  .line {
+    border-left: solid 0px;
+  }
 }

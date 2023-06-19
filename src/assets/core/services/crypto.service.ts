@@ -102,11 +102,20 @@ export class CryptoService {
   }
 
   getCryptoDetails(identifier: string): Observable<ResponseModel> {
-    //if (this.user.mockedUser) {
-    return this.http.get<any>(environment.getCryptoDetailsMock);
-    //} else {
-    //  return this.http.get<any>(environment.getCryptoAssetsMock);
-    //}
+    const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      authToken: authToken!,
+    });
+    if (this.user.mockedUser) {
+      return this.http.get<any>(environment.getCryptoDetailsMock);
+    } else {
+      const url =
+        environment.getCryptoDetailsDataUrl + '?identifier=' + identifier;
+      return this.http.get<any>(url, {
+        headers: headers,
+      });
+    }
   }
 
   addOrUpdateCryptoAsset(wallet: Wallet): Observable<ResponseModel> {

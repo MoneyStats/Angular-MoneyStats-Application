@@ -26,15 +26,17 @@ export class CryptoDetailsComponent implements OnInit {
     this.screenService.hideFooter();
     this.cryptoDashboard = this.cryptoService.cryptoDashboard;
     let assets = this.cryptoService.assets;
-    console.log(assets);
+    console.log(assets, this.cryptoDashboard);
     this.route.params.subscribe((a: any) => {
       if (assets.length != 0) {
         this.asset = assets.find((as) => as.identifier == a.identifier)!;
       } else {
-        this.cryptoService.getCryptoDetails(a.id).subscribe((details) => {
-          this.asset = details.data;
-          this.cryptoService.asset = details.data;
-        });
+        this.cryptoService
+          .getCryptoDetails(a.identifier)
+          .subscribe((details) => {
+            this.asset = details.data;
+            this.cryptoService.asset = details.data;
+          });
       }
     });
   }
