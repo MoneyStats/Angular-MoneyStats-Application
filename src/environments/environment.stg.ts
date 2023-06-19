@@ -10,7 +10,7 @@ export const environment = {
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: '1.6.2 (Alpha)',
+  version: '1.6.3 (Alpha)',
 
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
@@ -45,6 +45,7 @@ export const environment = {
   restoreDataUrl: host + '/v1/app/restore',
   addCryptoAssetDataUrl: host + '/v1/crypto/asset/addOrUpdate',
   getCryptoAssetDataUrl: host + '/v1/crypto/asset/getAll',
+  getCryptoDetailsDataUrl: host + '/v1/crypto/asset/get',
   getCryptoDashboardDataUrl: host + '/v1/crypto/dashboard',
   getCryptoResumeDataUrl: host + '/v1/crypto/resume',
   getMarketDataUrl: host + '/v1/market-data/get',

@@ -245,7 +245,7 @@
                 alt="avatar"
                 class="imaged d-inline w30 rounded me-2 ms-1"
               />
-              {{ wallet.name }}
+              <div class="accordion-wallet-name">{{ wallet.name }}</div>
               <div class="title-section text-end accordion-right-title">
                 <h5 class="card-text fs-3">
                   {{ wallet.assets[0].value }}
@@ -334,12 +334,18 @@
                     <div class="item">
                       <div
                         class="icon-box {{
-                          history.trend > 0 ? 'text-success' : 'text-danger'
+                          history.trend == 0
+                            ? 'text-warning'
+                            : history.trend > 0
+                            ? 'text-success'
+                            : 'text-danger'
                         }} "
                       >
                         <ion-icon
                           name="{{
-                            history.trend > 0
+                            history.trend == 0
+                              ? 'trending-down-outline'
+                              : history.trend > 0
                               ? 'trending-up-outline'
                               : 'trending-down-outline'
                           }}"
@@ -360,14 +366,18 @@
                           <div class="text-small">
                             <span
                               class="badge {{
-                                history.trend > 0
+                                history.trend == 0
+                                  ? 'text-warning'
+                                  : history.trend > 0
                                   ? 'badge-success'
                                   : 'badge-danger'
                               }} "
                             >
                               <ion-icon
                                 name="{{
-                                  history.trend > 0
+                                  history.trend == 0
+                                    ? 'trending-down-outline'
+                                    : history.trend > 0
                                     ? 'arrow-up-outline'
                                     : 'arrow-down-outline'
                                 }}"

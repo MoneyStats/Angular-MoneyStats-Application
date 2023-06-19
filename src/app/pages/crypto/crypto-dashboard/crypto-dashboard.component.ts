@@ -29,6 +29,7 @@ export class CryptoDashboardComponent implements OnInit {
   environment = environment;
   @ViewChild('tradingViewListCrypto') tradingViewListCrypto?: ElementRef;
   @ViewChild('tradingViewPrices') tradingViewPrices?: ElementRef;
+  @ViewChild('tradingViewPricesScroll') tradingViewPricesScroll?: ElementRef;
   @ViewChild('selectGraph') selectGraph?: ElementRef;
 
   selectedSymbol: string = 'BTCUSDT';
@@ -59,6 +60,7 @@ export class CryptoDashboardComponent implements OnInit {
     this.appendListGraph();
     this.appendPrices();
     this.appendSelectGraph(this.selectedSymbol);
+    this.appendPricesScroll();
   }
 
   getDashboard() {
@@ -139,6 +141,49 @@ export class CryptoDashboardComponent implements OnInit {
     }`;
 
     this.tradingViewPrices?.nativeElement.appendChild(script);
+  }
+
+  appendPricesScroll() {
+    let script = this._renderer2.createElement('script');
+    script.type = `text/javascript`;
+    script.src =
+      'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
+    script.text = `
+    {
+      "symbols": [
+        {
+          "proName": "FX_IDC:EURUSD",
+          "title": "EUR/USD"
+        },
+        {
+          "description": "Bitcoin",
+          "proName": "BINANCE:BTCUSD"
+        },
+        {
+          "description": "Ethereum",
+          "proName": "BINANCE:ETHUSD"
+        },
+        {
+          "description": "Crypto.com",
+          "proName": "COINBASE:CROUSD"
+        },
+        {
+          "description": "Binance Coin",
+          "proName": "BINANCE:BNBUSD"
+        },
+        {
+          "description": "Sandbox",
+          "proName": "COINBASE:SANDUSD"
+        }
+      ],
+      "showSymbolLogo": true,
+      "colorTheme": "dark",
+      "isTransparent": true,
+      "displayMode": "compact",
+      "locale": "it"
+    }`;
+
+    this.tradingViewPricesScroll?.nativeElement.appendChild(script);
   }
 
   appendSelectGraph(symbol: string) {

@@ -7,6 +7,18 @@
     margin-left: -20px !important;
     margin-right: -20px !important;
   }
+  .accordion-button {
+    img {
+      margin-left: -4px !important;
+      margin-right: 10px !important;
+    }
+    .accordion-wallet-name {
+      max-width: 100px;
+    }
+    .accordion-right-title {
+      max-width: 180px;
+    }
+  }
 }
 
 .w30 {

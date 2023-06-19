@@ -19,3 +19,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   margin-right: -25px;
   border-width: thin;
 }
+@media screen and (max-width: 780px) {
+  .date-form {
+    max-width: auto !important;
+    input {
+      margin-left: 7px;
+    }
+  }
+}
+
+@media screen and (min-width: 780px) {
+  .date-form {
+    max-width: 200px;
+  }
+}
