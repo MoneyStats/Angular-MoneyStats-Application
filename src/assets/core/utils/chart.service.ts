@@ -289,17 +289,11 @@ export class ChartService {
     let series: Array<any> = [];
     let oldStats: any = new Stats();
     let oldDate: any;
-    if (
-      cryptoDashboard.statsAssetsDays &&
-      cryptoDashboard.statsAssetsDays.length === 1
-    ) {
+    let statsAssetsDays = cryptoDashboard.statsAssetsDays.slice();
+    if (statsAssetsDays && statsAssetsDays.length === 1) {
       oldDate =
-        parseInt(
-          cryptoDashboard.statsAssetsDays[
-            cryptoDashboard.statsAssetsDays.length - 1
-          ].split('-')[0]
-        ) - 1;
-      cryptoDashboard.statsAssetsDays.splice(0, 0, oldDate.toString());
+        parseInt(statsAssetsDays[statsAssetsDays.length - 1].split('-')[0]) - 1;
+      statsAssetsDays.splice(0, 0, oldDate.toString());
     }
     cryptoDashboard.assets.forEach((asset) => {
       let oldBalance = 0;
@@ -315,9 +309,7 @@ export class ChartService {
           if (h.date == undefined) {
             return;
           }
-          let count = cryptoDashboard.statsAssetsDays.indexOf(
-            h.date.toString()
-          );
+          let count = statsAssetsDays.indexOf(h.date.toString());
           if (count != -1 && count != index) {
             Array.from(Array(count - index)).forEach((d) =>
               historyBalance.push(0)
@@ -331,27 +323,19 @@ export class ChartService {
         //historyBalance.push(asset.value!);
         let today = new Date();
         const lastDay: Date = new Date(
-          cryptoDashboard.statsAssetsDays[
-            cryptoDashboard.statsAssetsDays.length - 1
-          ]
+          statsAssetsDays[statsAssetsDays.length - 1]
         );
         if (lastDay.getDate() < today.getDate()) {
           historyBalance.push(asset.value!);
-          cryptoDashboard.statsAssetsDays.push(today.toDateString());
+          statsAssetsDays.push(today.toDateString());
         }
       } else {
         // Se dovessi avere più Asset con uno di essi con history mentre l'altro no lo si gestisce così
-        if (
-          cryptoDashboard.statsAssetsDays &&
-          cryptoDashboard.statsAssetsDays.length != 0
-        ) {
+        if (statsAssetsDays && statsAssetsDays.length != 0) {
           let today = new Date();
           // L'index è -2 perchè essendo più asset ma questo non ha history è stato aggiunto il valore last
-          const lastDay =
-            cryptoDashboard.statsAssetsDays[
-              cryptoDashboard.statsAssetsDays.length - 2
-            ];
-          let count = cryptoDashboard.statsAssetsDays.indexOf(lastDay);
+          const lastDay = statsAssetsDays[statsAssetsDays.length - 2];
+          let count = statsAssetsDays.indexOf(lastDay);
           if (count != -1 && count != index) {
             Array.from(Array(count - index)).forEach((d) =>
               historyBalance.push(0)
@@ -368,8 +352,8 @@ export class ChartService {
           let today = new Date();
           let yesterday = new Date();
           yesterday.setDate(today.getDate() - 1);
-          cryptoDashboard.statsAssetsDays = [yesterday.toDateString()];
-          cryptoDashboard.statsAssetsDays.push(today.toDateString());
+          statsAssetsDays = [yesterday.toDateString()];
+          statsAssetsDays.push(today.toDateString());
         }
       }
       let serie = {
@@ -383,7 +367,7 @@ export class ChartService {
     if (height[0]) {
       h = height[0];
     }
-    console.log(series, cryptoDashboard.statsAssetsDays);
+    console.log(series, statsAssetsDays);
     let chartOptions: Partial<ApexOptions> = {
       series: series,
       chart: {
@@ -416,7 +400,7 @@ export class ChartService {
         '#500295',
         '#f7eedc',
       ],
-      labels: cryptoDashboard.statsAssetsDays,
+      labels: statsAssetsDays,
       legend: {
         show: true,
         position: 'top',
