@@ -48,46 +48,55 @@ export class DetailsOverviewComponent implements OnInit {
   }
 
   graphAll() {
+    let dashboard: CryptoDashboard = new CryptoDashboard();
+    dashboard.statsAssetsDays = this.cryptoDashboard.statsAssetsDays;
+    dashboard.assets = [
+      this.asset.name == undefined ? this.cryptoService.asset! : this.asset,
+    ];
     setTimeout(() => {
       if (this.cryptoDashboard.wallets) {
         if (this.screenService?.screenWidth! <= 780) {
-          this.chartOptions = this.charts.renderCryptoAsset(
-            this.cryptoDashboard,
-            200
-          );
-        } else
-          this.chartOptions = this.charts.renderCryptoAsset(
-            this.cryptoDashboard
-          );
+          this.chartOptions = this.charts.renderCryptoAsset(dashboard, 200);
+        } else this.chartOptions = this.charts.renderCryptoAsset(dashboard);
       }
     }, 100);
   }
 
   graph1Y() {
-    this.asset.history?.filter(
+    let dashboard: CryptoDashboard = new CryptoDashboard();
+    dashboard.statsAssetsDays = this.cryptoDashboard.statsAssetsDays;
+    dashboard.assets = [
+      this.asset.name == undefined ? this.cryptoService.asset! : this.asset,
+    ];
+    dashboard.assets[0].history?.filter(
       (h) =>
         h.date.toString().split('-')[0] === new Date().getFullYear().toString()
     );
     setTimeout(() => {
       if (this.screenService?.screenWidth! <= 780)
-        this.chart1Y = this.charts.renderCryptoAsset(this.cryptoDashboard, 200);
-      else this.chart1Y = this.charts.renderCryptoAsset(this.cryptoDashboard);
+        this.chart1Y = this.charts.renderCryptoAsset(dashboard, 200);
+      else this.chart1Y = this.charts.renderCryptoAsset(dashboard);
     }, 200);
   }
 
   graph3Y() {
+    let dashboard: CryptoDashboard = new CryptoDashboard();
+    dashboard.statsAssetsDays = this.cryptoDashboard.statsAssetsDays;
+    dashboard.assets = [
+      this.asset.name == undefined ? this.cryptoService.asset! : this.asset,
+    ];
     let last3 = [
       new Date().getFullYear().toString(),
       (new Date().getFullYear() - 1).toString(),
       (new Date().getFullYear() - 2).toString(),
     ];
-    this.asset.history?.filter((h) =>
+    dashboard.assets[0].history?.filter((h) =>
       last3.includes(h.date.toString().split('-')[0])
     );
     setTimeout(() => {
       if (this.screenService?.screenWidth! <= 780)
-        this.chart3Y = this.charts.renderCryptoAsset(this.cryptoDashboard, 200);
-      else this.chart3Y = this.charts.renderCryptoAsset(this.cryptoDashboard);
+        this.chart3Y = this.charts.renderCryptoAsset(dashboard, 200);
+      else this.chart3Y = this.charts.renderCryptoAsset(dashboard);
     }, 200);
   }
 
