@@ -28,7 +28,8 @@ export class InvestmentsHistoryComponent implements OnInit {
   constructor(private cryptoService: CryptoService) {}
 
   ngOnInit(): void {
-    if (this.cryptoResume.size == 0) {
+    console.log(this.cryptoResume);
+    if (!this.cryptoResume || this.cryptoResume.size == 0) {
       this.cryptoResume = this.cryptoService.cryptoResume;
     }
     this.cryptoResume.forEach((value: CryptoDashboard, key: string) => {
