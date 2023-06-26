@@ -40,31 +40,34 @@ export class ChartService {
           : 0;
       let historyBalance: Array<number> = [];
       let index = 0;
-      if (wallet.history.length === 1) {
-        oldStats.balance = oldBalance;
+      if (wallet.history) {
+        if (wallet.history.length === 1) {
+          oldStats.balance = oldBalance;
 
-        oldStats.date = oldDate;
-        wallet.history.splice(0, 0, oldStats);
+          oldStats.date = oldDate;
+          wallet.history.splice(0, 0, oldStats);
+        }
+        wallet.history.forEach((h) => {
+          if (h.date == undefined) {
+            return;
+          }
+          let count = dashboard.statsWalletDays.indexOf(h.date.toString());
+          if (count != index) {
+            Array.from(Array(count - index)).forEach((d) =>
+              historyBalance.push(0)
+            );
+            index = count;
+          }
+          historyBalance.push(h.balance);
+          index++;
+        });
+
+        let serie = {
+          name: wallet.name,
+          data: historyBalance,
+        };
+        series.push(serie);
       }
-      wallet.history.forEach((h) => {
-        if (h.date == undefined) {
-          return;
-        }
-        let count = dashboard.statsWalletDays.indexOf(h.date.toString());
-        if (count != index) {
-          Array.from(Array(count - index)).forEach((d) =>
-            historyBalance.push(0)
-          );
-          index = count;
-        }
-        historyBalance.push(h.balance);
-        index++;
-      });
-      let serie = {
-        name: wallet.name,
-        data: historyBalance,
-      };
-      series.push(serie);
       historyBalance = [];
     });
     let chartOptions: Partial<ApexOptions> = {

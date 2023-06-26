@@ -181,7 +181,9 @@ export class CategoryComponent implements OnInit, OnChanges {
     let history: any = [];
 
     wallet.forEach((w: any) => {
-      let hist = w.history.find((h: any) => h.date === date);
+      let hist = w.history
+        ? w.history.find((h: any) => h.date === date)
+        : undefined;
       if (!hist) {
         hist = new Stats();
         hist.balance = 0;

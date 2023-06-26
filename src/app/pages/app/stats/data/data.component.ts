@@ -78,7 +78,9 @@ export class DataComponent implements OnInit, OnChanges {
     let array: any = [];
 
     this.dashboard.wallets.forEach((w, index) => {
-      let history = w.history.find((h) => h.date.toString() === date);
+      let history = w.history
+        ? w.history.find((h) => h.date.toString() === date)
+        : undefined;
       if (!history) {
         history = new Stats();
         history.balance = 0;
