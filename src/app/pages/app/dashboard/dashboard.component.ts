@@ -59,7 +59,8 @@ export class DashboardComponent implements OnInit {
     private readonly updates: SwUpdate
   ) {
     this.updates.versionUpdates.subscribe((event) => {
-      toast.updateAvaiable();
+      let isAutoUpdate = !localStorage.getItem(StorageConstant.AUTOUPDATE);
+      if (!isAutoUpdate) toast.updateAvaiable();
     });
   }
 

@@ -344,7 +344,8 @@
       "support": "Supporto",
       "howItWorks": "Come funziona?",
       "version": "Versione MoneyStats",
-      "version_open": "Apri"
+      "version_open": "Apri",
+      "auto_update": "Aggiornamento Automatico"
     },
     "develop": "Info Sviluppi & Contatti"
   },

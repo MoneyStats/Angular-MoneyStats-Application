@@ -26,6 +26,7 @@ export enum StorageConstant {
   ACCESSTOKEN = 'accessToken',
   USERACCOUNT = 'userAccount',
   HIDDENAMOUNT = 'hiddenAmount',
+  AUTOUPDATE = 'auto_update',
 }
 
 export enum ProfileSettings {

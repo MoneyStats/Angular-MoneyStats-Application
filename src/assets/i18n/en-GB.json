@@ -344,7 +344,8 @@
       "support": "Support",
       "howItWorks": "How it works",
       "version": "MoneyStats Version",
-      "version_open": "Open"
+      "version_open": "Open",
+      "auto_update": "Auto Update"
     },
     "develop": "Info Develop & Contact"
   },

@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ChildrenOutletContexts, RouterOutlet } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { LanguagesSettings } from 'src/assets/core/data/constant/constant';
+import {
+  LanguagesSettings,
+  StorageConstant,
+} from 'src/assets/core/data/constant/constant';
 import { ThemeService } from 'src/assets/core/utils/theme.service';
 import { fader, slideUp } from './shared/animations/route-animations';
+import { SwUpdate } from '@angular/service-worker';
 
 @Component({
   selector: 'app-root',
@@ -21,8 +25,14 @@ export class AppComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private themeService: ThemeService,
-    private contexts: ChildrenOutletContexts
+    private contexts: ChildrenOutletContexts,
+    private readonly updates: SwUpdate
   ) {
+    this.updates.versionUpdates.subscribe((event) => {
+      let isAutoUpdate = !localStorage.getItem(StorageConstant.AUTOUPDATE);
+      if (isAutoUpdate)
+        this.updates.activateUpdate().then(() => document.location.reload());
+    });
     this.setLanguages();
   }
   ngOnInit(): void {
