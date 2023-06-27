@@ -26,6 +26,7 @@ export class SettingsComponent implements OnInit {
   user?: User;
 
   warning: boolean = false;
+  isAutoUpdate: boolean = false;
 
   constructor(
     public screenService: ScreenService,
@@ -56,6 +57,10 @@ export class SettingsComponent implements OnInit {
       this.user = JSON.parse(
         localStorage.getItem(StorageConstant.USERACCOUNT)!
       );
+    }
+    let autoUpdate = !localStorage.getItem(StorageConstant.AUTOUPDATE);
+    if (autoUpdate) {
+      this.isAutoUpdate = autoUpdate;
     }
   }
 
@@ -105,5 +110,13 @@ export class SettingsComponent implements OnInit {
     } else if (file.size > environment.imageSizeMax) {
       this.warning = true;
     }
+  }
+
+  autoUpdate() {
+    this.isAutoUpdate == true ? false : true;
+    localStorage.setItem(
+      StorageConstant.AUTOUPDATE,
+      JSON.stringify(this.isAutoUpdate)
+    );
   }
 }

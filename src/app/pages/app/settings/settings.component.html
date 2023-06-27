@@ -160,6 +160,33 @@
         </li>
       </ul>
 
+      <!-- Info Develop & Contact -->
+      <div class="listview-title mt-1">
+        {{ "settings.develop" | translate }}
+      </div>
+      <ul class="listview border_round image-listview text inset mb-2">
+        <li>
+          <a class="item" routerLink="/support">
+            <div class="in">
+              <div>{{ "settings.info.support" | translate }}</div>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a
+            class="item"
+            data-bs-toggle="modal"
+            attr.data-bs-target="#{{ modalConstant.OPENBUG }}"
+          >
+            <div class="in">
+              <div>{{ "modal.reportBug.title" | translate }}</div>
+            </div>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Security Section -->
       <div class="listview-title mt-1">
         {{ "settings.security.title" | translate }}
       </div>
@@ -188,31 +215,6 @@
       </ul>
 
       <div class="listview-title mt-1">
-        {{ "settings.develop" | translate }}
-      </div>
-      <ul class="listview border_round image-listview text inset mb-2">
-        <li>
-          <a class="item" routerLink="/support">
-            <div class="in">
-              <div>{{ "settings.info.support" | translate }}</div>
-            </div>
-          </a>
-        </li>
-
-        <li>
-          <a
-            class="item"
-            data-bs-toggle="modal"
-            attr.data-bs-target="#{{ modalConstant.OPENBUG }}"
-          >
-            <div class="in">
-              <div>{{ "modal.reportBug.title" | translate }}</div>
-            </div>
-          </a>
-        </li>
-      </ul>
-
-      <div class="listview-title mt-1">
         {{ "settings.info.title" | translate }}
       </div>
       <ul class="listview border_round image-listview text inset mb-2">
@@ -234,6 +236,24 @@
               <div>{{ "modal.update.title" | translate }}</div>
             </div>
           </a>
+        </li>
+
+        <li>
+          <div class="item">
+            <div class="in">
+              <div>{{ "settings.info.auto_update" | translate }}</div>
+              <div class="form-check form-switch ms-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="auto_update"
+                  [checked]="!isAutoUpdate"
+                  (change)="autoUpdate()"
+                />
+                <label class="form-check-label" for="auto_update"></label>
+              </div>
+            </div>
+          </div>
         </li>
 
         <li>
