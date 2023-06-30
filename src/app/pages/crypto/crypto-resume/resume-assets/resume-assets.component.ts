@@ -25,7 +25,6 @@ export class ResumeAssetsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.resumeData);
     // TODO: ix lato BE
     setTimeout(() => {
       if (this.resumeData.assets) {
@@ -69,7 +68,6 @@ export class ResumeAssetsComponent implements OnInit {
 
     this.resumeData.assets.forEach((a, index) => {
       let history = a.history?.find((h) => h.date.toString() === date);
-      console.log(history, date, a);
       if (!history) {
         history = new Stats();
         history.balance = 0;

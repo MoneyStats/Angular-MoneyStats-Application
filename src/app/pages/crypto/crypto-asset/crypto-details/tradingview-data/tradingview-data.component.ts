@@ -129,7 +129,7 @@ export class TradingviewDataComponent implements OnInit {
   appendTradingViewAssetInfo() {
     let div = this._renderer2.createElement('div');
     div.style.height = '100%';
-    let symbol = this.assetSymbol.toString();
+    let symbol = this.assetSymbol;
     let script = this._renderer2.createElement('script');
     script.type = `text/javascript`;
     script.src =

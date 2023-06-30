@@ -41,9 +41,7 @@ export class CryptoDashboardComponent implements OnInit {
   constructor(
     public screenService: ScreenService,
     private _renderer2: Renderer2,
-    private cryptoService: CryptoService,
-    private dashboardService: DashboardService,
-    private router: Router
+    private cryptoService: CryptoService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -70,9 +68,9 @@ export class CryptoDashboardComponent implements OnInit {
       this.assets = data.data.assets;
       //this.cryptoService.cryptoDashboard.assets = this.assets;
       //this.cryptoDashboard.assets = this.assets;
-      this.cryptoWallet = this.cryptoDashboard.wallets.filter(
-        (w) => w.category == 'Crypto'
-      );
+      //this.cryptoWallet = this.cryptoDashboard.wallets.filter(
+      //  (w) => w.category == 'Crypto'
+      //);
     });
   }
 
@@ -215,28 +213,6 @@ export class CryptoDashboardComponent implements OnInit {
     //this.selectGraph?.nativeElement.appendChild(script);
   }
   saveWallet(wallet: Wallet) {
-    console.log(wallet);
     this.getDashboard();
-    /*if (wallet.assets != undefined && wallet.assets.length != 0) {
-      wallet.assets.forEach((asset) => {
-        if (wallet.type == 'Holding') {
-          this.cryptoDashboard.holdingLong.balance += asset.value!;
-          this.cryptoDashboard.holdingLong.lastUpdate = new Date();
-        } else if (wallet.type == 'Trading') {
-          this.cryptoDashboard.trading.balance += asset.value!;
-          this.cryptoDashboard.trading.lastUpdate = new Date();
-        }
-        this.cryptoDashboard.balance += asset.value!;
-      });
-    }
-
-    if (this.cryptoWallet?.find((w) => w.id == wallet.id)) {
-      let index = this.cryptoWallet?.indexOf(wallet);
-      this.cryptoWallet[index] = wallet;
-      this.cryptoDashboard.wallets[index] = wallet;
-    } else {
-      this.cryptoDashboard.wallets.push(wallet);
-      this.cryptoWallet?.push(wallet);
-    }*/
   }
 }

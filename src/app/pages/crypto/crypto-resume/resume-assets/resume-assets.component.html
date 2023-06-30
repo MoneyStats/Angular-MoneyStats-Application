@@ -1,4 +1,4 @@
-<div *ngIf="resumeData.statsAssetsDays" class="transactions row">
+<div *ngIf="resumeData.assets" class="transactions row">
   <div class="col-md-6 mt-2">
     <!-- item -->
     <a routerLink="/crypto/asset" class="item">
@@ -215,7 +215,7 @@
     <div class="section-title">
       {{ "crypto.resume.tableAsset" | translate }}
     </div>
-    <div *ngIf="resumeData.statsAssetsDays" class="card">
+    <div *ngIf="resumeData.assets" class="card">
       <div class="table-responsive">
         <table class="table">
           <thead>

@@ -16,6 +16,7 @@ import {
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { UserService } from 'src/assets/core/services/user.service';
 import { WalletService } from 'src/assets/core/services/wallet.service';
+import { LoggerService } from 'src/assets/core/utils/log.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 import { environment } from 'src/environments/environment';
 
@@ -53,7 +54,8 @@ export class AddWalletComponent implements OnInit, OnChanges {
     private swalService: SwalService,
     private translate: TranslateService,
     private walletService: WalletService,
-    private userService: UserService
+    private userService: UserService,
+    private logger: LoggerService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -133,7 +135,9 @@ export class AddWalletComponent implements OnInit, OnChanges {
       walletToSave.imgName = walletToSave.fileImage.name;
 
       this.userService.uploadImage(walletToSave.fileImage).subscribe((data) => {
+        this.logger.LOG(data.message!, 'AddWalletComponent');
         this.walletService.addUpdateWallet(walletToSave).subscribe((data) => {
+          this.logger.LOG(data.message!, 'AddWalletComponent');
           this.wallet.img = data.data.img;
           // Save Wallet
           this.emitAddWallet.emit(data.data);
@@ -141,6 +145,7 @@ export class AddWalletComponent implements OnInit, OnChanges {
       });
     } else {
       this.walletService.addUpdateWallet(walletToSave).subscribe((data) => {
+        this.logger.LOG(data.message!, 'AddWalletComponent');
         // Save Wallet
         this.emitAddWallet.emit(data.data);
       });

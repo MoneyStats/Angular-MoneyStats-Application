@@ -8,6 +8,7 @@ import {
 } from 'src/assets/core/data/constant/constant';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { LoggerService } from 'src/assets/core/utils/log.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private location: Location,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private logger: LoggerService
   ) {}
 
   ngOnInit(): void {}
@@ -38,15 +40,17 @@ export class LoginComponent implements OnInit {
   login() {
     const user = this.userService.login(this.username, this.password);
     user.subscribe((data) => {
+      this.logger.LOG(data.message!, 'LoginComponent');
       if (data.data.githubUser) {
         data.data.github = JSON.parse(data.data.githubUser);
+        localStorage.setItem(
+          StorageConstant.GITHUBACCOUNT,
+          JSON.stringify(data.data.githubUser)
+        );
       }
       this.user = data.data;
       this.userService.user = data.data;
-      localStorage.setItem(
-        StorageConstant.GITHUBACCOUNT,
-        JSON.stringify(data.data.githubUser)
-      );
+
       localStorage.setItem(
         StorageConstant.ACCESSTOKEN,
         data.data.authToken.accessToken

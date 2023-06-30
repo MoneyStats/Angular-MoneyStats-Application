@@ -6,6 +6,7 @@ import { UserService } from 'src/assets/core/services/user.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { Router } from '@angular/router';
+import { LoggerService } from 'src/assets/core/utils/log.service';
 
 @Component({
   selector: 'app-register',
@@ -27,7 +28,8 @@ export class RegisterComponent implements OnInit {
     private location: Location,
     private userService: UserService,
     private swal: SwalService,
-    private router: Router
+    private router: Router,
+    private logger: LoggerService
   ) {}
 
   ngOnInit(): void {
@@ -56,6 +58,7 @@ export class RegisterComponent implements OnInit {
     user.currency = this.currency;
 
     this.userService.register(user, this.invitationCode).subscribe((data) => {
+      this.logger.LOG(data.message!, 'RegisterComponent');
       this.swal.toastMessage(SwalIcon.SUCCESS, data.message!);
       this.router.navigate(['auth/login']);
     });

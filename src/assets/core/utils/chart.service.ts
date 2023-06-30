@@ -291,18 +291,21 @@ export class ChartService {
   ): Partial<ApexOptions> {
     let series: Array<any> = [];
     let oldStats: any = new Stats();
-    let oldDate: any;
-    let statsAssetsDays = cryptoDashboard.statsAssetsDays.slice();
-    if (statsAssetsDays && statsAssetsDays.length === 1) {
-      oldDate =
-        parseInt(statsAssetsDays[statsAssetsDays.length - 1].split('-')[0]) - 1;
-      statsAssetsDays.splice(0, 0, oldDate.toString());
-    }
+    let statsAssetsDays = cryptoDashboard.statsAssetsDays
+      ? cryptoDashboard.statsAssetsDays.slice()
+      : cryptoDashboard.statsAssetsDays;
+    let oldDate: any = statsAssetsDays
+      ? parseInt(statsAssetsDays[statsAssetsDays.length - 1].split('-')[0]) - 1
+      : undefined;
+
     cryptoDashboard.assets.forEach((asset) => {
       let oldBalance = 0;
       let historyBalance: Array<number> = [];
       let index = 0;
-      if (asset.history && asset.history.length != 0) {
+      if (statsAssetsDays && statsAssetsDays.length === 1) {
+        statsAssetsDays.splice(0, 0, oldDate.toString());
+      }
+      if (asset && asset.history && asset.history.length != 0) {
         if (asset.history.length === 1) {
           oldStats.balance = oldBalance;
           oldStats.date = oldDate;
@@ -323,7 +326,7 @@ export class ChartService {
           index++;
         });
 
-        //historyBalance.push(asset.value!);
+        // Aggiungo l'ultimo valore dell'asset corrente se l'ultimo stats non corrisponde ad oggi
         let today = new Date();
         const lastDay: Date = new Date(
           statsAssetsDays[statsAssetsDays.length - 1]
@@ -336,8 +339,23 @@ export class ChartService {
         // Se dovessi avere più Asset con uno di essi con history mentre l'altro no lo si gestisce così
         if (statsAssetsDays && statsAssetsDays.length != 0) {
           let today = new Date();
-          // L'index è -2 perchè essendo più asset ma questo non ha history è stato aggiunto il valore last
-          const lastDay = statsAssetsDays[statsAssetsDays.length - 2];
+          let lastDay;
+          // (Caso solo per asset singoli) Se dovessi avere un asset appena aggiunto (Senza History) ma durante l'anno ho degli stats, devo prendere l'ultima data registrata e settarla a 0
+          if (
+            cryptoDashboard.assets.length == 1 &&
+            statsAssetsDays.length > 1 &&
+            !asset.history
+          ) {
+            statsAssetsDays = [statsAssetsDays[statsAssetsDays.length - 1]];
+            historyBalance.push(0);
+
+            lastDay = statsAssetsDays[statsAssetsDays.length - 1];
+            statsAssetsDays.push(today.toDateString());
+          } else {
+            // (Caso si abbiamo più di un asset)
+            // L'index è -2 perchè essendo più asset ma questo non ha history è stato aggiunto il valore last
+            lastDay = statsAssetsDays[statsAssetsDays.length - 2];
+          }
           let count = statsAssetsDays.indexOf(lastDay);
           if (count != -1 && count != index) {
             Array.from(Array(count - index)).forEach((d) =>
@@ -346,6 +364,7 @@ export class ChartService {
             // Pusho per l'ultima data valida trovata
             historyBalance.push(0);
           }
+
           if (new Date(lastDay).getDate() < today.getDate()) {
             historyBalance.push(asset.value!);
           }

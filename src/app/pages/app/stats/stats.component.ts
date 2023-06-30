@@ -3,6 +3,7 @@ import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { StatsService } from 'src/assets/core/services/stats.service';
+import { LoggerService } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class StatsComponent implements OnInit {
   constructor(
     public screenService: ScreenService,
     public dashboardService: DashboardService,
-    private statsService: StatsService
+    private statsService: StatsService,
+    private logger: LoggerService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -30,6 +32,7 @@ export class StatsComponent implements OnInit {
     this.screenService.showFooter();
     this.screenService.goToStats();
     this.statsService.getResume().subscribe((res) => {
+      this.logger.LOG(res.message!, 'StatsComponent');
       this.resume = new Map<string, Dashboard>(Object.entries(res.data));
       this.years = Array.from(this.resume.keys());
       this.updateData(this.years[this.years.length - 1]);
