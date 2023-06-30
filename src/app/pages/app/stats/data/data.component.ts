@@ -5,7 +5,6 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { CoinSymbol } from 'src/assets/core/data/class/coin';
 import { Dashboard, Stats } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { ChartService } from 'src/assets/core/utils/chart.service';

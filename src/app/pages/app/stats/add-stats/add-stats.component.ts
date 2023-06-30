@@ -4,6 +4,7 @@ import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ErrorService } from 'src/assets/core/interceptors/error.service';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { StatsService } from 'src/assets/core/services/stats.service';
+import { LoggerService } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { environment } from 'src/environments/environment';
 
@@ -27,7 +28,8 @@ export class AddStatsComponent implements OnInit {
     private dashboardService: DashboardService,
     private statsService: StatsService,
     private errorService: ErrorService,
-    private router: Router
+    private router: Router,
+    private logger: LoggerService
   ) {}
 
   ngOnInit(): void {
@@ -72,9 +74,9 @@ export class AddStatsComponent implements OnInit {
     return validate;
   }
   save() {
-    console.log(this.walletsToSave);
     this.saveValidation = false;
     this.statsService.addStats(this.walletsToSave).subscribe((data) => {
+      this.logger.LOG(data.message!, 'AddStatsComponent');
       this.walletsToSave = data.data;
     });
     this.getTodayAsString();
@@ -143,9 +145,12 @@ export class AddStatsComponent implements OnInit {
       );
     }
     if (days[indexDate - 1]) {
-      beforeThisStats = wallet.history.find(
-        (w) => w.date != undefined && w.date.toString() === days[indexDate - 1]
-      )!;
+      beforeThisStats = wallet.history
+        ? wallet.history.find(
+            (w) =>
+              w.date != undefined && w.date.toString() === days[indexDate - 1]
+          )!
+        : undefined!;
       if (beforeThisStats == undefined) {
         beforeThisStats = new Stats();
         beforeThisStats.balance = 0.001;

@@ -17,7 +17,6 @@ export class ChangelogComponent implements OnInit {
   ngOnInit(): void {
     this.translate.get('modal.version.changelog.data').subscribe((data) => {
       this.changelogs = data.slice().reverse();
-      console.log(this.changelogs);
     });
   }
 }

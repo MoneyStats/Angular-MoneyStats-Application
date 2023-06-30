@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { fader } from 'src/app/shared/animations/route-animations';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import {
   ModalConstant,
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
 import { WalletService } from 'src/assets/core/services/wallet.service';
+import { LoggerService } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
@@ -20,7 +20,8 @@ export class WalletComponent implements OnInit {
 
   constructor(
     public walletService: WalletService,
-    public screenService: ScreenService
+    public screenService: ScreenService,
+    private logger: LoggerService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -32,6 +33,7 @@ export class WalletComponent implements OnInit {
     this.screenService.goToWallet();
     this.screenService.showFooter();
     this.walletService.getWallet().subscribe((res) => {
+      this.logger.LOG(res.message!, 'WalletComponent');
       this.wallets = res.data;
       this.walletService.walletActive = this.walletActive(res.data);
       this.walletService.walletDeleted = this.walletDeleted(res.data);

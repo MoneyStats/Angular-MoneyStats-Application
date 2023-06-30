@@ -37,9 +37,7 @@ export class OperationsModalComponent implements OnInit {
     private statsService: StatsService
   ) {}
 
-  ngOnInit(): void {
-    console.log('INIT');
-  }
+  ngOnInit(): void {}
 
   /**
    * ADD STATS METHODS
@@ -222,7 +220,6 @@ export class OperationsModalComponent implements OnInit {
   }
 
   save() {
-    console.log(this.wallets);
     this.saveValidation = false;
     this.statsService.addStats(this.wallets).subscribe((data) => {
       this.wallets = data.data;

@@ -48,15 +48,14 @@ export class AddAssetModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.wallets);
     this.categories = this.dashboardService.dashboard.categories;
     if (this.wallets == undefined && this.dashboardService.dashboard.wallets) {
       this.wallets = this.dashboardService.dashboard.wallets.filter(
         (w) => w.category == 'Crypto'
       );
-      if (this.wallets && this.wallets.length == 1) {
+      if (this.wallets && this.wallets.length != 0) {
+        //if (this.wallets && this.wallets.length == 1) {
         this.modelWallet = this.wallets[0].name;
-        console.log(this.cryptoCurrency);
       }
     } else this.wallets;
 

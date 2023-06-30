@@ -44,6 +44,7 @@ export class UserService {
         this.coinSymbol = CoinSymbol.GBP;
         break;
       default:
+        this.coinSymbol = CoinSymbol.USD;
         break;
     }
 

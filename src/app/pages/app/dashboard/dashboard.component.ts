@@ -3,7 +3,6 @@ import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 import { TranslateService } from '@ngx-translate/core';
-import { fader } from 'src/app/shared/animations/route-animations';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
@@ -15,6 +14,7 @@ import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { UserService } from 'src/assets/core/services/user.service';
 import { WalletService } from 'src/assets/core/services/wallet.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
+import { LoggerService } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { SplideService } from 'src/assets/core/utils/splide.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
@@ -49,14 +49,14 @@ export class DashboardComponent implements OnInit {
     private dashboardService: DashboardService,
     public userService: UserService,
     private datePipe: DatePipe,
-    private splide: SplideService,
     private charts: ChartService,
     private toast: ToastService,
     public screenService: ScreenService,
     private walletService: WalletService,
     private translate: TranslateService,
     private router: Router,
-    private readonly updates: SwUpdate
+    private readonly updates: SwUpdate,
+    private logger: LoggerService
   ) {
     this.updates.versionUpdates.subscribe((event) => {
       let isAutoUpdate = !localStorage.getItem(StorageConstant.AUTOUPDATE);
@@ -71,6 +71,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.userService.user;
     this.dashboardService.getData().subscribe((data) => {
+      this.logger.LOG(data.message!, 'DashboardComponent');
       if (!data.data.balance) {
         this.dashboard.categories = data.data.categories;
         this.dashboard.wallets = data.data.wallets;
@@ -125,7 +126,6 @@ export class DashboardComponent implements OnInit {
         ' ' +
         this.userService.coinSymbol;
       this.walletService.totalBalance = this.dashboard.balance;
-      //this.chart.render(data);
       setTimeout(() => {
         if (this.dashboard.wallets) {
           this.chartOptions = this.charts.renderChartLine(this.dashboard);
@@ -134,9 +134,7 @@ export class DashboardComponent implements OnInit {
       this.walletDetails(data.data.wallets);
     });
 
-    /*setTimeout(() => {
-      this.splide.activeSplide();
-    }, 100);*/
+
     this.isWalletBalanceHidden();
     this.screenService.activeHeaderAndFooter();
     this.screenService.goToDashboard();

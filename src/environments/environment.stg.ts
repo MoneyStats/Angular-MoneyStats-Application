@@ -4,6 +4,7 @@ const host: string = 'https://oraclewebserver.ddns.net/stg-moneystats-service';
 const subDomain = 'stg-moneystats/';
 
 export const environment = {
+  envType: "STG",
   production: false,
   baseUrl: '../../' + subDomain,
   baseUrlHeader: '../../../../' + subDomain,

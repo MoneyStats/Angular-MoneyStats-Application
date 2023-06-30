@@ -1,4 +1,12 @@
-import { Component, Input, OnInit, Renderer2 } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  Renderer2,
+  SimpleChanges,
+} from '@angular/core';
+import { Router } from '@angular/router';
 import {
   Asset,
   CryptoDashboard,
@@ -7,6 +15,7 @@ import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
+import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
@@ -14,11 +23,12 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
   templateUrl: './details-overview.component.html',
   styleUrls: ['./details-overview.component.scss'],
 })
-export class DetailsOverviewComponent implements OnInit {
+export class DetailsOverviewComponent implements OnInit, OnChanges {
   public chartOptions?: Partial<ApexOptions>;
   public chart1Y?: Partial<ApexOptions>;
   public chart3Y?: Partial<ApexOptions>;
   @Input('asset') asset: Asset = new Asset();
+  @Input('assetName') assetName: string = '';
   @Input('cryptoDashboard') cryptoDashboard: CryptoDashboard =
     new CryptoDashboard();
 
@@ -27,22 +37,31 @@ export class DetailsOverviewComponent implements OnInit {
   constructor(
     public cryptoService: CryptoService,
     private screenService: ScreenService,
-    private charts: ChartService,
-    private _renderer2: Renderer2
+    private charts: ChartService
   ) {}
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getAsset();
+  }
+
   ngOnInit(): void {
+    //this.cryptoDashboard = deepCopy(this.cryptoService.cryptoDashboard);
+
     /*let dashboard: CryptoDashboard = new CryptoDashboard();
     dashboard.statsAssetsDays = this.cryptoDashboard.statsAssetsDays;
     dashboard.assets = [
       this.asset.name == undefined ? this.cryptoService.asset! : this.asset,
     ];*/
-    if (this.asset.history?.find((h) => h.id == undefined)) {
-      let indexOf = this.asset.history?.indexOf(
-        this.asset.history?.find((h) => h.id == undefined)!
-      );
-      this.asset.history.splice(indexOf, 1);
-    }
+    this.getAsset();
+  }
+
+  getAsset() {
+    //if (this.asset.history?.find((h) => h.id == undefined)) {
+    //  let indexOf = this.asset.history?.indexOf(
+    //    this.asset.history?.find((h) => h.id == undefined)!
+    //  );
+    //  this.asset.history.splice(indexOf, 1);
+    //}
     this.graph1Y();
     this.walletsAsset = this.filterWallets();
   }
@@ -63,20 +82,24 @@ export class DetailsOverviewComponent implements OnInit {
   }
 
   graph1Y() {
-    let dashboard: CryptoDashboard = new CryptoDashboard();
-    dashboard.statsAssetsDays = this.cryptoDashboard.statsAssetsDays;
+    let dashboard: CryptoDashboard = deepCopy(this.cryptoDashboard);
     dashboard.assets = [
       this.asset.name == undefined ? this.cryptoService.asset! : this.asset,
     ];
-    dashboard.assets[0].history?.filter(
-      (h) =>
-        h.date.toString().split('-')[0] === new Date().getFullYear().toString()
-    );
-    setTimeout(() => {
-      if (this.screenService?.screenWidth! <= 780)
-        this.chart1Y = this.charts.renderCryptoAsset(dashboard, 200);
-      else this.chart1Y = this.charts.renderCryptoAsset(dashboard);
-    }, 200);
+    if (dashboard.assets[0]) {
+      dashboard.assets[0].history
+        ?.slice()
+        .filter(
+          (h) =>
+            h.date.toString().split('-')[0] ===
+            new Date().getFullYear().toString()
+        );
+      setTimeout(() => {
+        if (this.screenService?.screenWidth! <= 780)
+          this.chart1Y = this.charts.renderCryptoAsset(dashboard, 200);
+        else this.chart1Y = this.charts.renderCryptoAsset(dashboard);
+      }, 200);
+    }
   }
 
   graph3Y() {
@@ -109,10 +132,10 @@ export class DetailsOverviewComponent implements OnInit {
       this.asset.name == undefined
         ? this.cryptoService.asset?.name
         : this.asset.name;
-    const wallets = this.cryptoDashboard.wallets.slice();
-    let wallAsset = wallets.filter((w) => {
+    const dashboard = deepCopy(this.cryptoDashboard);
+    let wallAsset = dashboard.wallets.filter((w) => {
       if (w.assets != undefined && w.assets.length != 0)
-        return w.assets.find((a) => a.name == name);
+        return w.assets.slice().find((a) => a.name == name);
       return null;
     });
     wallAsset.forEach((w) => {

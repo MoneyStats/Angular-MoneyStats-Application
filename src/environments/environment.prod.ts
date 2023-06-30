@@ -4,6 +4,7 @@ const host: string = 'https://oraclewebserver.ddns.net/prod-moneystats-service';
 const subDomain = '';
 
 export const environment = {
+  envType: 'PROD',
   production: true,
   baseUrl: baseUrlApp,
   baseUrlHeader: baseUrlApp,

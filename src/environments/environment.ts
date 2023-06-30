@@ -9,6 +9,7 @@ const subDomain = '';
 //const subDomain = 'moneystats/';
 
 export const environment = {
+  envType: "Local",
   production: false,
   baseUrl: '../../' + subDomain,
   baseUrlHeader: '../../../../' + subDomain,
@@ -48,13 +49,17 @@ export const environment = {
   updateUserDataUrl: host + '/v1/auth/update/user',
   backupDataUrl: host + '/v1/app/backup',
   restoreDataUrl: host + '/v1/app/restore',
+  forgotPassword: true,
+
+  /*
+   * Crypto Section
+   */
   addCryptoAssetDataUrl: host + '/v1/crypto/asset/addOrUpdate',
   getCryptoAssetDataUrl: host + '/v1/crypto/asset/getAll',
   getCryptoDetailsDataUrl: host + '/v1/crypto/asset/get',
   getCryptoDashboardDataUrl: host + '/v1/crypto/dashboard',
   getCryptoResumeDataUrl: host + '/v1/crypto/resume',
   getMarketDataUrl: host + '/v1/market-data/get',
-  forgotPassword: true,
 };
 
 /*

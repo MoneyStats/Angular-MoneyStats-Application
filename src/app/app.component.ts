@@ -8,6 +8,7 @@ import {
 import { ThemeService } from 'src/assets/core/utils/theme.service';
 import { fader, slideUp } from './shared/animations/route-animations';
 import { SwUpdate } from '@angular/service-worker';
+import { LoggerService } from 'src/assets/core/utils/log.service';
 
 @Component({
   selector: 'app-root',
@@ -26,9 +27,11 @@ export class AppComponent implements OnInit {
     private translate: TranslateService,
     private themeService: ThemeService,
     private contexts: ChildrenOutletContexts,
-    private readonly updates: SwUpdate
+    private readonly updates: SwUpdate,
+    private logger: LoggerService
   ) {
     this.updates.versionUpdates.subscribe((event) => {
+      logger.LOG('A new update is available', 'AppComponent');
       let isAutoUpdate = !localStorage.getItem(StorageConstant.AUTOUPDATE);
       if (isAutoUpdate)
         this.updates.activateUpdate().then(() => document.location.reload());

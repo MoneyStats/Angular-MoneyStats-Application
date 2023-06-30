@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
-import { UserService } from 'src/assets/core/services/user.service';
+import { LoggerService } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 import { environment } from 'src/environments/environment';
@@ -19,7 +19,8 @@ export class SupportComponent implements OnInit {
   constructor(
     public screenService: ScreenService,
     private dashboardService: DashboardService,
-    private swal: SwalService
+    private swal: SwalService,
+    private logger: LoggerService
   ) {}
 
   ngOnInit(): void {
@@ -31,6 +32,7 @@ export class SupportComponent implements OnInit {
     this.dashboardService
       .contactUs(this.name, this.email, this.message)
       .subscribe((data) => {
+        this.logger.LOG(data.message!, 'SupportComponent');
         this.swal.toastMessage(SwalIcon.SUCCESS, data.message!);
         this.message = '';
         this.name = '';

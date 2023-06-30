@@ -14,7 +14,6 @@ import { HeaderMobileComponent } from './header-mobile/header-mobile.component';
 import { TitleDesktopComponent } from './title-desktop/title-desktop.component';
 import { RouterModule } from '@angular/router';
 import { AppComponentsModule } from '../app/app-components.module';
-import { SharedModule } from '../shared/shared.module';
 import { CryptoComponentsModule } from '../crypto/crypto-components.module';
 
 @NgModule({
