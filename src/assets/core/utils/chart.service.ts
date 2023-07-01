@@ -368,7 +368,7 @@ export class ChartService {
             historyBalance.push(0);
           }
 
-          if (new Date(lastDay).getDate() < today.getDate()) {
+          if (new Date(lastDay) < today) {
             historyBalance.push(asset.value!);
           }
         } else {

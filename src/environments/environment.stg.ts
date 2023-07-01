@@ -4,14 +4,14 @@ const host: string = 'https://oraclewebserver.ddns.net/stg-moneystats-service';
 const subDomain = 'stg-moneystats/';
 
 export const environment = {
-  envType: "STG",
+  envType: 'STG',
   production: false,
   baseUrl: '../../' + subDomain,
   baseUrlHeader: '../../../../' + subDomain,
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: '1.6.8 (Alpha)',
+  version: '1.6.9 (Beta)',
 
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
