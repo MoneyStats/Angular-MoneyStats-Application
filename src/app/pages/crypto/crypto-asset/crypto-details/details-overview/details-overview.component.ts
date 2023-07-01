@@ -67,11 +67,13 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
   }
 
   graphAll() {
-    let dashboard: CryptoDashboard = new CryptoDashboard();
-    dashboard.statsAssetsDays = this.cryptoDashboard.statsAssetsDays;
+    let dashboard: CryptoDashboard = deepCopy(this.cryptoDashboard);
     dashboard.assets = [
-      this.asset.name == undefined ? this.cryptoService.asset! : this.asset,
+      this.asset.name == undefined
+        ? deepCopy(this.cryptoService.asset!)
+        : deepCopy(this.asset),
     ];
+    console.log(dashboard);
     setTimeout(() => {
       if (this.cryptoDashboard.wallets) {
         if (this.screenService?.screenWidth! <= 780) {
@@ -84,16 +86,20 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
   graph1Y() {
     let dashboard: CryptoDashboard = deepCopy(this.cryptoDashboard);
     dashboard.assets = [
-      this.asset.name == undefined ? this.cryptoService.asset! : this.asset,
+      this.asset.name == undefined
+        ? deepCopy(this.cryptoService.asset!)
+        : deepCopy(this.asset),
     ];
     if (dashboard.assets[0]) {
-      dashboard.assets[0].history
-        ?.slice()
-        .filter(
-          (h) =>
-            h.date.toString().split('-')[0] ===
-            new Date().getFullYear().toString()
-        );
+      dashboard.assets[0].history = dashboard.assets[0].history?.filter(
+        (h) =>
+          h.date.toString().split('-')[0] ===
+          new Date().getFullYear().toString()
+      );
+      dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter(
+        (s) =>
+          s.toString().split('-')[0] === new Date().getFullYear().toString()
+      );
       setTimeout(() => {
         if (this.screenService?.screenWidth! <= 780)
           this.chart1Y = this.charts.renderCryptoAsset(dashboard, 200);
@@ -103,18 +109,22 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
   }
 
   graph3Y() {
-    let dashboard: CryptoDashboard = new CryptoDashboard();
-    dashboard.statsAssetsDays = this.cryptoDashboard.statsAssetsDays;
+    let dashboard: CryptoDashboard = deepCopy(this.cryptoDashboard);
     dashboard.assets = [
-      this.asset.name == undefined ? this.cryptoService.asset! : this.asset,
+      this.asset.name == undefined
+        ? deepCopy(this.cryptoService.asset!)
+        : deepCopy(this.asset),
     ];
     let last3 = [
       new Date().getFullYear().toString(),
       (new Date().getFullYear() - 1).toString(),
       (new Date().getFullYear() - 2).toString(),
     ];
-    dashboard.assets[0].history?.filter((h) =>
+    dashboard.assets[0].history = dashboard.assets[0].history?.filter((h) =>
       last3.includes(h.date.toString().split('-')[0])
+    );
+    dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter((s) =>
+      last3.includes(s.toString().split('-')[0])
     );
     setTimeout(() => {
       if (this.screenService?.screenWidth! <= 780)

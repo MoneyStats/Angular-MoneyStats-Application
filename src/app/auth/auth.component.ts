@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { LanguagesSettings } from 'src/assets/core/data/constant/constant';
+import {
+  LanguagesSettings,
+  StorageConstant,
+} from 'src/assets/core/data/constant/constant';
 import { LoggerService } from 'src/assets/core/utils/log.service';
 
 @Component({
@@ -17,9 +20,13 @@ export class AuthComponent implements OnInit {
   cleanLocalStorage() {
     // Check della lingua se già settata nel localstorage
     let languages = localStorage.getItem(LanguagesSettings.ATTR_LANGUAGE);
+    let autoUpdate = localStorage.getItem(StorageConstant.AUTOUPDATE);
 
     this.logger.LOG(
-      'Cleaning localStorage and getting language: ' + languages,
+      'Cleaning localStorage and getting language: ' +
+        languages +
+        ' and Auto Update Data ' +
+        autoUpdate,
       'AuthComponent'
     );
     // Cancello lo storage
@@ -27,6 +34,10 @@ export class AuthComponent implements OnInit {
     if (languages) {
       // Se lo storage conteneva una lingua la inserisco nuovamente
       localStorage.setItem(LanguagesSettings.ATTR_LANGUAGE, languages);
+    }
+    if (autoUpdate) {
+      // Se lo storage conteneva una lingua la inserisco nuovamente
+      localStorage.setItem(StorageConstant.AUTOUPDATE, autoUpdate);
     }
   }
 }

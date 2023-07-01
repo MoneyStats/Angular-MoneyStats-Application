@@ -63,6 +63,9 @@ export class CryptoAssetComponent implements OnInit {
           new Date().getFullYear().toString()
       );
     });
+    dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter(
+      (s) => s.toString().split('-')[0] === new Date().getFullYear().toString()
+    );
     console.log(dashboard);
     setTimeout(() => {
       if (this.screenService?.screenWidth! <= 780)
@@ -83,6 +86,9 @@ export class CryptoAssetComponent implements OnInit {
         last3.includes(h.date.toString().split('-')[0])
       );
     });
+    dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter((s) =>
+      last3.includes(s.toString().split('-')[0])
+    );
     setTimeout(() => {
       if (this.screenService?.screenWidth! <= 780)
         this.chart3Y = this.charts.renderCryptoAsset(dashboard, 200);
