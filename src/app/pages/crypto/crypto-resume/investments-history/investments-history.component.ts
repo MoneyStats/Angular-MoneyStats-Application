@@ -1,21 +1,25 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import {
   Asset,
   CryptoDashboard,
 } from 'src/assets/core/data/class/crypto.class';
 import { Stats } from 'src/assets/core/data/class/dashboard.class';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
+import { deepCopy } from '@angular-devkit/core/src/utils/object';
 
 @Component({
   selector: 'app-investments-history',
   templateUrl: './investments-history.component.html',
   styleUrls: ['./investments-history.component.scss'],
 })
-export class InvestmentsHistoryComponent implements OnInit {
-  @Input('cryptoResume') cryptoResume: Map<string, CryptoDashboard> = new Map<
-    string,
-    CryptoDashboard
-  >();
+export class InvestmentsHistoryComponent implements OnInit, OnChanges {
+  @Input('cryptoResume') cryptoResume!: Map<string, CryptoDashboard>;
   @Input('cryptoCurrency') cryptoCurrency: string = '';
   @Input('assets') assets: Asset[] = [];
   // History Tab
@@ -27,9 +31,17 @@ export class InvestmentsHistoryComponent implements OnInit {
 
   constructor(private cryptoService: CryptoService) {}
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getResume();
+  }
+
   ngOnInit(): void {
-    if (!this.cryptoResume || this.cryptoResume.size == 0) {
-      this.cryptoResume = this.cryptoService.cryptoResume;
+    //this.getResume();
+  }
+
+  getResume() {
+    if (!this.cryptoResume) {
+      this.cryptoResume = deepCopy(this.cryptoService.cryptoResume);
     }
     this.cryptoResume.forEach((value: CryptoDashboard, key: string) => {
       this.tableBalance.push(this.tableCreate(key, value));
