@@ -17,6 +17,7 @@ import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
+import { ImageColorPickerService } from 'src/assets/core/utils/image.color.picker.service';
 
 @Component({
   selector: 'app-details-overview',
@@ -37,7 +38,8 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
   constructor(
     public cryptoService: CryptoService,
     private screenService: ScreenService,
-    private charts: ChartService
+    private charts: ChartService,
+    public imageColorPicker: ImageColorPickerService
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {

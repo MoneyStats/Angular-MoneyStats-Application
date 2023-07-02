@@ -4,13 +4,27 @@ import { Dashboard, Stats, Wallet } from '../data/class/dashboard.class';
 import * as ApexCharts from 'apexcharts';
 import { ApexOptions } from '../data/constant/apex.chart';
 import { CryptoDashboard } from '../data/class/crypto.class';
+import { ImageColorPickerService } from './image.color.picker.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChartService {
+  private colorsList: string[] = [
+    '#6236FF',
+    '#d119d0',
+    '#bb9df7',
+    '#de3454',
+    '#407306',
+    '#9c413c',
+    '#f2ed0a',
+    '#fa5c42',
+    '#57cb54',
+    '#500295',
+    '#f7eedc',
+  ];
   environment = environment;
-  constructor() {}
+  constructor(private imageColorPicker: ImageColorPickerService) {}
 
   renderChartLine(dashboard: Dashboard): Partial<ApexOptions> {
     let series: Array<any> = [];
@@ -299,11 +313,12 @@ export class ChartService {
         ? parseInt(statsAssetsDays[statsAssetsDays.length - 1].split('-')[0]) -
           1
         : undefined;
-
-    cryptoDashboard.assets.forEach((asset) => {
+    let colors: string[] = [];
+    cryptoDashboard.assets.forEach((asset, index) => {
+      colors.push(this.imageColorPicker.getColor(asset.icon!, index));
       let oldBalance = 0;
       let historyBalance: Array<number> = [];
-      let index = 0;
+
       if (statsAssetsDays && statsAssetsDays.length === 1) {
         statsAssetsDays.splice(0, 0, oldDate.toString());
       }
@@ -388,6 +403,7 @@ export class ChartService {
       series.push(serie);
       historyBalance = [];
     });
+    console.log(colors, this.colorsList);
     let h = 350;
     if (height[0]) {
       h = height[0];
@@ -412,19 +428,7 @@ export class ChartService {
       stroke: {
         width: 2,
       },
-      colors: [
-        '#6236FF',
-        '#d119d0',
-        '#bb9df7',
-        '#de3454',
-        '#407306',
-        '#9c413c',
-        '#f2ed0a',
-        '#fa5c42',
-        '#57cb54',
-        '#500295',
-        '#f7eedc',
-      ],
+      colors: colors.length != 0 ? colors : this.colorsList,
       labels: statsAssetsDays,
       legend: {
         show: true,
