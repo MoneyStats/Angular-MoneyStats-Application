@@ -52,9 +52,12 @@ export class ImageColorPickerService {
       ',' +
       data![3] +
       ')';
+
+    let colorPixel = 'rgb(' + data![0] + ',' + data![1] + ',' + data![2] + ')';
     var dColor = data![2] + 256 * data![1] + 65536 * data![0];
     console.log(pixelColor, dColor.toString(16));
-    return '#' + dColor.toString(16);
+    //return '#' + dColor.toString(16);
+    return colorPixel;
     //};
     //return colorAsset;
   }

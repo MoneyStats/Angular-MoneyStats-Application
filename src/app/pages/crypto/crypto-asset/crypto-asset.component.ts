@@ -66,12 +66,11 @@ export class CryptoAssetComponent implements OnInit {
     dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter(
       (s) => s.toString().split('-')[0] === new Date().getFullYear().toString()
     );
-    console.log(dashboard);
-    setTimeout(() => {
-      if (this.screenService?.screenWidth! <= 780)
-        this.chart1Y = this.charts.renderCryptoAsset(dashboard, 200);
-      else this.chart1Y = this.charts.renderCryptoAsset(dashboard);
-    }, 200);
+    //setTimeout(() => {
+    if (this.screenService?.screenWidth! <= 780)
+      this.chart1Y = this.charts.renderCryptoAsset(dashboard, 200);
+    else this.chart1Y = this.charts.renderCryptoAsset(dashboard);
+    //}, 200);
   }
 
   graph3Y() {
