@@ -57,6 +57,29 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
     this.getAsset();
   }
 
+  setColor() {
+    this.resetColor();
+    const activeElem = document.querySelectorAll('.active');
+    activeElem.forEach((e, index) => {
+      if (e.getAttribute('class')?.includes('graph-tab')) {
+        let color = this.imageColorPicker.getColor(this.asset.icon!, 0);
+        e.setAttribute(
+          'style',
+          'color: ' + color + '; border-bottom-color: ' + color + ' !important'
+        );
+      }
+    });
+  }
+
+  resetColor() {
+    const activeElem = document.querySelectorAll('.graph-tab');
+    activeElem.forEach((e) => {
+      if (!e.getAttribute('class')?.includes('active')) {
+        e.removeAttribute('style');
+      }
+    });
+  }
+
   getAsset() {
     //if (this.asset.history?.find((h) => h.id == undefined)) {
     //  let indexOf = this.asset.history?.indexOf(
@@ -66,9 +89,11 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
     //}
     this.graph1Y();
     this.walletsAsset = this.filterWallets();
+    this.setColor();
   }
 
   graphAll() {
+    this.setColor();
     let dashboard: CryptoDashboard = deepCopy(this.cryptoDashboard);
     dashboard.assets = [
       this.asset.name == undefined
@@ -86,6 +111,7 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
   }
 
   graph1Y() {
+    this.setColor();
     let dashboard: CryptoDashboard = deepCopy(this.cryptoDashboard);
     dashboard.assets = [
       this.asset.name == undefined
@@ -111,6 +137,7 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
   }
 
   graph3Y() {
+    this.setColor();
     let dashboard: CryptoDashboard = deepCopy(this.cryptoDashboard);
     dashboard.assets = [
       this.asset.name == undefined

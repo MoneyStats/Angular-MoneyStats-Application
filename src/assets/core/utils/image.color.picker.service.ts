@@ -1,4 +1,4 @@
-import { ElementRef, Injectable, ViewChild } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -8,6 +8,7 @@ export class ImageColorPickerService {
   environment = environment;
   colors: string[] = [
     '#6236FF',
+    '#3c3c3d',
     '#d119d0',
     '#bb9df7',
     '#de3454',
@@ -21,7 +22,6 @@ export class ImageColorPickerService {
   ];
 
   getColor(img: string, index: number): string {
-    console.log(index);
     //this.getBase64ImageFromUrl(img + '?r=' + Math.floor(Math.random() * 100000))
     //  .then((result) => console.log(result))
     //  .catch((err) => console.error(err));
@@ -53,12 +53,43 @@ export class ImageColorPickerService {
       data![3] +
       ')';
 
-    let colorPixel = 'rgb(' + data![0] + ',' + data![1] + ',' + data![2] + ')';
-    var dColor = data![2] + 256 * data![1] + 65536 * data![0];
-    console.log(pixelColor, dColor.toString(16));
-    //return '#' + dColor.toString(16);
-    return colorPixel;
+    //let colorPixel = 'rgb(' + data![0] + ',' + data![1] + ',' + data![2] + ')';
+    //var dColor = data![2] + 256 * data![1] + 65536 * data![0];
+    return this.rgbaToHex(pixelColor) != '#000000'
+      ? this.rgbaToHex(pixelColor)
+      : this.colors[index];
+    //return colorPixel;
     //};
     //return colorAsset;
+  }
+
+  rgbaToHex(color: string): string {
+    if (/^rgb/.test(color)) {
+      const rgba = color.replace(/^rgba?\(|\s+|\)$/g, '').split(',');
+
+      // rgb to hex
+      // eslint-disable-next-line no-bitwise
+      let hex = `#${(
+        (1 << 24) +
+        (parseInt(rgba[0], 10) << 16) +
+        (parseInt(rgba[1], 10) << 8) +
+        parseInt(rgba[2], 10)
+      )
+        .toString(16)
+        .slice(1)}`;
+
+      // added alpha param if exists
+      if (rgba[4]) {
+        const alpha = Math.round(0o1 * 255);
+        const hexAlpha = (alpha + 0x10000)
+          .toString(16)
+          .substr(-2)
+          .toUpperCase();
+        hex += hexAlpha;
+      }
+
+      return hex;
+    }
+    return color;
   }
 }

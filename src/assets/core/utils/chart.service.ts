@@ -45,7 +45,6 @@ export class ChartService {
         filterDate.push(d);
       }
     });
-    console.log(filterDate, dashboard);
     dashboard.statsWalletDays = filterDate;**/
     dashboard.wallets.forEach((wallet) => {
       let oldBalance =
@@ -314,10 +313,11 @@ export class ChartService {
           1
         : undefined;
     let colors: string[] = [];
-    cryptoDashboard.assets.forEach((asset, index) => {
-      colors.push(this.imageColorPicker.getColor(asset.icon!, index));
+    cryptoDashboard.assets.forEach((asset, index1) => {
+      colors.push(this.imageColorPicker.getColor(asset.icon!, index1));
       let oldBalance = 0;
       let historyBalance: Array<number> = [];
+      let index = 0;
 
       if (statsAssetsDays && statsAssetsDays.length === 1) {
         statsAssetsDays.splice(0, 0, oldDate.toString());
@@ -403,12 +403,10 @@ export class ChartService {
       series.push(serie);
       historyBalance = [];
     });
-    console.log(colors, this.colorsList);
     let h = 350;
     if (height[0]) {
       h = height[0];
     }
-    console.log(series, statsAssetsDays);
     let chartOptions: Partial<ApexOptions> = {
       series: series,
       chart: {
