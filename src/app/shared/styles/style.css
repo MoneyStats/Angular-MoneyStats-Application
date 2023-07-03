@@ -196,7 +196,7 @@ a:focus {
   margin-top: env(safe-area-inset-top);
   align-items: center;
   background: #fff;
-  z-index: 1000;
+  /*z-index: 1000;*/
   border-bottom: 1px solid #dcdce9;
 }
 

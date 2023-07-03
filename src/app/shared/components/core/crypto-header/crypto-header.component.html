@@ -42,9 +42,14 @@
         <a class="dropdown-item" routerLink="/settings">
           {{ "dashboard.sidebar.dropdown.settings" | translate }}</a
         >
-        <!--<a class="dropdown-item" href="#">
+        <a
+          class="dropdown-item"
+          href="#"
+          data-bs-toggle="modal"
+          attr.data-bs-target="#{{ modalConstant.VERSION }}"
+        >
           {{ "dashboard.sidebar.dropdown.version" | translate }}</a
-        >-->
+        >
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" (click)="logout()">{{
           "dashboard.sidebar.dropdown.logout" | translate
@@ -54,3 +59,5 @@
   </div>
   <!-- * App Header -->
 </div>
+
+<app-version [modalId]="modalConstant.VERSION"></app-version>
