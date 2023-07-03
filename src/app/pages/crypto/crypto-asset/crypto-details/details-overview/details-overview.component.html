@@ -7,8 +7,7 @@
           <ul class="nav nav-tabs lined" role="tablist">
             <li class="nav-item">
               <a
-                id="tab1y"
-                class="nav-link active"
+                class="nav-link graph-tab active"
                 data-bs-toggle="tab"
                 href="#tab-1y"
                 role="tab"
@@ -19,7 +18,7 @@
             </li>
             <li class="nav-item">
               <a
-                class="nav-link"
+                class="nav-link graph-tab"
                 data-bs-toggle="tab"
                 href="#tab-3y"
                 role="tab"
@@ -30,7 +29,7 @@
             </li>
             <li class="nav-item">
               <a
-                class="nav-link"
+                class="nav-link graph-tab"
                 data-bs-toggle="tab"
                 href="#tab-all"
                 role="tab"
@@ -139,8 +138,12 @@
             <strong
               ><span
                 class="badge {{
-                  ((asset.value! - asset.invested!) / asset.invested!) * 100! >
+                  ((asset.value! - asset.invested!) / asset.invested!) * 100! ==
                   0
+                    ? 'badge-warning'
+                    : ((asset.value! - asset.invested!) / asset.invested!) *
+                        100! >
+                      0
                     ? 'badge-success'
                     : 'badge-danger'
                 }}"
@@ -148,8 +151,12 @@
                 <ion-icon
                   name="{{
                     ((asset.value! - asset.invested!) / asset.invested!) *
-                      100! >
+                      100! ==
                     0
+                      ? 'arrow-down-outline'
+                      : ((asset.value! - asset.invested!) / asset.invested!) *
+                          100! >
+                        0
                       ? 'arrow-up-outline'
                       : 'arrow-down-outline'
                   }}"
@@ -169,7 +176,9 @@
             </div>
             <strong
               class="{{
-                (asset.value! - asset.invested!)! > 0
+                (asset.value! - asset.invested!)! == 0
+                  ? 'text-warning'
+                  : (asset.value! - asset.invested!)! > 0
                   ? 'text-success'
                   : 'text-danger'
               }}"
@@ -287,7 +296,9 @@
                   </div>
                   <strong
                     class="{{
-                      asset.value! - asset.invested! > 0
+                      asset.value! - asset.invested! == 0
+                        ? 'text-warning'
+                        : asset.value! - asset.invested! > 0
                         ? 'text-success'
                         : 'text-danger'
                     }}"
@@ -296,8 +307,13 @@
                     <span
                       class="badge {{
                         ((asset.value! - asset.invested!) / asset.invested!) *
-                          100! >
+                          100! ==
                         0
+                          ? 'badge-warning'
+                          : ((asset.value! - asset.invested!) /
+                              asset.invested!) *
+                              100! >
+                            0
                           ? 'badge-success'
                           : 'badge-danger'
                       }}"
@@ -305,8 +321,13 @@
                       <ion-icon
                         name="{{
                           ((asset.value! - asset.invested!) / asset.invested!) *
-                            100! >
+                            100! ==
                           0
+                            ? 'arrow-down-outline'
+                            : ((asset.value! - asset.invested!) /
+                                asset.invested!) *
+                                100! >
+                              0
                             ? 'arrow-up-outline'
                             : 'arrow-down-outline'
                         }}"

@@ -15,6 +15,7 @@ import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
+import { LoggerService } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { environment } from 'src/environments/environment';
 
@@ -41,7 +42,8 @@ export class CryptoDashboardComponent implements OnInit {
   constructor(
     public screenService: ScreenService,
     private _renderer2: Renderer2,
-    private cryptoService: CryptoService
+    private cryptoService: CryptoService,
+    private logger: LoggerService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -63,6 +65,7 @@ export class CryptoDashboardComponent implements OnInit {
 
   getDashboard() {
     this.cryptoService.getCryptoDashboard().subscribe((data) => {
+      this.logger.LOG(data.message!, 'CryptoDashboardComponent');
       this.cryptoDashboard = data.data;
       this.cryptoService.cryptoDashboard = data.data;
       this.assets = data.data.assets;

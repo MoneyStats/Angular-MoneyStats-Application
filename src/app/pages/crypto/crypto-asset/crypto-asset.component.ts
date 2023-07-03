@@ -8,6 +8,7 @@ import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
+import { LoggerService } from 'src/assets/core/utils/log.service';
 
 @Component({
   selector: 'app-crypto-asset',
@@ -24,13 +25,15 @@ export class CryptoAssetComponent implements OnInit {
   constructor(
     private cryptoService: CryptoService,
     private charts: ChartService,
-    private screenService: ScreenService
+    private screenService: ScreenService,
+    private logger: LoggerService
   ) {}
 
   ngOnInit(): void {
     this.screenService.hideFooter();
     this.cryptoDashboard = deepCopy(this.cryptoService.cryptoDashboard);
     this.cryptoService.getCryptoAssets().subscribe((data) => {
+      this.logger.LOG(data.message!, 'CryptoAssetComponent');
       this.assets = data.data;
       this.cryptoService.assets = data.data;
       this.cryptoDashboard.assets = data.data;
@@ -66,11 +69,11 @@ export class CryptoAssetComponent implements OnInit {
     dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter(
       (s) => s.toString().split('-')[0] === new Date().getFullYear().toString()
     );
-    //setTimeout(() => {
-    if (this.screenService?.screenWidth! <= 780)
-      this.chart1Y = this.charts.renderCryptoAsset(dashboard, 200);
-    else this.chart1Y = this.charts.renderCryptoAsset(dashboard);
-    //}, 200);
+    setTimeout(() => {
+      if (this.screenService?.screenWidth! <= 780)
+        this.chart1Y = this.charts.renderCryptoAsset(dashboard, 200);
+      else this.chart1Y = this.charts.renderCryptoAsset(dashboard);
+    }, 200);
   }
 
   graph3Y() {
