@@ -124,10 +124,11 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
           h.date.toString().split('-')[0] ===
           new Date().getFullYear().toString()
       );
-      dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter(
-        (s) =>
-          s.toString().split('-')[0] === new Date().getFullYear().toString()
-      );
+      if (dashboard.statsAssetsDays)
+        dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter(
+          (s) =>
+            s.toString().split('-')[0] === new Date().getFullYear().toString()
+        );
       setTimeout(() => {
         if (this.screenService?.screenWidth! <= 780)
           this.chart1Y = this.charts.renderCryptoAsset(dashboard, 200);
@@ -152,9 +153,10 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
     dashboard.assets[0].history = dashboard.assets[0].history?.filter((h) =>
       last3.includes(h.date.toString().split('-')[0])
     );
-    dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter((s) =>
-      last3.includes(s.toString().split('-')[0])
-    );
+    if (dashboard.statsAssetsDays)
+      dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter((s) =>
+        last3.includes(s.toString().split('-')[0])
+      );
     setTimeout(() => {
       if (this.screenService?.screenWidth! <= 780)
         this.chart3Y = this.charts.renderCryptoAsset(dashboard, 200);
