@@ -83,6 +83,10 @@ export class ChartService {
       }
       historyBalance = [];
     });
+    let finalStatsDays: string[] = [];
+    dashboard.statsWalletDays.forEach((d) =>
+      finalStatsDays.push(new Date(d).toDateString())
+    );
     let chartOptions: Partial<ApexOptions> = {
       series: series,
       chart: {
@@ -112,7 +116,7 @@ export class ChartService {
         '#500295',
         '#f7eedc',
       ],
-      labels: dashboard.statsWalletDays,
+      labels: finalStatsDays,
       legend: {
         show: true,
         position: 'top',
@@ -210,6 +214,10 @@ export class ChartService {
     };
     series.push(serie);
     historyBalance = [];
+    let finalStatsDays: string[] = [];
+    historyDates.forEach((d) =>
+      finalStatsDays.push(new Date(d).toDateString())
+    );
     let chartExample1: Partial<ApexOptions> = {
       series: series,
       chart: {
@@ -298,7 +306,7 @@ export class ChartService {
     return chartExample1;
   }
 
-  renderCryptoAsset(
+  renderCryptoAsset1(
     cryptoDashboard: CryptoDashboard,
     ...height: number[]
   ): Partial<ApexOptions> {
@@ -428,6 +436,146 @@ export class ChartService {
       },
       colors: colors.length != 0 ? colors : this.colorsList,
       labels: statsAssetsDays,
+      legend: {
+        show: true,
+        position: 'top',
+        horizontalAlign: 'center',
+        floating: false,
+        fontFamily: 'Helvetica, Arial',
+      },
+    };
+    return chartOptions;
+    //chartLine(series, dashboard.statsWalletDays);
+  }
+
+  renderCryptoAsset(
+    cryptoDashboard: CryptoDashboard,
+    ...height: number[]
+  ): Partial<ApexOptions> {
+    let series: Array<any> = [];
+    let statsAssetsDays = cryptoDashboard.statsAssetsDays
+      ? cryptoDashboard.statsAssetsDays.slice()
+      : cryptoDashboard.statsAssetsDays;
+    let returnStatsDays: string[] =
+      statsAssetsDays != undefined ? statsAssetsDays.slice() : [];
+    let colors: string[] = [];
+    cryptoDashboard.assets.forEach((asset, index1) => {
+      colors.push(this.imageColorPicker.getColor(asset.icon!, index1));
+      let historyBalance: Array<number> = [];
+      let index = 0;
+
+      if (asset && asset.history && asset.history.length != 0) {
+        asset.history!.forEach((h) => {
+          if (h.date == undefined) {
+            return;
+          }
+          let count = returnStatsDays.indexOf(h.date.toString());
+          if (count != -1 && count != index) {
+            Array.from(Array(count - index)).forEach((d) =>
+              historyBalance.push(0)
+            );
+            index = count;
+          }
+          historyBalance.push(h.balance);
+          index++;
+        });
+
+        // Aggiungo l'ultimo valore dell'asset corrente se l'ultimo stats non corrisponde ad oggi
+        let today = new Date();
+        const lastDay: Date = new Date(
+          returnStatsDays[returnStatsDays.length - 1]
+        );
+        if (lastDay < today) {
+          //if (lastDay.getDate() < today.getDate()) {
+          historyBalance.push(asset.value!);
+          returnStatsDays.push(today.toDateString());
+        }
+      } else {
+        // Se dovessi avere più Asset con uno di essi con history mentre l'altro no lo si gestisce così
+        if (statsAssetsDays && statsAssetsDays.length != 0) {
+          let today = new Date();
+          let lastDay;
+          // (Caso solo per asset singoli) Se dovessi avere un asset appena aggiunto (Senza History) ma durante l'anno ho degli stats, devo prendere l'ultima data registrata e settarla a 0
+          //if (cryptoDashboard.assets.length == 1 && !asset.history) {
+          returnStatsDays = [statsAssetsDays[statsAssetsDays.length - 1]];
+          historyBalance.push(0);
+
+          lastDay = statsAssetsDays[statsAssetsDays.length - 1];
+          returnStatsDays.push(today.toDateString());
+          //} else {
+          //  // (Caso si abbiamo più di un asset)
+          //  // L'index è -2 perchè essendo più asset ma questo non ha history è stato aggiunto il valore last
+          //  lastDay = statsAssetsDays[statsAssetsDays.length - 2];
+          //  historyBalance.push(0);
+          //}
+          let count = returnStatsDays.indexOf(lastDay);
+          if (count != -1 && count != index) {
+            Array.from(Array(count - index)).forEach((d) =>
+              historyBalance.push(0)
+            );
+            // Pusho per l'ultima data valida trovata
+            historyBalance.push(0);
+          }
+
+          if (new Date(lastDay) < today) {
+            historyBalance.push(asset.value!);
+          }
+          console.log(statsAssetsDays);
+        } else {
+          console.log('ZRO');
+          historyBalance.push(0);
+          historyBalance.push(asset.value!);
+          let today = new Date();
+          let yesterday = new Date();
+          yesterday.setDate(today.getDate() - 1);
+          returnStatsDays = [yesterday.toDateString()];
+          returnStatsDays.push(today.toDateString());
+          console.log(returnStatsDays);
+        }
+      }
+      console.log(historyBalance);
+      console.log(statsAssetsDays);
+      let serie = {
+        name: asset.name,
+        data: historyBalance,
+      };
+      series.push(serie);
+      historyBalance = [];
+    });
+    let h = 350;
+    if (height[0]) {
+      h = height[0];
+    }
+    let finalStatsDays: string[] = [];
+    if (returnStatsDays.length != 0)
+      returnStatsDays.forEach((d) =>
+        finalStatsDays.push(new Date(d).toDateString())
+      );
+    else
+      statsAssetsDays.forEach((d) =>
+        finalStatsDays.push(new Date(d).toDateString())
+      );
+    let chartOptions: Partial<ApexOptions> = {
+      series: series,
+      chart: {
+        type: 'area',
+        width: '100%',
+        height: h,
+        sparkline: {
+          enabled: true,
+        },
+      },
+      dataLabels: {
+        enabled: false,
+        background: {
+          borderRadius: 20,
+        },
+      },
+      stroke: {
+        width: 2,
+      },
+      colors: colors.length != 0 ? colors : this.colorsList,
+      labels: finalStatsDays,
       legend: {
         show: true,
         position: 'top',

@@ -16,9 +16,9 @@ import { WalletService } from 'src/assets/core/services/wallet.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
 import { LoggerService } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
-import { SplideService } from 'src/assets/core/utils/splide.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
 import { environment } from 'src/environments/environment';
+import { deepCopy } from '@angular-devkit/core/src/utils/object';
 
 @Component({
   selector: 'app-dashboard',
@@ -89,7 +89,7 @@ export class DashboardComponent implements OnInit {
         }
         this.dashboard = data.data;
       }
-      this.dashboardService.dashboard = this.dashboard;
+      this.dashboardService.dashboard = deepCopy(this.dashboard);
       if (this.dashboard.wallets && this.dashboard.wallets.length) {
         this.scrollX();
       } else {
@@ -133,7 +133,6 @@ export class DashboardComponent implements OnInit {
       }, 100);
       this.walletDetails(data.data.wallets);
     });
-
 
     this.isWalletBalanceHidden();
     this.screenService.activeHeaderAndFooter();
