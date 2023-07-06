@@ -9,14 +9,14 @@ const subDomain = '';
 //const subDomain = 'moneystats/';
 
 export const environment = {
-  envType: "Local",
+  envType: 'Local',
   production: false,
   baseUrl: '../../' + subDomain,
   baseUrlHeader: '../../../../' + subDomain,
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: '1.6.14 (Beta)',
+  version: '1.7.0 (Beta)',
 
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',

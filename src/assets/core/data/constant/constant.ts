@@ -19,6 +19,7 @@ export enum ModalConstant {
   ADDASSET = 'addAssetModal',
   ADDOPERATIONS = 'addOperationsModal',
   ADDCRYPTOCURRENCY = 'addCryptoCurrencyModal',
+  INFO = 'infoModal',
 }
 
 export enum StorageConstant {
@@ -45,3 +46,5 @@ export enum AppConfigConst {
   DEFAULT_WALLET_IMG = 'assets/images/sample/wallet.png',
   DEFAULT_USER_IMG = 'assets/images/sample/avatar.png',
 }
+
+export var Operations = ['New Investment', 'Holding', 'Trading'];

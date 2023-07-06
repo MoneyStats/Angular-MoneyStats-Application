@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CryptoDashboard } from 'src/assets/core/data/class/crypto.class';
+import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { AppService } from 'src/assets/core/services/app.service';
+import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { environment } from 'src/environments/environment';
 
@@ -16,7 +19,7 @@ export class CryptoComponent implements OnInit {
   constructor(
     private router: Router,
     private appService: AppService,
-    private dashboardService: DashboardService
+    private cryptoService: CryptoService
   ) {
     router.events.subscribe((data: any) => {
       if (data.url == '/crypto/requirements') {
@@ -30,22 +33,24 @@ export class CryptoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let dashboard = this.dashboardService.dashboard;
+    this.cryptoService.getCryptoDashboard().subscribe((data) => {
+      let dashboard = data.data;
 
-    if (dashboard.wallets != undefined && dashboard.wallets.length != 0) {
-      let wallets = this.dashboardService.dashboard.wallets.filter(
-        (wallet) => wallet.category == 'Crypto'
-      );
-      if (
-        wallets == undefined ||
-        wallets.length == 0 ||
-        wallets[0].assets == undefined ||
-        wallets[0].assets.length == 0
-        //wallets.find((w) => w.assets == undefined || w.assets.length == 0)
-      ) {
-        this.onBoard();
-      }
-    } else this.onBoard();
+      if (dashboard.wallets != undefined && dashboard.wallets.length != 0) {
+        let wallets = dashboard.wallets.filter(
+          (wallet: Wallet) => wallet.category == 'Crypto'
+        );
+        if (
+          wallets == undefined ||
+          wallets.length == 0 ||
+          wallets[0].assets == undefined ||
+          wallets[0].assets.length == 0
+          //wallets.find((w) => w.assets == undefined || w.assets.length == 0)
+        ) {
+          this.onBoard();
+        }
+      } else this.onBoard();
+    });
   }
 
   onBoard() {

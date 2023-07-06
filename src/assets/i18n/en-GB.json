@@ -649,6 +649,11 @@
           "resumeSubTitle": "Resume all stats, save to confirm",
           "next": "Next Asset",
           "save": "Save Stats"
+        },
+        "operation": {
+          "title": "Add Operation",
+          "subTitle": "Add a new operation, invest some FIAT money, open a new Holding position or open a new Trading position.",
+          "details": "Add a new operation, means that you can invest some FIAT money to Crypto by selecting New Investment, open a new Holding position by moving Crypto or Stablecoin or open a new Trading position, that means you can open and close position on those Crypto."
         }
       }
     }

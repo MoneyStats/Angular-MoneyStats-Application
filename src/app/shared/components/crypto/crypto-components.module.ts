@@ -11,12 +11,18 @@ import { RouterModule } from '@angular/router';
 import { AddAssetModalComponent } from './modal/add-asset-modal/add-asset-modal.component';
 import { OperationsModalComponent } from './modal/operations-modal/operations-modal.component';
 import { SelectCryptoCurrencyComponent } from './modal/select-crypto-currency/select-crypto-currency.component';
+import { AddCryptoStatsComponent } from './modal/operations-modal/add-crypto-stats/add-crypto-stats.component';
+import { AddCryptoOperationComponent } from './modal/operations-modal/add-crypto-operation/add-crypto-operation.component';
+import { InfoModalComponent } from './modal/info-modal/info-modal.component';
 
 @NgModule({
   declarations: [
     AddAssetModalComponent,
     OperationsModalComponent,
     SelectCryptoCurrencyComponent,
+    AddCryptoStatsComponent,
+    AddCryptoOperationComponent,
+    InfoModalComponent,
   ],
   exports: [
     AddAssetModalComponent,
