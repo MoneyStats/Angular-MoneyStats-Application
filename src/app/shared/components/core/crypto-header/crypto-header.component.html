@@ -14,17 +14,23 @@
   </div>
   <div *ngIf="isMenuActive" class="right">
     <div class="menu hidden_mobile">
-      <a routerLink="/wallet" class="d-inline me-2 title-page">Wallets</a>
-      <a routerLink="/crypto/asset" class="d-inline me-2 title-page">Assets</a>
+      <a routerLink="/wallet" class="d-inline me-2 title-page">{{
+        "crypto.header.tab1" | translate
+      }}</a>
+      <a routerLink="/crypto/asset" class="d-inline me-2 title-page">{{
+        "crypto.header.tab2" | translate
+      }}</a>
       <a
         data-bs-toggle="modal"
         attr.data-bs-target="#{{ modalConstant.ADDOPERATIONS }}"
         aria-disabled="true"
         class="d-inline me-2 title-page clickable"
       >
-        Operations
+        {{ "crypto.header.tab3" | translate }}
       </a>
-      <a routerLink="/crypto/resume" class="d-inline me-2 title-page">Resume</a>
+      <a routerLink="/crypto/resume" class="d-inline me-2 title-page">{{
+        "crypto.header.tab4" | translate
+      }}</a>
     </div>
     <div class="dropdown">
       <a href="#" class="headerButton" data-bs-toggle="dropdown">

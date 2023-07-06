@@ -9,17 +9,24 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content modal-round mx-auto">
       <div class="modal-header">
-        <h5 class="modal-title">Add Operations</h5>
+        <h5 class="modal-title">
+          {{ "crypto.cryptoModal.operations.title" | translate }}
+        </h5>
       </div>
       <div class="modal-body">
         <form #f="ngForm" type="submit">
           <div class="action-sheet-content" id="action-scheet">
-            <div *ngIf="!isAddStatsSelected" class="card-title">
+            <div
+              *ngIf="!isAddStatsSelected && !isOperationSelected"
+              class="card-title"
+            >
               <h2 class="modal-title d-inline" style="vertical-align: -4px">
-                Add Operations
+                {{ "crypto.cryptoModal.operations.title" | translate }}
               </h2>
               <p>
-                <small>Select what do you want to do</small>
+                <small>{{
+                  "crypto.cryptoModal.operations.subTitle" | translate
+                }}</small>
               </p>
             </div>
             <div
@@ -29,19 +36,18 @@
               <div class="row">
                 <div class="col-md-6">
                   <h2 class="modal-title d-inline" style="vertical-align: -4px">
-                    Add Stats
+                    {{
+                      "crypto.cryptoModal.operations.stats.title" | translate
+                    }}
                   </h2>
                   <p>
-                    <small
-                      >Add new stats for the current asset in all your
-                      wallets</small
-                    >
+                    <small>{{
+                      "crypto.cryptoModal.operations.stats.subTitle" | translate
+                    }}</small>
                   </p>
                 </div>
                 <div class="col-md-6">
-                  <div
-                    class="form-group boxed float-end ms-1 me-1 date-form"
-                  >
+                  <div class="form-group boxed float-end ms-1 me-1 date-form">
                     <div class="input-wrapper">
                       <input
                         name="date"
@@ -65,27 +71,83 @@
                 </div>
               </div>
             </div>
+            <div *ngIf="isOperationSelected" class="card-title">
+              <div class="row">
+                <div class="col-md-12">
+                  <h2 class="modal-title d-inline" style="vertical-align: -4px">
+                    {{
+                      "crypto.cryptoModal.operations.operation.title"
+                        | translate
+                    }}
+                  </h2>
+                  <ion-icon
+                    name="alert-circle"
+                    style="width: 20px; height: 20px; vertical-align: -5px"
+                    data-bs-toggle="modal"
+                    attr.data-bs-target="#{{ modalConstant.INFO }}"
+                  ></ion-icon>
+                  <p>
+                    <small>{{
+                      "crypto.cryptoModal.operations.operation.subTitle"
+                        | translate
+                    }}</small>
+                  </p>
+                </div>
+              </div>
+            </div>
             <div *ngIf="isResumeAddAssets" class="card-title">
               <h2 class="modal-title d-inline" style="vertical-align: -4px">
-                Resume Stats
+                {{
+                  "crypto.cryptoModal.operations.stats.resumeTitle" | translate
+                }}
               </h2>
               <p>
-                <small>Resume all stats, save to confirm</small>
+                <small>{{
+                  "crypto.cryptoModal.operations.stats.resumeSubTitle"
+                    | translate
+                }}</small>
               </p>
             </div>
+            <!-- Bottoni Desktop -->
             <div
-              *ngIf="!isAddStatsSelected"
-              class="addWallet text-end hidden_mobile"
+              *ngIf="!isAddStatsSelected && !isOperationSelected"
+              class="text-end hidden_mobile"
             >
-              <button
-                (click)="addStatsClick()"
-                type="button"
-                class="btn btn-primary me-1 mb-1"
-              >
-                Add Stats
-              </button>
+              <div class="addWallet d-inline">
+                <button
+                  (click)="addStatsClick()"
+                  type="button"
+                  class="btn btn-primary me-1 mb-1"
+                >
+                  {{ "crypto.cryptoModal.operations.stats.title" | translate }}
+                </button>
+              </div>
+
+              <div class="addWallet d-inline">
+                <button
+                  (click)="addOperationClick()"
+                  type="button"
+                  class="btn btn-primary me-1 mb-1"
+                >
+                  {{
+                    "crypto.cryptoModal.operations.operation.title" | translate
+                  }}
+                </button>
+              </div>
             </div>
-            <!-- Add Stats -->
+
+            <app-add-crypto-stats
+              [assets]="assets"
+              [currency]="currency"
+              [currentIndex]="currentIndex"
+              [isAddStatsSelected]="isAddStatsSelected"
+              [isResumeAddAssets]="isResumeAddAssets"
+              [wallets]="wallets"
+            ></app-add-crypto-stats>
+            <app-add-crypto-operation
+              [isOperationSelected]="isOperationSelected"
+            ></app-add-crypto-operation>
+            <!-- Add Stats
             <div *ngIf="isAddStatsSelected" class="transactions row">
               <hr />
               <div *ngFor="let asset of assets; let i = index">
@@ -160,8 +222,8 @@
                       >
                     </p>
                     <hr />
-                  </div>
-                  <!-- Input Add Asset -->
+                  </div>-->
+            <!-- Input Add Asset
                   <div class="row" style="margin-top: -45px">
                     <div
                       *ngFor="let wallet of filterWallets(wallets, asset.name!)"
@@ -214,11 +276,11 @@
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <!-- END Input Add Asset -->
+                  </div>-->
+            <!-- END Input Add Asset
                 </div>
-              </div>
-              <!-- Riepilogo Add Stats -->
+              </div>-->
+            <!-- Riepilogo Add Stats
               <div *ngIf="isResumeAddAssets" style="margin-top: -20px">
                 <div
                   *ngFor="let asset of assets; let i = index"
@@ -248,8 +310,8 @@
                   <div class="card">
                     <ul
                       class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1"
-                    >
-                      <!-- item -->
+                    >-->
+            <!-- item
                       <li
                         *ngFor="
                           let wallet of filterWallets(wallets, asset.name!)
@@ -344,50 +406,69 @@
                             </div>
                           </div>
                         </a>
-                      </li>
-                      <!-- * item -->
+                      </li>-->
+            <!-- * item
                     </ul>
                   </div>
                   <hr style="margin-top: -10px" *ngIf="i < assets.length - 1" />
                 </div>
-              </div>
-              <!-- End Riepilogo Add Stats -->
-              <!-- Bottoni Add Stats Desktop -->
-              <div class="addWallet text-end hidden_mobile">
-                <button
-                  *ngIf="currentIndex != assets.length"
-                  (click)="changeAsset()"
-                  [disabled]="f.invalid && !validateDate()"
-                  type="button"
-                  class="btn btn-primary me-1 mb-1"
-                >
-                  Next Asset
-                </button>
-                <button
-                  *ngIf="isResumeAddAssets"
-                  type="button"
-                  class="btn btn-primary me-1 mb-1"
-                  (click)="save()"
-                  data-bs-dismiss="modal"
-                >
-                  Save Asset
-                </button>
-              </div>
-              <!-- End Bottoni Add Stats Desktop -->
+              </div>-->
+            <!-- End Riepilogo Add Stats -->
+            <!-- Bottoni Add Stats Desktop -->
+            <div
+              *ngIf="isAddStatsSelected"
+              class="addWallet text-end hidden_mobile"
+            >
+              <button
+                *ngIf="currentIndex != assets.length"
+                (click)="changeAsset()"
+                [disabled]="f.invalid && !validateDate()"
+                type="button"
+                class="btn btn-primary me-1 mb-1"
+              >
+                {{ "crypto.cryptoModal.operations.stats.next" | translate }}
+              </button>
+              <button
+                *ngIf="isResumeAddAssets"
+                type="button"
+                class="btn btn-primary me-1 mb-1"
+                (click)="save()"
+                data-bs-dismiss="modal"
+              >
+                {{ "crypto.cryptoModal.operations.stats.save" | translate }}
+              </button>
             </div>
+            <!-- End Bottoni Add Stats Desktop
+            </div>-->
             <!-- End Add Stats -->
 
             <!-- Bottoni Mobile -->
             <div class="hidden_desktop">
               <div *ngIf="!isAddStatsSelected" class="row">
-                <div class="col-12">
+                <div class="col-6">
                   <div class="form-group basic">
                     <button
                       (click)="addStatsClick()"
                       type="button"
                       class="btn btn-primary btn-block btn-lg"
                     >
-                      Add Stats
+                      {{
+                        "crypto.cryptoModal.operations.stats.title" | translate
+                      }}
+                    </button>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group basic">
+                    <button
+                      (click)="addOperationClick()"
+                      type="button"
+                      class="btn btn-primary btn-block btn-lg"
+                    >
+                      {{
+                        "crypto.cryptoModal.operations.operation.title"
+                          | translate
+                      }}
                     </button>
                   </div>
                 </div>
@@ -400,7 +481,7 @@
                   type="button"
                   class="btn btn-primary btn-block btn-lg"
                 >
-                  Next Asset
+                  {{ "crypto.cryptoModal.operations.stats.next" | translate }}
                 </button>
                 <button
                   *ngIf="isResumeAddAssets"
@@ -409,7 +490,7 @@
                   (click)="save()"
                   data-bs-dismiss="modal"
                 >
-                  Save Asset
+                  {{ "crypto.cryptoModal.operations.stats.save" | translate }}
                 </button>
               </div>
             </div>
@@ -421,3 +502,5 @@
   </div>
 </div>
 <!-- * Send Action Sheet -->
+
+<app-info-modal [modalId]="modalConstant.INFO"></app-info-modal>

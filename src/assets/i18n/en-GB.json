@@ -506,6 +506,16 @@
     "title": ""
   },
   "crypto": {
+    "header": {
+      "tab1": "Wallets",
+      "tab2": "Assets",
+      "tab3": "Operations",
+      "tab4": "Resume"
+    },
+    "footer": {
+      "tab1": "Operations",
+      "tab2": "Crypto Resume"
+    },
     "requirements": {
       "headerTitle": "Crypto Requirements",
       "title": "Crypto: You are almost there",
@@ -587,7 +597,22 @@
       "assetList": "Current Asset",
       "graphAsset": "Performance",
       "tableAsset": "Resume performance of the year",
-      "warning": "Add a new Stats to get the table data"
+      "warning": "Add a new Stats to get the table data",
+      "investments": {
+        "price": {
+          "title": "Price Average Purchase Currency",
+          "table": {
+            "tab1": "Asset",
+            "tab2": "Quantity",
+            "tab3": "Invested",
+            "tab4": "Asset Mid Balance",
+            "tab5": "MarketData Balance",
+            "tab6": "Actual Balance",
+            "tab7": "Trend +/-",
+            "tab8": "Performance"
+          }
+        }
+      }
     },
     "cryptoModal": {
       "addAsset": {
@@ -613,6 +638,23 @@
         "title": "Select Crypto Currency",
         "subtitle": "Fill the form by selecting a Crypto currency",
         "save": "Save"
+      },
+      "operations": {
+        "title": "Add Operations",
+        "subTitle": "Select what do you want to do",
+        "stats": {
+          "title": "Add Stats",
+          "subTitle": "Add new stats for the current asset in all your wallets",
+          "resumeTitle": "Resume Stats",
+          "resumeSubTitle": "Resume all stats, save to confirm",
+          "next": "Next Asset",
+          "save": "Save Stats"
+        },
+        "operation": {
+          "title": "Add Operation",
+          "subTitle": "Add a new operation, invest some FIAT money, open a new Holding position or open a new Trading position.",
+          "details": "Add a new operation, means that you can invest some FIAT money to Crypto by selecting New Investment, open a new Holding position by moving Crypto or Stablecoin or open a new Trading position, that means you can open and close position on those Crypto."
+        }
       }
     }
   },

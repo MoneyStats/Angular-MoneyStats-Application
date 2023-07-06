@@ -1,0 +1,31 @@
+<div *ngIf="isOperationSelected" class="transactions row">
+  <hr />
+  <div class="section mb-2">
+    <form>
+      <div class="form-group boxed">
+        <div class="input-wrapper">
+          <label class="label" for="select4b">Select Operation</label>
+          <select
+            class="form-control custom-select"
+            id="operationSelect"
+            name="operationSelect"
+            [(ngModel)]="operationSelect"
+            #operationSelect1="ngModel"
+            required
+          >
+            <option selected disabled>Select Operation</option>
+            <option
+              *ngFor="let operation of operations"
+              value="{{ operation }}"
+            >
+              {{ operation }}
+            </option>
+          </select>
+        </div>
+        <div class="input-info">
+          Select the type of operation you want to do
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

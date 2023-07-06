@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Asset } from 'src/assets/core/data/class/crypto.class';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { ErrorService } from 'src/assets/core/interceptors/error.service';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { StatsService } from 'src/assets/core/services/stats.service';
@@ -30,12 +31,19 @@ export class OperationsModalComponent implements OnInit {
 
   currentIndex: number = 0;
 
+  // Datas for Operations
+  isOperationSelected: boolean = false;
+
   constructor(
     private cryptoService: CryptoService,
     private errorService: ErrorService,
     private router: Router,
     private statsService: StatsService
   ) {}
+
+  public get modalConstant(): typeof ModalConstant {
+    return ModalConstant;
+  }
 
   ngOnInit(): void {}
 
@@ -56,6 +64,11 @@ export class OperationsModalComponent implements OnInit {
       }
     });
   }
+
+  addOperationClick() {
+    this.isOperationSelected = true;
+  }
+
   changeAsset() {
     this.currentIndex += 1;
     let element = document.getElementById('action-scheet');
@@ -66,22 +79,22 @@ export class OperationsModalComponent implements OnInit {
     }
   }
 
-  filterWallets(wallets: Wallet[], assetName: string): Wallet[] {
-    let wallAsset = wallets.filter((w) => {
-      if (w.assets != undefined && w.assets.length > 0)
-        return w.assets.find((a) => a.name == assetName);
-      return null;
-    });
-    /*wallAsset.forEach((w) => {
-      w.assets = w.assets.filter((a) => a.name == assetName);
-    });*/
-    return wallAsset;
-  }
-
-  // Mi serve per filtrare gli asset prima di fare Add Stats
-  filterAsset(wallet: Wallet, assetName: string): Asset {
-    return wallet.assets.find((a) => a.name == assetName)!;
-  }
+  // filterWallets(wallets: Wallet[], assetName: string): Wallet[] {
+  //   let wallAsset = wallets.filter((w) => {
+  //     if (w.assets != undefined && w.assets.length > 0)
+  //       return w.assets.find((a) => a.name == assetName);
+  //     return null;
+  //   });
+  //   /*wallAsset.forEach((w) => {
+  //     w.assets = w.assets.filter((a) => a.name == assetName);
+  //   });*/
+  //   return wallAsset;
+  // }
+  //
+  // // Mi serve per filtrare gli asset prima di fare Add Stats
+  // filterAsset(wallet: Wallet, assetName: string): Asset {
+  //   return wallet.assets.find((a) => a.name == assetName)!;
+  // }
 
   validateDate() {
     this.dateValidation = false;

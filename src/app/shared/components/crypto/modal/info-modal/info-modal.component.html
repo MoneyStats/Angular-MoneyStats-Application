@@ -1,0 +1,38 @@
+<!-- Alert Iconed Action Sheet -->
+<div
+  class="modal fade action-sheet"
+  id="{{ modalId }}"
+  tabindex="-1"
+  role="dialog"
+  data-bs-focus="false"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal-round mx-auto">
+      <div class="modal-body">
+        <div class="action-sheet-content">
+          <div class="iconbox text-warning">
+            <ion-icon name="alert-circle"></ion-icon>
+          </div>
+          <div class="text-center p-2">
+            <h3>
+              {{ "crypto.cryptoModal.operations.operation.title" | translate }}
+            </h3>
+            <p>
+              {{
+                "crypto.cryptoModal.operations.operation.details" | translate
+              }}
+            </p>
+          </div>
+          <a
+            href="#"
+            class="btn btn-primary btn-lg btn-block"
+            data-bs-toggle="modal"
+            attr.data-bs-target="#{{ modalConstant.ADDOPERATIONS }}"
+            >Close</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- * Alert Iconed Action Sheet -->
