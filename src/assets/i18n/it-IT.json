@@ -506,6 +506,16 @@
     "title": ""
   },
   "crypto": {
+    "header": {
+      "tab1": "Portafogli",
+      "tab2": "Assets",
+      "tab3": "Operazioni",
+      "tab4": "Storico"
+    },
+    "footer": {
+      "tab1": "Operazioni",
+      "tab2": "Storico Crypto"
+    },
     "requirements": {
       "headerTitle": "Verifica Crypto",
       "title": "Crypto: Ci sei quasi",
@@ -587,7 +597,22 @@
       "assetList": "Asset in possesso",
       "graphAsset": "Performance",
       "tableAsset": "Storico performance annuale",
-      "warning": "Aggiungi un nuovo crypto stats per ottenere dei dati"
+      "warning": "Aggiungi un nuovo crypto stats per ottenere dei dati",
+      "investments": {
+        "price": {
+          "title": "Media di acquisto della currency",
+          "table": {
+            "tab1": "Asset",
+            "tab2": "Quantità",
+            "tab3": "Investito",
+            "tab4": "Media Asset",
+            "tab5": "MarketData Saldo",
+            "tab6": "Saldo Attuale",
+            "tab7": "Trend +/-",
+            "tab8": "Performance"
+          }
+        }
+      }
     },
     "cryptoModal": {
       "addAsset": {
@@ -613,6 +638,18 @@
         "title": "Seleziona Crypto Currency",
         "subtitle": "Completa il form selzionando una Crypto currency",
         "save": "Salva"
+      },
+      "operations": {
+        "title": "Aggiungi Operazione",
+        "subTitle": "Seleziona cosa desideri fare",
+        "stats": {
+          "title": "Aggiungi Stats",
+          "subTitle": "Aggiungi nuovo stats per l'asset corrente in tutti i tuoi portafogli",
+          "resumeTitle": "Sommario Stats",
+          "resumeSubTitle": "Sommario stats, Salva per confermare l'operazione",
+          "next": "Prossimo Asset",
+          "save": "Salva Stats"
+        }
       }
     }
   },
