@@ -1,7 +1,7 @@
-<div *ngIf="isOperationSelected" class="transactions row">
+<div class="transactions row">
   <hr />
   <div class="section mb-2">
-    <form>
+    <form #f="ngForm" type="submit">
       <div class="form-group boxed">
         <div class="input-wrapper">
           <label class="label" for="select4b">Select Operation</label>
@@ -10,6 +10,7 @@
             id="operationSelect"
             name="operationSelect"
             [(ngModel)]="operationSelect"
+            [disabled]="isOperationSel && operationSelect != ''"
             #operationSelect1="ngModel"
             required
           >
@@ -24,6 +25,192 @@
         </div>
         <div class="input-info">
           Select the type of operation you want to do
+        </div>
+      </div>
+      <!-- Bottoni Desktop -->
+      <div class="text-end hidden_mobile">
+        <div *ngIf="!isOperationSel" class="addWallet d-inline">
+          <button
+            type="button"
+            [disabled]="f.invalid"
+            (click)="isOperationSel = true"
+            class="btn btn-primary me-1 mb-1"
+          >
+            Select Type
+          </button>
+        </div>
+      </div>
+      <!-- Bottoni Mobile -->
+      <div class="hidden_desktop">
+        <div *ngIf="!isOperationSel">
+          <div class="form-group basic" style="margin-bottom: -20px">
+            <button
+              [disabled]="f.invalid"
+              (click)="isOperationSel = true"
+              type="button"
+              class="btn btn-primary btn-block btn-lg"
+            >
+              Select Type
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- End Bottoni Mobile -->
+    </form>
+    <form #g="ngForm" type="submit">
+      <div *ngIf="isOperationSel" class="form-group boxed">
+        <div class="input-wrapper">
+          <label class="label" for="select4b">Select Wallet</label>
+          <select
+            class="form-control custom-select"
+            id="operationSelect"
+            name="operationSelect"
+            [(ngModel)]="walletSelect"
+            [disabled]="isWalletSelected"
+            #operationSelect1="ngModel"
+            required
+          >
+            <!--<option value="{{ wallets[0] }}">Select Wallet</option>-->
+            <option selected disabled>Select Wallet</option>
+            <option
+              selected="{{ wallet }}"
+              *ngFor="let wallet of wallets"
+              value="{{ wallet.name }}"
+            >
+              {{ wallet.name }}
+            </option>
+          </select>
+        </div>
+        <div class="input-info">Select the wallet to make the investment</div>
+      </div>
+      <!-- Bottoni Desktop -->
+      <div class="text-end hidden_mobile">
+        <div
+          *ngIf="isOperationSel && !isWalletSelected"
+          class="addWallet d-inline"
+        >
+          <button
+            [disabled]="!isWalletPresent()"
+            (click)="isWalletSelected = true"
+            type="button"
+            class="btn btn-primary me-1 mb-1"
+          >
+            Select Wallet
+          </button>
+        </div>
+      </div>
+      <!-- Bottoni Mobile -->
+      <div class="hidden_desktop">
+        <div *ngIf="isOperationSel && !isWalletSelected">
+          <div class="form-group basic" style="margin-bottom: -20px">
+            <button
+              [disabled]="!isWalletPresent()"
+              (click)="isWalletSelected = true"
+              type="button"
+              class="btn btn-primary btn-block btn-lg"
+            >
+              Select Wallet
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- End Bottoni Mobile -->
+    </form>
+    <form action="">
+      <div *ngIf="isWalletSelected">
+        <div class="section mt-2">
+          <div class="card border">
+            <div class="card-body">
+              <div class="form-group basic p-0">
+                <div class="exchange-heading">
+                  <label class="group-label" for="fromAmount">From</label>
+                </div>
+                <div class="exchange-group">
+                  <div class="input-col">
+                    <input
+                      type="text"
+                      class="form-control form-control-lg pe-0 border-0"
+                      id="fromAmount"
+                      placeholder="0"
+                      value="100"
+                      maxlength="10"
+                    />
+                  </div>
+                  <div class="select-col">
+                    <select class="form-select form-select-lg currency">
+                      <option value="{{ fiat }}" selected>
+                        {{ fiat }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="exchange-line">
+            <div class="exchange-icon">
+              <ion-icon name="swap-vertical-outline"></ion-icon>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="card border">
+            <div class="card-body">
+              <div class="form-group basic p-0">
+                <div class="exchange-heading">
+                  <label class="group-label" for="toAmount">To</label>
+                  <div class="exchange-wallet-info">
+                    Balance : <strong> 0,504 BTC</strong>
+                  </div>
+                </div>
+                <div class="exchange-group">
+                  <div class="input-col">
+                    <input
+                      type="text"
+                      class="form-control form-control-lg pe-0 border-0"
+                      id="toAmount"
+                      placeholder="0"
+                      value="0,014"
+                      maxlength="10"
+                    />
+                  </div>
+                  <div class="select-col">
+                    <select class="form-select form-select-lg currency">
+                      <option value="USD">USD</option>
+                      <option value="BTC" selected>BTC</option>
+                      <option value="ETH">ETH</option>
+                      <option value="ADA">ADA</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section mt-2">
+          <div class="row fontsize-caption">
+            <div class="col"><b>1 BTC</b> = 39.019,09 USD</div>
+            <div class="col text-end">Commission rate : <b>2%</b></div>
+          </div>
+        </div>
+
+        <!-- Bottoni Desktop -->
+        <div class="text-end hidden_mobile mt-2">
+          <div class="addWallet d-inline">
+            <button
+              [disabled]="!isWalletPresent()"
+              (click)="isWalletSelected = true"
+              type="button"
+              class="btn btn-primary me-1 mb-1"
+            >
+              Select Wallet
+            </button>
+          </div>
         </div>
       </div>
     </form>
