@@ -1,6 +1,6 @@
 {
   "name": "angular-moneystats",
-  "version": "1.7.1",
+  "version": "1.7.3",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -26,7 +26,6 @@
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "apexcharts": "^3.36.3",
-    "jquery": "^3.6.3",
     "ng-apexcharts": "^1.7.4",
     "ng2-charts": "^3.1.0",
     "rxjs": "~7.4.0",

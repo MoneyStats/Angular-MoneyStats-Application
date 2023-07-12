@@ -121,7 +121,13 @@
                     }}</span>
                   </div>
                 </div>
-                <div *ngIf="!isAssetSelected" class="row">
+                <div *ngIf="!isAssetSelected" class="col-md-8 col-12 float-end">
+                  <app-asset-select
+                    [fiat]="cryptoCurrency"
+                    [isOperation]="false"
+                    (emitSelectAsset)="emitSelectAsset($event)"
+                  ></app-asset-select>
+                  <!--<div *ngIf="!isAssetSelected" class="row">
                   <div class="col-md-5">
                     <div class="form-group basic">
                       <div class="input-wrapper">
@@ -165,14 +171,14 @@
                         >
                       </div>
                     </div>
+                  </div>-->
+                  <div
+                    *ngIf="warning"
+                    class="mx-auto alert alert-danger mb-1 mt-2"
+                    role="alert"
+                  >
+                    {{ "crypto.cryptoModal.addAsset.warning" | translate }}
                   </div>
-                </div>
-                <div
-                  *ngIf="warning"
-                  class="mx-auto alert alert-danger mb-1 mt-2"
-                  role="alert"
-                >
-                  {{ "crypto.cryptoModal.addAsset.warning" | translate }}
                 </div>
               </div>
             </div>

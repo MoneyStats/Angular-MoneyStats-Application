@@ -14,6 +14,7 @@ import { SelectCryptoCurrencyComponent } from './modal/select-crypto-currency/se
 import { AddCryptoStatsComponent } from './modal/operations-modal/add-crypto-stats/add-crypto-stats.component';
 import { AddCryptoOperationComponent } from './modal/operations-modal/add-crypto-operation/add-crypto-operation.component';
 import { InfoModalComponent } from './modal/info-modal/info-modal.component';
+import { AssetSelectComponent } from './asset-select/asset-select.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { InfoModalComponent } from './modal/info-modal/info-modal.component';
     AddCryptoStatsComponent,
     AddCryptoOperationComponent,
     InfoModalComponent,
+    AssetSelectComponent,
   ],
   exports: [
     AddAssetModalComponent,

@@ -1,0 +1,50 @@
+<div id="wrapper" class="wrapper">
+  <div
+    class="{{ isOperation ? 'select-btn-op text-end' : 'select-btn' }}"
+    (click)="openCloseSelect()"
+  >
+    <span *ngIf="!isOperation"
+      ><img
+        src="{{ assetSelected?.icon }}"
+        alt="avatar"
+        class="imaged d-inline w30 rounded me-1"
+      />
+      {{ assetSelected?.name }} - {{ assetSelected?.symbol }}</span
+    >
+    <span *ngIf="isOperation" style="color: aliceblue"
+      ><img
+        src="{{ assetSelected?.icon }}"
+        alt="avatar"
+        class="imaged d-inline w30 rounded me-1"
+      />
+      {{ assetSelected?.symbol }}</span
+    >
+    <ion-icon name="chevron-down-outline"></ion-icon>
+  </div>
+  <div class="content">
+    <div class="search">
+      <ion-icon name="search-outline"></ion-icon>
+      <input
+        [(ngModel)]="search"
+        #name="ngModel"
+        spellcheck="false"
+        type="text"
+        (keyup)="onKeySearch($event)"
+        placeholder="Search"
+      />
+    </div>
+    <ul class="options">
+      <li
+        (click)="selectAssetInput(asset.name!)"
+        *ngFor="let asset of filterCryptoPrices; let index"
+      >
+        <img
+          src="{{ asset.icon }}"
+          alt="avatar"
+          class="imaged d-inline w30 rounded me-1"
+        />
+        {{ asset.name }} - {{ asset.symbol }}
+      </li>
+    </ul>
+  </div>
+</div>

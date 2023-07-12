@@ -116,7 +116,7 @@
       </div>
       <!-- End Bottoni Mobile -->
     </form>
-    <form action="">
+    <form #z="ngForm" action="">
       <div *ngIf="isWalletSelected">
         <div class="section mt-2">
           <div class="card border">
@@ -167,25 +167,43 @@
                     Balance : <strong> 0,504 BTC</strong>
                   </div>
                 </div>
-                <div class="exchange-group">
-                  <div class="input-col">
-                    <input
-                      type="text"
-                      class="form-control form-control-lg pe-0 border-0"
-                      id="toAmount"
-                      placeholder="0"
-                      value="0,014"
-                      maxlength="10"
-                    />
+                <div class="row">
+                  <div class="col-8">
+                    <div class="exchange-group">
+                      <div class="input-col">
+                        <input
+                          type="text"
+                          class="form-control form-control-lg pe-0 border-0"
+                          id="toAmount"
+                          placeholder="0"
+                          value="0,014"
+                          maxlength="10"
+                        />
+                      </div>
+                    </div>
                   </div>
-                  <div class="select-col">
-                    <select class="form-select form-select-lg currency">
-                      <option value="USD">USD</option>
-                      <option value="BTC" selected>BTC</option>
-                      <option value="ETH">ETH</option>
-                      <option value="ADA">ADA</option>
+                  <div class="col-4" style="max-height: 55px">
+                    <app-asset-select
+                      style="max-height: 55px !important"
+                      [fiat]="fiat!"
+                    ></app-asset-select>
+                  </div>
+
+                  <!--<div class="select-col">
+                    <select
+                      data-show-subtext="true"
+                      class="selectpicker form-select form-select-lg currency"
+                      data-live-search="true"
+                    >
+                      <option value=""><input type="text" /></option>
+                      <option data-tokens="USD" value="USD">USD</option>
+                      <option data-tokens="BTC" value="BTC" selected>
+                        BTC
+                      </option>
+                      <option data-tokens="ETH" value="ETH">ETH</option>
+                      <option data-tokens="ADA" value="ADA">ADA</option>
                     </select>
-                  </div>
+                  </div>-->
                 </div>
               </div>
             </div>

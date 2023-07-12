@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Asset } from 'src/assets/core/data/class/crypto.class';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { Operations } from 'src/assets/core/data/constant/constant';
 
@@ -9,6 +10,7 @@ import { Operations } from 'src/assets/core/data/constant/constant';
 })
 export class AddCryptoOperationComponent implements OnInit {
   @Input('wallets') wallets: Wallet[] = [];
+  @Input('assets') assets: Asset[] = [];
   @Input('fiat') fiat?: string;
 
   operations: string[] = Operations;

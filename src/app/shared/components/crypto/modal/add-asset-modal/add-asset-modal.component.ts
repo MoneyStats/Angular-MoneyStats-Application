@@ -31,7 +31,6 @@ export class AddAssetModalComponent implements OnInit {
 
   cryptoTypes: string[] = ['Holding', 'Trading'];
   cryptoPrices: Asset[] = [];
-  filterCryptoPrices: Asset[] = [];
   search: string = '';
 
   categories: Category[] = [];
@@ -58,27 +57,6 @@ export class AddAssetModalComponent implements OnInit {
         this.modelWallet = this.wallets[0].name;
       }
     } else this.wallets;
-
-    this.getCryptoPrices();
-  }
-
-  getCryptoPrices() {
-    this.cryptoService.getCryptoPrice(this.cryptoCurrency).subscribe((data) => {
-      this.cryptoPrices = data.data;
-      this.filterCryptoPrices = data.data;
-    });
-  }
-
-  filterCryptoPrice(filter: string) {
-    this.filterCryptoPrices = this.cryptoPrices.filter(
-      (cp) => cp.name?.includes(filter) || cp.symbol?.includes(filter)
-    );
-  }
-
-  onKeySearch(event: any) {
-    setTimeout(() => {
-      this.filterCryptoPrice(this.search);
-    }, 1000);
   }
 
   selectWallet() {
@@ -97,11 +75,6 @@ export class AddAssetModalComponent implements OnInit {
       this.asset = this.cryptoPrices.find((c) => c.name == this.modelAsset);
       this.isAssetSelected = true;
     } else this.warning = true;
-  }
-
-  selectAssetInput(name: string) {
-    this.search = '';
-    this.modelAsset = name;
   }
 
   saveAsset() {
@@ -141,5 +114,11 @@ export class AddAssetModalComponent implements OnInit {
     this.isWalletSelected = false;
     this.modelAsset = '';
     this.modelWallet = '';
+  }
+
+  emitSelectAsset(asset: Asset) {
+    this.warning = false;
+    this.cryptoPrices = [asset];
+    this.modelAsset = asset.name!;
   }
 }
