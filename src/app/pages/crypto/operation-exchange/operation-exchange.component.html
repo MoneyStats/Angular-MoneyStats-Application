@@ -1,0 +1,159 @@
+<div class="mx-auto section-width">
+  <app-crypto-header
+    [routerLinks]="''"
+    [title]="operationType"
+    [isMenuActive]="false"
+    [isInfoActive]="true"
+    (emitInfo)="openInfo.click()"
+  ></app-crypto-header>
+  <input
+    type="hidden"
+    #openInfo
+    data-bs-toggle="modal"
+    attr.data-bs-target="#{{ modalConstant.INFO }}"
+  />
+  <!-- App Capsule -->
+  <div id="appCapsule">
+    <div class="row margin">
+      <div class="col-12 col-md-6">
+        <div class="title-section row">
+          <div
+            class="col-2 col-md-2 col-xl-1"
+            style="display: flex; align-items: center"
+          >
+            <img class="walletLogo" src="{{ wallet.img }}" alt="" />
+          </div>
+          <div class="col-10 col-md-10 col-xl-11">
+            <h2 class="title">{{ wallet.name }}</h2>
+            <small
+              ><p>Balance: {{ wallet.balance }}</p></small
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-6 hidden_mobile text-end">
+        <div class="title-section">
+          <h2 class="title">{{ operationType }}</h2>
+          <small><p>Operation Type</p></small>
+        </div>
+      </div>
+    </div>
+
+    <form #f="ngForm" action="">
+      <section class="mx-auto" style="max-width: 1500px">
+        <div class="section mt-2">
+          <div class="card border">
+            <div class="card-body">
+              <div class="form-group basic p-0">
+                <div class="exchange-heading">
+                  <label class="group-label" for="fromAmount">From</label>
+                </div>
+                <div class="exchange-group">
+                  <div class="input-col">
+                    <input
+                      type="text"
+                      class="form-control form-control-lg pe-0 border-0"
+                      id="fromAmount"
+                      placeholder="0"
+                      value="100"
+                      maxlength="10"
+                    />
+                  </div>
+                  <div class="select-col">
+                    <select class="form-select form-select-lg currency">
+                      <option value="{{ fiat }}" selected>
+                        {{ fiat }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="exchange-line">
+            <div class="exchange-icon">
+              <ion-icon name="swap-vertical-outline"></ion-icon>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="card border">
+            <div class="card-body">
+              <div class="form-group basic p-0">
+                <div class="exchange-heading">
+                  <label class="group-label" for="toAmount">To</label>
+                  <div class="exchange-wallet-info">
+                    Balance : <strong> 0,504 BTC</strong>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-8 col-7">
+                    <div class="exchange-group">
+                      <div class="input-col">
+                        <input
+                          type="text"
+                          class="form-control form-control-lg pe-0 border-0"
+                          id="toAmount"
+                          placeholder="0"
+                          value="0,014"
+                          maxlength="10"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-5" style="max-height: 55px">
+                    <app-asset-select
+                      [wrapperID]="'addCryptoOperation'"
+                      [fiat]="fiat!"
+                      [isOperation]="true"
+                    ></app-asset-select>
+                  </div>
+
+                  <!--<div class="select-col">
+                <select
+                  data-show-subtext="true"
+                  class="selectpicker form-select form-select-lg currency"
+                  data-live-search="true"
+                >
+                  <option value=""><input type="text" /></option>
+                  <option data-tokens="USD" value="USD">USD</option>
+                  <option data-tokens="BTC" value="BTC" selected>
+                    BTC
+                  </option>
+                  <option data-tokens="ETH" value="ETH">ETH</option>
+                  <option data-tokens="ADA" value="ADA">ADA</option>
+                </select>
+              </div>-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section mt-2">
+          <div class="row fontsize-caption">
+            <div class="col"><b>1 BTC</b> = 39.019,09 USD</div>
+            <div class="col text-end">Commission rate : <b>2%</b></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottoni Mobile -->
+      <div class="form-button-group transparent">
+        <button
+          [disabled]="f.invalid"
+          type="button"
+          class="btn btn-primary btn-block btn-lg"
+        >
+          {{ "crypto.cryptoModal.operations.stats.next" | translate }}
+        </button>
+      </div>
+      <!-- End Bottoni Mobile -->
+    </form>
+  </div>
+</div>
+<app-info-modal [modalId]="modalConstant.INFO"></app-info-modal>

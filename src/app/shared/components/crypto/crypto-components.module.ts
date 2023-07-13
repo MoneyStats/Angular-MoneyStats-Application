@@ -30,6 +30,8 @@ import { AssetSelectComponent } from './asset-select/asset-select.component';
     AddAssetModalComponent,
     OperationsModalComponent,
     SelectCryptoCurrencyComponent,
+    AssetSelectComponent,
+    InfoModalComponent,
   ],
   imports: [
     RouterModule,

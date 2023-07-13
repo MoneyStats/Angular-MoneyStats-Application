@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { UserService } from 'src/assets/core/services/user.service';
@@ -15,12 +15,14 @@ export class CryptoHeaderComponent implements OnInit {
   @Input('title') title: string = 'Crypto';
 
   @Input('isMenuActive') isMenuActive: boolean = true;
+  @Input('isInfoActive') isInfoActive: boolean = false;
+
+  @Output('emitInfo') emitInfo = new EventEmitter<string>();
 
   constructor(
     private location: Location,
     private router: Router,
-    public userService: UserService,
-
+    public userService: UserService
   ) {
     router.events.subscribe((data: any) => {
       if (data.url == '/crypto/requirements') {
@@ -45,5 +47,9 @@ export class CryptoHeaderComponent implements OnInit {
 
   logout() {
     this.userService.logout();
+  }
+
+  goToInfo() {
+    this.emitInfo.emit('go');
   }
 }

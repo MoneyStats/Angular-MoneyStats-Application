@@ -25,6 +25,7 @@ import { AdvancedGraphComponent } from './crypto-asset/crypto-details/advanced-g
 import { CryptoResumeComponent } from './crypto-resume/crypto-resume.component';
 import { ResumeAssetsComponent } from './crypto-resume/resume-assets/resume-assets.component';
 import { InvestmentsHistoryComponent } from './crypto-resume/investments-history/investments-history.component';
+import { OperationExchangeComponent } from './operation-exchange/operation-exchange.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { InvestmentsHistoryComponent } from './crypto-resume/investments-history
     CryptoResumeComponent,
     ResumeAssetsComponent,
     InvestmentsHistoryComponent,
+    OperationExchangeComponent,
   ],
   imports: [
     CryptoRoutingModule,

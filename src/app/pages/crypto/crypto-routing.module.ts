@@ -6,6 +6,7 @@ import { RequirementsComponent } from './requirements/requirements.component';
 import { CryptoAssetComponent } from './crypto-asset/crypto-asset.component';
 import { CryptoDetailsComponent } from './crypto-asset/crypto-details/crypto-details.component';
 import { CryptoResumeComponent } from './crypto-resume/crypto-resume.component';
+import { OperationExchangeComponent } from './operation-exchange/operation-exchange.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path: 'resume',
         component: CryptoResumeComponent,
+      },
+      {
+        path: 'operation/:operationType/:wallet/:fiat',
+        component: OperationExchangeComponent,
       },
     ],
   },
