@@ -1,4 +1,4 @@
-<div id="wrapper" class="wrapper">
+<div id="{{ wrapperID }}" class="wrapper">
   <div
     class="{{ isOperation ? 'select-btn-op text-end' : 'select-btn' }}"
     (click)="openCloseSelect()"
@@ -15,13 +15,16 @@
       ><img
         src="{{ assetSelected?.icon }}"
         alt="avatar"
-        class="imaged d-inline w30 rounded me-1"
+        class="imaged d-inline w30s rounded me-1"
       />
       {{ assetSelected?.symbol }}</span
     >
     <ion-icon name="chevron-down-outline"></ion-icon>
   </div>
-  <div class="content">
+  <div
+    class="content"
+    attr.style="{{ isOperation ? 'position: absolute;' : '' }}"
+  >
     <div class="search">
       <ion-icon name="search-outline"></ion-icon>
       <input
@@ -48,3 +51,48 @@
     </ul>
   </div>
 </div>
+<!--<div *ngIf="!isAssetSelected" class="row">
+                  <div class="col-md-5">
+                    <div class="form-group basic">
+                      <div class="input-wrapper">
+                        <input
+                          name="name"
+                          class="form-control"
+                          rows="5"
+                          [(ngModel)]="search"
+                          #name="ngModel"
+                          type="text"
+                          class="form-control"
+                          id="text11"
+                          (keyup)="onKeySearch($event)"
+                          placeholder="🔍 {{
+                            'crypto.cryptoModal.addAsset.searchAsset'
+                              | translate
+                          }}"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-7">
+                    <div class="select" tabindex="1">
+                      <div *ngFor="let asset of filterCryptoPrices">
+                        <input
+                          class="selectopt"
+                          name="test"
+                          type="radio"
+                          required
+                          id="{{ asset.identifier }}"
+                          checked
+                          (click)="selectAssetInput(asset.name!)"
+                        />
+                        <label for="{{ asset.identifier }}" class="option"
+                          ><img
+                            src="{{ asset.icon }}"
+                            alt="avatar"
+                            class="imaged d-inline w30 rounded me-1"
+                          />
+                          {{ asset.name }} - {{ asset.symbol }}</label
+                        >
+                      </div>
+                    </div>
+                  </div>-->

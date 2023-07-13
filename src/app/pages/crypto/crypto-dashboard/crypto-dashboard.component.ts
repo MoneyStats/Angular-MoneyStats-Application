@@ -1,12 +1,10 @@
 import {
-  ChangeDetectorRef,
   Component,
   ElementRef,
   OnInit,
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { Router } from '@angular/router';
 import {
   Asset,
   CryptoDashboard,
@@ -14,7 +12,6 @@ import {
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
-import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { LoggerService } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { environment } from 'src/environments/environment';

@@ -1,4 +1,5 @@
-.w30 {
+.w30,
+.w30s {
   width: 30px;
   height: 30px;
 }
@@ -35,9 +36,12 @@ li {
     margin-left: 0 !important;
     padding: 0 !important;
   }
-  .w30 {
-    width: 15px;
-    height: 15px;
+  .w30s {
+    width: 20px;
+    height: 20px;
+  }
+  .wrapper.active .content {
+    left: 0px;
   }
 }
 .select-btn-op {

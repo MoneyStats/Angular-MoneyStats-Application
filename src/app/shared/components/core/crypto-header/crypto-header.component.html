@@ -12,6 +12,12 @@
   >
     {{ title }}
   </div>
+  <div *ngIf="isInfoActive && !isMenuActive" class="right">
+    <a (click)="goToInfo()" class="headerButton goBack clickable">
+      <!--<ion-icon name="chevron-back-outline"></ion-icon>-->
+      <ion-icon name="alert-circle-outline"></ion-icon>
+    </a>
+  </div>
   <div *ngIf="isMenuActive" class="right">
     <div class="menu hidden_mobile">
       <a routerLink="/wallet" class="d-inline me-2 title-page">{{

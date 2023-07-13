@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Asset } from 'src/assets/core/data/class/crypto.class';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { Operations } from 'src/assets/core/data/constant/constant';
@@ -21,13 +22,23 @@ export class AddCryptoOperationComponent implements OnInit {
 
   // Boolean for buttons
   isOperationSel: boolean = false;
-  isWalletSelected: boolean = false;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
   isWalletPresent() {
     return this.walletSelect != undefined;
+  }
+
+  selectWallet() {
+    this.router.navigate([
+      'crypto/operation/' +
+        this.operationSelect +
+        '/' +
+        this.walletSelect +
+        '/' +
+        this.fiat,
+    ]);
   }
 }

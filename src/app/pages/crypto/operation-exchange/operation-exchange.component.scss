@@ -1,0 +1,27 @@
+@media screen and (max-width: 780px) {
+  .title {
+    font-size: larger;
+  }
+  .margin {
+    margin-top: 10px !important;
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+  }
+  .walletLogo {
+    vertical-align: -60px !important;
+  }
+}
+
+.margin {
+  margin: 20px;
+}
+
+.walletLogo {
+  border-radius: 50%;
+  vertical-align: -65px;
+  width: 80px;
+}
+
+.border {
+  border-color: #372648 !important;
+}

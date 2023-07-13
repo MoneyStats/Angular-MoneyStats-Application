@@ -11,8 +11,10 @@ declare var jQuery: any;
   styleUrls: ['./asset-select.component.scss'],
 })
 export class AssetSelectComponent implements OnInit {
+  @Input('wrapperID') wrapperID: string = '';
   @Input('fiat') cryptoCurrency: string = '';
-  @Input('isOperation') isOperation: boolean = true;
+  @Input('isOperation') isOperation: boolean = false;
+
   @Output('emitSelectAsset') emitSelectAsset = new EventEmitter<Asset>();
 
   filterCryptoPrices: Asset[] = [];
@@ -66,7 +68,8 @@ export class AssetSelectComponent implements OnInit {
   }
 
   openCloseSelect() {
-    let select = document.getElementById('wrapper');
+    let select = document.getElementById(this.wrapperID);
+    console.log('CLICK', select, this.wrapperID);
     if (select?.classList.contains('active')) {
       select.classList.remove('active');
     } else select?.classList.add('active');
