@@ -13,22 +13,36 @@
           <div class="iconbox text-warning">
             <ion-icon name="alert-circle"></ion-icon>
           </div>
-          <div class="text-center">
+          <div *ngIf="isOperation" class="text-center">
             <h3>
-              {{ "crypto.cryptoModal.operations.operation.title" | translate }}
+              {{ "crypto.cryptoModal.info.operation.title" | translate }}
             </h3>
             <p>
-              {{
-                "crypto.cryptoModal.operations.operation.details" | translate
-              }}
+              {{ "crypto.cryptoModal.info.operation.details" | translate }}
             </p>
           </div>
+          <div *ngIf="isNewInvestment" class="text-center">
+            <h3>
+              {{ "crypto.cryptoModal.info.newInvestment.title" | translate }}
+            </h3>
+            <p
+              [innerHTML]="
+                'crypto.cryptoModal.info.newInvestment.details' | translate
+              "
+            ></p>
+          </div>
           <a
-            href="#"
+            *ngIf="isOperation"
             class="btn btn-primary btn-lg btn-block"
             data-bs-toggle="modal"
             attr.data-bs-target="#{{ modalConstant.ADDOPERATIONS }}"
-            >Close</a
+            >{{ "crypto.cryptoModal.info.close" | translate }}</a
+          >
+          <a
+            *ngIf="!isOperation"
+            class="btn btn-primary btn-lg btn-block"
+            data-bs-toggle="modal"
+            >{{ "crypto.cryptoModal.info.close" | translate }}</a
           >
         </div>
       </div>

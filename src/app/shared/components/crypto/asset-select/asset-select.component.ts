@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Asset } from 'src/assets/core/data/class/crypto.class';
-import { Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
+import { LoggerService } from 'src/assets/core/utils/log.service';
 
 declare var jQuery: any;
 
@@ -18,14 +19,17 @@ export class AssetSelectComponent implements OnInit {
   @Output('emitSelectAsset') emitSelectAsset = new EventEmitter<Asset>();
 
   filterCryptoPrices: Asset[] = [];
-  cryptoPrices: Asset[] = [];
+  @Input('cryptoPrices') cryptoPrices: Asset[] = [];
 
   search: string = '';
   // Change the value of the asset
   assetSelected?: Asset;
   isFilterActive: boolean = false;
 
-  constructor(private cryptoService: CryptoService) {}
+  constructor(
+    private cryptoService: CryptoService,
+    private logger: LoggerService
+  ) {}
 
   ngOnInit(): void {
     this.getCryptoPrices();
@@ -49,27 +53,32 @@ export class AssetSelectComponent implements OnInit {
 
   filterCryptoPrice(filter: string) {
     this.filterCryptoPrices = this.cryptoPrices.filter(
-      (cp) => cp.name?.includes(filter) || cp.symbol?.includes(filter)
+      (cp) =>
+        cp.name?.toLocaleLowerCase().includes(filter.toLocaleLowerCase()) ||
+        cp.symbol?.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
     );
   }
 
   getCryptoPrices() {
-    this.cryptoService.getCryptoPrice(this.cryptoCurrency).subscribe((data) => {
-      this.cryptoPrices = data.data;
-      this.filterCryptoPrices = data.data;
-      this.assetSelected = data.data[0];
+    if (this.cryptoPrices && this.cryptoPrices.length > 0) {
+      this.filterCryptoPrices = this.cryptoPrices.slice();
+      this.assetSelected = deepCopy(this.cryptoPrices[0]);
       this.emitSelectAsset.emit(this.assetSelected);
-    });
-  }
-
-  isFilterAc() {
-    console.log('hU');
-    this.isFilterActive = true;
+    } else {
+      this.cryptoService
+        .getCryptoPrice(this.cryptoCurrency)
+        .subscribe((data) => {
+          this.logger.LOG(data.message!, 'AssetSelectComponent');
+          this.cryptoPrices = data.data;
+          this.filterCryptoPrices = data.data;
+          this.assetSelected = data.data[0];
+          this.emitSelectAsset.emit(this.assetSelected);
+        });
+    }
   }
 
   openCloseSelect() {
     let select = document.getElementById(this.wrapperID);
-    console.log('CLICK', select, this.wrapperID);
     if (select?.classList.contains('active')) {
       select.classList.remove('active');
     } else select?.classList.add('active');

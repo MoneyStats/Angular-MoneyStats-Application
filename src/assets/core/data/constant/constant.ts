@@ -22,6 +22,11 @@ export enum ModalConstant {
   INFO = 'infoModal',
 }
 
+export enum SelectAssetConstant {
+  ADDASSET = 'addAssetModalWrapper',
+  NEWINVESTMENT = 'newCryptoInvestment',
+}
+
 export enum StorageConstant {
   GITHUBACCOUNT = 'github_account',
   ACCESSTOKEN = 'accessToken',

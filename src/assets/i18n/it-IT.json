@@ -649,7 +649,27 @@
           "resumeSubTitle": "Sommario stats, Salva per confermare l'operazione",
           "next": "Prossimo Asset",
           "save": "Salva Stats"
+        },
+        "operation": {
+          "title": "Aggiungi Operazione",
+          "subTitle": "Aggiungi una nuova operazione, investi moneta FIAT, apri una nuova Posizione Holding o Trading.",
+          "selectOperation": "Seleziona Operazione",
+          "selectDescription": "Selezione l'operazione che desideri effettuare.",
+          "selectType": "Conferma",
+          "selectWallet": "Seleziona Portafoglio",
+          "selectWalletDesc": "Seleziona il portafoglio dove effettuare l'investimento."
         }
+      },
+      "info": {
+        "operation": {
+          "title": "Aggiungi Operazione",
+          "details": "Aggiungere un'operazione significa che puoi investire della moneta FIAT in Crypto selezionando l'opzione New investment, per aprire un'operazione Holding, che consiste nel trasferimento da Stable Coin a Crypto o Viceversa ed infine l'opzione Trading, che ti permette di aprire e chiudere un'operazione tra Stable Coin e Crypto con le relative statistiche."
+        },
+        "newInvestment": {
+          "title": "Nuovo Investimento",
+          "details": "In questa sezione puoi aggiungere un nuovo investimento, dal tuo portafoglio personale (Non è necessario specificare il portafoglio personale) nel tuo <strong>Crypto Wallet</strong>, verrà registrata una nuova operazione ed aggiornato o aggiunto l'asset corrente."
+        },
+        "close": "Chiudi"
       }
     }
   },

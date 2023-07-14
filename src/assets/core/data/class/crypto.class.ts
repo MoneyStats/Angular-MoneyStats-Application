@@ -30,8 +30,8 @@ export class Asset extends GenericModel {
   newValue?: number;
   current_price?: number;
   icon?: string;
-  balance?: number;
-  invested?: number;
+  balance: number = 0;
+  invested: number = 0;
   lastUpdate: Date = new Date();
   // Performance and trend sono dell'ultimo Stats
   performance?: number;

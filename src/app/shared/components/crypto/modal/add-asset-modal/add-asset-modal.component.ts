@@ -1,9 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Asset } from 'src/assets/core/data/class/crypto.class';
 import { Category, Wallet } from 'src/assets/core/data/class/dashboard.class';
-import { ModalConstant } from 'src/assets/core/data/constant/constant';
+import {
+  ModalConstant,
+  SelectAssetConstant,
+} from 'src/assets/core/data/constant/constant';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
+import { LoggerService } from 'src/assets/core/utils/log.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -24,6 +28,8 @@ export class AddAssetModalComponent implements OnInit {
   balance?: number;
   invested?: number;
 
+  marketData: Asset[] = [];
+
   @Input('wallets') wallets: Wallet[] = [];
   wallet?: Wallet;
   modelWallet: string = '';
@@ -39,14 +45,20 @@ export class AddAssetModalComponent implements OnInit {
 
   constructor(
     public dashboardService: DashboardService,
-    public cryptoService: CryptoService
+    public cryptoService: CryptoService,
+    private logger: LoggerService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
   }
 
+  public get assetConstant(): typeof SelectAssetConstant {
+    return SelectAssetConstant;
+  }
+
   ngOnInit(): void {
+    this.getCryptoPrices();
     this.categories = this.dashboardService.dashboard.categories;
     if (this.wallets == undefined && this.dashboardService.dashboard.wallets) {
       this.wallets = this.dashboardService.dashboard.wallets.filter(
@@ -57,6 +69,13 @@ export class AddAssetModalComponent implements OnInit {
         this.modelWallet = this.wallets[0].name;
       }
     } else this.wallets;
+  }
+
+  getCryptoPrices() {
+    this.cryptoService.getCryptoPrice(this.cryptoCurrency).subscribe((data) => {
+      this.logger.LOG(data.message!, 'AddAssetModalComponent');
+      this.marketData = data.data;
+    });
   }
 
   selectWallet() {
@@ -88,8 +107,8 @@ export class AddAssetModalComponent implements OnInit {
         this.wallet!.assets = [];
       }
       this.asset!.id = undefined;
-      this.asset!.balance = this.balance;
-      this.asset!.invested = this.invested;
+      this.asset!.balance = this.balance!;
+      this.asset!.invested = this.invested!;
       this.asset!.performance = 0;
       this.asset!.trend = 0;
       this.asset!.lastUpdate = new Date();
