@@ -514,7 +514,8 @@
     },
     "footer": {
       "tab1": "Operazioni",
-      "tab2": "Storico Crypto"
+      "tab2": "Storico Crypto",
+      "tab3": "Portafogli"
     },
     "requirements": {
       "headerTitle": "Verifica Crypto",
