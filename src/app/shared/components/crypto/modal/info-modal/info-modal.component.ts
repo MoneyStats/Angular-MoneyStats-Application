@@ -8,6 +8,8 @@ import { ModalConstant } from 'src/assets/core/data/constant/constant';
 })
 export class InfoModalComponent implements OnInit {
   @Input('modalId') modalId: string = '';
+  @Input('isOperation') isOperation: boolean = false;
+  @Input('isNewInvestment') isNewInvestment: boolean = false;
 
   constructor() {}
 

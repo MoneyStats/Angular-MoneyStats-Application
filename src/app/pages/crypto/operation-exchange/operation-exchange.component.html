@@ -26,7 +26,7 @@
           <div class="col-10 col-md-10 col-xl-11">
             <h2 class="title">{{ wallet.name }}</h2>
             <small
-              ><p>Balance: {{ wallet.balance }}</p></small
+              ><p>Balance: {{ wallet.balance }} {{ fiat }}</p></small
             >
           </div>
         </div>
@@ -47,6 +47,9 @@
               <div class="form-group basic p-0">
                 <div class="exchange-heading">
                   <label class="group-label" for="fromAmount">From</label>
+                  <div class="exchange-wallet-info">
+                    Commition Rate : <strong> Included</strong>
+                  </div>
                 </div>
                 <div class="exchange-group">
                   <div class="input-col">
@@ -55,7 +58,13 @@
                       class="form-control form-control-lg pe-0 border-0"
                       id="fromAmount"
                       placeholder="0"
-                      value="100"
+                      id="investedMoney"
+                      name="investedMoney"
+                      #investedMoney1="ngModel"
+                      required
+                      (keyup)="makeNewBalance()"
+                      [(ngModel)]="investedMoney"
+                      value="{{ investedMoney }}"
                       maxlength="10"
                     />
                   </div>
@@ -87,7 +96,11 @@
                 <div class="exchange-heading">
                   <label class="group-label" for="toAmount">To</label>
                   <div class="exchange-wallet-info">
-                    Balance : <strong> 0,504 BTC</strong>
+                    Balance :
+                    <strong>
+                      {{ assetInWallet.balance ? assetInWallet.balance : 0 }}
+                      {{ assetInWallet.symbol }}</strong
+                    >
                   </div>
                 </div>
                 <div class="row">
@@ -99,7 +112,12 @@
                           class="form-control form-control-lg pe-0 border-0"
                           id="toAmount"
                           placeholder="0"
-                          value="0,014"
+                          id="assetNewBalance"
+                          name="assetNewBalance"
+                          #assetNewBalance1="ngModel"
+                          required
+                          [(ngModel)]="assetNewBalance"
+                          value="{{ assetNewBalance }}"
                           maxlength="10"
                         />
                       </div>
@@ -107,27 +125,13 @@
                   </div>
                   <div class="col-md-4 col-5" style="max-height: 55px">
                     <app-asset-select
-                      [wrapperID]="'addCryptoOperation'"
+                      [wrapperID]="assetConstant.NEWINVESTMENT"
                       [fiat]="fiat!"
                       [isOperation]="true"
+                      [cryptoPrices]="marketData"
+                      (emitSelectAsset)="emitSelectAsset($event)"
                     ></app-asset-select>
                   </div>
-
-                  <!--<div class="select-col">
-                <select
-                  data-show-subtext="true"
-                  class="selectpicker form-select form-select-lg currency"
-                  data-live-search="true"
-                >
-                  <option value=""><input type="text" /></option>
-                  <option data-tokens="USD" value="USD">USD</option>
-                  <option data-tokens="BTC" value="BTC" selected>
-                    BTC
-                  </option>
-                  <option data-tokens="ETH" value="ETH">ETH</option>
-                  <option data-tokens="ADA" value="ADA">ADA</option>
-                </select>
-              </div>-->
                 </div>
               </div>
             </div>
@@ -136,8 +140,18 @@
 
         <div class="section mt-2">
           <div class="row fontsize-caption">
-            <div class="col"><b>1 BTC</b> = 39.019,09 USD</div>
-            <div class="col text-end">Commission rate : <b>2%</b></div>
+            <div class="col">
+              <b>{{ marketDataSelected.symbol }}</b> =
+              {{ marketDataSelected.current_price }} {{ fiat }}
+            </div>
+            <div class="col text-end">
+              Last Update :
+              <b>{{
+                assetInWallet.lastUpdate
+                  ? (assetInWallet.lastUpdate | date : "d MMM y")
+                  : "NEVER"
+              }}</b>
+            </div>
           </div>
         </div>
       </section>
@@ -148,12 +162,16 @@
           [disabled]="f.invalid"
           type="button"
           class="btn btn-primary btn-block btn-lg"
+          (click)="exchangeNewInvestment()"
         >
-          {{ "crypto.cryptoModal.operations.stats.next" | translate }}
+          Exchange
         </button>
       </div>
       <!-- End Bottoni Mobile -->
     </form>
   </div>
 </div>
-<app-info-modal [modalId]="modalConstant.INFO"></app-info-modal>
+<app-info-modal
+  [isNewInvestment]="true"
+  [modalId]="modalConstant.INFO"
+></app-info-modal>

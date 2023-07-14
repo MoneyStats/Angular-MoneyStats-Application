@@ -4,7 +4,10 @@
     <form #f="ngForm" type="submit">
       <div class="form-group boxed">
         <div class="input-wrapper">
-          <label class="label" for="select4b">Select Operation</label>
+          <label class="label" for="select4b">{{
+            "crypto.cryptoModal.operations.operation.selectOperation"
+              | translate
+          }}</label>
           <select
             class="form-control custom-select"
             id="operationSelect"
@@ -14,17 +17,27 @@
             #operationSelect1="ngModel"
             required
           >
-            <option selected disabled>Select Operation</option>
+            <option selected disabled>
+              {{
+                "crypto.cryptoModal.operations.operation.selectOperation"
+                  | translate
+              }}
+            </option>
             <option
               *ngFor="let operation of operations"
               value="{{ operation }}"
+              [selected]="operation"
+              [disabled]="operation != 'New Investment'"
             >
               {{ operation }}
             </option>
           </select>
         </div>
         <div class="input-info">
-          Select the type of operation you want to do
+          {{
+            "crypto.cryptoModal.operations.operation.selectDescription"
+              | translate
+          }}
         </div>
       </div>
       <!-- Bottoni Desktop -->
@@ -36,7 +49,9 @@
             (click)="isOperationSel = true"
             class="btn btn-primary me-1 mb-1"
           >
-            Select Type
+            {{
+              "crypto.cryptoModal.operations.operation.selectType" | translate
+            }}
           </button>
         </div>
       </div>
@@ -50,7 +65,9 @@
               type="button"
               class="btn btn-primary btn-block btn-lg"
             >
-              Select Type
+              {{
+                "crypto.cryptoModal.operations.operation.selectType" | translate
+              }}
             </button>
           </div>
         </div>
@@ -60,7 +77,9 @@
     <form #g="ngForm" type="submit">
       <div *ngIf="isOperationSel" class="form-group boxed">
         <div class="input-wrapper">
-          <label class="label" for="select4b">Select Wallet</label>
+          <label class="label" for="select4b">{{
+            "crypto.cryptoModal.operations.operation.selectWallet" | translate
+          }}</label>
           <select
             class="form-control custom-select"
             id="operationSelect"
@@ -70,9 +89,14 @@
             required
           >
             <!--<option value="{{ wallets[0] }}">Select Wallet</option>-->
-            <option selected disabled>Select Wallet</option>
+            <option selected disabled>
+              {{
+                "crypto.cryptoModal.operations.operation.selectWallet"
+                  | translate
+              }}
+            </option>
             <option
-              selected="{{ wallet }}"
+              selected="{{ wallet.name }}"
               *ngFor="let wallet of wallets"
               value="{{ wallet.name }}"
             >
@@ -80,7 +104,12 @@
             </option>
           </select>
         </div>
-        <div class="input-info">Select the wallet to make the investment</div>
+        <div class="input-info">
+          {{
+            "crypto.cryptoModal.operations.operation.selectWalletDesc"
+              | translate
+          }}
+        </div>
       </div>
       <!-- Bottoni Desktop -->
       <div class="text-end hidden_mobile">
@@ -92,7 +121,9 @@
             class="btn btn-primary me-1 mb-1"
             data-bs-toggle="modal"
           >
-            Select Wallet
+            {{
+              "crypto.cryptoModal.operations.operation.selectWallet" | translate
+            }}
           </button>
         </div>
       </div>
@@ -107,7 +138,10 @@
               class="btn btn-primary btn-block btn-lg"
               data-bs-toggle="modal"
             >
-              Select Wallet
+              {{
+                "crypto.cryptoModal.operations.operation.selectWallet"
+                  | translate
+              }}
             </button>
           </div>
         </div>

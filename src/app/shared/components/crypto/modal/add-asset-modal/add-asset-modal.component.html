@@ -123,9 +123,10 @@
                 </div>
                 <div *ngIf="!isAssetSelected" class="col-md-8 col-12 float-end">
                   <app-asset-select
-                    [wrapperID]="'addAssetModalWrapper'"
+                    [wrapperID]="assetConstant.ADDASSET"
                     [fiat]="cryptoCurrency"
                     [isOperation]="false"
+                    [cryptoPrices]="marketData"
                     (emitSelectAsset)="emitSelectAsset($event)"
                   ></app-asset-select>
 

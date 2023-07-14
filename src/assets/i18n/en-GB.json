@@ -653,8 +653,23 @@
         "operation": {
           "title": "Add Operation",
           "subTitle": "Add a new operation, invest some FIAT money, open a new Holding position or open a new Trading position.",
-          "details": "Add a new operation, means that you can invest some FIAT money to Crypto by selecting New Investment, open a new Holding position by moving Crypto or Stablecoin or open a new Trading position, that means you can open and close position on those Crypto."
+          "selectOperation": "Select Operation",
+          "selectDescription": "Select the type of operation you want to do",
+          "selectType": "Select Type",
+          "selectWallet": "Select Wallet",
+          "selectWalletDesc": "Select the wallet to make the investment"
         }
+      },
+      "info": {
+        "operation": {
+          "title": "Add Operation",
+          "details": "Add a new operation, means that you can invest some FIAT money to Crypto by selecting New Investment, open a new Holding position by moving Crypto or Stablecoin or open a new Trading position, that means you can open and close position on those Crypto."
+        },
+        "newInvestment": {
+          "title": "New Investment",
+          "details": "In this section you can add a new investment, from your Personal Wallet into the selected <strong>Crypto Wallet</strong>, it will add a new operation and update or add the current Asset."
+        },
+        "close": "Close"
       }
     }
   },
