@@ -22,16 +22,19 @@
       </div>
     </div>
   </a>
+  <a routerLink="/wallet" class="item">
+    <div class="col">
+      <ion-icon name="wallet"></ion-icon>
+      <strong>{{ "crypto.footer.tab3" | translate }}</strong>
+    </div>
+  </a>
   <a
+    hidden
     data-bs-toggle="modal"
     attr.data-bs-target="#{{ modalConstant.ADDOPERATIONS }}"
     class="item"
   >
     <div class="col">
-      <ion-icon name="wallet"></ion-icon>
-      <strong>{{ "crypto.footer.tab3" | translate }}</strong>
-    </div>
-    <div hidden class="col">
       <ion-icon name="swap-horizontal"></ion-icon>
       <strong>{{ "crypto.footer.tab1" | translate }}</strong>
     </div>
