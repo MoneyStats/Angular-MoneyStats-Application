@@ -124,20 +124,12 @@ $color1: #a5a7bb;
 $color2: #a496a4;
 $color3: #554d73;
 
-body {
-  background-color: #eee;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .loader {
   width: 200px;
   height: 200px;
 }
 svg {
-  width: 90%;
+  width: 100%;
   fill: none;
 }
 
