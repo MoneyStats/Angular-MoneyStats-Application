@@ -39,3 +39,20 @@ export class Asset extends GenericModel {
   history?: Stats[] = [];
   operations: Array<any> = [];
 }
+
+export class Operation extends GenericModel {
+  type?: string; // Holding, Trading, New Investment
+  status?: string; // Open Closed
+  entryDate?: Date;
+  entryCoin?: string;
+  entryPrice?: number; // Prezzo d'acquisto
+  entryPriceValue?: number; // Conversione in FIAT di quanto si sta investendo
+  entryQuantity?: number; // Quantità di value investita
+  exitDate?: Date; // Data di uscita
+  exitCoin?: string;
+  exitPrice?: number;
+  exitPriceValue?: number; // Conversione in FIAT di quanto si è guadagnato o perso
+  exitQuantity?: number; // Quantità di value investita
+  performance?: number;
+  trend?: number;
+}

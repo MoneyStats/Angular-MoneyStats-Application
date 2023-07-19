@@ -8,7 +8,7 @@ import {
   SelectAssetConstant,
 } from 'src/assets/core/data/constant/constant';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
-import { Asset } from 'src/assets/core/data/class/crypto.class';
+import { Asset, Operation } from 'src/assets/core/data/class/crypto.class';
 import { LoggerService } from 'src/assets/core/utils/log.service';
 import { AssetSelectComponent } from 'src/app/shared/components/crypto/asset-select/asset-select.component';
 import { SwalService } from 'src/assets/core/utils/swal.service';
@@ -100,6 +100,23 @@ export class OperationExchangeComponent implements OnInit {
     Number.isNaN(assetToSave.balance) || assetToSave.balance == undefined
       ? (assetToSave.balance = this.assetNewBalance)
       : (assetToSave.balance += this.assetNewBalance);
+
+    let operation: Operation = new Operation();
+    operation.type = this.operationType;
+    operation.status = 'CLOSED';
+    operation.entryDate = new Date();
+    operation.entryCoin = this.fiat;
+    operation.entryPrice = assetToSave.current_price;
+    operation.entryPriceValue = this.investedMoney;
+    operation.entryQuantity = this.assetNewBalance;
+    operation.exitDate = new Date();
+    operation.exitCoin = assetToSave.symbol;
+    operation.exitPrice = assetToSave.current_price;
+    operation.exitPriceValue = this.investedMoney;
+    operation.exitQuantity = this.assetNewBalance;
+
+    assetToSave.operations = [operation];
+
     let walletToSave = deepCopy(this.wallet);
     walletToSave.assets = [assetToSave];
     this.cryptoService

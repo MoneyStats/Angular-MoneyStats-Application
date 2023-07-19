@@ -420,4 +420,78 @@
       </div>
     </div>
   </div>
+  <div
+    class="col-md-12"
+    *ngIf="asset.operations && asset.operations.length > 0"
+  >
+    <!-- History -->
+    <div class="section mt-4">
+      <div class="section-heading">
+        <h2 class="title">Operations</h2>
+        <a hidden href="#" class="link">View All</a>
+      </div>
+      <div class="card">
+        <ul
+          class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1"
+        >
+          <!-- item -->
+          <li *ngFor="let wallet of walletsAsset">
+            <a
+              *ngFor="let operation of wallet.assets[0].operations"
+              href="#"
+              class="item"
+            >
+              <div class="icon-box-c me-2">
+                <img class="rounded-pill" src="{{ wallet.img }}" alt="" />
+              </div>
+              <div class="in">
+                <div>
+                  <strong>{{ wallet.name }}</strong>
+                  <div class="text-small text-secondary">
+                    {{ wallet.assets[0].name }} Price
+                    {{ operation.exitPrice }}
+                    {{ cryptoDashboard.currency }}
+                  </div>
+                  <div class="text-small text-secondary">
+                    <strong>{{ operation.type }}</strong> #{{ operation.id }}
+                  </div>
+                </div>
+                <div class="text-end">
+                  <strong
+                    >{{ operation.exitQuantity }}
+                    {{ wallet.assets[0].symbol }}</strong
+                  >
+                  <div class="text-small">
+                    <span
+                      class="badge {{
+                        operation.status == 'CLOSED'
+                          ? 'badge-danger'
+                          : 'badge-success'
+                      }} "
+                      >{{ operation.status }}</span
+                    >
+                  </div>
+
+                  <div class="text-small">
+                    Invested
+                    <strong
+                      >{{ operation.entryPriceValue }}
+                      {{ cryptoDashboard.currency }}</strong
+                    >
+                    on
+                    {{ operation.exitDate | date : "d MMM yy" }}
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+          <!-- * item -->
+        </ul>
+        <div hidden class="card-body pt-0">
+          <a href="#" class="btn btn-block btn-outline-secondary">Load more</a>
+        </div>
+      </div>
+    </div>
+    <!-- History -->
+  </div>
 </div>
