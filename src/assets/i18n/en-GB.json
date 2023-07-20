@@ -584,7 +584,12 @@
           "invested": "Money Invested",
           "performance": "Performance since beginning",
           "trend": "Trend since beginning",
-          "wallets": "Wallet with "
+          "wallets": "Wallet with ",
+          "operations": "Operations",
+          "view": "View All",
+          "price": "Price",
+          "invest": "Invested",
+          "on": "on"
         }
       }
     },

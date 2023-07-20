@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import {
   Asset,
   CryptoDashboard,
+  Operation,
 } from 'src/assets/core/data/class/crypto.class';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
@@ -186,5 +187,24 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
       }
     });
     return wallAsset;
+  }
+
+  getOperations() {
+    let wallets = deepCopy(this.walletsAsset);
+    let operations: any[] = [];
+    wallets.forEach((wallet) => {
+      if (
+        wallet.assets &&
+        wallet.assets.length > 0 &&
+        wallet.assets[0].operations &&
+        wallet.assets[0].operations.length > 0
+      )
+        wallet.assets[0].operations.forEach((operation) => {
+          operation.wallet = wallet;
+          operations.push(operation);
+        });
+    });
+    operations.sort((a, b) => (a.exitDate! < b.exitDate! ? 1 : -1));
+    return operations;
   }
 }

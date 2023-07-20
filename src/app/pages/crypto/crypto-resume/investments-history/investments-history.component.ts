@@ -28,14 +28,18 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
   balances: Array<number> = [];
   tableBalance: Array<any> = [];
   // END History Tab
+  isOperationPresent: boolean = false;
+  operations: any[] = [];
 
   constructor(private cryptoService: CryptoService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.getResume();
+    this.getOperations();
   }
 
   ngOnInit(): void {
+    this.getOperations();
     //this.getResume();
   }
 
@@ -88,4 +92,21 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
   /**
    * END History Tab Section
    */
+  getOperations() {
+    this.operations = [];
+    let wallets = deepCopy(this.cryptoService.cryptoDashboard.wallets);
+    wallets.forEach((wallet) => {
+      if (wallet.assets && wallet.assets.length > 0)
+        wallet.assets.forEach((asset) => {
+          if (asset.operations && asset.operations.length > 0)
+            asset.operations.forEach((operation) => {
+              operation.asset = asset;
+              operation.wallet = wallet;
+              this.operations.push(operation);
+            });
+        });
+    });
+    this.operations.sort((a, b) => (a.exitDate! < b.exitDate! ? 1 : -1));
+    if (this.operations.length > 0) this.isOperationPresent = true;
+  }
 }

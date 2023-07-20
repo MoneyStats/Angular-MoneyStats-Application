@@ -76,6 +76,9 @@ export class OperationExchangeComponent implements OnInit {
 
   emitSelectAsset(asset: Asset) {
     asset.id = undefined;
+    asset.lastUpdate = new Date();
+    asset.performance = 0;
+    asset.trend = 0;
     this.marketDataSelected = asset;
     let assets = deepCopy(this.wallet.assets);
     if (assets.find((a) => a.identifier == asset.identifier)!)

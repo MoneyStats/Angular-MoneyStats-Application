@@ -427,28 +427,33 @@
     <!-- History -->
     <div class="section mt-4">
       <div class="section-heading">
-        <h2 class="title">Operations</h2>
-        <a hidden href="#" class="link">View All</a>
+        <h2 class="title">
+          {{ "crypto.asset.details.overview.operations" | translate }}
+        </h2>
+        <a hidden href="#" class="link">{{
+          "crypto.asset.details.overview.view" | translate
+        }}</a>
       </div>
-      <div class="card">
+      <div class="card border_round">
         <ul
-          class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1"
+          class="listview flush transparent no-line image-listview detailed-list border_round"
         >
           <!-- item -->
-          <li *ngFor="let wallet of walletsAsset">
-            <a
-              *ngFor="let operation of wallet.assets[0].operations"
-              href="#"
-              class="item"
-            >
+          <li *ngFor="let operation of getOperations()">
+            <a class="item">
               <div class="icon-box-c me-2">
-                <img class="rounded-pill" src="{{ wallet.img }}" alt="" />
+                <img
+                  class="rounded-pill"
+                  src="{{ operation.wallet.img }}"
+                  alt=""
+                />
               </div>
               <div class="in">
                 <div>
-                  <strong>{{ wallet.name }}</strong>
+                  <strong>{{ operation.wallet.name }}</strong>
                   <div class="text-small text-secondary">
-                    {{ wallet.assets[0].name }} Price
+                    {{ operation.wallet.assets[0].name }}
+                    {{ "crypto.asset.details.overview.price" | translate }}
                     {{ operation.exitPrice }}
                     {{ cryptoDashboard.currency }}
                   </div>
@@ -459,7 +464,7 @@
                 <div class="text-end">
                   <strong
                     >{{ operation.exitQuantity }}
-                    {{ wallet.assets[0].symbol }}</strong
+                    {{ operation.wallet.assets[0].symbol }}</strong
                   >
                   <div class="text-small">
                     <span
@@ -473,12 +478,12 @@
                   </div>
 
                   <div class="text-small">
-                    Invested
+                    {{ "crypto.asset.details.overview.invest" | translate }}
                     <strong
                       >{{ operation.entryPriceValue }}
                       {{ cryptoDashboard.currency }}</strong
                     >
-                    on
+                    {{ "crypto.asset.details.overview.on" | translate }}
                     {{ operation.exitDate | date : "d MMM yy" }}
                   </div>
                 </div>
