@@ -584,7 +584,12 @@
           "invested": "Saldo Investito",
           "performance": "Performance dall'inizio",
           "trend": "Trend dall'inizio",
-          "wallets": "Wallet possedenti "
+          "wallets": "Wallet possedenti ",
+          "operations": "Operazioni",
+          "view": "Vedi",
+          "price": "Prezzo",
+          "invest": "Investito",
+          "on": "il"
         }
       }
     },
