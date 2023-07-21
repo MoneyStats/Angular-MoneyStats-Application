@@ -57,13 +57,14 @@ export class AddStatsComponent implements OnInit {
       });
     }
     let statsWalletDays = this.dashboardService.dashboard.statsWalletDays;
-    if (statsWalletDays.find((d) => d === this.dateStats)) {
+    if (statsWalletDays && statsWalletDays.find((d) => d === this.dateStats)) {
       this.dateValidation = true;
       validate = true;
     }
     // Previene inserimento di un anno non in dashboard wallet
     // TODO: Implementare call a DB
     if (
+      statsWalletDays &&
       statsWalletDays.length &&
       parseInt(statsWalletDays[0].split('-')[0]) >
         parseInt(this.dateStats.split('-')[0])

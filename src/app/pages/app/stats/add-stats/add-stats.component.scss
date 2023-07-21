@@ -1,3 +1,4 @@
+$darkColor: #121212;
 .section {
   margin-top: 30px !important;
   max-width: 1800px;
@@ -11,7 +12,7 @@
   .box-shadow {
     //margin-top: -20px !important;
     //z-index: -1;
-    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 100%) !important;
+    box-shadow: inset 0 0 0 1000px $darkColor !important;
   }
   .editWallet {
     display: none;

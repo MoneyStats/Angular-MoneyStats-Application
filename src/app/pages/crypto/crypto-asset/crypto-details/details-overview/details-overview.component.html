@@ -282,11 +282,51 @@
                     {{ "crypto.asset.details.overview.invested" | translate }}
                   </div>
                   <strong
+                    class="clickable"
+                    *ngIf="!isEditInvestmentActive"
+                    (click)="isEditInvestmentActive = true"
                     ><p>
                       {{ wallet.assets[0].invested }}
                       {{ cryptoDashboard.currency }}
-                    </p></strong
+                      <ion-icon
+                        style="vertical-align: -1px"
+                        name="create-outline"
+                      ></ion-icon>
+                    </p>
+                  </strong>
+                  <form
+                    *ngIf="isEditInvestmentActive"
+                    #f="ngForm"
+                    type="submit"
                   >
+                    <div class="form-group boxed row">
+                      <div class="input-wrapper col-md-10 col-12 text-end">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="investment"
+                          name="investment"
+                          required
+                          [(ngModel)]="wallet.assets[0].invested"
+                          #investment1="ngModel"
+                          placeholder="Insert new value"
+                        />
+                        <i class="clear-input">
+                          <ion-icon name="close-circle"></ion-icon>
+                        </i>
+                      </div>
+                      <div class="col-md-2 col-12 text-start">
+                        <button
+                          [disabled]="f.invalid"
+                          (click)="updateInvestment(wallet)"
+                          type="button"
+                          class="btn btn-outline-primary rounded shadowed me-1 mb-1"
+                        >
+                          Save
+                        </button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
                 <div class="col-6 text-center">
                   <div class="text-muted">

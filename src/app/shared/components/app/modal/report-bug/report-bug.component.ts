@@ -53,7 +53,10 @@ export class ReportBugComponent implements OnInit {
             (this.exception?.error?.stackTrace
               ? '<hr> <h1>Stacktrace:</h1> <br>' +
                 this.exception.error.stackTrace
-              : '')
+              : '') +
+            '<br><hr>' +
+            'Device Datas: <br>' +
+            window.navigator.userAgent
         );
       githubIssues.body = template;
       this.userService.openIssues(githubIssues).subscribe((res) => {
