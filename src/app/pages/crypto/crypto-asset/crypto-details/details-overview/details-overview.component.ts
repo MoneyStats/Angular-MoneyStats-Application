@@ -19,6 +19,7 @@ import { ChartService } from 'src/assets/core/utils/chart.service';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { ImageColorPickerService } from 'src/assets/core/utils/image.color.picker.service';
+import { LoggerService } from 'src/assets/core/utils/log.service';
 
 @Component({
   selector: 'app-details-overview',
@@ -36,11 +37,14 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
 
   walletsAsset: Wallet[] = [];
 
+  isEditInvestmentActive: boolean = false;
+
   constructor(
     public cryptoService: CryptoService,
     private screenService: ScreenService,
     private charts: ChartService,
-    public imageColorPicker: ImageColorPickerService
+    public imageColorPicker: ImageColorPickerService,
+    private logger: LoggerService
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -101,7 +105,6 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
         ? deepCopy(this.cryptoService.asset!)
         : deepCopy(this.asset),
     ];
-    console.log(dashboard);
     setTimeout(() => {
       if (this.cryptoDashboard.wallets) {
         if (this.screenService?.screenWidth! <= 780) {
@@ -206,5 +209,19 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
     });
     operations.sort((a, b) => (a.exitDate! < b.exitDate! ? 1 : -1));
     return operations;
+  }
+
+  updateInvestment(wallet: Wallet) {
+    this.isEditInvestmentActive = false;
+    this.cryptoService.addOrUpdateCryptoAsset(wallet).subscribe((data) => {
+      this.logger.LOG(data.message!, 'DetailsOverviewComponent');
+    });
+
+    let wallets = deepCopy(this.walletsAsset);
+    let invested = 0;
+    wallets.forEach((w) => {
+      invested += w.assets[0].invested;
+    });
+    this.asset.invested = invested;
   }
 }

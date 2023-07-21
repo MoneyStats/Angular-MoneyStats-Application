@@ -30,7 +30,11 @@ export class OpenBugComponent implements OnInit {
     githubIssues.assignees = ['giovannilamarmora'];
     githubIssues.labels = ['bug'];
 
-    githubIssues.body = this.description;
+    githubIssues.body =
+      this.description +
+      '<br><hr>' +
+      'Device Datas: <br>' +
+      window.navigator.userAgent;
     this.userService.openIssues(githubIssues).subscribe((res) => {
       this.swal.toastMessage(SwalIcon.SUCCESS, res.message!);
     });

@@ -89,7 +89,7 @@ export class DashboardComponent implements OnInit {
         }
         this.dashboard = data.data;
       }
-      this.dashboardService.dashboard = deepCopy(this.dashboard);
+      this.dashboardService.dashboard = data.data;
       if (this.dashboard.wallets && this.dashboard.wallets.length) {
         this.scrollX();
       } else {
