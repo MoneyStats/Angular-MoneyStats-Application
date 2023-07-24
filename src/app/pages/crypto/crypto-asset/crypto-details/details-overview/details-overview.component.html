@@ -470,7 +470,7 @@
         <h2 class="title">
           {{ "crypto.asset.details.overview.operations" | translate }}
         </h2>
-        <a hidden href="#" class="link">{{
+        <a (click)="goToOperations()" class="link clickable">{{
           "crypto.asset.details.overview.view" | translate
         }}</a>
       </div>
@@ -479,8 +479,14 @@
           class="listview flush transparent no-line image-listview detailed-list border_round"
         >
           <!-- item -->
-          <li *ngFor="let operation of getOperations()">
-            <a class="item">
+          <li *ngFor="let operation of getOperations(); let i = index">
+            <a
+              *ngIf="i < 4"
+              class="item"
+              (click)="selectOperation(operation)"
+              data-bs-toggle="modal"
+              attr.data-bs-target="#{{ modalConstant.CRYPTOOPERATIONDETAILS }}"
+            >
               <div class="icon-box-c me-2">
                 <img
                   class="rounded-pill"
@@ -532,11 +538,20 @@
           </li>
           <!-- * item -->
         </ul>
-        <div hidden class="card-body pt-0">
-          <a href="#" class="btn btn-block btn-outline-secondary">Load more</a>
+        <div class="card-body pt-0">
+          <a
+            class="btn btn-block btn-outline-secondary"
+            (click)="goToOperations()"
+            >Load more</a
+          >
         </div>
       </div>
     </div>
     <!-- History -->
   </div>
 </div>
+<app-operation-details
+  [modalId]="modalConstant.CRYPTOOPERATIONDETAILS"
+  [operation]="operationSelect"
+  [currency]="cryptoDashboard.currency"
+></app-operation-details>

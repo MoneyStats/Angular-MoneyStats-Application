@@ -20,6 +20,7 @@ export enum ModalConstant {
   ADDOPERATIONS = 'addOperationsModal',
   ADDCRYPTOCURRENCY = 'addCryptoCurrencyModal',
   INFO = 'infoModal',
+  CRYPTOOPERATIONDETAILS = 'modalCryptoOperationDetails'
 }
 
 export enum SelectAssetConstant {

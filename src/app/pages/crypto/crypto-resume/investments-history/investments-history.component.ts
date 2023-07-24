@@ -8,10 +8,14 @@ import {
 import {
   Asset,
   CryptoDashboard,
+  Operation,
 } from 'src/assets/core/data/class/crypto.class';
 import { Stats } from 'src/assets/core/data/class/dashboard.class';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
+import { v4 as uuidv4 } from 'uuid';
+import { Router } from '@angular/router';
+import { ModalConstant } from 'src/assets/core/data/constant/constant';
 
 @Component({
   selector: 'app-investments-history',
@@ -29,9 +33,14 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
   tableBalance: Array<any> = [];
   // END History Tab
   isOperationPresent: boolean = false;
-  operations: any[] = [];
+  operations: Operation[] = [];
+  operationSelect?: Operation;
 
-  constructor(private cryptoService: CryptoService) {}
+  constructor(private cryptoService: CryptoService, private router: Router) {}
+
+  public get modalConstant(): typeof ModalConstant {
+    return ModalConstant;
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.getResume();
@@ -108,5 +117,17 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
     });
     this.operations.sort((a, b) => (a.exitDate! < b.exitDate! ? 1 : -1));
     if (this.operations.length > 0) this.isOperationPresent = true;
+  }
+
+  goToOperations() {
+    let uuid = uuidv4();
+    this.cryptoService.operationsMap.set(uuid, this.operations);
+    this.router.navigate([
+      '/crypto/operations/' + this.cryptoCurrency + '/' + uuid,
+    ]);
+  }
+
+  selectOperation(operation: any) {
+    this.operationSelect = operation;
   }
 }

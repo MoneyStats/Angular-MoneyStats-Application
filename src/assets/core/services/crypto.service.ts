@@ -24,6 +24,7 @@ export class CryptoService {
   public currency: string = Coin.USD;
   public cryptoDashboard: CryptoDashboard = new CryptoDashboard();
   public assets: Asset[] = [];
+  public operationsMap: Map<string, any[]> = new Map();
 
   // Used for history table
   public cryptoResume: Map<string, CryptoDashboard> = new Map<

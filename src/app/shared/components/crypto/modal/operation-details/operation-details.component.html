@@ -1,0 +1,124 @@
+<!-- Modal Basic -->
+<div class="modal fade modalbox" id="{{ modalId }}" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center">
+          <img
+            src="{{ operation?.asset?.icon }}"
+            alt="img"
+            class="image-block imaged w30 me-1"
+          />{{ operation?.asset?.name }} Details
+        </h5>
+        <a href="#" data-bs-dismiss="modal">Close</a>
+      </div>
+      <div class="modal-body">
+        <div class="section mt-2 mb-2 row">
+          <div class="col-5">
+            <div class="listed-detail mt-3">
+              <div class="float-end text-end">
+                <div class="icon-wrapper">
+                  <!--<div class="iconbox">
+                            <ion-icon name="arrow-forward-outline"></ion-icon>
+
+                        </div>-->
+                  <img
+                    src="{{ operation?.wallet?.img }}"
+                    alt="img"
+                    class="image-block imaged w48"
+                  />
+                </div>
+                <h3 class="text-center mt-2">
+                  {{ operation?.wallet?.name }}
+                </h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-2 text-center" style="align-self: center">
+            <ion-icon name="swap-horizontal-outline"></ion-icon>
+          </div>
+          <div class="col-5">
+            <div class="listed-detail mt-3">
+              <div class="float-start text-start">
+                <div class="icon-wrapper">
+                  <!--<div class="iconbox">
+                            <ion-icon name="arrow-forward-outline"></ion-icon>
+
+                        </div>-->
+                  <img
+                    src="{{ operation?.asset?.icon }}"
+                    alt="img"
+                    class="image-block imaged w48"
+                  />
+                </div>
+                <h3 class="text-center mt-2">
+                  {{ operation?.asset?.name }}
+                </h3>
+              </div>
+            </div>
+          </div>
+          <ul class="listview flush transparent simple-listview no-space mt-3">
+            <li>
+              <strong>Status</strong>
+              <div class="text-small">
+                <span
+                  class="badge {{
+                    operation?.status == 'CLOSED'
+                      ? 'badge-danger'
+                      : 'badge-success'
+                  }} "
+                  >{{ operation?.status }}</span
+                >
+              </div>
+            </li>
+            <li>
+              <strong>Operation Type</strong>
+              <span> {{ operation?.type }}</span>
+            </li>
+            <li>
+              <strong>Currency</strong>
+              <span>{{ operation?.entryCoin }}/{{ operation?.exitCoin }}</span>
+            </li>
+            <li>
+              <strong>Entry Date</strong>
+              <span>{{ operation?.entryDate | date : "MMM dd, y HH:mm" }}</span>
+            </li>
+            <li>
+              <strong>Entry Price</strong>
+              <strong
+                ><span>{{ operation?.entryPrice }} {{ currency }}</span></strong
+              >
+            </li>
+            <li>
+              <strong>{{ currency }} Value</strong>
+              <strong
+                ><span
+                  >{{ operation?.entryPriceValue }} {{ currency }}</span
+                ></strong
+              >
+            </li>
+            <li *ngIf="operation?.exitDate">
+              <strong>Exit Date</strong>
+              <span>{{ operation?.exitDate | date : "MMM dd, y HH:mm" }}</span>
+            </li>
+            <li *ngIf="operation?.exitPrice">
+              <strong>Exit Price</strong>
+              <strong
+                ><span>{{ operation?.exitPrice }} {{ currency }}</span></strong
+              >
+            </li>
+            <li *ngIf="operation?.exitPriceValue">
+              <strong>{{ currency }} Value</strong>
+              <strong
+                ><span
+                  >{{ operation?.exitPriceValue }} {{ currency }}</span
+                ></strong
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- * Modal Basic -->
