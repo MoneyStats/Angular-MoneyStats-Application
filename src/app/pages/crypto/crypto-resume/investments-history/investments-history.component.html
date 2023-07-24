@@ -178,7 +178,7 @@
         <h2 class="title">
           {{ "crypto.asset.details.overview.operations" | translate }}
         </h2>
-        <a hidden href="#" class="link">{{
+        <a (click)="goToOperations()" class="link clickable">{{
           "crypto.asset.details.overview.view" | translate
         }}</a>
       </div>
@@ -187,57 +187,63 @@
           class="listview flush transparent no-line image-listview detailed-list border_round"
         >
           <!-- item -->
-          <li *ngFor="let operation of operations">
-            <a class="item">
+          <li *ngFor="let operation of operations; let i = index">
+            <a
+              *ngIf="i < 4"
+              class="item"
+              (click)="selectOperation(operation)"
+              data-bs-toggle="modal"
+              attr.data-bs-target="#{{ modalConstant.CRYPTOOPERATIONDETAILS }}"
+            >
               <div class="icon-box-c me-4">
                 <img
                   class="rounded-pill img1"
-                  src="{{ operation.wallet.img }}"
+                  src="{{ operation?.wallet?.img }}"
                   alt=""
                 />
                 <img
                   class="rounded-pill img2"
-                  src="{{ operation.asset.icon }}"
+                  src="{{ operation?.asset?.icon }}"
                   alt=""
                 />
               </div>
               <div class="in">
                 <div>
-                  <strong>{{ operation.wallet.name }}</strong>
+                  <strong>{{ operation?.wallet?.name }}</strong>
                   <div class="text-small text-secondary">
-                    {{ operation.asset.name }}
+                    {{ operation?.asset?.name }}
                     {{ "crypto.asset.details.overview.price" | translate }}
-                    {{ operation.exitPrice }}
+                    {{ operation?.exitPrice }}
                     {{ cryptoCurrency }}
                   </div>
                   <div class="text-small text-secondary">
-                    <strong>{{ operation.type }}</strong> #{{ operation.id }}
+                    <strong>{{ operation?.type }}</strong> #{{ operation?.id }}
                   </div>
                 </div>
                 <div class="text-end">
                   <strong
-                    >{{ operation.exitQuantity }}
-                    {{ operation.asset.symbol }}</strong
+                    >{{ operation?.exitQuantity }}
+                    {{ operation?.asset?.symbol }}</strong
                   >
                   <div class="text-small">
                     <span
                       class="badge {{
-                        operation.status == 'CLOSED'
+                        operation?.status == 'CLOSED'
                           ? 'badge-danger'
                           : 'badge-success'
                       }} "
-                      >{{ operation.status }}</span
+                      >{{ operation?.status }}</span
                     >
                   </div>
 
                   <div class="text-small">
                     {{ "crypto.asset.details.overview.invest" | translate }}
                     <strong
-                      >{{ operation.entryPriceValue }}
+                      >{{ operation?.entryPriceValue }}
                       {{ cryptoCurrency }}</strong
                     >
                     {{ "crypto.asset.details.overview.on" | translate }}
-                    {{ operation.exitDate | date : "d MMM yy" }}
+                    {{ operation?.exitDate | date : "d MMM yy" }}
                   </div>
                 </div>
               </div>
@@ -245,11 +251,20 @@
           </li>
           <!-- * item -->
         </ul>
-        <div hidden class="card-body pt-0">
-          <a href="#" class="btn btn-block btn-outline-secondary">Load more</a>
+        <div class="card-body pt-0">
+          <a
+            (click)="goToOperations()"
+            class="btn btn-block btn-outline-secondary"
+            >Load more</a
+          >
         </div>
       </div>
     </div>
     <!-- History -->
   </div>
 </div>
+<app-operation-details
+  [modalId]="modalConstant.CRYPTOOPERATIONDETAILS"
+  [operation]="operationSelect"
+  [currency]="cryptoCurrency"
+></app-operation-details>

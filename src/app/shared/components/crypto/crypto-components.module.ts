@@ -15,6 +15,7 @@ import { AddCryptoStatsComponent } from './modal/operations-modal/add-crypto-sta
 import { AddCryptoOperationComponent } from './modal/operations-modal/add-crypto-operation/add-crypto-operation.component';
 import { InfoModalComponent } from './modal/info-modal/info-modal.component';
 import { AssetSelectComponent } from './asset-select/asset-select.component';
+import { OperationDetailsComponent } from './modal/operation-details/operation-details.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AssetSelectComponent } from './asset-select/asset-select.component';
     AddCryptoOperationComponent,
     InfoModalComponent,
     AssetSelectComponent,
+    OperationDetailsComponent,
   ],
   exports: [
     AddAssetModalComponent,
@@ -32,6 +34,7 @@ import { AssetSelectComponent } from './asset-select/asset-select.component';
     SelectCryptoCurrencyComponent,
     AssetSelectComponent,
     InfoModalComponent,
+    OperationDetailsComponent,
   ],
   imports: [
     RouterModule,

@@ -89,6 +89,20 @@ $darkColor: #121212;
 }
 
 body:not(.dark-mode) {
+  .selectCryptoAsset {
+    .select-btn,
+    .select-btn-op,
+    .content,
+    .search {
+      background: #e5e5e5;
+      border: none;
+      color: $darkColor;
+    }
+    
+  }
+  #cryptoHeader {
+    background-color: $whiteBg !important;
+  }
   app-loading {
     .overlay {
       background-color: rgba(229, 229, 229, 0.9);

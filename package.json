@@ -1,6 +1,6 @@
 {
   "name": "angular-moneystats",
-  "version": "1.8.7",
+  "version": "1.9.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -25,12 +25,14 @@
     "@ng-bootstrap/ng-bootstrap": "^12.1.2",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
+    "@types/uuid": "^9.0.2",
     "apexcharts": "^3.36.3",
     "ng-apexcharts": "^1.7.4",
     "ng2-charts": "^3.1.0",
     "rxjs": "~7.4.0",
     "sweetalert2": "^11.4.8",
     "tslib": "^2.3.0",
+    "uuid": "^9.0.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

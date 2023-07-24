@@ -20,6 +20,8 @@ import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { ImageColorPickerService } from 'src/assets/core/utils/image.color.picker.service';
 import { LoggerService } from 'src/assets/core/utils/log.service';
+import { v4 as uuidv4 } from 'uuid';
+import { ModalConstant } from 'src/assets/core/data/constant/constant';
 
 @Component({
   selector: 'app-details-overview',
@@ -39,13 +41,20 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
 
   isEditInvestmentActive: boolean = false;
 
+  operationSelect: any;
+
   constructor(
     public cryptoService: CryptoService,
     private screenService: ScreenService,
     private charts: ChartService,
     public imageColorPicker: ImageColorPickerService,
-    private logger: LoggerService
+    private logger: LoggerService,
+    private router: Router
   ) {}
+
+  public get modalConstant(): typeof ModalConstant {
+    return ModalConstant;
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.getAsset();
@@ -204,6 +213,7 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
       )
         wallet.assets[0].operations.forEach((operation) => {
           operation.wallet = wallet;
+          operation.asset = wallet.assets[0];
           operations.push(operation);
         });
     });
@@ -223,5 +233,17 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
       invested += w.assets[0].invested;
     });
     this.asset.invested = invested;
+  }
+
+  goToOperations() {
+    let uuid = uuidv4();
+    this.cryptoService.operationsMap.set(uuid, this.getOperations());
+    this.router.navigate([
+      '/crypto/operations/' + this.cryptoDashboard.currency + '/' + uuid,
+    ]);
+  }
+
+  selectOperation(operation: any) {
+    this.operationSelect = operation;
   }
 }
