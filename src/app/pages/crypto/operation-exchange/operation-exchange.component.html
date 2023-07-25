@@ -26,7 +26,10 @@
           <div class="col-10 col-md-10 col-xl-11">
             <h2 class="title">{{ wallet.name }}</h2>
             <small
-              ><p>Balance: {{ wallet.balance }} {{ fiat }}</p></small
+              ><p>
+                {{ "crypto.operationExchange.balance" | translate }}
+                {{ wallet.balance }} {{ fiat }}
+              </p></small
             >
           </div>
         </div>
@@ -34,7 +37,9 @@
       <div class="col-6 hidden_mobile text-end">
         <div class="title-section">
           <h2 class="title">{{ operationType }}</h2>
-          <small><p>Operation Type</p></small>
+          <small
+            ><p>{{ "crypto.operationExchange.type" | translate }}</p></small
+          >
         </div>
       </div>
     </div>
@@ -46,10 +51,15 @@
             <div class="card-body">
               <div class="form-group basic p-0">
                 <div class="exchange-heading">
-                  <label class="group-label" for="fromAmount">From</label>
-                  <div class="exchange-wallet-info">
-                    Commition Rate : <strong> Included</strong>
-                  </div>
+                  <label class="group-label" for="fromAmount">{{
+                    "crypto.operationExchange.from" | translate
+                  }}</label>
+                  <div
+                    class="exchange-wallet-info"
+                    [innerHTML]="
+                      'crypto.operationExchange.commition' | translate
+                    "
+                  ></div>
                 </div>
                 <div class="exchange-group">
                   <div class="input-col">
@@ -94,9 +104,11 @@
             <div class="card-body">
               <div class="form-group basic p-0">
                 <div class="exchange-heading">
-                  <label class="group-label" for="toAmount">To</label>
+                  <label class="group-label" for="toAmount">{{
+                    "crypto.operationExchange.to" | translate
+                  }}</label>
                   <div class="exchange-wallet-info">
-                    Balance :
+                    {{ "crypto.operationExchange.balance" | translate }}
                     <strong>
                       {{ assetInWallet.balance ? assetInWallet.balance : 0 }}
                       {{ assetInWallet.symbol }}</strong
@@ -145,7 +157,7 @@
               {{ marketDataSelected.current_price }} {{ fiat }}
             </div>
             <div class="col text-end">
-              Last Update :
+              {{ "crypto.operationExchange.last" | translate }}
               <b>{{
                 assetInWallet.lastUpdate
                   ? (assetInWallet.lastUpdate | date : "d MMM y")
@@ -164,7 +176,7 @@
           class="btn btn-primary btn-block btn-lg"
           (click)="exchangeNewInvestment()"
         >
-          Exchange
+          {{ "crypto.operationExchange.exchange" | translate }}
         </button>
       </div>
       <!-- End Bottoni Mobile -->

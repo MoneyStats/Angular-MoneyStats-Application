@@ -8,9 +8,12 @@
             src="{{ operation?.asset?.icon }}"
             alt="img"
             class="image-block imaged w30 me-1"
-          />{{ operation?.asset?.name }} Details
+          />{{ operation?.asset?.name }}
+          {{ "crypto.operationDetails.title" | translate }}
         </h5>
-        <a href="#" data-bs-dismiss="modal">Close</a>
+        <a href="#" data-bs-dismiss="modal">{{
+          "crypto.operationDetails.close" | translate
+        }}</a>
       </div>
       <div class="modal-body">
         <div class="section mt-2 mb-2 row">
@@ -59,7 +62,9 @@
           </div>
           <ul class="listview flush transparent simple-listview no-space mt-3">
             <li>
-              <strong>Status</strong>
+              <strong>{{
+                "crypto.operationDetails.status" | translate
+              }}</strong>
               <div class="text-small">
                 <span
                   class="badge {{
@@ -72,43 +77,70 @@
               </div>
             </li>
             <li>
-              <strong>Operation Type</strong>
+              <strong>{{ "crypto.operationDetails.type" | translate }}</strong>
               <span> {{ operation?.type }}</span>
             </li>
             <li>
-              <strong>Currency</strong>
-              <span>{{ operation?.entryCoin }}/{{ operation?.exitCoin }}</span>
+              <strong>{{
+                "crypto.operationDetails.currency" | translate
+              }}</strong>
+              <span
+                ><mark
+                  >{{ operation?.entryCoin }}/{{ operation?.exitCoin }}</mark
+                ></span
+              >
             </li>
             <li>
-              <strong>Entry Date</strong>
+              <strong>{{ "crypto.operationDetails.entry" | translate }}</strong>
               <span>{{ operation?.entryDate | date : "MMM dd, y HH:mm" }}</span>
             </li>
             <li>
-              <strong>Entry Price</strong>
+              <strong>{{
+                "crypto.operationDetails.entryPrice" | translate
+              }}</strong>
               <strong
                 ><span>{{ operation?.entryPrice }} {{ currency }}</span></strong
               >
             </li>
             <li>
-              <strong>{{ currency }} Value</strong>
+              <strong
+                >{{ currency }}
+                {{ "crypto.operationDetails.value" | translate }}</strong
+              >
               <strong
                 ><span
                   >{{ operation?.entryPriceValue }} {{ currency }}</span
                 ></strong
               >
             </li>
+            <li>
+              <strong>{{
+                "crypto.operationDetails.quantity" | translate
+              }}</strong>
+              <strong
+                ><span
+                  >{{ operation?.exitQuantity }}
+                  {{ operation?.asset?.symbol }}</span
+                ></strong
+              >
+            </li>
             <li *ngIf="operation?.exitDate">
-              <strong>Exit Date</strong>
+              <strong>{{ "crypto.operationDetails.exit" | translate }}</strong>
               <span>{{ operation?.exitDate | date : "MMM dd, y HH:mm" }}</span>
             </li>
             <li *ngIf="operation?.exitPrice">
-              <strong>Exit Price</strong>
+              <strong>{{
+                "crypto.operationDetails.exitPrice" | translate
+              }}</strong>
               <strong
                 ><span>{{ operation?.exitPrice }} {{ currency }}</span></strong
               >
             </li>
             <li *ngIf="operation?.exitPriceValue">
-              <strong>{{ currency }} Value</strong>
+              <strong
+                >{{ currency }}
+                {{ "crypto.operationDetails.value" | translate }}</strong
+              >
               <strong
                 ><span
                   >{{ operation?.exitPriceValue }} {{ currency }}</span

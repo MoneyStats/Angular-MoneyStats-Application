@@ -589,7 +589,8 @@
           "view": "Vedi",
           "price": "Prezzo",
           "invest": "Investito",
-          "on": "il"
+          "on": "il",
+          "more": "Vedi tutti"
         }
       }
     },
@@ -619,6 +620,29 @@
           }
         }
       }
+    },
+    "operationExchange": {
+      "history": "Storico Operazioni",
+      "balance": "Saldo :",
+      "type": "Tipo Operazione",
+      "from": "Da",
+      "to": "A",
+      "commition": "Commissioni : <strong> Incluse</strong>",
+      "last": "Ultimo Aggiornamento :",
+      "exchange": "Exchange"
+    },
+    "operationDetails": {
+      "title": "Dettagli",
+      "close": "Chiudi",
+      "status": "Stato",
+      "type": "Tipo Operazione",
+      "currency": "Moneta",
+      "entry": "Data Ingresso",
+      "entryPrice": "Prezzo d'ingresso",
+      "value": "Valore",
+      "quantity": "Quantità",
+      "exit": "Data di uscita",
+      "exitPrice": "Prezzo d'uscita"
     },
     "cryptoModal": {
       "addAsset": {

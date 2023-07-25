@@ -589,7 +589,8 @@
           "view": "View All",
           "price": "Price",
           "invest": "Invested",
-          "on": "on"
+          "on": "on",
+          "more": "Load more"
         }
       }
     },
@@ -619,6 +620,29 @@
           }
         }
       }
+    },
+    "operationExchange": {
+      "history": "Operation History",
+      "balance": "Balance : ",
+      "type": "Operation Type",
+      "from": "From",
+      "to": "To",
+      "commition": "Commition Rate : <strong> Included</strong>",
+      "last": "Last Update :",
+      "exchange": "Exchange"
+    },
+    "operationDetails": {
+      "title": "Details",
+      "close": "Close",
+      "status": "Status",
+      "type": "Operation Type",
+      "currency": "Currency",
+      "entry": "Entry Date",
+      "entryPrice": "Entry Price",
+      "value": "Value",
+      "quantity": "Quantity",
+      "exit": "Exit Date",
+      "exitPrice": "Exit Price"
     },
     "cryptoModal": {
       "addAsset": {

@@ -171,7 +171,7 @@
       </div>
     </div>
   </div>
-  <div class="section mb-1 col-md-12" *ngIf="isOperationPresent">
+  <div class="section mb-3 col-md-12" *ngIf="isOperationPresent">
     <!-- History -->
     <div class="section mt-4">
       <div class="section-heading">
@@ -255,7 +255,7 @@
           <a
             (click)="goToOperations()"
             class="btn btn-block btn-outline-secondary"
-            >Load more</a
+            >{{ "crypto.asset.details.overview.more" | translate }}</a
           >
         </div>
       </div>
