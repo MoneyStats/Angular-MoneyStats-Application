@@ -71,6 +71,9 @@
                     #walletName1="ngModel"
                     class="form-control custom-select"
                   >
+                    <option [value]="walletName" selected disabled>
+                      {{ "wallet.modal.selectWallet" | translate }}
+                    </option>
                     <option
                       [value]="wallet.name"
                       *ngFor="let wallet of notCryptoWallets"
@@ -296,7 +299,13 @@
                       [(ngModel)]="wallet.type"
                       #type="ngModel"
                     >
-                      <option [value]="wallet.type" selected disabled>
+                      <option
+                        [value]="
+                          modalId == modalConstant.EDITWALLET ? '' : wallet.type
+                        "
+                        selected
+                        disabled
+                      >
                         {{ "wallet.modal.typeText" | translate }}
                       </option>
                       <!--<option
@@ -309,9 +318,9 @@
                       </option>-->
                       <option
                         *ngFor="let type of cryptoTypes"
-                        [selected]="type === wallet.type"
+                        [selected]="wallet.type"
                         [disabled]="type != 'Holding'"
-                        value="{{ type }}"
+                        [value]="wallet.type"
                       >
                         {{ type }}
                       </option>

@@ -185,11 +185,11 @@
       <div class="card cards-op border_round">
         <ul
           class="listview flush transparent no-line image-listview detailed-list border_round"
+          *ngFor="let operation of operations; let i = index"
         >
           <!-- item -->
-          <li *ngFor="let operation of operations; let i = index">
+          <li *ngIf="i < 4">
             <a
-              *ngIf="i < 4"
               class="item"
               (click)="selectOperation(operation)"
               data-bs-toggle="modal"

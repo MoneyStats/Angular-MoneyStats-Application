@@ -63,6 +63,10 @@ export class AddWalletComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    if (this.modalId == ModalConstant.EDITWALLET) {
+      this.isNewWallet = true;
+      this.isCrypto = true;
+    }
     this.categories = this.dashboardService.dashboard.categories;
     if (this.wallets && this.wallets.length == 0) {
       this.wallets = this.dashboardService.dashboard.wallets;

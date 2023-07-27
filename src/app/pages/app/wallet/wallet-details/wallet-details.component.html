@@ -237,6 +237,12 @@
                 </div>
                 <strong>{{ wallet?.category }}</strong>
               </li>
+              <li *ngIf="wallet?.type">
+                <div class="text-muted">
+                  {{ "wallet.details.type" | translate }}
+                </div>
+                <strong>{{ wallet?.type }}</strong>
+              </li>
               <li>
                 <div class="text-muted">
                   {{ "wallet.details.dateLastStats" | translate }}
