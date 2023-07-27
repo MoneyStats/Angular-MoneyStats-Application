@@ -248,6 +248,7 @@
       "highPrice": "Massimo annuale il ",
       "lowPrice": "Minimo annuale il ",
       "category": "Categoria",
+      "type": "Tipo di wallet",
       "dateLastStats": "Data Ultimo Stats",
       "edit": "Modifica Portafoglio",
       "delete": "Cancella Portafoglio",

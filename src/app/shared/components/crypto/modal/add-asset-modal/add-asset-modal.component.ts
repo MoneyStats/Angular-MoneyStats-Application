@@ -64,10 +64,10 @@ export class AddAssetModalComponent implements OnInit {
       this.wallets = this.dashboardService.dashboard.wallets.filter(
         (w) => w.category == 'Crypto'
       );
-      if (this.wallets && this.wallets.length != 0) {
-        //if (this.wallets && this.wallets.length == 1) {
-        this.modelWallet = this.wallets[0].name;
-      }
+      //if (this.wallets && this.wallets.length != 0) {
+      //  //if (this.wallets && this.wallets.length == 1) {
+      //  this.modelWallet = this.wallets[0].name;
+      //}
     } else this.wallets;
   }
 

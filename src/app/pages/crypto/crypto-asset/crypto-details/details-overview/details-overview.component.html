@@ -263,7 +263,8 @@
                 </h5>
                 <p style="margin-top: -15px">
                   <small
-                    >{{ wallet.assets[0].balance }} {{ asset.symbol }}</small
+                    >{{ wallet.assets[0].balance.toFixed(8) }}
+                    {{ asset.symbol }}</small
                   >
                 </p>
               </div>
@@ -477,11 +478,11 @@
       <div class="card border_round">
         <ul
           class="listview flush transparent no-line image-listview detailed-list border_round"
+          *ngFor="let operation of getOperations(); let i = index"
         >
           <!-- item -->
-          <li *ngFor="let operation of getOperations(); let i = index">
+          <li *ngIf="i < 4">
             <a
-              *ngIf="i < 4"
               class="item"
               (click)="selectOperation(operation)"
               data-bs-toggle="modal"

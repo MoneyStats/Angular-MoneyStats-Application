@@ -81,7 +81,7 @@ export class OperationExchangeComponent implements OnInit {
     asset.trend = 0;
     this.marketDataSelected = asset;
     let assets = deepCopy(this.wallet.assets);
-    if (assets.find((a) => a.identifier == asset.identifier)!)
+    if (assets && assets.find((a) => a.identifier == asset.identifier)!)
       this.assetInWallet = assets.find(
         (a) => a.identifier == asset.identifier
       )!;
@@ -97,6 +97,11 @@ export class OperationExchangeComponent implements OnInit {
 
   exchangeNewInvestment() {
     let assetToSave = deepCopy(this.assetInWallet);
+    if (!assetToSave.lastUpdate) {
+      assetToSave.lastUpdate = new Date();
+      assetToSave.performance = 0;
+      assetToSave.trend = 0;
+    }
     Number.isNaN(assetToSave.invested) || assetToSave.invested == undefined
       ? (assetToSave.invested = this.investedMoney)
       : (assetToSave.invested += this.investedMoney);

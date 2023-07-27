@@ -247,6 +247,7 @@
       "totalPerformance": "Total Performance",
       "highPrice": "High Price on ",
       "lowPrice": "Low Price on ",
+      "type": "Wallet Type",
       "category": "Category",
       "dateLastStats": "Date Last Stats",
       "edit": "Edit Wallet",

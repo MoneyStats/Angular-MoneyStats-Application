@@ -182,9 +182,9 @@
                   {{ "auth.register.selectCurrency" | translate }}
                 </option>
                 <option
-                  value="{{ coin }}"
+                  [value]="coin"
                   *ngFor="let coin of currencyList"
-                  [selected]="currency === coin"
+                  [selected]="coin"
                 >
                   {{ coin }}
                 </option>
