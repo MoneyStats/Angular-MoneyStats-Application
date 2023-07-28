@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Asset } from 'src/assets/core/data/class/crypto.class';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
@@ -26,7 +34,7 @@ export class OperationsModalComponent implements OnInit {
 
   saveValidation: boolean = false;
   // Used for warning date
-  dateValidation: boolean = false;
+  //dateValidation: boolean = false;
   dateStats: string = '';
 
   currentIndex: number = 0;
@@ -34,12 +42,7 @@ export class OperationsModalComponent implements OnInit {
   // Datas for Operations
   isOperationSelected: boolean = false;
 
-  constructor(
-    private cryptoService: CryptoService,
-    private errorService: ErrorService,
-    private router: Router,
-    private statsService: StatsService
-  ) {}
+  constructor() {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -68,7 +71,7 @@ export class OperationsModalComponent implements OnInit {
   addOperationClick() {
     this.isOperationSelected = true;
   }
-
+  /*
   changeAsset() {
     this.currentIndex += 1;
     let element = document.getElementById('action-scheet');
@@ -121,12 +124,12 @@ export class OperationsModalComponent implements OnInit {
     this.cryptoService.cryptoDashboard.statsAssetsDays.sort();
     this.saveValidation = true;
   }
-
-  setDataForNewStats(asset: Asset, statsWalletDays: string[], stats: Stats) {
-    /* trovo gli indici corrispondenti da analizzare inserendo la data corrente
-     * all'interno della lista di date e trovo l'indice della mia data
-     */
-    const days: any = [];
+*/
+  //setDataForNewStats(asset: Asset, statsWalletDays: string[], stats: Stats) {
+  /* trovo gli indici corrispondenti da analizzare inserendo la data corrente
+   * all'interno della lista di date e trovo l'indice della mia data
+   */
+  /*const days: any = [];
     if (statsWalletDays && statsWalletDays.length > 0) {
       statsWalletDays.forEach((d) => {
         days.push(d);
@@ -227,16 +230,21 @@ export class OperationsModalComponent implements OnInit {
   getTodayAsString() {
     let today = new Date().toISOString().split('T')[0];
     this.dateStats = today;
-  }
+  }*/
   /**
    * END ADD STATS METHODS
    */
+
+  addStats(wallets: Wallet[]) {
+    this.resetForm();
+    this.emitAddStats.emit(wallets);
+  }
 
   resetForm() {
     this.isAddStatsSelected = false;
     this.isResumeAddAssets = false;
     this.saveValidation = false;
-    this.dateValidation = false;
+    //this.dateValidation = false;
     this.dateStats = '';
     this.currentIndex = 0;
   }
