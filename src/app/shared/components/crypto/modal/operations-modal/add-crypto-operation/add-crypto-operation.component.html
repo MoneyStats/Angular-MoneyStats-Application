@@ -17,7 +17,7 @@
             #operationSelect1="ngModel"
             required
           >
-            <option selected disabled>
+            <option [value]="operationSelect" selected disabled>
               {{
                 "crypto.cryptoModal.operations.operation.selectOperation"
                   | translate
@@ -26,7 +26,7 @@
             <option
               *ngFor="let operation of operations"
               value="{{ operation }}"
-              [selected]="operation"
+              [selected]="operation == operationSelect"
               [disabled]="operation != 'New Investment'"
             >
               {{ operation }}
@@ -89,14 +89,14 @@
             required
           >
             <!--<option value="{{ wallets[0] }}">Select Wallet</option>-->
-            <option selected disabled>
+            <option [value]="walletSelect" selected disabled>
               {{
                 "crypto.cryptoModal.operations.operation.selectWallet"
                   | translate
               }}
             </option>
             <option
-              selected="{{ wallet.name }}"
+              selected="{{ wallet.name == walletSelect }}"
               *ngFor="let wallet of wallets"
               value="{{ wallet.name }}"
             >

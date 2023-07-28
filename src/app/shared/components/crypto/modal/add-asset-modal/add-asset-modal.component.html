@@ -55,7 +55,11 @@
                             | translate
                         }}
                       </option>
-                      <option *ngFor="let w of wallets" [value]="w.name">
+                      <option
+                        [selected]="modelWallet === w.name"
+                        *ngFor="let w of wallets"
+                        [value]="w.name"
+                      >
                         {{ w.name }}
                       </option>
                     </select>

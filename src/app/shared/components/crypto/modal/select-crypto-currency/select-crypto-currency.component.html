@@ -42,16 +42,17 @@
                       [(ngModel)]="currency"
                       #currency1="ngModel"
                     >
-                      <option [selected]="this" disabled>
+                      <option [value]="currency" selected disabled>
                         {{
                           "crypto.cryptoModal.selectCurrency.title" | translate
                         }}
                       </option>
                       <option
-                        *ngFor="let currency of currencies"
-                        value="{{ currency }}"
+                        *ngFor="let curr of currencies"
+                        [selected]="currency == curr"
+                        value="{{ curr }}"
                       >
-                        {{ currency }}
+                        {{ curr }}
                       </option>
                     </select>
                   </div>

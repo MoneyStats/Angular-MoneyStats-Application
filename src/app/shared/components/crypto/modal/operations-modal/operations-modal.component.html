@@ -29,7 +29,7 @@
                 }}</small>
               </p>
             </div>
-            <div
+            <!--<div
               *ngIf="isAddStatsSelected && !isResumeAddAssets"
               class="card-title"
             >
@@ -52,11 +52,12 @@
                       <input
                         name="date"
                         [(ngModel)]="dateStats"
-                        #date="ngModel"
+                        #date1="ngModel"
                         type="date"
                         class="form-control"
                         id="text4b"
                         required
+                        (change)="dateSelect()"
                         [disabled]="currentIndex > 0"
                       />
                       <div
@@ -70,7 +71,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div>-->
             <div *ngIf="isOperationSelected" class="card-title">
               <div class="row">
                 <div class="col-md-12">
@@ -95,7 +96,7 @@
                 </div>
               </div>
             </div>
-            <div *ngIf="isResumeAddAssets" class="card-title">
+            <!--<div *ngIf="isResumeAddAssets" class="card-title">
               <h2 class="modal-title d-inline" style="vertical-align: -4px">
                 {{
                   "crypto.cryptoModal.operations.stats.resumeTitle" | translate
@@ -107,7 +108,7 @@
                     | translate
                 }}</small>
               </p>
-            </div>
+            </div>-->
             <!-- Bottoni Desktop -->
             <div
               *ngIf="!isAddStatsSelected && !isOperationSelected"
@@ -137,6 +138,8 @@
             </div>
 
             <app-add-crypto-stats
+              (emitAddStats)="addStats($event)"
+              [statsAssetsDays]="statsAssetsDays"
               [assets]="assets"
               [currency]="currency"
               [currentIndex]="currentIndex"
@@ -151,7 +154,7 @@
               [assets]="assets"
             ></app-add-crypto-operation>
 
-            <!-- Bottoni Add Stats Desktop -->
+            <!-- Bottoni Add Stats Desktop
             <div
               *ngIf="isAddStatsSelected"
               class="addWallet text-end hidden_mobile"
@@ -174,7 +177,7 @@
               >
                 {{ "crypto.cryptoModal.operations.stats.save" | translate }}
               </button>
-            </div>
+            </div>-->
             <!-- End Bottoni Add Stats Desktop
             </div>-->
             <!-- End Add Stats -->
@@ -213,6 +216,7 @@
                   </div>
                 </div>
               </div>
+              <!--
               <div *ngIf="isAddStatsSelected" class="form-group basic">
                 <button
                   *ngIf="currentIndex != assets.length"
@@ -232,7 +236,7 @@
                 >
                   {{ "crypto.cryptoModal.operations.stats.save" | translate }}
                 </button>
-              </div>
+              </div>-->
             </div>
             <!-- End Bottoni Mobile -->
           </div>
