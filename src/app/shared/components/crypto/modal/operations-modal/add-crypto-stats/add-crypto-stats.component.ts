@@ -163,10 +163,10 @@ export class AddCryptoStatsComponent implements OnInit {
         beforeThisStats.balance = 0.001;
       }
     }
-    let percentageThisStats = (
+    let percentageThisStats = beforeThisStats.balance != 0 ? (
       ((asset.newValue! - beforeThisStats.balance) / beforeThisStats.balance) *
       100
-    ).toFixed(2);
+    ).toFixed(2) : '0';
 
     stats.balance = asset.newValue!;
     stats.date = new Date(this.dateStats);

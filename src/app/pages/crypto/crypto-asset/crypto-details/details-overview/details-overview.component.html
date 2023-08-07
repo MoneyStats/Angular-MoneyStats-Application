@@ -279,7 +279,7 @@
             <div class="accordion-body">
               <div class="row">
                 <div class="col-6 text-center">
-                  <div class="text-muted">
+                  <div class="text-muted" *ngIf="!isEditInvestmentActive">
                     {{ "crypto.asset.details.overview.invested" | translate }}
                   </div>
                   <strong
@@ -301,7 +301,8 @@
                     type="submit"
                   >
                     <div class="form-group boxed row">
-                      <div class="input-wrapper col-md-10 col-12 text-end">
+                      <div class="input-wrapper col-md-5 col-12 text-end">
+                        <label class="label" for="select4">{{ "crypto.asset.details.overview.editInvested" | translate }}</label>
                         <input
                           type="number"
                           class="form-control"
@@ -310,20 +311,42 @@
                           required
                           [(ngModel)]="wallet.assets[0].invested"
                           #investment1="ngModel"
-                          placeholder="Insert new value"
                         />
                         <i class="clear-input">
                           <ion-icon name="close-circle"></ion-icon>
                         </i>
                       </div>
-                      <div class="col-md-2 col-12 text-start">
+                      <div class="input-wrapper col-md-5 col-12 text-end">
+                        <label class="label" for="select4">{{ "crypto.asset.details.overview.editBalance" | translate }}</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="balance"
+                          name="balance"
+                          required
+                          [(ngModel)]="wallet.assets[0].balance"
+                          #investment1="ngModel"
+                          min="0.00000000"
+                        />
+                        <i class="clear-input">
+                          <ion-icon name="close-circle"></ion-icon>
+                        </i>
+                      </div>
+                      <div class="col-md-2 col-12 text-start d-flex mt-3">
                         <button
                           [disabled]="f.invalid"
                           (click)="updateInvestment(wallet)"
                           type="button"
-                          class="btn btn-outline-primary rounded shadowed me-1 mb-1"
+                          class="btn btn-outline-primary rounded shadowed me-1 mb-1 d-inline"
                         >
-                          Save
+                        {{ "crypto.asset.details.overview.save" | translate }}
+                        </button>
+                        <button
+                          (click)="isEditInvestmentActive = false"
+                          type="button"
+                          class="btn btn-outline-secondary rounded shadowed me-1 mb-1 d-inline"
+                        >
+                        {{ "crypto.asset.details.overview.cancel" | translate }}
                         </button>
                       </div>
                     </div>
