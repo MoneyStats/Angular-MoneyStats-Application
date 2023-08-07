@@ -576,6 +576,8 @@
       "tab1": "Overview",
       "tab2": "Dati TradingView",
       "tab3": "Grafico Avanzato",
+      "show": "Mostra con Saldo Zero",
+      "hidden": "Nascondi con Saldo Zero",
       "details": {
         "overview": {
           "rank": "Rank",

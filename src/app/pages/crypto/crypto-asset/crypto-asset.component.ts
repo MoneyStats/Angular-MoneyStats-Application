@@ -22,6 +22,8 @@ export class CryptoAssetComponent implements OnInit {
   cryptoDashboard: CryptoDashboard = new CryptoDashboard();
   assets: Asset[] = [];
 
+  showZeroBalance: boolean = false;
+
   constructor(
     private cryptoService: CryptoService,
     private charts: ChartService,
@@ -99,5 +101,9 @@ export class CryptoAssetComponent implements OnInit {
         this.chart3Y = this.charts.renderCryptoAsset(dashboard, 200);
       else this.chart3Y = this.charts.renderCryptoAsset(dashboard);
     }, 200);
+  }
+
+  zeroBalanceSwitch(){
+    return this.showZeroBalance ? this.showZeroBalance = false : this.showZeroBalance = true;
   }
 }
