@@ -197,5 +197,8 @@
       }
     }
   },
-  "defaultProject": "angular-moneystats"
+  "defaultProject": "angular-moneystats",
+  "cli": {
+    "analytics": false
+  }
 }

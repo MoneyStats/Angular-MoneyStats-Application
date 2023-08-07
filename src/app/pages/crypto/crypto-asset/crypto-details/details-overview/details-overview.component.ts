@@ -229,10 +229,17 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
 
     let wallets = deepCopy(this.walletsAsset);
     let invested = 0;
+    let balance = 0;
     wallets.forEach((w) => {
       invested += w.assets[0].invested;
+      balance += w.assets[0].balance;
+      this.cryptoService.cryptoDashboard.wallets.find(w1 => w1.name == w.name)!.assets.find(a=> a.identifier == w.assets[0].identifier)!.balance = w.assets[0].balance;
+      this.cryptoService.cryptoDashboard.wallets.find(w1 => w1.name == w.name)!.assets.find(a=> a.identifier == w.assets[0].identifier)!.invested = w.assets[0].invested;
     });
     this.asset.invested = invested;
+    this.asset.balance = balance;
+
+    
   }
 
   goToOperations() {
