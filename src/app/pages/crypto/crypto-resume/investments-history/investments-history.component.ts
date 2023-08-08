@@ -53,6 +53,7 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
   }
 
   getResume() {
+    this.tableBalance = [];
     if (!this.cryptoResume) {
       this.cryptoResume = deepCopy(this.cryptoService.cryptoResume);
     }

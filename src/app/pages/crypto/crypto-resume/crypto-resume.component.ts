@@ -19,6 +19,8 @@ export class CryptoResumeComponent implements OnInit {
   resume: Map<string, CryptoDashboard> = new Map<string, CryptoDashboard>();
   years: Array<string> = [];
 
+  isPast: boolean = false;
+
   constructor(
     private cryptoService: CryptoService,
     private screenService: ScreenService,
@@ -43,6 +45,9 @@ export class CryptoResumeComponent implements OnInit {
   }
 
   updateData(year: string) {
+    if (this.years[this.years.length - 1] != year) {
+      this.isPast = true;
+    } else this.isPast = false;
     this.resumeData = this.resume.get(year)!;
     this.assets = this.resumeData.assets;
   }

@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { CryptoDashboard } from 'src/assets/core/data/class/crypto.class';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
@@ -10,11 +16,11 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
   templateUrl: './resume-assets.component.html',
   styleUrls: ['./resume-assets.component.scss'],
 })
-export class ResumeAssetsComponent implements OnInit {
+export class ResumeAssetsComponent implements OnInit, OnChanges {
   public chartOptions?: Partial<ApexOptions>;
   @Input('resumeData') resumeData: CryptoDashboard = new CryptoDashboard();
   //resume: Map<string, CryptoDashboard> = new Map<string, CryptoDashboard>();
-  years: Array<string> = [];
+  @Input('isPast') isPast: boolean = false;
   balances: Array<number> = [];
   filterDateHistory: string[] = [];
 
@@ -24,17 +30,25 @@ export class ResumeAssetsComponent implements OnInit {
     private charts: ChartService
   ) {}
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.ngOnInit();
+  }
+
   ngOnInit(): void {
+    console.log(this.isPast);
     // TODO: ix lato BE
     setTimeout(() => {
       if (this.resumeData.assets) {
         if (this.screenService?.screenWidth! <= 780) {
-          this.chartOptions = this.charts.renderCryptoAsset(
-            this.resumeData,
-            200
-          );
+          this.chartOptions = this.charts.renderCryptoAsset(this.resumeData, [
+            200,
+            this.isPast,
+          ]);
         } else
-          this.chartOptions = this.charts.renderCryptoAsset(this.resumeData);
+          this.chartOptions = this.charts.renderCryptoAsset(this.resumeData, [
+            350,
+            this.isPast,
+          ]);
       }
     }, 100);
     this.renderTable();
