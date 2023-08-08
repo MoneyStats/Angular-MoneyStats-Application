@@ -118,7 +118,13 @@
                 </h5>
                 <span class="h2 font-weight-bold mb-0" id="tot1"
                   ><small>{{ resumeData.currency }}</small>
-                  {{ asset.value }}</span
+                  {{
+                    isPast &&
+                    asset.history &&
+                    asset.history[asset.history.length - 1].balance
+                      ? asset.history[asset.history.length - 1].balance
+                      : asset.value
+                  }}</span
                 >
                 <br />
                 <span style="margin-left: 1px"
