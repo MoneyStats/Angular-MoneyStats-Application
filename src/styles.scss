@@ -14,13 +14,13 @@ $darkColor: #121212;
     /*margin-left: calc(50% - 1000px);*/
   }
   .hidden_desktop {
-    display: none;
+    display: none !important;
   }
 }
 
 @media screen and (max-width: 780px) {
   .hidden_mobile {
-    display: none;
+    display: none !important;
   }
 
   .text-not-selected,
@@ -98,7 +98,6 @@ body:not(.dark-mode) {
       border: none;
       color: $darkColor;
     }
-    
   }
   #cryptoHeader {
     background-color: $whiteBg !important;
