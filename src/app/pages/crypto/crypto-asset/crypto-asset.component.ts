@@ -44,30 +44,35 @@ export class CryptoAssetComponent implements OnInit {
   }
 
   graphAll() {
+    let dashboard = deepCopy(this.cryptoDashboard);
+    // Get All Date serve a prendere tutte le date per i grafici
+    dashboard.statsAssetsDays = this.getAllDate();
     setTimeout(() => {
       if (this.cryptoDashboard.wallets) {
         if (this.screenService?.screenWidth! <= 780) {
-          this.chartOptions = this.charts.renderCryptoAsset(
-            this.cryptoDashboard,
-            200
-          );
-        } else
-          this.chartOptions = this.charts.renderCryptoAsset(
-            this.cryptoDashboard
-          );
+          this.chartOptions = this.charts.renderCryptoAsset(dashboard, 200);
+        } else this.chartOptions = this.charts.renderCryptoAsset(dashboard);
       }
     }, 100);
   }
 
   graph1Y() {
     let dashboard = deepCopy(this.cryptoDashboard);
+    // Get All Date serve a prendere tutte le date per i grafici
+    dashboard.statsAssetsDays = this.getAllDate();
+
+    let assets: Asset[] = [];
     dashboard.assets.forEach((asset) => {
-      asset.history = asset.history?.filter(
+      let last1Year = asset.history?.filter(
         (h) =>
           h.date.toString().split('-')[0] ===
           new Date().getFullYear().toString()
       );
+      asset.history = last1Year;
+      if (asset.balance != 0) assets.push(asset);
     });
+    dashboard.assets = assets;
+    console.log(assets);
     if (dashboard.statsAssetsDays)
       dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter(
         (s) =>
@@ -82,16 +87,23 @@ export class CryptoAssetComponent implements OnInit {
 
   graph3Y() {
     let dashboard = deepCopy(this.cryptoDashboard);
+    // Get All Date serve a prendere tutte le date per i grafici
+    dashboard.statsAssetsDays = this.getAllDate();
     let last3 = [
       new Date().getFullYear().toString(),
       (new Date().getFullYear() - 1).toString(),
       (new Date().getFullYear() - 2).toString(),
     ];
-    dashboard.assets.forEach((asset) => {
-      asset.history = asset.history?.filter((h) =>
+    let assets: Asset[] = [];
+    dashboard.assets.forEach((asset, index) => {
+      let last3Hist = asset.history?.filter((h) =>
         last3.includes(h.date.toString().split('-')[0])
       );
+      asset.history = last3Hist;
+
+      if (last3Hist?.length != 0) assets.push(asset);
     });
+    dashboard.assets = assets;
     if (dashboard.statsAssetsDays)
       dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter((s) =>
         last3.includes(s.toString().split('-')[0])
@@ -103,7 +115,21 @@ export class CryptoAssetComponent implements OnInit {
     }, 200);
   }
 
-  zeroBalanceSwitch(){
-    return this.showZeroBalance ? this.showZeroBalance = false : this.showZeroBalance = true;
+  zeroBalanceSwitch() {
+    return this.showZeroBalance
+      ? (this.showZeroBalance = false)
+      : (this.showZeroBalance = true);
+  }
+
+  getAllDate(): string[] {
+    let date: string[] = [];
+    this.cryptoDashboard.assets.forEach((a) =>
+      a.history?.forEach((h) => {
+        if (!date.find((d) => d == h.date.toString()))
+          date.push(h.date.toString());
+      })
+    );
+    date.sort();
+    return date;
   }
 }

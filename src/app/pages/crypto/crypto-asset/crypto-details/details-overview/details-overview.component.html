@@ -248,7 +248,7 @@
               class="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
-              attr.data-bs-target="#{{ wallet.name }}"
+              attr.data-bs-target="#{{ wallet.name.split('.')[0] + wallet.id }}"
             >
               <img
                 src="{{ wallet.img }}"
@@ -272,7 +272,7 @@
             </button>
           </h2>
           <div
-            id="{{ wallet.name }}"
+            id="{{ wallet.name.split('.')[0] + wallet.id }}"
             class="accordion-collapse collapse"
             data-bs-parent="#accordionExample2"
           >
@@ -302,7 +302,10 @@
                   >
                     <div class="form-group boxed row">
                       <div class="input-wrapper col-md-5 col-12 text-end">
-                        <label class="label" for="select4">{{ "crypto.asset.details.overview.editInvested" | translate }}</label>
+                        <label class="label" for="select4">{{
+                          "crypto.asset.details.overview.editInvested"
+                            | translate
+                        }}</label>
                         <input
                           type="number"
                           class="form-control"
@@ -317,7 +320,10 @@
                         </i>
                       </div>
                       <div class="input-wrapper col-md-5 col-12 text-end">
-                        <label class="label" for="select4">{{ "crypto.asset.details.overview.editBalance" | translate }}</label>
+                        <label class="label" for="select4">{{
+                          "crypto.asset.details.overview.editBalance"
+                            | translate
+                        }}</label>
                         <input
                           type="number"
                           class="form-control"
@@ -339,14 +345,16 @@
                           type="button"
                           class="btn btn-outline-primary rounded shadowed me-1 mb-1 d-inline"
                         >
-                        {{ "crypto.asset.details.overview.save" | translate }}
+                          {{ "crypto.asset.details.overview.save" | translate }}
                         </button>
                         <button
                           (click)="isEditInvestmentActive = false"
                           type="button"
                           class="btn btn-outline-secondary rounded shadowed me-1 mb-1 d-inline"
                         >
-                        {{ "crypto.asset.details.overview.cancel" | translate }}
+                          {{
+                            "crypto.asset.details.overview.cancel" | translate
+                          }}
                         </button>
                       </div>
                     </div>
