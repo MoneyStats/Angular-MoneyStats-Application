@@ -450,7 +450,7 @@ export class ChartService {
 
   renderCryptoAsset(
     cryptoDashboard: CryptoDashboard,
-    ...height: number[]
+    ...optional: any[]
   ): Partial<ApexOptions> {
     let series: Array<any> = [];
     let statsAssetsDays = cryptoDashboard.statsAssetsDays
@@ -485,7 +485,7 @@ export class ChartService {
         const lastDay: Date = new Date(
           returnStatsDays[returnStatsDays.length - 1]
         );
-        if (lastDay < today) {
+        if (lastDay < today && optional[1]) {
           //if (lastDay.getDate() < today.getDate()) {
           historyBalance.push(asset.value!);
           returnStatsDays.push(today.toDateString());
@@ -543,8 +543,8 @@ export class ChartService {
       historyBalance = [];
     });
     let h = 350;
-    if (height[0]) {
-      h = height[0];
+    if (optional[0] && optional[0] != undefined) {
+      h = optional[0];
     }
     let finalStatsDays: string[] = [];
     if (returnStatsDays.length != 0)

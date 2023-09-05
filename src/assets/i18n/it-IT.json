@@ -576,6 +576,8 @@
       "tab1": "Overview",
       "tab2": "Dati TradingView",
       "tab3": "Grafico Avanzato",
+      "show": "Mostra con Saldo Zero",
+      "hidden": "Nascondi con Saldo Zero",
       "details": {
         "overview": {
           "rank": "Rank",
@@ -583,6 +585,10 @@
           "balance": "Saldo",
           "value": "Saldo Totale in ",
           "invested": "Saldo Investito",
+          "editInvested": "Modifica Investiti",
+          "editBalance": "Modifica Saldo",
+          "save": "Salva",
+          "cancel": "Cancella",
           "performance": "Performance dall'inizio",
           "trend": "Trend dall'inizio",
           "wallets": "Wallet possedenti ",

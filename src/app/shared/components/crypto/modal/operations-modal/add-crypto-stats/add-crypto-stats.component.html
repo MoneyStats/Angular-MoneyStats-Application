@@ -38,21 +38,18 @@
   </div>
   <div *ngIf="isResumeAddAssets" class="card-title">
     <h2 class="modal-title d-inline" style="vertical-align: -4px">
-      {{
-        "crypto.cryptoModal.operations.stats.resumeTitle" | translate
-      }}
+      {{ "crypto.cryptoModal.operations.stats.resumeTitle" | translate }}
     </h2>
     <p>
       <small>{{
-        "crypto.cryptoModal.operations.stats.resumeSubTitle"
-          | translate
+        "crypto.cryptoModal.operations.stats.resumeSubTitle" | translate
       }}</small>
     </p>
   </div>
   <div *ngIf="isAddStatsSelected" class="transactions row">
     <hr />
     <div *ngFor="let asset of assets; let i = index">
-      <div *ngIf="i == currentIndex && !isResumeAddAssets">
+      <div *ngIf="i == currentIndex && !isResumeAddAssets && asset.balance > 0">
         <div class="card-body" style="margin-top: -30px; margin-bottom: -20px">
           <div class="row">
             <div class="col">
@@ -175,120 +172,124 @@
         *ngFor="let asset of assets; let i = index"
         style="margin-top: -20px"
       >
-        <h5 class="card-title text-uppercase text-muted mb-0 ms-2">
-          <img
-            src="{{ asset?.icon }}"
-            alt="img"
-            class="image-block imaged round-img me-1"
-            style="
-              width: 30px !important;
-              height: 30px !important;
-              vertical-align: -11px;
-            "
-          />
-          {{ asset.name }} ({{ asset.symbol }})
-        </h5>
-        <div class="input-info ms-2">
-          <small>
-            {{ asset.name }}
-            {{ "insertStats.balance" | translate }}
-            {{ asset.balance }}
-            {{ asset.symbol }}</small
-          >
-        </div>
-        <div class="card">
-          <ul
-            class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1"
-          >
-            <!-- item -->
-            <li *ngFor="let wallet of filterWallets(wallets, asset.name!)">
-              <a class="item">
-                <div class="icon-box">
-                  <img
-                    src="{{ wallet.img }}"
-                    alt=""
-                    style="border-radius: 50%"
-                  />
-                </div>
-                <div class="in">
-                  <div>
-                    <strong>{{ wallet.name }}</strong>
-                    <div class="text-small text-secondary">
-                      <strong
-                        ><span
-                          class="badge me-1 {{
-                            filterAsset(wallet, asset.name!).history![
-                              filterAsset(wallet, asset.name!).history!.length -
-                                1
-                            ].percentage == 0
-                              ? 'badge-warning'
-                              : filterAsset(wallet, asset.name!).history![
-                                  filterAsset(wallet, asset.name!).history!
-                                    .length - 1
-                                ].percentage > 0
-                              ? 'badge-success'
-                              : 'badge-danger'
-                          }}"
-                        >
-                          <ion-icon
-                            name="{{
+        <div *ngIf="asset.balance > 0">
+          <h5 class="card-title text-uppercase text-muted mb-0 ms-2">
+            <img
+              src="{{ asset?.icon }}"
+              alt="img"
+              class="image-block imaged round-img me-1"
+              style="
+                width: 30px !important;
+                height: 30px !important;
+                vertical-align: -11px;
+              "
+            />
+            {{ asset.name }} ({{ asset.symbol }})
+          </h5>
+          <div class="input-info ms-2">
+            <small>
+              {{ asset.name }}
+              {{ "insertStats.balance" | translate }}
+              {{ asset.balance }}
+              {{ asset.symbol }}</small
+            >
+          </div>
+          <div class="card">
+            <ul
+              class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1"
+            >
+              <!-- item -->
+              <li *ngFor="let wallet of filterWallets(wallets, asset.name!)">
+                <a class="item">
+                  <div class="icon-box">
+                    <img
+                      src="{{ wallet.img }}"
+                      alt=""
+                      style="border-radius: 50%"
+                    />
+                  </div>
+                  <div class="in">
+                    <div>
+                      <strong>{{ wallet.name }}</strong>
+                      <div class="text-small text-secondary">
+                        <strong
+                          ><span
+                            class="badge me-1 {{
                               filterAsset(wallet, asset.name!).history![
                                 filterAsset(wallet, asset.name!).history!
                                   .length - 1
-                              ].percentage > 0
-                                ? 'arrow-up-outline'
-                                : 'arrow-down-outline'
+                              ].percentage == 0
+                                ? 'badge-warning'
+                                : filterAsset(wallet, asset.name!).history![
+                                    filterAsset(wallet, asset.name!).history!
+                                      .length - 1
+                                  ].percentage > 0
+                                ? 'badge-success'
+                                : 'badge-danger'
                             }}"
-                          ></ion-icon>
+                          >
+                            <ion-icon
+                              name="{{
+                                filterAsset(wallet, asset.name!).history![
+                                  filterAsset(wallet, asset.name!).history!
+                                    .length - 1
+                                ].percentage > 0
+                                  ? 'arrow-up-outline'
+                                  : 'arrow-down-outline'
+                              }}"
+                            ></ion-icon>
+                            {{
+                              filterAsset(wallet, asset.name!).history![
+                                filterAsset(wallet, asset.name!).history!
+                                  .length - 1
+                              ].percentage.toFixed(2)
+                            }}%
+                          </span></strong
+                        >
+                        <strong
+                          class="{{
+                            filterAsset(wallet, asset.name!).history![
+                              filterAsset(wallet, asset.name!).history!.length -
+                                1
+                            ].trend == 0
+                              ? 'text-warning'
+                              : filterAsset(wallet, asset.name!).history![
+                                  filterAsset(wallet, asset.name!).history!
+                                    .length - 1
+                                ].trend > 0
+                              ? 'text-success'
+                              : 'text-danger'
+                          }}"
+                          >{{ currency }}
                           {{
                             filterAsset(wallet, asset.name!).history![
                               filterAsset(wallet, asset.name!).history!.length -
                                 1
-                            ].percentage.toFixed(2)
-                          }}%
-                        </span></strong
-                      >
+                            ].trend
+                          }}</strong
+                        >
+                      </div>
+                    </div>
+                    <div class="text-end">
                       <strong
-                        class="{{
-                          filterAsset(wallet, asset.name!).history![
-                            filterAsset(wallet, asset.name!).history!.length - 1
-                          ].trend == 0
-                            ? 'text-warning'
-                            : filterAsset(wallet, asset.name!).history![
-                                filterAsset(wallet, asset.name!).history!
-                                  .length - 1
-                              ].trend > 0
-                            ? 'text-success'
-                            : 'text-danger'
-                        }}"
                         >{{ currency }}
-                        {{
-                          filterAsset(wallet, asset.name!).history![
-                            filterAsset(wallet, asset.name!).history!.length - 1
-                          ].trend
-                        }}</strong
+                        {{ filterAsset(wallet, asset.name!).value }}</strong
                       >
+                      <div class="text-small">
+                        {{
+                          filterAsset(wallet, asset.name!).lastUpdate
+                            | date : "d MMM y"
+                        }}
+                      </div>
                     </div>
                   </div>
-                  <div class="text-end">
-                    <strong
-                      >{{ currency }}
-                      {{ filterAsset(wallet, asset.name!).value }}</strong
-                    >
-                    <div class="text-small">
-                      {{
-                        filterAsset(wallet, asset.name!).lastUpdate
-                          | date : "d MMM y"
-                      }}
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <!-- * item -->
-          </ul>
+                </a>
+              </li>
+              <!-- * item -->
+            </ul>
+          </div>
+          <hr style="margin-top: -10px" *ngIf="i < assets.length - 1" />
         </div>
-        <hr style="margin-top: -10px" *ngIf="i < assets.length - 1" />
       </div>
     </div>
     <!-- End Riepilogo Add Stats -->
@@ -302,14 +303,14 @@
       (click)="changeAsset()"
       [disabled]="f.invalid && !validateDate()"
       type="button"
-      class="btn btn-primary me-1 mb-1"
+      class="btn btn-primary me-1"
     >
       {{ "crypto.cryptoModal.operations.stats.next" | translate }}
     </button>
     <button
       *ngIf="isResumeAddAssets"
       type="button"
-      class="btn btn-primary me-1 mb-1"
+      class="btn btn-primary me-1 mt-3"
       (click)="save()"
       data-bs-dismiss="modal"
     >

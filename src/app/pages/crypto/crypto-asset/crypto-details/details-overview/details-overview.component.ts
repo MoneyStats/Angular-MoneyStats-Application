@@ -114,6 +114,8 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
         ? deepCopy(this.cryptoService.asset!)
         : deepCopy(this.asset),
     ];
+    // Get All Date serve a prendere tutte le date per i grafici
+    dashboard.statsAssetsDays = this.getAllDate(dashboard.assets);
     setTimeout(() => {
       if (this.cryptoDashboard.wallets) {
         if (this.screenService?.screenWidth! <= 780) {
@@ -131,6 +133,8 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
         ? deepCopy(this.cryptoService.asset!)
         : deepCopy(this.asset),
     ];
+    // Get All Date serve a prendere tutte le date per i grafici
+    dashboard.statsAssetsDays = this.getAllDate(dashboard.assets);
     if (dashboard.assets[0]) {
       dashboard.assets[0].history = dashboard.assets[0].history?.filter(
         (h) =>
@@ -153,19 +157,24 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
   graph3Y() {
     this.setColor();
     let dashboard: CryptoDashboard = deepCopy(this.cryptoDashboard);
+
     dashboard.assets = [
       this.asset.name == undefined
         ? deepCopy(this.cryptoService.asset!)
         : deepCopy(this.asset),
     ];
+    // Get All Date serve a prendere tutte le date per i grafici
+    dashboard.statsAssetsDays = this.getAllDate(dashboard.assets);
     let last3 = [
       new Date().getFullYear().toString(),
       (new Date().getFullYear() - 1).toString(),
       (new Date().getFullYear() - 2).toString(),
     ];
-    dashboard.assets[0].history = dashboard.assets[0].history?.filter((h) =>
+    let last3Years = dashboard.assets[0].history?.filter((h) =>
       last3.includes(h.date.toString().split('-')[0])
     );
+    dashboard.assets[0].history = last3Years;
+
     if (dashboard.statsAssetsDays)
       dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter((s) =>
         last3.includes(s.toString().split('-')[0])
@@ -229,10 +238,21 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
 
     let wallets = deepCopy(this.walletsAsset);
     let invested = 0;
+    let balance = 0;
     wallets.forEach((w) => {
       invested += w.assets[0].invested;
+      balance += w.assets[0].balance;
+      this.cryptoService.cryptoDashboard.wallets
+        .find((w1) => w1.name == w.name)!
+        .assets.find((a) => a.identifier == w.assets[0].identifier)!.balance =
+        w.assets[0].balance;
+      this.cryptoService.cryptoDashboard.wallets
+        .find((w1) => w1.name == w.name)!
+        .assets.find((a) => a.identifier == w.assets[0].identifier)!.invested =
+        w.assets[0].invested;
     });
     this.asset.invested = invested;
+    this.asset.balance = balance;
   }
 
   goToOperations() {
@@ -245,5 +265,18 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
 
   selectOperation(operation: any) {
     this.operationSelect = operation;
+  }
+
+  getAllDate(assets: Asset[]): string[] {
+    let date: string[] = [];
+    assets.forEach((a) =>
+      a.history?.forEach((h) => {
+        if (!date.find((d) => d == h.date.toString()))
+          date.push(h.date.toString());
+      })
+    );
+    date.sort();
+    console.log(date);
+    return date;
   }
 }

@@ -107,7 +107,7 @@
     <div class="transactions row">
       <div
         class="col-xl-3 col-sm-6 mobile-size"
-        *ngFor="let asset of resumeData.assets"
+        *ngFor="let asset of resumeDataFilterOnDate.assets"
       >
         <div class="card border_round card-stats mb-4 mb-xl-0">
           <div class="card-body">
@@ -118,7 +118,13 @@
                 </h5>
                 <span class="h2 font-weight-bold mb-0" id="tot1"
                   ><small>{{ resumeData.currency }}</small>
-                  {{ asset.value }}</span
+                  {{
+                    isPast &&
+                    asset.history &&
+                    asset.history[asset.history.length - 1].balance
+                      ? asset.history[asset.history.length - 1].balance
+                      : asset.value
+                  }}</span
                 >
                 <br />
                 <span style="margin-left: 1px"

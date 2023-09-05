@@ -576,6 +576,8 @@
       "tab1": "Overview",
       "tab2": "TradingView Datas",
       "tab3": "Advanced Graph",
+      "show": "Show Zero Balance",
+      "hidden": "Hidden Zero Balance",
       "details": {
         "overview": {
           "rank": "Rank",
@@ -583,6 +585,10 @@
           "balance": "Balance",
           "value": "Total Balance in ",
           "invested": "Money Invested",
+          "editInvested": "Edit Invested",
+          "editBalance": "Edit Balance",
+          "save": "Save",
+          "cancel": "Cancel",
           "performance": "Performance since beginning",
           "trend": "Trend since beginning",
           "wallets": "Wallet with ",

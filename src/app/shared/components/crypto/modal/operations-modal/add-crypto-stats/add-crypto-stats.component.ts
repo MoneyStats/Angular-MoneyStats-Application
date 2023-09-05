@@ -55,13 +55,21 @@ export class AddCryptoStatsComponent implements OnInit {
   }
 
   changeAsset() {
+    console.log(this.currentIndex, this.assets.length);
     this.currentIndex += 1;
     let element = document.getElementById('action-scheet');
     element?.scrollTo(0, 0);
     if (this.currentIndex == this.assets.length) {
       this.confirm();
       this.isResumeAddAssets = true;
+      return;
     }
+    // Cambio automaticamente asset se il balance è 0
+    if (
+      this.assets[this.currentIndex] == undefined ||
+      this.assets[this.currentIndex].balance == 0
+    )
+      this.changeAsset();
   }
 
   validateDate() {
@@ -93,9 +101,12 @@ export class AddCryptoStatsComponent implements OnInit {
       // Check Wallet Date if is before the current date to prevert the update of the data
       if (wallet.assets)
         wallet.assets.forEach((asset) => {
-          let stats: Stats = new Stats();
-          this.setDataForNewStats(asset, statsWalletDays, stats);
-          asset.newValue = parseFloat('');
+          // Non setto i dati se l'asset ha balance uguale a 0
+          if (asset.balance > 0) {
+            let stats: Stats = new Stats();
+            this.setDataForNewStats(asset, statsWalletDays, stats);
+            asset.newValue = parseFloat('');
+          }
         });
     });
     if (this.cryptoService.cryptoDashboard.statsAssetsDays) {
@@ -163,10 +174,14 @@ export class AddCryptoStatsComponent implements OnInit {
         beforeThisStats.balance = 0.001;
       }
     }
-    let percentageThisStats = (
-      ((asset.newValue! - beforeThisStats.balance) / beforeThisStats.balance) *
-      100
-    ).toFixed(2);
+    let percentageThisStats =
+      beforeThisStats.balance != 0
+        ? (
+            ((asset.newValue! - beforeThisStats.balance) /
+              beforeThisStats.balance) *
+            100
+          ).toFixed(2)
+        : '0';
 
     stats.balance = asset.newValue!;
     stats.date = new Date(this.dateStats);
