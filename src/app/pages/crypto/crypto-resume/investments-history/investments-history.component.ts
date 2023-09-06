@@ -16,6 +16,7 @@ import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { v4 as uuidv4 } from 'uuid';
 import { Router } from '@angular/router';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
+import { LoggerService } from 'src/assets/core/utils/log.service';
 
 @Component({
   selector: 'app-investments-history',
@@ -25,7 +26,7 @@ import { ModalConstant } from 'src/assets/core/data/constant/constant';
 export class InvestmentsHistoryComponent implements OnInit, OnChanges {
   @Input('cryptoResume') cryptoResume!: Map<string, CryptoDashboard>;
   @Input('cryptoCurrency') cryptoCurrency: string = '';
-  @Input('assets') assets: Asset[] = [];
+  assets: Asset[] = [];
   // History Tab
   totalList: Array<any> = [];
   totalMap: Map<string, any> = new Map<string, any>();
@@ -36,7 +37,11 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
   operations: Operation[] = [];
   operationSelect?: Operation;
 
-  constructor(private cryptoService: CryptoService, private router: Router) {}
+  constructor(
+    private cryptoService: CryptoService,
+    private router: Router,
+    private logger: LoggerService
+  ) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -103,6 +108,10 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
    * END History Tab Section
    */
   getOperations() {
+    this.cryptoService.getCryptoAssets().subscribe((data) => {
+      this.logger.LOG(data.message!, 'CryptoAssetComponent');
+      this.assets = data.data;
+    });
     this.operations = [];
     let wallets = deepCopy(this.cryptoService.cryptoDashboard.wallets);
     wallets.forEach((wallet) => {

@@ -463,6 +463,7 @@ export class ChartService {
       colors.push(this.imageColorPicker.getColor(asset.icon!, index1));
       let historyBalance: Array<number> = [];
       let index = 0;
+      console.log(returnStatsDays);
 
       if (asset && asset.history && asset.history.length != 0) {
         asset.history!.forEach((h) => {
@@ -508,6 +509,7 @@ export class ChartService {
           //  lastDay = statsAssetsDays[statsAssetsDays.length - 2];
           //  historyBalance.push(0);
           //}
+
           let count = returnStatsDays.indexOf(lastDay);
           if (count != -1 && count != index) {
             Array.from(Array(count - index)).forEach((d) =>

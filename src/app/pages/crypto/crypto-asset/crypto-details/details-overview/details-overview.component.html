@@ -368,22 +368,30 @@
                   </div>
                   <strong
                     class="{{
-                      asset.value! - asset.invested! == 0
+                      wallet.assets[0].value! - wallet.assets[0].invested! == 0
                         ? 'text-warning'
-                        : asset.value! - asset.invested! > 0
+                        : wallet.assets[0].value! - wallet.assets[0].invested! >
+                          0
                         ? 'text-success'
                         : 'text-danger'
                     }}"
-                    >{{ (asset.value! - asset.invested!).toFixed(2) }}
+                    >{{
+                      (
+                        wallet.assets[0].value! - wallet.assets[0].invested!
+                      ).toFixed(2)
+                    }}
                     {{ cryptoDashboard.currency }}
                     <span
                       class="badge {{
-                        ((asset.value! - asset.invested!) / asset.invested!) *
+                        ((wallet.assets[0].value! -
+                          wallet.assets[0].invested!) /
+                          wallet.assets[0].invested!) *
                           100! ==
                         0
                           ? 'badge-warning'
-                          : ((asset.value! - asset.invested!) /
-                              asset.invested!) *
+                          : ((wallet.assets[0].value! -
+                              wallet.assets[0].invested!) /
+                              wallet.assets[0].invested!) *
                               100! >
                             0
                           ? 'badge-success'
@@ -392,12 +400,15 @@
                     >
                       <ion-icon
                         name="{{
-                          ((asset.value! - asset.invested!) / asset.invested!) *
+                          ((wallet.assets[0].value! -
+                            wallet.assets[0].invested!) /
+                            wallet.assets[0].invested!) *
                             100! ==
                           0
                             ? 'arrow-down-outline'
-                            : ((asset.value! - asset.invested!) /
-                                asset.invested!) *
+                            : ((wallet.assets[0].value! -
+                                wallet.assets[0].invested!) /
+                                wallet.assets[0].invested!) *
                                 100! >
                               0
                             ? 'arrow-up-outline'
@@ -406,7 +417,9 @@
                       ></ion-icon>
                       {{
                         (
-                          ((asset.value! - asset.invested!) / asset.invested!) *
+                          ((wallet.assets[0].value! -
+                            wallet.assets[0].invested!) /
+                            wallet.assets[0].invested!) *
                           100!
                         ).toFixed(2)
                       }}%
