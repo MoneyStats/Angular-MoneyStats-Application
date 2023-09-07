@@ -27,7 +27,7 @@
               *ngFor="let operation of operations"
               value="{{ operation }}"
               [selected]="operation == operationSelect"
-              [disabled]="operation != 'New Investment'"
+              [disabled]="operation == 'Trading'"
             >
               {{ operation }}
             </option>
