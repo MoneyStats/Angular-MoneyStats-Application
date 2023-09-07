@@ -108,10 +108,7 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
    * END History Tab Section
    */
   getOperations() {
-    this.cryptoService.getCryptoAssets().subscribe((data) => {
-      this.logger.LOG(data.message!, 'CryptoAssetComponent');
-      this.assets = data.data;
-    });
+    this.assets = deepCopy(this.cryptoService.cryptoDashboard.assets);
     this.operations = [];
     let wallets = deepCopy(this.cryptoService.cryptoDashboard.wallets);
     wallets.forEach((wallet) => {

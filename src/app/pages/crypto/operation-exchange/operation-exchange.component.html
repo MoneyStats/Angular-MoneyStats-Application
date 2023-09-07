@@ -46,7 +46,7 @@
 
     <form #f="ngForm" action="">
       <section class="mx-auto" style="max-width: 1500px">
-        <div class="section mt-2">
+        <div class="section mt-2" *ngIf="operationType == 'New Investment'">
           <div class="card border">
             <div class="card-body">
               <div class="form-group basic p-0">
@@ -84,6 +84,62 @@
                         {{ fiat }}
                       </option>
                     </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section" *ngIf="operationType == 'Holding'">
+          <div class="card border">
+            <div class="card-body">
+              <div class="form-group basic p-0">
+                <div class="exchange-heading">
+                  <label class="group-label" for="toAmount">{{
+                    "crypto.operationExchange.to" | translate
+                  }}</label>
+                  <div class="exchange-wallet-info">
+                    {{ "crypto.operationExchange.balance" | translate }}
+                    <strong>
+                      {{
+                        holdingAssetToSell.balance
+                          ? holdingAssetToSell.balance
+                          : 0
+                      }}
+                      {{ holdingAssetToSell.symbol }}</strong
+                    >
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-8 col-7">
+                    <div class="exchange-group">
+                      <div class="input-col">
+                        <input
+                          type="number"
+                          class="form-control form-control-lg pe-0 border-0"
+                          id="toAmount"
+                          placeholder="0"
+                          id="assetHoldingBalance"
+                          name="assetHoldingBalance"
+                          #assetHoldingBalance1="ngModel"
+                          required
+                          (keyup)="makeNewBalance()"
+                          [(ngModel)]="investedBalance"
+                          value="{{ investedBalance }}"
+                          maxlength="10"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-5" style="max-height: 55px">
+                    <app-asset-select
+                      [wrapperID]="assetConstant.HOLDING"
+                      [fiat]="fiat!"
+                      [isOperation]="true"
+                      [cryptoPrices]="wallet.assets"
+                      (emitSelectAsset)="emitHoldingSelectAsset($event)"
+                    ></app-asset-select>
                   </div>
                 </div>
               </div>
@@ -169,12 +225,28 @@
       </section>
 
       <!-- Bottoni Mobile -->
-      <div class="form-button-group transparent">
+      <div
+        class="form-button-group transparent"
+        *ngIf="operationType == 'New Investment'"
+      >
         <button
           [disabled]="f.invalid"
           type="button"
           class="btn btn-primary btn-block btn-lg"
           (click)="exchangeNewInvestment()"
+        >
+          {{ "crypto.operationExchange.exchange" | translate }}
+        </button>
+      </div>
+      <div
+        class="form-button-group transparent"
+        *ngIf="operationType == 'Holding'"
+      >
+        <button
+          [disabled]="f.invalid"
+          type="button"
+          class="btn btn-primary btn-block btn-lg"
+          (click)="exchangeHoldingInvestment()"
         >
           {{ "crypto.operationExchange.exchange" | translate }}
         </button>

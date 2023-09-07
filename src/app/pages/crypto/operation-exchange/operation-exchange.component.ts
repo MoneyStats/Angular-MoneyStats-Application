@@ -32,6 +32,10 @@ export class OperationExchangeComponent implements OnInit {
   investedMoney: number = 100;
   assetNewBalance: number = 0;
 
+  // Holding
+  holdingAssetToSell: Asset = new Asset();
+  investedBalance: number = 0;
+
   constructor(
     private cryptoService: CryptoService,
     private route: ActivatedRoute,
@@ -74,6 +78,13 @@ export class OperationExchangeComponent implements OnInit {
     return this.walletSelect != undefined;
   }
 
+  emitHoldingSelectAsset(asset: Asset) {
+    this.holdingAssetToSell = asset;
+    this.investedBalance = this.holdingAssetToSell.balance;
+
+    this.makeNewBalance();
+  }
+
   emitSelectAsset(asset: Asset) {
     asset.id = undefined;
     asset.lastUpdate = new Date();
@@ -90,9 +101,55 @@ export class OperationExchangeComponent implements OnInit {
   }
 
   makeNewBalance() {
+    if (this.operationType == 'Holding')
+      this.investedMoney =
+        this.holdingAssetToSell.current_price! * this.investedBalance;
     this.assetNewBalance = parseFloat(
       (this.investedMoney / this.marketDataSelected.current_price!).toFixed(8)
     );
+  }
+
+  exchangeHoldingInvestment() {
+    let holdingAsset = deepCopy(this.holdingAssetToSell);
+    holdingAsset.lastUpdate = new Date();
+
+    let percentualeInvestitoCalcolata =
+      holdingAsset.invested * (this.investedMoney / holdingAsset.value!);
+    holdingAsset.balance -= this.investedBalance;
+    holdingAsset.invested -= percentualeInvestitoCalcolata;
+
+    let assetToSave = deepCopy(this.assetInWallet);
+    if (!assetToSave.lastUpdate) {
+      assetToSave.lastUpdate = new Date();
+      assetToSave.performance = 0;
+      assetToSave.trend = 0;
+    }
+    Number.isNaN(assetToSave.invested) || assetToSave.invested == undefined
+      ? (assetToSave.invested = percentualeInvestitoCalcolata)
+      : (assetToSave.invested += percentualeInvestitoCalcolata);
+    Number.isNaN(assetToSave.balance) || assetToSave.balance == undefined
+      ? (assetToSave.balance = this.assetNewBalance)
+      : (assetToSave.balance += this.assetNewBalance);
+
+    let operation: Operation = new Operation();
+    operation.type = this.operationType;
+    operation.status = 'CLOSED';
+    operation.entryDate = new Date();
+    operation.entryCoin = holdingAsset.name;
+    operation.entryPrice = holdingAsset.current_price;
+    operation.entryPriceValue = this.investedMoney;
+    operation.entryQuantity = this.investedBalance;
+    operation.exitDate = new Date();
+    operation.exitCoin = assetToSave.symbol;
+    operation.exitPrice = assetToSave.current_price;
+    operation.exitPriceValue = this.investedMoney;
+    operation.exitQuantity = this.assetNewBalance;
+
+    assetToSave.operations = [operation];
+
+    let walletToSave = deepCopy(this.wallet);
+    walletToSave.assets = [assetToSave, holdingAsset];
+    this.saveWallet(walletToSave);
   }
 
   exchangeNewInvestment() {
@@ -127,6 +184,10 @@ export class OperationExchangeComponent implements OnInit {
 
     let walletToSave = deepCopy(this.wallet);
     walletToSave.assets = [assetToSave];
+    this.saveWallet(walletToSave);
+  }
+
+  saveWallet(walletToSave: Wallet) {
     this.cryptoService
       .addOrUpdateCryptoAsset(walletToSave)
       .subscribe((data) => {
