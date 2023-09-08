@@ -15,7 +15,10 @@ import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { v4 as uuidv4 } from 'uuid';
 import { Router } from '@angular/router';
-import { ModalConstant } from 'src/assets/core/data/constant/constant';
+import {
+  ModalConstant,
+  OperationsType,
+} from 'src/assets/core/data/constant/constant';
 import { LoggerService } from 'src/assets/core/utils/log.service';
 
 @Component({
@@ -38,13 +41,17 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
   operationSelect?: Operation;
 
   constructor(
-    private cryptoService: CryptoService,
+    public cryptoService: CryptoService,
     private router: Router,
     private logger: LoggerService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
+  }
+
+  public get operationTypeConstant(): typeof OperationsType {
+    return OperationsType;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -118,6 +125,12 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
             asset.operations.forEach((operation) => {
               operation.asset = asset;
               operation.wallet = wallet;
+              if (operation.type != OperationsType.NEWINVESTMENT)
+                operation.assetSell = deepCopy(
+                  this.cryptoService.cryptoDashboard.assets.find(
+                    (a) => a.symbol == operation.entryCoin
+                  )
+                );
               this.operations.push(operation);
             });
         });

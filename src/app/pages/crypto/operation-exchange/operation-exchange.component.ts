@@ -116,6 +116,9 @@ export class OperationExchangeComponent implements OnInit {
     let percentualeInvestitoCalcolata =
       holdingAsset.invested * (this.investedMoney / holdingAsset.value!);
     holdingAsset.balance -= this.investedBalance;
+    if (holdingAsset.balance == 0) {
+      percentualeInvestitoCalcolata = holdingAsset.invested;
+    }
     holdingAsset.invested -= percentualeInvestitoCalcolata;
 
     let assetToSave = deepCopy(this.assetInWallet);
@@ -135,7 +138,7 @@ export class OperationExchangeComponent implements OnInit {
     operation.type = this.operationType;
     operation.status = 'CLOSED';
     operation.entryDate = new Date();
-    operation.entryCoin = holdingAsset.name;
+    operation.entryCoin = holdingAsset.symbol;
     operation.entryPrice = holdingAsset.current_price;
     operation.entryPriceValue = this.investedMoney;
     operation.entryQuantity = this.investedBalance;

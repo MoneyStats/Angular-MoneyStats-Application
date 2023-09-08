@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Operation } from 'src/assets/core/data/class/crypto.class';
+import { OperationsType } from 'src/assets/core/data/constant/constant';
 
 @Component({
   selector: 'app-operation-details',
@@ -12,6 +13,10 @@ export class OperationDetailsComponent implements OnInit {
   @Input('currency') currency: string = '';
 
   constructor() {}
+
+  public get operationTypeConstant(): typeof OperationsType {
+    return OperationsType;
+  }
 
   ngOnInit(): void {
     console.log(this.operation);

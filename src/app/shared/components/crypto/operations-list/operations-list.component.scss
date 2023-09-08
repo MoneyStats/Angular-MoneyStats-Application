@@ -1,0 +1,25 @@
+.img1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.img2 {
+  position: absolute;
+  left: 20px;
+}
+.icon-box-c {
+  width: 45px !important;
+  height: 45px !important;
+  position: relative;
+}
+
+.rounded-pill {
+  background-color: black !important;
+}
+@media screen and (max-width: 780px) {
+  .cards-op {
+    margin-left: -10px !important;
+    margin-right: -10px !important;
+  }
+}

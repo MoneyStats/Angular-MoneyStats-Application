@@ -97,7 +97,7 @@
               <div class="form-group basic p-0">
                 <div class="exchange-heading">
                   <label class="group-label" for="toAmount">{{
-                    "crypto.operationExchange.to" | translate
+                    "crypto.operationExchange.from" | translate
                   }}</label>
                   <div class="exchange-wallet-info">
                     {{ "crypto.operationExchange.balance" | translate }}
@@ -110,9 +110,16 @@
                       {{ holdingAssetToSell.symbol }}</strong
                     >
                   </div>
+                  <div
+                    style="position: absolute; bottom: 9px; right: 13px"
+                    class="exchange-wallet-info"
+                    [innerHTML]="
+                      'crypto.operationExchange.commition' | translate
+                    "
+                  ></div>
                 </div>
                 <div class="row">
-                  <div class="col-md-8 col-7">
+                  <div class="col-md-8 col-7 mt-1">
                     <div class="exchange-group">
                       <div class="input-col">
                         <input
@@ -128,11 +135,12 @@
                           [(ngModel)]="investedBalance"
                           value="{{ investedBalance }}"
                           maxlength="10"
+                          max="{{ holdingAssetToSell.balance }}"
                         />
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-4 col-5" style="max-height: 55px">
+                  <div class="col-md-4 col-5 mb-2" style="max-height: 55px">
                     <app-asset-select
                       [wrapperID]="assetConstant.HOLDING"
                       [fiat]="fiat!"
@@ -144,6 +152,13 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div
+            *ngIf="assetHoldingBalance1.invalid"
+            class="alert alert-danger mb-1"
+            role="alert"
+          >
+            {{ "crypto.operationExchange.warningBalance" | translate }}
           </div>
         </div>
 
@@ -256,6 +271,6 @@
   </div>
 </div>
 <app-info-modal
-  [isNewInvestment]="true"
+  [operationType]="operationType"
   [modalId]="modalConstant.INFO"
 ></app-info-modal>

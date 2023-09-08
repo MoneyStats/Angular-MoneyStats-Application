@@ -21,13 +21,29 @@
               {{ "crypto.cryptoModal.info.operation.details" | translate }}
             </p>
           </div>
-          <div *ngIf="isNewInvestment" class="text-center">
+          <div
+            *ngIf="operationType == operationTypeConstant.NEWINVESTMENT"
+            class="text-center"
+          >
             <h3>
               {{ "crypto.cryptoModal.info.newInvestment.title" | translate }}
             </h3>
             <p
               [innerHTML]="
                 'crypto.cryptoModal.info.newInvestment.details' | translate
+              "
+            ></p>
+          </div>
+          <div
+            *ngIf="operationType == operationTypeConstant.HOLDING"
+            class="text-center"
+          >
+            <h3>
+              {{ "crypto.cryptoModal.info.holding.title" | translate }}
+            </h3>
+            <p
+              [innerHTML]="
+                'crypto.cryptoModal.info.holding.details' | translate
               "
             ></p>
           </div>

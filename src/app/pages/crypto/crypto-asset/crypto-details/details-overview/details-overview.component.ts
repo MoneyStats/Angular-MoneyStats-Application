@@ -21,7 +21,10 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { ImageColorPickerService } from 'src/assets/core/utils/image.color.picker.service';
 import { LoggerService } from 'src/assets/core/utils/log.service';
 import { v4 as uuidv4 } from 'uuid';
-import { ModalConstant } from 'src/assets/core/data/constant/constant';
+import {
+  ModalConstant,
+  OperationsType,
+} from 'src/assets/core/data/constant/constant';
 
 @Component({
   selector: 'app-details-overview',
@@ -54,6 +57,10 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
+  }
+
+  public get operationTypeConstant(): typeof OperationsType {
+    return OperationsType;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -119,8 +126,15 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
     setTimeout(() => {
       if (this.cryptoDashboard.wallets) {
         if (this.screenService?.screenWidth! <= 780) {
-          this.chartOptions = this.charts.renderCryptoAsset(dashboard, 200);
-        } else this.chartOptions = this.charts.renderCryptoAsset(dashboard);
+          this.chartOptions = this.charts.renderCryptoAsset(dashboard, [
+            200,
+            true,
+          ]);
+        } else
+          this.chartOptions = this.charts.renderCryptoAsset(dashboard, [
+            350,
+            true,
+          ]);
       }
     }, 100);
   }
@@ -148,8 +162,9 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
         );
       setTimeout(() => {
         if (this.screenService?.screenWidth! <= 780)
-          this.chart1Y = this.charts.renderCryptoAsset(dashboard, 200);
-        else this.chart1Y = this.charts.renderCryptoAsset(dashboard);
+          this.chart1Y = this.charts.renderCryptoAsset(dashboard, [200, false]);
+        else
+          this.chart1Y = this.charts.renderCryptoAsset(dashboard, [350, false]);
       }, 200);
     }
   }
@@ -181,8 +196,8 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
       );
     setTimeout(() => {
       if (this.screenService?.screenWidth! <= 780)
-        this.chart3Y = this.charts.renderCryptoAsset(dashboard, 200);
-      else this.chart3Y = this.charts.renderCryptoAsset(dashboard);
+        this.chart3Y = this.charts.renderCryptoAsset(dashboard, [200, true]);
+      else this.chart3Y = this.charts.renderCryptoAsset(dashboard, [350, true]);
     }, 200);
   }
 
@@ -223,6 +238,11 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
         wallet.assets[0].operations.forEach((operation) => {
           operation.wallet = wallet;
           operation.asset = wallet.assets[0];
+          if (operation.type != OperationsType.NEWINVESTMENT)
+            operation.assetSell = this.cryptoDashboard.assets.find(
+              (a) => a.symbol == operation.entryCoin
+            );
+          console.log(operation.assetSell);
           operations.push(operation);
         });
     });

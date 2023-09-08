@@ -20,11 +20,18 @@
           "crypto.asset.details.overview.view" | translate
         }}</a>
       </div>
-      <div class="card border_round">
+      <app-operations-list
+        [cryptoDashboard]="cryptoService.cryptoDashboard"
+        [walletsAsset]="cryptoService.cryptoDashboard.wallets"
+        [isFullList]="true"
+        [operationsMapByYear]="operationsMapByYear"
+        [year]="year"
+      ></app-operations-list>
+      <!--<div class="card border_round">
         <ul
           class="listview flush transparent no-line image-listview detailed-list border_round"
         >
-          <!-- item -->
+           item
           <li *ngFor="let operation of operationsMapByYear?.get(year)">
             <a
               class="item"
@@ -85,13 +92,13 @@
                 </div>
               </div>
             </a>
-          </li>
-          <!-- * item -->
+          </li>-->
+      <!-- * item
         </ul>
         <div hidden class="card-body pt-0">
           <a href="#" class="btn btn-block btn-outline-secondary">Load more</a>
         </div>
-      </div>
+      </div>-->
     </div>
     <!-- History -->
   </div>

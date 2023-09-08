@@ -38,6 +38,7 @@ export class ResumeAssetsComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    console.log(this.isPast);
     // TODO: ix lato BE
     setTimeout(() => {
       if (this.resumeData.assets) {

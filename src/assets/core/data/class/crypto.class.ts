@@ -57,4 +57,5 @@ export class Operation extends GenericModel {
   trend?: number;
   asset?: Asset;
   wallet?: Wallet;
+  assetSell?: Asset;
 }

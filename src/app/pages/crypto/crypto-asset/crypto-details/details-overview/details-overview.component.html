@@ -519,12 +519,17 @@
           "crypto.asset.details.overview.view" | translate
         }}</a>
       </div>
-      <div class="card border_round">
+      <app-operations-list
+        [cryptoDashboard]="cryptoDashboard"
+        [walletsAsset]="walletsAsset"
+        [isAssetOperations]="true"
+      ></app-operations-list>
+      <!--<div class="card border_round">
         <ul
           class="listview flush transparent no-line image-listview detailed-list border_round"
           *ngFor="let operation of getOperations(); let i = index"
         >
-          <!-- item -->
+
           <li *ngIf="i < 4">
             <a
               class="item"
@@ -532,10 +537,28 @@
               data-bs-toggle="modal"
               attr.data-bs-target="#{{ modalConstant.CRYPTOOPERATIONDETAILS }}"
             >
-              <div class="icon-box-c me-2">
+              <div
+                class="icon-box-c me-2"
+                *ngIf="operation.type == operationTypeConstant.NEWINVESTMENT"
+              >
                 <img
                   class="rounded-pill"
                   src="{{ operation.wallet.img }}"
+                  alt=""
+                />
+              </div>
+              <div
+                class="icon-box-c me-4"
+                *ngIf="operation.type != operationTypeConstant.NEWINVESTMENT"
+              >
+                <img
+                  class="rounded-pill img1"
+                  src="{{ operation?.assetSell?.icon }}"
+                  alt=""
+                />
+                <img
+                  class="rounded-pill img2"
+                  src="{{ operation?.asset?.icon }}"
                   alt=""
                 />
               </div>
@@ -581,7 +604,6 @@
               </div>
             </a>
           </li>
-          <!-- * item -->
         </ul>
         <div class="card-body pt-0">
           <a
@@ -590,13 +612,8 @@
             >{{ "crypto.asset.details.overview.more" | translate }}</a
           >
         </div>
-      </div>
+      </div>-->
     </div>
     <!-- History -->
   </div>
 </div>
-<app-operation-details
-  [modalId]="modalConstant.CRYPTOOPERATIONDETAILS"
-  [operation]="operationSelect"
-  [currency]="cryptoDashboard.currency"
-></app-operation-details>
