@@ -39,7 +39,18 @@
   right: 40px;
 }
 
+.img1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.img2 {
+  position: absolute;
+  left: 20px;
+}
 .icon-box-c {
   width: 45px !important;
   height: 45px !important;
+  position: relative;
 }

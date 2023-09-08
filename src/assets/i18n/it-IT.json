@@ -636,6 +636,7 @@
       "to": "A",
       "commition": "Commissioni : <strong> Incluse</strong>",
       "last": "Ultimo Aggiornamento :",
+      "warningBalance": "Il saldo inserito supera il massimo amount disponibile",
       "exchange": "Exchange"
     },
     "operationDetails": {
@@ -705,6 +706,10 @@
         "newInvestment": {
           "title": "Nuovo Investimento",
           "details": "In questa sezione puoi aggiungere un nuovo investimento, dal tuo portafoglio personale (Non è necessario specificare il portafoglio personale) nel tuo <strong>Crypto Wallet</strong>, verrà registrata una nuova operazione ed aggiornato o aggiunto l'asset corrente."
+        },
+        "holding": {
+          "title": "Holding",
+          "details": "In questa sezione puoi effettuare un'operazione di Holding.<br>Scegli l'<strong>Asset</strong> che vuoi utilizzare per l'investimento dal tuo portafoglio e l'<strong>Asset</strong> che vuoi acquistare.<br >Calcolerà automaticamente anche la percentuale di denaro investito trasferito sul nuovo conto.<br>Puoi sempre modificare il balance e il saldo investito nella pagina Dettagli del'Asset, nell'elenco dei portafogli."
         },
         "close": "Chiudi"
       }

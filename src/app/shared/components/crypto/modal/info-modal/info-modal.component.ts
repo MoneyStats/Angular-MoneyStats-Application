@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalConstant } from 'src/assets/core/data/constant/constant';
+import {
+  ModalConstant,
+  Operations,
+  OperationsType,
+} from 'src/assets/core/data/constant/constant';
 
 @Component({
   selector: 'app-info-modal',
@@ -9,12 +13,17 @@ import { ModalConstant } from 'src/assets/core/data/constant/constant';
 export class InfoModalComponent implements OnInit {
   @Input('modalId') modalId: string = '';
   @Input('isOperation') isOperation: boolean = false;
-  @Input('isNewInvestment') isNewInvestment: boolean = false;
+  @Input('operationType') operationType: string = '';
+  operation = Operations;
 
   constructor() {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
+  }
+
+  public get operationTypeConstant(): typeof OperationsType {
+    return OperationsType;
   }
 
   ngOnInit(): void {}

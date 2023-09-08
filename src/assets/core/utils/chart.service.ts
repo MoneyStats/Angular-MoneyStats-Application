@@ -459,11 +459,13 @@ export class ChartService {
     let returnStatsDays: string[] =
       statsAssetsDays != undefined ? statsAssetsDays.slice() : [];
     let colors: string[] = [];
+
+    let options: Array<any> = optional[0];
+
     cryptoDashboard.assets.forEach((asset, index1) => {
       colors.push(this.imageColorPicker.getColor(asset.icon!, index1));
       let historyBalance: Array<number> = [];
       let index = 0;
-      console.log(returnStatsDays);
 
       if (asset && asset.history && asset.history.length != 0) {
         asset.history!.forEach((h) => {
@@ -486,7 +488,12 @@ export class ChartService {
         const lastDay: Date = new Date(
           returnStatsDays[returnStatsDays.length - 1]
         );
-        if (lastDay < today && optional[1]) {
+        if (
+          lastDay < today &&
+          options != undefined &&
+          options[1] != undefined &&
+          !options[1]
+        ) {
           //if (lastDay.getDate() < today.getDate()) {
           historyBalance.push(asset.value!);
           returnStatsDays.push(today.toDateString());
@@ -522,9 +529,7 @@ export class ChartService {
           if (new Date(lastDay) < today) {
             historyBalance.push(asset.value!);
           }
-          console.log(statsAssetsDays);
         } else {
-          console.log('ZRO');
           historyBalance.push(0);
           historyBalance.push(asset.value!);
           let today = new Date();
@@ -535,8 +540,6 @@ export class ChartService {
           console.log(returnStatsDays);
         }
       }
-      console.log(historyBalance);
-      console.log(statsAssetsDays);
       let serie = {
         name: asset.name,
         data: historyBalance,
@@ -545,8 +548,8 @@ export class ChartService {
       historyBalance = [];
     });
     let h = 350;
-    if (optional[0] && optional[0] != undefined) {
-      h = optional[0];
+    if (options != undefined && options[0] != undefined && options[0]) {
+      h = options[0];
     }
     let finalStatsDays: string[] = [];
     if (returnStatsDays.length != 0)

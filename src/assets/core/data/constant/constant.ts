@@ -54,4 +54,10 @@ export enum AppConfigConst {
   DEFAULT_USER_IMG = 'assets/images/sample/avatar.png',
 }
 
+export enum OperationsType {
+  HOLDING = 'Holding',
+  NEWINVESTMENT = 'New Investment',
+  TRADING = 'Trading',
+}
+
 export var Operations = ['New Investment', 'Holding', 'Trading'];

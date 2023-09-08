@@ -182,12 +182,16 @@
           "crypto.asset.details.overview.view" | translate
         }}</a>
       </div>
-      <div class="card cards-op border_round">
+      <app-operations-list
+        [cryptoDashboard]="cryptoService.cryptoDashboard"
+        [walletsAsset]="cryptoService.cryptoDashboard.wallets"
+      ></app-operations-list>
+      <!--<div class="card cards-op border_round">
         <ul
           class="listview flush transparent no-line image-listview detailed-list border_round"
           *ngFor="let operation of operations; let i = index"
         >
-          <!-- item -->
+           item
           <li *ngIf="i < 4">
             <a
               class="item"
@@ -196,7 +200,12 @@
               attr.data-bs-target="#{{ modalConstant.CRYPTOOPERATIONDETAILS }}"
             >
               <div class="icon-box-c me-4">
-                <img
+                <img *ngIf="operation.type != operationTypeConstant.NEWINVESTMENT"
+                  class="rounded-pill img1"
+                  src="{{ operation?.assetSell?.icon }}"
+                  alt=""
+                />
+                <img *ngIf="operation.type == operationTypeConstant.NEWINVESTMENT"
                   class="rounded-pill img1"
                   src="{{ operation?.wallet?.img }}"
                   alt=""
@@ -248,8 +257,8 @@
                 </div>
               </div>
             </a>
-          </li>
-          <!-- * item -->
+          </li>-->
+      <!-- * item
         </ul>
         <div class="card-body pt-0">
           <a
@@ -258,7 +267,7 @@
             >{{ "crypto.asset.details.overview.more" | translate }}</a
           >
         </div>
-      </div>
+      </div>-->
     </div>
     <!-- History -->
   </div>

@@ -636,6 +636,7 @@
       "to": "To",
       "commition": "Commition Rate : <strong> Included</strong>",
       "last": "Last Update :",
+      "warningBalance": "The current value exceed the maximum amount",
       "exchange": "Exchange"
     },
     "operationDetails": {
@@ -705,6 +706,10 @@
         "newInvestment": {
           "title": "New Investment",
           "details": "In this section you can add a new investment, from your Personal Wallet into the selected <strong>Crypto Wallet</strong>, it will add a new operation and update or add the current Asset."
+        },
+        "holding": {
+          "title": "Holding",
+          "details": "In this section you can perform an Holding operation.<br>Choose the <strong>Asset</strong> you want to use for the investment from your wallet and the <strong>Asset</strong> you want to buy.<br>It will also calculate automatically the percentage of money invested moved to the new account.<br>You can always edit the Asset balance and invested into the Details page of the Asset, into the wallet list."
         },
         "close": "Close"
       }
