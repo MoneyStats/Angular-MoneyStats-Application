@@ -4,6 +4,7 @@ import {
   CryptoDashboard,
 } from 'src/assets/core/data/class/crypto.class';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { LoggerService } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
@@ -22,13 +23,21 @@ export class CryptoResumeComponent implements OnInit {
   isPast: boolean = false;
 
   constructor(
-    private cryptoService: CryptoService,
+    public cryptoService: CryptoService,
     private screenService: ScreenService,
     private logger: LoggerService
   ) {}
 
+  public get modalConstant(): typeof ModalConstant {
+    return ModalConstant;
+  }
+
   ngOnInit(): void {
     this.screenService.hideFooter();
+    this.getResume();
+  }
+
+  getResume() {
     this.cryptoService.getCryptoResume().subscribe((res) => {
       this.logger.LOG(res.message!, 'CryptoResumeComponent');
       this.resume = new Map<string, CryptoDashboard>(Object.entries(res.data));

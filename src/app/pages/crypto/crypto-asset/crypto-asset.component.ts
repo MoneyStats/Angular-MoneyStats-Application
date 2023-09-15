@@ -9,6 +9,7 @@ import { ChartService } from 'src/assets/core/utils/chart.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { LoggerService } from 'src/assets/core/utils/log.service';
+import { ModalConstant } from 'src/assets/core/data/constant/constant';
 
 @Component({
   selector: 'app-crypto-asset',
@@ -31,8 +32,16 @@ export class CryptoAssetComponent implements OnInit {
     private logger: LoggerService
   ) {}
 
+  public get modalConstant(): typeof ModalConstant {
+    return ModalConstant;
+  }
+
   ngOnInit(): void {
     this.screenService.hideFooter();
+    this.getAssets();
+  }
+
+  getAssets() {
     this.cryptoDashboard = deepCopy(this.cryptoService.cryptoDashboard);
     this.cryptoService.getCryptoAssets().subscribe((data) => {
       this.logger.LOG(data.message!, 'CryptoAssetComponent');
@@ -50,12 +59,12 @@ export class CryptoAssetComponent implements OnInit {
     setTimeout(() => {
       if (this.cryptoDashboard.wallets) {
         if (this.screenService?.screenWidth! <= 780) {
-          this.chartOptions = this.charts.renderCryptoAsset(dashboard, [
+          this.chartOptions = this.charts.renderCryptoDatas(dashboard, [
             200,
             true,
           ]);
         } else
-          this.chartOptions = this.charts.renderCryptoAsset(dashboard, [
+          this.chartOptions = this.charts.renderCryptoDatas(dashboard, [
             350,
             true,
           ]);
@@ -87,9 +96,9 @@ export class CryptoAssetComponent implements OnInit {
       );
     setTimeout(() => {
       if (this.screenService?.screenWidth! <= 780)
-        this.chart1Y = this.charts.renderCryptoAsset(dashboard, [200, false]);
+        this.chart1Y = this.charts.renderCryptoDatas(dashboard, [200, false]);
       else
-        this.chart1Y = this.charts.renderCryptoAsset(dashboard, [350, false]);
+        this.chart1Y = this.charts.renderCryptoDatas(dashboard, [350, false]);
     }, 200);
   }
 
@@ -118,8 +127,8 @@ export class CryptoAssetComponent implements OnInit {
       );
     setTimeout(() => {
       if (this.screenService?.screenWidth! <= 780)
-        this.chart3Y = this.charts.renderCryptoAsset(dashboard, [200, true]);
-      else this.chart3Y = this.charts.renderCryptoAsset(dashboard, [350, true]);
+        this.chart3Y = this.charts.renderCryptoDatas(dashboard, [200, true]);
+      else this.chart3Y = this.charts.renderCryptoDatas(dashboard, [350, true]);
     }, 200);
   }
 

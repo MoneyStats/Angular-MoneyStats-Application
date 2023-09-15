@@ -297,20 +297,38 @@
         <!-- Portfolio -->
         <div class="section mt-2 mb-2">
           <div class="section-heading">
-          <div class="section-title">
-            {{ "crypto.asset.assetList" | translate }}
-          </div><a *ngIf="!showZeroBalance" (click)="zeroBalanceSwitch()" class="link clickable">
-            <ion-icon name="eye-outline" style="width: 20px; height: 20px; vertical-align: -5px;"></ion-icon> {{
-            "crypto.asset.show" | translate
-          }}</a>
-          <a *ngIf="showZeroBalance" (click)="zeroBalanceSwitch()" class="link clickable">
-            <ion-icon name="eye-off-outline" style="width: 20px; height: 20px; vertical-align: -5px;"></ion-icon> {{
-            "crypto.asset.hidden" | translate
-          }}</a></div>
+            <div class="section-title">
+              {{ "crypto.asset.assetList" | translate }}
+            </div>
+            <a
+              *ngIf="!showZeroBalance"
+              (click)="zeroBalanceSwitch()"
+              class="link clickable"
+            >
+              <ion-icon
+                name="eye-outline"
+                style="width: 20px; height: 20px; vertical-align: -5px"
+              ></ion-icon>
+              {{ "crypto.asset.show" | translate }}</a
+            >
+            <a
+              *ngIf="showZeroBalance"
+              (click)="zeroBalanceSwitch()"
+              class="link clickable"
+            >
+              <ion-icon
+                name="eye-off-outline"
+                style="width: 20px; height: 20px; vertical-align: -5px"
+              ></ion-icon>
+              {{ "crypto.asset.hidden" | translate }}</a
+            >
+          </div>
           <div class="transactions">
             <div *ngFor="let asset of assets; let i = index">
               <app-transaction-card
-              *ngIf="!showZeroBalance ? asset.balance > 0 : asset.balance >= 0"
+                *ngIf="
+                  !showZeroBalance ? asset.balance > 0 : asset.balance >= 0
+                "
                 [assets]="asset"
                 [currency]="cryptoDashboard.currency"
               >
@@ -322,3 +340,12 @@
     </div>
   </div>
 </div>
+
+<app-operations-modal
+  [modalId]="modalConstant.ADDOPERATIONS"
+  [wallets]="cryptoDashboard.wallets"
+  [assets]="cryptoDashboard.assets"
+  [currency]="cryptoDashboard.currency"
+  [statsAssetsDays]="cryptoDashboard.statsAssetsDays"
+  (emitAddStats)="getAssets()"
+></app-operations-modal>
