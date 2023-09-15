@@ -306,148 +306,9 @@ export class ChartService {
     return chartExample1;
   }
 
-  renderCryptoAsset1(
-    cryptoDashboard: CryptoDashboard,
-    ...height: number[]
-  ): Partial<ApexOptions> {
-    let series: Array<any> = [];
-    let oldStats: any = new Stats();
-    let statsAssetsDays = cryptoDashboard.statsAssetsDays
-      ? cryptoDashboard.statsAssetsDays.slice()
-      : cryptoDashboard.statsAssetsDays;
-    let oldDate: any =
-      statsAssetsDays && statsAssetsDays.length != 0
-        ? parseInt(statsAssetsDays[statsAssetsDays.length - 1].split('-')[0]) -
-          1
-        : undefined;
-    let colors: string[] = [];
-    cryptoDashboard.assets.forEach((asset, index1) => {
-      colors.push(this.imageColorPicker.getColor(asset.icon!, index1));
-      let oldBalance = 0;
-      let historyBalance: Array<number> = [];
-      let index = 0;
-
-      if (statsAssetsDays && statsAssetsDays.length === 1) {
-        statsAssetsDays.splice(0, 0, oldDate.toString());
-      }
-      if (asset && asset.history && asset.history.length != 0) {
-        if (asset.history.length === 1) {
-          oldStats.balance = oldBalance;
-          oldStats.date = oldDate;
-          asset.history!.splice(0, 0, oldStats);
-        }
-        asset.history!.forEach((h) => {
-          if (h.date == undefined) {
-            return;
-          }
-          let count = statsAssetsDays.indexOf(h.date.toString());
-          if (count != -1 && count != index) {
-            Array.from(Array(count - index)).forEach((d) =>
-              historyBalance.push(0)
-            );
-            index = count;
-          }
-          historyBalance.push(h.balance);
-          index++;
-        });
-
-        // Aggiungo l'ultimo valore dell'asset corrente se l'ultimo stats non corrisponde ad oggi
-        let today = new Date();
-        const lastDay: Date = new Date(
-          statsAssetsDays[statsAssetsDays.length - 1]
-        );
-        if (lastDay < today) {
-          //if (lastDay.getDate() < today.getDate()) {
-          historyBalance.push(asset.value!);
-          statsAssetsDays.push(today.toDateString());
-        }
-      } else {
-        // Se dovessi avere più Asset con uno di essi con history mentre l'altro no lo si gestisce così
-        if (statsAssetsDays && statsAssetsDays.length != 0) {
-          let today = new Date();
-          let lastDay;
-          // (Caso solo per asset singoli) Se dovessi avere un asset appena aggiunto (Senza History) ma durante l'anno ho degli stats, devo prendere l'ultima data registrata e settarla a 0
-          if (
-            cryptoDashboard.assets.length == 1 &&
-            statsAssetsDays.length > 1 &&
-            !asset.history
-          ) {
-            statsAssetsDays = [statsAssetsDays[statsAssetsDays.length - 1]];
-            historyBalance.push(0);
-
-            lastDay = statsAssetsDays[statsAssetsDays.length - 1];
-            statsAssetsDays.push(today.toDateString());
-          } else {
-            // (Caso si abbiamo più di un asset)
-            // L'index è -2 perchè essendo più asset ma questo non ha history è stato aggiunto il valore last
-            lastDay = statsAssetsDays[statsAssetsDays.length - 2];
-          }
-          let count = statsAssetsDays.indexOf(lastDay);
-          if (count != -1 && count != index) {
-            Array.from(Array(count - index)).forEach((d) =>
-              historyBalance.push(0)
-            );
-            // Pusho per l'ultima data valida trovata
-            historyBalance.push(0);
-          }
-
-          if (new Date(lastDay) < today) {
-            historyBalance.push(asset.value!);
-          }
-        } else {
-          historyBalance.push(0);
-          historyBalance.push(asset.value!);
-          let today = new Date();
-          let yesterday = new Date();
-          yesterday.setDate(today.getDate() - 1);
-          statsAssetsDays = [yesterday.toDateString()];
-          statsAssetsDays.push(today.toDateString());
-        }
-      }
-      let serie = {
-        name: asset.name,
-        data: historyBalance,
-      };
-      series.push(serie);
-      historyBalance = [];
-    });
-    let h = 350;
-    if (height[0]) {
-      h = height[0];
-    }
-    let chartOptions: Partial<ApexOptions> = {
-      series: series,
-      chart: {
-        type: 'area',
-        width: '100%',
-        height: h,
-        sparkline: {
-          enabled: true,
-        },
-      },
-      dataLabels: {
-        enabled: false,
-        background: {
-          borderRadius: 20,
-        },
-      },
-      stroke: {
-        width: 2,
-      },
-      colors: colors.length != 0 ? colors : this.colorsList,
-      labels: statsAssetsDays,
-      legend: {
-        show: true,
-        position: 'top',
-        horizontalAlign: 'center',
-        floating: false,
-        fontFamily: 'Helvetica, Arial',
-      },
-    };
-    return chartOptions;
-    //chartLine(series, dashboard.statsWalletDays);
-  }
-
+  /**
+   * @deprecated
+   */
   renderCryptoAsset(
     cryptoDashboard: CryptoDashboard,
     ...optional: any[]
@@ -591,5 +452,104 @@ export class ChartService {
     };
     return chartOptions;
     //chartLine(series, dashboard.statsWalletDays);
+  }
+
+  renderCryptoDatas(
+    cryptoDashboard: CryptoDashboard,
+    ...optional: any[]
+  ): Partial<ApexOptions> {
+    let series: Array<any> = [];
+    let statsAssetsDays = cryptoDashboard.statsAssetsDays.slice();
+    let colors: string[] = [];
+
+    let options: Array<any> = optional[0];
+    let today = new Date();
+    cryptoDashboard.assets.forEach((asset, indexAsset) => {
+      console.log(asset);
+      colors.push(this.imageColorPicker.getColor(asset.icon!, indexAsset));
+      let historyBalance: Array<number> = [];
+      if (statsAssetsDays == undefined || statsAssetsDays.length == 0) {
+        historyBalance.push(0);
+        let yesterday = new Date();
+        yesterday.setDate(today.getDate() - 1);
+        statsAssetsDays = [yesterday.toDateString()];
+      } else
+        statsAssetsDays.forEach((day) => {
+          if (asset.history && asset.history.length > 0) {
+            let history = asset.history.find((h) => h.date.toString() == day);
+            if (history) {
+              return historyBalance.push(history?.balance!);
+            }
+          }
+          return historyBalance.push(0);
+        });
+
+      // Se non è in resume setto l'ultimo giorno
+      if (options != undefined && options[1] != undefined && !options[1]) {
+        // Aggiungo l'ultimo valore dell'asset corrente se l'ultimo stats non corrisponde ad oggi
+        const lastDay: Date = new Date(
+          statsAssetsDays[statsAssetsDays.length - 1]
+        );
+        if (lastDay < today) {
+          historyBalance.push(asset.value!);
+        }
+      }
+
+      let serie = {
+        name: asset.name,
+        data: historyBalance,
+      };
+      series.push(serie);
+      console.log(serie, historyBalance);
+    });
+
+    // Se non è in resume setto l'ultimo giorno
+    if (options != undefined && options[1] != undefined && !options[1]) {
+      // Aggiungo l'ultimo valore dell'asset corrente se l'ultimo stats non corrisponde ad oggi
+      const lastDay: Date = new Date(
+        statsAssetsDays[statsAssetsDays.length - 1]
+      );
+      if (lastDay < today) {
+        statsAssetsDays.push(today.toDateString());
+      }
+    }
+    let h = 350;
+    if (options != undefined && options[0] != undefined && options[0]) {
+      h = options[0];
+    }
+    let finalStatsDays: string[] = [];
+    statsAssetsDays.forEach((d) =>
+      finalStatsDays.push(new Date(d).toDateString())
+    );
+    let chartOptions: Partial<ApexOptions> = {
+      series: series,
+      chart: {
+        type: 'area',
+        width: '100%',
+        height: h,
+        sparkline: {
+          enabled: true,
+        },
+      },
+      dataLabels: {
+        enabled: false,
+        background: {
+          borderRadius: 20,
+        },
+      },
+      stroke: {
+        width: 2,
+      },
+      colors: colors.length != 0 ? colors : this.colorsList,
+      labels: finalStatsDays,
+      legend: {
+        show: true,
+        position: 'top',
+        horizontalAlign: 'center',
+        floating: false,
+        fontFamily: 'Helvetica, Arial',
+      },
+    };
+    return chartOptions;
   }
 }

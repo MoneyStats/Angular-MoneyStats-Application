@@ -6,7 +6,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { CryptoDashboard } from 'src/assets/core/data/class/crypto.class';
-import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { Stats } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { ChartService } from 'src/assets/core/utils/chart.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
@@ -38,8 +38,6 @@ export class ResumeAssetsComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    console.log(this.isPast);
-    // TODO: ix lato BE
     setTimeout(() => {
       if (this.resumeData.assets) {
         this.resumeDataFilterOnDate = deepCopy(this.resumeData);
@@ -47,12 +45,12 @@ export class ResumeAssetsComponent implements OnInit, OnChanges {
           this.resumeDataFilterOnDate.assets =
             this.resumeDataFilterOnDate.assets.filter((a) => a.balance != 0);
         if (this.screenService?.screenWidth! <= 780) {
-          this.chartOptions = this.charts.renderCryptoAsset(this.resumeData, [
+          this.chartOptions = this.charts.renderCryptoDatas(this.resumeData, [
             200,
             this.isPast,
           ]);
         } else
-          this.chartOptions = this.charts.renderCryptoAsset(this.resumeData, [
+          this.chartOptions = this.charts.renderCryptoDatas(this.resumeData, [
             350,
             this.isPast,
           ]);

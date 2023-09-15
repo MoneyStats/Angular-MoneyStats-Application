@@ -1,5 +1,5 @@
 <!-- App Header -->
-<div id="cryptoHeader" class="appHeader no-border">
+<div id="cryptoHeader" class="appHeader no-border mx-auto">
   <div class="left">
     <a (click)="goBack()" class="headerButton goBack clickable">
       <!--<ion-icon name="chevron-back-outline"></ion-icon>-->
@@ -30,7 +30,7 @@
         data-bs-toggle="modal"
         attr.data-bs-target="#{{ modalConstant.ADDOPERATIONS }}"
         aria-disabled="true"
-        class="d-inline me-2 title-page clickable"
+        class="d-inline me-2 title-page clickable effect-underline"
       >
         {{ "crypto.header.tab3" | translate }}
       </a>

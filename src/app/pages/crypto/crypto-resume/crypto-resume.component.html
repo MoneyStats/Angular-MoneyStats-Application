@@ -76,3 +76,12 @@
     </div>
   </div>
 </div>
+
+<app-operations-modal
+  [modalId]="modalConstant.ADDOPERATIONS"
+  [wallets]="cryptoService.cryptoDashboard.wallets"
+  [assets]="cryptoService.cryptoDashboard.assets"
+  [currency]="cryptoService.cryptoDashboard.currency"
+  [statsAssetsDays]="cryptoService.cryptoDashboard.statsAssetsDays"
+  (emitAddStats)="getResume()"
+></app-operations-modal>
