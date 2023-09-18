@@ -314,7 +314,6 @@
                       <option
                         *ngFor="let type of cryptoTypes"
                         [selected]="type == wallet.type"
-                        [disabled]="type != 'Holding'"
                         [value]="type"
                       >
                         {{ type }}

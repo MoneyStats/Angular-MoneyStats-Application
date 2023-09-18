@@ -60,4 +60,9 @@ export enum OperationsType {
   TRADING = 'Trading',
 }
 
+export enum MarketDataCategory {
+  CRYPTOCURRENCY = 'Cryptocurrency',
+  STABLECOIN = 'StableCoin',
+}
+
 export var Operations = ['New Investment', 'Holding', 'Trading'];

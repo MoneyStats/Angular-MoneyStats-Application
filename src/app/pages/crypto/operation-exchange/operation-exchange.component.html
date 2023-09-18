@@ -46,7 +46,10 @@
 
     <form #f="ngForm" action="">
       <section class="mx-auto" style="max-width: 1500px">
-        <div class="section mt-2" *ngIf="operationType == 'New Investment'">
+        <div
+          class="section mt-2"
+          *ngIf="operationType == operations.NEWINVESTMENT"
+        >
           <div class="card border">
             <div class="card-body">
               <div class="form-group basic p-0">
@@ -91,7 +94,7 @@
           </div>
         </div>
 
-        <div class="section" *ngIf="operationType == 'Holding'">
+        <div class="section" *ngIf="operationType == operations.HOLDING">
           <div class="card border">
             <div class="card-body">
               <div class="form-group basic p-0">
@@ -147,6 +150,77 @@
                       [isOperation]="true"
                       [cryptoPrices]="wallet.assets"
                       (emitSelectAsset)="emitHoldingSelectAsset($event)"
+                    ></app-asset-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            *ngIf="assetHoldingBalance1.invalid"
+            class="alert alert-danger mb-1"
+            role="alert"
+          >
+            {{ "crypto.operationExchange.warningBalance" | translate }}
+          </div>
+        </div>
+
+        <div class="section" *ngIf="operationType == operations.TRADING">
+          <div class="card border">
+            <div class="card-body">
+              <div class="form-group basic p-0">
+                <div class="exchange-heading">
+                  <label class="group-label" for="toAmount">{{
+                    "crypto.operationExchange.from" | translate
+                  }}</label>
+                  <div class="exchange-wallet-info">
+                    {{ "crypto.operationExchange.balance" | translate }}
+                    <strong>
+                      {{
+                        tradingAssetToSell.balance
+                          ? tradingAssetToSell.balance
+                          : 0
+                      }}
+                      {{ tradingAssetToSell.symbol }}</strong
+                    >
+                  </div>
+                  <div
+                    style="position: absolute; bottom: 9px; right: 13px"
+                    class="exchange-wallet-info"
+                    [innerHTML]="
+                      'crypto.operationExchange.commition' | translate
+                    "
+                  ></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-8 col-7 mt-1">
+                    <div class="exchange-group">
+                      <div class="input-col">
+                        <input
+                          type="number"
+                          class="form-control form-control-lg pe-0 border-0"
+                          id="toAmount"
+                          placeholder="0"
+                          id="assetHoldingBalance"
+                          name="assetHoldingBalance"
+                          #assetHoldingBalance1="ngModel"
+                          required
+                          (keyup)="makeNewBalance()"
+                          [(ngModel)]="investedBalance"
+                          value="{{ investedBalance }}"
+                          maxlength="10"
+                          max="{{ tradingAssetToSell.balance }}"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-5 mb-2" style="max-height: 55px">
+                    <app-asset-select
+                      [wrapperID]="assetConstant.HOLDING"
+                      [fiat]="fiat!"
+                      [isOperation]="true"
+                      [cryptoPrices]="stablecoin"
+                      (emitSelectAsset)="emitTradingSelectAsset($event)"
                     ></app-asset-select>
                   </div>
                 </div>
