@@ -27,6 +27,7 @@ export class Asset extends GenericModel {
   symbol?: string;
   rank?: number;
   value?: number;
+  category?: string;
   newValue?: number;
   current_price?: number;
   icon?: string;

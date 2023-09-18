@@ -4,7 +4,9 @@ import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import {
+  MarketDataCategory,
   ModalConstant,
+  OperationsType,
   SelectAssetConstant,
 } from 'src/assets/core/data/constant/constant';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
@@ -36,6 +38,10 @@ export class OperationExchangeComponent implements OnInit {
   holdingAssetToSell: Asset = new Asset();
   investedBalance: number = 0;
 
+  // Trading
+  tradingAssetToSell: Asset = new Asset();
+  stablecoin: Asset[] = [];
+
   constructor(
     private cryptoService: CryptoService,
     private route: ActivatedRoute,
@@ -53,6 +59,10 @@ export class OperationExchangeComponent implements OnInit {
     return SelectAssetConstant;
   }
 
+  public get operations(): typeof OperationsType {
+    return OperationsType;
+  }
+
   ngOnInit(): void {
     this.screenService.hideFooter();
     this.route.params.subscribe((a: any) => {
@@ -65,6 +75,12 @@ export class OperationExchangeComponent implements OnInit {
       this.wallet = wallets.find((w) => w.name == this.walletSelect)!;
       this.getCryptoPrices(a.fiat);
     });
+    if (this.operationType == this.operations.TRADING) {
+      let marketData = deepCopy(this.marketData);
+      this.stablecoin = marketData.filter(
+        (md) => md.category == MarketDataCategory.STABLECOIN
+      );
+    }
   }
 
   getCryptoPrices(fiat: string) {
@@ -85,6 +101,13 @@ export class OperationExchangeComponent implements OnInit {
     this.makeNewBalance();
   }
 
+  emitTradingSelectAsset(asset: Asset) {
+    this.tradingAssetToSell = asset;
+    this.investedBalance = this.tradingAssetToSell.balance;
+
+    this.makeNewBalance();
+  }
+
   emitSelectAsset(asset: Asset) {
     asset.id = undefined;
     asset.lastUpdate = new Date();
@@ -101,9 +124,12 @@ export class OperationExchangeComponent implements OnInit {
   }
 
   makeNewBalance() {
-    if (this.operationType == 'Holding')
+    if (this.operationType == OperationsType.HOLDING)
       this.investedMoney =
         this.holdingAssetToSell.current_price! * this.investedBalance;
+    if (this.operationType == OperationsType.TRADING)
+      this.investedMoney =
+        this.tradingAssetToSell.current_price! * this.investedBalance;
     this.assetNewBalance = parseFloat(
       (this.investedMoney / this.marketDataSelected.current_price!).toFixed(8)
     );

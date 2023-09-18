@@ -14,6 +14,7 @@
             name="operationSelect"
             [(ngModel)]="operationSelect"
             [disabled]="isOperationSel && operationSelect != ''"
+            (change)="selectOperation($event)"
             #operationSelect1="ngModel"
             required
           >
@@ -27,7 +28,6 @@
               *ngFor="let operation of operations"
               value="{{ operation }}"
               [selected]="operation == operationSelect"
-              [disabled]="operation == 'Trading'"
             >
               {{ operation }}
             </option>
@@ -97,7 +97,7 @@
             </option>
             <option
               selected="{{ wallet.name == walletSelect }}"
-              *ngFor="let wallet of wallets"
+              *ngFor="let wallet of filterWallets"
               value="{{ wallet.name }}"
             >
               {{ wallet.name }}
