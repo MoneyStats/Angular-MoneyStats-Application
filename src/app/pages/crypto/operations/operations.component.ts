@@ -38,13 +38,13 @@ export class OperationsComponent implements OnInit {
   mapOperationsByYear(operations: any) {
     let years: Array<string> = [];
     operations.forEach((operation: any) => {
-      years.push(operation.exitDate.toString().split('-')[0]);
+      years.push(operation.entryDate.toString().split('-')[0]);
     });
     this.uniqueYears = [...new Set(years)];
     this.uniqueYears.forEach((year: string) => {
       this.operationsMapByYear?.set(
         year,
-        operations.filter((o: any) => o.exitDate.toString().includes(year))
+        operations.filter((o: any) => o.entryDate.toString().includes(year))
       );
     });
   }

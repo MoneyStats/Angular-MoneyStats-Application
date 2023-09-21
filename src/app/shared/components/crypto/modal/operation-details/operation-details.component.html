@@ -140,13 +140,15 @@
               >
             </li>
             <li>
-              <strong>{{
-                "crypto.operationDetails.quantity" | translate
-              }}</strong>
+              <strong
+                >{{ "crypto.operationDetails.quantity" | translate }} ({{
+                  operation?.entryCoin
+                }})</strong
+              >
               <strong
                 ><span
-                  >{{ operation?.exitQuantity }}
-                  {{ operation?.asset?.symbol }}</span
+                  >{{ operation?.entryQuantity }}
+                  {{ operation?.entryCoin }}</span
                 ></strong
               >
             </li>
@@ -170,6 +172,19 @@
               <strong
                 ><span
                   >{{ operation?.exitPriceValue }} {{ currency }}</span
+                ></strong
+              >
+            </li>
+            <li *ngIf="operation?.exitQuantity">
+              <strong
+                >{{ "crypto.operationDetails.quantity" | translate }} ({{
+                  operation?.exitCoin
+                }})</strong
+              >
+              <strong
+                ><span
+                  >{{ operation?.exitQuantity }}
+                  {{ operation?.asset?.symbol }}</span
                 ></strong
               >
             </li>

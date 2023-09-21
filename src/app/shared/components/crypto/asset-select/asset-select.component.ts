@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { Asset } from 'src/assets/core/data/class/crypto.class';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
@@ -11,7 +19,7 @@ declare var jQuery: any;
   templateUrl: './asset-select.component.html',
   styleUrls: ['./asset-select.component.scss'],
 })
-export class AssetSelectComponent implements OnInit {
+export class AssetSelectComponent implements OnInit, OnChanges {
   @Input('wrapperID') wrapperID: string = '';
   @Input('fiat') cryptoCurrency: string = '';
   @Input('isOperation') isOperation: boolean = false;
@@ -30,6 +38,9 @@ export class AssetSelectComponent implements OnInit {
     private cryptoService: CryptoService,
     private logger: LoggerService
   ) {}
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getCryptoPrices();
+  }
 
   ngOnInit(): void {
     this.getCryptoPrices();
@@ -64,7 +75,7 @@ export class AssetSelectComponent implements OnInit {
       this.filterCryptoPrices = this.cryptoPrices.slice();
       this.assetSelected = deepCopy(this.cryptoPrices[0]);
       this.emitSelectAsset.emit(this.assetSelected);
-    } else {
+    } /*else {
       this.cryptoService
         .getCryptoPrice(this.cryptoCurrency)
         .subscribe((data) => {
@@ -74,7 +85,7 @@ export class AssetSelectComponent implements OnInit {
           this.assetSelected = data.data[0];
           this.emitSelectAsset.emit(this.assetSelected);
         });
-    }
+    }*/
   }
 
   openCloseSelect() {

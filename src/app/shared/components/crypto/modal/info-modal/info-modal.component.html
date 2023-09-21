@@ -47,6 +47,19 @@
               "
             ></p>
           </div>
+          <div
+            *ngIf="operationType == operationTypeConstant.TRADING"
+            class="text-center"
+          >
+            <h3>
+              {{ "crypto.cryptoModal.info.trading.title" | translate }}
+            </h3>
+            <p
+              [innerHTML]="
+                'crypto.cryptoModal.info.trading.details' | translate
+              "
+            ></p>
+          </div>
           <a
             *ngIf="isOperation"
             class="btn btn-primary btn-lg btn-block"

@@ -4,7 +4,7 @@
     "crypto": {
       "tab1": {
         "title": "Welcome to Crypto",
-        "text": "This is the first login thru the section. <br /> To continue the on-board process press Next."
+        "text": "This is the first login through the section. <br /> To continue the onboarding process, press Next."
       },
       "tab2": {
         "title": "How it works?",
@@ -25,7 +25,7 @@
     },
     "tab2": {
       "title": "Why use it?",
-      "text": "The difference between MoneyStats and the others Money Management apps is that you don't need to keep track of you expences, once a week or once a month is needed and recommended to get the best performance."
+      "text": "The difference between MoneyStats and other money management apps is that you don't need to keep track of your expenses. Checking once a week or once a month is recommended to achieve the best performance."
     },
     "tab3": {
       "title": "How it works?",
@@ -45,7 +45,7 @@
       "user": "Username or Email",
       "userPlaceholder": "Your username or email",
       "password": "Password",
-      "passPlaceholder": "Your Password",
+      "passPlaceholder": "Your password",
       "register": "Register Now",
       "forgot": "Forgot Password?",
       "login": "Login"
@@ -75,7 +75,7 @@
     },
     "forgot": {
       "title": "Forgot password?",
-      "subtitle": "Type your email to reset your password",
+      "subtitle": "Enter your email to reset your password",
       "place": "Type your current email",
       "forgot": "Reset Password"
     },
@@ -141,7 +141,7 @@
       "view": "View All",
       "nodata": {
         "header": "Transaction",
-        "body": "Insert new data to get transaction History.",
+        "body": "Add new data to view the transaction history.",
         "footer": "MoneyStats"
       }
     },
@@ -161,7 +161,7 @@
       "btn": "Open Wallet",
       "nodata": {
         "header": "Wallet",
-        "body": "Insert new data to get wallet.",
+        "body": "Add new data to view the wallet.",
         "footer": "MoneyStats"
       }
     }
@@ -304,7 +304,7 @@
     "account": {
       "title": "Account Settings",
       "sync": "Sync Account",
-      "descriptionSync": "Sync your profile pictures with an existing social Account",
+      "descriptionSync": "Sync your profile picture with an existing social account.",
       "open": "Open",
       "username": "Change Username",
       "user_label": "Username",
@@ -316,7 +316,7 @@
     },
     "security": {
       "title": "Security",
-      "password": "Change Password",
+      "password": "Change password",
       "old_label": "Old Password",
       "old_placeholder": "Digit your current password",
       "new_label": "New Password",
@@ -405,7 +405,7 @@
     "back": "Go back to previous page",
     "subtitle": "Contact us by sending and email",
     "formTitle": "Get in Touch",
-    "formSubTitle": "Fill the form to contact us",
+    "formSubTitle": "Fill in the form to contact us.",
     "name": "Your name",
     "namePlace": "Insert your name",
     "email": "Email",
@@ -431,7 +431,7 @@
     },
     "infoApp": {
       "title": "Info Registration",
-      "text": "To register into MoneyStats Application you need the Invitation Code.<br>If you don't have the code, you can ask for it to <a href='https://giovannilamarmoraproject.github.io/Portfolio/' target='_blank'>Giovanni</a> into the contact section. <br>In the meantime you can take a look at the application using the following data <br>&bull; Username: moneystats<br>&bull; Password: moneystats<br>This account will give you the ability to see what the app looks like.<br>Attention: You will not be able to modify or add new data.",
+      "text": "To register for the MoneyStats Application, you need an Invitation Code.<br>If you don't have the code, you can ask for it from <a href='https://giovannilamarmoraproject.github.io/Portfolio/' target='_blank'>Giovanni</a> in the contact section. <br>In the meantime, you can explore the application using the following credentials: <br>&bull; Username: moneystats<br>&bull; Password: moneystats<br>This account allows you to see what the app looks like.<br>Note: You will not be able to modify or add new data.",
       "close": "Close"
     },
     "socialList": {
@@ -521,7 +521,7 @@
     "requirements": {
       "headerTitle": "Crypto Requirements",
       "title": "Crypto: You are almost there",
-      "subTitle": "Before to access to the crypto dashboard, the new features of MoneyStats, you need to ensure that all the requirements are respected otherwise you can't go on with it.",
+      "subTitle": "Before accessing the crypto dashboard, the new feature of MoneyStats, ensure all the requirements are met; otherwise, you cannot proceed.",
       "req1": {
         "title": "Having a Wallet",
         "subTitle": "Having a wallet or create one"
@@ -710,6 +710,10 @@
         "holding": {
           "title": "Holding",
           "details": "In this section you can perform an Holding operation.<br>Choose the <strong>Asset</strong> you want to use for the investment from your wallet and the <strong>Asset</strong> you want to buy.<br>It will also calculate automatically the percentage of money invested moved to the new account.<br>You can always edit the Asset balance and invested into the Details page of the Asset, into the wallet list."
+        },
+        "trading": {
+          "title": "Trading",
+          "details": "<p>The Trading section of MoneyStats allows you to execute trading operations directly from your wallet. You can swap between <strong>Stablecoin</strong> and <strong>Cryptocurrency</strong>, using an intuitive and secure interface. Transactions are monitored in real-time, and for enhanced management, open operations can be reviewed and closed in the <strong>Resume</strong> section of the application.</p>"
         },
         "close": "Close"
       }
