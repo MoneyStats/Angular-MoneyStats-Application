@@ -50,7 +50,7 @@
           </div>
           <div class="text-end">
             <strong
-              >{{ operation?.exitQuantity }}
+              >{{ operation?.entryQuantity }}
               {{ operation?.asset?.symbol }}</strong
             >
             <div class="text-small">
@@ -71,7 +71,7 @@
                 {{ cryptoDashboard.currency }}</strong
               >
               {{ "crypto.asset.details.overview.on" | translate }}
-              {{ operation?.exitDate | date : "d MMM yy" }}
+              {{ operation?.entryDate | date : "d MMM yy" }}
             </div>
           </div>
         </div>

@@ -67,7 +67,15 @@ export class OperationsListComponent implements OnInit {
             operations.push(operation);
           });
       });
-      operations.sort((a, b) => (a.exitDate! < b.exitDate! ? 1 : -1));
+      operations.sort((a, b) =>
+        a.exitDate
+          ? a.exitDate! < b.exitDate!
+            ? 1
+            : -1
+          : a.entryDate! < b.entryDate!
+          ? 1
+          : -1
+      );
       return operations;
     } else {
       let wallets = deepCopy(this.cryptoService.cryptoDashboard.wallets);
@@ -89,7 +97,15 @@ export class OperationsListComponent implements OnInit {
               });
           });
       });
-      operations.sort((a, b) => (a.exitDate! < b.exitDate! ? 1 : -1));
+      operations.sort((a, b) =>
+        a.exitDate
+          ? a.exitDate! < b.exitDate!
+            ? 1
+            : -1
+          : a.entryDate! < b.entryDate!
+          ? 1
+          : -1
+      );
       return operations;
     }
   }

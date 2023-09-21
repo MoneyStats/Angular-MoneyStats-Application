@@ -12,7 +12,7 @@ import {
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { Asset, Operation } from 'src/assets/core/data/class/crypto.class';
 import { LoggerService } from 'src/assets/core/utils/log.service';
-import { AssetSelectComponent } from 'src/app/shared/components/crypto/asset-select/asset-select.component';
+import { ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 
@@ -48,8 +48,11 @@ export class OperationExchangeComponent implements OnInit {
     private screenService: ScreenService,
     private logger: LoggerService,
     private swal: SwalService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private cdref: ChangeDetectorRef
+  ) {
+    this.screenService.hideFooter();
+  }
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -64,7 +67,14 @@ export class OperationExchangeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.screenService.hideFooter();
+    this.getOperationExchange();
+  }
+
+  ngAfterContentChecked() {
+    this.cdref.detectChanges();
+  }
+
+  getOperationExchange() {
     this.route.params.subscribe((a: any) => {
       this.operationType = a.operationType;
       this.walletSelect = a.wallet;
@@ -74,13 +84,13 @@ export class OperationExchangeComponent implements OnInit {
       );
       this.wallet = wallets.find((w) => w.name == this.walletSelect)!;
       this.getCryptoPrices(a.fiat);
+      if (this.operationType == this.operations.TRADING) {
+        let marketData = deepCopy(this.wallet.assets);
+        this.stablecoin = marketData.filter(
+          (md) => md.category == MarketDataCategory.STABLECOIN
+        );
+      }
     });
-    if (this.operationType == this.operations.TRADING) {
-      let marketData = deepCopy(this.marketData);
-      this.stablecoin = marketData.filter(
-        (md) => md.category == MarketDataCategory.STABLECOIN
-      );
-    }
   }
 
   getCryptoPrices(fiat: string) {
@@ -133,6 +143,48 @@ export class OperationExchangeComponent implements OnInit {
     this.assetNewBalance = parseFloat(
       (this.investedMoney / this.marketDataSelected.current_price!).toFixed(8)
     );
+  }
+
+  exchangeTradingInvestment() {
+    let tradingAsset = deepCopy(this.tradingAssetToSell);
+    tradingAsset.lastUpdate = new Date();
+
+    let percentualeInvestitoCalcolata =
+      tradingAsset.invested * (this.investedMoney / tradingAsset.value!);
+    tradingAsset.balance -= this.investedBalance;
+    if (tradingAsset.balance == 0) {
+      percentualeInvestitoCalcolata = tradingAsset.invested;
+    }
+    tradingAsset.invested -= percentualeInvestitoCalcolata;
+
+    let assetToSave = deepCopy(this.assetInWallet);
+    if (!assetToSave.lastUpdate) {
+      assetToSave.lastUpdate = new Date();
+      assetToSave.performance = 0;
+      assetToSave.trend = 0;
+    }
+    Number.isNaN(assetToSave.invested) || assetToSave.invested == undefined
+      ? (assetToSave.invested = percentualeInvestitoCalcolata)
+      : (assetToSave.invested += percentualeInvestitoCalcolata);
+    Number.isNaN(assetToSave.balance) || assetToSave.balance == undefined
+      ? (assetToSave.balance = this.assetNewBalance)
+      : (assetToSave.balance += this.assetNewBalance);
+    console.log(this.assetNewBalance, assetToSave, tradingAsset);
+    let operation: Operation = new Operation();
+    operation.type = this.operationType;
+    operation.status = 'OPEN';
+    operation.entryDate = new Date();
+    operation.entryCoin = tradingAsset.symbol;
+    operation.entryPrice = assetToSave.current_price;
+    operation.entryPriceValue = this.investedMoney;
+    operation.entryQuantity = this.assetNewBalance;
+    operation.exitCoin = assetToSave.symbol;
+
+    assetToSave.operations = [operation];
+
+    let walletToSave = deepCopy(this.wallet);
+    walletToSave.assets = [assetToSave, tradingAsset];
+    this.saveWallet(walletToSave);
   }
 
   exchangeHoldingInvestment() {

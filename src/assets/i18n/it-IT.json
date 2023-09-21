@@ -170,11 +170,11 @@
     "title": "Transazioni",
     "subTitle": "Ultime performance",
     "difference": "Differenza",
-    "back": "Torna alla pagina precendete",
+    "back": "Torna alla pagina precedente",
     "mobile_back": "Indietro",
     "details": {
-      "title": "Dettagli Transazione",
-      "back": "Torna alla pagina precendete",
+      "title": "Dettagli della Transazione",
+      "back": "Torna alla pagina precedente",
       "status": "Stato",
       "success": "Completato",
       "category": "Categoria",
@@ -189,7 +189,7 @@
     "title": "Portafoglio",
     "mobile_back": "Indietro",
     "mobile_add": "Aggiungi",
-    "back": "Torna alla pagina precendete",
+    "back": "Torna alla pagina precedente",
     "add": "Aggiungi nuovo Portafoglio",
     "open": "Apri Portafoglio",
     "modal": {
@@ -213,7 +213,7 @@
       "category": "Categoria",
       "categoryText": "Scegli una categoria",
       "categoryTextEdit": "Lascia per mantenere la categoria",
-      "balance": "Salndo",
+      "balance": "Saldo",
       "balanceText": "Inserisci Saldo",
       "type": "Tipo di wallet",
       "typeText": "Scegli il tipo di wallet",
@@ -238,7 +238,7 @@
     },
     "details": {
       "title": " Dettagli",
-      "back": "Torna alla pagina precendete",
+      "back": "Torna alla pagina precedente",
       "mobile_back": "Indietro",
       "mobile_edit": "Modifica",
       "mobile_delete": "Cancella",
@@ -252,7 +252,7 @@
       "dateLastStats": "Data Ultimo Stats",
       "edit": "Modifica Portafoglio",
       "delete": "Cancella Portafoglio",
-      "restore": "Riristina Portafoglio",
+      "restore": "Ripristina Portafoglio",
       "info": {
         "title": "Info",
         "subTitle": "Puoi aggiungere ogni info di cui hai bisogno (es IBAN per una Banca)",
@@ -288,14 +288,14 @@
         "history": {
           "title": "Storico Transazioni",
           "mobile_back": "Indietro",
-          "back": "Torna alla pagina precendete"
+          "back": "Torna alla pagina precedente"
         }
       }
     }
   },
   "settings": {
     "title": "Impostazioni",
-    "back": "Torna alla pagina precendete",
+    "back": "Torna alla pagina precedente",
     "mobile_back": "Indietro",
     "theme": {
       "title": "Tema",
@@ -353,7 +353,7 @@
   "stats": {
     "title": "Storico",
     "subTitle": "Dettagli delle transazioni e performance",
-    "back": "Torna alla pagina precendete",
+    "back": "Torna alla pagina precedente",
     "mobile_back": "Indietro",
     "total": "Saldo Totale",
     "since": "Da",
@@ -376,7 +376,7 @@
       "table_balance": "Saldo",
       "table_trend": "Trend",
       "table_performance": "Performance",
-      "table_value": "Saldo Trend",
+      "table_value": "Saldo del Trend",
       "investments": "Investimenti",
       "capital": "Capitali",
       "others": "Altro",
@@ -389,7 +389,7 @@
   },
   "insertStats": {
     "title": "Pagamenti",
-    "back": "Torna alla pagina precendete",
+    "back": "Torna alla pagina precedente",
     "mobile_back": "Indietro",
     "dataPresent": "Seleziona una data diversa",
     "balance": " saldo: ",
@@ -402,7 +402,7 @@
   "support": {
     "title": "Contatta Supporto",
     "mobile_back": "Indietro",
-    "back": "Torna alla pagina precendete",
+    "back": "Torna alla pagina precedente",
     "subtitle": "Contattaci inviandoci un'email",
     "formTitle": "Contattaci",
     "formSubTitle": "Completa il form per contattarci",
@@ -602,7 +602,7 @@
       }
     },
     "resume": {
-      "title": "Crypto Resume",
+      "title": "Riepilogo Crypto",
       "tab": {
         "tab1": "Holding",
         "tab2": "Trading",
@@ -622,7 +622,7 @@
             "tab4": "Media Asset",
             "tab5": "MarketData Saldo",
             "tab6": "Saldo Attuale",
-            "tab7": "Trend +/-",
+            "tab7": "Tendenza +/-",
             "tab8": "Performance"
           }
         }
@@ -667,7 +667,7 @@
         "balance": "Saldo",
         "balancePla": "Inserisci il tuo saldo in ",
         "invested": "Investito",
-        "investedPla": "Inserisci il saldo investito in "
+        "investedPla": "Inserisci l'importo investito in "
       },
       "editAsset": {
         "title": "Modifica Asset "
@@ -683,8 +683,8 @@
         "stats": {
           "title": "Aggiungi Stats",
           "subTitle": "Aggiungi nuovo stats per l'asset corrente in tutti i tuoi portafogli",
-          "resumeTitle": "Sommario Stats",
-          "resumeSubTitle": "Sommario stats, Salva per confermare l'operazione",
+          "resumeTitle": "Riepilogo Stats",
+          "resumeSubTitle": "Riepilogo Stats, Salva per confermare l'operazione",
           "next": "Prossimo Asset",
           "save": "Salva Stats"
         },
@@ -710,6 +710,10 @@
         "holding": {
           "title": "Holding",
           "details": "In questa sezione puoi effettuare un'operazione di Holding.<br>Scegli l'<strong>Asset</strong> che vuoi utilizzare per l'investimento dal tuo portafoglio e l'<strong>Asset</strong> che vuoi acquistare.<br >Calcolerà automaticamente anche la percentuale di denaro investito trasferito sul nuovo conto.<br>Puoi sempre modificare il balance e il saldo investito nella pagina Dettagli del'Asset, nell'elenco dei portafogli."
+        },
+        "trading": {
+          "title": "Trading",
+          "details": "<p>La sezione Trading di MoneyStats ti permette di eseguire operazioni di trading direttamente dal tuo wallet. Puoi effettuare scambi tra <strong>Stablecoin</strong> e <strong>Cryptocurrency</strong>, con una interfaccia intuitiva e sicura. Le transazioni sono monitorate in tempo reale e, per una maggiore gestione, le operazioni aperte possono essere visionate e chiuse nella sezione <strong>Resume</strong> dell'applicazione.</p>"
         },
         "close": "Chiudi"
       }

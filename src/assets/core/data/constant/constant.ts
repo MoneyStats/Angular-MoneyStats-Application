@@ -27,6 +27,7 @@ export enum SelectAssetConstant {
   ADDASSET = 'addAssetModalWrapper',
   NEWINVESTMENT = 'newCryptoInvestment',
   HOLDING = 'newHoldingOperation',
+  TRADING = 'newTradingOperation',
 }
 
 export enum StorageConstant {
@@ -62,7 +63,7 @@ export enum OperationsType {
 
 export enum MarketDataCategory {
   CRYPTOCURRENCY = 'Cryptocurrency',
-  STABLECOIN = 'StableCoin',
+  STABLECOIN = 'Stablecoin',
 }
 
 export var Operations = ['New Investment', 'Holding', 'Trading'];

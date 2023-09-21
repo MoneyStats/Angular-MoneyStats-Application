@@ -27,6 +27,7 @@ import { ResumeAssetsComponent } from './crypto-resume/resume-assets/resume-asse
 import { InvestmentsHistoryComponent } from './crypto-resume/investments-history/investments-history.component';
 import { OperationExchangeComponent } from './operation-exchange/operation-exchange.component';
 import { OperationsComponent } from './operations/operations.component';
+import { TradingResumeComponent } from './crypto-resume/trading-resume/trading-resume.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { OperationsComponent } from './operations/operations.component';
     InvestmentsHistoryComponent,
     OperationExchangeComponent,
     OperationsComponent,
+    TradingResumeComponent,
   ],
   imports: [
     CryptoRoutingModule,
