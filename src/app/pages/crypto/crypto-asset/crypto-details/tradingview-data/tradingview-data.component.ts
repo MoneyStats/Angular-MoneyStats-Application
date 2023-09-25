@@ -52,10 +52,10 @@ export class TradingviewDataComponent implements OnInit {
     {
       "symbols": [
         [
-          "$SYMBOL$USDT|1D"
+          "$SYMBOL$USDT|7D"
         ],
         [
-          "FX:EURUSD|1D"
+          "FX:EURUSD|7D"
         ]
       ],
       "chartOnly": false,
@@ -85,6 +85,7 @@ export class TradingviewDataComponent implements OnInit {
       "lineType": 0,
       "dateRanges": [
         "1d|1",
+        "1w|15",
         "1m|30",
         "3m|60",
         "12m|1D",
