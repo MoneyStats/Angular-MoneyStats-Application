@@ -42,13 +42,11 @@ export class OperationsListComponent implements OnInit {
     return ModalConstant;
   }
 
-  ngOnInit(): void {
-    console.log(this.operationsMapByYear);
-  }
+  ngOnInit(): void {}
 
   getOperations() {
     let operations: Operation[] = [];
-    if (this.isAssetOperations) {
+    /*if (this.isAssetOperations) {
       let wallets = deepCopy(this.walletsAsset);
       wallets.forEach((wallet) => {
         if (
@@ -77,37 +75,38 @@ export class OperationsListComponent implements OnInit {
           : -1
       );
       return operations;
-    } else {
-      let wallets = deepCopy(this.cryptoService.cryptoDashboard.wallets);
-      console.log(wallets);
-      wallets.forEach((wallet) => {
-        if (wallet.assets && wallet.assets.length > 0)
-          wallet.assets.forEach((asset) => {
-            if (asset.operations && asset.operations.length > 0)
-              asset.operations.forEach((operation) => {
-                operation.asset = asset;
-                operation.wallet = wallet;
-                if (operation.type != OperationsType.NEWINVESTMENT)
-                  operation.assetSell = deepCopy(
-                    this.cryptoService.cryptoDashboard.assets.find(
-                      (a) => a.symbol == operation.entryCoin
-                    )
-                  );
-                operations.push(operation);
-              });
-          });
-      });
-      operations.sort((a, b) =>
-        a.exitDate
-          ? a.exitDate! < b.exitDate!
-            ? 1
-            : -1
-          : a.entryDate! < b.entryDate!
+    } else {*/
+    //let wallets = deepCopy(this.cryptoService.cryptoDashboard.wallets);
+    let wallets = deepCopy(this.walletsAsset);
+    wallets.forEach((wallet) => {
+      if (wallet.assets && wallet.assets.length > 0)
+        wallet.assets.forEach((asset) => {
+          if (asset.operations && asset.operations.length > 0)
+            asset.operations.forEach((operation) => {
+              operation.asset = asset;
+              operation.wallet = wallet;
+              if (operation.type != OperationsType.NEWINVESTMENT)
+                operation.assetSell = deepCopy(
+                  this.cryptoService.cryptoDashboard.assets.find(
+                    (a) => a.symbol == operation.entryCoin
+                  )
+                );
+              operations.push(operation);
+            });
+        });
+    });
+    operations = operations.sort((a, b) =>
+      a.exitDate && b.exitDate
+        ? a.exitDate! < b.exitDate!
           ? 1
           : -1
-      );
-      return operations;
-    }
+        : a.entryDate! < b.entryDate!
+        ? 1
+        : -1
+    );
+    console.log('OPERA', operations);
+    return operations;
+    //}
   }
 
   selectOperation(operation: any) {

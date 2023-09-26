@@ -1,0 +1,13 @@
+.transactions {
+  margin: 0px;
+}
+
+@media screen and (max-width: 780px) {
+  .transactions {
+    margin-left: -10px !important;
+    margin-right: -10px !important;
+  }
+}
+.round-img {
+  border-radius: 50%;
+}
