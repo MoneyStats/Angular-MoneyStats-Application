@@ -21,6 +21,7 @@
         }}</a>
       </div>
       <app-operations-list
+        [modalID]="modalConstant.CRYPTOOPERATION"
         [cryptoDashboard]="cryptoService.cryptoDashboard"
         [walletsAsset]="cryptoService.cryptoDashboard.wallets"
         [isFullList]="true"

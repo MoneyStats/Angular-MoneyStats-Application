@@ -9,7 +9,10 @@ import { v4 as uuidv4 } from 'uuid';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { Router } from '@angular/router';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
-import { OperationsType } from 'src/assets/core/data/constant/constant';
+import {
+  ModalConstant,
+  OperationsType,
+} from 'src/assets/core/data/constant/constant';
 import {
   Asset,
   CryptoDashboard,
@@ -31,6 +34,10 @@ export class TradingResumeComponent implements OnInit, OnChanges {
 
   constructor(public cryptoService: CryptoService, private router: Router) {}
 
+  public get modalConstant(): typeof ModalConstant {
+    return ModalConstant;
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     this.filterWallet();
   }
@@ -45,9 +52,10 @@ export class TradingResumeComponent implements OnInit, OnChanges {
     this.walletsFilter.forEach((w) => {
       if (w.assets && w.assets.length > 0)
         w.assets.forEach((a) => {
-          a.operations = a.operations.filter(
-            (o) => o.type == OperationsType.TRADING
-          );
+          if (a.operations && a.operations.length > 0)
+            a.operations = a.operations.filter(
+              (o) => o.type == OperationsType.TRADING
+            );
         });
     });
   }

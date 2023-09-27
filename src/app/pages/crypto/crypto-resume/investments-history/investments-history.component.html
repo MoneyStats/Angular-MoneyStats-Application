@@ -183,6 +183,7 @@
         }}</a>
       </div>
       <app-operations-list
+        [modalID]="modalConstant.CRYPTOHISTORY"
         [cryptoDashboard]="cryptoService.cryptoDashboard"
         [walletsAsset]="cryptoService.cryptoDashboard.wallets"
       ></app-operations-list>

@@ -152,6 +152,21 @@
                 ></strong
               >
             </li>
+            <li>
+              <strong>Trend</strong>
+              <strong
+                ><span
+                  class="badge {{
+                    trend == 0
+                      ? 'badge-warning'
+                      : trend < 0
+                      ? 'badge-danger'
+                      : 'badge-success'
+                  }}"
+                  >{{ currency }} {{ trend }} ({{ percentage }}%)</span
+                ></strong
+              >
+            </li>
             <li *ngIf="operation?.exitDate">
               <strong>{{ "crypto.operationDetails.exit" | translate }}</strong>
               <span>{{ operation?.exitDate | date : "MMM dd, y HH:mm" }}</span>

@@ -1,16 +1,28 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { Operation } from 'src/assets/core/data/class/crypto.class';
-import { OperationsType } from 'src/assets/core/data/constant/constant';
+import {
+  ModalConstant,
+  OperationsType,
+} from 'src/assets/core/data/constant/constant';
 
 @Component({
   selector: 'app-operation-details',
   templateUrl: './operation-details.component.html',
   styleUrls: ['./operation-details.component.scss'],
 })
-export class OperationDetailsComponent implements OnInit {
+export class OperationDetailsComponent implements OnInit, OnChanges {
   @Input('operation') operation?: Operation = new Operation();
   @Input('modalId') modalId: string = '';
   @Input('currency') currency: string = '';
+
+  trend: number = 0;
+  percentage: number = 0;
 
   constructor() {}
 
@@ -19,6 +31,26 @@ export class OperationDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.operation);
+    this.getTradingData();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getTradingData();
+  }
+
+  getTradingData() {
+    if (this.modalId == ModalConstant.CRYPTOTRADINGRESUME) {
+      let currentPrice =
+        this.operation?.entryQuantity! * this.operation?.asset?.current_price!;
+      this.trend = parseFloat(
+        (currentPrice - this.operation?.entryPriceValue!).toFixed(2)
+      );
+      this.percentage = parseFloat(
+        (
+          ((currentPrice - this.operation?.entryPriceValue!) / currentPrice) *
+          100
+        ).toFixed(2)
+      );
+    }
   }
 }
