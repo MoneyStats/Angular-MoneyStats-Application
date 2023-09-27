@@ -14,7 +14,7 @@
         class="item"
         (click)="selectOperation(operation)"
         data-bs-toggle="modal"
-        attr.data-bs-target="#{{ modalConstant.CRYPTOOPERATIONDETAILS }}"
+        attr.data-bs-target="#{{ modalID }}"
       >
         <div class="icon-box-c me-4">
           <img
@@ -86,7 +86,7 @@
   </div>
 </div>
 <app-operation-details
-  [modalId]="modalConstant.CRYPTOOPERATIONDETAILS"
+  [modalId]="modalID"
   [operation]="operationSelect"
   [currency]="cryptoDashboard.currency"
 ></app-operation-details>

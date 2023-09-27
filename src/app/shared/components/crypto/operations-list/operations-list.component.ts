@@ -30,6 +30,7 @@ export class OperationsListComponent implements OnInit {
   @Input('year') year: string = '';
 
   @Input('isFullList') isFullList: boolean = false;
+  @Input('modalID') modalID: string = uuidv4();
 
   operationSelect: any;
   constructor(private cryptoService: CryptoService, private router: Router) {}
