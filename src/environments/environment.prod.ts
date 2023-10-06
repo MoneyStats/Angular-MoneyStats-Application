@@ -49,6 +49,8 @@ export const environment = {
   updateUserDataUrl: host + '/v1/auth/update/user',
   backupDataUrl: host + '/v1/app/backup',
   restoreDataUrl: host + '/v1/app/restore',
+  cleanCacheUrl: host + '/v1/crypto/cache/clean',
+  marketDataUrl: host + '/v1/crypto/marketData/import',
   addCryptoAssetDataUrl: host + '/v1/crypto/asset/addOrUpdate',
   getCryptoAssetDataUrl: host + '/v1/crypto/asset/getAll',
   getCryptoDetailsDataUrl: host + '/v1/crypto/asset/get',

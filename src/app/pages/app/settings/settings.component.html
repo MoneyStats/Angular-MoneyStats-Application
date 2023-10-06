@@ -186,6 +186,30 @@
         </li>
       </ul>
 
+      <!-- Admin Features -->
+      <div *ngIf="user?.role == userRole.ADMIN">
+        <div class="listview-title mt-1">
+          {{ "settings.admin.title" | translate }}
+        </div>
+        <ul class="listview border_round image-listview text inset mb-2">
+          <li>
+            <a class="item" (click)="cleanCache()">
+              <div class="in">
+                <div>{{ "settings.admin.cache" | translate }}</div>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a class="item" (click)="importMarketData()">
+              <div class="in">
+                <div>{{ "settings.admin.marketData" | translate }}</div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+
       <!-- Security Section -->
       <div class="listview-title mt-1">
         {{ "settings.security.title" | translate }}

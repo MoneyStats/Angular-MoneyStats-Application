@@ -16,7 +16,7 @@ export const environment = {
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: '1.10.5 (Beta)',
+  version: '1.10.6 (Beta)',
 
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
@@ -49,6 +49,8 @@ export const environment = {
   updateUserDataUrl: host + '/v1/auth/update/user',
   backupDataUrl: host + '/v1/app/backup',
   restoreDataUrl: host + '/v1/app/restore',
+  cleanCacheUrl: host + '/v1/crypto/cache/clean',
+  marketDataUrl: host + '/v1/crypto/marketData/import',
   forgotPassword: true,
 
   /*
