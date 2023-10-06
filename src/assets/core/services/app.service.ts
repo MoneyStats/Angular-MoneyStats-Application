@@ -67,4 +67,36 @@ export class AppService {
       );
     }
   }
+
+  cleanCache(): Observable<ResponseModel> {
+    const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      authToken: authToken!,
+    });
+    if (this.user?.mockedUser) {
+      let response: ResponseModel = new ResponseModel();
+      return of(response);
+    } else {
+      return this.http.patch<ResponseModel>(environment.cleanCacheUrl, null, {
+        headers: headers,
+      });
+    }
+  }
+
+  importMarketData(): Observable<ResponseModel> {
+    const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      authToken: authToken!,
+    });
+    if (this.user?.mockedUser) {
+      let response: ResponseModel = new ResponseModel();
+      return of(response);
+    } else {
+      return this.http.patch<ResponseModel>(environment.marketDataUrl, null, {
+        headers: headers,
+      });
+    }
+  }
 }

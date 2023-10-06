@@ -5,9 +5,12 @@ import {
   ModalConstant,
   ProfileSettings,
   StorageConstant,
+  UserRole,
 } from 'src/assets/core/data/constant/constant';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
+import { AppService } from 'src/assets/core/services/app.service';
 import { UserService } from 'src/assets/core/services/user.service';
+import { LoggerService } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 import { ThemeService } from 'src/assets/core/utils/theme.service';
@@ -33,11 +36,17 @@ export class SettingsComponent implements OnInit {
     private userService: UserService,
     private themeService: ThemeService,
     private toast: ToastService,
-    private swal: SwalService
+    private swal: SwalService,
+    private appService: AppService,
+    private logger: LoggerService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
+  }
+
+  public get userRole(): typeof UserRole {
+    return UserRole;
   }
 
   public get profileSettings(): typeof ProfileSettings {
@@ -62,6 +71,7 @@ export class SettingsComponent implements OnInit {
     if (autoUpdate) {
       this.isAutoUpdate = autoUpdate;
     }
+    console.log(this.user);
   }
 
   disconnect(user: User) {
@@ -118,5 +128,19 @@ export class SettingsComponent implements OnInit {
       StorageConstant.AUTOUPDATE,
       JSON.stringify(this.isAutoUpdate)
     );
+  }
+
+  cleanCache() {
+    this.appService.cleanCache().subscribe((res) => {
+      this.logger.LOG(res.message!, 'SettingsComponent');
+      this.swal.toastMessage(SwalIcon.SUCCESS, res.message!);
+    });
+  }
+
+  importMarketData() {
+    this.appService.importMarketData().subscribe((res) => {
+      this.logger.LOG(res.message!, 'SettingsComponent');
+      this.swal.toastMessage(SwalIcon.SUCCESS, res.message!);
+    });
   }
 }

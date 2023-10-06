@@ -348,7 +348,12 @@
       "version_open": "Apri",
       "auto_update": "Aggiornamento Automatico"
     },
-    "develop": "Info Sviluppi & Contatti"
+    "develop": "Info Sviluppi & Contatti",
+    "admin": {
+      "title": "Admin Features",
+      "cache": "Pulizia cache",
+      "marketData": "Importa Marketdata"
+    }
   },
   "stats": {
     "title": "Storico",

@@ -348,7 +348,12 @@
       "version_open": "Open",
       "auto_update": "Auto Update"
     },
-    "develop": "Info Develop & Contact"
+    "develop": "Info Develop & Contact",
+    "admin": {
+      "title": "Admin Features",
+      "cache": "Clean cache",
+      "marketData": "Import Marketdata"
+    }
   },
   "stats": {
     "title": "Resume Data",

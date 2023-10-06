@@ -69,4 +69,9 @@ export enum MarketDataCategory {
   STABLECOIN = 'Stablecoin',
 }
 
+export enum UserRole {
+  USER = 'USER',
+  ADMIN = 'ADMIN',
+}
+
 export var Operations = ['New Investment', 'Holding', 'Trading'];

@@ -39,7 +39,7 @@ export class OperationDetailsComponent implements OnInit, OnChanges {
   }
 
   getTradingData() {
-    if (this.modalId == ModalConstant.CRYPTOTRADINGRESUME) {
+    if (this.operation?.status == 'OPEN' && OperationsType.TRADING) {
       let currentPrice =
         this.operation?.entryQuantity! * this.operation?.asset?.current_price!;
       this.trend = parseFloat(
