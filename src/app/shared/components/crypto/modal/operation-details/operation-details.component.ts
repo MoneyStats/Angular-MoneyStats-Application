@@ -26,6 +26,10 @@ export class OperationDetailsComponent implements OnInit, OnChanges {
 
   constructor() {}
 
+  public get modalConstant(): typeof ModalConstant {
+    return ModalConstant;
+  }
+
   public get operationTypeConstant(): typeof OperationsType {
     return OperationsType;
   }

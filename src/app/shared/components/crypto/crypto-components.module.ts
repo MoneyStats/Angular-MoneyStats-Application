@@ -17,6 +17,7 @@ import { InfoModalComponent } from './modal/info-modal/info-modal.component';
 import { AssetSelectComponent } from './asset-select/asset-select.component';
 import { OperationDetailsComponent } from './modal/operation-details/operation-details.component';
 import { OperationsListComponent } from './operations-list/operations-list.component';
+import { CloseOperationComponent } from './modal/close-operation/close-operation.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { OperationsListComponent } from './operations-list/operations-list.compo
     AssetSelectComponent,
     OperationDetailsComponent,
     OperationsListComponent,
+    CloseOperationComponent,
   ],
   exports: [
     AddAssetModalComponent,

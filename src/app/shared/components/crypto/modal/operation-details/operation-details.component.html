@@ -206,7 +206,20 @@
           </ul>
         </div>
       </div>
+      <div class="modal-footer" *ngIf="operation?.status == 'OPEN'">
+        <a
+          class="btn btn-primary btn-lg btn-block"
+          data-bs-toggle="modal"
+          attr.data-bs-target="#{{ modalConstant.CLOSEOPERATION }}"
+          >{{ "crypto.cryptoModal.info.close" | translate }}</a
+        >
+      </div>
     </div>
   </div>
 </div>
 <!-- * Modal Basic -->
+
+<app-close-operation
+  [operation]="operation"
+  [modalId]="modalConstant.CLOSEOPERATION"
+></app-close-operation>
