@@ -657,6 +657,11 @@
       "exit": "Exit Date",
       "exitPrice": "Exit Price"
     },
+    "closeOperation": {
+      "title": "Close Operation",
+      "subTitle": "You are about to close the current trading operation. Check and confirm the exit price and quantity. If there's any discrepancy or if you wish to make changes, click <strong>'Edit'</strong>. Once you're satisfied, proceed with the closure.",
+      "close": "Exchange"
+    },
     "cryptoModal": {
       "addAsset": {
         "title": "Import an Asset",
@@ -719,6 +724,10 @@
         "trading": {
           "title": "Trading",
           "details": "<p>The Trading section of MoneyStats allows you to execute trading operations directly from your wallet. You can swap between <strong>Stablecoin</strong> and <strong>Cryptocurrency</strong>, using an intuitive and secure interface. Transactions are monitored in real-time, and for enhanced management, open operations can be reviewed and closed in the <strong>Resume</strong> section of the application.</p>"
+        },
+        "closeOperation": {
+          "title": "Close Operation",
+          "details": "<p>You are about to proceed with the closure of the current operation. This section allows you to confirm or modify the essential details of the operation before finalizing it.</p><h5>Operation Details:</h5><ul><li><strong>Exit Price:</strong> This represents the price at which you intend to sell the asset. Ensure it reflects your expectations and the current market conditions.</li><li><strong>Quantity:</strong> This is the quantity of the asset you intend to sell. Ensure it matches the actual quantity held.</li></ul><p>If you believe there are discrepancies in the above data or wish to make changes, click <button>Edit</button> to update the operation details.</p><p>Once you are satisfied with the entered information, you can proceed with the closure of the operation. Remember to trade cautiously and make informed decisions.</p>"
         },
         "close": "Close"
       }

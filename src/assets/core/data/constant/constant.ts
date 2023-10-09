@@ -24,6 +24,7 @@ export enum ModalConstant {
   CRYPTOHISTORY = 'modalCryptoHistory',
   CRYPTOTRADINGRESUME = 'modalCryptoTradingResume',
   CRYPTOOPERATION = 'modalCryptoOperation',
+  CLOSEOPERATION = 'closeOperationModal',
 }
 
 export enum SelectAssetConstant {
@@ -62,6 +63,7 @@ export enum OperationsType {
   HOLDING = 'Holding',
   NEWINVESTMENT = 'New Investment',
   TRADING = 'Trading',
+  CLOSEOPERATION = 'Close-Position',
 }
 
 export enum MarketDataCategory {

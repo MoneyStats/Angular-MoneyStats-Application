@@ -1,0 +1,82 @@
+<!-- Alert Iconed Action Sheet -->
+<div
+  class="modal fade action-sheet"
+  id="{{ modalId }}"
+  tabindex="-1"
+  role="dialog"
+  data-bs-focus="false"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal-round mx-auto">
+      <div class="modal-body">
+        <div class="action-sheet-content">
+          <div class="iconbox text-warning">
+            <ion-icon name="alert-circle"></ion-icon>
+          </div>
+          <div class="text-center">
+            <h3>
+              {{ "crypto.closeOperation.title" | translate }}
+              <ion-icon
+                name="alert-circle"
+                style="width: 20px; height: 20px; vertical-align: -2px"
+                data-bs-toggle="modal"
+                attr.data-bs-target="#{{ modalConstant.INFO }}"
+              ></ion-icon>
+            </h3>
+            <p [innerHTML]="'crypto.closeOperation.subTitle' | translate"></p>
+            <hr />
+            <div class="splash-page mb-5">
+              <div class="transfer-verification">
+                <div class="transfer-amount">
+                  <span class="caption">Amount</span>
+                  <h2>{{ operation?.entryCoin }} {{ currentPrice }}</h2>
+                  <p style="margin-top: -20px">
+                    <small
+                      >{{ operation?.exitCoin }}
+                      {{ operation?.entryQuantity }}</small
+                    >
+                  </p>
+                </div>
+                <div class="from-to-block mb-5">
+                  <div class="item text-center">
+                    <img
+                      src="{{ operation?.asset?.icon }}"
+                      alt="avatar"
+                      class="imaged w48"
+                    />
+                    <strong>{{ operation?.asset?.name }}</strong>
+                  </div>
+                  <div class="item text-center">
+                    <img
+                      src="{{ operation?.assetSell?.icon }}"
+                      alt="avatar"
+                      class="imaged w48"
+                    />
+                    <strong>{{ operation?.assetSell?.name }}</strong>
+                  </div>
+                  <div class="arrow"></div>
+                </div>
+              </div>
+              <h2 class="mb-2 mt-2">Verify the Transaction</h2>
+              <p>
+                You are sending <strong class="text-primary">$ 50.00</strong> to
+                Amanda. <br />Are you sure?
+              </p>
+            </div>
+          </div>
+
+          <a class="btn btn-danger btn-lg btn-block" data-bs-toggle="modal">{{
+            "crypto.cryptoModal.info.close" | translate
+          }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- * Alert Iconed Action Sheet -->
+
+<app-info-modal
+  [isClosingOperation]="true"
+  [modalId]="modalConstant.INFO"
+  [operationType]="operationTypeConstant.CLOSEOPERATION"
+></app-info-modal>

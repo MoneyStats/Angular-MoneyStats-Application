@@ -13,6 +13,7 @@ import {
 export class InfoModalComponent implements OnInit {
   @Input('modalId') modalId: string = '';
   @Input('isOperation') isOperation: boolean = false;
+  @Input('isClosingOperation') isClosingOperation: boolean = false;
   @Input('operationType') operationType: string = '';
   operation = Operations;
 
