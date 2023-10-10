@@ -59,4 +59,8 @@ export class CryptoComponent implements OnInit {
       this.router.navigate(['on-boarding']);
     } else this.router.navigate(['crypto/requirements']);
   }
+
+  vibrate() {
+    this.appService.vibrate();
+  }
 }
