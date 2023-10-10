@@ -99,4 +99,8 @@ export class AppService {
       });
     }
   }
+
+  vibrate() {
+    navigator.vibrate([5]);
+  }
 }

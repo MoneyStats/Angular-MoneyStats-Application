@@ -6,10 +6,10 @@
   role="dialog"
   data-bs-focus="false"
 >
-  <div class="modal-dialog" role="document">
-    <div class="modal-content modal-round mx-auto">
+  <div class="modal-dialog fullbig-modal" role="document">
+    <div class="modal-content modal-round mx-auto fullbig-modal">
       <div class="modal-body">
-        <div class="action-sheet-content">
+        <div class="action-sheet-content fullbig-modal">
           <div class="iconbox text-warning">
             <ion-icon name="alert-circle"></ion-icon>
           </div>
@@ -58,10 +58,52 @@
                 </div>
               </div>
               <h2 class="mb-2 mt-2">Verify the Transaction</h2>
-              <p>
-                You are sending <strong class="text-primary">$ 50.00</strong> to
-                Amanda. <br />Are you sure?
-              </p>
+              <div class="mx-auto" style="max-width: 500px">
+                <!-- timeline -->
+                <div class="timeline timed ms-1 me-2">
+                  <div class="item">
+                    <span class="time">{{
+                      operation?.entryDate | date : "d MMM y"
+                    }}</span>
+                    <div class="dot bg-success"></div>
+                    <div class="content">
+                      <h5 class="title">
+                        Position Open on Coins
+                        {{ operation?.assetSell?.symbol }}/{{
+                          operation?.asset?.symbol
+                        }}
+                      </h5>
+                      <div class="text">
+                        You buy {{ operation?.entryQuantity }} for
+                        {{ operation?.exitCoin }} at
+                        {{ operation?.entryPriceValue }}
+                        {{ operation?.entryCoin }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <span class="time">{{
+                      operation?.exitDate | date : "d MMM y"
+                    }}</span>
+                    <div class="dot bg-danger"></div>
+                    <div class="content">
+                      <h5 class="title">
+                        Position Closing on Coins
+                        {{ operation?.asset?.symbol }}/{{
+                          operation?.assetSell?.symbol
+                        }}
+                      </h5>
+                      <div class="text">
+                        You sell {{ operation?.exitQuantity }} for
+                        {{ operation?.exitCoin }} at
+                        {{ operation?.exitPriceValue }}
+                        {{ operation?.entryCoin }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- * timeline -->
+              </div>
             </div>
           </div>
 

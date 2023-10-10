@@ -44,5 +44,19 @@ export class CloseOperationComponent implements OnInit, OnChanges {
     let currentPrice =
       this.operation?.entryQuantity! * this.operation?.asset?.current_price!;
     this.currentPrice = parseFloat(currentPrice.toFixed(2));
+    let operation = this.operation;
+    operation!.exitDate = new Date();
+    operation!.exitPrice = operation?.asset?.current_price;
+    operation!.exitPriceValue = parseFloat(currentPrice.toFixed(2));
+    operation!.exitQuantity = operation?.entryQuantity;
+    operation!.performance = parseFloat(
+      (
+        ((currentPrice - this.operation?.entryPriceValue!) / currentPrice) *
+        100
+      ).toFixed(2)
+    );
+    operation!.trend = parseFloat(
+      (currentPrice - this.operation?.entryPriceValue!).toFixed(2)
+    );
   }
 }
