@@ -9,6 +9,7 @@
   <div
     routerLink="{{ isMenuActive ? '/crypto/dashboard' : '' }}"
     class="pageTitle clickable"
+    (click)="vibrate()"
   >
     {{ title }}
   </div>

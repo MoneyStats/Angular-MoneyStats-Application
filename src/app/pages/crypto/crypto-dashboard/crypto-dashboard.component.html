@@ -62,7 +62,7 @@
                     class="icon-size icon-color"
                     name="add-circle"
                   ></ion-icon>
-                  <a style="vertical-align: -1px">{{
+                  <a style="vertical-align: -1px" (click)="vibrate()">{{
                     "crypto.dashboard.cardRes.opt1" | translate
                   }}</a>
                 </div>
@@ -82,6 +82,7 @@
                     name="albums-outline"
                   ></ion-icon>
                   <a
+                    (click)="vibrate()"
                     routerLink="/crypto/asset"
                     style="vertical-align: -1px; color: #958d9e"
                     >{{ "crypto.dashboard.cardRes.opt2" | translate }}</a

@@ -40,6 +40,7 @@ import { CloseOperationComponent } from './modal/close-operation/close-operation
     InfoModalComponent,
     OperationDetailsComponent,
     OperationsListComponent,
+    CloseOperationComponent,
   ],
   imports: [
     RouterModule,

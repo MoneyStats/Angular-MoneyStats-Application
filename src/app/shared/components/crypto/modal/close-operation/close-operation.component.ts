@@ -10,6 +10,7 @@ import {
   ModalConstant,
   OperationsType,
 } from 'src/assets/core/data/constant/constant';
+import { CryptoService } from 'src/assets/core/services/crypto.service';
 
 @Component({
   selector: 'app-close-operation',
@@ -19,10 +20,12 @@ import {
 export class CloseOperationComponent implements OnInit, OnChanges {
   @Input('modalId') modalId: string = '';
   @Input('operation') operation?: Operation = new Operation();
+  cryptoCurrency: string = '';
 
   currentPrice: number = 0;
+  isEditActive: boolean = false;
 
-  constructor() {}
+  constructor(private cryptoService: CryptoService) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -41,6 +44,7 @@ export class CloseOperationComponent implements OnInit, OnChanges {
   }
 
   getData() {
+    this.cryptoCurrency = this.cryptoService.cryptoDashboard.currency;
     let currentPrice =
       this.operation?.entryQuantity! * this.operation?.asset?.current_price!;
     this.currentPrice = parseFloat(currentPrice.toFixed(2));
@@ -48,7 +52,12 @@ export class CloseOperationComponent implements OnInit, OnChanges {
     operation!.exitDate = new Date();
     operation!.exitPrice = operation?.asset?.current_price;
     operation!.exitPriceValue = parseFloat(currentPrice.toFixed(2));
-    operation!.exitQuantity = operation?.entryQuantity;
+    operation!.exitQuantity = parseFloat(
+      (
+        operation!.entryPriceValue! / operation!.assetSell!.current_price!
+      ).toFixed(8)
+    );
+
     operation!.performance = parseFloat(
       (
         ((currentPrice - this.operation?.entryPriceValue!) / currentPrice) *
@@ -58,5 +67,21 @@ export class CloseOperationComponent implements OnInit, OnChanges {
     operation!.trend = parseFloat(
       (currentPrice - this.operation?.entryPriceValue!).toFixed(2)
     );
+  }
+
+  refreshData() {
+    let operation = this.operation;
+    let currentPrice =
+      this.operation?.entryQuantity! * this.operation?.exitPrice!;
+    operation!.performance = parseFloat(
+      (
+        ((currentPrice - this.operation?.entryPriceValue!) / currentPrice) *
+        100
+      ).toFixed(2)
+    );
+    operation!.trend = parseFloat(
+      (currentPrice - this.operation?.entryPriceValue!).toFixed(2)
+    );
+    this.isEditActive = false;
   }
 }

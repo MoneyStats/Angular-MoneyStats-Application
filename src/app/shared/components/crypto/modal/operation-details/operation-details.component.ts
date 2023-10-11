@@ -43,18 +43,18 @@ export class OperationDetailsComponent implements OnInit, OnChanges {
   }
 
   getTradingData() {
-    if (this.operation?.status == 'OPEN' && OperationsType.TRADING) {
-      let currentPrice =
-        this.operation?.entryQuantity! * this.operation?.asset?.current_price!;
-      this.trend = parseFloat(
-        (currentPrice - this.operation?.entryPriceValue!).toFixed(2)
-      );
-      this.percentage = parseFloat(
-        (
-          ((currentPrice - this.operation?.entryPriceValue!) / currentPrice) *
-          100
-        ).toFixed(2)
-      );
-    }
+    //if (this.operation?.status == 'OPEN' && OperationsType.TRADING) {
+    let currentPrice =
+      this.operation?.entryQuantity! * this.operation?.asset?.current_price!;
+    this.trend = parseFloat(
+      (currentPrice - this.operation?.entryPriceValue!).toFixed(2)
+    );
+    this.percentage = parseFloat(
+      (
+        ((currentPrice - this.operation?.entryPriceValue!) / currentPrice) *
+        100
+      ).toFixed(2)
+    );
+    //}
   }
 }
