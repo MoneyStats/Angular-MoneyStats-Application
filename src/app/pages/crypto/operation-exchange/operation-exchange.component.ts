@@ -219,12 +219,14 @@ export class OperationExchangeComponent implements OnInit {
     operation.entryCoin = holdingAsset.symbol;
     operation.entryPrice = holdingAsset.current_price;
     operation.entryPriceValue = this.investedMoney;
-    operation.entryQuantity = this.investedBalance;
+    //operation.entryQuantity = this.investedBalance;
+    operation.entryQuantity = this.assetNewBalance;
     operation.exitDate = new Date();
     operation.exitCoin = assetToSave.symbol;
     operation.exitPrice = assetToSave.current_price;
     operation.exitPriceValue = this.investedMoney;
-    operation.exitQuantity = this.assetNewBalance;
+    //operation.exitQuantity = this.assetNewBalance;
+    operation.exitQuantity = this.investedMoney;
 
     assetToSave.operations = [operation];
 
@@ -254,12 +256,14 @@ export class OperationExchangeComponent implements OnInit {
     operation.entryCoin = this.fiat;
     operation.entryPrice = assetToSave.current_price;
     operation.entryPriceValue = this.investedMoney;
+    //operation.entryQuantity = this.investedMoney;
     operation.entryQuantity = this.assetNewBalance;
     operation.exitDate = new Date();
     operation.exitCoin = assetToSave.symbol;
     operation.exitPrice = assetToSave.current_price;
     operation.exitPriceValue = this.investedMoney;
-    operation.exitQuantity = this.assetNewBalance;
+    //operation.exitQuantity = this.assetNewBalance;
+    operation.exitQuantity = this.investedMoney;
 
     assetToSave.operations = [operation];
 

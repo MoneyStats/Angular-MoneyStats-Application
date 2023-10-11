@@ -11,6 +11,7 @@ import {
 } from 'src/assets/core/data/class/crypto.class';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
+import { AppService } from 'src/assets/core/services/app.service';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { LoggerService } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
@@ -40,7 +41,8 @@ export class CryptoDashboardComponent implements OnInit {
     public screenService: ScreenService,
     private _renderer2: Renderer2,
     private cryptoService: CryptoService,
-    private logger: LoggerService
+    private logger: LoggerService,
+    private appService: AppService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -72,6 +74,9 @@ export class CryptoDashboardComponent implements OnInit {
       //  (w) => w.category == 'Crypto'
       //);
     });
+  }
+  vibrate() {
+    this.appService.vibrate();
   }
 
   onChange(symbol: string) {

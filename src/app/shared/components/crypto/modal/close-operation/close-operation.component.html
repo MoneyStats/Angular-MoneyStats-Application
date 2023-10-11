@@ -57,8 +57,15 @@
                   <div class="arrow"></div>
                 </div>
               </div>
-              <h2 class="mb-2 mt-2">Verify the Transaction</h2>
-              <div class="mx-auto" style="max-width: 500px">
+              <!--<h2 class="mb-2 mt-2">Verify the Transaction</h2>-->
+              <div
+                class="mx-auto"
+                style="
+                  max-width: 500px;
+                  margin-top: -45px;
+                  margin-bottom: -25px;
+                "
+              >
                 <!-- timeline -->
                 <div class="timeline timed ms-1 me-2">
                   <div class="item">
@@ -67,17 +74,42 @@
                     }}</span>
                     <div class="dot bg-success"></div>
                     <div class="content">
-                      <h5 class="title">
+                      <h5 class="title text-start">
                         Position Open on Coins
-                        {{ operation?.assetSell?.symbol }}/{{
-                          operation?.asset?.symbol
+                        {{ operation?.asset?.symbol }}/{{
+                          operation?.assetSell?.symbol
                         }}
                       </h5>
-                      <div class="text">
-                        You buy {{ operation?.entryQuantity }} for
-                        {{ operation?.exitCoin }} at
-                        {{ operation?.entryPriceValue }}
-                        {{ operation?.entryCoin }}
+                      <div class="text text-start">
+                        <p>
+                          Trading Pair:
+                          <strong
+                            >{{ operation?.assetSell?.symbol }}/{{
+                              operation?.asset?.symbol
+                            }}</strong
+                          >
+                        </p>
+                        <p class="p">
+                          Quantity:
+                          <strong
+                            >{{ operation?.entryQuantity }}
+                            {{ operation?.exitCoin }}</strong
+                          >
+                        </p>
+                        <p class="p">
+                          Quantity Value:
+                          <strong
+                            >{{ operation?.entryPriceValue }}
+                            {{ operation?.entryCoin }}</strong
+                          >
+                        </p>
+                        <p class="p">
+                          Buying Price of {{ operation?.exitCoin }}:
+                          <strong
+                            >{{ operation?.entryPrice }}
+                            {{ cryptoCurrency }}</strong
+                          >
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -86,18 +118,128 @@
                       operation?.exitDate | date : "d MMM y"
                     }}</span>
                     <div class="dot bg-danger"></div>
-                    <div class="content">
-                      <h5 class="title">
-                        Position Closing on Coins
+                    <div *ngIf="isEditActive" class="content">
+                      <form #f="ngForm" type="submit">
+                        <div class="row">
+                          <div class="col-12 col-md-6">
+                            <div class="form-group basic">
+                              <div class="input-wrapper">
+                                <label class="label" for="quantity1"
+                                  >Quantity ({{
+                                    operation?.assetSell?.symbol
+                                  }})</label
+                                >
+                                <input
+                                  name="quantity"
+                                  #quantity1="ngModel"
+                                  type="number"
+                                  class="form-control"
+                                  id="quantity1"
+                                  placeholder="Enter an Amount"
+                                  [(ngModel)]="operation!.exitQuantity"
+                                />
+                                <i class="clear-input">
+                                  <ion-icon name="close-circle"></ion-icon>
+                                </i>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-6">
+                            <div class="form-group basic">
+                              <div class="input-wrapper">
+                                <label class="label" for="quantityValue1"
+                                  >Quantity Value ({{ cryptoCurrency }})</label
+                                >
+                                <input
+                                  name="quantityValue"
+                                  #quantityValue1="ngModel"
+                                  type="number"
+                                  class="form-control"
+                                  id="quantityValue1"
+                                  placeholder="Enter an Amount"
+                                  [(ngModel)]="operation!.exitPriceValue"
+                                />
+                                <i class="clear-input">
+                                  <ion-icon name="close-circle"></ion-icon>
+                                </i>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <div class="form-group basic">
+                              <div class="input-wrapper">
+                                <label class="label" for="price1"
+                                  >Selling Price ({{
+                                    operation?.asset?.symbol
+                                  }})</label
+                                >
+                                <input
+                                  name="price"
+                                  #price1="ngModel"
+                                  type="number"
+                                  class="form-control"
+                                  id="price1"
+                                  placeholder="Enter an Amount"
+                                  [(ngModel)]="operation!.exitPrice"
+                                />
+                                <i class="clear-input">
+                                  <ion-icon name="close-circle"></ion-icon>
+                                </i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div *ngIf="!isEditActive" class="content">
+                      <h5 class="title text-start">
+                        Position Close on Coins
                         {{ operation?.asset?.symbol }}/{{
                           operation?.assetSell?.symbol
                         }}
                       </h5>
-                      <div class="text">
-                        You sell {{ operation?.exitQuantity }} for
-                        {{ operation?.exitCoin }} at
-                        {{ operation?.exitPriceValue }}
-                        {{ operation?.entryCoin }}
+                      <div class="text text-start">
+                        <p>
+                          Trading Pair:
+                          <strong
+                            >{{ operation?.asset?.symbol }}/{{
+                              operation?.assetSell?.symbol
+                            }}</strong
+                          >
+                        </p>
+                        <p class="p">
+                          Quantity:
+                          <strong
+                            >{{ operation?.exitQuantity }}
+                            {{ operation?.entryCoin }}</strong
+                          >
+                        </p>
+                        <p class="p">
+                          Quantity Value:
+                          <strong
+                            >{{ operation?.exitPriceValue }}
+                            {{ cryptoCurrency }}
+                            <span
+                              class="badge {{
+                                operation?.trend == 0
+                                  ? 'badge-warning'
+                                  : operation?.trend! < 0
+                                  ? 'badge-danger'
+                                  : 'badge-success'
+                              }}"
+                              >{{ cryptoCurrency }} {{ operation?.trend }} ({{
+                                operation?.performance
+                              }}%)</span
+                            ></strong
+                          >
+                        </p>
+                        <p class="p">
+                          Selling Price of {{ operation?.exitCoin }}:
+                          <strong
+                            >{{ operation?.exitPrice }}
+                            {{ cryptoCurrency }}</strong
+                          >
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -106,10 +248,29 @@
               </div>
             </div>
           </div>
-
-          <a class="btn btn-danger btn-lg btn-block" data-bs-toggle="modal">{{
-            "crypto.cryptoModal.info.close" | translate
-          }}</a>
+          <div class="row">
+            <div class="col-6">
+              <a
+                *ngIf="!isEditActive"
+                (click)="isEditActive = true"
+                class="btn btn-lg btn-outline-secondary btn-block goBack"
+                >Edit</a
+              >
+              <a
+                *ngIf="isEditActive"
+                (click)="refreshData()"
+                class="btn btn-lg btn-primary btn-block goBack"
+                >Save</a
+              >
+            </div>
+            <div class="col-6">
+              <a
+                class="btn btn-danger btn-lg btn-block"
+                data-bs-toggle="modal"
+                >{{ "crypto.cryptoModal.info.close" | translate }}</a
+              >
+            </div>
+          </div>
         </div>
       </div>
     </div>

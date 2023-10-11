@@ -125,7 +125,9 @@
                 "crypto.operationDetails.entryPrice" | translate
               }}</strong>
               <strong
-                ><span>{{ operation?.entryPrice }} {{ currency }}</span></strong
+                ><span
+                  >{{ operation?.entryPrice }} {{ operation?.entryCoin }}</span
+                ></strong
               >
             </li>
             <li>
@@ -142,13 +144,13 @@
             <li>
               <strong
                 >{{ "crypto.operationDetails.quantity" | translate }} ({{
-                  operation?.entryCoin
+                  operation?.exitCoin
                 }})</strong
               >
               <strong
                 ><span
                   >{{ operation?.entryQuantity }}
-                  {{ operation?.entryCoin }}</span
+                  {{ operation?.exitCoin }}</span
                 ></strong
               >
             </li>
@@ -190,19 +192,6 @@
                 ></strong
               >
             </li>
-            <li *ngIf="operation?.exitQuantity">
-              <strong
-                >{{ "crypto.operationDetails.quantity" | translate }} ({{
-                  operation?.exitCoin
-                }})</strong
-              >
-              <strong
-                ><span
-                  >{{ operation?.exitQuantity }}
-                  {{ operation?.asset?.symbol }}</span
-                ></strong
-              >
-            </li>
           </ul>
         </div>
       </div>
@@ -211,7 +200,7 @@
           class="btn btn-primary btn-lg btn-block"
           data-bs-toggle="modal"
           attr.data-bs-target="#{{ modalConstant.CLOSEOPERATION }}"
-          >{{ "crypto.cryptoModal.info.close" | translate }}</a
+          >{{ "crypto.closeOperation.title" | translate }}</a
         >
       </div>
     </div>
