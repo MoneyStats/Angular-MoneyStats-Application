@@ -89,7 +89,6 @@ export class AddAssetModalComponent implements OnInit {
       (this.wallet?.assets.length > 0 &&
         !this.wallet?.assets.find((a) => a.name == this.modelAsset))
     ) {
-      console.log('SONO ASSET');
       this.warning = false;
       this.asset = this.cryptoPrices.find((c) => c.name == this.modelAsset);
       this.isAssetSelected = true;

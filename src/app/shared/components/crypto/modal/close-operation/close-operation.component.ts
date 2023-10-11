@@ -11,6 +11,10 @@ import {
   OperationsType,
 } from 'src/assets/core/data/constant/constant';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
+import { deepCopy } from '@angular-devkit/core/src/utils/object';
+import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
+import { SwalService } from 'src/assets/core/utils/swal.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-close-operation',
@@ -25,7 +29,11 @@ export class CloseOperationComponent implements OnInit, OnChanges {
   currentPrice: number = 0;
   isEditActive: boolean = false;
 
-  constructor(private cryptoService: CryptoService) {}
+  constructor(
+    private cryptoService: CryptoService,
+    private swal: SwalService,
+    private router: Router
+  ) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -83,5 +91,35 @@ export class CloseOperationComponent implements OnInit, OnChanges {
       (currentPrice - this.operation?.entryPriceValue!).toFixed(2)
     );
     this.isEditActive = false;
+  }
+
+  closeOperation() {
+    this.operation!.status = 'CLOSED';
+    let dashboard = deepCopy(this.cryptoService.cryptoDashboard);
+    /*let wallet = dashboard.wallets.find((w) =>
+      w.assets.find((a) => a.operations.find((o) => o.id == this.operation?.id))
+    );*/
+    let wallet = this.operation?.wallet;
+    let asset1 = this.operation?.asset;
+    let asset2 = this.operation?.assetSell;
+
+    this.operation!.asset = undefined;
+    this.operation!.assetSell = undefined;
+    this.operation!.wallet = undefined;
+
+    asset1!.operations = [this.operation];
+    asset1!.balance -= this.operation?.entryQuantity!;
+    asset1!.updateDate = new Date();
+
+    asset2!.balance += this.operation?.exitQuantity!;
+    asset2!.updateDate = new Date();
+
+    wallet!.assets = [asset1!, asset2!];
+    let message =
+      'Operation ' + asset1?.name + '/' + asset2?.name + ' successfully closed';
+    this.cryptoService.addOrUpdateCryptoAsset(wallet!).subscribe((data) => {
+      this.swal.toastMessage(SwalIcon.SUCCESS, message);
+      this.router.navigate(['/crypto/dashboard']);
+    });
   }
 }
