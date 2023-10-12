@@ -70,9 +70,9 @@ export class CryptoDashboardComponent implements OnInit {
       this.assets = data.data.assets;
       //this.cryptoService.cryptoDashboard.assets = this.assets;
       //this.cryptoDashboard.assets = this.assets;
-      //this.cryptoWallet = this.cryptoDashboard.wallets.filter(
-      //  (w) => w.category == 'Crypto'
-      //);
+      this.cryptoWallet = this.cryptoDashboard.wallets.filter(
+        (w) => w.category == 'Crypto'
+      );
     });
   }
   vibrate() {

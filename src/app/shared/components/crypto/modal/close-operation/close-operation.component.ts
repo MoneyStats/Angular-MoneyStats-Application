@@ -12,9 +12,9 @@ import {
 } from 'src/assets/core/data/constant/constant';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
-import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 import { Router } from '@angular/router';
+import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 
 @Component({
   selector: 'app-close-operation',
@@ -52,6 +52,10 @@ export class CloseOperationComponent implements OnInit, OnChanges {
   }
 
   getData() {
+    if (this.operation!.type != OperationsType.TRADING) {
+      return;
+    }
+
     this.cryptoCurrency = this.cryptoService.cryptoDashboard.currency;
     let currentPrice =
       this.operation?.entryQuantity! * this.operation?.asset?.current_price!;
@@ -96,13 +100,24 @@ export class CloseOperationComponent implements OnInit, OnChanges {
   closeOperation() {
     this.operation!.status = 'CLOSED';
     let dashboard = deepCopy(this.cryptoService.cryptoDashboard);
-    /*let wallet = dashboard.wallets.find((w) =>
-      w.assets.find((a) => a.operations.find((o) => o.id == this.operation?.id))
-    );*/
-    let wallet = this.operation?.wallet;
-    let asset1 = this.operation?.asset;
-    let asset2 = this.operation?.assetSell;
-
+    console.log(dashboard, this.operation);
+    let wallet = dashboard.wallets.find(
+      (w) =>
+        w.assets != undefined &&
+        w.assets.find(
+          (a) =>
+            a.operations != undefined &&
+            a.operations.find((o) => o.id == this.operation?.id)
+        )
+    );
+    //let wallet = this.operation?.wallet;
+    let asset1 = wallet?.assets.find(
+      (a) => a.symbol == this.operation?.exitCoin
+    );
+    let asset2 = wallet?.assets.find(
+      (a) => a.symbol == this.operation?.entryCoin
+    );
+    console.log(this.operation, asset1, asset2);
     this.operation!.asset = undefined;
     this.operation!.assetSell = undefined;
     this.operation!.wallet = undefined;
@@ -115,8 +130,13 @@ export class CloseOperationComponent implements OnInit, OnChanges {
     asset2!.updateDate = new Date();
 
     wallet!.assets = [asset1!, asset2!];
+    console.log(wallet, asset1, asset2);
     let message =
-      'Operation ' + asset1?.name + '/' + asset2?.name + ' successfully closed';
+      'Operation ' +
+      asset2?.symbol +
+      '/' +
+      asset1?.symbol +
+      ' successfully closed';
     this.cryptoService.addOrUpdateCryptoAsset(wallet!).subscribe((data) => {
       this.swal.toastMessage(SwalIcon.SUCCESS, message);
       this.router.navigate(['/crypto/dashboard']);

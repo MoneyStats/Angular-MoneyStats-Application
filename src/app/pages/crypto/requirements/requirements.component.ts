@@ -57,6 +57,7 @@ export class RequirementsComponent implements OnInit {
       this.isCurrencyAdded = true;
       this.currency = user.cryptoCurrency;
     }
+    this.goToDashboard();
     //if (this.validateBtn()) this.router.navigate(['/crypto/dashboard']);
   }
 
@@ -92,7 +93,6 @@ export class RequirementsComponent implements OnInit {
       this.dashboardService.dashboard.wallets = [wallet];
       this.cryptoWallet = [wallet];
       this.wallets = [wallet];
-      console.log(this.cryptoWallet);
       this.isWalletCreated = true;
     } else {
       this.dashboardService.dashboard.wallets = [wallet];
@@ -104,5 +104,15 @@ export class RequirementsComponent implements OnInit {
   selectCurrency(currency: string) {
     this.isCurrencyAdded = true;
     this.currency = currency;
+  }
+
+  goToDashboard() {
+    if (
+      this.isAssetCreated &&
+      this.isCryptoWalletCreated &&
+      this.isCurrencyAdded &&
+      this.isWalletCreated
+    )
+      this.router.navigate(['/crypto/dashboard']);
   }
 }
