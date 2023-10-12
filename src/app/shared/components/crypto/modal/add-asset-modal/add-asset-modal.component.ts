@@ -113,6 +113,7 @@ export class AddAssetModalComponent implements OnInit {
       this.asset!.lastUpdate = new Date();
       //this.wallet?.assets.push(this.asset!);
       this.wallet!.assets = [this.asset!];
+      console.log(this.wallet);
       this.cryptoService
         .addOrUpdateCryptoAsset(this.wallet!)
         .subscribe((data) => {

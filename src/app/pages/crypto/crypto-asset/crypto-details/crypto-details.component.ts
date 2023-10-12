@@ -30,6 +30,7 @@ export class CryptoDetailsComponent implements OnInit {
     this.screenService.hideFooter();
     this.cryptoDashboard = deepCopy(this.cryptoService.cryptoDashboard);
     let assets = [...this.cryptoService.assets];
+    //let assets = deepCopy(this.cryptoDashboard.assets);
     this.route.params.subscribe((a: any) => {
       this.assetName = a.identifier;
       if (assets.length != 0) {
