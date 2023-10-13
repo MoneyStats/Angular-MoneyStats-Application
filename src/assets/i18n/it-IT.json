@@ -642,7 +642,8 @@
       "commition": "Commissioni : <strong> Incluse</strong>",
       "last": "Ultimo Aggiornamento :",
       "warningBalance": "Il saldo inserito supera il massimo amount disponibile",
-      "exchange": "Exchange"
+      "exchange": "Exchange",
+      "warning": "Asset non presente nel portafoglio corrente, aggiungere nuovo asset e inserire del saldo da nuovo investimento per procedere!"
     },
     "operationDetails": {
       "title": "Dettagli",
@@ -660,6 +661,17 @@
     "closeOperation": {
       "title": "Chiudi Operazione",
       "subTitle": "Stai per chiudere l'operazione di trading corrente. Verifica e conferma il prezzo di uscita e la quantità. Se noti delle discrepanze o desideri apportare modifiche, clicca su <strong>'Modifica'</strong>. Una volta confermato, procedi con la chiusura.",
+      "open": "Posizione aperta su",
+      "closeP": "Posizione chiusa per",
+      "pair": "Trading Pair",
+      "quantity": "Quantità",
+      "value": "Quantità in moneta",
+      "price": "Prezzo d'acquisto di",
+      "sellPrice": "Prezzo di vendita di",
+      "edit": "Modifica",
+      "save": "Salva",
+      "selling": "Prezzo di vendita",
+      "amount": "Saldo",
       "close": "Exchange"
     },
     "cryptoModal": {

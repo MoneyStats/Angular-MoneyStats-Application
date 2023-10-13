@@ -176,7 +176,9 @@ export class OperationExchangeComponent implements OnInit {
     operation.entryDate = new Date();
     operation.entryCoin = tradingAsset.symbol;
     operation.entryPrice = assetToSave.current_price;
-    operation.entryPriceValue = this.investedMoney;
+    operation.entryPriceValue = parseFloat(
+      percentualeInvestitoCalcolata.toFixed(2)
+    );
     operation.entryQuantity = this.assetNewBalance;
     operation.exitCoin = assetToSave.symbol;
 
@@ -279,5 +281,12 @@ export class OperationExchangeComponent implements OnInit {
         this.swal.toastMessage(SwalIcon.SUCCESS, data.message!);
         this.router.navigate(['/crypto/dashboard']);
       });
+  }
+
+  validateSelect() {
+    if (this.wallet.assets) {
+      return true;
+    }
+    return false;
   }
 }

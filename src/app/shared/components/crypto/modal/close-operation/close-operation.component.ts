@@ -100,7 +100,6 @@ export class CloseOperationComponent implements OnInit, OnChanges {
   closeOperation() {
     this.operation!.status = 'CLOSED';
     let dashboard = deepCopy(this.cryptoService.cryptoDashboard);
-    console.log(dashboard, this.operation);
     let wallet = dashboard.wallets.find(
       (w) =>
         w.assets != undefined &&
@@ -117,20 +116,20 @@ export class CloseOperationComponent implements OnInit, OnChanges {
     let asset2 = wallet?.assets.find(
       (a) => a.symbol == this.operation?.entryCoin
     );
-    console.log(this.operation, asset1, asset2);
     this.operation!.asset = undefined;
     this.operation!.assetSell = undefined;
     this.operation!.wallet = undefined;
 
     asset1!.operations = [this.operation];
     asset1!.balance -= this.operation?.entryQuantity!;
+    asset1!.invested -= this.operation?.entryPriceValue!;
     asset1!.updateDate = new Date();
 
     asset2!.balance += this.operation?.exitQuantity!;
+    asset2!.invested += this.operation?.entryPriceValue!;
     asset2!.updateDate = new Date();
 
     wallet!.assets = [asset1!, asset2!];
-    console.log(wallet, asset1, asset2);
     let message =
       'Operation ' +
       asset2?.symbol +

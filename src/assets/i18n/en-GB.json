@@ -642,7 +642,8 @@
       "commition": "Commition Rate : <strong> Included</strong>",
       "last": "Last Update :",
       "warningBalance": "The current value exceed the maximum amount",
-      "exchange": "Exchange"
+      "exchange": "Exchange",
+      "warning": "Missing asset in the current wallet, add an Asset and New Balance on it to proceed!"
     },
     "operationDetails": {
       "title": "Details",
@@ -660,6 +661,17 @@
     "closeOperation": {
       "title": "Close Operation",
       "subTitle": "You are about to close the current trading operation. Check and confirm the exit price and quantity. If there's any discrepancy or if you wish to make changes, click <strong>'Edit'</strong>. Once you're satisfied, proceed with the closure.",
+      "open": "Position Open on Coins",
+      "closeP": "Position Close on Coins",
+      "pair": "Trading Pair",
+      "quantity": "Quantity",
+      "value": "Quantity Value",
+      "price": "Buying Price of",
+      "sellPrice": "Selling Price of",
+      "edit": "Edit",
+      "save": "Save",
+      "selling": "Selling Price",
+      "amount": "Amount",
       "close": "Exchange"
     },
     "cryptoModal": {
