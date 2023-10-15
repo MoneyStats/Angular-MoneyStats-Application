@@ -309,16 +309,102 @@
         <div class="section mt-2">
           <div class="row fontsize-caption">
             <div class="col">
-              <b>{{ marketDataSelected.symbol }}</b> =
-              {{ marketDataSelected.current_price }} {{ fiat }}
+              <div
+                *ngIf="!isEditBalance"
+                (click)="isEditBalance = true"
+                class="clickable"
+              >
+                <b>{{ marketDataSelected.symbol }}</b> =
+                {{ marketDataSelected.current_price }} {{ fiat }}
+              </div>
+              <div *ngIf="isEditBalance" class="row">
+                <div class="col-11">
+                  <div class="form-group basic">
+                    <div class="input-wrapper">
+                      <label class="label" for="price"
+                        >{{ "crypto.operationExchange.price" | translate }}
+                        {{ marketDataSelected.symbol }}</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="price"
+                        name="price"
+                        #price1="ngModel"
+                        [(ngModel)]="marketDataSelected.current_price"
+                        value="{{ marketDataSelected.current_price }}"
+                        required
+                        placeholder="{{
+                          'crypto.operationExchange.newPrice' | translate
+                        }}"
+                      />
+                      <i class="clear-input">
+                        <ion-icon name="close-circle"></ion-icon>
+                      </i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-1">
+                  <button
+                    [disabled]="f.invalid"
+                    style="vertical-align: -25px"
+                    type="button"
+                    class="btn btn-primary rounded me-1"
+                    (click)="editBalance()"
+                  >
+                    {{ "crypto.operationExchange.save" | translate }}
+                  </button>
+                </div>
+              </div>
             </div>
             <div class="col text-end">
-              {{ "crypto.operationExchange.last" | translate }}
-              <b>{{
-                assetInWallet.lastUpdate
-                  ? (assetInWallet.lastUpdate | date : "d MMM y")
-                  : "NEVER"
-              }}</b>
+              <div
+                *ngIf="!isEditDate"
+                (click)="isEditDate = true"
+                class="clickable"
+              >
+                {{ "crypto.operationExchange.last" | translate }}
+                <b>{{
+                  marketDataSelected.lastUpdate
+                    ? (marketDataSelected.lastUpdate | date : "d MMM y")
+                    : "NEVER"
+                }}</b>
+              </div>
+              <div *ngIf="isEditDate" class="row">
+                <div class="col-11">
+                  <div class="form-group basic">
+                    <div class="input-wrapper">
+                      <label class="label" for="date"
+                        >{{ "crypto.operationExchange.date" | translate }}
+                      </label>
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="date"
+                        name="date"
+                        #date1="ngModel"
+                        [(ngModel)]="marketDataSelected.lastUpdate"
+                        value="{{ marketDataSelected.lastUpdate }}"
+                        required
+                      />
+                      <i class="clear-input">
+                        <ion-icon name="close-circle"></ion-icon>
+                      </i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-1">
+                  <button
+                    [disabled]="f.invalid"
+                    style="vertical-align: -25px"
+                    type="button"
+                    class="btn btn-primary rounded me-1"
+                    (click)="isEditDate = false"
+                  >
+                    {{ "crypto.operationExchange.save" | translate }}
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -330,7 +416,7 @@
         *ngIf="operationType == operations.NEWINVESTMENT"
       >
         <button
-          [disabled]="f.invalid"
+          [disabled]="f.invalid || !disableOnEdit()"
           type="button"
           class="btn btn-primary btn-block btn-lg"
           (click)="exchangeNewInvestment()"
@@ -343,7 +429,7 @@
         *ngIf="operationType == operations.HOLDING"
       >
         <button
-          [disabled]="f.invalid || !validateSelect()"
+          [disabled]="f.invalid || !validateSelect() || !disableOnEdit()"
           type="button"
           class="btn btn-primary btn-block btn-lg"
           (click)="exchangeHoldingInvestment()"
@@ -356,7 +442,7 @@
         *ngIf="operationType == operations.TRADING"
       >
         <button
-          [disabled]="f.invalid || !validateSelect()"
+          [disabled]="f.invalid || !validateSelect() || !disableOnEdit()"
           type="button"
           class="btn btn-primary btn-block btn-lg"
           (click)="exchangeTradingInvestment()"
