@@ -374,11 +374,12 @@
                   (ngModelChange)="onChange($event)"
                   class="form-control custom-select"
                 >
-                  <option value="BTCUSDT">BTC-USDT</option>
-                  <option value="ETHUSDT">ETH-USDT</option>
-                  <option value="CROUSDT">CRO-USDT</option>
-                  <option value="BNBUSDT">BNB-USDT</option>
-                  <option value="SANDUSDT">SAND-USDT</option>
+                  <option
+                    *ngFor="let coin of symbolList"
+                    value="{{ coin.split('-')[0] + coin.split('-')[1] }}"
+                  >
+                    {{ coin }}
+                  </option>
                 </select>
               </div>
             </div>
