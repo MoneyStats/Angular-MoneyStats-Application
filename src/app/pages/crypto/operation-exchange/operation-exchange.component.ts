@@ -76,7 +76,6 @@ export class OperationExchangeComponent implements OnInit {
 
   ngAfterContentChecked() {
     this.cdref.detectChanges();
-    console.log(this.marketDataSelected);
   }
 
   getOperationExchange() {
@@ -182,7 +181,7 @@ export class OperationExchangeComponent implements OnInit {
     let operation: Operation = new Operation();
     operation.type = this.operationType;
     operation.status = 'OPEN';
-    operation.entryDate = this.marketDataSelected.lastUpdate;
+    operation.entryDate = new Date(this.marketDataSelected.lastUpdate);
     operation.entryCoin = tradingAsset.symbol;
     operation.entryPrice = this.marketDataSelected.current_price;
     operation.entryPriceValue = parseFloat(
@@ -225,13 +224,13 @@ export class OperationExchangeComponent implements OnInit {
     let operation: Operation = new Operation();
     operation.type = this.operationType;
     operation.status = 'CLOSED';
-    operation.entryDate = this.marketDataSelected.lastUpdate;
+    operation.entryDate = new Date(this.marketDataSelected.lastUpdate);
     operation.entryCoin = holdingAsset.symbol;
     operation.entryPrice = this.marketDataSelected.current_price;
     operation.entryPriceValue = this.investedMoney;
     //operation.entryQuantity = this.investedBalance;
     operation.entryQuantity = this.assetNewBalance;
-    operation.exitDate = this.marketDataSelected.lastUpdate;
+    operation.exitDate = new Date(this.marketDataSelected.lastUpdate);
     operation.exitCoin = assetToSave.symbol;
     operation.exitPrice = this.marketDataSelected.current_price;
     operation.exitPriceValue = this.investedMoney;
@@ -261,7 +260,7 @@ export class OperationExchangeComponent implements OnInit {
     let operation: Operation = new Operation();
     operation.type = this.operationType;
     operation.status = 'CLOSED';
-    operation.entryDate = assetToSave.lastUpdate;
+    operation.entryDate = new Date(assetToSave.lastUpdate);
     operation.entryCoin = this.fiat;
     operation.entryPrice = assetToSave.current_price;
     operation.entryPriceValue = this.investedMoney;

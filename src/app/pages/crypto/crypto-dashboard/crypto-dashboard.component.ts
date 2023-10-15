@@ -16,6 +16,7 @@ import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { LoggerService } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { environment } from 'src/environments/environment';
+import { deepCopy } from '@angular-devkit/core/src/utils/object';
 
 declare const TradingView: any;
 
@@ -32,6 +33,8 @@ export class CryptoDashboardComponent implements OnInit {
   @ViewChild('selectGraph') selectGraph?: ElementRef;
 
   selectedSymbol: string = 'BTCUSDT';
+
+  symbolList: Array<string> = [];
 
   cryptoDashboard: CryptoDashboard = new CryptoDashboard();
   cryptoWallet?: Wallet[];
@@ -73,10 +76,19 @@ export class CryptoDashboardComponent implements OnInit {
       this.cryptoWallet = this.cryptoDashboard.wallets.filter(
         (w) => w.category == 'Crypto'
       );
+      this.getCoinForGraph();
     });
   }
   vibrate() {
     this.appService.vibrate();
+  }
+
+  getCoinForGraph() {
+    this.symbolList = [];
+    let assets = deepCopy(this.assets);
+    assets = assets.filter((a) => a.balance > 0 && a.symbol != 'USDT');
+    assets.forEach((a) => this.symbolList.push(a.symbol + '-USDT'));
+    if (this.symbolList.length == 0) this.symbolList.push('BTC-USDT');
   }
 
   onChange(symbol: string) {
