@@ -283,12 +283,12 @@ export class OperationExchangeComponent implements OnInit {
 
   saveWallet(walletToSave: Wallet) {
     console.log(walletToSave);
-    //this.cryptoService
-    //  .addOrUpdateCryptoAsset(walletToSave)
-    //  .subscribe((data) => {
-    //    this.swal.toastMessage(SwalIcon.SUCCESS, data.message!);
-    //    this.router.navigate(['/crypto/dashboard']);
-    //  });
+    this.cryptoService
+      .addOrUpdateCryptoAsset(walletToSave)
+      .subscribe((data) => {
+        this.swal.toastMessage(SwalIcon.SUCCESS, data.message!);
+        this.router.navigate(['/crypto/dashboard']);
+      });
   }
 
   validateSelect() {
