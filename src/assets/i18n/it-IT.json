@@ -640,10 +640,14 @@
       "from": "Da",
       "to": "A",
       "commition": "Commissioni : <strong> Incluse</strong>",
-      "last": "Ultimo Aggiornamento :",
+      "last": "Data :",
       "warningBalance": "Il saldo inserito supera il massimo amount disponibile",
       "exchange": "Exchange",
-      "warning": "Asset non presente nel portafoglio corrente, aggiungere nuovo asset e inserire del saldo da nuovo investimento per procedere!"
+      "warning": "Asset non presente nel portafoglio corrente, aggiungere nuovo asset e inserire del saldo da nuovo investimento per procedere!",
+      "price": "Modifica il prezzo d'acquisto di",
+      "newPrice": "Inserisci un nuovo saldo",
+      "date": "Modifica la data di acquisto",
+      "save": "Salva"
     },
     "operationDetails": {
       "title": "Dettagli",

@@ -640,10 +640,14 @@
       "from": "From",
       "to": "To",
       "commition": "Commition Rate : <strong> Included</strong>",
-      "last": "Last Update :",
+      "last": "Date :",
       "warningBalance": "The current value exceed the maximum amount",
       "exchange": "Exchange",
-      "warning": "Missing asset in the current wallet, add an Asset and New Balance on it to proceed!"
+      "warning": "Missing asset in the current wallet, add an Asset and New Balance on it to proceed!",
+      "price": "Edit buy Price of",
+      "newPrice": "Enter a new price",
+      "date": "Edit buy Date",
+      "save": "Save"
     },
     "operationDetails": {
       "title": "Details",

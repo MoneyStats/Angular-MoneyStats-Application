@@ -27,6 +27,10 @@ export class OperationExchangeComponent implements OnInit {
   walletSelect?: string = '';
   wallet: Wallet = new Wallet();
 
+  // Usate per modificare la data dell'operazione e il saldo dell'asset
+  isEditBalance: boolean = false;
+  isEditDate: boolean = false;
+
   marketData: Asset[] = [];
 
   marketDataSelected: Asset = new Asset();
@@ -72,6 +76,7 @@ export class OperationExchangeComponent implements OnInit {
 
   ngAfterContentChecked() {
     this.cdref.detectChanges();
+    console.log(this.marketDataSelected);
   }
 
   getOperationExchange() {
@@ -105,6 +110,7 @@ export class OperationExchangeComponent implements OnInit {
   }
 
   emitHoldingSelectAsset(asset: Asset) {
+    console.log('emitHoldingSelectAsset');
     this.holdingAssetToSell = asset;
     this.investedBalance = this.holdingAssetToSell.balance;
 
@@ -112,6 +118,7 @@ export class OperationExchangeComponent implements OnInit {
   }
 
   emitTradingSelectAsset(asset: Asset) {
+    console.log('emitTradingSelectAsset');
     this.tradingAssetToSell = asset;
     this.investedBalance = this.tradingAssetToSell.balance;
 
@@ -119,8 +126,11 @@ export class OperationExchangeComponent implements OnInit {
   }
 
   emitSelectAsset(asset: Asset) {
+    console.log('emitSelectAsset', this.marketDataSelected, asset);
     asset.id = undefined;
     asset.lastUpdate = new Date();
+    //asset.lastUpdate = this.marketDataSelected.lastUpdate;
+    //asset.current_price = this.marketDataSelected.current_price;
     asset.performance = 0;
     asset.trend = 0;
     this.marketDataSelected = asset;
@@ -158,8 +168,7 @@ export class OperationExchangeComponent implements OnInit {
     tradingAsset.invested -= percentualeInvestitoCalcolata;
 
     let assetToSave = deepCopy(this.assetInWallet);
-    if (!assetToSave.lastUpdate) {
-      assetToSave.lastUpdate = new Date();
+    if (!assetToSave.performance) {
       assetToSave.performance = 0;
       assetToSave.trend = 0;
     }
@@ -173,9 +182,9 @@ export class OperationExchangeComponent implements OnInit {
     let operation: Operation = new Operation();
     operation.type = this.operationType;
     operation.status = 'OPEN';
-    operation.entryDate = new Date();
+    operation.entryDate = this.marketDataSelected.lastUpdate;
     operation.entryCoin = tradingAsset.symbol;
-    operation.entryPrice = assetToSave.current_price;
+    operation.entryPrice = this.marketDataSelected.current_price;
     operation.entryPriceValue = parseFloat(
       percentualeInvestitoCalcolata.toFixed(2)
     );
@@ -202,8 +211,7 @@ export class OperationExchangeComponent implements OnInit {
     holdingAsset.invested -= percentualeInvestitoCalcolata;
 
     let assetToSave = deepCopy(this.assetInWallet);
-    if (!assetToSave.lastUpdate) {
-      assetToSave.lastUpdate = new Date();
+    if (!assetToSave.performance) {
       assetToSave.performance = 0;
       assetToSave.trend = 0;
     }
@@ -213,19 +221,19 @@ export class OperationExchangeComponent implements OnInit {
     Number.isNaN(assetToSave.balance) || assetToSave.balance == undefined
       ? (assetToSave.balance = this.assetNewBalance)
       : (assetToSave.balance += this.assetNewBalance);
-
+    console.log(this.marketDataSelected);
     let operation: Operation = new Operation();
     operation.type = this.operationType;
     operation.status = 'CLOSED';
-    operation.entryDate = new Date();
+    operation.entryDate = this.marketDataSelected.lastUpdate;
     operation.entryCoin = holdingAsset.symbol;
-    operation.entryPrice = holdingAsset.current_price;
+    operation.entryPrice = this.marketDataSelected.current_price;
     operation.entryPriceValue = this.investedMoney;
     //operation.entryQuantity = this.investedBalance;
     operation.entryQuantity = this.assetNewBalance;
-    operation.exitDate = new Date();
+    operation.exitDate = this.marketDataSelected.lastUpdate;
     operation.exitCoin = assetToSave.symbol;
-    operation.exitPrice = assetToSave.current_price;
+    operation.exitPrice = this.marketDataSelected.current_price;
     operation.exitPriceValue = this.investedMoney;
     //operation.exitQuantity = this.assetNewBalance;
     operation.exitQuantity = this.investedMoney;
@@ -239,8 +247,7 @@ export class OperationExchangeComponent implements OnInit {
 
   exchangeNewInvestment() {
     let assetToSave = deepCopy(this.assetInWallet);
-    if (!assetToSave.lastUpdate) {
-      assetToSave.lastUpdate = new Date();
+    if (!assetToSave.performance) {
       assetToSave.performance = 0;
       assetToSave.trend = 0;
     }
@@ -254,13 +261,13 @@ export class OperationExchangeComponent implements OnInit {
     let operation: Operation = new Operation();
     operation.type = this.operationType;
     operation.status = 'CLOSED';
-    operation.entryDate = new Date();
+    operation.entryDate = assetToSave.lastUpdate;
     operation.entryCoin = this.fiat;
     operation.entryPrice = assetToSave.current_price;
     operation.entryPriceValue = this.investedMoney;
     //operation.entryQuantity = this.investedMoney;
     operation.entryQuantity = this.assetNewBalance;
-    operation.exitDate = new Date();
+    operation.exitDate = assetToSave.lastUpdate;
     operation.exitCoin = assetToSave.symbol;
     operation.exitPrice = assetToSave.current_price;
     operation.exitPriceValue = this.investedMoney;
@@ -275,18 +282,31 @@ export class OperationExchangeComponent implements OnInit {
   }
 
   saveWallet(walletToSave: Wallet) {
-    this.cryptoService
-      .addOrUpdateCryptoAsset(walletToSave)
-      .subscribe((data) => {
-        this.swal.toastMessage(SwalIcon.SUCCESS, data.message!);
-        this.router.navigate(['/crypto/dashboard']);
-      });
+    console.log(walletToSave);
+    //this.cryptoService
+    //  .addOrUpdateCryptoAsset(walletToSave)
+    //  .subscribe((data) => {
+    //    this.swal.toastMessage(SwalIcon.SUCCESS, data.message!);
+    //    this.router.navigate(['/crypto/dashboard']);
+    //  });
   }
 
   validateSelect() {
-    if (this.wallet.assets) {
+    if (
+      this.wallet.assets ||
+      this.operationType == OperationsType.NEWINVESTMENT
+    ) {
       return true;
     }
     return false;
+  }
+
+  disableOnEdit() {
+    return !this.isEditBalance && !this.isEditDate;
+  }
+
+  editBalance() {
+    this.isEditBalance = false;
+    this.makeNewBalance();
   }
 }
