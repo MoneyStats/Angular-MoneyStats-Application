@@ -3,8 +3,9 @@ import { environment } from 'src/environments/environment';
 import { Dashboard, Stats, Wallet } from '../data/class/dashboard.class';
 import * as ApexCharts from 'apexcharts';
 import { ApexOptions } from '../data/constant/apex.chart';
-import { CryptoDashboard } from '../data/class/crypto.class';
+import { CryptoDashboard, Operation } from '../data/class/crypto.class';
 import { ImageColorPickerService } from './image.color.picker.service';
+import { deepCopy } from '@angular-devkit/core/src/utils/object';
 
 @Injectable({
   providedIn: 'root',
@@ -521,6 +522,134 @@ export class ChartService {
     statsAssetsDays.forEach((d) =>
       finalStatsDays.push(new Date(d).toDateString())
     );
+    let chartOptions: Partial<ApexOptions> = {
+      series: series,
+      chart: {
+        type: 'area',
+        width: '100%',
+        height: h,
+        sparkline: {
+          enabled: true,
+        },
+      },
+      dataLabels: {
+        enabled: false,
+        background: {
+          borderRadius: 20,
+        },
+      },
+      stroke: {
+        width: 2,
+      },
+      colors: colors.length != 0 ? colors : this.colorsList,
+      labels: finalStatsDays,
+      legend: {
+        show: true,
+        position: 'top',
+        horizontalAlign: 'center',
+        floating: false,
+        fontFamily: 'Helvetica, Arial',
+      },
+    };
+    return chartOptions;
+  }
+
+  renderTradingOperations(
+    operations: Array<Operation>,
+    ...optional: any[]
+  ): Partial<ApexOptions> {
+    console.log('TEST');
+    let operationsCopy = deepCopy(operations);
+    let tradingDate: Array<string> = [];
+    operationsCopy = operationsCopy.sort(
+      (b, a) =>
+        new Date(b.exitDate!).getTime() - new Date(a.exitDate!).getTime()
+    );
+    operationsCopy = operationsCopy.filter((o) => o.status == 'CLOSED');
+
+    let wallets: Array<Wallet> = [];
+
+    operationsCopy.forEach((operation) => {
+      let exitDate = operation.exitDate?.toString().split('T')[0]!;
+      if (!tradingDate.find((d) => d == exitDate)) tradingDate.push(exitDate);
+
+      if (!wallets.find((w) => w.id == operation?.wallet!.id))
+        wallets.push(operation?.wallet!);
+    });
+
+    let totalInvested: number = 0;
+
+    wallets.forEach((wallet) => {
+      wallet.assets.forEach((asset) => (totalInvested += asset.invested));
+    });
+
+    let investedSum: number = totalInvested;
+    let profit: number = 0;
+    let investedBalance: Array<number> = [];
+    let trendBalance: Array<number> = [];
+    let singleBalance: Array<number> = [];
+
+    tradingDate.forEach((date) => {
+      console.log(date);
+      let op = operationsCopy.filter(
+        (op) => op.exitDate?.toString().split('T')[0]! == date
+      );
+      let singleTrend: number = 0;
+      let title: string = '';
+      op.forEach((o) => {
+        investedSum += o.trend!;
+        profit += o.trend!;
+        singleTrend += o.trend!;
+        title += o.entryCoin + '/' + o.exitCoin + '</br>';
+      });
+
+      investedBalance.push(investedSum);
+      trendBalance.push(profit);
+      singleBalance.push(singleTrend);
+    });
+
+    let serieInvested = {
+      name: 'Invested',
+      data: investedBalance,
+    };
+
+    let trend = {
+      name: 'Trend',
+      data: trendBalance,
+    };
+
+    let singlePerformace = {
+      name: 'Operation Performace',
+      data: singleBalance,
+    };
+
+    console.log(investedBalance, trendBalance, singleBalance);
+    let series: Array<any> = [serieInvested];
+    let options: Array<any> = optional[0];
+
+    let h = 350;
+    if (options != undefined && options[0] != undefined && options[0]) {
+      h = options[0];
+    }
+    let finalStatsDays: string[] = [];
+    tradingDate.forEach((d) => finalStatsDays.push(new Date(d).toDateString()));
+    return this.createChartLine([], series, finalStatsDays, h);
+  }
+
+  /**
+   * Chart Line Rendering
+   * @param colors
+   * @param series
+   * @param finalStatsDays
+   * @param h
+   * @returns
+   */
+  createChartLine(
+    colors: string[],
+    series: Array<any>,
+    finalStatsDays: string[],
+    h: any
+  ) {
     let chartOptions: Partial<ApexOptions> = {
       series: series,
       chart: {

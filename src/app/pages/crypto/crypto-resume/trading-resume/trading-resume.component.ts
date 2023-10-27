@@ -19,6 +19,9 @@ import {
   Operation,
 } from 'src/assets/core/data/class/crypto.class';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { ApexOptions } from 'ng-apexcharts';
+import { ScreenService } from 'src/assets/core/utils/screen.service';
+import { ChartService } from 'src/assets/core/utils/chart.service';
 
 @Component({
   selector: 'app-trading-resume',
@@ -26,13 +29,19 @@ import { Wallet } from 'src/assets/core/data/class/dashboard.class';
   styleUrls: ['./trading-resume.component.scss'],
 })
 export class TradingResumeComponent implements OnInit, OnChanges {
+  public trading?: Partial<ApexOptions>;
   @Input('cryptoDashboard') cryptoDashboard: CryptoDashboard =
     new CryptoDashboard();
   @Input('wallets') wallets: Wallet[] = [];
 
   walletsFilter: Wallet[] = [];
 
-  constructor(public cryptoService: CryptoService, private router: Router) {}
+  constructor(
+    public cryptoService: CryptoService,
+    private router: Router,
+    private screenService: ScreenService,
+    private charts: ChartService
+  ) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -40,6 +49,8 @@ export class TradingResumeComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.filterWallet();
+    this.getOperations();
+    console.log('TRADING', this.trading);
   }
 
   ngOnInit(): void {
@@ -48,44 +59,51 @@ export class TradingResumeComponent implements OnInit, OnChanges {
 
   filterWallet() {
     let wall = deepCopy(this.wallets);
-    this.walletsFilter = wall.filter((w) => w.type == OperationsType.TRADING);
-    this.walletsFilter.forEach((w) => {
-      if (w.assets && w.assets.length > 0)
-        w.assets.forEach((a) => {
-          if (a.operations && a.operations.length > 0)
-            a.operations = a.operations.filter(
-              (o) => o.type == OperationsType.TRADING
-            );
-        });
-    });
+    if (wall) {
+      this.walletsFilter = wall.filter((w) => w.type == OperationsType.TRADING);
+      this.walletsFilter.forEach((w) => {
+        if (w.assets && w.assets.length > 0)
+          w.assets.forEach((a) => {
+            if (a.operations && a.operations.length > 0)
+              a.operations = a.operations.filter(
+                (o) => o.type == OperationsType.TRADING
+              );
+          });
+      });
+    }
   }
 
   getOperations() {
     let operations: Operation[] = [];
     let wallets = deepCopy(this.wallets);
-    wallets.forEach((wallet) => {
-      if (wallet.assets && wallet.assets.length > 0)
-        wallet.assets.forEach((asset) => {
-          if (asset.operations && asset.operations.length > 0) {
-            asset.operations = asset.operations.filter(
-              (o) => o.type == OperationsType.TRADING
-            );
-            asset.operations.forEach((operation) => {
-              operation.asset = asset;
-              operation.wallet = wallet;
-              if (operation.type != OperationsType.NEWINVESTMENT)
-                operation.assetSell = deepCopy(
-                  this.cryptoService.cryptoDashboard.assets.find(
-                    (a) => a.symbol == operation.entryCoin
-                  )
-                );
-              operations.push(operation);
-            });
-          }
-        });
-    });
+    if (wallets)
+      wallets.forEach((wallet) => {
+        if (wallet.assets && wallet.assets.length > 0)
+          wallet.assets.forEach((asset) => {
+            if (asset.operations && asset.operations.length > 0) {
+              asset.operations = asset.operations.filter(
+                (o) => o.type == OperationsType.TRADING
+              );
+              asset.operations.forEach((operation) => {
+                operation.asset = asset;
+                operation.wallet = wallet;
+                if (operation.type != OperationsType.NEWINVESTMENT)
+                  operation.assetSell = deepCopy(
+                    this.cryptoService.cryptoDashboard.assets.find(
+                      (a) => a.symbol == operation.entryCoin
+                    )
+                  );
+                operations.push(operation);
+              });
+            }
+          });
+      });
     operations = operations.filter((o) => o.type == OperationsType.TRADING);
     operations.sort((a, b) => (a.entryDate! < b.entryDate! ? 1 : -1));
+    if (this.screenService?.screenWidth! <= 780) {
+      this.trading = this.charts.renderTradingOperations(operations, [200]);
+    } else
+      this.trading = this.charts.renderTradingOperations(operations, [350]);
     return operations;
   }
 
