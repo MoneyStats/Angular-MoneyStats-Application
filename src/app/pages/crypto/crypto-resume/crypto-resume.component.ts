@@ -63,13 +63,14 @@ export class CryptoResumeComponent implements OnInit {
 
   isOperationPresent() {
     let indexPresent: number = 0;
-    this.resumeData.wallets.forEach((w) => {
-      if (w.assets && w.assets.length > 0)
-        w.assets.forEach((a) => {
-          if (a.operations != undefined && a.operations.length > 0)
-            indexPresent += 1;
-        });
-    });
+    if (this.resumeData.wallets)
+      this.resumeData.wallets.forEach((w) => {
+        if (w.assets && w.assets.length > 0)
+          w.assets.forEach((a) => {
+            if (a.operations != undefined && a.operations.length > 0)
+              indexPresent += 1;
+          });
+      });
     return indexPresent;
   }
 }

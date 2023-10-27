@@ -112,6 +112,7 @@ export class OperationsListComponent implements OnInit {
   }
 
   selectOperation(operation: any) {
+    console.log("SELECT", operation)
     this.operationSelect = operation;
   }
 

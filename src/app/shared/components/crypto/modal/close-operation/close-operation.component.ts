@@ -44,7 +44,7 @@ export class CloseOperationComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.getData();
+    //this.getData();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -52,7 +52,11 @@ export class CloseOperationComponent implements OnInit, OnChanges {
   }
 
   getData() {
-    if (this.operation!.type != OperationsType.TRADING) {
+    if (
+      !this.operation ||
+      !this.operation!.type ||
+      this.operation!.type != OperationsType.TRADING
+    ) {
       return;
     }
 
@@ -60,7 +64,7 @@ export class CloseOperationComponent implements OnInit, OnChanges {
     let currentPrice =
       this.operation?.entryQuantity! * this.operation?.asset?.current_price!;
     this.currentPrice = parseFloat(currentPrice.toFixed(2));
-    let operation = this.operation;
+    let operation = deepCopy(this.operation);
     operation!.exitDate = new Date();
     operation!.exitPrice = operation?.asset?.current_price;
     operation!.exitPriceValue = parseFloat(currentPrice.toFixed(2));

@@ -1,4 +1,26 @@
 <div class="transactions row">
+  <div
+    *ngIf="trading && trading?.labels?.length != 0"
+    class="section col-xl-12"
+  >
+    <div class="section-title">
+      {{ "crypto.resume.graphAsset" | translate }}
+    </div>
+    <div class="card inner-round border_round">
+      <apx-chart
+        *ngIf="trading"
+        [series]="trading.series!"
+        [chart]="trading.chart!"
+        [title]="trading.title!"
+        [colors]="trading.colors!"
+        [legend]="trading.legend!"
+        [stroke]="trading.stroke!"
+        [labels]="trading.labels!"
+        type="area"
+        class="border_round"
+      ></apx-chart>
+    </div>
+  </div>
   <div class="col-md-12">
     <!-- History -->
     <div class="section mt-4">
