@@ -29,6 +29,7 @@ import { VersionComponent } from './modal/version-and-change/version/version.com
 import { ChangelogComponent } from './modal/version-and-change/changelog/changelog.component';
 import { WalletCardComponent } from './wallet/wallet-card/wallet-card.component';
 import { WalletHistoryCardComponent } from './wallet/wallet-history/wallet-history.component';
+import { LoadingCardComponent } from '../shared/loading-card/loading-card.component';
 
 @NgModule({
   declarations: [

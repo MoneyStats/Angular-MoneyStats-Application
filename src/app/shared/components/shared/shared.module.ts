@@ -10,10 +10,15 @@ import { environment } from 'src/environments/environment';
 import { AddWalletComponent } from './modal/add-wallet/add-wallet.component';
 import { TransactionCardComponent } from './card/transaction-card/transaction-card.component';
 import { RouterModule } from '@angular/router';
+import { LoadingCardComponent } from './loading-card/loading-card.component';
 
 @NgModule({
-  declarations: [TransactionCardComponent, AddWalletComponent],
-  exports: [TransactionCardComponent, AddWalletComponent],
+  declarations: [
+    TransactionCardComponent,
+    AddWalletComponent,
+    LoadingCardComponent,
+  ],
+  exports: [TransactionCardComponent, AddWalletComponent, LoadingCardComponent],
   imports: [
     RouterModule,
     CommonModule,

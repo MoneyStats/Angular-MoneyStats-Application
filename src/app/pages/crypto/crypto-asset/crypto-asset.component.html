@@ -36,7 +36,8 @@
             </div>
             <div class="right float-end">
               <div class="price" id="totale">
-                {{ cryptoDashboard.currency }} {{ cryptoDashboard.balance }}
+                {{ cryptoDashboard.currency }}
+                {{ hidden ? amount : cryptoDashboard.balance }}
               </div>
               <div class="price performancetot float-end">
                 <span
@@ -93,8 +94,10 @@
                 }}"
                 id="pil"
               >
-                {{ cryptoDashboard.currency }}
-                {{ cryptoDashboard.holdingLong.balance }}
+                <div>
+                  {{ cryptoDashboard.currency }}
+                  {{ hidden ? amount : cryptoDashboard.holdingLong.balance }}
+                </div>
               </div>
               <div class="price float-end performancetot">
                 <span
@@ -187,9 +190,12 @@
             {{ "crypto.dashboard.cardRes.title" | translate }}
           </p>
           <h5 class="card-text fs-3">
-            {{ cryptoDashboard.balance }} {{ cryptoDashboard.currency }}
+            {{ hidden ? amount : cryptoDashboard.balance }}
+            {{ cryptoDashboard.currency }}
           </h5>
-          <p style="margin-top: -15px">{{ cryptoDashboard.btcBalance }} BTC</p>
+          <p style="margin-top: -15px">
+            {{ hidden ? amount : cryptoDashboard.btcBalance }} BTC
+          </p>
         </div>
         <div class="section mt-2">
           <div class="section-title hidden_mobile">
@@ -326,6 +332,7 @@
           <div class="transactions">
             <div *ngFor="let asset of assets; let i = index">
               <app-transaction-card
+                [hiddenAmount]="hidden"
                 *ngIf="
                   !showZeroBalance ? asset.balance > 0 : asset.balance >= 0
                 "

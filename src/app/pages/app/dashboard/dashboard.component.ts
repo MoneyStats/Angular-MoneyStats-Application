@@ -44,6 +44,7 @@ export class DashboardComponent implements OnInit {
   @ViewChild('content') content: any;
 
   @Output() hidden?: boolean;
+  amount: string = '******';
 
   constructor(
     private dashboardService: DashboardService,

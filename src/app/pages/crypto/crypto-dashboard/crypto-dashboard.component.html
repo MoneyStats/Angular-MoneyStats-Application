@@ -28,17 +28,45 @@
                   srcset=""
                 />
               </div>
-              <p class="card-title">
-                {{ "crypto.dashboard.cardRes.title" | translate }}
-              </p>
-              <h5 class="card-text fs-3 balance">
-                {{ cryptoDashboard.balance }}
-                <small>{{ cryptoDashboard.currency }}</small>
+              <div class="clickable" (click)="hiddenShowAmount()">
+                <p class="card-title">
+                  {{ "crypto.dashboard.cardRes.title" | translate }}
+                  <ion-icon
+                    *ngIf="!hidden"
+                    name="eye-outline"
+                    style="
+                      height: 20px;
+                      width: 20px;
+                      align-self: center;
+                      position: absolute;
+                      top: 3px;
+                      color: aliceblue;
+                    "
+                    class="ps-1"
+                  ></ion-icon>
+                  <ion-icon
+                    *ngIf="hidden"
+                    name="eye-off-outline"
+                    style="
+                      height: 20px;
+                      width: 20px;
+                      align-self: center;
+                      position: absolute;
+                      top: 3px;
+                      color: aliceblue;
+                    "
+                    class="ps-1"
+                  ></ion-icon>
+                </p>
+              </div>
+              <h5 class="card-text fs-3 balance load-text">
+                {{ hidden ? amount : cryptoDashboard.balance }}
+                <small class="hidden">{{ cryptoDashboard.currency }}</small>
               </h5>
-              <p style="margin-top: -15px">
-                {{ cryptoDashboard.btcBalance }} BTC
+              <p style="margin-top: -15px" class="load-text">
+                {{ hidden ? amount : cryptoDashboard.btcBalance }} BTC
               </p>
-              <p style="margin-top: -15px" class="card-text">
+              <p style="margin-top: -15px" class="card-text load-text">
                 <small
                   >{{ "crypto.dashboard.cardRes.lastUpdate" | translate }}
                   {{ cryptoDashboard.lastUpdate | date : "d MMM y" }}</small
@@ -195,7 +223,8 @@
               {{ "crypto.dashboard.performanceCard.title" | translate }}
             </h2>
           </div>
-          <div class="card">
+          <app-loading-card [isThreeValue]="true"></app-loading-card>
+          <div class="card loading-hidden">
             <div class="card-body text-center mx-auto">
               <div class="row">
                 <div class="col-6 col-md-4">
@@ -206,7 +235,9 @@
                       }}
                     </p>
                     <h5 class="card-text fs-3">
-                      {{ cryptoDashboard.holdingLong.balance }}
+                      {{
+                        hidden ? amount : cryptoDashboard.holdingLong.balance
+                      }}
                       <small>{{ cryptoDashboard.currency }}</small>
                     </h5>
                     <span
@@ -249,7 +280,7 @@
                       }}
                     </p>
                     <h5 class="card-text fs-3">
-                      {{ cryptoDashboard.trading.balance }}
+                      {{ hidden ? amount : cryptoDashboard.trading.balance }}
                       <small>{{ cryptoDashboard.currency }}</small>
                     </h5>
                     <span
@@ -293,7 +324,9 @@
                       }}
                     </p>
                     <h5 class="card-text fs-3">
-                      {{ cryptoDashboard.performance.balance }}
+                      {{
+                        hidden ? amount : cryptoDashboard.performance.balance
+                      }}
                       <small>{{ cryptoDashboard.currency }}</small>
                     </h5>
                     <span
@@ -347,11 +380,13 @@
           }}</a>
         </div>
         <div class="transactions">
+          <app-loading-card *ngFor="let item of [1, 2, 3]"></app-loading-card>
           <div *ngFor="let asset of assets; let i = index">
             <app-transaction-card
               *ngIf="i < 4"
               [assets]="asset"
               [currency]="cryptoDashboard.currency"
+              [hiddenAmount]="hidden"
             >
             </app-transaction-card>
           </div>
