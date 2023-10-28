@@ -47,19 +47,25 @@
                 />
                 {{ asset.name }}
               </th>
-              <td class="text-end">{{ asset.balance }} {{ asset.symbol }}</td>
               <td class="text-end">
-                {{ asset.invested }} {{ cryptoCurrency }}
+                {{ hidden ? amount : asset.balance }} {{ asset.symbol }}
+              </td>
+              <td class="text-end">
+                {{ hidden ? amount : asset.invested }} {{ cryptoCurrency }}
               </td>
               <td class="text-end text-primary">
-                {{ (asset.invested! / asset.balance!).toFixed(2) }}
+                {{
+                  hidden
+                    ? amount
+                    : (asset.invested! / asset.balance!).toFixed(2)
+                }}
                 {{ cryptoCurrency }}
               </td>
               <td class="text-end">
                 {{ asset.current_price }} {{ cryptoCurrency }}
               </td>
               <td class="text-end text-secondary">
-                {{ asset.value }} {{ cryptoCurrency }}
+                {{ hidden ? amount : asset.value }} {{ cryptoCurrency }}
               </td>
               <td
                 class="text-end {{
@@ -70,7 +76,9 @@
                     : 'text-danger'
                 }}"
               >
-                {{ (asset.value! - asset.invested!).toFixed(2) }}
+                {{
+                  hidden ? amount : (asset.value! - asset.invested!).toFixed(2)
+                }}
                 {{ cryptoCurrency }}
               </td>
               <td
@@ -141,7 +149,7 @@
                     : 'text-danger'
                 }} {{ balance.index === y ? 'text-end' : '' }}"
               >
-                {{ cryptoCurrency }} {{ balance.balance }}
+                {{ cryptoCurrency }} {{ hidden ? amount : balance.balance }}
               </td>
               <td
                 class="{{
@@ -163,7 +171,7 @@
                     : 'text-danger'
                 }} text-end"
               >
-                {{ cryptoCurrency }} {{ balance.trend }}
+                {{ cryptoCurrency }} {{ hidden ? amount : balance.trend }}
               </td>
             </tr>
           </tbody>

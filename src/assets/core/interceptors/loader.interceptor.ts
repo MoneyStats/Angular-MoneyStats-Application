@@ -28,11 +28,11 @@ export class LoaderInterceptor implements HttpInterceptor {
           tap(
             async (event: HttpEvent<any>) => {
               if (event instanceof HttpResponse) {
-                setTimeout(() => this.loaderService.hide(), 5000);
+                setTimeout(() => this.loaderService.hide(), 500);
               }
             },
             (err: any) => {
-              setTimeout(() => this.loaderService.hide(), 5000);
+              setTimeout(() => this.loaderService.hide(), 500);
             }
           )
         )

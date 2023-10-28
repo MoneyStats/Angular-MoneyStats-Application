@@ -20,7 +20,7 @@
       </div>
       <div class="right float-end">
         <div class="price" id="totale">
-          {{ resumeData.currency }} {{ resumeData.balance }}
+          {{ resumeData.currency }} {{ hidden ? amount : resumeData.balance }}
         </div>
         <div class="price performancetot float-end">
           <span
@@ -76,7 +76,7 @@
           id="pil"
         >
           {{ resumeData.currency }}
-          {{ resumeData.holdingLong.balance }}
+          {{ hidden ? amount : resumeData.holdingLong.balance }}
         </div>
         <div class="price float-end performancetot">
           <span
@@ -122,13 +122,20 @@
                     isPast &&
                     asset.history &&
                     asset.history[asset.history.length - 1].balance
-                      ? asset.history[asset.history.length - 1].balance
+                      ? hidden
+                        ? amount
+                        : asset.history[asset.history.length - 1].balance
+                      : hidden
+                      ? amount
                       : asset.value
                   }}</span
                 >
                 <br />
                 <span style="margin-left: 1px"
-                  ><small>{{ asset.balance }} {{ asset.symbol }}</small></span
+                  ><small
+                    >{{ hidden ? amount : asset.balance }}
+                    {{ asset.symbol }}</small
+                  ></span
                 >
               </div>
               <div class="col-auto">
@@ -280,7 +287,8 @@
                 }}"
                 *ngFor="let balance of balances; let y = index"
               >
-                {{ resumeData.currency }} {{ balance.balance }}
+                {{ resumeData.currency }}
+                {{ hidden ? amount : balance.balance }}
                 <span *ngIf="balances.index != y"
                   >({{
                     balance.percentage >= 1000 ? "+1000" : balance.percentage

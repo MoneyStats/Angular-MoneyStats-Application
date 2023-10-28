@@ -3,14 +3,12 @@ import {
   Input,
   OnChanges,
   OnInit,
-  Renderer2,
   SimpleChanges,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   Asset,
   CryptoDashboard,
-  Operation,
 } from 'src/assets/core/data/class/crypto.class';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
@@ -32,6 +30,8 @@ import {
   styleUrls: ['./details-overview.component.scss'],
 })
 export class DetailsOverviewComponent implements OnInit, OnChanges {
+  amount: string = '******';
+  @Input('hidden') hidden: boolean = false;
   public chartOptions?: Partial<ApexOptions>;
   public chart1Y?: Partial<ApexOptions>;
   public chart3Y?: Partial<ApexOptions>;

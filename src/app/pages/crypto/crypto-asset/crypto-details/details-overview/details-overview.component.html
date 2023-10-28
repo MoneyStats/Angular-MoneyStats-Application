@@ -116,20 +116,28 @@
             <div class="text-muted">
               {{ "crypto.asset.details.overview.balance" | translate }}
             </div>
-            <strong>{{ asset.balance }} {{ asset.symbol }}</strong>
+            <strong
+              >{{ hidden ? amount : asset.balance }} {{ asset.symbol }}</strong
+            >
           </li>
           <li>
             <div class="text-muted">
               {{ "crypto.asset.details.overview.value" | translate
               }}{{ cryptoService.currency }}
             </div>
-            <strong>{{ cryptoService.currency }} {{ asset.value }}</strong>
+            <strong
+              >{{ cryptoService.currency }}
+              {{ hidden ? amount : asset.value }}</strong
+            >
           </li>
           <li>
             <div class="text-muted">
               {{ "crypto.asset.details.overview.invested" | translate }}
             </div>
-            <strong>{{ cryptoService.currency }} {{ asset.invested }}</strong>
+            <strong
+              >{{ cryptoService.currency }}
+              {{ hidden ? amount : asset.invested }}</strong
+            >
           </li>
           <li>
             <div class="text-muted">
@@ -183,7 +191,9 @@
                   : 'text-danger'
               }}"
               >{{ cryptoDashboard.currency }}
-              {{ (asset.value! - asset.invested!).toFixed(2) }}</strong
+              {{
+                hidden ? amount : (asset.value! - asset.invested!).toFixed(2)
+              }}</strong
             >
           </li>
         </ul>
@@ -199,7 +209,7 @@
             <div class="col text-secondary text-end">
               <strong
                 >{{ cryptoService.currency }}
-                {{ cryptoDashboard.balance }}</strong
+                {{ hidden ? amount : cryptoDashboard.balance }}</strong
               >
             </div>
           </div>
@@ -258,12 +268,14 @@
               <div class="accordion-wallet-name">{{ wallet.name }}</div>
               <div class="title-section text-end accordion-right-title">
                 <h5 class="card-text fs-3">
-                  {{ wallet.assets[0].value }}
+                  {{ hidden ? amount : wallet.assets[0].value }}
                   <small>{{ cryptoDashboard.currency }}</small>
                 </h5>
                 <p style="margin-top: -15px">
                   <small
-                    >{{ wallet.assets[0].balance.toFixed(8) }}
+                    >{{
+                      hidden ? amount : wallet.assets[0].balance.toFixed(8)
+                    }}
                     {{ asset.symbol }}</small
                   >
                 </p>
@@ -287,7 +299,7 @@
                     *ngIf="!isEditInvestmentActive"
                     (click)="isEditInvestmentActive = true"
                     ><p>
-                      {{ wallet.assets[0].invested }}
+                      {{ hidden ? amount : wallet.assets[0].invested }}
                       {{ cryptoDashboard.currency }}
                       <ion-icon
                         style="vertical-align: -1px"
@@ -376,9 +388,11 @@
                         : 'text-danger'
                     }}"
                     >{{
-                      (
-                        wallet.assets[0].value! - wallet.assets[0].invested!
-                      ).toFixed(2)
+                      hidden
+                        ? amount
+                        : (
+                            wallet.assets[0].value! - wallet.assets[0].invested!
+                          ).toFixed(2)
                     }}
                     {{ cryptoDashboard.currency }}
                     <span
@@ -416,12 +430,14 @@
                         }}"
                       ></ion-icon>
                       {{
-                        (
-                          ((wallet.assets[0].value! -
-                            wallet.assets[0].invested!) /
-                            wallet.assets[0].invested!) *
-                          100!
-                        ).toFixed(2)
+                        hidden
+                          ? amount
+                          : (
+                              ((wallet.assets[0].value! -
+                                wallet.assets[0].invested!) /
+                                wallet.assets[0].invested!) *
+                              100!
+                            ).toFixed(2)
                       }}%
                     </span></strong
                   >
@@ -468,7 +484,7 @@
                         <div class="text-end">
                           <strong
                             >{{ cryptoDashboard.currency }}
-                            {{ history.balance }}</strong
+                            {{ hidden ? amount : history.balance }}</strong
                           >
                           <div class="text-small">
                             <span

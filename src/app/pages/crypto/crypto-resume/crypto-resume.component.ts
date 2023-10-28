@@ -4,7 +4,10 @@ import {
   CryptoDashboard,
 } from 'src/assets/core/data/class/crypto.class';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
-import { ModalConstant } from 'src/assets/core/data/constant/constant';
+import {
+  ModalConstant,
+  StorageConstant,
+} from 'src/assets/core/data/constant/constant';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { LoggerService } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
@@ -15,6 +18,8 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
   styleUrls: ['./crypto-resume.component.scss'],
 })
 export class CryptoResumeComponent implements OnInit {
+  amount: string = '******';
+  hidden: boolean = false;
   assets: Asset[] = [];
   resumeData: CryptoDashboard = new CryptoDashboard();
   resume: Map<string, CryptoDashboard> = new Map<string, CryptoDashboard>();
@@ -47,6 +52,7 @@ export class CryptoResumeComponent implements OnInit {
       console.log(this.resumeData);
     });
     //this.resumeData = this.cryptoService.cryptoDashboard;
+    this.isWalletBalanceHidden();
   }
 
   onChange(e: any) {
@@ -72,5 +78,14 @@ export class CryptoResumeComponent implements OnInit {
           });
       });
     return indexPresent;
+  }
+
+  isWalletBalanceHidden() {
+    let isHidden = JSON.parse(
+      localStorage.getItem(StorageConstant.HIDDENAMOUNT)!
+    );
+    if (isHidden != null) {
+      this.hidden = isHidden;
+    }
   }
 }

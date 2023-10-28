@@ -18,8 +18,8 @@
           <div class="row" style="margin-top: -10px">
             <div class="col-6">
               <h5 class="card-text fs-3">
-                {{ asset.value }}
-                {{ hidden ? amount : cryptoDashboard.currency }}
+                {{ hidden ? amount : asset.value }}
+                {{ cryptoDashboard.currency }}
               </h5>
               <p style="margin-top: -15px">
                 {{ hidden ? amount : asset.balance }} {{ asset.symbol }}
@@ -119,6 +119,7 @@
               role="tabpanel"
             >
               <app-details-overview
+                [hidden]="hidden"
                 [asset]="asset"
                 [cryptoDashboard]="cryptoDashboard"
                 [assetName]="assetName"

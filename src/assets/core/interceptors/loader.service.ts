@@ -16,7 +16,7 @@ export class LoaderService {
   show() {
     if (
       this.shouldNotLoader.find(
-        (f) => f == environment.subDomain + window.location.pathname
+        (f) => environment.subDomain + f == window.location.pathname
       )
     ) {
       this.isLoading.next(false);

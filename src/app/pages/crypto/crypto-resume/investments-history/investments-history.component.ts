@@ -27,6 +27,8 @@ import { LoggerService } from 'src/assets/core/utils/log.service';
   styleUrls: ['./investments-history.component.scss'],
 })
 export class InvestmentsHistoryComponent implements OnInit, OnChanges {
+  amount: string = '******';
+  @Input('hidden') hidden: boolean = false;
   @Input('cryptoResume') cryptoResume!: Map<string, CryptoDashboard>;
   @Input('cryptoCurrency') cryptoCurrency: string = '';
   assets: Asset[] = [];
