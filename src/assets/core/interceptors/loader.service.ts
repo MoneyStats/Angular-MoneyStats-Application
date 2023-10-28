@@ -14,9 +14,13 @@ export class LoaderService {
   constructor(private router: Router) {}
 
   show() {
+    console.log(window.location.pathname);
     if (
-      this.shouldNotLoader.find(
-        (f) => environment.subDomain + f == window.location.pathname
+      this.shouldNotLoader.find((f) =>
+        environment.subDomain == ''
+          ? environment.subDomain
+          : '/' + environment.subDomain.replace('/', '') + f ==
+            window.location.pathname
       )
     ) {
       this.isLoading.next(false);
