@@ -58,6 +58,7 @@
       <div class="tab-content mt-1 margin-bottom-size">
         <div class="tab-pane fade show active" id="overview" role="tabpanel">
           <app-resume-assets
+            [hidden]="hidden"
             *ngIf="assets && assets.length"
             [resumeData]="resumeData"
             [isPast]="isPast"
@@ -86,6 +87,7 @@
         </div>
         <div class="tab-pane fade" id="resume" role="tabpanel">
           <app-investments-history
+            [hidden]="hidden"
             [cryptoResume]="resume"
             [cryptoCurrency]="resumeData.currency"
           ></app-investments-history>

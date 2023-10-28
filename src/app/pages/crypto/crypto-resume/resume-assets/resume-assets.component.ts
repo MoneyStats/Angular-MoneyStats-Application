@@ -18,6 +18,8 @@ import { deepCopy } from '@angular-devkit/core/src/utils/object';
   styleUrls: ['./resume-assets.component.scss'],
 })
 export class ResumeAssetsComponent implements OnInit, OnChanges {
+  amount: string = '******';
+  @Input('hidden') hidden: boolean = false;
   public chartOptions?: Partial<ApexOptions>;
   @Input('resumeData') resumeData: CryptoDashboard = new CryptoDashboard();
   //resume: Map<string, CryptoDashboard> = new Map<string, CryptoDashboard>();
