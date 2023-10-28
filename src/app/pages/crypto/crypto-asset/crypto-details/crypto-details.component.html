@@ -19,10 +19,10 @@
             <div class="col-6">
               <h5 class="card-text fs-3">
                 {{ asset.value }}
-                {{ cryptoDashboard.currency }}
+                {{ hidden ? amount : cryptoDashboard.currency }}
               </h5>
               <p style="margin-top: -15px">
-                {{ asset.balance }} {{ asset.symbol }}
+                {{ hidden ? amount : asset.balance }} {{ asset.symbol }}
               </p>
             </div>
             <div class="col-6 text-end">
@@ -74,10 +74,12 @@
             ></ion-icon>
             {{ asset.performance }}%
           </span>
-          {{ asset.value }}
+          {{ hidden ? amount : asset.value }}
           {{ cryptoDashboard.currency }}
         </h5>
-        <p style="margin-top: -15px">{{ asset.balance }} {{ asset.symbol }}</p>
+        <p style="margin-top: -15px">
+          {{ hidden ? amount : asset.balance }} {{ asset.symbol }}
+        </p>
       </div>
     </div>
     <div class="section mt-3">

@@ -9,7 +9,10 @@ import { ChartService } from 'src/assets/core/utils/chart.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { LoggerService } from 'src/assets/core/utils/log.service';
-import { ModalConstant } from 'src/assets/core/data/constant/constant';
+import {
+  ModalConstant,
+  StorageConstant,
+} from 'src/assets/core/data/constant/constant';
 
 @Component({
   selector: 'app-crypto-asset',
@@ -17,6 +20,8 @@ import { ModalConstant } from 'src/assets/core/data/constant/constant';
   styleUrls: ['./crypto-asset.component.scss'],
 })
 export class CryptoAssetComponent implements OnInit {
+  amount: string = '******';
+  hidden: boolean = false;
   public chartOptions?: Partial<ApexOptions>;
   public chart1Y?: Partial<ApexOptions>;
   public chart3Y?: Partial<ApexOptions>;
@@ -50,6 +55,7 @@ export class CryptoAssetComponent implements OnInit {
       this.cryptoDashboard.assets = data.data;
     });
     this.graph1Y();
+    this.isWalletBalanceHidden();
   }
 
   graphAll() {
@@ -148,5 +154,14 @@ export class CryptoAssetComponent implements OnInit {
     );
     date.sort();
     return date;
+  }
+
+  isWalletBalanceHidden() {
+    let isHidden = JSON.parse(
+      localStorage.getItem(StorageConstant.HIDDENAMOUNT)!
+    );
+    if (isHidden != null) {
+      this.hidden = isHidden;
+    }
   }
 }

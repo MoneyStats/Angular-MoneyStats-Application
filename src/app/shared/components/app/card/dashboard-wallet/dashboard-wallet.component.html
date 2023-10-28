@@ -33,11 +33,8 @@
           ></ion-icon> </span
       ></a>
 
-      <h1 *ngIf="!hidden" id="reportStatement" class="total">
-        {{ value }} {{ dashboard?.balance | number }}
-      </h1>
-      <h1 *ngIf="hidden" id="reportStatement" class="total">
-        {{ value }} {{ amount }}
+      <h1 id="reportStatement" class="total load-text">
+        {{ value }} {{ hidden ? amount : (dashboard?.balance | number) }}
       </h1>
     </div>
     <div class="right">

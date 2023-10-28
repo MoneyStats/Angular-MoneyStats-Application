@@ -149,3 +149,76 @@ body.dark-mode {
     color: $whiteBg;
   }
 }
+
+.card {
+  box-shadow: -10px 5px 20px rgba(0, 0, 0, 0.2) !important;
+  transition: box-shadow 0.2s ease-in !important;
+}
+
+/*.card:hover {
+  box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.4) !important;
+}*/
+
+body.loading {
+  .loading-hidden {
+    display: none;
+  }
+  .w25w {
+    width: 25px;
+  }
+  .w50w {
+    width: 50px !important;
+  }
+  .w100w {
+    width: 100vh;
+  }
+  .load-text {
+    background: #0d0a18;
+    color: transparent;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    height: 25px;
+    margin-bottom: 20px;
+    .hidden {
+      display: none;
+    }
+    small {
+      max-height: 10px !important;
+    }
+  }
+
+  .load-text::before {
+    content: "";
+    position: absolute;
+    left: 0%;
+    top: 0;
+    height: 100%;
+    width: 50px;
+    background: linear-gradient(
+      to right,
+      #211a3c 25%,
+      #3a2c69 50%,
+      #5a45a5 100%
+    );
+    animation-name: gradient-animation;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    filter: blur(5px);
+  }
+
+  @keyframes gradient-animation {
+    from {
+      left: 0%;
+    }
+    to {
+      left: 100%;
+    }
+  }
+}
+
+body:not(.loading) {
+  .loading-card {
+    display: none;
+  }
+}

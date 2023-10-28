@@ -60,7 +60,7 @@
           <div class="col-6">
             <app-stats-card
               [title]="'dashboard.dashboardCard.stats.title3' | translate"
-              [value]="lastStatsBalanceDifference"
+              [value]="hidden ? amount : lastStatsBalanceDifference"
               [class]="
                 dashboard.lastStatsBalanceDifference === 0
                   ? 'text-warning'
@@ -86,6 +86,7 @@
           }}</a>
         </div>
         <div class="transactions">
+          <app-loading-card *ngFor="let item of [1, 2, 3]"></app-loading-card>
           <app-content-box
             *ngIf="!dashboard.wallets || !dashboard.wallets.length"
             [header]="'dashboard.transaction.nodata.header' | translate"
@@ -94,6 +95,7 @@
           ></app-content-box>
           <div *ngFor="let wallet of dashboard.wallets; let i = index">
             <app-transaction-card
+              [hiddenAmount]="hidden!"
               *ngIf="i < 4"
               [class]="
                 wallet.differenceLastStats === 0
@@ -123,6 +125,7 @@
             "dashboard.graph.view" | translate
           }}</a>
         </div>
+        <app-loading-card *ngFor="let item of [1, 2]"></app-loading-card>
         <app-content-box
           *ngIf="
             !dashboard.statsWalletDays || !dashboard.statsWalletDays.length
@@ -165,6 +168,7 @@
         }}</a>
       </div>
       <div>
+        <app-loading-card></app-loading-card>
         <app-content-box
           *ngIf="!dashboard.wallets || !dashboard.wallets.length"
           [header]="'dashboard.wallet_splide.nodata.header' | translate"

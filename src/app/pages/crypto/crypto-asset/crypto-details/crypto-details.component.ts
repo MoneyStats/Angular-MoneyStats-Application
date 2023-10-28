@@ -8,6 +8,7 @@ import {
 import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { LoggerService } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
+import { StorageConstant } from 'src/assets/core/data/constant/constant';
 
 @Component({
   selector: 'app-crypto-details',
@@ -15,6 +16,8 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
   styleUrls: ['./crypto-details.component.scss'],
 })
 export class CryptoDetailsComponent implements OnInit {
+  amount: string = '******';
+  hidden: boolean = false;
   cryptoDashboard: CryptoDashboard = new CryptoDashboard();
   @Output('asset') asset: Asset = new Asset();
   @Output('assetName') assetName: string = '';
@@ -45,5 +48,15 @@ export class CryptoDetailsComponent implements OnInit {
           });
       }
     });
+    this.isWalletBalanceHidden();
+  }
+
+  isWalletBalanceHidden() {
+    let isHidden = JSON.parse(
+      localStorage.getItem(StorageConstant.HIDDENAMOUNT)!
+    );
+    if (isHidden != null) {
+      this.hidden = isHidden;
+    }
   }
 }

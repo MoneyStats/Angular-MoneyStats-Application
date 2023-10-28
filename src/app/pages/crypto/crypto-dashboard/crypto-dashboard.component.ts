@@ -10,7 +10,10 @@ import {
   CryptoDashboard,
 } from 'src/assets/core/data/class/crypto.class';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
-import { ModalConstant } from 'src/assets/core/data/constant/constant';
+import {
+  ModalConstant,
+  StorageConstant,
+} from 'src/assets/core/data/constant/constant';
 import { AppService } from 'src/assets/core/services/app.service';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { LoggerService } from 'src/assets/core/utils/log.service';
@@ -26,6 +29,8 @@ declare const TradingView: any;
   styleUrls: ['./crypto-dashboard.component.scss'],
 })
 export class CryptoDashboardComponent implements OnInit {
+  amount: string = '******';
+  hidden: boolean = false;
   environment = environment;
   @ViewChild('tradingViewListCrypto') tradingViewListCrypto?: ElementRef;
   @ViewChild('tradingViewPrices') tradingViewPrices?: ElementRef;
@@ -78,6 +83,7 @@ export class CryptoDashboardComponent implements OnInit {
       );
       this.getCoinForGraph();
     });
+    this.isWalletBalanceHidden();
   }
   vibrate() {
     this.appService.vibrate();
@@ -231,5 +237,22 @@ export class CryptoDashboardComponent implements OnInit {
   }
   saveWallet(wallet: Wallet) {
     this.getDashboard();
+  }
+  hiddenShowAmount() {
+    if (this.hidden) {
+      this.hidden = false;
+    } else {
+      this.hidden = true;
+    }
+    localStorage.setItem(StorageConstant.HIDDENAMOUNT, this.hidden.toString());
+  }
+
+  isWalletBalanceHidden() {
+    let isHidden = JSON.parse(
+      localStorage.getItem(StorageConstant.HIDDENAMOUNT)!
+    );
+    if (isHidden != null) {
+      this.hidden = isHidden;
+    }
   }
 }
