@@ -1,17 +1,18 @@
 const baseUrlApp: string = '../../';
 //const host: string = 'http://synologynas.ddns.net:7006/stg-moneystats-service';
 const host: string = 'https://oraclewebserver.ddns.net/stg-moneystats-service';
-const subDomain = 'stg-moneystats/';
+export const subDomain = 'stg-moneystats/';
 
 export const environment = {
   envType: 'STG',
   production: false,
+  subDomain: subDomain,
   baseUrl: '../../' + subDomain,
   baseUrlHeader: '../../../../' + subDomain,
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: '1.10.17 (Beta)',
+  version: '1.10.18 (Beta)',
 
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
