@@ -1,18 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoaderService {
+  environment = environment;
   isLoading = new Subject<boolean>();
   shouldNotLoader: Array<string> = ['/crypto/dashboard', '/'];
 
   constructor(private router: Router) {}
 
   show() {
-    if (this.shouldNotLoader.find((f) => f == window.location.pathname)) {
+    if (
+      this.shouldNotLoader.find(
+        (f) => f == environment.subDomain + window.location.pathname
+      )
+    ) {
       this.isLoading.next(false);
     } else this.isLoading.next(true);
     const body = document.querySelector('body');

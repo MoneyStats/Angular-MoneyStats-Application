@@ -11,12 +11,13 @@ const subDomain = '';
 export const environment = {
   envType: 'Local',
   production: false,
+  subDomain: subDomain,
   baseUrl: '../../' + subDomain,
   baseUrlHeader: '../../../../' + subDomain,
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: '1.10.17 (Beta)',
+  version: '1.10.18 (Beta)',
 
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
