@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import {
   Asset,
   CryptoDashboard,
@@ -17,7 +18,8 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
   templateUrl: './crypto-resume.component.html',
   styleUrls: ['./crypto-resume.component.scss'],
 })
-export class CryptoResumeComponent implements OnInit {
+export class CryptoResumeComponent implements OnInit, OnDestroy {
+  getResumeSub: Subscription = new Subscription();
   amount: string = '******';
   hidden: boolean = false;
   assets: Asset[] = [];
@@ -43,14 +45,18 @@ export class CryptoResumeComponent implements OnInit {
   }
 
   getResume() {
-    this.cryptoService.getCryptoResume().subscribe((res) => {
-      this.logger.LOG(res.message!, 'CryptoResumeComponent');
-      this.resume = new Map<string, CryptoDashboard>(Object.entries(res.data));
-      this.years = Array.from(this.resume.keys());
-      this.updateData(this.years[this.years.length - 1]);
-      this.cryptoService.cryptoResume = this.resume;
-      console.log(this.resumeData);
-    });
+    this.getResumeSub = this.cryptoService
+      .getCryptoResume()
+      .subscribe((res) => {
+        this.logger.LOG(res.message!, 'CryptoResumeComponent');
+        this.resume = new Map<string, CryptoDashboard>(
+          Object.entries(res.data)
+        );
+        this.years = Array.from(this.resume.keys());
+        this.updateData(this.years[this.years.length - 1]);
+        this.cryptoService.cryptoResume = this.resume;
+        console.log(this.resumeData);
+      });
     //this.resumeData = this.cryptoService.cryptoDashboard;
     this.isWalletBalanceHidden();
   }
@@ -87,5 +93,9 @@ export class CryptoResumeComponent implements OnInit {
     if (isHidden != null) {
       this.hidden = isHidden;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.getResumeSub.unsubscribe();
   }
 }

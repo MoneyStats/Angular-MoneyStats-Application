@@ -1,5 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Asset } from 'src/assets/core/data/class/crypto.class';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ErrorService } from 'src/assets/core/interceptors/error.service';
@@ -11,7 +21,9 @@ import { StatsService } from 'src/assets/core/services/stats.service';
   templateUrl: './add-crypto-stats.component.html',
   styleUrls: ['./add-crypto-stats.component.scss'],
 })
-export class AddCryptoStatsComponent implements OnInit {
+export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
+  // Subscribe
+  addStats: Subscription = new Subscription();
   @Input('assets') assets: Asset[] = [];
   @Input('currency') currency: string = '';
   @Input('wallets') wallets: Wallet[] = [];
@@ -36,7 +48,19 @@ export class AddCryptoStatsComponent implements OnInit {
     private statsService: StatsService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.deleteTradingWallet();
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.deleteTradingWallet();
+  }
+
+  deleteTradingWallet() {
+    if (this.wallets && this.wallets.length > 0)
+      this.wallets = this.wallets.filter(
+        (wallet) => wallet.type && wallet.type == 'Holding'
+      );
+  }
   filterWallets(wallets: Wallet[], assetName: string): Wallet[] {
     let wallAsset = wallets.filter((w) => {
       if (w.assets != undefined && w.assets.length > 0)
@@ -217,10 +241,12 @@ export class AddCryptoStatsComponent implements OnInit {
 
   save() {
     this.saveValidation = false;
-    this.statsService.addStats(this.wallets).subscribe((data) => {
-      this.wallets = data.data;
-      this.emitAddStats.emit(this.wallets);
-    });
+    this.addStats = this.statsService
+      .addStats(this.wallets)
+      .subscribe((data) => {
+        this.wallets = data.data;
+        this.emitAddStats.emit(this.wallets);
+      });
     this.getTodayAsString();
     this.resetForm();
   }
@@ -239,5 +265,9 @@ export class AddCryptoStatsComponent implements OnInit {
     this.dateValidation = false;
     this.dateStats = '';
     this.currentIndex = 0;
+  }
+
+  ngOnDestroy(): void {
+    this.addStats.unsubscribe();
   }
 }
