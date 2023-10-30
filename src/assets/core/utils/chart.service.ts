@@ -588,6 +588,9 @@ export class ChartService {
     let investedBalance: Array<number> = [];
     let trendBalance: Array<number> = [];
     let singleBalance: Array<number> = [];
+    investedBalance.push(parseFloat(totalInvested.toFixed(2)));
+    trendBalance.push(0);
+    singleBalance.push(0);
 
     tradingDate.forEach((date) => {
       console.log(date);
@@ -603,13 +606,14 @@ export class ChartService {
         title += o.entryCoin + '/' + o.exitCoin + '</br>';
       });
 
-      investedBalance.push(investedSum);
+      investedBalance.push(parseFloat(investedSum.toFixed(2)));
       trendBalance.push(profit);
       singleBalance.push(singleTrend);
     });
+    tradingDate.splice(0, 0, '2023-01-01');
 
     let serieInvested = {
-      name: 'Invested',
+      name: 'Balance',
       data: investedBalance,
     };
 
@@ -623,8 +627,7 @@ export class ChartService {
       data: singleBalance,
     };
 
-    console.log(investedBalance, trendBalance, singleBalance);
-    let series: Array<any> = [serieInvested];
+    let series: Array<any> = [serieInvested, trend, singlePerformace];
     let options: Array<any> = optional[0];
 
     let h = 350;
@@ -633,7 +636,12 @@ export class ChartService {
     }
     let finalStatsDays: string[] = [];
     tradingDate.forEach((d) => finalStatsDays.push(new Date(d).toDateString()));
-    return this.createChartLine([], series, finalStatsDays, h);
+    return this.createChartLine(
+      ['#6236FF', '#1DCC70', '#FF781F'],
+      series,
+      finalStatsDays,
+      h
+    );
   }
 
   /**

@@ -21,9 +21,10 @@ import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
   templateUrl: './close-operation.component.html',
   styleUrls: ['./close-operation.component.scss'],
 })
-export class CloseOperationComponent implements OnInit, OnChanges {
+export class CloseOperationComponent implements OnInit {
   @Input('modalId') modalId: string = '';
   @Input('operation') operation?: Operation = new Operation();
+  operationToClose: Operation = new Operation();
   cryptoCurrency: string = '';
 
   currentPrice: number = 0;
@@ -48,7 +49,7 @@ export class CloseOperationComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.getData();
+    if (this.operation) this.getData();
   }
 
   getData() {
@@ -59,20 +60,16 @@ export class CloseOperationComponent implements OnInit, OnChanges {
     ) {
       return;
     }
-
     this.cryptoCurrency = this.cryptoService.cryptoDashboard.currency;
     let currentPrice =
       this.operation?.entryQuantity! * this.operation?.asset?.current_price!;
     this.currentPrice = parseFloat(currentPrice.toFixed(2));
     let operation = deepCopy(this.operation);
+    //let operation = this.operation;
     operation!.exitDate = new Date();
     operation!.exitPrice = operation?.asset?.current_price;
     operation!.exitPriceValue = parseFloat(currentPrice.toFixed(2));
-    operation!.exitQuantity = parseFloat(
-      (
-        operation!.entryPriceValue! / operation!.assetSell!.current_price!
-      ).toFixed(8)
-    );
+    operation!.exitQuantity = parseFloat(currentPrice.toFixed(8));
 
     operation!.performance = parseFloat(
       (
@@ -83,12 +80,15 @@ export class CloseOperationComponent implements OnInit, OnChanges {
     operation!.trend = parseFloat(
       (currentPrice - this.operation?.entryPriceValue!).toFixed(2)
     );
+    this.operationToClose = operation;
   }
 
   refreshData() {
-    let operation = this.operation;
+    let operation = this.operationToClose;
     let currentPrice =
       this.operation?.entryQuantity! * this.operation?.exitPrice!;
+    operation!.exitPriceValue = parseFloat(currentPrice.toFixed(2));
+    operation!.exitQuantity = parseFloat(currentPrice.toFixed(8));
     operation!.performance = parseFloat(
       (
         ((currentPrice - this.operation?.entryPriceValue!) / currentPrice) *
@@ -98,11 +98,11 @@ export class CloseOperationComponent implements OnInit, OnChanges {
     operation!.trend = parseFloat(
       (currentPrice - this.operation?.entryPriceValue!).toFixed(2)
     );
-    this.isEditActive = false;
+    //this.isEditActive = false;
   }
 
   closeOperation() {
-    this.operation!.status = 'CLOSED';
+    this.operationToClose!.status = 'CLOSED';
     let dashboard = deepCopy(this.cryptoService.cryptoDashboard);
     let wallet = dashboard.wallets.find(
       (w) =>
@@ -115,22 +115,22 @@ export class CloseOperationComponent implements OnInit, OnChanges {
     );
     //let wallet = this.operation?.wallet;
     let asset1 = wallet?.assets.find(
-      (a) => a.symbol == this.operation?.exitCoin
+      (a) => a.symbol == this.operationToClose?.exitCoin
     );
     let asset2 = wallet?.assets.find(
-      (a) => a.symbol == this.operation?.entryCoin
+      (a) => a.symbol == this.operationToClose?.entryCoin
     );
-    this.operation!.asset = undefined;
-    this.operation!.assetSell = undefined;
-    this.operation!.wallet = undefined;
+    this.operationToClose.asset = undefined;
+    this.operationToClose.assetSell = undefined;
+    this.operationToClose.wallet = undefined;
 
-    asset1!.operations = [this.operation];
-    asset1!.balance -= this.operation?.entryQuantity!;
-    asset1!.invested -= this.operation?.entryPriceValue!;
+    asset1!.operations = [this.operationToClose];
+    asset1!.balance -= this.operationToClose?.entryQuantity!;
+    asset1!.invested -= this.operationToClose?.entryPriceValue!;
     asset1!.updateDate = new Date();
 
-    asset2!.balance += this.operation?.exitQuantity!;
-    asset2!.invested += this.operation?.entryPriceValue!;
+    asset2!.balance += this.operationToClose?.exitQuantity!;
+    asset2!.invested += this.operationToClose?.entryPriceValue!;
     asset2!.updateDate = new Date();
 
     wallet!.assets = [asset1!, asset2!];

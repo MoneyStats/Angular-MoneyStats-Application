@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Asset } from 'src/assets/core/data/class/crypto.class';
 import { Category, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import {
@@ -15,7 +23,10 @@ import { environment } from 'src/environments/environment';
   templateUrl: './add-asset-modal.component.html',
   styleUrls: ['./add-asset-modal.component.scss'],
 })
-export class AddAssetModalComponent implements OnInit {
+export class AddAssetModalComponent implements OnInit, OnDestroy {
+  getMarketDataSubscribe: Subscription = new Subscription();
+  saveAssetSubscription: Subscription = new Subscription();
+
   environment = environment;
   @Input('modalId') modalId: string = '';
   @Input('cryptoCurrency') cryptoCurrency: string = '';
@@ -72,10 +83,12 @@ export class AddAssetModalComponent implements OnInit {
   }
 
   getCryptoPrices() {
-    this.cryptoService.getCryptoPrice(this.cryptoCurrency).subscribe((data) => {
-      this.logger.LOG(data.message!, 'AddAssetModalComponent');
-      this.marketData = data.data;
-    });
+    this.getMarketDataSubscribe = this.cryptoService
+      .getCryptoPrice(this.cryptoCurrency)
+      .subscribe((data) => {
+        this.logger.LOG(data.message!, 'AddAssetModalComponent');
+        this.marketData = data.data;
+      });
   }
 
   selectWallet() {
@@ -114,7 +127,7 @@ export class AddAssetModalComponent implements OnInit {
       //this.wallet?.assets.push(this.asset!);
       this.wallet!.assets = [this.asset!];
       console.log(this.wallet);
-      this.cryptoService
+      this.saveAssetSubscription = this.cryptoService
         .addOrUpdateCryptoAsset(this.wallet!)
         .subscribe((data) => {
           console.log(data);
@@ -140,5 +153,10 @@ export class AddAssetModalComponent implements OnInit {
     this.warning = false;
     this.cryptoPrices = [asset];
     this.modelAsset = asset.name!;
+  }
+
+  ngOnDestroy(): void {
+    this.getMarketDataSubscribe.unsubscribe();
+    this.saveAssetSubscription.unsubscribe();
   }
 }

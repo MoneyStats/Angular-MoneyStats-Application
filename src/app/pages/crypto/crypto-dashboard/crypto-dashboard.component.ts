@@ -1,6 +1,7 @@
 import {
   Component,
   ElementRef,
+  OnDestroy,
   OnInit,
   Renderer2,
   ViewChild,
@@ -20,6 +21,7 @@ import { LoggerService } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { environment } from 'src/environments/environment';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
+import { Subscription } from 'rxjs';
 
 declare const TradingView: any;
 
@@ -28,7 +30,8 @@ declare const TradingView: any;
   templateUrl: './crypto-dashboard.component.html',
   styleUrls: ['./crypto-dashboard.component.scss'],
 })
-export class CryptoDashboardComponent implements OnInit {
+export class CryptoDashboardComponent implements OnInit, OnDestroy {
+  getDashboardSubscribe: Subscription = new Subscription();
   amount: string = '******';
   hidden: boolean = false;
   environment = environment;
@@ -71,18 +74,20 @@ export class CryptoDashboardComponent implements OnInit {
   }
 
   getDashboard() {
-    this.cryptoService.getCryptoDashboard().subscribe((data) => {
-      this.logger.LOG(data.message!, 'CryptoDashboardComponent');
-      this.cryptoDashboard = data.data;
-      this.cryptoService.cryptoDashboard = data.data;
-      this.assets = data.data.assets;
-      //this.cryptoService.cryptoDashboard.assets = this.assets;
-      //this.cryptoDashboard.assets = this.assets;
-      this.cryptoWallet = this.cryptoDashboard.wallets.filter(
-        (w) => w.category == 'Crypto'
-      );
-      this.getCoinForGraph();
-    });
+    this.getDashboardSubscribe = this.cryptoService
+      .getCryptoDashboard()
+      .subscribe((data) => {
+        this.logger.LOG(data.message!, 'CryptoDashboardComponent');
+        this.cryptoDashboard = data.data;
+        this.cryptoService.cryptoDashboard = data.data;
+        this.assets = data.data.assets;
+        //this.cryptoService.cryptoDashboard.assets = this.assets;
+        //this.cryptoDashboard.assets = this.assets;
+        this.cryptoWallet = this.cryptoDashboard.wallets.filter(
+          (w) => w.category == 'Crypto'
+        );
+        this.getCoinForGraph();
+      });
     this.isWalletBalanceHidden();
   }
   vibrate() {
@@ -254,5 +259,9 @@ export class CryptoDashboardComponent implements OnInit {
     if (isHidden != null) {
       this.hidden = isHidden;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.getDashboardSubscribe.unsubscribe();
   }
 }
