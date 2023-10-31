@@ -79,7 +79,6 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   changeAsset() {
-    console.log(this.currentIndex, this.assets.length);
     this.currentIndex += 1;
     let element = document.getElementById('action-scheet');
     element?.scrollTo(0, 0);

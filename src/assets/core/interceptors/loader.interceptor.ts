@@ -7,7 +7,7 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError, finalize, map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { LoaderService } from './loader.service';
 
 @Injectable()

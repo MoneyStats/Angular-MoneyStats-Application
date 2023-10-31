@@ -94,7 +94,6 @@ export class CryptoAssetComponent implements OnInit {
       if (asset.balance != 0) assets.push(asset);
     });
     dashboard.assets = assets;
-    console.log(assets);
     if (dashboard.statsAssetsDays)
       dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter(
         (s) =>

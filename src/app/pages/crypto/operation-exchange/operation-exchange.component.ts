@@ -12,7 +12,7 @@ import {
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { Asset, Operation } from 'src/assets/core/data/class/crypto.class';
 import { LoggerService } from 'src/assets/core/utils/log.service';
-import { ChangeDetectorRef, AfterContentChecked } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 
@@ -109,7 +109,6 @@ export class OperationExchangeComponent implements OnInit {
   }
 
   emitHoldingSelectAsset(asset: Asset) {
-    console.log('emitHoldingSelectAsset');
     this.holdingAssetToSell = asset;
     this.investedBalance = this.holdingAssetToSell.balance;
 
@@ -117,7 +116,6 @@ export class OperationExchangeComponent implements OnInit {
   }
 
   emitTradingSelectAsset(asset: Asset) {
-    console.log('emitTradingSelectAsset');
     this.tradingAssetToSell = asset;
     this.investedBalance = this.tradingAssetToSell.balance;
 
@@ -125,7 +123,6 @@ export class OperationExchangeComponent implements OnInit {
   }
 
   emitSelectAsset(asset: Asset) {
-    console.log('emitSelectAsset', this.marketDataSelected, asset);
     asset.id = undefined;
     asset.lastUpdate = new Date();
     //asset.lastUpdate = this.marketDataSelected.lastUpdate;
@@ -177,7 +174,6 @@ export class OperationExchangeComponent implements OnInit {
     Number.isNaN(assetToSave.balance) || assetToSave.balance == undefined
       ? (assetToSave.balance = this.assetNewBalance)
       : (assetToSave.balance += this.assetNewBalance);
-    console.log(this.assetNewBalance, assetToSave, tradingAsset);
     let operation: Operation = new Operation();
     operation.type = this.operationType;
     operation.status = 'OPEN';
@@ -220,7 +216,6 @@ export class OperationExchangeComponent implements OnInit {
     Number.isNaN(assetToSave.balance) || assetToSave.balance == undefined
       ? (assetToSave.balance = this.assetNewBalance)
       : (assetToSave.balance += this.assetNewBalance);
-    console.log(this.marketDataSelected);
     let operation: Operation = new Operation();
     operation.type = this.operationType;
     operation.status = 'CLOSED';
@@ -281,7 +276,6 @@ export class OperationExchangeComponent implements OnInit {
   }
 
   saveWallet(walletToSave: Wallet) {
-    console.log(walletToSave);
     this.cryptoService
       .addOrUpdateCryptoAsset(walletToSave)
       .subscribe((data) => {

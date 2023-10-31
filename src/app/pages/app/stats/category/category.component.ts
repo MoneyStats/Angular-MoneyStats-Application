@@ -5,11 +5,10 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { map } from 'rxjs';
 import { Dashboard, Stats } from 'src/assets/core/data/class/dashboard.class';
 //import { ChartOptions } from 'src/assets/core/data/constant/apex.chart';
 import { ChartService } from 'src/assets/core/utils/chart.service';
-import { ChartConfiguration, ChartOptions, ChartType } from 'chart.js';
+import { ChartOptions } from 'chart.js';
 import {
   ApexOptions,
   ChartJSOptions,
@@ -25,7 +24,7 @@ export class CategoryComponent implements OnInit, OnChanges {
   @Input('dashboard') dashboard: Dashboard = new Dashboard();
   @Input('coinSymbol') coinSymbol: string = '';
 
-  INVESTMENTS: string[] = ['Investments', 'Cryptocurrency'];
+  INVESTMENTS: string[] = ['Investments', 'Crypto'];
   CAPITAL: string[] = ['Cash', 'Bank Account', 'Debit Card'];
   SAVING: string[] = ['Save Account', 'Save'];
   DEBITS: string[] = ['Credit Card', 'Recurrence'];
