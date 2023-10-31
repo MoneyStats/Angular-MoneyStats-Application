@@ -71,7 +71,6 @@ export class SettingsComponent implements OnInit {
     if (autoUpdate) {
       this.isAutoUpdate = autoUpdate;
     }
-    console.log(this.user);
   }
 
   disconnect(user: User) {

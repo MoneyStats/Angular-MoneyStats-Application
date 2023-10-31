@@ -307,154 +307,6 @@ export class ChartService {
     return chartExample1;
   }
 
-  /**
-   * @deprecated
-   */
-  renderCryptoAsset(
-    cryptoDashboard: CryptoDashboard,
-    ...optional: any[]
-  ): Partial<ApexOptions> {
-    let series: Array<any> = [];
-    let statsAssetsDays = cryptoDashboard.statsAssetsDays
-      ? cryptoDashboard.statsAssetsDays.slice()
-      : cryptoDashboard.statsAssetsDays;
-    let returnStatsDays: string[] =
-      statsAssetsDays != undefined ? statsAssetsDays.slice() : [];
-    let colors: string[] = [];
-
-    let options: Array<any> = optional[0];
-
-    cryptoDashboard.assets.forEach((asset, index1) => {
-      colors.push(this.imageColorPicker.getColor(asset.icon!, index1));
-      let historyBalance: Array<number> = [];
-      let index = 0;
-
-      if (asset && asset.history && asset.history.length != 0) {
-        asset.history!.forEach((h) => {
-          if (h.date == undefined) {
-            return;
-          }
-          let count = returnStatsDays.indexOf(h.date.toString());
-          if (count != -1 && count != index) {
-            Array.from(Array(count - index)).forEach((d) =>
-              historyBalance.push(0)
-            );
-            index = count;
-          }
-          historyBalance.push(h.balance);
-          index++;
-        });
-
-        // Aggiungo l'ultimo valore dell'asset corrente se l'ultimo stats non corrisponde ad oggi
-        let today = new Date();
-        const lastDay: Date = new Date(
-          returnStatsDays[returnStatsDays.length - 1]
-        );
-        if (
-          lastDay < today &&
-          options != undefined &&
-          options[1] != undefined &&
-          !options[1]
-        ) {
-          //if (lastDay.getDate() < today.getDate()) {
-          historyBalance.push(asset.value!);
-          returnStatsDays.push(today.toDateString());
-        }
-      } else {
-        // Se dovessi avere più Asset con uno di essi con history mentre l'altro no lo si gestisce così
-        if (statsAssetsDays && statsAssetsDays.length != 0) {
-          let today = new Date();
-          let lastDay;
-          // (Caso solo per asset singoli) Se dovessi avere un asset appena aggiunto (Senza History) ma durante l'anno ho degli stats, devo prendere l'ultima data registrata e settarla a 0
-          //if (cryptoDashboard.assets.length == 1 && !asset.history) {
-          returnStatsDays = [statsAssetsDays[statsAssetsDays.length - 1]];
-          historyBalance.push(0);
-
-          lastDay = statsAssetsDays[statsAssetsDays.length - 1];
-          returnStatsDays.push(today.toDateString());
-          //} else {
-          //  // (Caso si abbiamo più di un asset)
-          //  // L'index è -2 perchè essendo più asset ma questo non ha history è stato aggiunto il valore last
-          //  lastDay = statsAssetsDays[statsAssetsDays.length - 2];
-          //  historyBalance.push(0);
-          //}
-
-          let count = returnStatsDays.indexOf(lastDay);
-          if (count != -1 && count != index) {
-            Array.from(Array(count - index)).forEach((d) =>
-              historyBalance.push(0)
-            );
-            // Pusho per l'ultima data valida trovata
-            historyBalance.push(0);
-          }
-
-          if (new Date(lastDay) < today) {
-            historyBalance.push(asset.value!);
-          }
-        } else {
-          historyBalance.push(0);
-          historyBalance.push(asset.value!);
-          let today = new Date();
-          let yesterday = new Date();
-          yesterday.setDate(today.getDate() - 1);
-          returnStatsDays = [yesterday.toDateString()];
-          returnStatsDays.push(today.toDateString());
-          console.log(returnStatsDays);
-        }
-      }
-      let serie = {
-        name: asset.name,
-        data: historyBalance,
-      };
-      series.push(serie);
-      historyBalance = [];
-    });
-    let h = 350;
-    if (options != undefined && options[0] != undefined && options[0]) {
-      h = options[0];
-    }
-    let finalStatsDays: string[] = [];
-    if (returnStatsDays.length != 0)
-      returnStatsDays.forEach((d) =>
-        finalStatsDays.push(new Date(d).toDateString())
-      );
-    else
-      statsAssetsDays.forEach((d) =>
-        finalStatsDays.push(new Date(d).toDateString())
-      );
-    let chartOptions: Partial<ApexOptions> = {
-      series: series,
-      chart: {
-        type: 'area',
-        width: '100%',
-        height: h,
-        sparkline: {
-          enabled: true,
-        },
-      },
-      dataLabels: {
-        enabled: false,
-        background: {
-          borderRadius: 20,
-        },
-      },
-      stroke: {
-        width: 2,
-      },
-      colors: colors.length != 0 ? colors : this.colorsList,
-      labels: finalStatsDays,
-      legend: {
-        show: true,
-        position: 'top',
-        horizontalAlign: 'center',
-        floating: false,
-        fontFamily: 'Helvetica, Arial',
-      },
-    };
-    return chartOptions;
-    //chartLine(series, dashboard.statsWalletDays);
-  }
-
   renderCryptoDatas(
     cryptoDashboard: CryptoDashboard,
     ...optional: any[]
@@ -466,7 +318,6 @@ export class ChartService {
     let options: Array<any> = optional[0];
     let today = new Date();
     cryptoDashboard.assets.forEach((asset, indexAsset) => {
-      console.log(asset);
       colors.push(this.imageColorPicker.getColor(asset.icon!, indexAsset));
       let historyBalance: Array<number> = [];
       if (statsAssetsDays == undefined || statsAssetsDays.length == 0) {
@@ -501,7 +352,6 @@ export class ChartService {
         data: historyBalance,
       };
       series.push(serie);
-      console.log(serie, historyBalance);
     });
 
     // Se non è in resume setto l'ultimo giorno
@@ -522,43 +372,13 @@ export class ChartService {
     statsAssetsDays.forEach((d) =>
       finalStatsDays.push(new Date(d).toDateString())
     );
-    let chartOptions: Partial<ApexOptions> = {
-      series: series,
-      chart: {
-        type: 'area',
-        width: '100%',
-        height: h,
-        sparkline: {
-          enabled: true,
-        },
-      },
-      dataLabels: {
-        enabled: false,
-        background: {
-          borderRadius: 20,
-        },
-      },
-      stroke: {
-        width: 2,
-      },
-      colors: colors.length != 0 ? colors : this.colorsList,
-      labels: finalStatsDays,
-      legend: {
-        show: true,
-        position: 'top',
-        horizontalAlign: 'center',
-        floating: false,
-        fontFamily: 'Helvetica, Arial',
-      },
-    };
-    return chartOptions;
+    return this.createChartLine(colors, series, finalStatsDays, h);
   }
 
   renderTradingOperations(
     operations: Array<Operation>,
     ...optional: any[]
   ): Partial<ApexOptions> {
-    console.log('TEST');
     let operationsCopy = deepCopy(operations);
     let tradingDate: Array<string> = [];
     operationsCopy = operationsCopy.sort(
@@ -593,7 +413,6 @@ export class ChartService {
     singleBalance.push(0);
 
     tradingDate.forEach((date) => {
-      console.log(date);
       let op = operationsCopy.filter(
         (op) => op.exitDate?.toString().split('T')[0]! == date
       );

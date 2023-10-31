@@ -242,7 +242,6 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
             operation.assetSell = this.cryptoDashboard.assets.find(
               (a) => a.symbol == operation.entryCoin
             );
-          console.log(operation.assetSell);
           operations.push(operation);
         });
     });
@@ -296,7 +295,6 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
       })
     );
     date.sort();
-    console.log(date);
     return date;
   }
 }

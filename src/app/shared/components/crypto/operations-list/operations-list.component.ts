@@ -44,7 +44,6 @@ export class OperationsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.walletsAsset);
   }
 
   getOperations() {
@@ -112,7 +111,6 @@ export class OperationsListComponent implements OnInit {
   }
 
   selectOperation(operation: any) {
-    console.log("SELECT", operation)
     this.operationSelect = operation;
   }
 

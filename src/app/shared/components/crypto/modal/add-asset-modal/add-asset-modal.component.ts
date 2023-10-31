@@ -126,11 +126,9 @@ export class AddAssetModalComponent implements OnInit, OnDestroy {
       this.asset!.lastUpdate = new Date();
       //this.wallet?.assets.push(this.asset!);
       this.wallet!.assets = [this.asset!];
-      console.log(this.wallet);
       this.saveAssetSubscription = this.cryptoService
         .addOrUpdateCryptoAsset(this.wallet!)
         .subscribe((data) => {
-          console.log(data);
           this.emitAddAsset.emit(data.data);
           this.resetModal();
         });

@@ -50,7 +50,6 @@ export class TradingResumeComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.filterWallet();
     this.getOperations();
-    console.log('TRADING', this.trading);
   }
 
   ngOnInit(): void {

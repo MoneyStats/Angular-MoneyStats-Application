@@ -62,7 +62,6 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getDashboard();
-    //this.screenService.setupHeader();
     this.screenService.showFooter();
   }
 

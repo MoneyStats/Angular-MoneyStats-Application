@@ -14,7 +14,6 @@ export class LoaderService {
   constructor(private router: Router) {}
 
   show() {
-    console.log(window.location.pathname);
     if (
       this.shouldNotLoader.find((f) =>
         environment.subDomain == ''

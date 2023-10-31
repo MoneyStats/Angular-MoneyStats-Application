@@ -24,7 +24,7 @@ import { SharedModule } from './shared/components/shared/shared.module';
 import { InterceptorsModule } from './interceptors/interceptors.module';
 import { CoreModule } from './shared/components/core/core.module';
 import { CryptoComponentsModule } from './shared/components/crypto/crypto-components.module';
-import { ResumeAssetsComponent } from './pages/crypto/crypto-resume/resume-assets/resume-assets.component';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [

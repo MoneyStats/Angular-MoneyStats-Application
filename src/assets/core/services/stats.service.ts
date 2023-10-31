@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CoinSymbol } from '../data/class/coin';
 import { Dashboard, Wallet } from '../data/class/dashboard.class';
 import { ResponseModel } from '../data/class/generic.class';
 import { User } from '../data/class/user.class';
@@ -14,9 +13,6 @@ import { StorageConstant } from '../data/constant/constant';
 export class StatsService {
   environment = environment;
   public fullResume?: Map<string, Dashboard>;
-  //public dashboard: Dashboard = new Dashboard();
-  //public wallet?: Wallet;
-  //public coinSymbol?: string;
   user?: User;
   constructor(private http: HttpClient) {}
 
