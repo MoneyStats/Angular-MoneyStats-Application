@@ -104,7 +104,7 @@
               "outputHashing": "all"
             },
             "staging": {
-              "baseHref": "/stg-moneystats/",
+              "baseHref": "/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -113,6 +113,7 @@
               ]
             },
             "development": {
+              "baseHref": "/",
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,

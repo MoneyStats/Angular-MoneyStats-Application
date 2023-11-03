@@ -1,4 +1,4 @@
-FROM node:16.14-alpine AS builder
+FROM node:19.2.0-alpine AS builder
 WORKDIR '/app'
 COPY . .
 ARG config
@@ -8,7 +8,7 @@ RUN npm install --force && \
 FROM nginx:alpine
 COPY --from=builder /app/dist/* /usr/share/nginx/html/
 #COPY --from=builder /app/src/assets/ssl/* /etc/ssl/
-COPY /nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
 
 #FROM node:16.13.2-alpine

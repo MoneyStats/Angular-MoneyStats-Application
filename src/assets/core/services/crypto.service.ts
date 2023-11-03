@@ -38,7 +38,7 @@ export class CryptoService {
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      authToken: authToken!,
+      Authorization: authToken!,
     });
     if (this.user.mockedUser) {
       return this.http.get<any>(environment.getCryptoDashboardMock);
@@ -53,7 +53,7 @@ export class CryptoService {
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      authToken: authToken!,
+      Authorization: authToken!,
     });
     if (this.user.mockedUser) {
       return this.http.get<any>(environment.getCryptoPriceMock);
@@ -69,7 +69,7 @@ export class CryptoService {
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      authToken: authToken!,
+      Authorization: authToken!,
     });
     if (this.user.mockedUser) {
       return this.http.get<any>(environment.getCryptoResumeMock);
@@ -84,7 +84,7 @@ export class CryptoService {
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      authToken: authToken!,
+      Authorization: authToken!,
     });
     if (this.user.mockedUser) {
       return this.http.get<any>(environment.getCryptoAssetsMock);
@@ -99,7 +99,7 @@ export class CryptoService {
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      authToken: authToken!,
+      Authorization: authToken!,
     });
     if (this.user.mockedUser) {
       return this.http.get<any>(environment.getCryptoDetailsMock);
@@ -116,7 +116,7 @@ export class CryptoService {
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      authToken: authToken!,
+      Authorization: authToken!,
     });
     if (this.user.mockedUser) {
       let response: ResponseModel = new ResponseModel();
