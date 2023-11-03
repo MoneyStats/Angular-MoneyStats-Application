@@ -129,7 +129,7 @@ export class UserService {
     if (this.user?.mockedUser) {
       return this.http.get<ResponseModel>(environment.getUserUrl);
     } else {
-      const headers = new HttpHeaders({ authToken: authToken! });
+      const headers = new HttpHeaders({ Authorization: authToken! });
       return this.http.get<ResponseModel>(environment.checkLoginDataUrl, {
         headers: headers,
       });
@@ -157,7 +157,7 @@ export class UserService {
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      authToken: authToken!,
+      Authorization: authToken!,
     });
     if (this.user?.mockedUser) {
       let response: ResponseModel = new ResponseModel();
@@ -181,7 +181,7 @@ export class UserService {
     } else {
       const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
       const headers = new HttpHeaders({
-        authToken: authToken!,
+        Authorization: authToken!,
         'Content-Type': 'multipart/form-data',
       });
       const formData: FormData = new FormData();

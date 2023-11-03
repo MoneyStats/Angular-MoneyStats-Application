@@ -24,7 +24,7 @@ export class DashboardService {
       return this.http.get<ResponseModel>(environment.getDashboardDataUrlMock);
     } else {
       const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
-      const headers = new HttpHeaders({ authToken: authToken! });
+      const headers = new HttpHeaders({ Authorization: authToken! });
       return this.http.get<ResponseModel>(environment.getDashboardDataUrl, {
         headers: headers,
       });

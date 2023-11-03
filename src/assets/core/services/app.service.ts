@@ -24,7 +24,7 @@ export class AppService {
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      authToken: authToken!,
+      Authorization: authToken!,
     });
     if (this.user?.mockedUser) {
       let response: ResponseModel = new ResponseModel();
@@ -40,7 +40,7 @@ export class AppService {
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      authToken: authToken!,
+      Authorization: authToken!,
     });
     if (this.user?.mockedUser) {
       let response: ResponseModel = new ResponseModel();
@@ -60,7 +60,7 @@ export class AppService {
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      authToken: authToken!,
+      Authorization: authToken!,
     });
     if (this.user?.mockedUser) {
       let response: ResponseModel = new ResponseModel();
@@ -76,7 +76,7 @@ export class AppService {
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      authToken: authToken!,
+      Authorization: authToken!,
     });
     if (this.user?.mockedUser) {
       let response: ResponseModel = new ResponseModel();

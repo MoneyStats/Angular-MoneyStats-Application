@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -11,17 +10,14 @@ export class LoaderService {
   isLoading = new Subject<boolean>();
   shouldNotLoader: Array<string> = ['/crypto/dashboard', '/'];
 
-  constructor(private router: Router) {}
+  constructor() {}
 
   show() {
-    if (
-      this.shouldNotLoader.find((f) =>
-        environment.subDomain == ''
-          ? environment.subDomain
-          : '/' + environment.subDomain.replace('/', '') + f ==
-            window.location.pathname
-      )
-    ) {
+    let pathname =
+      environment.subDomain == ''
+        ? window.location.pathname
+        : window.location.pathname.replace(environment.subDomain, '');
+    if (this.shouldNotLoader.find((f) => f == pathname)) {
       this.isLoading.next(false);
     } else this.isLoading.next(true);
     const body = document.querySelector('body');

@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
 
       localStorage.setItem(
         StorageConstant.ACCESSTOKEN,
-        data.data.authToken.accessToken
+        data.data.authToken.type + ' ' + data.data.authToken.accessToken
       );
       this.userService.setValue();
       this.userService.setUserGlobally();

@@ -21,7 +21,7 @@ export class StatsService {
       return this.http.get<ResponseModel>(environment.getResumeDataUrlMock);
     } else {
       const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
-      const headers = new HttpHeaders({ authToken: authToken! });
+      const headers = new HttpHeaders({ Authorization: authToken! });
       return this.http.get<ResponseModel>(environment.getResumeDataUrl, {
         headers: headers,
       });
@@ -30,7 +30,7 @@ export class StatsService {
 
   addStats(wallets: Wallet[]): Observable<ResponseModel> {
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
-    const headers = new HttpHeaders({ authToken: authToken! });
+    const headers = new HttpHeaders({ Authorization: authToken! });
     if (this.user?.mockedUser) {
       let response: ResponseModel = new ResponseModel();
       response.data = wallets;
