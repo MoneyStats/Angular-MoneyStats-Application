@@ -1,5 +1,5 @@
 const baseUrlApp: string = '../../';
-const host: string = 'http://stg.moneystats.service.hostwebserver.site';
+const host: string = 'https://stg.moneystats.service.hostwebserver.site';
 //const host: string = 'https://oraclewebserver.ddns.net/stg-moneystats-service';
 //const subDomain = 'stg-moneystats/';
 const subDomain = '';
