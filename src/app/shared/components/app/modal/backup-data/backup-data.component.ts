@@ -3,7 +3,7 @@ import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { AppService } from 'src/assets/core/services/app.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
-import { ToastService } from 'src/assets/core/utils/toast.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-backup-data',
@@ -22,7 +22,7 @@ export class BackupDataComponent implements OnInit {
     this.appService.backupData().subscribe((data) => {
       this.walletEntities = data.data;
       let fileName = 'Backup_Moneystats_' + new Date().toISOString();
-      downloadObjectAsJson(this.walletEntities, fileName);
+      this.downloadObjectAsJson(this.walletEntities, fileName);
       this.swal.toastMessage(SwalIcon.SUCCESS, data.message!);
     });
   }
@@ -44,8 +44,20 @@ export class BackupDataComponent implements OnInit {
       reader.readAsText(event.target.files[0]);
     }
   }
+
+  downloadObjectAsJson(exportObj: any, exportName: string) {
+    const jsonBlob = new Blob([JSON.stringify(exportObj)], {
+      type: 'application/json',
+    });
+    saveAs(jsonBlob, `${exportName}.json`);
+  }
 }
 
+/**
+ * @deprecated
+ * @param exportObj
+ * @param exportName
+ */
 function downloadObjectAsJson(exportObj: any, exportName: string) {
   var dataStr =
     'data:text/json;charset=utf-8,' +
