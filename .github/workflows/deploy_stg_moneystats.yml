@@ -71,6 +71,7 @@ jobs:
         run: docker build . --file Dockerfile --build-arg config=staging --tag angular-moneystats:$(date +%s)
 
       - name: Get current package version
+        id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
 
       - name: Log in to Docker Hub
