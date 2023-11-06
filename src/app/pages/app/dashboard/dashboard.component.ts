@@ -127,17 +127,22 @@ export class DashboardComponent implements OnInit {
         ' ' +
         this.userService.coinSymbol;
       this.walletService.totalBalance = this.dashboard.balance;
-      setTimeout(() => {
-        if (this.dashboard.wallets) {
-          this.chartOptions = this.charts.renderChartLine(this.dashboard);
-        }
-      }, 100);
+      this.renderChart(this.dashboard);
       this.walletDetails(data.data.wallets);
     });
 
     this.isWalletBalanceHidden();
     this.screenService.activeHeaderAndFooter();
     this.screenService.goToDashboard();
+  }
+
+  renderChart(dashboard: Dashboard) {
+    let dashboardRender = deepCopy(dashboard);
+    setTimeout(() => {
+      if (this.dashboard.wallets) {
+        this.chartOptions = this.charts.renderChartLine(dashboardRender);
+      }
+    }, 100);
   }
 
   availableSoon() {

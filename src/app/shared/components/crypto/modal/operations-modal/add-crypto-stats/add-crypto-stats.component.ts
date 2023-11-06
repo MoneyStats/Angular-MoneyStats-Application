@@ -60,7 +60,17 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
       this.wallets = this.wallets.filter(
         (wallet) => wallet.type && wallet.type == 'Holding'
       );
+    let assetList: Array<string> = [];
+    this.wallets.forEach((w) => {
+      w.assets.forEach((a) => {
+        if (!assetList.includes(a.symbol!)) {
+          assetList.push(a.symbol!);
+        }
+      });
+    });
+    this.assets = this.assets.filter((a) => assetList.includes(a.symbol!));
   }
+
   filterWallets(wallets: Wallet[], assetName: string): Wallet[] {
     let wallAsset = wallets.filter((w) => {
       if (w.assets != undefined && w.assets.length > 0)

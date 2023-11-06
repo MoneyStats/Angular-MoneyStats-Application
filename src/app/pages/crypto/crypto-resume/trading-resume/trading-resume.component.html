@@ -21,6 +21,115 @@
       ></apx-chart>
     </div>
   </div>
+  <!-- App Capsule -->
+  <div class="section mt-2 mb-4 col-xl-12">
+    <div class="section-title">
+      {{ "crypto.resume.tableAsset" | translate }}
+    </div>
+    <div *ngIf="operations && operations.length > 0" class="card">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Ingress Date</th>
+              <th scope="col" class="text-center">Coins</th>
+              <th scope="col" class="text-center">Quantity</th>
+              <th scope="col" class="text-center">Price</th>
+              <th scope="col" class="text-center">Total</th>
+              <th scope="col" class="text-center">Exit Date</th>
+              <th scope="col" class="text-center">Quantity</th>
+              <th scope="col" class="text-center">Price</th>
+              <th scope="col" class="text-center">Total</th>
+              <th scope="col" class="text-center">Trend</th>
+              <th scope="col" class="text-center">Total Trend</th>
+              <th scope="col" class="text-end">Balance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let operation of operations; let i = index">
+              <th scope="row">
+                {{ operation.entryDate | date : "d MMM y" }}
+              </th>
+              <td class="text-center">
+                {{ operation.assetSell?.symbol }}/{{ operation.asset?.symbol }}
+              </td>
+              <td class="text-center">
+                {{ operation.entryQuantity }}
+                {{ operation.asset?.symbol }}
+              </td>
+              <td class="text-center">
+                {{ operation.entryPrice }}
+                {{ cryptoDashboard.currency }}
+              </td>
+              <td class="text-center">
+                {{ operation.entryPriceValue }}
+                {{ cryptoDashboard.currency }}
+              </td>
+              <th class="text-center" scope="row">
+                {{ operation.exitDate | date : "d MMM y" }}
+              </th>
+              <td class="text-center">
+                {{ operation.exitQuantity }}
+                {{ operation.assetSell?.symbol }}
+              </td>
+              <td class="text-center">
+                {{ operation.exitPrice }}
+                {{ cryptoDashboard.currency }}
+              </td>
+              <td class="text-center">
+                {{ operation.exitPriceValue }}
+                {{ cryptoDashboard.currency }}
+              </td>
+              <td
+                class="text-center {{
+                  operation.trend == 0
+                    ? 'text-warning'
+                    : operation.trend! > 0
+                    ? 'text-success'
+                    : 'text-danger'
+                }}"
+              >
+                {{ operation.trend }}
+                {{ cryptoDashboard.currency }}
+                ({{ operation.performance }}%)
+              </td>
+              <td
+                class="text-center {{
+                  operation.trend == 0
+                    ? 'text-warning'
+                    : operation.trend! > 0
+                    ? 'text-success'
+                    : 'text-danger'
+                }}"
+              >
+                {{ operation.trendSum }}
+                {{ cryptoDashboard.currency }}
+              </td>
+              <td
+                class="text-end {{
+                  operation.trend == 0
+                    ? 'text-warning'
+                    : operation.trend! > 0
+                    ? 'text-success'
+                    : 'text-danger'
+                }}"
+              >
+                {{ operation.balance }}
+                {{ cryptoDashboard.currency }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div
+          *ngIf="operations && operations.length == 0"
+          class="mx-auto text-center alert alert-danger mb-1"
+          role="alert"
+        >
+          {{ "crypto.resume.warning" | translate }}
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="col-md-12">
     <!-- History -->
     <div class="section mt-4">

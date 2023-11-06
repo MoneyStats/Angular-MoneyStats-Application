@@ -33,6 +33,7 @@ export class TradingResumeComponent implements OnInit, OnChanges {
   @Input('cryptoDashboard') cryptoDashboard: CryptoDashboard =
     new CryptoDashboard();
   @Input('wallets') wallets: Wallet[] = [];
+  operations: Array<Operation> = [];
 
   walletsFilter: Wallet[] = [];
 
@@ -73,12 +74,17 @@ export class TradingResumeComponent implements OnInit, OnChanges {
   }
 
   getOperations() {
+    let totalInvested: number = 0;
+
     let operations: Operation[] = [];
     let wallets = deepCopy(this.wallets);
     if (wallets)
       wallets.forEach((wallet) => {
         if (wallet.assets && wallet.assets.length > 0)
           wallet.assets.forEach((asset) => {
+            if (wallet.type == OperationsType.TRADING) {
+              totalInvested += asset.invested;
+            }
             if (asset.operations && asset.operations.length > 0) {
               asset.operations = asset.operations.filter(
                 (o) => o.type == OperationsType.TRADING
@@ -103,6 +109,7 @@ export class TradingResumeComponent implements OnInit, OnChanges {
       this.trading = this.charts.renderTradingOperations(operations, [200]);
     } else
       this.trading = this.charts.renderTradingOperations(operations, [350]);
+    this.getOperationTable(operations, totalInvested);
     return operations;
   }
 
@@ -112,5 +119,15 @@ export class TradingResumeComponent implements OnInit, OnChanges {
     this.router.navigate([
       '/crypto/operations/' + this.cryptoDashboard.currency + '/' + uuid,
     ]);
+  }
+
+  getOperationTable(operations: Array<Operation>, totalInvested: number) {
+    let balance = totalInvested;
+    let trendSum = 0;
+    this.operations = deepCopy(operations).filter((o) => o.status == 'CLOSED');
+    this.operations.forEach((o) => {
+      o.trendSum = parseFloat((trendSum += o.trend!).toFixed(2));
+      o.balance = parseFloat((balance += o.trend!).toFixed(2));
+    });
   }
 }

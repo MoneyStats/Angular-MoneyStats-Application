@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { ErrorService } from 'src/assets/core/interceptors/error.service';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { StatsService } from 'src/assets/core/services/stats.service';
 import { LoggerService } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
+import { SwalService } from 'src/assets/core/utils/swal.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -29,7 +31,8 @@ export class AddStatsComponent implements OnInit {
     private statsService: StatsService,
     private errorService: ErrorService,
     private router: Router,
-    private logger: LoggerService
+    private logger: LoggerService,
+    private swal: SwalService
   ) {}
 
   ngOnInit(): void {
@@ -79,12 +82,14 @@ export class AddStatsComponent implements OnInit {
     this.statsService.addStats(this.walletsToSave).subscribe((data) => {
       this.logger.LOG(data.message!, 'AddStatsComponent');
       this.walletsToSave = data.data;
+      this.swal.toastMessage(SwalIcon.SUCCESS, 'Stats Successfully Saved!');
     });
     this.getTodayAsString();
   }
 
   confirm() {
     let statsWalletDays = this.dashboardService.dashboard.statsWalletDays;
+    if (!statsWalletDays) statsWalletDays = [];
 
     this.walletsToSave.forEach((wallet) => {
       wallet = this.setWalletHighAndLow(wallet);
@@ -95,6 +100,8 @@ export class AddStatsComponent implements OnInit {
 
       wallet.newBalance = parseFloat('');
     });
+    if (!this.dashboardService.dashboard.statsWalletDays)
+      this.dashboardService.dashboard.statsWalletDays = [];
     this.dashboardService.dashboard.statsWalletDays.push(this.dateStats);
     this.dashboardService.dashboard.statsWalletDays.sort();
     this.saveValidation = true;
@@ -105,6 +112,7 @@ export class AddStatsComponent implements OnInit {
      * all'interno della lista di date e trovo l'indice della mia data
      */
     const days: any = [];
+
     statsWalletDays.forEach((d) => {
       days.push(d);
     });

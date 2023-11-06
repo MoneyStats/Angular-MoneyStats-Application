@@ -23,7 +23,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnChanges {
   @Input('user') user?: User;
   @Input() dashboard?: Dashboard;
   environment = environment;
@@ -32,6 +32,10 @@ export class HeaderComponent implements OnInit {
     private dashboardService: DashboardService,
     public userService: UserService
   ) {}
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    this.updateData();
+  }
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
