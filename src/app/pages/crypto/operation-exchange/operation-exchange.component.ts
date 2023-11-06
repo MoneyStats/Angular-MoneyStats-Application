@@ -261,7 +261,7 @@ export class OperationExchangeComponent implements OnInit {
     operation.entryPriceValue = this.investedMoney;
     //operation.entryQuantity = this.investedMoney;
     operation.entryQuantity = this.assetNewBalance;
-    operation.exitDate = assetToSave.lastUpdate;
+    operation.exitDate = new Date(assetToSave.lastUpdate);
     operation.exitCoin = assetToSave.symbol;
     operation.exitPrice = assetToSave.current_price;
     operation.exitPriceValue = this.investedMoney;
