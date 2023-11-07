@@ -36,6 +36,7 @@ export class TradingResumeComponent implements OnInit, OnChanges {
   operations: Array<Operation> = [];
 
   walletsFilter: Wallet[] = [];
+  invested: number = 0;
 
   constructor(
     public cryptoService: CryptoService,
@@ -125,9 +126,11 @@ export class TradingResumeComponent implements OnInit, OnChanges {
     let balance = totalInvested;
     let trendSum = 0;
     this.operations = deepCopy(operations).filter((o) => o.status == 'CLOSED');
-    this.operations.forEach((o) => {
+    this.operations.reverse().forEach((o) => {
       o.trendSum = parseFloat((trendSum += o.trend!).toFixed(2));
       o.balance = parseFloat((balance += o.trend!).toFixed(2));
     });
+    this.operations.reverse();
+    this.invested = totalInvested;
   }
 }

@@ -631,6 +631,23 @@
             "tab8": "Performance"
           }
         }
+      },
+      "trading": {
+        "table": {
+          "title": "Trading Performance, Saldo iniziale",
+          "tab1": "Data ingresso",
+          "tab2": "Scambio",
+          "tab3": "Quantità",
+          "tab4": "Prezzo",
+          "tab5": "Totale",
+          "tab6": "Data di uscita",
+          "tab7": "Quantità",
+          "tab8": "Prezzo",
+          "tab9": "Totale",
+          "tab10": "Trend",
+          "tab11": "Totale Trend",
+          "tab12": "Saldo"
+        }
       }
     },
     "operationExchange": {

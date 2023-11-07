@@ -31,24 +31,35 @@ export class CryptoDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.screenService.hideFooter();
-    this.cryptoDashboard = deepCopy(this.cryptoService.cryptoDashboard);
+
     let assets = [...this.cryptoService.assets];
     //let assets = deepCopy(this.cryptoDashboard.assets);
     this.route.params.subscribe((a: any) => {
       this.assetName = a.identifier;
       if (assets.length != 0) {
         this.asset = assets.find((as) => as.identifier == a.identifier)!;
-      } else {
-        this.cryptoService
-          .getCryptoDetails(a.identifier)
-          .subscribe((details) => {
-            this.logger.LOG(details.message!, 'CryptoDetailsComponent');
-            this.asset = details.data;
-            this.cryptoService.asset = details.data;
-          });
-      }
+      } else this.getCryptoDetails(a.identifier);
+
+      if (this.cryptoService.cryptoDashboard.balance != 0 && assets.length != 0)
+        this.cryptoDashboard = deepCopy(this.cryptoService.cryptoDashboard);
+      else this.getCryptoDashboard();
     });
     this.isWalletBalanceHidden();
+  }
+
+  getCryptoDetails(identifier: string) {
+    this.cryptoService.getCryptoDetails(identifier).subscribe((details) => {
+      this.logger.LOG(details.message!, 'CryptoDetailsComponent');
+      this.asset = details.data;
+      this.cryptoService.asset = details.data;
+    });
+  }
+
+  getCryptoDashboard() {
+    this.cryptoService.getCryptoDashboard().subscribe((data) => {
+      this.logger.LOG(data.message!, 'CryptoDetailsComponent');
+      this.cryptoDashboard = data.data;
+    });
   }
 
   isWalletBalanceHidden() {
