@@ -631,6 +631,23 @@
             "tab8": "Performance"
           }
         }
+      },
+      "trading": {
+        "table": {
+          "title": "Trading Performance, Initial Balance",
+          "tab1": "Ingress Date",
+          "tab2": "Coins Exchange",
+          "tab3": "Quantity",
+          "tab4": "Price",
+          "tab5": "Total",
+          "tab6": "Exit Date",
+          "tab7": "Quantity",
+          "tab8": "Price",
+          "tab9": "Total",
+          "tab10": "Trend",
+          "tab11": "Total Trend",
+          "tab12": "Balance"
+        }
       }
     },
     "operationExchange": {

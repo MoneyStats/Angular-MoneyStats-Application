@@ -200,6 +200,7 @@ export class AddWalletComponent implements OnInit, OnChanges {
     this.isNewWallet = true;
   }
 
+  //@HostListener('document:click', ['$event', '$event.target'])
   resetForm() {
     this.walletName = '';
     this.isNewWallet = false;

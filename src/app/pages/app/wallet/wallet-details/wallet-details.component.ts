@@ -5,9 +5,13 @@ import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { ChartService } from 'src/assets/core/utils/chart.service';
 import { WalletService } from 'src/assets/core/services/wallet.service';
-import { ModalConstant } from 'src/assets/core/data/constant/constant';
+import {
+  ModalConstant,
+  StorageConstant,
+} from 'src/assets/core/data/constant/constant';
 import { environment } from 'src/environments/environment';
 import { ToastService } from 'src/assets/core/utils/toast.service';
+import { AppService } from 'src/assets/core/services/app.service';
 
 @Component({
   selector: 'app-wallet-details',
@@ -15,6 +19,8 @@ import { ToastService } from 'src/assets/core/utils/toast.service';
   styleUrls: ['./wallet-details.component.scss'],
 })
 export class WalletDetailsComponent implements OnInit {
+  amount: string = '******';
+  hidden: boolean = false;
   environment = environment;
   public chartAll?: Partial<ApexOptions>;
   public chart1Y?: Partial<ApexOptions>;
@@ -35,12 +41,17 @@ export class WalletDetailsComponent implements OnInit {
   wallet?: Wallet;
   walletName?: string;
   walletId?: number;
+
+  // Crypto Asset
+  showZeroBalance: boolean = false;
+
   constructor(
     public screenService: ScreenService,
     private route: ActivatedRoute,
     private charts: ChartService,
     public walletService: WalletService,
-    private toast: ToastService
+    private toast: ToastService,
+    public appService: AppService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -78,6 +89,7 @@ export class WalletDetailsComponent implements OnInit {
     this.renderImage();
     this.walletService.walletHistory = this.wallet;
     this.coinSymbol = this.walletService.coinSymbol;
+    this.isWalletBalanceHidden();
   }
   renderImage() {
     if (this.screenService!.screenWidth! <= 780) {
@@ -216,5 +228,21 @@ export class WalletDetailsComponent implements OnInit {
       .then()
       .catch((e) => console.error(e));*/
     this.toast.copiedAvaiable();
+  }
+
+  // Crypto
+  zeroBalanceSwitch() {
+    return this.showZeroBalance
+      ? (this.showZeroBalance = false)
+      : (this.showZeroBalance = true);
+  }
+
+  isWalletBalanceHidden() {
+    let isHidden = JSON.parse(
+      localStorage.getItem(StorageConstant.HIDDENAMOUNT)!
+    );
+    if (isHidden != null) {
+      this.hidden = isHidden;
+    }
   }
 }
