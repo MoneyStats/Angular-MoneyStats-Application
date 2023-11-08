@@ -19,6 +19,7 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
 import { environment } from 'src/environments/environment';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
+import { fadeAnimation, fadeSlider } from 'src/app/shared/animations/route-animations';
 
 @Component({
   selector: 'app-dashboard',
