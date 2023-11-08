@@ -8,6 +8,7 @@ import { CryptoDetailsComponent } from './crypto-asset/crypto-details/crypto-det
 import { CryptoResumeComponent } from './crypto-resume/crypto-resume.component';
 import { OperationExchangeComponent } from './operation-exchange/operation-exchange.component';
 import { OperationsComponent } from './operations/operations.component';
+import { fadeSlider } from 'src/app/shared/animations/route-animations';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
       {
         path: 'requirements',
         component: RequirementsComponent,
+        data: { animation: fadeSlider },
       },
       {
         path: 'asset',
@@ -29,18 +31,22 @@ const routes: Routes = [
       {
         path: 'asset/details/:identifier',
         component: CryptoDetailsComponent,
+        data: { animation: fadeSlider },
       },
       {
         path: 'resume',
         component: CryptoResumeComponent,
+        data: { animation: fadeSlider },
       },
       {
         path: 'operation/:operationType/:wallet/:fiat',
         component: OperationExchangeComponent,
+        data: { animation: fadeSlider },
       },
       {
         path: 'operations/:currency/:uuid',
         component: OperationsComponent,
+        data: { animation: fadeSlider },
       },
     ],
   },

@@ -87,6 +87,7 @@ export class CategoryComponent implements OnInit, OnChanges {
     // INVESTMENTS
     this.categoryTableBalance = [];
     this.totalList = [];
+    this.balances = [];
 
     let table = this.dashboard.wallets.filter((wallet) =>
       this.INVESTMENTS.includes(wallet.category)
@@ -105,6 +106,7 @@ export class CategoryComponent implements OnInit, OnChanges {
     // CAPITAL
     this.categoryTableBalance = [];
     this.totalList = [];
+    this.balances = [];
 
     table = this.dashboard.wallets.filter((wallet) =>
       this.CAPITAL.includes(wallet.category)
@@ -123,6 +125,7 @@ export class CategoryComponent implements OnInit, OnChanges {
     // SAVING
     this.categoryTableBalance = [];
     this.totalList = [];
+    this.balances = [];
 
     table = this.dashboard.wallets.filter((wallet) =>
       this.SAVING.includes(wallet.category)
@@ -141,6 +144,7 @@ export class CategoryComponent implements OnInit, OnChanges {
     // DEBITS
     this.categoryTableBalance = [];
     this.totalList = [];
+    this.balances = [];
 
     table = this.dashboard.wallets.filter((wallet) =>
       this.DEBITS.includes(wallet.category)
@@ -159,6 +163,7 @@ export class CategoryComponent implements OnInit, OnChanges {
     // OTHER
     this.categoryTableBalance = [];
     this.totalList = [];
+    this.balances = [];
 
     table = this.dashboard.wallets.filter((wallet) =>
       this.OTHER.includes(wallet.category)
@@ -207,10 +212,11 @@ export class CategoryComponent implements OnInit, OnChanges {
       (total.balance - this.balances[this.balances.length - 1]).toFixed(2)
     );
     total.percentage = parseFloat(percentage);
+    total.trend = trend;
     if (total.percentage === Infinity || Number.isNaN(total.percentage)) {
       total.percentage = 0;
+      total.trend = 0;
     }
-    total.trend = trend;
     array.push(total);
     this.totalList.push(total);
     this.balances.push(total.balance);

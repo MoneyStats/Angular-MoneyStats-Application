@@ -1,6 +1,11 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { ChildrenOutletContexts, RouterOutlet } from '@angular/router';
-import { fader, slideUp } from 'src/app/shared/animations/route-animations';
+import {
+  fadeAnimation,
+  fadeSlider,
+  fader,
+  slideUp,
+} from 'src/app/shared/animations/route-animations';
 import { User } from 'src/assets/core/data/class/user.class';
 import { UserService } from 'src/assets/core/services/user.service';
 
@@ -10,8 +15,9 @@ import { UserService } from 'src/assets/core/services/user.service';
   styleUrls: ['./app.pages.component.scss'],
   animations: [
     // <-- add your animations here
-    fader,
-    slideUp,
+    //fader,
+    //slideUp,
+    fadeSlider,
   ],
 })
 export class AppPagesComponent implements OnInit {

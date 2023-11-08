@@ -1,5 +1,7 @@
 <app-loading></app-loading>
-<router-outlet></router-outlet>
+<div [@routeAnimations]="getRouteAnimationData()" >
+  <router-outlet></router-outlet>
+</div>
 <!--<app-footer *ngIf="isFooterActive" [isCrypto]="true"></app-footer>-->
 <div *ngIf="isFooterActive" id="footer" class="appBottomMenu mx-auto">
   <a routerLink="/crypto/resume" class="item" (click)="vibrate()">

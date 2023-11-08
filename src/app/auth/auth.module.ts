@@ -14,7 +14,6 @@ import { RegisterComponent } from './register/register.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { InterceptorsModule } from '../interceptors/interceptors.module';
 import { AuthRoutingModule } from './auth-routing.module';
-import { SharedModule } from '../shared/components/shared/shared.module';
 import { AppComponentsModule } from '../shared/components/app/app-components.module';
 
 @NgModule({

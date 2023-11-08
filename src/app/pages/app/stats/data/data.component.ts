@@ -51,7 +51,7 @@ export class DataComponent implements OnInit, OnChanges {
         }
       });
       moreThanOneInAMonth.forEach((date, index) => {
-        this.tableBalance.push(this.tableColumsCreate(date, index));
+        this.tableBalance.push(this.tableColumsCreateRefactor(date, index));
       });
       //this.dashboard.statsWalletDays = moreThanOneInAMonth;
       this.renderChart();
@@ -73,6 +73,12 @@ export class DataComponent implements OnInit, OnChanges {
     return new Date().getFullYear().toString();
   }
 
+  /**
+   * @deprecated
+   * @param date
+   * @param index
+   * @returns
+   */
   tableColumsCreate(date: string, index: number) {
     let array: any = [];
 
@@ -106,6 +112,66 @@ export class DataComponent implements OnInit, OnChanges {
           history.percentage = 0;
           history.trend = 0;
         }
+        if (index === this.dashboard.wallets.length - 1) {
+          this.filterDateHistory.push(history.date.toString());
+        }
+      }
+      array.push(history);
+    });
+    let total: Stats = new Stats();
+    total.balance = 0;
+    total.date = new Date(date);
+    array.forEach((h: any) => {
+      if (h && h.balance != undefined && h.balance) {
+        total.balance = parseFloat((total.balance + h.balance).toFixed(2));
+      }
+    });
+    let percentage = (
+      ((total.balance - this.balances[this.balances.length - 1]) /
+        this.balances[this.balances.length - 1]) *
+      100
+    ).toFixed(2);
+    total.percentage = parseFloat(percentage);
+
+    if (
+      total.percentage === Infinity ||
+      Number.isNaN(total.percentage) ||
+      index == 0
+    ) {
+      total.percentage = 0;
+    }
+
+    let trendStats: Stats = new Stats();
+    let trend = (
+      total.balance - this.balances[this.balances.length - 1]
+    ).toFixed(2);
+    trendStats.balance = parseFloat(trend);
+
+    if (Number.isNaN(trendStats.balance)) {
+      trendStats.balance = 0;
+    }
+
+    array.push(total);
+    array.push(trendStats);
+    this.balances.push(total.balance);
+    array.index = array.length - 1;
+    return array;
+  }
+
+  tableColumsCreateRefactor(date: string, index: number) {
+    let array: any = [];
+
+    this.dashboard.wallets.forEach((w, index) => {
+      let history = w.history
+        ? w.history.find((h) => h.date.toString() === date)
+        : undefined;
+      if (!history) {
+        history = new Stats();
+        history.balance = 0;
+        history.date = new Date(date);
+        history.percentage = 0;
+        history.trend = 0;
+      } else {
         if (index === this.dashboard.wallets.length - 1) {
           this.filterDateHistory.push(history.date.toString());
         }

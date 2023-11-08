@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChildrenOutletContexts, Router } from '@angular/router';
+import { fadeSlider } from 'src/app/shared/animations/route-animations';
 import { CryptoDashboard } from 'src/assets/core/data/class/crypto.class';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
@@ -12,6 +13,7 @@ import { environment } from 'src/environments/environment';
   selector: 'app-crypto',
   templateUrl: './crypto.component.html',
   styleUrls: ['./crypto.component.scss'],
+  animations: [fadeSlider],
 })
 export class CryptoComponent implements OnInit {
   environment = environment;
@@ -19,7 +21,8 @@ export class CryptoComponent implements OnInit {
   constructor(
     private router: Router,
     private appService: AppService,
-    private cryptoService: CryptoService
+    private cryptoService: CryptoService,
+    private contexts: ChildrenOutletContexts
   ) {
     router.events.subscribe((data: any) => {
       if (data.url == '/crypto/requirements') {
@@ -62,5 +65,11 @@ export class CryptoComponent implements OnInit {
 
   vibrate() {
     this.appService.vibrate();
+  }
+
+  getRouteAnimationData() {
+    return this.contexts.getContext('primary')?.route?.snapshot?.data?.[
+      'animation'
+    ];
   }
 }

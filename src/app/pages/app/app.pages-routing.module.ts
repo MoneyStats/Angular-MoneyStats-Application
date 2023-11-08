@@ -4,7 +4,11 @@ import { AppPagesComponent } from './app.pages.component';
 import { RouteGuardService } from 'src/app/auth/route-guard.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TransactionsComponent } from './transactions/transactions.component';
-import { fader, slideUp } from 'src/app/shared/animations/route-animations';
+import {
+  fadeSlider,
+  fader,
+  slideUp,
+} from 'src/app/shared/animations/route-animations';
 import { TransactionDetailsComponent } from './transactions/transaction-details/transaction-details.component';
 import { WalletComponent } from './wallet/wallet.component';
 import { WalletDetailsComponent } from './wallet/wallet-details/wallet-details.component';
@@ -27,46 +31,54 @@ const routes: Routes = [
       {
         path: 'transaction',
         component: TransactionsComponent,
-        data: { animation: fader },
+        data: { animation: fadeSlider },
+        //data: { animation: fader },
       },
       {
         path: 'transaction/details/:id/:wallet',
         component: TransactionDetailsComponent,
-        data: { animation: slideUp },
+        data: { animation: fadeSlider },
+        //data: { animation: slideUp },
       },
       {
         path: 'wallet',
         component: WalletComponent,
-        data: { animation: fader },
+        //data: { animation: fader },
       },
       {
         path: 'wallet/details/:id/:wallet',
         component: WalletDetailsComponent,
-        data: { animation: slideUp },
+        data: { animation: fadeSlider },
+        //data: { animation: slideUp },
       },
       {
         path: 'wallet/details/:id/:wallet/history',
         component: WalletHistoryComponent,
-        data: { animation: fader },
+        data: { animation: fadeSlider },
+        //data: { animation: fader },
       },
       {
         path: 'settings',
         component: SettingsComponent,
-        data: { animation: fader },
+        data: { animation: fadeSlider },
+        //data: { animation: fader },
       },
       {
         path: 'stats',
         component: StatsComponent,
-        data: { animation: fader },
+        data: { animation: fadeSlider },
+        //data: { animation: fader },
       },
       {
         path: 'stats/insert',
         component: AddStatsComponent,
-        data: { animation: fader },
+        data: { animation: fadeSlider },
+        //data: { animation: fader },
       },
       {
         path: 'support',
         component: SupportComponent,
+        data: { animation: fadeSlider },
       },
     ],
   },
