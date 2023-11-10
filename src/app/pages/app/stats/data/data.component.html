@@ -74,7 +74,16 @@
       [footer]="'dashboard.graph.nodata.footer' | translate"
     ></app-content-box>
     <div *ngIf="dashboard.statsWalletDays" class="card border_round">
-      <div class="inner-round">
+      <div class="inner-round" style="height: 380px">
+        <div
+          *ngIf="!chartOptions"
+          class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
+        >
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
         <apx-chart
           *ngIf="chartOptions"
           [series]="chartOptions.series!"
@@ -104,7 +113,16 @@
       [footer]="'dashboard.graph.nodata.footer' | translate"
     ></app-content-box>
     <div *ngIf="dashboard.statsWalletDays" class="card border_round">
-      <div class="card-body">
+      <div class="card-body" style="min-height: 345px">
+        <div
+          *ngIf="!chartPie"
+          class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
+        >
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
         <apx-chart
           *ngIf="chartPie"
           [series]="chartPie.series!"
@@ -206,7 +224,16 @@
       [footer]="'dashboard.graph.nodata.footer' | translate"
     ></app-content-box>
     <div *ngIf="dashboard.statsWalletDays" class="card border_round">
-      <div class="card-body">
+      <div class="card-body" style="min-height: 400px">
+        <div
+          *ngIf="!chartBar"
+          class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
+        >
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
         <apx-chart
           *ngIf="chartBar"
           [series]="chartBar.series!"

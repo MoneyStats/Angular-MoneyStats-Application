@@ -66,7 +66,7 @@ export class DataComponent implements OnInit, OnChanges {
         this.dashboard.statsWalletDays,
         this.balances
       );
-    }, 100);
+    }, 500);
   }
 
   currentYear(): string {

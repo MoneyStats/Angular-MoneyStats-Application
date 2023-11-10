@@ -20,6 +20,8 @@ import {
   OperationsType,
 } from 'src/assets/core/data/constant/constant';
 import { LoggerService } from 'src/assets/core/utils/log.service';
+import { ChartJSOptions } from 'src/assets/core/data/constant/apex.chart';
+import { ChartJSService } from 'src/assets/core/utils/chartjs.service';
 
 @Component({
   selector: 'app-investments-history',
@@ -42,10 +44,13 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
   operations: Operation[] = [];
   operationSelect?: Operation;
 
+  public lineChartJS?: ChartJSOptions = new ChartJSOptions();
+
   constructor(
     public cryptoService: CryptoService,
     private router: Router,
-    private logger: LoggerService
+    private logger: LoggerService,
+    private chartsJS: ChartJSService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -75,6 +80,13 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
       this.tableBalance.push(this.tableCreate(key, value));
     });
     this.totalMap.set('History', this.totalList);
+    this.renderChart();
+  }
+
+  renderChart() {
+    setTimeout(() => {
+      this.lineChartJS = this.chartsJS.renderChartLine(this.totalMap);
+    }, 500);
   }
 
   /**

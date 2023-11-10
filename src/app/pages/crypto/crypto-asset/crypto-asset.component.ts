@@ -59,82 +59,89 @@ export class CryptoAssetComponent implements OnInit {
   }
 
   graphAll() {
-    let dashboard = deepCopy(this.cryptoDashboard);
-    // Get All Date serve a prendere tutte le date per i grafici
-    dashboard.statsAssetsDays = this.getAllDate();
-    setTimeout(() => {
-      if (this.cryptoDashboard.wallets) {
-        if (this.screenService?.screenWidth! <= 780) {
-          this.chartOptions = this.charts.renderCryptoDatas(dashboard, [
-            200,
-            true,
-          ]);
-        } else
-          this.chartOptions = this.charts.renderCryptoDatas(dashboard, [
-            350,
-            true,
-          ]);
-      }
-    }, 100);
+    if (!this.chartOptions) {
+      let dashboard = deepCopy(this.cryptoDashboard);
+      // Get All Date serve a prendere tutte le date per i grafici
+      dashboard.statsAssetsDays = this.getAllDate();
+      setTimeout(() => {
+        if (this.cryptoDashboard.wallets) {
+          if (this.screenService?.screenWidth! <= 780) {
+            this.chartOptions = this.charts.renderCryptoDatas(dashboard, [
+              200,
+              true,
+            ]);
+          } else
+            this.chartOptions = this.charts.renderCryptoDatas(dashboard, [
+              350,
+              true,
+            ]);
+        }
+      }, 500);
+    }
   }
 
   graph1Y() {
-    let dashboard = deepCopy(this.cryptoDashboard);
-    // Get All Date serve a prendere tutte le date per i grafici
-    dashboard.statsAssetsDays = this.getAllDate();
+    if (!this.chart1Y) {
+      let dashboard = deepCopy(this.cryptoDashboard);
+      // Get All Date serve a prendere tutte le date per i grafici
+      dashboard.statsAssetsDays = this.getAllDate();
 
-    let assets: Asset[] = [];
-    dashboard.assets.forEach((asset) => {
-      let last1Year = asset.history?.filter(
-        (h) =>
-          h.date.toString().split('-')[0] ===
-          new Date().getFullYear().toString()
-      );
-      asset.history = last1Year;
-      if (asset.balance != 0) assets.push(asset);
-    });
-    dashboard.assets = assets;
-    if (dashboard.statsAssetsDays)
-      dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter(
-        (s) =>
-          s.toString().split('-')[0] === new Date().getFullYear().toString()
-      );
-    setTimeout(() => {
-      if (this.screenService?.screenWidth! <= 780)
-        this.chart1Y = this.charts.renderCryptoDatas(dashboard, [200, false]);
-      else
-        this.chart1Y = this.charts.renderCryptoDatas(dashboard, [350, false]);
-    }, 200);
+      let assets: Asset[] = [];
+      dashboard.assets.forEach((asset) => {
+        let last1Year = asset.history?.filter(
+          (h) =>
+            h.date.toString().split('-')[0] ===
+            new Date().getFullYear().toString()
+        );
+        asset.history = last1Year;
+        if (asset.balance != 0) assets.push(asset);
+      });
+      dashboard.assets = assets;
+      if (dashboard.statsAssetsDays)
+        dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter(
+          (s) =>
+            s.toString().split('-')[0] === new Date().getFullYear().toString()
+        );
+      setTimeout(() => {
+        if (this.screenService?.screenWidth! <= 780)
+          this.chart1Y = this.charts.renderCryptoDatas(dashboard, [200, false]);
+        else
+          this.chart1Y = this.charts.renderCryptoDatas(dashboard, [350, false]);
+      }, 500);
+    }
   }
 
   graph3Y() {
-    let dashboard = deepCopy(this.cryptoDashboard);
-    // Get All Date serve a prendere tutte le date per i grafici
-    dashboard.statsAssetsDays = this.getAllDate();
-    let last3 = [
-      new Date().getFullYear().toString(),
-      (new Date().getFullYear() - 1).toString(),
-      (new Date().getFullYear() - 2).toString(),
-    ];
-    let assets: Asset[] = [];
-    dashboard.assets.forEach((asset, index) => {
-      let last3Hist = asset.history?.filter((h) =>
-        last3.includes(h.date.toString().split('-')[0])
-      );
-      asset.history = last3Hist;
+    if (!this.chart3Y) {
+      let dashboard = deepCopy(this.cryptoDashboard);
+      // Get All Date serve a prendere tutte le date per i grafici
+      dashboard.statsAssetsDays = this.getAllDate();
+      let last3 = [
+        new Date().getFullYear().toString(),
+        (new Date().getFullYear() - 1).toString(),
+        (new Date().getFullYear() - 2).toString(),
+      ];
+      let assets: Asset[] = [];
+      dashboard.assets.forEach((asset, index) => {
+        let last3Hist = asset.history?.filter((h) =>
+          last3.includes(h.date.toString().split('-')[0])
+        );
+        asset.history = last3Hist;
 
-      if (last3Hist?.length != 0) assets.push(asset);
-    });
-    dashboard.assets = assets;
-    if (dashboard.statsAssetsDays)
-      dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter((s) =>
-        last3.includes(s.toString().split('-')[0])
-      );
-    setTimeout(() => {
-      if (this.screenService?.screenWidth! <= 780)
-        this.chart3Y = this.charts.renderCryptoDatas(dashboard, [200, true]);
-      else this.chart3Y = this.charts.renderCryptoDatas(dashboard, [350, true]);
-    }, 200);
+        if (last3Hist?.length != 0) assets.push(asset);
+      });
+      dashboard.assets = assets;
+      if (dashboard.statsAssetsDays)
+        dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter((s) =>
+          last3.includes(s.toString().split('-')[0])
+        );
+      setTimeout(() => {
+        if (this.screenService?.screenWidth! <= 780)
+          this.chart3Y = this.charts.renderCryptoDatas(dashboard, [200, true]);
+        else
+          this.chart3Y = this.charts.renderCryptoDatas(dashboard, [350, true]);
+      }, 500);
+    }
   }
 
   zeroBalanceSwitch() {

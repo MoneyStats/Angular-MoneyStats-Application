@@ -95,7 +95,16 @@
           [footer]="'dashboard.graph.nodata.footer' | translate"
         ></app-content-box>
         <div *ngIf="resume" class="card border_round">
-          <div class="card-body">
+          <div class="card-body" style="min-height: 380px">
+            <div
+              *ngIf="!lineChartJS"
+              class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
+            >
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
             <canvas
               baseChart
               height="400"
