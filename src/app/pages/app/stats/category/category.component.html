@@ -184,7 +184,16 @@
         </div>
 
         <div class="card border_round">
-          <div class="card-body mx-auto">
+          <div class="card-body mx-auto" style="min-height: 400px">
+            <div
+              *ngIf="!lineChartJS"
+              class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
+            >
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
             <canvas
               baseChart
               height="{{

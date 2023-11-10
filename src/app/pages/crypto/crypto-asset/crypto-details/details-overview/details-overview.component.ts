@@ -115,90 +115,103 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
 
   graphAll() {
     this.setColor();
-    let dashboard: CryptoDashboard = deepCopy(this.cryptoDashboard);
-    dashboard.assets = [
-      this.asset.name == undefined
-        ? deepCopy(this.cryptoService.asset!)
-        : deepCopy(this.asset),
-    ];
-    // Get All Date serve a prendere tutte le date per i grafici
-    dashboard.statsAssetsDays = this.getAllDate(dashboard.assets);
-    setTimeout(() => {
-      if (this.cryptoDashboard.wallets) {
-        if (this.screenService?.screenWidth! <= 780) {
-          this.chartOptions = this.charts.renderCryptoDatas(dashboard, [
-            200,
-            true,
-          ]);
-        } else
-          this.chartOptions = this.charts.renderCryptoDatas(dashboard, [
-            350,
-            true,
-          ]);
-      }
-    }, 100);
+    if (!this.chartOptions) {
+      let dashboard: CryptoDashboard = deepCopy(this.cryptoDashboard);
+      dashboard.assets = [
+        this.asset.name == undefined
+          ? deepCopy(this.cryptoService.asset!)
+          : deepCopy(this.asset),
+      ];
+      // Get All Date serve a prendere tutte le date per i grafici
+      dashboard.statsAssetsDays = this.getAllDate(dashboard.assets);
+      setTimeout(() => {
+        if (this.cryptoDashboard.wallets) {
+          if (this.screenService?.screenWidth! <= 780) {
+            this.chartOptions = this.charts.renderCryptoDatas(dashboard, [
+              200,
+              true,
+            ]);
+          } else
+            this.chartOptions = this.charts.renderCryptoDatas(dashboard, [
+              350,
+              true,
+            ]);
+        }
+      }, 500);
+    }
   }
 
   graph1Y() {
     this.setColor();
-    let dashboard: CryptoDashboard = deepCopy(this.cryptoDashboard);
-    dashboard.assets = [
-      this.asset.name == undefined
-        ? deepCopy(this.cryptoService.asset!)
-        : deepCopy(this.asset),
-    ];
-    // Get All Date serve a prendere tutte le date per i grafici
-    dashboard.statsAssetsDays = this.getAllDate(dashboard.assets);
-    if (dashboard.assets[0]) {
-      dashboard.assets[0].history = dashboard.assets[0].history?.filter(
-        (h) =>
-          h.date.toString().split('-')[0] ===
-          new Date().getFullYear().toString()
-      );
-      if (dashboard.statsAssetsDays)
-        dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter(
-          (s) =>
-            s.toString().split('-')[0] === new Date().getFullYear().toString()
+    if (!this.chart1Y) {
+      let dashboard: CryptoDashboard = deepCopy(this.cryptoDashboard);
+      dashboard.assets = [
+        this.asset.name == undefined
+          ? deepCopy(this.cryptoService.asset!)
+          : deepCopy(this.asset),
+      ];
+      // Get All Date serve a prendere tutte le date per i grafici
+      dashboard.statsAssetsDays = this.getAllDate(dashboard.assets);
+      if (dashboard.assets[0]) {
+        dashboard.assets[0].history = dashboard.assets[0].history?.filter(
+          (h) =>
+            h.date.toString().split('-')[0] ===
+            new Date().getFullYear().toString()
         );
-      setTimeout(() => {
-        if (this.screenService?.screenWidth! <= 780)
-          this.chart1Y = this.charts.renderCryptoDatas(dashboard, [200, false]);
-        else
-          this.chart1Y = this.charts.renderCryptoDatas(dashboard, [350, false]);
-      }, 200);
+        if (dashboard.statsAssetsDays)
+          dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter(
+            (s) =>
+              s.toString().split('-')[0] === new Date().getFullYear().toString()
+          );
+        setTimeout(() => {
+          if (this.screenService?.screenWidth! <= 780)
+            this.chart1Y = this.charts.renderCryptoDatas(dashboard, [
+              200,
+              false,
+            ]);
+          else
+            this.chart1Y = this.charts.renderCryptoDatas(dashboard, [
+              350,
+              false,
+            ]);
+        }, 500);
+      }
     }
   }
 
   graph3Y() {
     this.setColor();
-    let dashboard: CryptoDashboard = deepCopy(this.cryptoDashboard);
+    if (!this.chart3Y) {
+      let dashboard: CryptoDashboard = deepCopy(this.cryptoDashboard);
 
-    dashboard.assets = [
-      this.asset.name == undefined
-        ? deepCopy(this.cryptoService.asset!)
-        : deepCopy(this.asset),
-    ];
-    // Get All Date serve a prendere tutte le date per i grafici
-    dashboard.statsAssetsDays = this.getAllDate(dashboard.assets);
-    let last3 = [
-      new Date().getFullYear().toString(),
-      (new Date().getFullYear() - 1).toString(),
-      (new Date().getFullYear() - 2).toString(),
-    ];
-    let last3Years = dashboard.assets[0].history?.filter((h) =>
-      last3.includes(h.date.toString().split('-')[0])
-    );
-    dashboard.assets[0].history = last3Years;
-
-    if (dashboard.statsAssetsDays)
-      dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter((s) =>
-        last3.includes(s.toString().split('-')[0])
+      dashboard.assets = [
+        this.asset.name == undefined
+          ? deepCopy(this.cryptoService.asset!)
+          : deepCopy(this.asset),
+      ];
+      // Get All Date serve a prendere tutte le date per i grafici
+      dashboard.statsAssetsDays = this.getAllDate(dashboard.assets);
+      let last3 = [
+        new Date().getFullYear().toString(),
+        (new Date().getFullYear() - 1).toString(),
+        (new Date().getFullYear() - 2).toString(),
+      ];
+      let last3Years = dashboard.assets[0].history?.filter((h) =>
+        last3.includes(h.date.toString().split('-')[0])
       );
-    setTimeout(() => {
-      if (this.screenService?.screenWidth! <= 780)
-        this.chart3Y = this.charts.renderCryptoDatas(dashboard, [200, true]);
-      else this.chart3Y = this.charts.renderCryptoDatas(dashboard, [350, true]);
-    }, 200);
+      dashboard.assets[0].history = last3Years;
+
+      if (dashboard.statsAssetsDays)
+        dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter((s) =>
+          last3.includes(s.toString().split('-')[0])
+        );
+      setTimeout(() => {
+        if (this.screenService?.screenWidth! <= 780)
+          this.chart3Y = this.charts.renderCryptoDatas(dashboard, [200, true]);
+        else
+          this.chart3Y = this.charts.renderCryptoDatas(dashboard, [350, true]);
+      }, 500);
+    }
   }
 
   percentageAssetInTotal(): number {

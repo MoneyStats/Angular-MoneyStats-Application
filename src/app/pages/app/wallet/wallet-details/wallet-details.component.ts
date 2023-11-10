@@ -98,42 +98,49 @@ export class WalletDetailsComponent implements OnInit {
     }
   }
   renderGraph() {
-    setTimeout(() => {
-      this.chartAll = this.charts.renderChartWallet(
-        this.wallet?.name!,
-        this.wallet?.history!
-      );
-    }, 100);
+    if (!this.chartAll) {
+      setTimeout(() => {
+        this.chartAll = this.charts.renderChartWallet(
+          this.wallet?.name!,
+          this.wallet?.history!
+        );
+      }, 500);
+    }
   }
 
   graph1Y() {
-    let lastYear = this.wallet?.history.filter(
-      (h) =>
-        h.date.toString().split('-')[0] === new Date().getFullYear().toString()
-    );
-    setTimeout(() => {
-      this.chart1Y = this.charts.renderChartWallet(
-        this.wallet?.name!,
-        lastYear!
+    if (!this.chart1Y) {
+      let lastYear = this.wallet?.history.filter(
+        (h) =>
+          h.date.toString().split('-')[0] ===
+          new Date().getFullYear().toString()
       );
-    }, 200);
+      setTimeout(() => {
+        this.chart1Y = this.charts.renderChartWallet(
+          this.wallet?.name!,
+          lastYear!
+        );
+      }, 500);
+    }
   }
 
   graph3Y() {
-    let last3 = [
-      new Date().getFullYear().toString(),
-      (new Date().getFullYear() - 1).toString(),
-      (new Date().getFullYear() - 2).toString(),
-    ];
-    let last3Year = this.wallet?.history.filter((h) =>
-      last3.includes(h.date.toString().split('-')[0])
-    );
-    setTimeout(() => {
-      this.chart3Y = this.charts.renderChartWallet(
-        this.wallet?.name!,
-        last3Year!
+    if (!this.chart3Y) {
+      let last3 = [
+        new Date().getFullYear().toString(),
+        (new Date().getFullYear() - 1).toString(),
+        (new Date().getFullYear() - 2).toString(),
+      ];
+      let last3Year = this.wallet?.history.filter((h) =>
+        last3.includes(h.date.toString().split('-')[0])
       );
-    }, 200);
+      setTimeout(() => {
+        this.chart3Y = this.charts.renderChartWallet(
+          this.wallet?.name!,
+          last3Year!
+        );
+      }, 500);
+    }
   }
 
   percentageWalletInTotal(): number {

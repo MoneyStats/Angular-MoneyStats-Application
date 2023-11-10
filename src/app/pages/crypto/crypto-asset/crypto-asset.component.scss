@@ -17,6 +17,9 @@
       margin-right: -20px !important;
     }
   }
+  .inner-round {
+    min-height: 200px;
+  }
 }
 
 .transactions {
@@ -45,4 +48,6 @@
   border-radius: 20px;
 }
 
-
+.inner-round {
+  min-height: 350px;
+}

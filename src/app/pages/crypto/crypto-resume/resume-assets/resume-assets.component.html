@@ -209,6 +209,15 @@
       {{ "crypto.resume.graphAsset" | translate }}
     </div>
     <div class="card inner-round border_round">
+      <div
+        *ngIf="!chartOptions"
+        class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
+      >
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
       <apx-chart
         *ngIf="chartOptions"
         [series]="chartOptions.series!"

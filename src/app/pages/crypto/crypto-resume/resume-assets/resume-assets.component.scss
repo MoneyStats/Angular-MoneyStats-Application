@@ -6,6 +6,9 @@
   .mobile-size {
     margin-bottom: -15px;
   }
+  .inner-round {
+    min-height: 200px;
+  }
 }
 .icon-shape {
   display: inline-flex;
@@ -38,4 +41,8 @@
   align-items: center;
   justify-content: center;
   margin-right: 5px;
+}
+
+.inner-round {
+  min-height: 350px;
 }

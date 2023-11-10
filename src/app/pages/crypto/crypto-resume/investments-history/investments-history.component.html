@@ -179,6 +179,49 @@
       </div>
     </div>
   </div>
+  <!-- Graph -->
+  <div hidden class="section mt-4 col-xl-8 col-md-7">
+    <div class="section-heading">
+      <h2 class="title" id="year">
+        {{ "stats.data.graphHistory" | translate }}
+      </h2>
+    </div>
+    <div *ngIf="cryptoResume" class="card border_round">
+      <div class="card-body" style="min-height: 380px">
+        <div
+          *ngIf="!lineChartJS"
+          class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
+        >
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <canvas
+          baseChart
+          height="400"
+          [type]="'line'"
+          [data]="lineChartJS!.lineChartData"
+          [options]="lineChartJS!.lineChartOptions"
+          [legend]="lineChartJS!.lineChartLegend"
+        >
+        </canvas>
+        <!--<apx-chart
+      *ngIf="chartOptions"
+      [series]="chartOptions.series!"
+      [chart]="chartOptions.chart!"
+      [title]="chartOptions.title!"
+      [colors]="chartOptions.colors!"
+      [legend]="chartOptions.legend!"
+      [stroke]="chartOptions.stroke!"
+      [labels]="chartOptions.labels!"
+      type="area"
+    ></apx-chart>
+    <div id="chart-line"></div>-->
+      </div>
+    </div>
+  </div>
+  <!-- * Graph -->
   <div class="section mb-3 col-md-12" *ngIf="isOperationPresent">
     <!-- History -->
     <div class="section mt-4">

@@ -140,7 +140,16 @@
             <!-- tab content -->
             <div class="tab-content">
               <div class="tab-pane fade" id="tab-1y" role="tabpanel">
-                <div class="inner-round">
+                <div class="inner-round" style="height: 140px">
+                  <div
+                    *ngIf="!chart1Y"
+                    class="lds-ellipsis position-absolute top-60 start-50 translate-middle"
+                  >
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
                   <apx-chart
                     *ngIf="chart1Y"
                     [series]="chart1Y.series!"
@@ -155,7 +164,16 @@
                 </div>
               </div>
               <div class="tab-pane fade" id="tab-3y" role="tabpanel">
-                <div class="inner-round">
+                <div class="inner-round" style="height: 140px">
+                  <div
+                    *ngIf="!chart3Y"
+                    class="lds-ellipsis position-absolute top-60 start-50 translate-middle"
+                  >
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
                   <apx-chart
                     *ngIf="chart3Y"
                     [series]="chart3Y.series!"
@@ -174,7 +192,16 @@
                 id="tab-all"
                 role="tabpanel"
               >
-                <div class="inner-round">
+                <div class="inner-round" style="height: 140px">
+                  <div
+                    *ngIf="!chartAll"
+                    class="lds-ellipsis position-absolute top-60 start-50 translate-middle"
+                  >
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
                   <apx-chart
                     *ngIf="chartAll"
                     [series]="chartAll.series!"
