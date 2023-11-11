@@ -12,6 +12,7 @@ import {
 import { environment } from 'src/environments/environment';
 import { ToastService } from 'src/assets/core/utils/toast.service';
 import { AppService } from 'src/assets/core/services/app.service';
+import { deepCopy } from '@angular-devkit/core/src/utils/object';
 
 @Component({
   selector: 'app-wallet-details',
@@ -155,11 +156,7 @@ export class WalletDetailsComponent implements OnInit {
     if (this.wallet?.history.find((w) => w.id === undefined)) {
       this.wallet?.history.splice(0, 1);
     }
-    this.walletService.addUpdateWallet(this.wallet!).subscribe((data) => {
-      this.infoKey = '';
-      this.infoValue = '';
-      this.addInput = false;
-    });
+    this.saveOrUpdateWallet();
   }
 
   editInput(key: string) {
@@ -187,13 +184,7 @@ export class WalletDetailsComponent implements OnInit {
       this.wallet?.history.splice(0, 1);
     }
 
-    this.walletService.addUpdateWallet(this.wallet!).subscribe((data) => {
-      this.infoKey = '';
-      this.infoValue = '';
-      this.addInput = false;
-      this.editBtn = false;
-      this.editShow = false;
-    });
+    this.saveOrUpdateWallet();
   }
 
   deleteInfo(key: string) {
@@ -207,11 +198,7 @@ export class WalletDetailsComponent implements OnInit {
     if (this.wallet?.history.find((w) => w.id === undefined)) {
       this.wallet?.history.splice(0, 1);
     }
-    this.walletService.addUpdateWallet(this.wallet!).subscribe((data) => {
-      this.infoKey = '';
-      this.infoValue = '';
-      this.editShow = false;
-    });
+    this.saveOrUpdateWallet();
   }
   editWallet(wallet: Wallet) {
     this.wallet = wallet;
@@ -251,5 +238,15 @@ export class WalletDetailsComponent implements OnInit {
     if (isHidden != null) {
       this.hidden = isHidden;
     }
+  }
+
+  saveOrUpdateWallet() {
+    this.walletService.addUpdateWallet(this.wallet!).subscribe((data) => {
+      this.infoKey = '';
+      this.infoValue = '';
+      this.addInput = false;
+      this.editBtn = false;
+      this.editShow = false;
+    });
   }
 }
