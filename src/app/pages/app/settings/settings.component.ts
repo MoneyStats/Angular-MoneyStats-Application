@@ -1,6 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { fader } from 'src/app/shared/animations/route-animations';
-import { User } from 'src/assets/core/data/class/user.class';
+import { Status, User } from 'src/assets/core/data/class/user.class';
 import {
   ModalConstant,
   ProfileSettings,
@@ -30,6 +30,7 @@ export class SettingsComponent implements OnInit {
 
   warning: boolean = false;
   isAutoUpdate: boolean = false;
+  isLiveWallet: boolean = false;
 
   constructor(
     public screenService: ScreenService,
@@ -70,6 +71,11 @@ export class SettingsComponent implements OnInit {
     let autoUpdate = !localStorage.getItem(StorageConstant.AUTOUPDATE);
     if (autoUpdate) {
       this.isAutoUpdate = autoUpdate;
+    }
+    if (this.user?.settings.liveWallets != undefined) {
+      console.log(this.user.settings.liveWallets);
+      this.isLiveWallet =
+        this.user.settings.liveWallets == Status.ACTIVE ? true : false;
     }
   }
 
@@ -140,6 +146,35 @@ export class SettingsComponent implements OnInit {
     this.appService.importMarketData().subscribe((res) => {
       this.logger.LOG(res.message!, 'SettingsComponent');
       this.swal.toastMessage(SwalIcon.SUCCESS, res.message!);
+    });
+  }
+
+  changeTheme() {
+    let dark = parseInt(localStorage.getItem('MoneyStatsDarkMode')!);
+    this.user!.settings.darkMode =
+      dark == 1 ? Status.NOT_ACTIVE : Status.ACTIVE;
+    this.updateUser('Theme Updated');
+  }
+
+  liveWallet() {
+    if (this.user?.settings.liveWallets == undefined)
+      this.user!.settings.liveWallets = Status.NOT_ACTIVE;
+    else
+      this.user!.settings.liveWallets =
+        this.user?.settings.liveWallets &&
+        this.user?.settings.liveWallets == Status.ACTIVE
+          ? Status.NOT_ACTIVE
+          : Status.ACTIVE;
+    this.updateUser('Live Wallet Updated');
+    this.isLiveWallet == true ? false : true;
+  }
+
+  updateUser(message: string) {
+    this.userService.updateUserData(this.user!).subscribe((res) => {
+      this.userService.user! = res.data;
+      this.userService.setUserGlobally();
+      this.userService.setValue();
+      this.swal.toastMessage(SwalIcon.SUCCESS, message);
     });
   }
 }

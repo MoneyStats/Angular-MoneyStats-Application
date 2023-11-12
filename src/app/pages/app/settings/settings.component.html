@@ -57,6 +57,7 @@
                   class="form-check-input dark-mode-switch"
                   type="checkbox"
                   id="darkmodeSwitch"
+                  (click)="changeTheme()"
                 />
                 <label class="form-check-label" for="darkmodeSwitch"></label>
               </div>
@@ -157,6 +158,28 @@
               <div>{{ "modal.backup.title" | translate }}</div>
             </div>
           </a>
+        </li>
+        <li>
+          <div class="item">
+            <div class="in">
+              <div>
+                {{ "settings.app.liveWallet.title" | translate }}
+                <div class="text-muted">
+                  {{ "settings.app.liveWallet.description" | translate }}
+                </div>
+              </div>
+              <div class="form-check form-switch ms-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="liveWallet"
+                  [checked]="isLiveWallet"
+                  (click)="liveWallet()"
+                />
+                <label class="form-check-label" for="liveWallet"></label>
+              </div>
+            </div>
+          </div>
         </li>
       </ul>
 

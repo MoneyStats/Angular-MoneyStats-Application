@@ -33,7 +33,7 @@ export class UserService {
   ) {}
 
   setValue() {
-    switch (this.user?.currency) {
+    switch (this.user?.settings.currency) {
       case Coin.EUR:
         this.coinSymbol = CoinSymbol.EUR;
         break;
@@ -65,21 +65,21 @@ export class UserService {
   }
 
   updateGithubUser() {
-    this.user.github = this.swalService.githubAccount;
+    this.user.settings.github = this.swalService.githubAccount;
   }
 
   updateGithubData() {
     this.updateGithubUser();
-    if (this.user.github === undefined) {
+    if (this.user.settings.github === undefined) {
       setTimeout(() => {
         this.updateGithubData();
       }, 100 * 10);
     } else {
-      this.user!.profilePhoto = this.user.github.avatar_url!;
-      this.user.githubUser = JSON.stringify(this.user.github);
+      this.user!.profilePhoto = this.user.settings.github.avatar_url!;
+      this.user.settings.githubUser = JSON.stringify(this.user.settings.github);
       this.updateUserData(this.user).subscribe((res) => {
         this.user = res.data;
-        this.user.github = JSON.parse(this.user.githubUser!);
+        this.user.settings.github = JSON.parse(this.user.settings.githubUser!);
       });
     }
   }

@@ -30,9 +30,11 @@
               <div class="in">
                 {{ "modal.socialList.github" | translate }}
               </div>
-              <span *ngIf="user?.github" class="badge badge-success">{{
-                "modal.socialList.connect" | translate
-              }}</span>
+              <span
+                *ngIf="user?.settings?.github"
+                class="badge badge-success"
+                >{{ "modal.socialList.connect" | translate }}</span
+              >
             </a>
           </li>
         </ul>
@@ -44,5 +46,5 @@
 <app-social-details
   (emitDisconnect)="disconnect($event)"
   [modalId]="modalConstant.ACCOUNTDETAILS"
-  [github]="user!.github"
+  [github]="user!.settings.github"
 ></app-social-details>

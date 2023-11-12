@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Coin } from 'src/assets/core/data/class/coin';
-import { User } from 'src/assets/core/data/class/user.class';
+import { Status, User } from 'src/assets/core/data/class/user.class';
 import { UserService } from 'src/assets/core/services/user.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
@@ -55,7 +55,10 @@ export class RegisterComponent implements OnInit {
     user.password = this.password;
     user.surname = this.surname;
     user.username = this.username;
-    user.currency = this.currency;
+    user.settings.currency = this.currency;
+    let dark = parseInt(localStorage.getItem('MoneyStatsDarkMode')!);
+    user.settings.darkMode = dark == 1 ? Status.NOT_ACTIVE : Status.ACTIVE;
+    user.settings.liveWallets = Status.NOT_ACTIVE;
 
     this.userService.register(user, this.invitationCode).subscribe((data) => {
       this.logger.LOG(data.message!, 'RegisterComponent');

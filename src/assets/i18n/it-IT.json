@@ -331,6 +331,10 @@
         "title": "Modifica Portafoglio",
         "open": "Apri"
       },
+      "liveWallet": {
+        "title": "Live Wallet",
+        "description": "Attiva Live Wallet con Crypto"
+      },
       "languages": {
         "title": "Lingue",
         "open": "Modifica",
