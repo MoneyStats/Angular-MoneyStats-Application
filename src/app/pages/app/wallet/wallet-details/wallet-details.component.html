@@ -561,7 +561,7 @@
                   !showZeroBalance ? asset.balance > 0 : asset.balance >= 0
                 "
                 [assets]="asset"
-                [currency]="appService.user.cryptoCurrency"
+                [currency]="appService.user.settings.cryptoCurrency"
               >
               </app-transaction-card>
             </div>
