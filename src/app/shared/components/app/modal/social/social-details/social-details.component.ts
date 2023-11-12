@@ -33,8 +33,8 @@ export class SocialDetailsComponent implements OnInit {
     const githubAccount: any = localStorage.getItem(
       StorageConstant.GITHUBACCOUNT
     );
-    if (this.userService.user.github) {
-      this.github = this.userService.user.github!;
+    if (this.userService.user.settings.github) {
+      this.github = this.userService.user.settings.github!;
     } else if (githubAccount && githubAccount != 'undefined') {
       this.github = JSON.parse(githubAccount);
       this.github.username = this.github.login;
@@ -51,8 +51,8 @@ export class SocialDetailsComponent implements OnInit {
     localStorage.removeItem(StorageConstant.GITHUBACCOUNT);
     this.userService.user.profilePhoto =
       environment.baseUrlHeader + AppConfigConst.DEFAULT_USER_IMG;
-    this.userService.user.github = new Github();
-    this.userService.user.githubUser = undefined;
+    this.userService.user.settings.github = new Github();
+    this.userService.user.settings.githubUser = undefined;
     this.userService.updateUserData(this.userService.user).subscribe((res) => {
       this.userService.user = res.data;
       this.emitDisconnect.emit(res.data);
@@ -61,13 +61,13 @@ export class SocialDetailsComponent implements OnInit {
 
   updateGithubData() {
     this.userService.updateGithubUser();
-    if (this.userService.user.github === undefined) {
+    if (this.userService.user.settings.github === undefined) {
       setTimeout(() => {
         this.updateGithubData();
       }, 100 * 10);
     } else {
       this.userService.user!.profilePhoto =
-        this.userService.user.github.avatar_url!;
+        this.userService.user.settings.github.avatar_url!;
     }
   }
 }

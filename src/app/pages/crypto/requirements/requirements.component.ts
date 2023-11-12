@@ -53,9 +53,9 @@ export class RequirementsComponent implements OnInit {
           this.isAssetCreated = true;
       }
     }
-    if (user?.cryptoCurrency) {
+    if (user?.settings.cryptoCurrency) {
       this.isCurrencyAdded = true;
-      this.currency = user.cryptoCurrency;
+      this.currency = user.settings.cryptoCurrency;
     }
     this.goToDashboard();
     //if (this.validateBtn()) this.router.navigate(['/crypto/dashboard']);

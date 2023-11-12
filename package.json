@@ -1,6 +1,6 @@
 {
   "name": "angular-moneystats",
-  "version": "1.12.4",
+  "version": "1.13.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

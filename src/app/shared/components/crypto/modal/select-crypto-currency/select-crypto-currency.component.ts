@@ -21,7 +21,7 @@ export class SelectCryptoCurrencyComponent implements OnInit {
 
   selectCurrency() {
     let user = this.userService.user;
-    user.cryptoCurrency = this.currency;
+    user.settings.cryptoCurrency = this.currency;
     this.userService.updateUserData(user).subscribe((data) => {
       this.userService.user = data.data;
       this.userService.setUserGlobally();

@@ -331,6 +331,10 @@
         "title": "Edit Wallet",
         "open": "Open"
       },
+      "liveWallet": {
+        "title": "Live Wallet",
+        "description": "Activate Live Wallet on Crypto"
+      },
       "languages": {
         "title": "Languages",
         "open": "Edit",

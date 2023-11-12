@@ -18,5 +18,12 @@
       "expirationTime": 3600000,
       "accessToken": "mockAccessToken"
     }
+  },
+  "settings": {
+    "id": 1,
+    "creationDate": "2023-11-12T17:07:17",
+    "updateDate": "2023-11-12T17:07:17",
+    "currency": "EUR",
+    "cryptoCurrency": "USD"
   }
 }
