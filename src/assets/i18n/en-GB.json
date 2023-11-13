@@ -526,7 +526,8 @@
     "footer": {
       "tab1": "Operations",
       "tab2": "Crypto Resume",
-      "tab3": "Wallets"
+      "tab3": "Wallets",
+      "tab4": "Market Data"
     },
     "requirements": {
       "headerTitle": "Crypto Requirements",

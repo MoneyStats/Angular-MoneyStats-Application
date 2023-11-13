@@ -4,3 +4,29 @@
   object-position: center center !important;
   object-fit: cover !important;
 }
+
+.title-section {
+  margin-left: 30px;
+  margin-top: 10px;
+  margin-right: -85px;
+  margin-bottom: -60px;
+}
+
+#appCapsule {
+  overflow-x: hidden;
+}
+
+.margin {
+  margin-top: 40px;
+}
+
+@media screen and (max-width: 780px) {
+  .title-section {
+    margin-left: 20px;
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
+  }
+  .margin {
+    margin-top: 0px !important;
+  }
+}
