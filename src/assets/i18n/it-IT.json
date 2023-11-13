@@ -520,7 +520,8 @@
       "tab1": "Portafogli",
       "tab2": "Assets",
       "tab3": "Operazioni",
-      "tab4": "Storico"
+      "tab4": "Storico",
+      "tab5": "Market Data"
     },
     "footer": {
       "tab1": "Operazioni",

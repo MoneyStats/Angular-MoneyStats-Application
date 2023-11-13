@@ -45,6 +45,7 @@ export class CryptoDetailsComponent implements OnInit {
       else this.getCryptoDashboard();
     });
     this.isWalletBalanceHidden();
+    console.log(this.cryptoDashboard);
   }
 
   getCryptoDetails(identifier: string) {

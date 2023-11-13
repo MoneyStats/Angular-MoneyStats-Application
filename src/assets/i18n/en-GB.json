@@ -520,7 +520,8 @@
       "tab1": "Wallets",
       "tab2": "Assets",
       "tab3": "Operations",
-      "tab4": "Resume"
+      "tab4": "Resume",
+      "tab5": "Market Data"
     },
     "footer": {
       "tab1": "Operations",

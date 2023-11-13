@@ -28,6 +28,7 @@ import { InvestmentsHistoryComponent } from './crypto-resume/investments-history
 import { OperationExchangeComponent } from './operation-exchange/operation-exchange.component';
 import { OperationsComponent } from './operations/operations.component';
 import { TradingResumeComponent } from './crypto-resume/trading-resume/trading-resume.component';
+import { MarketDataComponent } from './market-data/market-data.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { TradingResumeComponent } from './crypto-resume/trading-resume/trading-r
     OperationExchangeComponent,
     OperationsComponent,
     TradingResumeComponent,
+    MarketDataComponent,
   ],
   imports: [
     CryptoRoutingModule,

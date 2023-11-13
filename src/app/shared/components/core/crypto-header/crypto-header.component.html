@@ -24,6 +24,14 @@
       <a routerLink="/wallet" class="d-inline me-2 title-page">{{
         "crypto.header.tab1" | translate
       }}</a>
+      <a
+        [routerLink]="[
+          '/crypto/market-data',
+          userService.user.settings.cryptoCurrency
+        ]"
+        class="d-inline me-2 title-page"
+        >{{ "crypto.header.tab5" | translate }}</a
+      >
       <a routerLink="/crypto/asset" class="d-inline me-2 title-page">{{
         "crypto.header.tab2" | translate
       }}</a>

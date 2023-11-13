@@ -100,7 +100,10 @@ export class CategoryComponent implements OnInit, OnChanges {
         this.categoryTableBalance.data = true;
       }
     });
-    this.mapWalletCategory.set(this.KEY_INVESTMENTS, this.categoryTableBalance);
+    this.mapWalletCategory.set(
+      this.KEY_INVESTMENTS,
+      this.categoryTableBalance.reverse()
+    );
     this.totalMap.set(this.KEY_INVESTMENTS, this.totalList);
 
     // CAPITAL
@@ -119,7 +122,10 @@ export class CategoryComponent implements OnInit, OnChanges {
         this.categoryTableBalance.data = true;
       }
     });
-    this.mapWalletCategory.set(this.KEY_CAPITAL, this.categoryTableBalance);
+    this.mapWalletCategory.set(
+      this.KEY_CAPITAL,
+      this.categoryTableBalance.reverse()
+    );
     this.totalMap.set(this.KEY_CAPITAL, this.totalList);
 
     // SAVING
@@ -138,7 +144,10 @@ export class CategoryComponent implements OnInit, OnChanges {
         this.categoryTableBalance.data = true;
       }
     });
-    this.mapWalletCategory.set(this.KEY_SAVING, this.categoryTableBalance);
+    this.mapWalletCategory.set(
+      this.KEY_SAVING,
+      this.categoryTableBalance.reverse()
+    );
     this.totalMap.set(this.KEY_SAVING, this.totalList);
 
     // DEBITS
@@ -157,7 +166,10 @@ export class CategoryComponent implements OnInit, OnChanges {
         this.categoryTableBalance.data = true;
       }
     });
-    this.mapWalletCategory.set(this.KEY_DEBITS, this.categoryTableBalance);
+    this.mapWalletCategory.set(
+      this.KEY_DEBITS,
+      this.categoryTableBalance.reverse()
+    );
     this.totalMap.set(this.KEY_DEBITS, this.totalList);
 
     // OTHER
@@ -176,7 +188,10 @@ export class CategoryComponent implements OnInit, OnChanges {
         this.categoryTableBalance.data = true;
       }
     });
-    this.mapWalletCategory.set(this.KEY_OTHER, this.categoryTableBalance);
+    this.mapWalletCategory.set(
+      this.KEY_OTHER,
+      this.categoryTableBalance.reverse()
+    );
     this.totalMap.set(this.KEY_OTHER, this.totalList);
   }
 

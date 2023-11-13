@@ -43,8 +43,7 @@ export class OperationsListComponent implements OnInit {
     return ModalConstant;
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   getOperations() {
     let operations: Operation[] = [];
@@ -106,6 +105,7 @@ export class OperationsListComponent implements OnInit {
         ? 1
         : -1
     );
+    console.log(operations, this.walletsAsset);
     return operations;
     //}
   }

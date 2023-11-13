@@ -9,6 +9,7 @@ import { CryptoResumeComponent } from './crypto-resume/crypto-resume.component';
 import { OperationExchangeComponent } from './operation-exchange/operation-exchange.component';
 import { OperationsComponent } from './operations/operations.component';
 import { fadeSlider } from 'src/app/shared/animations/route-animations';
+import { MarketDataComponent } from './market-data/market-data.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,11 @@ const routes: Routes = [
       {
         path: 'operations/:currency/:uuid',
         component: OperationsComponent,
+        data: { animation: fadeSlider },
+      },
+      {
+        path: 'market-data/:currency',
+        component: MarketDataComponent,
         data: { animation: fadeSlider },
       },
     ],
