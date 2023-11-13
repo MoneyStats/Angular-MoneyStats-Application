@@ -111,6 +111,7 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
     this.graph1Y();
     this.walletsAsset = this.filterWallets();
     this.setColor();
+    console.log(this.walletsAsset);
   }
 
   graphAll() {
@@ -224,6 +225,7 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
         ? this.cryptoService.asset?.name
         : this.asset.name;
     const dashboard = deepCopy(this.cryptoDashboard);
+    console.log(dashboard);
     let wallAsset = dashboard.wallets.filter((w) => {
       if (w.assets != undefined && w.assets.length != 0)
         return w.assets.slice().find((a) => a.name == name);

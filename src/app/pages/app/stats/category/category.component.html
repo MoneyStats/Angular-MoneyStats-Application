@@ -36,7 +36,7 @@
                 *ngFor="
                   let balances of mapWalletCategory
                     .get(KEY_INVESTMENTS)
-                    .reverse();
+                    ;
                   let i = index
                 "
               >
@@ -114,7 +114,7 @@
               </thead>
               <tbody
                 *ngFor="
-                  let balances of mapWalletCategory.get(KEY_CAPITAL).reverse();
+                  let balances of mapWalletCategory.get(KEY_CAPITAL);
                   let i = index
                 "
               >
@@ -251,7 +251,7 @@
               </thead>
               <tbody
                 *ngFor="
-                  let balances of mapWalletCategory.get(KEY_SAVING).reverse();
+                  let balances of mapWalletCategory.get(KEY_SAVING);
                   let i = index
                 "
               >
@@ -329,7 +329,7 @@
               </thead>
               <tbody
                 *ngFor="
-                  let balances of mapWalletCategory.get(KEY_DEBITS).reverse();
+                  let balances of mapWalletCategory.get(KEY_DEBITS);
                   let i = index
                 "
               >
@@ -407,7 +407,7 @@
               </thead>
               <tbody
                 *ngFor="
-                  let balances of mapWalletCategory.get(KEY_OTHER).reverse();
+                  let balances of mapWalletCategory.get(KEY_OTHER);
                   let i = index
                 "
               >

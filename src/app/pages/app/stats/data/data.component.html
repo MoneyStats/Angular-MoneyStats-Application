@@ -167,7 +167,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let balances of tableBalance.reverse(); let i = index">
+            <tr *ngFor="let balances of tableBalance; let i = index">
               <th scope="row">
                 {{ balances[balances.length - 2].date | date : "d MMM y" }}
               </th>

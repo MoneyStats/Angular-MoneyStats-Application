@@ -1,10 +1,20 @@
 <app-loading></app-loading>
-<div [@routeAnimations]="getRouteAnimationData()" >
+<div [@routeAnimations]="getRouteAnimationData()">
   <router-outlet></router-outlet>
 </div>
 <!--<app-footer *ngIf="isFooterActive" [isCrypto]="true"></app-footer>-->
 <div *ngIf="isFooterActive" id="footer" class="appBottomMenu mx-auto">
-  <a routerLink="/crypto/resume" class="item" (click)="vibrate()">
+  <!--<a routerLink="/crypto/resume" class="item" (click)="vibrate()">
+    <div class="col">
+      <ion-icon name="bar-chart"></ion-icon>
+      <strong>{{ "crypto.footer.tab2" | translate }}</strong>
+    </div>
+  </a>-->
+  <a
+    [routerLink]="['/crypto/market-data', user?.settings?.cryptoCurrency]"
+    class="item"
+    (click)="vibrate()"
+  >
     <div class="col">
       <ion-icon name="bar-chart"></ion-icon>
       <strong>{{ "crypto.footer.tab2" | translate }}</strong>

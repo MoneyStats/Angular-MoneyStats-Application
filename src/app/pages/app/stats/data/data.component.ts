@@ -53,6 +53,7 @@ export class DataComponent implements OnInit, OnChanges {
       moreThanOneInAMonth.forEach((date, index) => {
         this.tableBalance.push(this.tableColumsCreateRefactor(date, index));
       });
+      this.tableBalance = this.tableBalance.reverse();
       //this.dashboard.statsWalletDays = moreThanOneInAMonth;
       this.renderChart();
     }

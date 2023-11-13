@@ -3,6 +3,7 @@ import { ChildrenOutletContexts, Router } from '@angular/router';
 import { fadeSlider } from 'src/app/shared/animations/route-animations';
 import { CryptoDashboard } from 'src/assets/core/data/class/crypto.class';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { User } from 'src/assets/core/data/class/user.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { AppService } from 'src/assets/core/services/app.service';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
@@ -18,6 +19,7 @@ import { environment } from 'src/environments/environment';
 export class CryptoComponent implements OnInit {
   environment = environment;
   isFooterActive: boolean = false;
+  user?: User;
   constructor(
     private router: Router,
     private appService: AppService,
@@ -36,6 +38,7 @@ export class CryptoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.user = this.appService.user;
     this.cryptoService.getCryptoDashboard().subscribe((data) => {
       let dashboard = data.data;
 
@@ -64,6 +67,7 @@ export class CryptoComponent implements OnInit {
   }
 
   vibrate() {
+    this.user = this.appService.user;
     this.appService.vibrate();
   }
 
