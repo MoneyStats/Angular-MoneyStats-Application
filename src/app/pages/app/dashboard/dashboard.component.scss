@@ -37,7 +37,7 @@
 }
 
 @media screen and (min-width: 780px) {
-  #appCapsule:before {
+  /*#appCapsule:before {
     position: absolute;
     left: 0;
     right: 0;
@@ -54,7 +54,7 @@
       to(rgba(0, 0, 0, 0))
     );
     mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-  }
+  }*/
 
   .wallet-card-section,
   .stats-section {
@@ -85,6 +85,7 @@
 }
 
 .wallet-card-section:before {
+  background: none;
   -webkit-mask-image: -webkit-gradient(
     linear,
     left top,

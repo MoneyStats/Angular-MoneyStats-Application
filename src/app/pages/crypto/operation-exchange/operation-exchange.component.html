@@ -45,6 +45,53 @@
     </div>
 
     <form #f="ngForm" action="">
+      <!-- Selezione Wallets Per Transfer -->
+      <div *ngIf="operationType == operations.TRANSFER">
+        <div class="title-section text-center mb-3">
+          <h2 class="title" style="margin-top: 0px !important">
+            Select the wallet to receive the asset
+          </h2>
+        </div>
+        <div class="container parent">
+          <div class="row">
+            <div class="col text-center" *ngFor="let wallet of wallets">
+              <input
+                type="radio"
+                name="imgbackground"
+                id="{{ wallet.id }}"
+                class="d-none imgbgchk"
+                value=""
+                (click)="selectTransferWallet(wallet)"
+              />
+
+              <label for="{{ wallet.id }}">
+                <div class="card">
+                  <div class="card-body">
+                    <p>
+                      {{ wallet.name }} <br />
+                      <small>({{ wallet.type }})</small>
+                    </p>
+                    <img
+                      src="{{ wallet.img }}"
+                      width="48"
+                      height="48"
+                      class="border_round mb-1"
+                      alt="Image 2"
+                    />
+                    <small
+                      ><p>Balance: {{ wallet.balance }}</p></small
+                    >
+                  </div>
+                </div>
+                <div class="tick_container">
+                  <div class="tick"><i class="fa fa-check"></i></div>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END Selezione Wallets Per Transfer -->
       <section class="mx-auto" style="max-width: 1500px">
         <div
           class="section mt-2"
@@ -255,7 +302,103 @@
           </div>
         </div>
 
-        <div class="section">
+        <!-- Selezione Assets Per Transfer -->
+        <div class="section" *ngIf="operationType == operations.TRANSFER">
+          <div class="card border">
+            <div class="card-body">
+              <div class="form-group basic p-0">
+                <div class="exchange-heading">
+                  <label class="group-label" for="toAmount">{{
+                    "crypto.operationExchange.to" | translate
+                  }}</label>
+                  <div class="exchange-wallet-info">
+                    <div
+                      *ngIf="!isEditFees"
+                      (click)="isEditFees = true"
+                      class="clickable"
+                    >
+                      Fees:
+                      <strong>
+                        {{ fees }}
+                        {{ transferAssetToSell.symbol }}</strong
+                      >
+                    </div>
+                    <div *ngIf="isEditFees" class="row">
+                      <div class="col-7 col-md-8">
+                        <div class="form-group basic">
+                          <div class="input-wrapper">
+                            <label class="label" for="price"
+                              >Edit fees in
+                              {{ marketDataSelected.symbol }}</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="price"
+                              name="price"
+                              #price1="ngModel"
+                              [(ngModel)]="fees"
+                              value="{{ fees }}"
+                              required
+                              placeholder="Update fees"
+                            />
+                            <i class="clear-input">
+                              <ion-icon name="close-circle"></ion-icon>
+                            </i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-1">
+                        <button
+                          [disabled]="f.invalid"
+                          style="vertical-align: -25px"
+                          type="button"
+                          class="btn btn-primary rounded me-1"
+                          (click)="isEditFees = false"
+                        >
+                          {{ "crypto.operationExchange.save" | translate }}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-8 col-7">
+                    <div class="exchange-group">
+                      <div class="input-col">
+                        <input
+                          type="number"
+                          class="form-control form-control-lg pe-0 border-0"
+                          id="toNewBalanceAmount"
+                          placeholder="0"
+                          id="balanceToTransfer"
+                          name="balanceToTransfer"
+                          #balanceToTransfer1="ngModel"
+                          required
+                          [(ngModel)]="balanceToTransfer"
+                          value="{{ balanceToTransfer }}"
+                          maxlength="10"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-5" style="max-height: 55px">
+                    <app-asset-select
+                      [wrapperID]="assetConstant.TRANSFER"
+                      [fiat]="fiat!"
+                      [isOperation]="true"
+                      [cryptoPrices]="wallet.assets"
+                      (emitSelectAsset)="emitTransferSelectAsset($event)"
+                    ></app-asset-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END Selezione Assets Per Transfer -->
+
+        <div class="section" *ngIf="operationType != operations.TRANSFER">
           <div class="card border">
             <div class="card-body">
               <div class="form-group basic p-0">
@@ -446,6 +589,19 @@
           type="button"
           class="btn btn-primary btn-block btn-lg"
           (click)="exchangeTradingInvestment()"
+        >
+          {{ "crypto.operationExchange.exchange" | translate }}
+        </button>
+      </div>
+      <div
+        class="form-button-group transparent"
+        *ngIf="operationType == operations.TRANSFER"
+      >
+        <button
+          [disabled]="f.invalid || !validateSelect() || !disableOnEdit()"
+          type="button"
+          class="btn btn-primary btn-block btn-lg"
+          (click)="exchangeTransferInvestment()"
         >
           {{ "crypto.operationExchange.exchange" | translate }}
         </button>

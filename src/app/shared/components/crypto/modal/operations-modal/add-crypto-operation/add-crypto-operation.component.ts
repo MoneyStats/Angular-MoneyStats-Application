@@ -40,7 +40,10 @@ export class AddCryptoOperationComponent implements OnInit {
   selectOperation(e: any) {
     let operation = e.target.value;
     let wallet = deepCopy(this.wallets);
-    if (operation != OperationsType.NEWINVESTMENT) {
+    if (
+      operation != OperationsType.NEWINVESTMENT &&
+      operation != OperationsType.TRANSFER
+    ) {
       this.filterWallets = wallet.filter((w) => w.type == e.target.value);
     } else this.filterWallets = wallet;
   }
