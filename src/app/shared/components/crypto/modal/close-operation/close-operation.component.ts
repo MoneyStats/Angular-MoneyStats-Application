@@ -86,17 +86,18 @@ export class CloseOperationComponent implements OnInit {
   refreshData() {
     let operation = this.operationToClose;
     let currentPrice =
-      this.operation?.entryQuantity! * this.operation?.exitPrice!;
+      this.operationToClose?.entryQuantity! * this.operationToClose?.exitPrice!;
     operation!.exitPriceValue = parseFloat(currentPrice.toFixed(2));
     operation!.exitQuantity = parseFloat(currentPrice.toFixed(8));
     operation!.performance = parseFloat(
       (
-        ((currentPrice - this.operation?.entryPriceValue!) / currentPrice) *
+        ((currentPrice - this.operationToClose?.entryPriceValue!) /
+          currentPrice) *
         100
       ).toFixed(2)
     );
     operation!.trend = parseFloat(
-      (currentPrice - this.operation?.entryPriceValue!).toFixed(2)
+      (currentPrice - this.operationToClose?.entryPriceValue!).toFixed(2)
     );
     //this.isEditActive = false;
   }

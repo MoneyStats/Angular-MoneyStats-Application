@@ -105,7 +105,6 @@ export class OperationsListComponent implements OnInit {
         ? 1
         : -1
     );
-    console.log(operations, this.walletsAsset);
     return operations;
     //}
   }

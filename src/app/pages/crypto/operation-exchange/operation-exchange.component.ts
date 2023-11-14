@@ -49,6 +49,7 @@ export class OperationExchangeComponent implements OnInit {
   // Transfer
   walletToTansfer: Wallet = new Wallet();
   wallets?: Wallet[] = [];
+  isWalletSelected: boolean = false;
   transferAssetToSell: Asset = new Asset();
   balanceToTransfer: number = 0;
   isEditFees: boolean = false;
@@ -174,7 +175,7 @@ export class OperationExchangeComponent implements OnInit {
 
   selectTransferWallet(wallet: Wallet) {
     this.walletToTansfer = wallet;
-    console.log(this.walletToTansfer);
+    this.isWalletSelected = true;
   }
 
   exchangeTransferInvestment() {

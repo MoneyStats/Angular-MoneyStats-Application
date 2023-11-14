@@ -60,8 +60,8 @@
                 name="imgbackground"
                 id="{{ wallet.id }}"
                 class="d-none imgbgchk"
-                value=""
                 (click)="selectTransferWallet(wallet)"
+                required
               />
 
               <label for="{{ wallet.id }}">
@@ -598,7 +598,12 @@
         *ngIf="operationType == operations.TRANSFER"
       >
         <button
-          [disabled]="f.invalid || !validateSelect() || !disableOnEdit()"
+          [disabled]="
+            f.invalid ||
+            !validateSelect() ||
+            !disableOnEdit() ||
+            !isWalletSelected
+          "
           type="button"
           class="btn btn-primary btn-block btn-lg"
           (click)="exchangeTransferInvestment()"
