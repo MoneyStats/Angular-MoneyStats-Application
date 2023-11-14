@@ -46,6 +46,14 @@ export class OperationExchangeComponent implements OnInit {
   tradingAssetToSell: Asset = new Asset();
   stablecoin: Asset[] = [];
 
+  // Transfer
+  walletToTansfer: Wallet = new Wallet();
+  wallets?: Wallet[] = [];
+  transferAssetToSell: Asset = new Asset();
+  balanceToTransfer: number = 0;
+  isEditFees: boolean = false;
+  fees: number = 0;
+
   constructor(
     private cryptoService: CryptoService,
     private route: ActivatedRoute,
@@ -86,6 +94,7 @@ export class OperationExchangeComponent implements OnInit {
       let wallets = deepCopy(
         this.cryptoService.cryptoDashboard.wallets.slice()
       );
+      this.filterWalletsTransfer(wallets);
       this.wallet = wallets.find((w) => w.name == this.walletSelect)!;
       this.getCryptoPrices(a.fiat);
       if (this.operationType == this.operations.TRADING) {
@@ -95,6 +104,12 @@ export class OperationExchangeComponent implements OnInit {
         );
       }
     });
+  }
+
+  filterWalletsTransfer(wallets: Wallet[]) {
+    this.wallets = deepCopy(wallets).filter(
+      (wallet) => wallet.name != this.walletSelect
+    );
   }
 
   getCryptoPrices(fiat: string) {
@@ -120,6 +135,12 @@ export class OperationExchangeComponent implements OnInit {
     this.investedBalance = this.tradingAssetToSell.balance;
 
     this.makeNewBalance();
+  }
+
+  emitTransferSelectAsset(asset: Asset) {
+    this.transferAssetToSell = asset;
+    this.balanceToTransfer = this.transferAssetToSell.balance;
+    this.marketDataSelected = asset;
   }
 
   emitSelectAsset(asset: Asset) {
@@ -149,6 +170,74 @@ export class OperationExchangeComponent implements OnInit {
     this.assetNewBalance = parseFloat(
       (this.investedMoney / this.marketDataSelected.current_price!).toFixed(8)
     );
+  }
+
+  selectTransferWallet(wallet: Wallet) {
+    this.walletToTansfer = wallet;
+    console.log(this.walletToTansfer);
+  }
+
+  exchangeTransferInvestment() {
+    let transferAsset = deepCopy(this.transferAssetToSell);
+    transferAsset.lastUpdate = new Date();
+
+    let percentualeInvestitoCalcolata =
+      transferAsset.invested * (this.balanceToTransfer / transferAsset.value!);
+    transferAsset.balance -= this.balanceToTransfer;
+
+    if (transferAsset.balance == 0) {
+      percentualeInvestitoCalcolata = transferAsset.invested;
+    }
+    transferAsset.invested -= percentualeInvestitoCalcolata;
+
+    let transferedAsset = deepCopy(this.walletToTansfer.assets).find(
+      (as) => as.identifier == transferAsset.identifier
+    );
+
+    if (transferedAsset == undefined) {
+      transferedAsset = this.marketDataSelected;
+      transferedAsset.balance = 0;
+      transferedAsset.id = undefined;
+      transferedAsset.invested = 0;
+      transferedAsset.performance = 0;
+      transferedAsset.trend = 0;
+      transferedAsset.lastUpdate = transferAsset.lastUpdate;
+    }
+
+    transferedAsset!.balance += this.balanceToTransfer - this.fees;
+    transferedAsset.invested += percentualeInvestitoCalcolata;
+
+    let operation: Operation = new Operation();
+    operation.type = this.operationType;
+    operation.status = 'CLOSED';
+    operation.entryDate = new Date(transferAsset.lastUpdate);
+    operation.entryCoin = transferAsset.symbol;
+    operation.entryPrice = this.marketDataSelected.current_price;
+    operation.entryPriceValue = parseFloat(
+      percentualeInvestitoCalcolata.toFixed(2)
+    );
+    operation.entryQuantity = this.balanceToTransfer;
+
+    console.log(this.wallet, transferAsset, this.walletToTansfer);
+    /*
+
+    let operation: Operation = new Operation();
+    operation.type = this.operationType;
+    operation.status = 'OPEN';
+    operation.entryDate = new Date(this.marketDataSelected.lastUpdate);
+    operation.entryCoin = tradingAsset.symbol;
+    operation.entryPrice = this.marketDataSelected.current_price;
+    operation.entryPriceValue = parseFloat(
+      percentualeInvestitoCalcolata.toFixed(2)
+    );
+    operation.entryQuantity = this.assetNewBalance;
+    operation.exitCoin = assetToSave.symbol;
+
+    assetToSave.operations = [operation];
+
+    let walletToSave = deepCopy(this.wallet);
+    walletToSave.assets = [assetToSave, tradingAsset];
+    this.saveWallet(walletToSave);*/
   }
 
   exchangeTradingInvestment() {

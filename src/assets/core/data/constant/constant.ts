@@ -32,6 +32,7 @@ export enum SelectAssetConstant {
   NEWINVESTMENT = 'newCryptoInvestment',
   HOLDING = 'newHoldingOperation',
   TRADING = 'newTradingOperation',
+  TRANSFER = 'newTransferOperation',
 }
 
 export enum StorageConstant {
@@ -63,6 +64,7 @@ export enum OperationsType {
   HOLDING = 'Holding',
   NEWINVESTMENT = 'New Investment',
   TRADING = 'Trading',
+  TRANSFER = 'Transfer',
   CLOSEOPERATION = 'Close-Position',
 }
 
@@ -76,4 +78,4 @@ export enum UserRole {
   ADMIN = 'ADMIN',
 }
 
-export var Operations = ['New Investment', 'Holding', 'Trading'];
+export var Operations = ['New Investment', 'Holding', 'Trading', 'Transfer'];
