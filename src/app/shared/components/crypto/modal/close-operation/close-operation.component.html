@@ -142,7 +142,7 @@
                                   class="form-control"
                                   id="quantity1"
                                   placeholder="Enter an Amount"
-                                  [(ngModel)]="operation!.exitQuantity"
+                                  [(ngModel)]="operationToClose.exitQuantity"
                                 />
                                 <i class="clear-input">
                                   <ion-icon name="close-circle"></ion-icon>
@@ -166,7 +166,7 @@
                                   class="form-control"
                                   id="quantityValue1"
                                   placeholder="Enter an Amount"
-                                  [(ngModel)]="operation!.exitPriceValue"
+                                  [(ngModel)]="operationToClose.exitPriceValue"
                                 />
                                 <i class="clear-input">
                                   <ion-icon name="close-circle"></ion-icon>
@@ -190,7 +190,7 @@
                                   class="form-control"
                                   id="price1"
                                   placeholder="Enter an Amount"
-                                  [(ngModel)]="operation!.exitPrice"
+                                  [(ngModel)]="operationToClose.exitPrice"
                                   (keyup)="refreshData()"
                                 />
                                 <i class="clear-input">

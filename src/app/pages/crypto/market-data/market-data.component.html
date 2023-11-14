@@ -77,7 +77,13 @@
                           : 'badge-danger'
                       }}"
                     >
-                      <ion-icon name="arrow-up-outline"></ion-icon>
+                      <ion-icon
+                        name="{{
+                          asset.price_change_percentage_24h > 0
+                            ? 'arrow-up-outline'
+                            : 'arrow-down-outline'
+                        }}"
+                      ></ion-icon>
                       {{
                         asset.price_change_24h != undefined
                           ? asset.price_change_24h.toFixed(2)
