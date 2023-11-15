@@ -104,17 +104,16 @@
                     cursor: pointer;
                   "
                   class="col-6 hidden_desktop"
+                  (click)="vibrate()"
+                  routerLink="/crypto/asset"
                 >
                   <ion-icon
                     class="icon-size icon-color"
                     name="albums-outline"
                   ></ion-icon>
-                  <a
-                    (click)="vibrate()"
-                    routerLink="/crypto/asset"
-                    style="vertical-align: -1px; color: #958d9e"
-                    >{{ "crypto.dashboard.cardRes.opt2" | translate }}</a
-                  >
+                  <a style="vertical-align: -1px; color: #958d9e">{{
+                    "crypto.dashboard.cardRes.opt2" | translate
+                  }}</a>
                 </div>
                 <div
                   data-bs-toggle="modal"

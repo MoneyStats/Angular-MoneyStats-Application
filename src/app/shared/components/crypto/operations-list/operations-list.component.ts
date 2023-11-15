@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import {
@@ -18,7 +24,7 @@ import { Router } from '@angular/router';
   templateUrl: './operations-list.component.html',
   styleUrls: ['./operations-list.component.scss'],
 })
-export class OperationsListComponent implements OnInit {
+export class OperationsListComponent implements OnInit, OnChanges {
   @Input('walletsAsset') walletsAsset: Wallet[] = [];
   @Input('cryptoDashboard') cryptoDashboard: CryptoDashboard =
     new CryptoDashboard();
@@ -33,6 +39,8 @@ export class OperationsListComponent implements OnInit {
   @Input('modalID') modalID: string = uuidv4();
 
   operationSelect: any;
+
+  operations: Operation[] = [];
   constructor(private cryptoService: CryptoService, private router: Router) {}
 
   public get operationTypeConstant(): typeof OperationsType {
@@ -45,39 +53,12 @@ export class OperationsListComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getOperations();
+  }
+
   getOperations() {
     let operations: Operation[] = [];
-    /*if (this.isAssetOperations) {
-      let wallets = deepCopy(this.walletsAsset);
-      wallets.forEach((wallet) => {
-        if (
-          wallet.assets &&
-          wallet.assets.length > 0 &&
-          wallet.assets[0].operations &&
-          wallet.assets[0].operations.length > 0
-        )
-          wallet.assets[0].operations.forEach((operation) => {
-            operation.wallet = wallet;
-            operation.asset = wallet.assets[0];
-            if (operation.type != OperationsType.NEWINVESTMENT)
-              operation.assetSell = this.cryptoDashboard.assets.find(
-                (a) => a.symbol == operation.entryCoin
-              );
-            operations.push(operation);
-          });
-      });
-      operations.sort((a, b) =>
-        a.exitDate
-          ? a.exitDate! < b.exitDate!
-            ? 1
-            : -1
-          : a.entryDate! < b.entryDate!
-          ? 1
-          : -1
-      );
-      return operations;
-    } else {*/
-    //let wallets = deepCopy(this.cryptoService.cryptoDashboard.wallets);
     let wallets = deepCopy(this.walletsAsset);
     wallets.forEach((wallet) => {
       if (wallet.assets && wallet.assets.length > 0)
@@ -105,8 +86,8 @@ export class OperationsListComponent implements OnInit {
         ? 1
         : -1
     );
+    this.operations = operations;
     return operations;
-    //}
   }
 
   selectOperation(operation: any) {

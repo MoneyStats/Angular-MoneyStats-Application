@@ -1,4 +1,10 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
@@ -9,7 +15,7 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
   templateUrl: './market-data.component.html',
   styleUrls: ['./market-data.component.scss'],
 })
-export class MarketDataComponent implements OnInit {
+export class MarketDataComponent implements OnInit, OnDestroy {
   marketDataSubscribe: Subscription = new Subscription();
   cryptoCurrency?: string;
   marketData: Array<any> = [];
@@ -23,6 +29,10 @@ export class MarketDataComponent implements OnInit {
     private route: ActivatedRoute,
     private screenService: ScreenService
   ) {}
+  
+  ngOnDestroy(): void {
+    this.marketDataSubscribe.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.screenService.hideFooter();

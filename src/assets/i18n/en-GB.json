@@ -656,6 +656,21 @@
         }
       }
     },
+    "marketData": {
+      "title": "Market Data",
+      "currency": "Currency:",
+      "updated": "Updated at:",
+      "search": "Search for a coin",
+      "table": {
+        "tab1": "Rank",
+        "tab2": "Coin",
+        "tab3": "Price",
+        "tab4": "Performance 24h",
+        "tab5": "High 24h",
+        "tab6": "Low 24h",
+        "tab7": "Mkt Cap"
+      }
+    },
     "operationExchange": {
       "history": "Operation History",
       "balance": "Balance : ",
@@ -670,7 +685,11 @@
       "price": "Edit buy Price of",
       "newPrice": "Enter a new price",
       "date": "Edit buy Date",
-      "save": "Save"
+      "save": "Save",
+      "select": "Select the wallet to receive the asset",
+      "fees": "Fees",
+      "editFees": "Edit Fees in",
+      "updateFees": "Update Fees"
     },
     "operationDetails": {
       "title": "Details",

@@ -19,6 +19,29 @@
         <div class="section mt-2 mb-2 row">
           <div
             class="col-5"
+            *ngIf="operation?.type == operationTypeConstant.TRANSFER"
+          >
+            <div class="listed-detail mt-3">
+              <div class="float-end text-end">
+                <div class="icon-wrapper">
+                  <!--<div class="iconbox">
+                            <ion-icon name="arrow-forward-outline"></ion-icon>
+
+                        </div>-->
+                  <img
+                    src="{{ operation?.asset?.icon }}"
+                    alt="img"
+                    class="image-block imaged w48"
+                  />
+                </div>
+                <h3 class="text-center mt-2">
+                  {{ operation?.asset?.name }}
+                </h3>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-5"
             *ngIf="operation?.type == operationTypeConstant.NEWINVESTMENT"
           >
             <div class="listed-detail mt-3">
@@ -42,7 +65,10 @@
           </div>
           <div
             class="col-5"
-            *ngIf="operation?.type != operationTypeConstant.NEWINVESTMENT"
+            *ngIf="
+              operation?.type != operationTypeConstant.NEWINVESTMENT &&
+              operation?.type != operationTypeConstant.TRANSFER
+            "
           >
             <div class="listed-detail mt-3">
               <div class="float-end text-end">
@@ -66,7 +92,10 @@
           <div class="col-2 text-center" style="align-self: center">
             <ion-icon name="swap-horizontal-outline"></ion-icon>
           </div>
-          <div class="col-5">
+          <div
+            class="col-5"
+            *ngIf="operation?.type != operationTypeConstant.TRANSFER"
+          >
             <div class="listed-detail mt-3">
               <div class="float-start text-start">
                 <div class="icon-wrapper">
@@ -82,6 +111,29 @@
                 </div>
                 <h3 class="text-center mt-2">
                   {{ operation?.asset?.name }}
+                </h3>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-5"
+            *ngIf="operation?.type == operationTypeConstant.TRANSFER"
+          >
+            <div class="listed-detail mt-3">
+              <div class="float-start text-start">
+                <div class="icon-wrapper">
+                  <!--<div class="iconbox">
+                            <ion-icon name="arrow-forward-outline"></ion-icon>
+
+                        </div>-->
+                  <img
+                    src="{{ operation?.wallet?.img }}"
+                    alt="img"
+                    class="image-block imaged w48"
+                  />
+                </div>
+                <h3 class="text-center mt-2">
+                  {{ operation?.wallet?.name }}
                 </h3>
               </div>
             </div>

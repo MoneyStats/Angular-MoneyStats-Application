@@ -257,6 +257,11 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
             operation.assetSell = this.cryptoDashboard.assets.find(
               (a) => a.symbol == operation.entryCoin
             );
+          if (operation.type == OperationsType.TRANSFER)
+            operation.walletSell = this.cryptoDashboard.wallets.find((w) =>
+              w.assets.includes(operation.assetSell)
+            );
+          console.log(operation.walletSell);
           operations.push(operation);
         });
     });

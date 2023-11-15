@@ -58,6 +58,7 @@ export class Operation extends GenericModel {
   trend?: number;
   asset?: Asset;
   wallet?: Wallet;
+  walletSell?: Wallet;
   assetSell?: Asset;
   trendSum?: number; //Usato per tabella
   balance?: number; //Usato per tabella

@@ -656,6 +656,21 @@
         }
       }
     },
+    "marketData": {
+      "title": "Market Data",
+      "currency": "Moneta:",
+      "updated": "Aggiornato il:",
+      "search": "Cerca un'asset",
+      "table": {
+        "tab1": "Rank",
+        "tab2": "Asset",
+        "tab3": "Prezzo",
+        "tab4": "Performance 24h",
+        "tab5": "Massimo 24h",
+        "tab6": "Minimo 24h",
+        "tab7": "Mkt Cap"
+      }
+    },
     "operationExchange": {
       "history": "Storico Operazioni",
       "balance": "Saldo :",
@@ -670,7 +685,11 @@
       "price": "Modifica il prezzo d'acquisto di",
       "newPrice": "Inserisci un nuovo saldo",
       "date": "Modifica la data di acquisto",
-      "save": "Salva"
+      "save": "Salva",
+      "select": "Seleziona il portafoglio dove ricevere l'asset",
+      "fees": "Fees",
+      "editFees": "Modifica Fees in",
+      "updateFees": "Aggiorna Fees"
     },
     "operationDetails": {
       "title": "Dettagli",
