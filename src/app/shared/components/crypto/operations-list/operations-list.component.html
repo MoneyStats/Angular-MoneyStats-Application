@@ -3,7 +3,7 @@
     class="listview flush transparent no-line image-listview detailed-list border_round"
     *ngFor="
       let operation of !isFullList
-        ? getOperations()
+        ? operations
         : operationsMapByYear?.get(year);
       let i = index
     "
@@ -30,8 +30,15 @@
             alt=""
           />
           <img
+            *ngIf="operation.type != operationTypeConstant.TRANSFER"
             class="rounded-pill img2"
             src="{{ operation?.asset?.icon }}"
+            alt=""
+          />
+          <img
+            *ngIf="operation.type == operationTypeConstant.TRANSFER"
+            class="rounded-pill img2"
+            src="{{ operation?.wallet?.img }}"
             alt=""
           />
         </div>

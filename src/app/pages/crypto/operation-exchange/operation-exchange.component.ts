@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
@@ -15,13 +15,16 @@ import { LoggerService } from 'src/assets/core/utils/log.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-operation-exchange',
   templateUrl: './operation-exchange.component.html',
   styleUrls: ['./operation-exchange.component.scss'],
 })
-export class OperationExchangeComponent implements OnInit {
+export class OperationExchangeComponent implements OnInit, OnDestroy {
+  saveWalletSubscribe: Subscription = new Subscription();
+  saveWalletsSubscribe: Subscription = new Subscription();
   fiat: string = '';
   operationType: string = '';
   walletSelect?: string = '';
@@ -65,6 +68,11 @@ export class OperationExchangeComponent implements OnInit {
     private cdref: ChangeDetectorRef
   ) {
     this.screenService.hideFooter();
+  }
+
+  ngOnDestroy(): void {
+    this.saveWalletSubscribe.unsubscribe();
+    this.saveWalletsSubscribe.unsubscribe();
   }
 
   public get modalConstant(): typeof ModalConstant {
@@ -191,18 +199,21 @@ export class OperationExchangeComponent implements OnInit {
     }
     transferAsset.invested -= percentualeInvestitoCalcolata;
 
-    let transferedAsset = deepCopy(this.walletToTansfer.assets).find(
-      (as) => as.identifier == transferAsset.identifier
-    );
+    let transferedAsset = this.walletToTansfer.assets
+      ? deepCopy(this.walletToTansfer.assets).find(
+          (as) => as.identifier == transferAsset.identifier
+        )
+      : undefined;
 
     if (transferedAsset == undefined) {
-      transferedAsset = this.marketDataSelected;
+      transferedAsset = deepCopy(this.marketDataSelected);
       transferedAsset.balance = 0;
       transferedAsset.id = undefined;
       transferedAsset.invested = 0;
       transferedAsset.performance = 0;
       transferedAsset.trend = 0;
       transferedAsset.lastUpdate = transferAsset.lastUpdate;
+      transferedAsset.history = [];
     }
 
     transferedAsset!.balance += this.balanceToTransfer - this.fees;
@@ -215,30 +226,34 @@ export class OperationExchangeComponent implements OnInit {
     operation.entryCoin = transferAsset.symbol;
     operation.entryPrice = this.marketDataSelected.current_price;
     operation.entryPriceValue = parseFloat(
-      percentualeInvestitoCalcolata.toFixed(2)
+      (this.balanceToTransfer * this.marketDataSelected.current_price!).toFixed(
+        2
+      )
     );
     operation.entryQuantity = this.balanceToTransfer;
-
-    console.log(this.wallet, transferAsset, this.walletToTansfer);
-    /*
-
-    let operation: Operation = new Operation();
-    operation.type = this.operationType;
-    operation.status = 'OPEN';
-    operation.entryDate = new Date(this.marketDataSelected.lastUpdate);
-    operation.entryCoin = tradingAsset.symbol;
-    operation.entryPrice = this.marketDataSelected.current_price;
-    operation.entryPriceValue = parseFloat(
-      percentualeInvestitoCalcolata.toFixed(2)
+    operation.exitDate = new Date(transferAsset.lastUpdate);
+    operation.exitCoin = transferAsset.symbol;
+    operation.exitPrice = this.marketDataSelected.current_price;
+    operation.exitPriceValue = parseFloat(
+      (
+        (this.balanceToTransfer - this.fees) *
+        this.marketDataSelected.current_price!
+      ).toFixed(2)
     );
-    operation.entryQuantity = this.assetNewBalance;
-    operation.exitCoin = assetToSave.symbol;
+    operation.exitQuantity = this.balanceToTransfer - this.fees;
+    operation.performance = 0;
+    operation.trend = 0;
 
-    assetToSave.operations = [operation];
+    transferedAsset.operations = [operation];
 
-    let walletToSave = deepCopy(this.wallet);
-    walletToSave.assets = [assetToSave, tradingAsset];
-    this.saveWallet(walletToSave);*/
+    let walletSell = deepCopy(this.wallet);
+    let walletBuy = deepCopy(this.walletToTansfer);
+
+    walletSell.assets = [transferAsset];
+    walletBuy.assets = [transferedAsset];
+
+    this.saveWallets([walletSell, walletBuy]);
+    console.log(walletSell, walletBuy);
   }
 
   exchangeTradingInvestment() {
@@ -331,6 +346,7 @@ export class OperationExchangeComponent implements OnInit {
 
   exchangeNewInvestment() {
     let assetToSave = deepCopy(this.assetInWallet);
+    assetToSave.lastUpdate = new Date();
     if (!assetToSave.performance) {
       assetToSave.performance = 0;
       assetToSave.trend = 0;
@@ -366,8 +382,17 @@ export class OperationExchangeComponent implements OnInit {
   }
 
   saveWallet(walletToSave: Wallet) {
-    this.cryptoService
+    this.saveWalletSubscribe = this.cryptoService
       .addOrUpdateCryptoAsset(walletToSave)
+      .subscribe((data) => {
+        this.swal.toastMessage(SwalIcon.SUCCESS, data.message!);
+        this.router.navigate(['/crypto/dashboard']);
+      });
+  }
+
+  saveWallets(wallets: Wallet[]) {
+    this.saveWalletsSubscribe = this.cryptoService
+      .addOrUpdateCryptoAssets(wallets)
       .subscribe((data) => {
         this.swal.toastMessage(SwalIcon.SUCCESS, data.message!);
         this.router.navigate(['/crypto/dashboard']);

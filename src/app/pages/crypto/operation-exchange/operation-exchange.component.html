@@ -49,7 +49,7 @@
       <div *ngIf="operationType == operations.TRANSFER">
         <div class="title-section text-center mb-3">
           <h2 class="title" style="margin-top: 0px !important">
-            Select the wallet to receive the asset
+            {{ "crypto.operationExchange.select" | translate }}
           </h2>
         </div>
         <div class="container parent">
@@ -79,7 +79,10 @@
                       alt="Image 2"
                     />
                     <small
-                      ><p>Balance: {{ wallet.balance }}</p></small
+                      ><p>
+                        {{ "crypto.operationExchange.balance" | translate
+                        }}{{ wallet.balance }}
+                      </p></small
                     >
                   </div>
                 </div>
@@ -317,7 +320,7 @@
                       (click)="isEditFees = true"
                       class="clickable"
                     >
-                      Fees:
+                      {{ "crypto.operationExchange.fees" | translate }}:
                       <strong>
                         {{ fees }}
                         {{ transferAssetToSell.symbol }}</strong
@@ -328,7 +331,9 @@
                         <div class="form-group basic">
                           <div class="input-wrapper">
                             <label class="label" for="price"
-                              >Edit fees in
+                              >{{
+                                "crypto.operationExchange.editFees" | translate
+                              }}
                               {{ marketDataSelected.symbol }}</label
                             >
                             <input
@@ -340,7 +345,10 @@
                               [(ngModel)]="fees"
                               value="{{ fees }}"
                               required
-                              placeholder="Update fees"
+                              placeholder="{{
+                                'crypto.operationExchange.updateFees'
+                                  | translate
+                              }}"
                             />
                             <i class="clear-input">
                               <ion-icon name="close-circle"></ion-icon>

@@ -59,6 +59,7 @@ export const environment = {
    * Crypto Section
    */
   addCryptoAssetDataUrl: host + '/v1/crypto/asset/addOrUpdate',
+  addCryptoAssetsDataUrl: host + '/v1/crypto/asset/list/addOrUpdate',
   getCryptoAssetDataUrl: host + '/v1/crypto/asset/getAll',
   getCryptoDetailsDataUrl: host + '/v1/crypto/asset/get',
   getCryptoDashboardDataUrl: host + '/v1/crypto/dashboard',

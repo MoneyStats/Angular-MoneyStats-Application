@@ -62,11 +62,12 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
       );
     let assetList: Array<string> = [];
     this.wallets.forEach((w) => {
-      w.assets.forEach((a) => {
-        if (!assetList.includes(a.symbol!)) {
-          assetList.push(a.symbol!);
-        }
-      });
+      if (w.assets)
+        w.assets.forEach((a) => {
+          if (!assetList.includes(a.symbol!)) {
+            assetList.push(a.symbol!);
+          }
+        });
     });
     this.assets = this.assets.filter((a) => assetList.includes(a.symbol!));
   }

@@ -53,6 +53,7 @@ export const environment = {
   cleanCacheUrl: host + '/v1/crypto/cache/clean',
   marketDataUrl: host + '/v1/crypto/marketData/import',
   addCryptoAssetDataUrl: host + '/v1/crypto/asset/addOrUpdate',
+  addCryptoAssetsDataUrl: host + '/v1/crypto/asset/list/addOrUpdate',
   getCryptoAssetDataUrl: host + '/v1/crypto/asset/getAll',
   getCryptoDetailsDataUrl: host + '/v1/crypto/asset/get',
   getCryptoDashboardDataUrl: host + '/v1/crypto/dashboard',
