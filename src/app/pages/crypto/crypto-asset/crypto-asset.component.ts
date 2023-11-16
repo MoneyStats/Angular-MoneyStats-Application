@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   Asset,
   CryptoDashboard,
@@ -13,13 +13,16 @@ import {
   ModalConstant,
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-crypto-asset',
   templateUrl: './crypto-asset.component.html',
   styleUrls: ['./crypto-asset.component.scss'],
 })
-export class CryptoAssetComponent implements OnInit {
+export class CryptoAssetComponent implements OnInit, OnDestroy {
+  cryptoAssetSubscribe: Subscription = new Subscription();
+
   amount: string = '******';
   hidden: boolean = false;
   public chartOptions?: Partial<ApexOptions>;
@@ -41,6 +44,10 @@ export class CryptoAssetComponent implements OnInit {
     return ModalConstant;
   }
 
+  ngOnDestroy(): void {
+    this.cryptoAssetSubscribe.unsubscribe();
+  }
+
   ngOnInit(): void {
     this.screenService.hideFooter();
     this.getAssets();
@@ -48,12 +55,14 @@ export class CryptoAssetComponent implements OnInit {
 
   getAssets() {
     this.cryptoDashboard = deepCopy(this.cryptoService.cryptoDashboard);
-    this.cryptoService.getCryptoAssets().subscribe((data) => {
-      this.logger.LOG(data.message!, 'CryptoAssetComponent');
-      this.assets = data.data;
-      this.cryptoService.assets = data.data;
-      this.cryptoDashboard.assets = data.data;
-    });
+    this.cryptoAssetSubscribe = this.cryptoService
+      .getCryptoAssets()
+      .subscribe((data) => {
+        this.logger.LOG(data.message!, 'CryptoAssetComponent');
+        this.assets = data.data;
+        this.cryptoService.assets = data.data;
+        this.cryptoDashboard.assets = data.data;
+      });
     this.graph1Y();
     this.isWalletBalanceHidden();
   }

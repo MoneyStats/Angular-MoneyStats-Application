@@ -7,7 +7,6 @@ import { HttpLoaderFactory } from '../../../app.module';
 import { HttpClient } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from 'src/environments/environment';
-import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { ContentBoxComponent } from './card/content-box/content-box.component';
 import { DashboardWalletComponent } from './card/dashboard-wallet/dashboard-wallet.component';
@@ -29,7 +28,6 @@ import { VersionComponent } from './modal/version-and-change/version/version.com
 import { ChangelogComponent } from './modal/version-and-change/changelog/changelog.component';
 import { WalletCardComponent } from './wallet/wallet-card/wallet-card.component';
 import { WalletHistoryCardComponent } from './wallet/wallet-history/wallet-history.component';
-import { LoadingCardComponent } from '../shared/loading-card/loading-card.component';
 
 @NgModule({
   declarations: [

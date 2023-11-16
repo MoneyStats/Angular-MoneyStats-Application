@@ -1,5 +1,20 @@
 {
   "loading": "Loading...",
+  "response": {
+    "marketData": "Importing Market Data started...",
+    "cache": "Cache Cleaned Successfully",
+    "theme": "Changing Theme",
+    "live": "Live Wallet status: ",
+    "stats": "Stats Successfully Saved!",
+    "support": "Support successfully notifed!",
+    "register": "User $USER$ registered!",
+    "operation": "Operation for $OP1$/$OP2$ executed",
+    "backup": "Backup data completed!",
+    "restore": "Data successfully restored!",
+    "bug": "Bug successfully notified",
+    "user": "User Updated",
+    "close": "Operation Closed"
+  },
   "onboard": {
     "crypto": {
       "tab1": {

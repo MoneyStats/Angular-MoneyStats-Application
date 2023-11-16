@@ -1,4 +1,13 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 import { User } from 'src/assets/core/data/class/user.class';
 import {
   ModalConstant,
@@ -6,6 +15,7 @@ import {
 } from 'src/assets/core/data/constant/constant';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { UserService } from 'src/assets/core/services/user.service';
+import { LoggerService } from 'src/assets/core/utils/log.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 
 @Component({
@@ -13,7 +23,9 @@ import { SwalService } from 'src/assets/core/utils/swal.service';
   templateUrl: './profile-settings.component.html',
   styleUrls: ['./profile-settings.component.scss'],
 })
-export class ProfileSettingsComponent implements OnInit {
+export class ProfileSettingsComponent implements OnInit, OnDestroy {
+  updateUserSubscribe: Subscription = new Subscription();
+
   @Input('modalId') modalId: string = '';
   @Input('profileConst') profileConst: string = '';
   @Input('user') user?: User;
@@ -24,7 +36,12 @@ export class ProfileSettingsComponent implements OnInit {
   repetePassword: string = '';
   warning: boolean = false;
 
-  constructor(private userService: UserService, private swal: SwalService) {}
+  constructor(
+    private userService: UserService,
+    private swal: SwalService,
+    private logger: LoggerService,
+    private translate: TranslateService
+  ) {}
 
   public get profileConstant(): typeof ProfileSettings {
     return ProfileSettings;
@@ -34,6 +51,10 @@ export class ProfileSettingsComponent implements OnInit {
     if (this.user === undefined) {
       this.user = this.userService.user;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.updateUserSubscribe.unsubscribe();
   }
 
   updateUser() {
@@ -56,12 +77,18 @@ export class ProfileSettingsComponent implements OnInit {
       }
     }
 
-    this.userService.updateUserData(this.user!).subscribe((res) => {
-      this.userService.user! = res.data;
-      this.userService.setUserGlobally();
-      this.userService.setValue();
-      this.swal.toastMessage(SwalIcon.SUCCESS, res.message!);
-    });
+    this.updateUserSubscribe = this.userService
+      .updateUserData(this.user!)
+      .subscribe((res) => {
+        this.logger.LOG(res.message!, 'ProfileSettingsComponent');
+        this.userService.user! = res.data;
+        this.userService.setUserGlobally();
+        this.userService.setValue();
+        this.swal.toastMessage(
+          SwalIcon.SUCCESS,
+          this.translate.instant('response.user')
+        );
+      });
     // DELETE PASSWORD
     this.user!.password = '';
 

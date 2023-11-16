@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 import { TranslateService } from '@ngx-translate/core';
@@ -19,13 +19,15 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
 import { environment } from 'src/environments/environment';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
+  dashboardSubscribe: Subscription = new Subscription();
   environment = environment;
   @Output('dashboard') dashboard: Dashboard = new Dashboard();
   @Output('user') user: User = new User();
@@ -64,6 +66,10 @@ export class DashboardComponent implements OnInit {
       if (!isAutoUpdate) toast.updateAvaiable();
     });
   }
+  
+  ngOnDestroy(): void {
+    this.dashboardSubscribe.unsubscribe();
+  }
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -71,65 +77,67 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.userService.user;
-    this.dashboardService.getData().subscribe((data) => {
-      this.logger.LOG(data.message!, 'DashboardComponent');
-      if (!data.data.balance) {
-        this.dashboard.categories = data.data.categories;
-        this.dashboard.wallets = data.data.wallets;
+    this.dashboardSubscribe = this.dashboardService
+      .getData()
+      .subscribe((data) => {
+        this.logger.LOG(data.message!, 'DashboardComponent');
+        if (!data.data.balance) {
+          this.dashboard.categories = data.data.categories;
+          this.dashboard.wallets = data.data.wallets;
 
-        if (!this.dashboardService.isOnboarding) {
-          this.router.navigate(['on-boarding']);
-          this.dashboardService.isOnboarding = true;
-          return;
+          if (!this.dashboardService.isOnboarding) {
+            this.router.navigate(['on-boarding']);
+            this.dashboardService.isOnboarding = true;
+            return;
+          }
+        } else {
+          if (!this.dashboardService.isOnboarding && this.user.mockedUser) {
+            this.router.navigate(['on-boarding']);
+            this.dashboardService.isOnboarding = true;
+            return;
+          }
+          this.dashboard = data.data;
         }
-      } else {
-        if (!this.dashboardService.isOnboarding && this.user.mockedUser) {
-          this.router.navigate(['on-boarding']);
-          this.dashboardService.isOnboarding = true;
-          return;
+        this.dashboardService.dashboard = data.data;
+        if (this.dashboard.wallets && this.dashboard.wallets.length) {
+          this.scrollX();
+        } else {
+          const slider = document.getElementById('slider');
+          slider!.style.display = 'none';
         }
-        this.dashboard = data.data;
-      }
-      this.dashboardService.dashboard = data.data;
-      if (this.dashboard.wallets && this.dashboard.wallets.length) {
-        this.scrollX();
-      } else {
-        const slider = document.getElementById('slider');
-        slider!.style.display = 'none';
-      }
-      this.performance = this.dashboard.performance + ' %';
-      let date = this.datePipe
-        .transform(this.dashboard.performanceSince, 'dd MMM y')
-        ?.toString();
-      this.performanceSince =
-        this.dashboard.performanceSince != null
-          ? date!
-          : this.datePipe.transform(new Date(), 'dd MMM y')!;
-      let datelastStats = this.datePipe
-        .transform(this.dashboard.performanceLastDate, 'dd MMM y')
-        ?.toString();
-      this.performanceLastDate =
-        this.dashboard.performanceLastDate != null
-          ? datelastStats!
-          : this.datePipe.transform(new Date(), 'dd MMM y')!;
-      this.graphTitle =
-        this.performanceSince != this.performanceLastDate
-          ? this.translate
-              .instant('dashboard.graph.title')
-              .replace('&FROM&', this.performanceSince)
-              .replace('&TO&', this.performanceLastDate)
-          : this.translate
-              .instant('dashboard.graph.titleFirst')
-              .replace('&FROM&', this.performanceSince);
-      this.lastStatsPerformance = this.dashboard.lastStatsPerformance + ' %';
-      this.lastStatsBalanceDifference =
-        this.dashboard.lastStatsBalanceDifference +
-        ' ' +
-        this.userService.coinSymbol;
-      this.walletService.totalBalance = this.dashboard.balance;
-      this.renderChart(this.dashboard);
-      this.walletDetails(data.data.wallets);
-    });
+        this.performance = this.dashboard.performance + ' %';
+        let date = this.datePipe
+          .transform(this.dashboard.performanceSince, 'dd MMM y')
+          ?.toString();
+        this.performanceSince =
+          this.dashboard.performanceSince != null
+            ? date!
+            : this.datePipe.transform(new Date(), 'dd MMM y')!;
+        let datelastStats = this.datePipe
+          .transform(this.dashboard.performanceLastDate, 'dd MMM y')
+          ?.toString();
+        this.performanceLastDate =
+          this.dashboard.performanceLastDate != null
+            ? datelastStats!
+            : this.datePipe.transform(new Date(), 'dd MMM y')!;
+        this.graphTitle =
+          this.performanceSince != this.performanceLastDate
+            ? this.translate
+                .instant('dashboard.graph.title')
+                .replace('&FROM&', this.performanceSince)
+                .replace('&TO&', this.performanceLastDate)
+            : this.translate
+                .instant('dashboard.graph.titleFirst')
+                .replace('&FROM&', this.performanceSince);
+        this.lastStatsPerformance = this.dashboard.lastStatsPerformance + ' %';
+        this.lastStatsBalanceDifference =
+          this.dashboard.lastStatsBalanceDifference +
+          ' ' +
+          this.userService.coinSymbol;
+        this.walletService.totalBalance = this.dashboard.balance;
+        this.renderChart(this.dashboard);
+        this.walletDetails(data.data.wallets);
+      });
 
     this.isWalletBalanceHidden();
     this.screenService.activeHeaderAndFooter();

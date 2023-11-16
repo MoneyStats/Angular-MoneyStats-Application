@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { Location } from '@angular/common';
 import { UserService } from 'src/assets/core/services/user.service';
 import { User } from 'src/assets/core/data/class/user.class';
@@ -9,13 +9,16 @@ import {
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { LoggerService } from 'src/assets/core/utils/log.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnDestroy {
+  loginSubscribe: Subscription = new Subscription();
+
   environment = environment;
   @Output('user') user?: User = new User();
   username: string = '';
@@ -27,7 +30,9 @@ export class LoginComponent implements OnInit {
     private logger: LoggerService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnDestroy(): void {
+    this.loginSubscribe.unsubscribe();
+  }
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -39,7 +44,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     const user = this.userService.login(this.username, this.password);
-    user.subscribe((data) => {
+    this.loginSubscribe = user.subscribe((data) => {
       this.logger.LOG(data.message!, 'LoginComponent');
       if (data.data.githubUser) {
         data.data.github = JSON.parse(data.data.githubUser);

@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
-import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
-import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
   selector: 'app-requirements',

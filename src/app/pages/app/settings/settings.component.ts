@@ -1,4 +1,6 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 import { fader } from 'src/app/shared/animations/route-animations';
 import { Status, User } from 'src/assets/core/data/class/user.class';
 import {
@@ -23,7 +25,11 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./settings.component.scss'],
   animations: [fader],
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent implements OnInit, OnDestroy {
+  marketDataSubscribe: Subscription = new Subscription();
+  cacheSubscribe: Subscription = new Subscription();
+  updateUserSubscribe: Subscription = new Subscription();
+
   environment = environment;
   @Output('profileConst') profileConst: string = '';
   user?: User;
@@ -39,8 +45,15 @@ export class SettingsComponent implements OnInit {
     private toast: ToastService,
     private swal: SwalService,
     private appService: AppService,
-    private logger: LoggerService
+    private logger: LoggerService,
+    private translate: TranslateService
   ) {}
+
+  ngOnDestroy(): void {
+    this.marketDataSubscribe.unsubscribe();
+    this.cacheSubscribe.unsubscribe();
+    this.updateUserSubscribe.unsubscribe();
+  }
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -73,7 +86,6 @@ export class SettingsComponent implements OnInit {
       this.isAutoUpdate = autoUpdate;
     }
     if (this.user?.settings.liveWallets != undefined) {
-      console.log(this.user.settings.liveWallets);
       this.isLiveWallet =
         this.user.settings.liveWallets == Status.ACTIVE ? true : false;
     }
@@ -136,24 +148,32 @@ export class SettingsComponent implements OnInit {
   }
 
   cleanCache() {
-    this.appService.cleanCache().subscribe((res) => {
+    this.cacheSubscribe = this.appService.cleanCache().subscribe((res) => {
       this.logger.LOG(res.message!, 'SettingsComponent');
-      this.swal.toastMessage(SwalIcon.SUCCESS, res.message!);
+      this.swal.toastMessage(
+        SwalIcon.SUCCESS,
+        this.translate.instant('response.cache')
+      );
     });
   }
 
   importMarketData() {
-    this.appService.importMarketData().subscribe((res) => {
-      this.logger.LOG(res.message!, 'SettingsComponent');
-      this.swal.toastMessage(SwalIcon.SUCCESS, res.message!);
-    });
+    this.marketDataSubscribe = this.appService
+      .importMarketData()
+      .subscribe((res) => {
+        this.logger.LOG(res.message!, 'SettingsComponent');
+        this.swal.toastMessage(
+          SwalIcon.SUCCESS,
+          this.translate.instant('response.marketData')
+        );
+      });
   }
 
   changeTheme() {
     let dark = parseInt(localStorage.getItem('MoneyStatsDarkMode')!);
     this.user!.settings.darkMode =
       dark == 1 ? Status.NOT_ACTIVE : Status.ACTIVE;
-    this.updateUser('Theme Updated');
+    this.updateUser(this.translate.instant('response.theme'));
   }
 
   liveWallet() {
@@ -165,16 +185,21 @@ export class SettingsComponent implements OnInit {
         this.user?.settings.liveWallets == Status.ACTIVE
           ? Status.NOT_ACTIVE
           : Status.ACTIVE;
-    this.updateUser('Live Wallet Updated');
+    this.updateUser(
+      this.translate.instant('response.live') + this.user?.settings.liveWallets
+    );
     this.isLiveWallet == true ? false : true;
   }
 
   updateUser(message: string) {
-    this.userService.updateUserData(this.user!).subscribe((res) => {
-      this.userService.user! = res.data;
-      this.userService.setUserGlobally();
-      this.userService.setValue();
-      this.swal.toastMessage(SwalIcon.SUCCESS, message);
-    });
+    this.updateUserSubscribe = this.userService
+      .updateUserData(this.user!)
+      .subscribe((res) => {
+        this.logger.LOG(res.message!, 'SettingsComponent');
+        this.userService.user! = res.data;
+        this.userService.setUserGlobally();
+        this.userService.setValue();
+        this.swal.toastMessage(SwalIcon.SUCCESS, message);
+      });
   }
 }

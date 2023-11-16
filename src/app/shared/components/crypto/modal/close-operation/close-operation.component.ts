@@ -2,6 +2,7 @@ import {
   Component,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   SimpleChanges,
 } from '@angular/core';
@@ -15,13 +16,18 @@ import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 import { Router } from '@angular/router';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
+import { Subscription } from 'rxjs';
+import { LoggerService } from 'src/assets/core/utils/log.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-close-operation',
   templateUrl: './close-operation.component.html',
   styleUrls: ['./close-operation.component.scss'],
 })
-export class CloseOperationComponent implements OnInit {
+export class CloseOperationComponent implements OnDestroy {
+  closeSubscribe: Subscription = new Subscription();
+
   @Input('modalId') modalId: string = '';
   @Input('operation') operation?: Operation = new Operation();
   operationToClose: Operation = new Operation();
@@ -33,7 +39,9 @@ export class CloseOperationComponent implements OnInit {
   constructor(
     private cryptoService: CryptoService,
     private swal: SwalService,
-    private router: Router
+    private router: Router,
+    private logger: LoggerService,
+    private translate: TranslateService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -44,8 +52,8 @@ export class CloseOperationComponent implements OnInit {
     return OperationsType;
   }
 
-  ngOnInit(): void {
-    //this.getData();
+  ngOnDestroy(): void {
+    this.closeSubscribe.unsubscribe();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -141,9 +149,16 @@ export class CloseOperationComponent implements OnInit {
       '/' +
       asset1?.symbol +
       ' successfully closed';
-    this.cryptoService.addOrUpdateCryptoAsset(wallet!).subscribe((data) => {
-      this.swal.toastMessage(SwalIcon.SUCCESS, message);
-      this.router.navigate(['/crypto/dashboard']);
-    });
+
+    this.closeSubscribe = this.cryptoService
+      .addOrUpdateCryptoAsset(wallet!)
+      .subscribe((data) => {
+        this.logger.LOG(data.message!, 'CloseOperationComponent');
+        this.swal.toastMessage(
+          SwalIcon.SUCCESS,
+          this.translate.instant('response.close')
+        );
+        this.router.navigate(['/crypto/dashboard']);
+      });
   }
 }

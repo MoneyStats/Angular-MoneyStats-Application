@@ -2,6 +2,7 @@ import {
   Component,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   SimpleChanges,
 } from '@angular/core';
@@ -23,13 +24,16 @@ import {
   ModalConstant,
   OperationsType,
 } from 'src/assets/core/data/constant/constant';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-details-overview',
   templateUrl: './details-overview.component.html',
   styleUrls: ['./details-overview.component.scss'],
 })
-export class DetailsOverviewComponent implements OnInit, OnChanges {
+export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
+  updateinvestmentSubscribe: Subscription = new Subscription();
+
   amount: string = '******';
   @Input('hidden') hidden: boolean = false;
   public chartOptions?: Partial<ApexOptions>;
@@ -78,6 +82,10 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
     this.getAsset();
   }
 
+  ngOnDestroy(): void {
+    this.updateinvestmentSubscribe.unsubscribe();
+  }
+
   setColor() {
     this.resetColor();
     const activeElem = document.querySelectorAll('.active');
@@ -102,16 +110,9 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
   }
 
   getAsset() {
-    //if (this.asset.history?.find((h) => h.id == undefined)) {
-    //  let indexOf = this.asset.history?.indexOf(
-    //    this.asset.history?.find((h) => h.id == undefined)!
-    //  );
-    //  this.asset.history.splice(indexOf, 1);
-    //}
     this.graph1Y();
     this.walletsAsset = this.filterWallets();
     this.setColor();
-    console.log(this.walletsAsset);
   }
 
   graphAll() {
@@ -257,11 +258,6 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
             operation.assetSell = this.cryptoDashboard.assets.find(
               (a) => a.symbol == operation.entryCoin
             );
-          if (operation.type == OperationsType.TRANSFER)
-            operation.walletSell = this.cryptoDashboard.wallets.find((w) =>
-              w.assets.includes(operation.assetSell)
-            );
-          console.log(operation.walletSell);
           operations.push(operation);
         });
     });
@@ -271,9 +267,11 @@ export class DetailsOverviewComponent implements OnInit, OnChanges {
 
   updateInvestment(wallet: Wallet) {
     this.isEditInvestmentActive = false;
-    this.cryptoService.addOrUpdateCryptoAsset(wallet).subscribe((data) => {
-      this.logger.LOG(data.message!, 'DetailsOverviewComponent');
-    });
+    this.updateinvestmentSubscribe = this.cryptoService
+      .addOrUpdateCryptoAsset(wallet)
+      .subscribe((data) => {
+        this.logger.LOG(data.message!, 'DetailsOverviewComponent');
+      });
 
     let wallets = deepCopy(this.walletsAsset);
     let invested = 0;

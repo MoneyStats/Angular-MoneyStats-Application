@@ -14,7 +14,6 @@ import {
   OperationsType,
 } from 'src/assets/core/data/constant/constant';
 import {
-  Asset,
   CryptoDashboard,
   Operation,
 } from 'src/assets/core/data/class/crypto.class';

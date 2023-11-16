@@ -1,5 +1,20 @@
 {
   "loading": "Caricamento...",
+  "response": {
+    "marketData": "Importazione Market Data iniziato...",
+    "cache": "Cache Cancellata Correttamente",
+    "theme": "Cambio Tema",
+    "live": "Stato portafogli live: ",
+    "stats": "Stats salvato correttamente",
+    "support": "Supporto notificato correttamente!",
+    "register": "User $USER$ registrato",
+    "operation": "Operazione per $OP1$/$OP2$ eseguita",
+    "backup": "Backup dati completato!",
+    "restore": "Dati ripristinati correttamente!",
+    "bug": "Bug notificato correttamente",
+    "user": "Utente aggiornato",
+    "close": "Operazione chiusa"
+  },
   "onboard": {
     "crypto": {
       "tab1": {

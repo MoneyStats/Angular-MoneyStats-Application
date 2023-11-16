@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import {
   ModalConstant,
@@ -13,7 +14,9 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
   templateUrl: './wallet.component.html',
   styleUrls: ['./wallet.component.scss'],
 })
-export class WalletComponent implements OnInit {
+export class WalletComponent implements OnInit, OnDestroy {
+  walletsSubscribe: Subscription = new Subscription();
+
   wallets: Wallet[] = [];
   amount: string = '******';
   hidden: boolean = false;
@@ -24,6 +27,10 @@ export class WalletComponent implements OnInit {
     private logger: LoggerService
   ) {}
 
+  ngOnDestroy(): void {
+    this.walletsSubscribe.unsubscribe();
+  }
+
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
   }
@@ -32,7 +39,7 @@ export class WalletComponent implements OnInit {
     this.screenService.setupHeader();
     this.screenService.goToWallet();
     this.screenService.showFooter();
-    this.walletService.getWallet().subscribe((res) => {
+    this.walletsSubscribe = this.walletService.getWallet().subscribe((res) => {
       this.logger.LOG(res.message!, 'WalletComponent');
       this.wallets = res.data;
       this.walletService.walletActive = this.walletActive(res.data);

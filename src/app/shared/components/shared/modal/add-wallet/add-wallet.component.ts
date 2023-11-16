@@ -3,11 +3,13 @@ import {
   EventEmitter,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   Output,
   SimpleChanges,
 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 import { Category, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import {
   AppConfigConst,
@@ -25,7 +27,10 @@ import { environment } from 'src/environments/environment';
   templateUrl: './add-wallet.component.html',
   styleUrls: ['./add-wallet.component.scss'],
 })
-export class AddWalletComponent implements OnInit, OnChanges {
+export class AddWalletComponent implements OnInit, OnChanges, OnDestroy {
+  addWalletSub: Subscription = new Subscription();
+  updateuserSub: Subscription = new Subscription();
+
   environment = environment;
   @Input('modalId') modalId: string = '';
   @Output('emitAddWallet') emitAddWallet = new EventEmitter<Wallet>();
@@ -60,6 +65,11 @@ export class AddWalletComponent implements OnInit, OnChanges {
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
+  }
+
+  ngOnDestroy(): void {
+    this.addWalletSub.unsubscribe();
+    this.updateuserSub.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -138,21 +148,27 @@ export class AddWalletComponent implements OnInit, OnChanges {
     if (walletToSave.fileImage != undefined && walletToSave.fileImage.name) {
       walletToSave.imgName = walletToSave.fileImage.name;
 
-      this.userService.uploadImage(walletToSave.fileImage).subscribe((data) => {
-        this.logger.LOG(data.message!, 'AddWalletComponent');
-        this.walletService.addUpdateWallet(walletToSave).subscribe((data) => {
+      this.updateuserSub = this.userService
+        .uploadImage(walletToSave.fileImage)
+        .subscribe((data) => {
           this.logger.LOG(data.message!, 'AddWalletComponent');
-          this.wallet.img = data.data.img;
+          this.addWalletSub = this.walletService
+            .addUpdateWallet(walletToSave)
+            .subscribe((data) => {
+              this.logger.LOG(data.message!, 'AddWalletComponent');
+              this.wallet.img = data.data.img;
+              // Save Wallet
+              this.emitAddWallet.emit(data.data);
+            });
+        });
+    } else {
+      this.addWalletSub = this.walletService
+        .addUpdateWallet(walletToSave)
+        .subscribe((data) => {
+          this.logger.LOG(data.message!, 'AddWalletComponent');
           // Save Wallet
           this.emitAddWallet.emit(data.data);
         });
-      });
-    } else {
-      this.walletService.addUpdateWallet(walletToSave).subscribe((data) => {
-        this.logger.LOG(data.message!, 'AddWalletComponent');
-        // Save Wallet
-        this.emitAddWallet.emit(data.data);
-      });
     }
 
     if (!walletToSave.id) {
