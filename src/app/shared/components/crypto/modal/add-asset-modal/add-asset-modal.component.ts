@@ -129,6 +129,7 @@ export class AddAssetModalComponent implements OnInit, OnDestroy {
       this.saveAssetSubscription = this.cryptoService
         .addOrUpdateCryptoAsset(this.wallet!)
         .subscribe((data) => {
+          this.logger.LOG(data.message!, 'AddAssetModalComponent');
           this.emitAddAsset.emit(data.data);
           this.resetModal();
         });

@@ -9,8 +9,6 @@ import {
 } from '@angular/core';
 import { Asset } from 'src/assets/core/data/class/crypto.class';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
-import { CryptoService } from 'src/assets/core/services/crypto.service';
-import { LoggerService } from 'src/assets/core/utils/log.service';
 import { SelectAssetConstant } from 'src/assets/core/data/constant/constant';
 
 declare var jQuery: any;
@@ -35,10 +33,8 @@ export class AssetSelectComponent implements OnInit, OnChanges {
   assetSelected?: Asset;
   isFilterActive: boolean = false;
 
-  constructor(
-    private cryptoService: CryptoService,
-    private logger: LoggerService
-  ) {}
+  constructor() {}
+
   ngOnChanges(changes: SimpleChanges): void {
     this.getCryptoPrices();
   }

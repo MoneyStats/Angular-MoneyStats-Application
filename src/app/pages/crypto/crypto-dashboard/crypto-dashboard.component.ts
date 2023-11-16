@@ -22,14 +22,6 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { environment } from 'src/environments/environment';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { Subscription } from 'rxjs';
-import {
-  animate,
-  query,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
 
 declare const TradingView: any;
 
@@ -40,6 +32,7 @@ declare const TradingView: any;
 })
 export class CryptoDashboardComponent implements OnInit, OnDestroy {
   getDashboardSubscribe: Subscription = new Subscription();
+
   amount: string = '******';
   hidden: boolean = false;
   environment = environment;

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ChildrenOutletContexts, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { fadeSlider } from 'src/app/shared/animations/route-animations';
 import { CryptoDashboard } from 'src/assets/core/data/class/crypto.class';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
@@ -16,7 +17,9 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./crypto.component.scss'],
   animations: [fadeSlider],
 })
-export class CryptoComponent implements OnInit {
+export class CryptoComponent implements OnInit, OnDestroy {
+  cryptoDashboardSub: Subscription = new Subscription();
+
   environment = environment;
   isFooterActive: boolean = false;
   user?: User;
@@ -37,26 +40,32 @@ export class CryptoComponent implements OnInit {
     return ModalConstant;
   }
 
+  ngOnDestroy(): void {
+    this.cryptoDashboardSub.unsubscribe();
+  }
+
   ngOnInit(): void {
     this.user = this.appService.user;
-    this.cryptoService.getCryptoDashboard().subscribe((data) => {
-      let dashboard = data.data;
+    this.cryptoDashboardSub = this.cryptoService
+      .getCryptoDashboard()
+      .subscribe((data) => {
+        let dashboard = data.data;
 
-      if (dashboard.wallets != undefined && dashboard.wallets.length != 0) {
-        let wallets = dashboard.wallets.filter(
-          (wallet: Wallet) => wallet.category == 'Crypto'
-        );
-        if (
-          wallets == undefined ||
-          wallets.length == 0 ||
-          //wallets[0].assets == undefined ||
-          //wallets[0].assets.length == 0
-          !wallets.find((w: any) => w.assets != undefined)
-        ) {
-          this.onBoard();
-        }
-      } else this.onBoard();
-    });
+        if (dashboard.wallets != undefined && dashboard.wallets.length != 0) {
+          let wallets = dashboard.wallets.filter(
+            (wallet: Wallet) => wallet.category == 'Crypto'
+          );
+          if (
+            wallets == undefined ||
+            wallets.length == 0 ||
+            //wallets[0].assets == undefined ||
+            //wallets[0].assets.length == 0
+            !wallets.find((w: any) => w.assets != undefined)
+          ) {
+            this.onBoard();
+          }
+        } else this.onBoard();
+      });
   }
 
   onBoard() {

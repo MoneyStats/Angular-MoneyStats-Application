@@ -16,6 +16,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { Subscription } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-operation-exchange',
@@ -24,7 +25,10 @@ import { Subscription } from 'rxjs';
 })
 export class OperationExchangeComponent implements OnInit, OnDestroy {
   saveWalletSubscribe: Subscription = new Subscription();
+  routeSubscribe: Subscription = new Subscription();
   saveWalletsSubscribe: Subscription = new Subscription();
+  getPriceSubscribe: Subscription = new Subscription();
+
   fiat: string = '';
   operationType: string = '';
   walletSelect?: string = '';
@@ -65,7 +69,8 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     private logger: LoggerService,
     private swal: SwalService,
     private router: Router,
-    private cdref: ChangeDetectorRef
+    private cdref: ChangeDetectorRef,
+    private translate: TranslateService
   ) {
     this.screenService.hideFooter();
   }
@@ -73,6 +78,8 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.saveWalletSubscribe.unsubscribe();
     this.saveWalletsSubscribe.unsubscribe();
+    this.routeSubscribe.unsubscribe();
+    this.getPriceSubscribe.unsubscribe();
   }
 
   public get modalConstant(): typeof ModalConstant {
@@ -96,7 +103,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   }
 
   getOperationExchange() {
-    this.route.params.subscribe((a: any) => {
+    this.routeSubscribe = this.route.params.subscribe((a: any) => {
       this.operationType = a.operationType;
       this.walletSelect = a.wallet;
       this.fiat = a.fiat;
@@ -122,10 +129,12 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   }
 
   getCryptoPrices(fiat: string) {
-    this.cryptoService.getCryptoPrice(fiat).subscribe((data) => {
-      this.logger.LOG(data.message!, 'OperationExchangeComponent');
-      this.marketData = data.data;
-    });
+    this.getPriceSubscribe = this.cryptoService
+      .getCryptoPrice(fiat)
+      .subscribe((data) => {
+        this.logger.LOG(data.message!, 'OperationExchangeComponent');
+        this.marketData = data.data;
+      });
   }
 
   isWalletPresent() {
@@ -253,7 +262,6 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     walletBuy.assets = [transferedAsset];
 
     this.saveWallets([walletSell, walletBuy]);
-    console.log(walletSell, walletBuy);
   }
 
   exchangeTradingInvestment() {
@@ -385,7 +393,14 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     this.saveWalletSubscribe = this.cryptoService
       .addOrUpdateCryptoAsset(walletToSave)
       .subscribe((data) => {
-        this.swal.toastMessage(SwalIcon.SUCCESS, data.message!);
+        this.logger.LOG(data.message!, 'OperationExchangeComponent');
+        this.swal.toastMessage(
+          SwalIcon.SUCCESS,
+          this.translate
+            .instant('response.operation')
+            .replace('$OP1$', walletToSave.assets[0].symbol)
+            .replace('$OP2$', walletToSave.assets[1].symbol)
+        );
         this.router.navigate(['/crypto/dashboard']);
       });
   }
@@ -394,7 +409,14 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     this.saveWalletsSubscribe = this.cryptoService
       .addOrUpdateCryptoAssets(wallets)
       .subscribe((data) => {
-        this.swal.toastMessage(SwalIcon.SUCCESS, data.message!);
+        this.logger.LOG(data.message!, 'OperationExchangeComponent');
+        this.swal.toastMessage(
+          SwalIcon.SUCCESS,
+          this.translate
+            .instant('response.operation')
+            .replace('$OP1$', wallets[0].name)
+            .replace('$OP2$', wallets[1].name)
+        );
         this.router.navigate(['/crypto/dashboard']);
       });
   }

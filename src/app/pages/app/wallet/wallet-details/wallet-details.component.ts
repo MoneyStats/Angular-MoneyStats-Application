@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { ActivatedRoute } from '@angular/router';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
@@ -13,13 +13,18 @@ import { environment } from 'src/environments/environment';
 import { ToastService } from 'src/assets/core/utils/toast.service';
 import { AppService } from 'src/assets/core/services/app.service';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
+import { Subscription } from 'rxjs';
+import { LoggerService } from 'src/assets/core/utils/log.service';
 
 @Component({
   selector: 'app-wallet-details',
   templateUrl: './wallet-details.component.html',
   styleUrls: ['./wallet-details.component.scss'],
 })
-export class WalletDetailsComponent implements OnInit {
+export class WalletDetailsComponent implements OnInit, OnDestroy {
+  routeSubscribe: Subscription = new Subscription();
+  saveWalletSubscribe: Subscription = new Subscription();
+
   amount: string = '******';
   hidden: boolean = false;
   environment = environment;
@@ -52,17 +57,23 @@ export class WalletDetailsComponent implements OnInit {
     private charts: ChartService,
     public walletService: WalletService,
     private toast: ToastService,
-    public appService: AppService
+    public appService: AppService,
+    private logger: LoggerService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
   }
 
+  ngOnDestroy(): void {
+    this.routeSubscribe.unsubscribe();
+    this.saveWalletSubscribe.unsubscribe();
+  }
+
   ngOnInit(): void {
     this.screenService.setupHeader();
     this.screenService.hideFooter();
-    this.route.params.subscribe((w: any) => {
+    this.routeSubscribe = this.route.params.subscribe((w: any) => {
       this.walletId = w.id;
       this.walletName = w.wallet;
     });
@@ -92,12 +103,14 @@ export class WalletDetailsComponent implements OnInit {
     this.coinSymbol = this.walletService.coinSymbol;
     this.isWalletBalanceHidden();
   }
+
   renderImage() {
     if (this.screenService!.screenWidth! <= 780) {
       const image = document.getElementById('gradientSection');
       image!.style.backgroundImage = 'url(' + this.wallet!.img + ')';
     }
   }
+
   renderGraph() {
     if (!this.chartAll) {
       setTimeout(() => {
@@ -200,6 +213,7 @@ export class WalletDetailsComponent implements OnInit {
     }
     this.saveOrUpdateWallet();
   }
+
   editWallet(wallet: Wallet) {
     this.wallet = wallet;
     this.renderImage();
@@ -241,12 +255,15 @@ export class WalletDetailsComponent implements OnInit {
   }
 
   saveOrUpdateWallet() {
-    this.walletService.addUpdateWallet(this.wallet!).subscribe((data) => {
-      this.infoKey = '';
-      this.infoValue = '';
-      this.addInput = false;
-      this.editBtn = false;
-      this.editShow = false;
-    });
+    this.saveWalletSubscribe = this.walletService
+      .addUpdateWallet(this.wallet!)
+      .subscribe((data) => {
+        this.logger.LOG(data.message!, 'WalletDetailsComponent');
+        this.infoKey = '';
+        this.infoValue = '';
+        this.addInput = false;
+        this.editBtn = false;
+        this.editShow = false;
+      });
   }
 }

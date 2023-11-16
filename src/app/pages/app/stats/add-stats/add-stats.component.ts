@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { ErrorService } from 'src/assets/core/interceptors/error.service';
@@ -15,7 +17,9 @@ import { environment } from 'src/environments/environment';
   templateUrl: './add-stats.component.html',
   styleUrls: ['./add-stats.component.scss'],
 })
-export class AddStatsComponent implements OnInit {
+export class AddStatsComponent implements OnInit, OnDestroy {
+  addStatsSubscribe: Subscription = new Subscription();
+
   environment = environment;
   saveValidation: boolean = false;
   // Used for warning date
@@ -32,8 +36,13 @@ export class AddStatsComponent implements OnInit {
     private errorService: ErrorService,
     private router: Router,
     private logger: LoggerService,
-    private swal: SwalService
+    private swal: SwalService,
+    private translate: TranslateService
   ) {}
+
+  ngOnDestroy(): void {
+    this.addStatsSubscribe.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.screenService.setupHeader();
@@ -77,13 +86,19 @@ export class AddStatsComponent implements OnInit {
     }
     return validate;
   }
+
   save() {
     this.saveValidation = false;
-    this.statsService.addStats(this.walletsToSave).subscribe((data) => {
-      this.logger.LOG(data.message!, 'AddStatsComponent');
-      this.walletsToSave = data.data;
-      this.swal.toastMessage(SwalIcon.SUCCESS, 'Stats Successfully Saved!');
-    });
+    this.addStatsSubscribe = this.statsService
+      .addStats(this.walletsToSave)
+      .subscribe((data) => {
+        this.logger.LOG(data.message!, 'AddStatsComponent');
+        this.walletsToSave = data.data;
+        this.swal.toastMessage(
+          SwalIcon.SUCCESS,
+          this.translate.instant('response.stats')
+        );
+      });
     this.getTodayAsString();
   }
 
