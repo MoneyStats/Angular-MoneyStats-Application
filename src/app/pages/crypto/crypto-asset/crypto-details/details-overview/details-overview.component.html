@@ -47,14 +47,14 @@
           <div class="tab-pane fade show active" id="tab-1y" role="tabpanel">
             <div class="inner-round">
               <div
-                    *ngIf="!chart1Y"
-                    class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
-                  >
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                  </div>
+                *ngIf="!chart1Y"
+                class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
+              >
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
               <apx-chart
                 *ngIf="chart1Y"
                 [series]="chart1Y.series!"
@@ -71,14 +71,14 @@
           <div class="tab-pane fade" id="tab-3y" role="tabpanel">
             <div class="inner-round">
               <div
-                    *ngIf="!chart3Y"
-                    class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
-                  >
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                  </div>
+                *ngIf="!chart3Y"
+                class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
+              >
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
               <apx-chart
                 *ngIf="chart3Y"
                 [series]="chart3Y.series!"
@@ -95,14 +95,14 @@
           <div class="tab-pane fade" id="tab-all" role="tabpanel">
             <div class="inner-round">
               <div
-                    *ngIf="!chartOptions"
-                    class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
-                  >
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                  </div>
+                *ngIf="!chartOptions"
+                class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
+              >
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
               <apx-chart
                 *ngIf="chartOptions"
                 [series]="chartOptions.series!"
@@ -272,15 +272,45 @@
     <!-- Stats -->
   </div>
   <div class="col-md-12">
-    <div class="section inset mb-2">
-      <div class="section-title">
-        {{ "crypto.asset.details.overview.wallets" | translate
-        }}{{ asset.name }}
+    <div class="section inset mb-0">
+      <div class="section-heading mb-1">
+        <div class="section-title">
+          {{ "crypto.asset.details.overview.wallets" | translate
+          }}{{ asset.name }}
+        </div>
+        <a
+          *ngIf="!showZeroBalance"
+          (click)="zeroBalanceSwitch()"
+          class="link clickable"
+        >
+          <ion-icon
+            name="eye-outline"
+            style="width: 20px; height: 20px; vertical-align: -5px"
+          ></ion-icon>
+          {{ "crypto.asset.show" | translate }}</a
+        >
+        <a
+          *ngIf="showZeroBalance"
+          (click)="zeroBalanceSwitch()"
+          class="link clickable"
+        >
+          <ion-icon
+            name="eye-off-outline"
+            style="width: 20px; height: 20px; vertical-align: -5px"
+          ></ion-icon>
+          {{ "crypto.asset.hidden" | translate }}</a
+        >
       </div>
-
       <div class="accordion border_round" id="accordionExample2">
         <div class="accordion-item" *ngFor="let wallet of walletsAsset">
-          <h2 class="accordion-header">
+          <h2
+            class="accordion-header"
+            *ngIf="
+              !showZeroBalance
+                ? wallet.assets[0].balance > 0
+                : wallet.assets[0].balance >= 0
+            "
+          >
             <button
               class="accordion-button collapsed"
               type="button"
@@ -314,6 +344,11 @@
             id="{{ wallet.name.split('.')[0] + wallet.id }}"
             class="accordion-collapse collapse"
             data-bs-parent="#accordionExample2"
+            *ngIf="
+              !showZeroBalance
+                ? wallet.assets[0].balance > 0
+                : wallet.assets[0].balance >= 0
+            "
           >
             <div class="accordion-body">
               <div class="row">

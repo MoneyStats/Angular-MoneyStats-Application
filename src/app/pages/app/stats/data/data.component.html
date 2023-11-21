@@ -156,6 +156,7 @@
                 class="text-center"
                 *ngFor="let wallet of dashboard.wallets"
               >
+                <img src="{{ wallet.img }}" class="table-logo" alt="" />
                 {{ wallet.name }}
               </th>
               <th scope="col" class="text-end">
