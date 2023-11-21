@@ -36,10 +36,13 @@ export class ResumeAssetsComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.ngOnInit();
+    this.getDatas();
   }
 
   ngOnInit(): void {
+  }
+
+  getDatas() {
     setTimeout(() => {
       if (this.resumeData.assets) {
         this.resumeDataFilterOnDate = deepCopy(this.resumeData);
@@ -60,6 +63,7 @@ export class ResumeAssetsComponent implements OnInit, OnChanges {
     }, 100);
     this.renderTable();
   }
+
   renderTable() {
     this.tableBalance = [];
     this.balances = [];
@@ -139,6 +143,7 @@ export class ResumeAssetsComponent implements OnInit, OnChanges {
     array.push(trendStats);
     this.balances.push(total.balance);
     array.index = array.length - 1;
+    console.log(array);
     return array;
   }
 }

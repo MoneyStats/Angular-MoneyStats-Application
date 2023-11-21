@@ -50,6 +50,8 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
 
   operationSelect: any;
 
+  showZeroBalance: boolean = false;
+
   constructor(
     public cryptoService: CryptoService,
     private screenService: ScreenService,
@@ -314,5 +316,11 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
     );
     date.sort();
     return date;
+  }
+
+  zeroBalanceSwitch() {
+    return this.showZeroBalance
+      ? (this.showZeroBalance = false)
+      : (this.showZeroBalance = true);
   }
 }
