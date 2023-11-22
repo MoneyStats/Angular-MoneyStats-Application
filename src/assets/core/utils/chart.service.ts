@@ -345,6 +345,9 @@ export class ChartService {
         if (lastDay < today) {
           historyBalance.push(asset.value!);
         }
+      } else {
+        statsAssetsDays.splice(0, 0, 'Inital Date');
+        historyBalance.splice(0, 0, 0);
       }
 
       let serie = {
@@ -369,9 +372,13 @@ export class ChartService {
       h = options[0];
     }
     let finalStatsDays: string[] = [];
-    statsAssetsDays.forEach((d) =>
-      finalStatsDays.push(new Date(d).toDateString())
-    );
+    statsAssetsDays.forEach((d) => {
+      finalStatsDays.push(
+        new Date(d).toDateString() == 'Invalid Date'
+          ? d
+          : new Date(d).toDateString()
+      );
+    });
     return this.createChartLine(colors, series, finalStatsDays, h);
   }
 
