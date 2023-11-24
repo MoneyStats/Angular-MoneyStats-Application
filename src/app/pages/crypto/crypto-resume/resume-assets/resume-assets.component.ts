@@ -39,8 +39,7 @@ export class ResumeAssetsComponent implements OnInit, OnChanges {
     this.getDatas();
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   getDatas() {
     setTimeout(() => {

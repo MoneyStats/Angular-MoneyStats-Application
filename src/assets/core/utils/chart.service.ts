@@ -31,6 +31,8 @@ export class ChartService {
     let series: Array<any> = [];
     let oldStats: any = new Stats();
     let oldDate: any;
+    let colors: string[] = [];
+
     if (dashboard.statsWalletDays.length === 1) {
       oldDate =
         parseInt(
@@ -40,14 +42,8 @@ export class ChartService {
         ) - 1;
       dashboard.statsWalletDays.splice(0, 0, oldDate.toString());
     }
-    /**let filterDate: string[] = [];
-    dashboard.statsWalletDays.forEach((d, index) => {
-      if (d.split('-')[1]) {
-        filterDate.push(d);
-      }
-    });
-    dashboard.statsWalletDays = filterDate;**/
-    dashboard.wallets.forEach((wallet) => {
+    dashboard.wallets.forEach((wallet, indexWallet) => {
+      colors.push(this.imageColorPicker.getColor(wallet.img!, indexWallet));
       let oldBalance =
         wallet.differenceLastStats != 0
           ? wallet.balance - wallet.differenceLastStats
@@ -88,46 +84,7 @@ export class ChartService {
     dashboard.statsWalletDays.forEach((d) =>
       finalStatsDays.push(new Date(d).toDateString())
     );
-    let chartOptions: Partial<ApexOptions> = {
-      series: series,
-      chart: {
-        type: 'area',
-        width: '100%',
-        height: 380,
-        sparkline: {
-          enabled: true,
-        },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        width: 2,
-      },
-      colors: [
-        '#6236FF',
-        '#d119d0',
-        '#bb9df7',
-        '#de3454',
-        '#407306',
-        '#9c413c',
-        '#f2ed0a',
-        '#fa5c42',
-        '#57cb54',
-        '#500295',
-        '#f7eedc',
-      ],
-      labels: finalStatsDays,
-      legend: {
-        show: true,
-        position: 'top',
-        horizontalAlign: 'center',
-        floating: false,
-        fontFamily: 'Helvetica, Arial',
-      },
-    };
-    return chartOptions;
-    //chartLine(series, dashboard.statsWalletDays);
+    return this.createChartLine(colors, series, finalStatsDays, 380);
   }
 
   renderChartLineCategory(totalMap: Map<string, any>): Partial<ApexOptions> {
@@ -154,43 +111,7 @@ export class ChartService {
       index++;
     });
 
-    let chartOptions: Partial<ApexOptions> = {
-      series: series,
-      chart: {
-        type: 'area',
-        width: '100%',
-        height: 350,
-        sparkline: {
-          enabled: true,
-        },
-      },
-      stroke: {
-        width: 2,
-      },
-      colors: [
-        '#6236FF',
-        '#d119d0',
-        '#bb9df7',
-        '#de3454',
-        '#407306',
-        '#9c413c',
-        '#f2ed0a',
-        '#fa5c42',
-        '#57cb54',
-        '#500295',
-        '#f7eedc',
-      ],
-      labels: labels,
-      legend: {
-        show: true,
-        position: 'top',
-        horizontalAlign: 'center',
-        floating: false,
-        fontFamily: 'Helvetica, Arial',
-      },
-    };
-    return chartOptions;
-    //chartLine(series, dashboard.statsWalletDays);
+    return this.createChartLine([], series, labels, 350);
   }
 
   renderChartWallet(name: string, stats: Stats[]): Partial<ApexOptions> {
@@ -309,6 +230,10 @@ export class ChartService {
 
   renderCryptoDatas(
     cryptoDashboard: CryptoDashboard,
+    /**
+     * 1.Parametro: Dimensione Grafico
+     * 2.Parametro: Boolean Siamo in Resume (Setta il live price come ultimo dato)
+     */
     ...optional: any[]
   ): Partial<ApexOptions> {
     let series: Array<any> = [];
@@ -330,7 +255,9 @@ export class ChartService {
           if (asset.history && asset.history.length > 0) {
             let history = asset.history.find((h) => h.date.toString() == day);
             if (history) {
-              return historyBalance.push(history?.balance!);
+              return historyBalance.push(
+                this.roundToTwoDecimalPlaces(history?.balance!)
+              );
             }
           }
           return historyBalance.push(0);
@@ -345,9 +272,6 @@ export class ChartService {
         if (lastDay < today) {
           historyBalance.push(asset.value!);
         }
-      } else {
-        statsAssetsDays.splice(0, 0, 'Inital Date');
-        historyBalance.splice(0, 0, 0);
       }
 
       let serie = {
@@ -357,7 +281,10 @@ export class ChartService {
       series.push(serie);
     });
 
-    // Se non è in resume setto l'ultimo giorno
+    /**
+     * Se non è in resume setto l'ultimo giorno
+     * Utilizzata per inserire l'ultima data
+     */
     if (options != undefined && options[1] != undefined && !options[1]) {
       // Aggiungo l'ultimo valore dell'asset corrente se l'ultimo stats non corrisponde ad oggi
       const lastDay: Date = new Date(
@@ -384,7 +311,7 @@ export class ChartService {
 
   renderTradingOperations(
     operations: Array<Operation>,
-    ...optional: any[]
+    optional: any[]
   ): Partial<ApexOptions> {
     let operationsCopy = deepCopy(operations);
     let tradingDate: Array<string> = [];
@@ -514,5 +441,9 @@ export class ChartService {
       },
     };
     return chartOptions;
+  }
+
+  roundToTwoDecimalPlaces(value: number): number {
+    return Math.round((value + Number.EPSILON) * 100) / 100;
   }
 }

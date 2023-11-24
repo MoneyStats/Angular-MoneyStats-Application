@@ -79,3 +79,10 @@ export enum UserRole {
 }
 
 export var Operations = ['New Investment', 'Holding', 'Trading', 'Transfer'];
+
+export const ApexChartsOptions = {
+  LIVE_PRICE_AS_LAST_DATA: false,
+  NOT_LIVE_PRICE_AS_LAST_DATA: true,
+  MOBILE_MODE: 200,
+  DESKTOP_MODE: 350,
+};

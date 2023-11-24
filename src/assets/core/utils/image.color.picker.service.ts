@@ -22,45 +22,32 @@ export class ImageColorPickerService {
   ];
 
   getColor(img: string, index: number): string {
-    //this.getBase64ImageFromUrl(img + '?r=' + Math.floor(Math.random() * 100000))
-    //  .then((result) => console.log(result))
-    //  .catch((err) => console.error(err));
+    if (img.includes('https://'))
+      return this.colors[index] || this.getRandomColor();
+
     let canvas = <HTMLCanvasElement>document.createElement('canvas');
     let ctx = canvas.getContext('2d');
     let image = new Image();
     image.crossOrigin = 'anonymous';
-    //this._img.addEventListener('load', img, false);
-    //image.src = img + '?r=' + Math.floor(Math.random() * 100000);
     image.src = img;
-    var data;
-    let colorAsset = this.colors[index];
-    //image.onload = function () {
+
     try {
       ctx?.drawImage(image, 0, 0);
-      data = ctx?.getImageData(50, 50, 50, 50).data;
+      const data = ctx?.getImageData(60, 60, 60, 60)?.data ?? [];
+
+      // Creazione del colore
+      const pixelColor = `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3]})`;
+      const hexColor = this.rgbaToHex(pixelColor);
+
+      const finalColor =
+        hexColor !== '#000000'
+          ? hexColor
+          : this.colors[index] || this.getRandomColor();
+      return finalColor;
     } catch (e: any) {
-      return colorAsset;
+      console.error('Error processing image data, getting random color:', e);
+      return this.getRandomColor();
     }
-
-    let pixelColor: string =
-      'rgba(' +
-      data![0] +
-      ',' +
-      data![1] +
-      ',' +
-      data![2] +
-      ',' +
-      data![3] +
-      ')';
-
-    //let colorPixel = 'rgb(' + data![0] + ',' + data![1] + ',' + data![2] + ')';
-    //var dColor = data![2] + 256 * data![1] + 65536 * data![0];
-    return this.rgbaToHex(pixelColor) != '#000000'
-      ? this.rgbaToHex(pixelColor)
-      : this.colors[index];
-    //return colorPixel;
-    //};
-    //return colorAsset;
   }
 
   rgbaToHex(color: string): string {
@@ -89,6 +76,15 @@ export class ImageColorPickerService {
       }
 
       return hex;
+    }
+    return color;
+  }
+
+  getRandomColor(): string {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
   }
