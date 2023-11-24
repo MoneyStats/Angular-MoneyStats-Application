@@ -21,6 +21,7 @@ import { ImageColorPickerService } from 'src/assets/core/utils/image.color.picke
 import { LoggerService } from 'src/assets/core/utils/log.service';
 import { v4 as uuidv4 } from 'uuid';
 import {
+  ApexChartsOptions,
   ModalConstant,
   OperationsType,
 } from 'src/assets/core/data/constant/constant';
@@ -132,13 +133,13 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
         if (this.cryptoDashboard.wallets) {
           if (this.screenService?.screenWidth! <= 780) {
             this.chartOptions = this.charts.renderCryptoDatas(dashboard, [
-              200,
-              true,
+              ApexChartsOptions.MOBILE_MODE,
+              ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
             ]);
           } else
             this.chartOptions = this.charts.renderCryptoDatas(dashboard, [
-              350,
-              true,
+              ApexChartsOptions.DESKTOP_MODE,
+              ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
             ]);
         }
       }, 500);
@@ -170,13 +171,13 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
         setTimeout(() => {
           if (this.screenService?.screenWidth! <= 780)
             this.chart1Y = this.charts.renderCryptoDatas(dashboard, [
-              200,
-              false,
+              ApexChartsOptions.MOBILE_MODE,
+              ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
             ]);
           else
             this.chart1Y = this.charts.renderCryptoDatas(dashboard, [
-              350,
-              false,
+              ApexChartsOptions.DESKTOP_MODE,
+              ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
             ]);
         }, 500);
       }
@@ -211,9 +212,15 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
         );
       setTimeout(() => {
         if (this.screenService?.screenWidth! <= 780)
-          this.chart3Y = this.charts.renderCryptoDatas(dashboard, [200, true]);
+          this.chart3Y = this.charts.renderCryptoDatas(dashboard, [
+            ApexChartsOptions.MOBILE_MODE,
+            ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
+          ]);
         else
-          this.chart3Y = this.charts.renderCryptoDatas(dashboard, [350, true]);
+          this.chart3Y = this.charts.renderCryptoDatas(dashboard, [
+            ApexChartsOptions.DESKTOP_MODE,
+            ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
+          ]);
       }, 500);
     }
   }

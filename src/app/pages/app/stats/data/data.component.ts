@@ -8,6 +8,7 @@ import {
 import { Dashboard, Stats } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { ChartService } from 'src/assets/core/utils/chart.service';
+import { deepCopy } from '@angular-devkit/core/src/utils/object';
 
 @Component({
   selector: 'app-data',
@@ -30,9 +31,7 @@ export class DataComponent implements OnInit, OnChanges {
     this.renderTable();
   }
 
-  ngOnInit(): void {
-    this.renderTable();
-  }
+  ngOnInit(): void {}
 
   renderTable() {
     this.tableBalance = [];
@@ -60,11 +59,15 @@ export class DataComponent implements OnInit, OnChanges {
   }
 
   renderChart() {
+    let dashboard = deepCopy(this.dashboard);
+    this.chartOptions = undefined;
+    this.chartBar = undefined;
+    this.chartPie = undefined;
     setTimeout(() => {
-      this.chartOptions = this.charts.renderChartLine(this.dashboard);
-      this.chartPie = this.charts.renderChartPie(this.dashboard.wallets);
+      this.chartOptions = this.charts.renderChartLine(dashboard);
+      this.chartPie = this.charts.renderChartPie(dashboard.wallets);
       this.chartBar = this.charts.renderChartBar(
-        this.dashboard.statsWalletDays,
+        dashboard.statsWalletDays,
         this.balances
       );
     }, 500);
