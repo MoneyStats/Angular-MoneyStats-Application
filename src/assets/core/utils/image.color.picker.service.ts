@@ -9,10 +9,10 @@ export class ImageColorPickerService {
   colors: string[] = [
     '#6236FF',
     '#3c3c3d',
-    '#d119d0',
     '#bb9df7',
-    '#de3454',
+    '#d119d0',
     '#407306',
+    '#de3454',
     '#9c413c',
     '#f2ed0a',
     '#fa5c42',
@@ -22,7 +22,7 @@ export class ImageColorPickerService {
   ];
 
   getColor(img: string, index: number): string {
-    if (img.includes('https://'))
+    if (!img.includes('data:image'))
       return this.colors[index] || this.getRandomColor();
 
     let canvas = <HTMLCanvasElement>document.createElement('canvas');
