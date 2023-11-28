@@ -74,7 +74,7 @@ jobs:
       - build
     steps:
       - name: Grant execute permission to script
-        run: chmod +x rename.sh
+        run: chmod +x /home/runner/work/Angular-MoneyStats-Application/Angular-MoneyStats-Application/rename.sh
 
       - uses: actions/checkout@v3
       - name: Build the Docker image
