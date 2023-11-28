@@ -71,6 +71,7 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.screenService.hideFooter();
     this.getAsset();
   }
 
@@ -235,12 +236,13 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
         ? this.cryptoService.asset?.name
         : this.asset.name;
     const dashboard = deepCopy(this.cryptoDashboard);
-    console.log(dashboard);
-    let wallAsset = dashboard.wallets.filter((w) => {
-      if (w.assets != undefined && w.assets.length != 0)
-        return w.assets.slice().find((a) => a.name == name);
-      return null;
-    });
+    let wallAsset = dashboard.wallets
+      ? dashboard.wallets.filter((w) => {
+          if (w.assets != undefined && w.assets.length != 0)
+            return w.assets.slice().find((a) => a.name == name);
+          return null;
+        })
+      : [];
     wallAsset.forEach((w) => {
       w.assets = w.assets.slice().filter((a) => a.name == name);
       if (w.assets[0].history == undefined) {
@@ -315,12 +317,14 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
 
   getAllDate(assets: Asset[]): string[] {
     let date: string[] = [];
-    assets.forEach((a) =>
-      a.history?.forEach((h) => {
-        if (!date.find((d) => d == h.date.toString()))
-          date.push(h.date.toString());
-      })
-    );
+    if (assets)
+      assets.forEach((a) => {
+        if (a && a.history)
+          a.history?.forEach((h) => {
+            if (!date.find((d) => d == h.date.toString()))
+              date.push(h.date.toString());
+          });
+      });
     date.sort();
     return date;
   }

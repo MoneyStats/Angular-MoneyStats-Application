@@ -11,6 +11,9 @@ export class WalletHistoryCardComponent implements OnInit {
   @Input('stats') stats?: Stats;
   coinSymbol?: string;
 
+  amount: string = '******';
+  @Input('hidden') hidden: boolean = false;
+
   constructor(public walletService: WalletService) {}
 
   ngOnInit(): void {

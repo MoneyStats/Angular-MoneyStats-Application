@@ -21,7 +21,9 @@
       </div>
       <div class="in">
         <div>
-          <strong>{{ coinSymbol }} {{ stats?.balance }}</strong>
+          <strong
+            >{{ coinSymbol }} {{ hidden ? amount : stats?.balance }}</strong
+          >
           <div class="text-small text-secondary">
             Order #{{ stats?.id }} of
             {{ stats?.date | date : "d MMM y" }}

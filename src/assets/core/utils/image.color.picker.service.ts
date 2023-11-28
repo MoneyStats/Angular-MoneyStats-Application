@@ -22,7 +22,7 @@ export class ImageColorPickerService {
   ];
 
   getColor(img: string, index: number): string {
-    if (!img.includes('data:image'))
+    if (img && !img.includes('data:image'))
       return this.colors[index] || this.getRandomColor();
 
     let canvas = <HTMLCanvasElement>document.createElement('canvas');

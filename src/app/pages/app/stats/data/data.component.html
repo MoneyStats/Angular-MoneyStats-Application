@@ -10,7 +10,7 @@
                 {{ wallet.name }} ({{ wallet.category }})
               </h5>
               <span class="h2 font-weight-bold mb-0" id="tot1"
-                >{{ coinSymbol }} {{ wallet.balance }}</span
+                >{{ coinSymbol }} {{ hidden ? amount : wallet.balance }}</span
               >
             </div>
             <div class="col-auto">
@@ -197,7 +197,7 @@
                 }}"
                 *ngFor="let balance of balances; let y = index"
               >
-                {{ coinSymbol }} {{ balance.balance }}
+                {{ coinSymbol }} {{ hidden ? amount : balance.balance }}
                 <span *ngIf="balances.index != y"
                   >({{
                     balance.percentage >= 1000 ? "+1000" : balance.percentage

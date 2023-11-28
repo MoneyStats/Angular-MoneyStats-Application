@@ -19,6 +19,8 @@ import { Subscription } from 'rxjs';
 export class LoginComponent implements OnDestroy {
   loginSubscribe: Subscription = new Subscription();
 
+  isPasswordShow: boolean = false;
+
   environment = environment;
   @Output('user') user?: User = new User();
   username: string = '';
@@ -64,5 +66,11 @@ export class LoginComponent implements OnDestroy {
       this.userService.setUserGlobally();
       this.router.navigate(['']);
     });
+  }
+
+  hideShowPassword() {
+    this.isPasswordShow
+      ? (this.isPasswordShow = false)
+      : (this.isPasswordShow = true);
   }
 }

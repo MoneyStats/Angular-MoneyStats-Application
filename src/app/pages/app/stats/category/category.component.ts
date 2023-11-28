@@ -24,6 +24,9 @@ export class CategoryComponent implements OnInit, OnChanges {
   @Input('dashboard') dashboard: Dashboard = new Dashboard();
   @Input('coinSymbol') coinSymbol: string = '';
 
+  amount: string = '******';
+  @Input('hidden') hidden: boolean = false;
+
   INVESTMENTS: string[] = ['Investments', 'Crypto'];
   CAPITAL: string[] = ['Cash', 'Bank Account', 'Debit Card'];
   SAVING: string[] = ['Save Account', 'Save'];

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { StorageConstant } from 'src/assets/core/data/constant/constant';
 import { WalletService } from 'src/assets/core/services/wallet.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { environment } from 'src/environments/environment';
@@ -14,6 +15,9 @@ export class WalletHistoryComponent implements OnInit {
   wallet?: Wallet;
   walletMap?: Map<string, Stats[]> = new Map<string, Stats[]>();
   uniqueYears: any;
+
+  amount: string = '******';
+  hidden: boolean = false;
   constructor(
     public screenService: ScreenService,
     private walletService: WalletService
@@ -39,5 +43,15 @@ export class WalletHistoryComponent implements OnInit {
         this.wallet!.history.filter((h) => h.date.toString().includes(year))
       );
     });
+    this.isWalletBalanceHidden();
+  }
+
+  isWalletBalanceHidden() {
+    let isHidden = JSON.parse(
+      localStorage.getItem(StorageConstant.HIDDENAMOUNT)!
+    );
+    if (isHidden != null) {
+      this.hidden = isHidden;
+    }
   }
 }

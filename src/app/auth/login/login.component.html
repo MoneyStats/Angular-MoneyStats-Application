@@ -55,15 +55,24 @@
                 #password1="ngModel"
                 [(ngModel)]="password"
                 required
-                type="password"
+                [type]="isPasswordShow ? 'text' : 'password'"
                 class="form-control"
                 id="password1"
                 autocomplete="off"
                 placeholder="{{ 'auth.login.passPlaceholder' | translate }}"
               />
-              <i class="clear-input">
-                <ion-icon name="close-circle"></ion-icon>
-              </i>
+              <div class="clickable" (click)="hideShowPassword()">
+                <ion-icon
+                  *ngIf="!isPasswordShow"
+                  name="eye"
+                  class="showPass"
+                ></ion-icon>
+                <ion-icon
+                  *ngIf="isPasswordShow"
+                  name="eye-off"
+                  class="showPass"
+                ></ion-icon>
+              </div>
             </div>
           </div>
         </div>
