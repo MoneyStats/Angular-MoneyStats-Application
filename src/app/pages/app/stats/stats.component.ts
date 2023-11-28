@@ -1,7 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
-import { ModalConstant } from 'src/assets/core/data/constant/constant';
+import {
+  ModalConstant,
+  StorageConstant,
+} from 'src/assets/core/data/constant/constant';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { StatsService } from 'src/assets/core/services/stats.service';
 import { LoggerService } from 'src/assets/core/utils/log.service';
@@ -19,6 +22,9 @@ export class StatsComponent implements OnInit, OnDestroy {
   resumeData: Dashboard = new Dashboard();
   resume: Map<string, Dashboard> = new Map<string, Dashboard>();
   years: Array<string> = [];
+
+  amount: string = '******';
+  hidden: boolean = false;
   constructor(
     public screenService: ScreenService,
     public dashboardService: DashboardService,
@@ -54,5 +60,15 @@ export class StatsComponent implements OnInit, OnDestroy {
   updateData(year: string) {
     this.resumeData = this.resume.get(year)!;
     this.wallets = this.resumeData.wallets;
+    this.isWalletBalanceHidden();
+  }
+
+  isWalletBalanceHidden() {
+    let isHidden = JSON.parse(
+      localStorage.getItem(StorageConstant.HIDDENAMOUNT)!
+    );
+    if (isHidden != null) {
+      this.hidden = isHidden;
+    }
   }
 }

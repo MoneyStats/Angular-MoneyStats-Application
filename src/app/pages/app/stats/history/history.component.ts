@@ -23,6 +23,9 @@ export class HistoryComponent implements OnInit {
   totalList: Array<any> = [];
   totalMap: Map<string, any> = new Map<string, any>();
 
+  amount: string = '******';
+  @Input('hidden') hidden: boolean = false;
+
   tableBalance: Array<any> = [];
 
   public lineChartJS?: ChartJSOptions = new ChartJSOptions();

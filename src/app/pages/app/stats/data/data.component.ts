@@ -25,6 +25,9 @@ export class DataComponent implements OnInit, OnChanges {
   tableBalance: Array<any> = [];
   filterDateHistory: string[] = [];
 
+  amount: string = '******';
+  @Input('hidden') hidden: boolean = false;
+
   constructor(private charts: ChartService) {}
 
   ngOnChanges(changes: SimpleChanges): void {

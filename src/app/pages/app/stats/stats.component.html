@@ -103,7 +103,8 @@
           </div>
           <div class="right float-end">
             <div class="price" id="totale">
-              {{ dashboardService.coinSymbol }} {{ resumeData.balance }}
+              {{ dashboardService.coinSymbol }}
+              {{ hidden ? amount : resumeData.balance }}
             </div>
             <div class="price performancetot float-end">
               <span
@@ -159,7 +160,7 @@
               id="pil"
             >
               {{ dashboardService.coinSymbol }}
-              {{ resumeData.performanceValue }}
+              {{ hidden ? amount : resumeData.performanceValue }}
             </div>
             <div class="price float-end performancetot">
               <span
@@ -191,6 +192,7 @@
             *ngIf="wallets && wallets.length"
             [dashboard]="resumeData"
             [coinSymbol]="dashboardService.coinSymbol!"
+            [hidden]="hidden"
           ></app-data>
         </div>
       </div>
@@ -203,6 +205,7 @@
             *ngIf="wallets && wallets.length"
             [coinSymbol]="dashboardService.coinSymbol!"
             [dashboard]="resumeData"
+            [hidden]="hidden"
           ></app-category>
         </div>
       </div>
@@ -215,6 +218,7 @@
             *ngIf="wallets && wallets.length"
             [coinSymbol]="dashboardService.coinSymbol!"
             [resume]="resume"
+            [hidden]="hidden"
           ></app-history>
         </div>
       </div>

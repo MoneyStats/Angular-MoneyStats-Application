@@ -53,14 +53,19 @@
             let i = index
           "
         >
-          <app-wallet-history-card [stats]="stats"></app-wallet-history-card>
+          <app-wallet-history-card
+            [stats]="stats"
+            [hidden]="hidden"
+          ></app-wallet-history-card>
         </div>
       </div>
     </div>
     <!-- History -->
     <div align="center">
       <img
-        src="{{environment.baseUrlDashboard}}assets/images/logos/logo_transparent_gray_land.png"
+        src="{{
+          environment.baseUrlDashboard
+        }}assets/images/logos/logo_transparent_gray_land.png"
         alt=""
         srcset=""
         style="width: 150px"

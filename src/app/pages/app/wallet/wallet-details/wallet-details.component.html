@@ -63,7 +63,9 @@
                 </div>
               </div>
               <div class="col-6 w100">
-                <h1 class="total">{{ coinSymbol }} {{ wallet?.balance }}</h1>
+                <h1 class="total">
+                  {{ coinSymbol }} {{ !hidden ? wallet?.balance : amount }}
+                </h1>
                 <h4 class="caption">
                   <span
                     class="iconbox {{
@@ -82,7 +84,8 @@
                       }}"
                     ></ion-icon>
                   </span>
-                  {{ coinSymbol }}{{ wallet?.differenceLastStats }}
+                  {{ coinSymbol
+                  }}{{ hidden ? amount : wallet?.differenceLastStats }}
                   <strong
                     >({{ wallet?.performanceLastStats! >= 1000 ? "+" : ""
                     }}{{ wallet?.performanceLastStats }}%)</strong
@@ -103,7 +106,7 @@
               <ul class="nav nav-tabs lined" role="tablist">
                 <li class="nav-item">
                   <a
-                    class="nav-link"
+                    class="nav-link active"
                     data-bs-toggle="tab"
                     href="#tab-1y"
                     role="tab"
@@ -125,10 +128,11 @@
                 </li>
                 <li class="nav-item">
                   <a
-                    class="nav-link active"
+                    class="nav-link"
                     data-bs-toggle="tab"
                     href="#tab-all"
                     role="tab"
+                    (click)="graphAll()"
                   >
                     All
                   </a>
@@ -139,7 +143,11 @@
 
             <!-- tab content -->
             <div class="tab-content">
-              <div class="tab-pane fade" id="tab-1y" role="tabpanel">
+              <div
+                class="tab-pane fade show active"
+                id="tab-1y"
+                role="tabpanel"
+              >
                 <div class="inner-round" style="height: 140px">
                   <div
                     *ngIf="!chart1Y"
@@ -187,11 +195,7 @@
                   ></apx-chart>
                 </div>
               </div>
-              <div
-                class="tab-pane fade show active"
-                id="tab-all"
-                role="tabpanel"
-              >
+              <div class="tab-pane fade" id="tab-all" role="tabpanel">
                 <div class="inner-round" style="height: 140px">
                   <div
                     *ngIf="!chartAll"
@@ -242,21 +246,30 @@
                   {{ "wallet.details.allTimeHigh" | translate }}
                   {{ wallet?.allTimeHighDate | date : "d MMM y" }}
                 </div>
-                <strong>{{ coinSymbol }} {{ wallet?.allTimeHigh }}</strong>
+                <strong
+                  >{{ coinSymbol }}
+                  {{ hidden ? amount : wallet?.allTimeHigh }}</strong
+                >
               </li>
               <li>
                 <div class="text-muted">
                   {{ "wallet.details.highPrice" | translate }}
                   {{ wallet?.highPriceDate | date : "d MMM y" }}
                 </div>
-                <strong>{{ coinSymbol }} {{ wallet?.highPrice }}</strong>
+                <strong
+                  >{{ coinSymbol }}
+                  {{ hidden ? amount : wallet?.highPrice }}</strong
+                >
               </li>
               <li>
                 <div class="text-muted">
                   {{ "wallet.details.lowPrice" | translate }}
                   {{ wallet?.lowPriceDate | date : "d MMM y" }}
                 </div>
-                <strong>{{ coinSymbol }} {{ wallet?.lowPrice }}</strong>
+                <strong
+                  >{{ coinSymbol }}
+                  {{ hidden ? amount : wallet?.lowPrice }}</strong
+                >
               </li>
               <li>
                 <div class="text-muted">
@@ -288,7 +301,8 @@
                 </div>
                 <div class="col text-secondary text-end">
                   <strong
-                    >{{ coinSymbol }} {{ walletService.totalBalance }}</strong
+                    >{{ coinSymbol }}
+                    {{ hidden ? amount : walletService.totalBalance }}</strong
                   >
                 </div>
               </div>
@@ -590,6 +604,7 @@
               <app-wallet-history-card
                 *ngIf="i < 6 && stats.id"
                 [stats]="stats"
+                [hidden]="hidden"
               ></app-wallet-history-card>
             </div>
             <div class="card-body pt-0">

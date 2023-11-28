@@ -82,7 +82,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
       (w: Wallet) => w.id == this.walletId && w.name === this.walletName
     );
 
-    this.renderGraph();
+    this.graph1Y();
 
     if (this.wallet?.info != undefined) {
       this.mapInfo = new Map<string, string>(Object.entries(this.wallet.info));
@@ -111,7 +111,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  renderGraph() {
+  graphAll() {
     if (!this.chartAll) {
       setTimeout(() => {
         this.chartAll = this.charts.renderChartWallet(

@@ -1,4 +1,11 @@
-import { Component, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import {

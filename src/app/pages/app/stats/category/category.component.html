@@ -34,9 +34,7 @@
               </thead>
               <tbody
                 *ngFor="
-                  let balances of mapWalletCategory
-                    .get(KEY_INVESTMENTS)
-                    ;
+                  let balances of mapWalletCategory.get(KEY_INVESTMENTS);
                   let i = index
                 "
               >
@@ -57,7 +55,7 @@
                         : 'text-danger'
                     }} {{ balance.index === y ? 'text-end' : '' }}"
                   >
-                    {{ coinSymbol }} {{ balance.balance }}
+                    {{ coinSymbol }} {{ hidden ? amount : balance.balance }}
                   </td>
                   <td
                     class="{{
@@ -81,7 +79,7 @@
                         : 'text-danger'
                     }} text-end"
                   >
-                    {{ coinSymbol }} {{ balance.trend }}
+                    {{ coinSymbol }} {{ hidden ? amount : balance.trend }}
                   </td>
                 </tr>
               </tbody>
@@ -135,7 +133,7 @@
                         : 'text-danger'
                     }} {{ balance.index === y ? 'text-end' : '' }}"
                   >
-                    {{ coinSymbol }} {{ balance.balance }}
+                    {{ coinSymbol }} {{ hidden ? amount : balance.balance }}
                   </td>
                   <td
                     class="{{
@@ -159,7 +157,7 @@
                         : 'text-danger'
                     }} text-end"
                   >
-                    {{ coinSymbol }} {{ balance.trend }}
+                    {{ coinSymbol }} {{ hidden ? amount : balance.trend }}
                   </td>
                 </tr>
               </tbody>
@@ -272,7 +270,7 @@
                         : 'text-danger'
                     }} {{ balance.index === y ? 'text-end' : '' }}"
                   >
-                    {{ coinSymbol }} {{ balance.balance }}
+                    {{ coinSymbol }} {{ hidden ? amount : balance.balance }}
                   </td>
                   <td
                     class="{{
@@ -296,7 +294,7 @@
                         : 'text-danger'
                     }} text-end"
                   >
-                    {{ coinSymbol }} {{ balance.trend }}
+                    {{ coinSymbol }} {{ hidden ? amount : balance.trend }}
                   </td>
                 </tr>
               </tbody>
@@ -350,7 +348,7 @@
                         : 'text-danger'
                     }} {{ balance.index === y ? 'text-end' : '' }}"
                   >
-                    {{ coinSymbol }} {{ balance.balance }}
+                    {{ coinSymbol }} {{ hidden ? amount : balance.balance }}
                   </td>
                   <td
                     class="{{
@@ -374,7 +372,7 @@
                         : 'text-danger'
                     }} text-end"
                   >
-                    {{ coinSymbol }} {{ balance.trend }}
+                    {{ coinSymbol }} {{ hidden ? amount : balance.trend }}
                   </td>
                 </tr>
               </tbody>
@@ -428,7 +426,7 @@
                         : 'text-danger'
                     }} {{ balance.index === y ? 'text-end' : '' }}"
                   >
-                    {{ coinSymbol }} {{ balance.balance }}
+                    {{ coinSymbol }} {{ hidden ? amount : balance.balance }}
                   </td>
                   <td
                     class="{{
@@ -452,7 +450,7 @@
                         : 'text-danger'
                     }} text-end"
                   >
-                    {{ coinSymbol }} {{ balance.trend }}
+                    {{ coinSymbol }} {{ hidden ? amount : balance.trend }}
                   </td>
                 </tr>
               </tbody>
