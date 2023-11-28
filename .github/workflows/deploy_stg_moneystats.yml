@@ -19,6 +19,9 @@ jobs:
       - name: Print current directory
         run: |
           pwd
+      - name: Find script file
+        run: |
+          find . -name "rename.sh" -type f
 
   setting-up:
     name: 🔧 Setting Up
@@ -73,10 +76,11 @@ jobs:
       - dependency
       - build
     steps:
-      - name: Grant execute permission to script
-        run: chmod +x /home/runner/work/Angular-MoneyStats-Application/Angular-MoneyStats-Application/rename.sh
-
       - uses: actions/checkout@v3
+
+      - name: Grant execute permission to script
+        run: chmod +x ./rename.sh
+
       - name: Build the Docker image
         run: docker build . --file Dockerfile --build-arg config=staging --tag angular-moneystats:$(date +%s)
 
