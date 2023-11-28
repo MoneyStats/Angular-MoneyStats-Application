@@ -17,8 +17,8 @@ jobs:
         with:
           persist-credentials: false
       - name: Print current directory
-      run: |
-        pwd
+        run: |
+          pwd
 
   setting-up:
     name: 🔧 Setting Up
