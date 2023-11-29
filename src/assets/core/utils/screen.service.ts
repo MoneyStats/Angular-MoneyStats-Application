@@ -36,7 +36,7 @@ export class ScreenService {
     this.getScreenSize();
     if (this.screenWidth! <= 780) {
       const footer = document.getElementById('footer');
-      footer!.style.display = 'none';
+      if (footer) footer!.style.display = 'none';
     }
   }
   showFooter() {

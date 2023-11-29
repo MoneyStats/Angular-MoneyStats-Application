@@ -450,138 +450,23 @@
       </div>
     </div>
 
-    <div class="row" hidden>
-      <div class="col-md-6">
-        <!-- Transactions -->
-        <div class="section mt-4">
-          <div class="section-heading">
-            <h2 class="title">Operazioni</h2>
-            <a href="crypto-transactions.html" class="link">View All</a>
-          </div>
-          <div class="card">
-            <ul
-              class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1"
-            >
-              <!-- item -->
-              <li>
-                <a href="#" class="item">
-                  <div class="icon-box bg-success">
-                    <ion-icon name="arrow-up-outline"></ion-icon>
-                  </div>
-                  <div class="in">
-                    <div>
-                      <strong>Bitcoin</strong>
-                      <div class="text-small text-secondary">Sell</div>
-                    </div>
-                    <div class="text-end">
-                      <strong>$855,24</strong>
-                      <div class="text-small">Today 11:38 AM</div>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <!-- * item -->
-              <!-- item -->
-              <li>
-                <a href="#" class="item">
-                  <div class="icon-box bg-warning">
-                    <ion-icon name="arrow-down-outline"></ion-icon>
-                  </div>
-                  <div class="in">
-                    <div>
-                      <strong>Etherium</strong>
-                      <div class="text-small text-secondary">Buy</div>
-                    </div>
-                    <div class="text-end">
-                      <strong>$40,68</strong>
-                      <div class="text-small">March 8, 2021</div>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <!-- * item -->
-              <!-- item -->
-              <li>
-                <a href="#" class="item">
-                  <div class="icon-box bg-warning">
-                    <ion-icon name="arrow-down-outline"></ion-icon>
-                  </div>
-                  <div class="in">
-                    <div>
-                      <strong>Bitcoin</strong>
-                      <div class="text-small text-secondary">Send</div>
-                    </div>
-                    <div class="text-end">
-                      <strong>$100,00</strong>
-                      <div class="text-small">March 4, 2021</div>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <!-- * item -->
-              <!-- item -->
-              <li>
-                <a href="#" class="item">
-                  <div class="icon-box bg-secondary">
-                    <ion-icon name="swap-vertical-outline"></ion-icon>
-                  </div>
-                  <div class="in">
-                    <div>
-                      <strong>Tether</strong>
-                      <div class="text-small text-secondary">Trade</div>
-                    </div>
-                    <div class="text-end">
-                      <strong>$2.405,48</strong>
-                      <div class="text-small">February 24, 2021</div>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <!-- * item -->
-              <!-- item -->
-              <li>
-                <a href="#" class="item">
-                  <div class="icon-box bg-secondary">
-                    <ion-icon name="swap-vertical-outline"></ion-icon>
-                  </div>
-                  <div class="in">
-                    <div>
-                      <strong>Tether</strong>
-                      <div class="text-small text-secondary">Trade</div>
-                    </div>
-                    <div class="text-end">
-                      <strong>$2.405,48</strong>
-                      <div class="text-small">February 24, 2021</div>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <!-- * item -->
-            </ul>
-          </div>
-        </div>
-        <!-- Transactions -->
+    <div class="section mt-3 col-12">
+      <div class="section-heading">
+        <h2 class="title ms-2">
+          {{ "crypto.dashboard.marketData.title" | translate }}
+        </h2>
+        <a
+          [routerLink]="['/crypto/market-data', cryptoDashboard.currency]"
+          class="link me-2"
+          >{{ "crypto.dashboard.marketData.view" | translate }}</a
+        >
       </div>
-      <div class="col-md-6">
-        <!-- Portfolio -->
-        <div class="section mt-4">
-          <div class="section-heading">
-            <h2 class="title">
-              Grafico BTC con select per modificare con ETH etc
-            </h2>
-            <a href="crypto-portfolio.html" class="link">View All</a>
-          </div>
-          <div class="card">
-            <div class="card-body" style="height: 380px">
-              <!-- TradingView Widget BEGIN -->
-              <div class="tradingview-widget-container">
-                <div class="tradingview-widget-container__widget"></div>
-                <div #tradingViewListCrypto style="height: 360px"></div>
-              </div>
-              <!-- TradingView Widget END -->
-            </div>
-          </div>
-        </div>
+      <div class="transactions marketData">
+        <app-loading-card *ngFor="let item of [1, 2, 3]"></app-loading-card>
+        <app-market-data-table
+          [filterMarketData]="filterMarketData"
+          [limit]="15"
+        ></app-market-data-table>
       </div>
     </div>
   </div>

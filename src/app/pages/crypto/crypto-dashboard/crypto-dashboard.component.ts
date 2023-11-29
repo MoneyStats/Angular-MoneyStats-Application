@@ -32,6 +32,9 @@ declare const TradingView: any;
 })
 export class CryptoDashboardComponent implements OnInit, OnDestroy {
   getDashboardSubscribe: Subscription = new Subscription();
+  marketDataSubscribe: Subscription = new Subscription();
+
+  filterMarketData: Array<any> = [];
 
   amount: string = '******';
   hidden: boolean = false;
@@ -87,6 +90,7 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
           (w) => w.category == 'Crypto'
         );
         this.getCoinForGraph();
+        this.getMarketData();
       });
     this.isWalletBalanceHidden();
   }
@@ -261,7 +265,16 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
     }
   }
 
+  getMarketData() {
+    this.marketDataSubscribe = this.cryptoService
+      .getCryptoPrice(this.cryptoDashboard.currency)
+      .subscribe((data) => {
+        this.filterMarketData = data.data;
+      });
+  }
+
   ngOnDestroy(): void {
     this.getDashboardSubscribe.unsubscribe();
+    this.marketDataSubscribe.unsubscribe();
   }
 }

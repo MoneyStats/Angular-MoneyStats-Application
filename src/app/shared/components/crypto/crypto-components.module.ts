@@ -18,6 +18,7 @@ import { AssetSelectComponent } from './asset-select/asset-select.component';
 import { OperationDetailsComponent } from './modal/operation-details/operation-details.component';
 import { OperationsListComponent } from './operations-list/operations-list.component';
 import { CloseOperationComponent } from './modal/close-operation/close-operation.component';
+import { MarketDataTableComponent } from './market-data-table/market-data-table.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { CloseOperationComponent } from './modal/close-operation/close-operation
     OperationDetailsComponent,
     OperationsListComponent,
     CloseOperationComponent,
+    MarketDataTableComponent,
   ],
   exports: [
     AddAssetModalComponent,
@@ -41,6 +43,7 @@ import { CloseOperationComponent } from './modal/close-operation/close-operation
     OperationDetailsComponent,
     OperationsListComponent,
     CloseOperationComponent,
+    MarketDataTableComponent,
   ],
   imports: [
     RouterModule,

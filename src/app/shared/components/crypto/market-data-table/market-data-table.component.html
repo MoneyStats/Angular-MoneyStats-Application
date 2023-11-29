@@ -1,0 +1,87 @@
+<div class="card">
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">
+            {{ "crypto.marketData.table.tab1" | translate }}
+          </th>
+          <th scope="col">
+            {{ "crypto.marketData.table.tab2" | translate }}
+          </th>
+          <th scope="col" class="text-end">
+            {{ "crypto.marketData.table.tab3" | translate }}
+          </th>
+          <th scope="col" class="text-end hidden_mobile">
+            {{ "crypto.marketData.table.tab4" | translate }}
+          </th>
+          <th scope="col" class="text-end hidden_mobile">
+            {{ "crypto.marketData.table.tab5" | translate }}
+          </th>
+          <th scope="col" class="text-end hidden_mobile">
+            {{ "crypto.marketData.table.tab6" | translate }}
+          </th>
+          <th scope="col" class="text-end hidden_mobile">
+            {{ "crypto.marketData.table.tab7" | translate }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let asset of filterMarketData">
+          <th scope="row" class="align-middle">#{{ asset.rank }}</th>
+          <td>
+            <img
+              src="{{ asset.icon }}"
+              alt="img"
+              class="image-block imaged me-2"
+            />
+            {{ asset.name }}
+          </td>
+          <td class="align-middle text-primary text-end">
+            {{ asset.currency }} {{ asset.current_price }}
+          </td>
+          <td class="align-middle text-end hidden_mobile">
+            <div class="text-small">
+              <span
+                class="badge {{
+                  asset.price_change_percentage_24h == 0
+                    ? 'badge-warning'
+                    : asset.price_change_percentage_24h > 0
+                    ? 'badge-success'
+                    : 'badge-danger'
+                }}"
+              >
+                <ion-icon
+                  name="{{
+                    asset.price_change_percentage_24h > 0
+                      ? 'arrow-up-outline'
+                      : 'arrow-down-outline'
+                  }}"
+                ></ion-icon>
+                {{
+                  asset.price_change_24h != undefined
+                    ? asset.price_change_24h.toFixed(2)
+                    : asset.price_change_24h
+                }}
+                ({{
+                  asset.price_change_percentage_24h != undefined
+                    ? asset.price_change_percentage_24h.toFixed(2)
+                    : asset.price_change_percentage_24h
+                }}%)
+              </span>
+            </div>
+          </td>
+          <td class="align-middle text-end hidden_mobile">
+            {{ asset.currency }} {{ asset.high_24h }}
+          </td>
+          <td class="align-middle text-end hidden_mobile">
+            {{ asset.currency }} {{ asset.low_24h }}
+          </td>
+          <td class="align-middle text-end hidden_mobile">
+            {{ asset.currency }} {{ asset.market_cap }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

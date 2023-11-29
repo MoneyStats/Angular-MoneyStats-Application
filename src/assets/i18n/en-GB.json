@@ -365,6 +365,7 @@
       "howItWorks": "How it works",
       "version": "MoneyStats Version",
       "version_open": "Open",
+      "service": "MoneyStats Service",
       "auto_update": "Auto Update"
     },
     "develop": "Info Develop & Contact",
@@ -593,6 +594,10 @@
         "title": "My Assets",
         "view": "View All",
         "assetGraph": "Cryptocurrency Graph"
+      },
+      "marketData": {
+        "title": "Market Data",
+        "view": "View All"
       }
     },
     "asset": {

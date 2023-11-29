@@ -30,7 +30,11 @@ export class CryptoComponent implements OnInit, OnDestroy {
     private contexts: ChildrenOutletContexts
   ) {
     router.events.subscribe((data: any) => {
-      if (data.url == '/crypto/requirements') {
+      let url: string = data.url;
+      if (
+        url &&
+        (url == '/crypto/requirements' || url.includes('/crypto/asset/details'))
+      ) {
         this.isFooterActive = false;
       } else this.isFooterActive = true;
     });

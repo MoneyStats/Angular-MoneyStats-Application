@@ -365,6 +365,7 @@
       "howItWorks": "Come funziona?",
       "version": "Versione MoneyStats",
       "version_open": "Apri",
+      "service": "MoneyStats Service",
       "auto_update": "Aggiornamento Automatico"
     },
     "develop": "Info Sviluppi & Contatti",
@@ -593,6 +594,10 @@
         "title": "I miei Assets",
         "view": "Vedi",
         "assetGraph": "Grafico Cryptocurrency"
+      },
+      "marketData": {
+        "title": "Market Data",
+        "view": "Vedi"
       }
     },
     "asset": {

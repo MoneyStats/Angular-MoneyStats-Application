@@ -1,10 +1,13 @@
 import {
   Component,
+  ElementRef,
   OnChanges,
   OnDestroy,
   OnInit,
   Output,
+  Renderer2,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
@@ -24,6 +27,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./crypto-details.component.scss'],
 })
 export class CryptoDetailsComponent implements OnInit, OnDestroy {
+  @ViewChild('tradingViewDetails') tradingViewDetails?: ElementRef;
   routeSubscribe: Subscription = new Subscription();
   detailsSubscribe: Subscription = new Subscription();
   cryptoDashSubscribe: Subscription = new Subscription();
@@ -38,7 +42,8 @@ export class CryptoDetailsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private cryptoService: CryptoService,
     private screenService: ScreenService,
-    private logger: LoggerService
+    private logger: LoggerService,
+    private _renderer2: Renderer2
   ) {}
 
   ngOnDestroy(): void {
@@ -63,6 +68,10 @@ export class CryptoDetailsComponent implements OnInit, OnDestroy {
       else this.getCryptoDashboard();
     });
     this.isWalletBalanceHidden();
+  }
+
+  ngAfterViewInit(): void {
+    this.appendTradingViewDetails();
   }
 
   getCryptoDetails(identifier: string) {
@@ -91,5 +100,28 @@ export class CryptoDetailsComponent implements OnInit, OnDestroy {
     if (isHidden != null) {
       this.hidden = isHidden;
     }
+  }
+
+  appendTradingViewDetails() {
+    let div = this._renderer2.createElement('div');
+    div.style.height = '100%';
+    let symbol = this.asset.symbol!;
+    let script = this._renderer2.createElement('script');
+    script.type = `text/javascript`;
+    script.src =
+      'https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js';
+    let text = `
+    {
+      "symbol": "$SYMBOL$USD",
+      "width": "100%",
+      "locale": "it",
+      "colorTheme": "dark",
+      "isTransparent": true
+    }
+    `;
+
+    script.text = text.replace('$SYMBOL$', symbol);
+    this._renderer2.appendChild(div, script);
+    this._renderer2.appendChild(this.tradingViewDetails?.nativeElement, div);
   }
 }

@@ -1,6 +1,7 @@
 import {
   Component,
   ElementRef,
+  Input,
   OnInit,
   Renderer2,
   ViewChild,
@@ -13,6 +14,8 @@ import {
 })
 export class AdvancedGraphComponent implements OnInit {
   @ViewChild('tradingViewAdvanced') tradingViewAdvanced?: ElementRef;
+  @ViewChild('tradingViewDetails') tradingViewDetails?: ElementRef;
+  @Input('symbol') symbol: string = '';
 
   constructor(private _renderer2: Renderer2) {}
 
@@ -20,6 +23,7 @@ export class AdvancedGraphComponent implements OnInit {
 
   ngAfterViewInit(): void {
     this.appendTradingViewAdvanced();
+    this.appendTradingViewDetails();
   }
 
   appendTradingViewAdvanced() {
@@ -29,7 +33,7 @@ export class AdvancedGraphComponent implements OnInit {
     script.text = `
     {
       "autosize": true,
-      "symbol": "BINANCE:BTCUSD",
+      "symbol": "BINANCE:BTCUSDT",
       "interval": "D",
       "timezone": "Etc/UTC",
       "theme": "dark",
@@ -39,9 +43,32 @@ export class AdvancedGraphComponent implements OnInit {
       "enable_publishing": false,
       "withdateranges": true,
       "allow_symbol_change": true,
-      "container_id": "tradingview_c4cd6"
+      "container_id": "tradingview_39b4d"
     }`;
 
     this.tradingViewAdvanced?.nativeElement.appendChild(script);
+  }
+
+  appendTradingViewDetails() {
+    let div = this._renderer2.createElement('div');
+    div.style.height = '100%';
+    let symbol = this.symbol;
+    let script = this._renderer2.createElement('script');
+    script.type = `text/javascript`;
+    script.src =
+      'https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js';
+    let text = `
+    {
+      "symbol": "BINANCE:$SYMBOL$USD",
+      "width": "100%",
+      "locale": "it",
+      "colorTheme": "dark",
+      "isTransparent": true
+    }
+    `;
+
+    script.text = text.replace('$SYMBOL$', symbol);
+    this._renderer2.appendChild(div, script);
+    this._renderer2.appendChild(this.tradingViewDetails?.nativeElement, div);
   }
 }

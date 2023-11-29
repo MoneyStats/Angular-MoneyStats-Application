@@ -78,6 +78,9 @@
     //margin-top: 30px !important;
     margin-bottom: 20px !important;
   }
+  .marketData {
+    margin-bottom: 30px !important;
+  }
 }
 .row {
   margin-left: 0px;
@@ -125,4 +128,10 @@
 .card-title {
   position: relative;
   z-index: 9 !important;
+}
+
+.marketData {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: -30px;
 }
