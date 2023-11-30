@@ -145,7 +145,7 @@
         </div>
 
         <div
-          *ngIf="!validateSelect()"
+          *ngIf="!validateSelect() && operationType != operations.TRANSFER"
           class="alert alert-danger mb-1"
           role="alert"
         >
@@ -306,7 +306,10 @@
         </div>
 
         <!-- Selezione Assets Per Transfer -->
-        <div class="section" *ngIf="operationType == operations.TRANSFER">
+        <div
+          class="section"
+          *ngIf="operationType == operations.TRANSFER && validateSelect()"
+        >
           <div class="card border">
             <div class="card-body">
               <div class="form-group basic p-0">
@@ -404,6 +407,13 @@
             </div>
           </div>
         </div>
+        <div
+          *ngIf="!validateSelect() && operationType == operations.TRANSFER"
+          class="alert alert-danger mb-1"
+          role="alert"
+        >
+          {{ "crypto.operationExchange.warning" | translate }}
+        </div>
         <!-- END Selezione Assets Per Transfer -->
 
         <div class="section" *ngIf="operationType != operations.TRANSFER">
@@ -457,7 +467,7 @@
           </div>
         </div>
 
-        <div class="section mt-2">
+        <div *ngIf="validateSelect()" class="section mt-2">
           <div class="row fontsize-caption">
             <div class="col">
               <div
