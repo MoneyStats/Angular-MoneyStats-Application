@@ -5,7 +5,7 @@
   margin-bottom: -40px;
 }
 #appCapsule {
-  overflow-x: hidden;
+  overflow-x: hidden !important;
 }
 @media screen and (max-width: 780px) {
   .title-section {
@@ -17,7 +17,7 @@
     position: absolute;
     top: 235px;
     height: 70px;
-    width: 100%;
+    width: 95%;
     background-color: #121212;
   }
 
@@ -28,6 +28,7 @@
 
   .tradingview-widget-container {
     height: 210px;
+    width: 95%;
   }
 }
 

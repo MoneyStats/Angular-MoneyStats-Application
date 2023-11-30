@@ -20,6 +20,7 @@ export class TradingviewDataComponent implements OnInit {
   @ViewChild('tradingViewAssetInfo')
   tradingViewAssetInfo?: ElementRef;
   @ViewChild('tradingViewListCryptos') tradingViewListCryptos?: ElementRef;
+  @ViewChild('tradingViewMap') tradingViewMap?: ElementRef;
 
   @Input('assetSymbol') assetSymbol: string = 'BTC';
 
@@ -38,6 +39,7 @@ export class TradingviewDataComponent implements OnInit {
     this.appendTradingViewTechnicalAnalisys();
     this.appendTradingViewAssetInfo();
     this.appendListGraph();
+    this.appendTradingViewMap();
   }
 
   appendGraph() {
@@ -168,5 +170,30 @@ export class TradingviewDataComponent implements OnInit {
     }`;
 
     this.tradingViewListCryptos?.nativeElement.appendChild(script);
+  }
+
+  appendTradingViewMap() {
+    let script = this._renderer2.createElement('script');
+    script.type = `text/javascript`;
+    script.async = true;
+    script.src =
+      'https://s3.tradingview.com/external-embedding/embed-widget-crypto-coins-heatmap.js';
+    script.innerHTML = `
+    {
+      "dataSource": "Crypto",
+      "blockSize": "market_cap_calc",
+      "blockColor": "change",
+      "locale": "it",
+      "symbolUrl": "",
+      "colorTheme": "dark",
+      "hasTopBar": false,
+      "isDataSetEnabled": false,
+      "isZoomEnabled": false,
+      "hasSymbolTooltip": false,
+      "width": "100%",
+      "height": "100%"
+    }`;
+
+    this.tradingViewMap?.nativeElement.appendChild(script);
   }
 }
