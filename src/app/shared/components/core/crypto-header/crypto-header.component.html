@@ -21,20 +21,32 @@
   </div>
   <div *ngIf="isMenuActive" class="right">
     <div class="menu hidden_mobile">
-      <a routerLink="/wallet" class="d-inline me-2 title-page">{{
-        "crypto.header.tab1" | translate
-      }}</a>
-      <a
-        [routerLink]="[
-          '/crypto/market-data',
-          userService.user.settings.cryptoCurrency
-        ]"
-        class="d-inline me-2 title-page"
-        >{{ "crypto.header.tab5" | translate }}</a
-      >
-      <a routerLink="/crypto/asset" class="d-inline me-2 title-page">{{
-        "crypto.header.tab2" | translate
-      }}</a>
+      <div class="dropdown d-inline">
+        <a href="#" class="d-inline me-2 title-page" data-bs-toggle="dropdown">
+          More Options
+        </a>
+        <div class="dropdown-menu dropdown-menu-end">
+          <h6 class="dropdown-header">
+            {{ "dashboard.sidebar.dropdown.options" | translate }}
+          </h6>
+          <a
+            [routerLink]="[
+              '/crypto/market-data',
+              userService.user.settings.cryptoCurrency
+            ]"
+            class="dropdown-item"
+            >{{ "crypto.header.tab5" | translate }}</a
+          >
+          <a routerLink="/crypto/asset" class="dropdown-item">{{
+            "crypto.header.tab2" | translate
+          }}</a>
+          <div class="dropdown-divider"></div>
+          <a routerLink="/wallet" class="dropdown-item">{{
+            "crypto.header.tab1" | translate
+          }}</a>
+        </div>
+      </div>
+
       <a
         data-bs-toggle="modal"
         attr.data-bs-target="#{{ modalConstant.ADDOPERATIONS }}"

@@ -77,7 +77,7 @@
                   let i = index
                 "
               >
-                <th scope="row">{{ history.date }}</th>
+                <th scope="row">{{ history.date | date : "MMM dd, y" }}</th>
                 <td class="text-end text-primary">
                   {{ dashboardService.coinSymbol }} {{ history.balance }}
                 </td>
