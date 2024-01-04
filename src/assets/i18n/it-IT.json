@@ -533,6 +533,7 @@
   },
   "crypto": {
     "header": {
+      "tabOpt": "Altre Opzioni",
       "tab1": "Portafogli",
       "tab2": "Assets",
       "tab3": "Operazioni",
