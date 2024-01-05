@@ -113,12 +113,43 @@ jobs:
         run: |
           npm install -g @angular/cli
           npm install --force
-          ng build --configuration=production --output-hashing=none --base-href "https://${{ secrets.ORGANIZATION_USERNAME }}.github.io/${{ secrets.DESTINATION_REPOSITORY }}/"
+          ng build --configuration=production --output-hashing=none --base-href "https://${{ secrets.ORGANIZATION_USERNAME }}.github.io/${{ secrets.DESTINATION_REPOSITORY_OLD }}/"
       - name: 🚀 Pushes to github pages
         uses: cpina/github-action-push-to-another-repository@main
         env:
           name: angular-moneystats
           url: https://MoneyStats.github.io/App/
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN }}
+        with:
+          source-directory: "dist/angular-moneystats"
+          destination-github-username: "${{ secrets.ORGANIZATION_USERNAME }}"
+          destination-repository-name: "${{ secrets.DESTINATION_REPOSITORY_OLD }}"
+          user-email: ${{ secrets.EMAIL }}
+          target-branch: main
+  deploy-github-pages-new:
+    name: 🚀 Deploy on Github Pages (NEW)
+    runs-on: ubuntu-latest
+    environment:
+      name: prod-moneystats-angular
+      url: https://moneystats.github.io
+    needs:
+      - dependency
+      - build
+    steps:
+      - name: "☁️ Checkout Repository"
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: 📂 Build
+        run: |
+          npm install -g @angular/cli
+          npm install --force
+          ng build --configuration=production --output-hashing=none --base-href "https://${{ secrets.DESTINATION_REPOSITORY }}"
+      - name: 🚀 Pushes to github pages
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          name: angular-moneystats
+          url: https://moneystats.github.io
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN }}
         with:
           source-directory: "dist/angular-moneystats"

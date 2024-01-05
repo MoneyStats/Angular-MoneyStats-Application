@@ -58,6 +58,7 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   deleteTradingWallet() {
+    this.getTodayAsString();
     if (this.wallets && this.wallets.length > 0)
       this.wallets = this.wallets.filter(
         (wallet) => wallet.type && wallet.type == 'Holding'
