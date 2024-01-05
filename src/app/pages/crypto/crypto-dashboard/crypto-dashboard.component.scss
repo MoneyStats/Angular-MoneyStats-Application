@@ -67,6 +67,13 @@
 }
 
 @media screen and (max-width: 780px) {
+  .fixed {
+    width: 100%;
+    bottom: 0px;
+    height: 120px;
+    margin-top: -70px;
+  }
+
   .balance {
     font-size: xx-large !important;
   }

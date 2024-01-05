@@ -135,3 +135,11 @@
     </div>
   </div>
 </div>
+
+<app-operations-modal
+  [modalId]="modalConstant.ADDOPERATIONS"
+  [wallets]="cryptoDashboard.wallets"
+  [assets]="cryptoDashboard.assets"
+  [currency]="cryptoDashboard.currency"
+  [statsAssetsDays]="cryptoDashboard.statsAssetsDays"
+></app-operations-modal>
