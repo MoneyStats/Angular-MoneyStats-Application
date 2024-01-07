@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: checkout-and-setup
     steps:
-        uses: actions/checkout@v3
+      uses: actions/checkout@v3
       - name: 📦 Dependency Injection
         run: |
           npm install -g @angular/cli
