@@ -244,6 +244,15 @@
                 ></strong
               >
             </li>
+            <li *ngIf="operation?.fees">
+              <strong
+                >{{ currency }}
+                {{ "crypto.operationDetails.fees" | translate }}</strong
+              >
+              <strong
+                ><span>{{ operation?.fees }} {{ currency }}</span></strong
+              >
+            </li>
           </ul>
         </div>
       </div>

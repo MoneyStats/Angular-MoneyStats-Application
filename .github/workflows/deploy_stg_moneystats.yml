@@ -8,8 +8,8 @@ env:
   NODE_VERSION: "16.13.2"
 
 jobs:
-  checkout:
-    name: 🔧 Checkout
+  checkout-and-setup:
+    name: 🔧 Checkout and Setup
     runs-on: ubuntu-latest
     steps:
       - name: "☁️ Checkout Repository"
@@ -17,65 +17,54 @@ jobs:
         with:
           persist-credentials: false
 
-  setup:
-    name: 🔧 Setup
-    runs-on: ubuntu-latest
-    steps:
-      - name: "☁️ Checkout Repository"
-        uses: actions/checkout@v3
-        with:
-          persist-credentials: false
       - name: 🔧 Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v3
         with:
           node-version: "${{ env.NODE_VERSION }}"
 
-  dependency:
-    name: 📦 Installing Dependency
+  dependency-build:
+    name: 📦 Install and Build
     runs-on: ubuntu-latest
-    needs: [checkout, setup]
+    needs: [checkout-and-setup]
     steps:
-      - name: "☁️ Checkout Repository"
         uses: actions/checkout@v3
-        with:
-          persist-credentials: false
       - name: "📦 Dependency Injection"
         run: |
           npm install -g @angular/cli
           npm install --force
-
-  build:
-    name: 📂 Build
-    runs-on: ubuntu-latest
-    needs: [checkout, setup, dependency]
-    steps:
-      - name: "☁️ Checkout Repository"
-        uses: actions/checkout@v3
-        with:
-          persist-credentials: false
       - name: 📂 Build
         run: npm run staging
+
+  docker-login:
+    name: 🐳 Docker Login
+    runs-on: ubuntu-latest
+    needs: dependency-build
+    steps:
+      - name: 🐳 Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ env.DOCKER_USERNAME }}
+          password: ${{ env.DOCKER_PASSWORD }}
 
   deploy:
     name: 🚀 Deploy
     runs-on: ubuntu-latest
     environment:
       name: stg-moneystats-angular
-    needs: [dependency, build]
+    needs: [dependency-build, docker-login]
     steps:
       - uses: actions/checkout@v3
+
       - name: Grant execute permission to script
         run: chmod +x ./rename.sh
+
       - name: Build the Docker image
         run: docker build . --file Dockerfile --build-arg config=staging --tag angular-moneystats:$(date +%s)
+
       - name: Get current package version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Build & push Docker image
         uses: mr-smithers-excellent/docker-build-push@v6.2
         with:

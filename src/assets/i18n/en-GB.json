@@ -723,7 +723,8 @@
       "value": "Value",
       "quantity": "Quantity",
       "exit": "Exit Date",
-      "exitPrice": "Exit Price"
+      "exitPrice": "Exit Price",
+      "fees": "Fees"
     },
     "closeOperation": {
       "title": "Close Operation",
