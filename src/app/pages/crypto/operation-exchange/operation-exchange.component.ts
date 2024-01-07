@@ -186,8 +186,12 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
       this.investedMoney =
         this.tradingAssetToSell.current_price! * this.investedBalance;
     this.assetNewBalance = parseFloat(
-      (this.investedMoney / this.marketDataSelected.current_price!).toFixed(8)
+      (
+        this.investedMoney / this.marketDataSelected.current_price! -
+        this.fees
+      ).toFixed(8)
     );
+    this.isEditFees = false;
   }
 
   selectTransferWallet(wallet: Wallet) {
@@ -252,6 +256,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     operation.exitQuantity = this.balanceToTransfer - this.fees;
     operation.performance = 0;
     operation.trend = 0;
+    operation.fees = this.fees;
 
     transferedAsset.operations = [operation];
 
@@ -298,6 +303,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     );
     operation.entryQuantity = this.assetNewBalance;
     operation.exitCoin = assetToSave.symbol;
+    operation.fees = this.fees;
 
     assetToSave.operations = [operation];
 
@@ -344,6 +350,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     operation.exitPriceValue = this.investedMoney;
     //operation.exitQuantity = this.assetNewBalance;
     operation.exitQuantity = this.investedMoney;
+    operation.fees = this.fees;
 
     assetToSave.operations = [operation];
 
@@ -381,6 +388,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     operation.exitPriceValue = this.investedMoney;
     //operation.exitQuantity = this.assetNewBalance;
     operation.exitQuantity = this.investedMoney;
+    operation.fees = this.fees;
 
     assetToSave.operations = [operation];
 

@@ -723,7 +723,8 @@
       "value": "Valore",
       "quantity": "Quantità",
       "exit": "Data di uscita",
-      "exitPrice": "Prezzo d'uscita"
+      "exitPrice": "Prezzo d'uscita",
+      "fees": "Fees"
     },
     "closeOperation": {
       "title": "Chiudi Operazione",

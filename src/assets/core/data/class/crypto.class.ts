@@ -56,6 +56,7 @@ export class Operation extends GenericModel {
   exitQuantity?: number; // Quantità di value investita
   performance?: number;
   trend?: number;
+  fees?: number;
   asset?: Asset;
   wallet?: Wallet;
   walletSell?: Wallet;

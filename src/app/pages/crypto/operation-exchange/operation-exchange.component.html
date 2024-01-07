@@ -107,12 +107,61 @@
                   <label class="group-label" for="fromAmount">{{
                     "crypto.operationExchange.from" | translate
                   }}</label>
-                  <div
-                    class="exchange-wallet-info"
-                    [innerHTML]="
-                      'crypto.operationExchange.commition' | translate
-                    "
-                  ></div>
+                  <div class="exchange-wallet-info">
+                    <div
+                      *ngIf="!isEditFees"
+                      (click)="isEditFees = true"
+                      class="clickable"
+                    >
+                      {{ "crypto.operationExchange.fees" | translate }}:
+                      <strong>
+                        {{ fees }}
+                        {{ assetInWallet.symbol }}</strong
+                      >
+                    </div>
+                    <div *ngIf="isEditFees" class="row">
+                      <div class="col-7 col-md-8">
+                        <div class="form-group basic">
+                          <div class="input-wrapper">
+                            <label class="label" for="price"
+                              >{{
+                                "crypto.operationExchange.editFees" | translate
+                              }}
+                              {{ marketDataSelected.symbol }}</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="price"
+                              name="price"
+                              #price1="ngModel"
+                              [(ngModel)]="fees"
+                              value="{{ fees }}"
+                              required
+                              placeholder="{{
+                                'crypto.operationExchange.updateFees'
+                                  | translate
+                              }}"
+                            />
+                            <i class="clear-input">
+                              <ion-icon name="close-circle"></ion-icon>
+                            </i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-1">
+                        <button
+                          [disabled]="f.invalid"
+                          style="vertical-align: -25px"
+                          type="button"
+                          class="btn btn-primary rounded me-1"
+                          (click)="makeNewBalance()"
+                        >
+                          {{ "crypto.operationExchange.save" | translate }}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="exchange-group">
                   <div class="input-col">
@@ -164,6 +213,64 @@
                     "crypto.operationExchange.from" | translate
                   }}</label>
                   <div class="exchange-wallet-info">
+                    <div
+                      *ngIf="!isEditFees"
+                      (click)="isEditFees = true"
+                      class="clickable"
+                    >
+                      {{ "crypto.operationExchange.fees" | translate }}:
+                      <strong>
+                        {{ fees }}
+                        {{ assetInWallet.symbol }}</strong
+                      >
+                    </div>
+                    <div *ngIf="isEditFees" class="row">
+                      <div class="col-7 col-md-8">
+                        <div class="form-group basic">
+                          <div class="input-wrapper">
+                            <label class="label" for="price"
+                              >{{
+                                "crypto.operationExchange.editFees" | translate
+                              }}
+                              {{ marketDataSelected.symbol }}</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="price"
+                              name="price"
+                              #price1="ngModel"
+                              [(ngModel)]="fees"
+                              value="{{ fees }}"
+                              required
+                              placeholder="{{
+                                'crypto.operationExchange.updateFees'
+                                  | translate
+                              }}"
+                            />
+                            <i class="clear-input">
+                              <ion-icon name="close-circle"></ion-icon>
+                            </i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-1">
+                        <button
+                          [disabled]="f.invalid"
+                          style="vertical-align: -25px"
+                          type="button"
+                          class="btn btn-primary rounded me-1"
+                          (click)="makeNewBalance()"
+                        >
+                          {{ "crypto.operationExchange.save" | translate }}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    style="position: absolute; bottom: 9px; right: 13px"
+                    class="exchange-wallet-info"
+                  >
                     {{ "crypto.operationExchange.balance" | translate }}
                     <strong>
                       {{
@@ -174,13 +281,6 @@
                       {{ holdingAssetToSell.symbol }}</strong
                     >
                   </div>
-                  <div
-                    style="position: absolute; bottom: 9px; right: 13px"
-                    class="exchange-wallet-info"
-                    [innerHTML]="
-                      'crypto.operationExchange.commition' | translate
-                    "
-                  ></div>
                 </div>
                 <div class="row">
                   <div class="col-md-8 col-7 mt-1">
@@ -235,6 +335,64 @@
                     "crypto.operationExchange.from" | translate
                   }}</label>
                   <div class="exchange-wallet-info">
+                    <div
+                      *ngIf="!isEditFees"
+                      (click)="isEditFees = true"
+                      class="clickable"
+                    >
+                      {{ "crypto.operationExchange.fees" | translate }}:
+                      <strong>
+                        {{ fees }}
+                        {{ assetInWallet.symbol }}</strong
+                      >
+                    </div>
+                    <div *ngIf="isEditFees" class="row">
+                      <div class="col-7 col-md-8">
+                        <div class="form-group basic">
+                          <div class="input-wrapper">
+                            <label class="label" for="price"
+                              >{{
+                                "crypto.operationExchange.editFees" | translate
+                              }}
+                              {{ marketDataSelected.symbol }}</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="price"
+                              name="price"
+                              #price1="ngModel"
+                              [(ngModel)]="fees"
+                              value="{{ fees }}"
+                              required
+                              placeholder="{{
+                                'crypto.operationExchange.updateFees'
+                                  | translate
+                              }}"
+                            />
+                            <i class="clear-input">
+                              <ion-icon name="close-circle"></ion-icon>
+                            </i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-1">
+                        <button
+                          [disabled]="f.invalid"
+                          style="vertical-align: -25px"
+                          type="button"
+                          class="btn btn-primary rounded me-1"
+                          (click)="makeNewBalance()"
+                        >
+                          {{ "crypto.operationExchange.save" | translate }}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    style="position: absolute; bottom: 9px; right: 13px"
+                    class="exchange-wallet-info"
+                  >
                     {{ "crypto.operationExchange.balance" | translate }}
                     <strong>
                       {{
@@ -245,13 +403,6 @@
                       {{ tradingAssetToSell.symbol }}</strong
                     >
                   </div>
-                  <div
-                    style="position: absolute; bottom: 9px; right: 13px"
-                    class="exchange-wallet-info"
-                    [innerHTML]="
-                      'crypto.operationExchange.commition' | translate
-                    "
-                  ></div>
                 </div>
                 <div class="row">
                   <div class="col-md-8 col-7 mt-1">
@@ -415,7 +566,7 @@
           {{ "crypto.operationExchange.warning" | translate }}
         </div>
         <!-- END Selezione Assets Per Transfer -->
-
+        <!-- Crypto da selezionare per New Operation-->
         <div class="section" *ngIf="operationType != operations.TRANSFER">
           <div class="card border">
             <div class="card-body">
@@ -466,6 +617,7 @@
             </div>
           </div>
         </div>
+        <!-- END Crypto da selezionare per New Operation-->
 
         <div *ngIf="validateSelect()" class="section mt-2">
           <div class="row fontsize-caption">

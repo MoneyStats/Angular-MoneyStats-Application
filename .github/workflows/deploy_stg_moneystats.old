@@ -1,15 +1,15 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
 name: Deploy-STG
 
 on:
   push:
     branches: [develop]
 
-env:
-  NODE_VERSION: "16.13.2"
-
 jobs:
-  checkout-and-setup:
-    name: 🔧 Checkout and Setup
+  checkout:
+    name: 🔧 Checkout
     runs-on: ubuntu-latest
     steps:
       - name: "☁️ Checkout Repository"
@@ -17,41 +17,55 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: 🔧 Use Node.js ${{ env.NODE_VERSION }}
+  setting-up:
+    name: 🔧 Setting Up
+    runs-on: ubuntu-latest
+    steps:
+      - name: "☁️ Checkout Repository"
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+      - name: 🔧 Use Node.js 16.13.2
         uses: actions/setup-node@v3
         with:
-          node-version: "${{ env.NODE_VERSION }}"
+          node-version: "16.13.2"
 
-  dependency-build:
-    name: 📦 Install and Build
+  dependency:
+    name: 📦 Installing Dependency
     runs-on: ubuntu-latest
-    needs: [checkout-and-setup]
+    needs: [checkout, setting-up]
     steps:
+      - name: "☁️ Checkout Repository"
         uses: actions/checkout@v3
+        with:
+          persist-credentials: false
       - name: "📦 Dependency Injection"
         run: |
           npm install -g @angular/cli
           npm install --force
-      - name: 📂 Build
-        run: npm run staging
-
-  docker-login:
-    name: 🐳 Docker Login
+  build:
+    name: 📂 Build
     runs-on: ubuntu-latest
-    needs: dependency-build
+    needs: [setting-up, dependency]
     steps:
-      - name: 🐳 Log in to Docker Hub
-        uses: docker/login-action@v2
+      - name: "☁️ Checkout Repository"
+        uses: actions/checkout@v3
         with:
-          username: ${{ env.DOCKER_USERNAME }}
-          password: ${{ env.DOCKER_PASSWORD }}
+          persist-credentials: false
 
+      - name: 📂 Build
+        run: |
+          npm install -g @angular/cli
+          npm install --force
+          npm run staging
   deploy:
     name: 🚀 Deploy
     runs-on: ubuntu-latest
     environment:
       name: stg-moneystats-angular
-    needs: [dependency-build, docker-login]
+    needs:
+      - dependency
+      - build
     steps:
       - uses: actions/checkout@v3
 
@@ -65,11 +79,17 @@ jobs:
         id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
 
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Build & push Docker image
         uses: mr-smithers-excellent/docker-build-push@v6.2
         with:
           image: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}
-          tags: ${{ steps.package-version.outputs.current-version }}, latest
+          tags: ${{ steps.package-version.outputs.current-version}}, latest
           buildArgs: config=staging
           registry: docker.io
           dockerfile: Dockerfile
