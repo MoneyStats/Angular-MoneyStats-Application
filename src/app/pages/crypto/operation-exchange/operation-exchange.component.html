@@ -693,16 +693,13 @@
                       <input
                         type="date"
                         class="form-control"
-                        id="date"
+                        id="editDate"
                         name="date"
                         #date1="ngModel"
-                        [(ngModel)]="marketDataSelected.lastUpdate"
-                        value="{{ marketDataSelected.lastUpdate }}"
+                        [(ngModel)]="operationDate"
+                        value="{{ operationDate }}"
                         required
                       />
-                      <i class="clear-input">
-                        <ion-icon name="close-circle"></ion-icon>
-                      </i>
                     </div>
                   </div>
                 </div>

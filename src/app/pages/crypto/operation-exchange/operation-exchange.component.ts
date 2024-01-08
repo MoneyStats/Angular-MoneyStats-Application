@@ -17,6 +17,7 @@ import { SwalService } from 'src/assets/core/utils/swal.service';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-operation-exchange',
@@ -61,6 +62,8 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   balanceToTransfer: number = 0;
   isEditFees: boolean = false;
   fees: number = 0;
+
+  operationDate: Date = new Date();
 
   constructor(
     private cryptoService: CryptoService,
@@ -233,9 +236,10 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     transferedAsset.invested += percentualeInvestitoCalcolata;
 
     let operation: Operation = new Operation();
+    operation.identifier = uuidv4();
     operation.type = this.operationType;
     operation.status = 'CLOSED';
-    operation.entryDate = new Date(transferAsset.lastUpdate);
+    operation.entryDate = new Date(this.operationDate);
     operation.entryCoin = transferAsset.symbol;
     operation.entryPrice = this.marketDataSelected.current_price;
     operation.entryPriceValue = parseFloat(
@@ -244,7 +248,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
       )
     );
     operation.entryQuantity = this.balanceToTransfer;
-    operation.exitDate = new Date(transferAsset.lastUpdate);
+    operation.exitDate = new Date(this.operationDate);
     operation.exitCoin = transferAsset.symbol;
     operation.exitPrice = this.marketDataSelected.current_price;
     operation.exitPriceValue = parseFloat(
@@ -293,9 +297,10 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
       ? (assetToSave.balance = this.assetNewBalance)
       : (assetToSave.balance += this.assetNewBalance);
     let operation: Operation = new Operation();
+    operation.identifier = uuidv4();
     operation.type = this.operationType;
     operation.status = 'OPEN';
-    operation.entryDate = new Date(this.marketDataSelected.lastUpdate);
+    operation.entryDate = new Date(this.operationDate);
     operation.entryCoin = tradingAsset.symbol;
     operation.entryPrice = this.marketDataSelected.current_price;
     operation.entryPriceValue = parseFloat(
@@ -336,15 +341,16 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
       ? (assetToSave.balance = this.assetNewBalance)
       : (assetToSave.balance += this.assetNewBalance);
     let operation: Operation = new Operation();
+    operation.identifier = uuidv4();
     operation.type = this.operationType;
     operation.status = 'CLOSED';
-    operation.entryDate = new Date(this.marketDataSelected.lastUpdate);
+    operation.entryDate = new Date(this.operationDate);
     operation.entryCoin = holdingAsset.symbol;
     operation.entryPrice = this.marketDataSelected.current_price;
     operation.entryPriceValue = this.investedMoney;
     //operation.entryQuantity = this.investedBalance;
     operation.entryQuantity = this.assetNewBalance;
-    operation.exitDate = new Date(this.marketDataSelected.lastUpdate);
+    operation.exitDate = new Date(this.operationDate);
     operation.exitCoin = assetToSave.symbol;
     operation.exitPrice = this.marketDataSelected.current_price;
     operation.exitPriceValue = this.investedMoney;
@@ -374,15 +380,16 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
       : (assetToSave.balance += this.assetNewBalance);
 
     let operation: Operation = new Operation();
+    operation.identifier = uuidv4();
     operation.type = this.operationType;
     operation.status = 'CLOSED';
-    operation.entryDate = new Date(assetToSave.lastUpdate);
+    operation.entryDate = new Date(this.operationDate);
     operation.entryCoin = this.fiat;
     operation.entryPrice = assetToSave.current_price;
     operation.entryPriceValue = this.investedMoney;
     //operation.entryQuantity = this.investedMoney;
     operation.entryQuantity = this.assetNewBalance;
-    operation.exitDate = new Date(assetToSave.lastUpdate);
+    operation.exitDate = new Date(this.operationDate);
     operation.exitCoin = assetToSave.symbol;
     operation.exitPrice = assetToSave.current_price;
     operation.exitPriceValue = this.investedMoney;
@@ -402,13 +409,17 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
       .addOrUpdateCryptoAsset(walletToSave)
       .subscribe((data) => {
         this.logger.LOG(data.message!, 'OperationExchangeComponent');
-        this.swal.toastMessage(
-          SwalIcon.SUCCESS,
-          this.translate
-            .instant('response.operation')
-            .replace('$OP1$', walletToSave.assets[0].symbol)
-            .replace('$OP2$', walletToSave.assets[1].symbol)
-        );
+        let message =
+          walletToSave.assets.length > 1
+            ? this.translate
+                .instant('response.operation')
+                .replace('$OP1$', walletToSave.assets[0].symbol)
+                .replace('$OP2$', walletToSave.assets[1].symbol)
+            : this.translate
+                .instant('response.operation')
+                .replace('$OP1$', 'USD')
+                .replace('$OP2$', walletToSave.assets[0].symbol);
+        this.swal.toastMessage(SwalIcon.SUCCESS, message);
         this.router.navigate(['/crypto/dashboard']);
       });
   }

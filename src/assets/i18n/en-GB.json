@@ -713,17 +713,18 @@
       "updateFees": "Update Fees"
     },
     "operationDetails": {
+      "identifier": "Operation identifier",
       "title": "Details",
       "close": "Close",
       "status": "Status",
       "type": "Operation Type",
       "currency": "Currency",
-      "entry": "Entry Date",
-      "entryPrice": "Entry Price",
-      "value": "Value",
-      "quantity": "Quantity",
-      "exit": "Exit Date",
-      "exitPrice": "Exit Price",
+      "entry": "Execution date",
+      "entryPrice": "Execution price",
+      "value": "Executed value",
+      "quantity": "Quantity executed",
+      "exit": "Selling execution date",
+      "exitPrice": "Selling execution price",
       "fees": "Fees"
     },
     "closeOperation": {
@@ -817,5 +818,5 @@
       }
     }
   },
-  "copyright": "Copyright © MoneyStats 2023. All Rights Reserved."
+  "copyright": "Copyright © MoneyStats 2024. All Rights Reserved."
 }

@@ -139,6 +139,12 @@
             </div>
           </div>
           <ul class="listview flush transparent simple-listview no-space mt-3">
+            <li *ngIf="operation?.identifier">
+              <strong>{{
+                "crypto.operationDetails.identifier" | translate
+              }}</strong>
+              <span style="text-align: end"> {{ operation?.identifier }}</span>
+            </li>
             <li>
               <strong>{{
                 "crypto.operationDetails.status" | translate
@@ -206,6 +212,58 @@
                 ></strong
               >
             </li>
+            <li *ngIf="operation?.fees">
+              <strong
+                >{{ operation?.exitCoin }}
+                {{ "crypto.operationDetails.fees" | translate }}</strong
+              >
+              <strong
+                ><span
+                  >{{ operation?.fees }} {{ operation?.exitCoin }}</span
+                ></strong
+              >
+            </li>
+            <li
+              *ngIf="
+                operation?.exitDate &&
+                operation?.type != operationTypeConstant.NEWINVESTMENT &&
+                operation?.type != operationTypeConstant.HOLDING
+              "
+            >
+              <strong>{{ "crypto.operationDetails.exit" | translate }}</strong>
+              <span>{{ operation?.exitDate | date : "MMM dd, y HH:mm" }}</span>
+            </li>
+            <li
+              *ngIf="
+                operation?.exitPrice &&
+                operation?.type != operationTypeConstant.NEWINVESTMENT &&
+                operation?.type != operationTypeConstant.HOLDING
+              "
+            >
+              <strong>{{
+                "crypto.operationDetails.exitPrice" | translate
+              }}</strong>
+              <strong
+                ><span>{{ operation?.exitPrice }} {{ currency }}</span></strong
+              >
+            </li>
+            <li
+              *ngIf="
+                operation?.exitPriceValue &&
+                operation?.type != operationTypeConstant.NEWINVESTMENT &&
+                operation?.type != operationTypeConstant.HOLDING
+              "
+            >
+              <strong
+                >{{ currency }}
+                {{ "crypto.operationDetails.value" | translate }}</strong
+              >
+              <strong
+                ><span
+                  >{{ operation?.exitPriceValue }} {{ currency }}</span
+                ></strong
+              >
+            </li>
             <li>
               <strong>Trend</strong>
               <strong
@@ -219,38 +277,6 @@
                   }}"
                   >{{ currency }} {{ trend }} ({{ percentage }}%)</span
                 ></strong
-              >
-            </li>
-            <li *ngIf="operation?.exitDate">
-              <strong>{{ "crypto.operationDetails.exit" | translate }}</strong>
-              <span>{{ operation?.exitDate | date : "MMM dd, y HH:mm" }}</span>
-            </li>
-            <li *ngIf="operation?.exitPrice">
-              <strong>{{
-                "crypto.operationDetails.exitPrice" | translate
-              }}</strong>
-              <strong
-                ><span>{{ operation?.exitPrice }} {{ currency }}</span></strong
-              >
-            </li>
-            <li *ngIf="operation?.exitPriceValue">
-              <strong
-                >{{ currency }}
-                {{ "crypto.operationDetails.value" | translate }}</strong
-              >
-              <strong
-                ><span
-                  >{{ operation?.exitPriceValue }} {{ currency }}</span
-                ></strong
-              >
-            </li>
-            <li *ngIf="operation?.fees">
-              <strong
-                >{{ currency }}
-                {{ "crypto.operationDetails.fees" | translate }}</strong
-              >
-              <strong
-                ><span>{{ operation?.fees }} {{ currency }}</span></strong
               >
             </li>
           </ul>

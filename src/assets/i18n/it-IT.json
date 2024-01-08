@@ -713,6 +713,7 @@
       "updateFees": "Aggiorna Fees"
     },
     "operationDetails": {
+      "identifier": "Identificativo Operazione",
       "title": "Dettagli",
       "close": "Chiudi",
       "status": "Stato",
@@ -817,5 +818,5 @@
       }
     }
   },
-  "copyright": "Copyright © MoneyStats 2023. All Rights Reserved."
+  "copyright": "Copyright © MoneyStats 2024. All Rights Reserved."
 }

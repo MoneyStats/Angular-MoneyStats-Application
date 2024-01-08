@@ -42,6 +42,7 @@ export class Asset extends GenericModel {
 }
 
 export class Operation extends GenericModel {
+  identifier?: string;
   type?: string; // Holding, Trading, New Investment
   status?: string; // Open Closed
   entryDate?: Date;
