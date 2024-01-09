@@ -16,5 +16,6 @@ export class Error {
 }
 
 export enum ExceptionCode {
+  GenericException = 'ERR_AUTH_MSS_001',
   Authentication = 'ERR_AUTH_MSS_004',
 }

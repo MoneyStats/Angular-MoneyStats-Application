@@ -818,5 +818,17 @@
       }
     }
   },
+  "exception": {
+    "ERR_AUTH_MSS_003": {
+      "status": "Unauthorized",
+      "exceptionName": "Wrong Credentials",
+      "message": "Wrong Credential for username or password. Try again!"
+    },
+    "ERR_AUTH_MSS_004": {
+      "status": "Internal Server Error",
+      "exceptionName": "Unknown Error",
+      "message": "An Unknown error happen during the process, please try again."
+    }
+  },
   "copyright": "Copyright © MoneyStats 2024. All Rights Reserved."
 }

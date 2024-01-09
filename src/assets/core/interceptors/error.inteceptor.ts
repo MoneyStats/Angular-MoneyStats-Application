@@ -42,7 +42,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           let exceptionCode = this.errorService.exception.error?.exceptionCode;
 
           if (
-            exceptionCode == ExceptionCode.Authentication ||
+            this.isExceptionCodeIncluded(exceptionCode!) ||
             error.status == HttpStatusCode.GatewayTimeout
           ) {
             this.userService.logout();
@@ -56,5 +56,9 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         return throwError(() => new Error(errorMsg));
       })
     );
+  }
+
+  isExceptionCodeIncluded(value: string): boolean {
+    return Object.values(ExceptionCode).includes(value as ExceptionCode);
   }
 }
