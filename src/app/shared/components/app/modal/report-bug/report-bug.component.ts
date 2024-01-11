@@ -40,16 +40,16 @@ export class ReportBugComponent implements OnDestroy {
     let githubIssues = new GithubIssues();
     githubIssues.title =
       '[' +
-      this.exception?.error?.exceptionCode +
+      this.exception?.error?.errorCode +
       ']: ' +
-      this.exception?.error?.exceptionName;
+      this.exception?.error?.exception;
     githubIssues.assignees = ['giovannilamarmora'];
     githubIssues.labels = ['bug'];
     this.userService.getTemplate().subscribe((t) => {
       let template = t.template
         .replace('$DATETIME$', this.exception!.dateTime!.toString())
         .replace('$URL$', this.exception!.url!)
-        .replace('$EXCEPTION_CODE$', this.exception?.error?.exceptionCode)
+        .replace('$EXCEPTION_CODE$', this.exception?.error?.errorCode)
         .replace('$STATUS$', this.exception?.error?.statusCode!)
         .replace('$MESSAGE$', this.exception?.error?.message!)
         .replace(

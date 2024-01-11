@@ -33,6 +33,7 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
   assets: Asset[] = [];
 
   showZeroBalance: boolean = false;
+  thisYear: number = new Date().getFullYear();
 
   constructor(
     private cryptoService: CryptoService,

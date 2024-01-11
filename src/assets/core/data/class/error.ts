@@ -7,15 +7,15 @@ export class UtilsException {
 
 export class Error {
   statusCode?: number;
-  exceptionCode?: string;
-  exceptionName?: string;
+  errorCode?: string;
+  exception?: string;
   status?: string;
   message?: string;
   exceptionMessage?: string;
   stackTrace?: string;
 }
 
-export enum ExceptionCode {
-  GenericException = 'ERR_AUTH_MSS_001',
+export enum errorCode {
+  GenericException = 'ERR_AUTH_MSS_003',
   Authentication = 'ERR_AUTH_MSS_004',
 }

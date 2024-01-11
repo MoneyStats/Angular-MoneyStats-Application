@@ -51,6 +51,8 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
   // Crypto Asset
   showZeroBalance: boolean = false;
 
+  thisYear: number = new Date().getFullYear();
+
   constructor(
     public screenService: ScreenService,
     private route: ActivatedRoute,
@@ -112,7 +114,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
   }
 
   graphAll() {
-    if (!this.chartAll) {
+    if (!this.chartAll && this.wallet?.history) {
       setTimeout(() => {
         this.chartAll = this.charts.renderChartWallet(
           this.wallet?.name!,
@@ -123,7 +125,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
   }
 
   graph1Y() {
-    if (!this.chart1Y) {
+    if (!this.chart1Y && this.wallet?.history) {
       let lastYear = this.wallet?.history.filter(
         (h) =>
           h.date.toString().split('-')[0] ===
@@ -139,7 +141,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
   }
 
   graph3Y() {
-    if (!this.chart3Y) {
+    if (!this.chart3Y && this.wallet?.history) {
       let last3 = [
         new Date().getFullYear().toString(),
         (new Date().getFullYear() - 1).toString(),

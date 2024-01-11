@@ -53,6 +53,8 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
 
   showZeroBalance: boolean = false;
 
+  thisYear: number = new Date().getFullYear();
+
   constructor(
     public cryptoService: CryptoService,
     private screenService: ScreenService,

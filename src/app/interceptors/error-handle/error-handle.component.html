@@ -29,16 +29,16 @@
             <ion-icon class="error-icon" name="skull-outline"></ion-icon>
           </div>
         </div>
-        <h2 class="mb-2">{{ exception?.error?.exceptionName }}</h2>
+        <h2 class="mb-2">{{ exception?.error?.exception }}</h2>
         <p *ngIf="showMoreData && exception?.url">
           Date: {{ exception?.dateTime | date : "d MMM y" }} <br />
           Correlation ID: {{ exception?.correlationId }} <br />
           URL: <strong>{{ exception?.url }}</strong> <br />
-          Exception: {{ exception?.error?.exceptionCode }}
+          Exception: {{ exception?.error?.errorCode }}
         </p>
         <p *ngIf="!showMoreData && exception?.url">
           Date: {{ exception?.dateTime | date : "d MMM y" }} <br />
-          Exception: {{ exception?.error?.exceptionCode }}
+          Exception: {{ exception?.error?.errorCode }}
         </p>
         <h1 *ngIf="showMoreData">
           {{ exception?.error?.statusCode }} {{ exception?.error?.status }}

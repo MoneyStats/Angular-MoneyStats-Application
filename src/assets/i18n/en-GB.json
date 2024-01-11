@@ -819,14 +819,14 @@
     }
   },
   "exception": {
-    "ERR_AUTH_MSS_003": {
+    "ERR_AUTH_MSS_001": {
       "status": "Unauthorized",
-      "exceptionName": "Wrong Credentials",
+      "exception": "Wrong Credentials",
       "message": "Wrong Credential for username or password. Try again!"
     },
     "ERR_AUTH_MSS_004": {
       "status": "Internal Server Error",
-      "exceptionName": "Unknown Error",
+      "exception": "Unknown Error",
       "message": "An Unknown error happen during the process, please try again."
     }
   },

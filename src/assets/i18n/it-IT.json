@@ -819,14 +819,14 @@
     }
   },
   "exception": {
-    "ERR_AUTH_MSS_003": {
+    "ERR_AUTH_MSS_001": {
       "status": "Non autorizzato",
-      "exceptionName": "Credenziali Sbagliate",
+      "exception": "Credenziali Sbagliate",
       "message": "Lo username o la password inserita sono errate, prova nuovamente!"
     },
     "ERR_AUTH_MSS_004": {
       "status": "Errore Interno",
-      "exceptionName": "Errore Sconosciuto",
+      "exception": "Errore Sconosciuto",
       "message": "Un errore sconosciuto è apparso durante il processo, prova nuovamente."
     }
   },

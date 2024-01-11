@@ -1,7 +1,7 @@
 import { HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { ExceptionCode, UtilsException } from '../data/class/error';
+import { errorCode, UtilsException } from '../data/class/error';
 import { Error } from '../data/class/error';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -27,15 +27,15 @@ export class ErrorService {
     let exceptionMap: Record<string, any> =
       this.translateService.instant('exception');
 
-    let exceptionCode = this.exception.error?.exceptionCode!;
+    let errorCode = this.exception.error?.errorCode!;
 
-    if (exceptionMap.hasOwnProperty(exceptionCode)) {
+    if (exceptionMap.hasOwnProperty(errorCode)) {
       // Puoi accedere alla traduzione direttamente usando la chiave
-      const error = exceptionMap[exceptionCode];
+      const error = exceptionMap[errorCode];
       // Assegna il messaggio tradotto all'oggetto UtilsException
       this.exception.error!.message = error.message;
       this.exception.error!.status = error.status;
-      this.exception.error!.exceptionName = error.exceptionName;
+      this.exception.error!.exception = error.exception;
     }
   }
 
@@ -43,10 +43,10 @@ export class ErrorService {
     this.exception.url = error.url;
     this.exception.dateTime = new Date();
     let errorModel: Error = new Error();
-    errorModel.exceptionCode = ExceptionCode.GenericException;
+    errorModel.errorCode = errorCode.GenericException;
     errorModel.message = error.message;
     errorModel.statusCode = HttpStatusCode.InternalServerError;
-    errorModel.exceptionName = error.statusText;
+    errorModel.exception = error.statusText;
     this.exception.error = errorModel;
     this.mapError(error);
   }
@@ -55,11 +55,11 @@ export class ErrorService {
     this.exception.url = '/stats/insert';
     this.exception.dateTime = new Date();
     let errorModel: Error = new Error();
-    errorModel.exceptionCode = 'WALLET_DATA_ERROR';
+    errorModel.errorCode = 'WALLET_DATA_ERROR';
     errorModel.message =
       'This error appeared cause you have been try to add a Stats with a date before a wallet was created, try different date!';
     errorModel.statusCode = HttpStatusCode.BadRequest;
-    //errorModel.exceptionName = 'error.statusText';
+    //errorModel.exception = 'error.statusText';
     this.exception.error = errorModel;
   }
 }

@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ExceptionCode } from '../data/class/error';
+import { errorCode } from '../data/class/error';
 import { UserService } from '../services/user.service';
 import { ErrorService } from './error.service';
 
@@ -39,10 +39,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
           console.log(errorMsg, error);
           this.errorService.getError(error);
-          let exceptionCode = this.errorService.exception.error?.exceptionCode;
+          let errorCode = this.errorService.exception.error?.errorCode;
 
           if (
-            this.isExceptionCodeIncluded(exceptionCode!) ||
+            this.iserrorCodeIncluded(errorCode!) ||
             error.status == HttpStatusCode.GatewayTimeout
           ) {
             this.userService.logout();
@@ -58,7 +58,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     );
   }
 
-  isExceptionCodeIncluded(value: string): boolean {
-    return Object.values(ExceptionCode).includes(value as ExceptionCode);
+  iserrorCodeIncluded(value: string): boolean {
+    return Object.values(errorCode).includes(value as errorCode);
   }
 }
