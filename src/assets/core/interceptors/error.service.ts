@@ -14,7 +14,7 @@ export class ErrorService {
   constructor(private translateService: TranslateService) {}
 
   getError(error: any) {
-    if (error.error != null && error.error.error) {
+    if (error.error && error.error.error) {
       this.mapError(error);
     } else {
       this.getUnknowError(error);
@@ -40,6 +40,7 @@ export class ErrorService {
   }
 
   getUnknowError(error: any) {
+    error.status = HttpStatusCode.InternalServerError;
     this.exception.url = error.url;
     this.exception.dateTime = new Date();
     let errorModel: Error = new Error();
@@ -48,7 +49,6 @@ export class ErrorService {
     errorModel.statusCode = HttpStatusCode.InternalServerError;
     errorModel.exception = error.statusText;
     this.exception.error = errorModel;
-    this.mapError(error);
   }
 
   handleWalletStatsError() {

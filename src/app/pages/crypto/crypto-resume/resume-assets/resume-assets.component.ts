@@ -42,6 +42,9 @@ export class ResumeAssetsComponent implements OnInit, OnChanges {
   ngOnInit(): void {}
 
   getDatas() {
+    this.resumeData.holdingLong.trend =
+      this.resumeData.holdingLong.balance /
+      (1 + this.resumeData.holdingLong.performance / 100);
     setTimeout(() => {
       if (this.resumeData.assets) {
         this.resumeDataFilterOnDate = deepCopy(this.resumeData);

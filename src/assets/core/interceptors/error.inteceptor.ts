@@ -35,14 +35,14 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           errorMsg = `Error: ${error.error.message}`;
           this.router.navigateByUrl('error');
         } else {
-          console.log('this is server side error', 'New Update');
+          console.log('this is server side error');
           errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
           console.log(errorMsg, error);
           this.errorService.getError(error);
           let errorCode = this.errorService.exception.error?.errorCode;
 
           if (
-            this.iserrorCodeIncluded(errorCode!) ||
+            this.isErrorCodeIncluded(errorCode!) ||
             error.status == HttpStatusCode.GatewayTimeout
           ) {
             this.userService.logout();
@@ -58,7 +58,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     );
   }
 
-  iserrorCodeIncluded(value: string): boolean {
+  isErrorCodeIncluded(value: string): boolean {
     return Object.values(errorCode).includes(value as errorCode);
   }
 }

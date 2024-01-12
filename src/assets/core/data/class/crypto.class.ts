@@ -9,7 +9,7 @@ export class CryptoDashboard {
   statsAssetsDays: string[] = [];
   holdingLong: TradingStatus = new TradingStatus();
   trading: TradingStatus = new TradingStatus();
-  performance: TradingStatus = new TradingStatus();
+  //performance: TradingStatus = new TradingStatus();
   assets: Asset[] = []; // Usata solo per i grafici
   wallets: Wallet[] = [];
 }

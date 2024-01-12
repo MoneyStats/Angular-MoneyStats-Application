@@ -22,25 +22,6 @@
         <div class="price" id="totale">
           {{ resumeData.currency }} {{ hidden ? amount : resumeData.balance }}
         </div>
-        <div class="price performancetot float-end">
-          <span
-            class="{{
-              resumeData.performance.performance == 0
-                ? 'text-warning'
-                : resumeData.performance.performance > 0
-                ? 'text-success'
-                : 'text-danger'
-            }} mr-2"
-            ><i
-              class="fa {{
-                resumeData.performance.performance > 0
-                  ? 'fa-arrow-up'
-                  : 'fa-arrow-down'
-              }}"
-            ></i>
-            {{ resumeData.performance.performance }}%</span
-          >
-        </div>
       </div>
     </a>
     <!-- * item -->
@@ -67,9 +48,9 @@
       <div class="right float-end">
         <div
           class="price {{
-            resumeData.holdingLong.balance == 0
+            resumeData.holdingLong.performance == 0
               ? 'text-warning'
-              : resumeData.holdingLong.balance > 0
+              : resumeData.holdingLong.performance > 0
               ? 'text-success'
               : 'text-danger'
           }}"

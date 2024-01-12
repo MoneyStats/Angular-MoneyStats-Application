@@ -39,25 +39,6 @@
                 {{ cryptoDashboard.currency }}
                 {{ hidden ? amount : cryptoDashboard.balance }}
               </div>
-              <div class="price performancetot float-end">
-                <span
-                  class="{{
-                    cryptoDashboard.performance.performance == 0
-                      ? 'text-warning'
-                      : cryptoDashboard.performance.performance > 0
-                      ? 'text-success'
-                      : 'text-danger'
-                  }} mr-2"
-                  ><i
-                    class="fa {{
-                      cryptoDashboard.performance.performance > 0
-                        ? 'fa-arrow-up'
-                        : 'fa-arrow-down'
-                    }}"
-                  ></i>
-                  {{ cryptoDashboard.performance.performance }}%</span
-                >
-              </div>
             </div>
           </a>
           <!-- * item -->
@@ -86,9 +67,9 @@
             <div class="right float-end">
               <div
                 class="price {{
-                  cryptoDashboard.holdingLong.balance == 0
+                  cryptoDashboard.holdingLong.performance == 0
                     ? 'text-warning'
-                    : cryptoDashboard.holdingLong.balance > 0
+                    : cryptoDashboard.holdingLong.performance > 0
                     ? 'text-success'
                     : 'text-danger'
                 }}"
