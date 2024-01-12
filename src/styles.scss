@@ -280,3 +280,6 @@ body:not(.loading) {
   }
 }
 // Fine Animazione Loading Grafico
+body.modal-open {
+  overflow: hidden !important;
+}
