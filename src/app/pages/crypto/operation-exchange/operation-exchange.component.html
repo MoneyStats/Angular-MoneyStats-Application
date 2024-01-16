@@ -221,7 +221,7 @@
                       {{ "crypto.operationExchange.fees" | translate }}:
                       <strong>
                         {{ fees }}
-                        {{ assetInWallet.symbol }}</strong
+                        {{ holdingAssetToSell.symbol }}</strong
                       >
                     </div>
                     <div *ngIf="isEditFees" class="row">
@@ -232,7 +232,7 @@
                               >{{
                                 "crypto.operationExchange.editFees" | translate
                               }}
-                              {{ marketDataSelected.symbol }}</label
+                              {{ holdingAssetToSell.symbol }}</label
                             >
                             <input
                               type="number"
@@ -343,7 +343,7 @@
                       {{ "crypto.operationExchange.fees" | translate }}:
                       <strong>
                         {{ fees }}
-                        {{ assetInWallet.symbol }}</strong
+                        {{ tradingAssetToSell.symbol }}</strong
                       >
                     </div>
                     <div *ngIf="isEditFees" class="row">
@@ -354,7 +354,7 @@
                               >{{
                                 "crypto.operationExchange.editFees" | translate
                               }}
-                              {{ marketDataSelected.symbol }}</label
+                              {{ tradingAssetToSell.symbol }}</label
                             >
                             <input
                               type="number"
@@ -566,7 +566,8 @@
           {{ "crypto.operationExchange.warning" | translate }}
         </div>
         <!-- END Selezione Assets Per Transfer -->
-        <!-- Crypto da selezionare per New Operation-->
+
+        <!-- Crypto da selezionare per New Operation, Holding e Trading -->
         <div class="section" *ngIf="operationType != operations.TRANSFER">
           <div class="card border">
             <div class="card-body">
@@ -619,8 +620,10 @@
         </div>
         <!-- END Crypto da selezionare per New Operation-->
 
+        <!-- Edit Date & Balance -->
         <div *ngIf="validateSelect()" class="section mt-2">
           <div class="row fontsize-caption">
+            <!-- Edit Balance -->
             <div class="col">
               <div
                 *ngIf="!isEditBalance"
@@ -670,6 +673,8 @@
                 </div>
               </div>
             </div>
+            <!-- END Edit Balance -->
+            <!-- Edit Date -->
             <div class="col text-end">
               <div
                 *ngIf="!isEditDate"
@@ -716,6 +721,7 @@
                 </div>
               </div>
             </div>
+            <!-- END Edit Date -->
           </div>
         </div>
       </section>

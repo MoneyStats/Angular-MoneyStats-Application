@@ -182,18 +182,41 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   }
 
   makeNewBalance() {
-    if (this.operationType == OperationsType.HOLDING)
-      this.investedMoney =
-        this.holdingAssetToSell.current_price! * this.investedBalance;
-    if (this.operationType == OperationsType.TRADING)
-      this.investedMoney =
-        this.tradingAssetToSell.current_price! * this.investedBalance;
-    this.assetNewBalance = parseFloat(
-      (
-        this.investedMoney / this.marketDataSelected.current_price! -
-        this.fees
-      ).toFixed(8)
-    );
+    switch (this.operationType) {
+      case OperationsType.HOLDING:
+        console.log('HOLDING');
+        this.investedMoney =
+          this.holdingAssetToSell.current_price! * this.investedBalance;
+        this.assetNewBalance = parseFloat(
+          (
+            (this.holdingAssetToSell.current_price! *
+              (this.investedBalance - this.fees)) /
+            this.marketDataSelected.current_price!
+          ).toFixed(8)
+        );
+        break;
+      case OperationsType.TRADING:
+        this.investedMoney =
+          this.tradingAssetToSell.current_price! * this.investedBalance;
+        this.assetNewBalance = parseFloat(
+          (
+            (this.tradingAssetToSell.current_price! *
+              (this.investedBalance - this.fees)) /
+            this.marketDataSelected.current_price!
+          ).toFixed(8)
+        );
+        break;
+      case OperationsType.NEWINVESTMENT:
+        this.assetNewBalance = parseFloat(
+          (
+            this.investedMoney / this.marketDataSelected.current_price! -
+            this.fees
+          ).toFixed(8)
+        );
+        break;
+      default:
+        break;
+    }
     this.isEditFees = false;
   }
 

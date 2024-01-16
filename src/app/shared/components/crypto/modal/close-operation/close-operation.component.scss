@@ -13,3 +13,13 @@
 .p {
   margin-top: -15px;
 }
+
+.item {
+  display: block;
+  padding-top: 0px;
+}
+
+.timeline:before {
+  top: 10px;
+  bottom: 20px;
+}
