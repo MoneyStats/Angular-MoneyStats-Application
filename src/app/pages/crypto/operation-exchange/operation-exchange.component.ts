@@ -308,7 +308,10 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     }
     tradingAsset.invested -= percentualeInvestitoCalcolata;
 
-    let assetToSave = deepCopy(this.assetInWallet);
+    const assetToString = JSON.stringify(this.assetInWallet);
+    const assetParsed = JSON.parse(assetToString);
+    let assetToSave = deepCopy(assetParsed);
+
     if (!assetToSave.performance) {
       assetToSave.performance = 0;
       assetToSave.trend = 0;
@@ -326,9 +329,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     operation.entryDate = new Date(this.operationDate);
     operation.entryCoin = tradingAsset.symbol;
     operation.entryPrice = this.marketDataSelected.current_price;
-    operation.entryPriceValue = parseFloat(
-      percentualeInvestitoCalcolata.toFixed(2)
-    );
+    operation.entryPriceValue = this.investedMoney;
     operation.entryQuantity = this.assetNewBalance;
     operation.exitCoin = assetToSave.symbol;
     operation.fees = this.fees;
@@ -352,7 +353,10 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     }
     holdingAsset.invested -= percentualeInvestitoCalcolata;
 
-    let assetToSave = deepCopy(this.assetInWallet);
+    const assetToString = JSON.stringify(this.assetInWallet);
+    const assetParsed = JSON.parse(assetToString);
+    let assetToSave = deepCopy(assetParsed);
+
     if (!assetToSave.performance) {
       assetToSave.performance = 0;
       assetToSave.trend = 0;
