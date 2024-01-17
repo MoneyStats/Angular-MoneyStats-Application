@@ -47,10 +47,12 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   assetNewBalance: number = 0;
 
   // Holding
+  /**@deprecated*/
   holdingAssetToSell: Asset = new Asset();
   investedBalance: number = 0;
 
   // Trading
+  /**@deprecated*/
   tradingAssetToSell: Asset = new Asset();
   stablecoin: Asset[] = [];
 
@@ -58,12 +60,16 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   walletToTansfer: Wallet = new Wallet();
   wallets?: Wallet[] = [];
   isWalletSelected: boolean = false;
+  /**@deprecated*/
   transferAssetToSell: Asset = new Asset();
   balanceToTransfer: number = 0;
   isEditFees: boolean = false;
   fees: number = 0;
 
   operationDate: Date = new Date();
+
+  /* Refactor */
+  assetToSell: Asset = new Asset();
 
   constructor(
     private cryptoService: CryptoService,
@@ -144,6 +150,25 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     return this.walletSelect != undefined;
   }
 
+  emitOperationSelectAsset(asset: Asset) {
+    console.log(this.operationType);
+    this.assetToSell = asset;
+    switch (this.operationType) {
+      case OperationsType.HOLDING || OperationsType.TRADING:
+        this.investedBalance = this.assetToSell.balance;
+
+        this.makeNewBalance();
+        break;
+      case OperationsType.TRANSFER:
+        this.balanceToTransfer = this.assetToSell.balance;
+        this.marketDataSelected = asset;
+        break;
+      default:
+        break;
+    }
+  }
+
+  /**@deprecated*/
   emitHoldingSelectAsset(asset: Asset) {
     this.holdingAssetToSell = asset;
     this.investedBalance = this.holdingAssetToSell.balance;
@@ -151,6 +176,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     this.makeNewBalance();
   }
 
+  /**@deprecated*/
   emitTradingSelectAsset(asset: Asset) {
     this.tradingAssetToSell = asset;
     this.investedBalance = this.tradingAssetToSell.balance;
@@ -158,6 +184,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     this.makeNewBalance();
   }
 
+  /**@deprecated*/
   emitTransferSelectAsset(asset: Asset) {
     this.transferAssetToSell = asset;
     this.balanceToTransfer = this.transferAssetToSell.balance;
@@ -183,8 +210,35 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
 
   makeNewBalance() {
     switch (this.operationType) {
+      case OperationsType.HOLDING || OperationsType.TRADING:
+        this.investedMoney =
+          this.assetToSell.current_price! * this.investedBalance;
+        this.assetNewBalance = parseFloat(
+          (
+            (this.assetToSell.current_price! *
+              (this.investedBalance - this.fees)) /
+            this.marketDataSelected.current_price!
+          ).toFixed(8)
+        );
+        break;
+      case OperationsType.NEWINVESTMENT:
+        this.assetNewBalance = parseFloat(
+          (
+            this.investedMoney / this.marketDataSelected.current_price! -
+            this.fees
+          ).toFixed(8)
+        );
+        break;
+      default:
+        break;
+    }
+    this.isEditFees = false;
+  }
+
+  /** @deprecated */
+  makeNewBalance_OLD() {
+    switch (this.operationType) {
       case OperationsType.HOLDING:
-        console.log('HOLDING');
         this.investedMoney =
           this.holdingAssetToSell.current_price! * this.investedBalance;
         this.assetNewBalance = parseFloat(
@@ -225,6 +279,160 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     this.isWalletSelected = true;
   }
 
+  isEmpty(number: number) {
+    return Number.isNaN(number) || number == undefined;
+  }
+
+  exchangeInvestments() {
+    let assetOperation =
+      this.operationType == OperationsType.NEWINVESTMENT
+        ? deepCopy(this.assetInWallet)
+        : deepCopy(this.assetToSell);
+    assetOperation.lastUpdate = new Date();
+
+    let operation: Operation = new Operation();
+    let assetToSave = new Asset();
+    let percentualeInvestitoCalcolata = 0;
+    let transferedAsset: any = new Asset();
+
+    switch (this.operationType) {
+      case OperationsType.NEWINVESTMENT:
+        // Setting Invested Money into the Asset
+        this.isEmpty(assetOperation.invested)
+          ? (assetOperation.invested = this.investedMoney)
+          : (assetOperation.invested += this.investedMoney);
+        this.isEmpty(assetOperation.balance)
+          ? (assetOperation.balance = this.assetNewBalance)
+          : (assetOperation.balance += this.assetNewBalance);
+
+        // Setting Operation for New Investment
+        operation.entryCoin = this.fiat;
+        operation.entryPrice = assetOperation.current_price;
+        operation.exitCoin = assetOperation.symbol;
+        operation.exitPrice = assetOperation.current_price;
+        break;
+      case OperationsType.HOLDING || OperationsType.TRADING:
+        percentualeInvestitoCalcolata =
+          assetOperation.invested *
+          (this.investedMoney / assetOperation.value!);
+        assetOperation.balance -= this.investedBalance;
+        if (assetOperation.balance == 0)
+          percentualeInvestitoCalcolata = assetOperation.invested;
+        assetOperation.invested -= percentualeInvestitoCalcolata;
+
+        const assetAsString = JSON.stringify(this.assetInWallet);
+        const assetParse = JSON.parse(assetAsString);
+        assetToSave = deepCopy(assetParse);
+
+        this.isEmpty(assetToSave.invested)
+          ? (assetToSave.invested = percentualeInvestitoCalcolata)
+          : (assetToSave.invested += percentualeInvestitoCalcolata);
+        this.isEmpty(assetToSave.balance)
+          ? (assetToSave.balance = this.assetNewBalance)
+          : (assetToSave.balance += this.assetNewBalance);
+        break;
+      case OperationsType.TRANSFER:
+        percentualeInvestitoCalcolata =
+          assetOperation.invested *
+          (this.balanceToTransfer / assetOperation.value!);
+        assetOperation.balance -= this.balanceToTransfer;
+
+        if (assetOperation.balance == 0) {
+          percentualeInvestitoCalcolata = assetOperation.invested;
+        }
+        assetOperation.invested -= percentualeInvestitoCalcolata;
+
+        transferedAsset = this.walletToTansfer.assets
+          ? deepCopy(this.walletToTansfer.assets).find(
+              (as) => as.identifier == assetOperation.identifier
+            )
+          : undefined;
+
+        if (transferedAsset == undefined) {
+          transferedAsset = deepCopy(this.marketDataSelected);
+          transferedAsset.balance = 0;
+          transferedAsset.id = undefined;
+          transferedAsset.invested = 0;
+          transferedAsset.performance = 0;
+          transferedAsset.trend = 0;
+          transferedAsset.lastUpdate = assetOperation.lastUpdate;
+          transferedAsset.history = [];
+        }
+
+        transferedAsset!.balance += this.balanceToTransfer - this.fees;
+        transferedAsset.invested += percentualeInvestitoCalcolata;
+
+        // Setting Operation for Transfer
+        operation.entryPriceValue = parseFloat(
+          (
+            this.balanceToTransfer * this.marketDataSelected.current_price!
+          ).toFixed(2)
+        );
+        operation.entryQuantity = this.balanceToTransfer;
+        operation.exitPriceValue = parseFloat(
+          (
+            (this.balanceToTransfer - this.fees) *
+            this.marketDataSelected.current_price!
+          ).toFixed(2)
+        );
+        operation.exitQuantity = this.balanceToTransfer - this.fees;
+        operation.performance = 0;
+        operation.trend = 0;
+        break;
+      default:
+        break;
+    }
+
+    // Setting Operation
+    operation.identifier = uuidv4();
+    operation.type = this.operationType;
+    operation.status = 'CLOSED';
+    operation.entryDate = new Date(this.operationDate);
+    operation.fees = this.fees;
+
+    // Setting Operation for Holding & Trading and Transfer
+    if (this.operationType != OperationsType.NEWINVESTMENT) {
+      operation.entryCoin = assetOperation.symbol;
+      operation.entryPrice = this.marketDataSelected.current_price;
+      operation.exitCoin = assetToSave.symbol;
+      if (this.operationType != OperationsType.TRADING)
+        operation.exitPrice = this.marketDataSelected.current_price;
+    }
+    if (this.operationType != OperationsType.TRANSFER) {
+      operation.entryPriceValue = this.investedMoney;
+      operation.entryQuantity = this.assetNewBalance;
+    }
+    if (this.operationType != OperationsType.TRADING) {
+      operation.exitDate = new Date(this.operationDate);
+      if (this.operationType != OperationsType.TRANSFER) {
+        operation.exitPriceValue = this.investedMoney;
+        operation.exitQuantity = this.investedMoney;
+      }
+    }
+    if (this.operationType != OperationsType.TRANSFER) {
+      assetOperation.operations = [operation];
+
+      let walletToSave = deepCopy(this.wallet);
+
+      if (this.operationType != OperationsType.NEWINVESTMENT)
+        walletToSave.assets = [assetToSave, assetOperation];
+      else walletToSave.assets = [assetOperation];
+
+      this.saveWallet(walletToSave);
+    } else {
+      transferedAsset.operations = [operation];
+
+      let walletSell = deepCopy(this.wallet);
+      let walletBuy = deepCopy(this.walletToTansfer);
+
+      walletSell.assets = [assetOperation];
+      walletBuy.assets = [transferedAsset];
+
+      this.saveWallets([walletSell, walletBuy]);
+    }
+  }
+
+  /**@deprecated*/
   exchangeTransferInvestment() {
     let transferAsset = deepCopy(this.transferAssetToSell);
     transferAsset.lastUpdate = new Date();
@@ -296,6 +504,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     this.saveWallets([walletSell, walletBuy]);
   }
 
+  /**@deprecated*/
   exchangeTradingInvestment() {
     let tradingAsset = deepCopy(this.tradingAssetToSell);
     tradingAsset.lastUpdate = new Date();
@@ -326,9 +535,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     operation.entryDate = new Date(this.operationDate);
     operation.entryCoin = tradingAsset.symbol;
     operation.entryPrice = this.marketDataSelected.current_price;
-    operation.entryPriceValue = parseFloat(
-      percentualeInvestitoCalcolata.toFixed(2)
-    );
+    operation.entryPriceValue = this.investedMoney;
     operation.entryQuantity = this.assetNewBalance;
     operation.exitCoin = assetToSave.symbol;
     operation.fees = this.fees;
@@ -340,6 +547,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     this.saveWallet(walletToSave);
   }
 
+  /**@deprecated*/
   exchangeHoldingInvestment() {
     let holdingAsset = deepCopy(this.holdingAssetToSell);
     holdingAsset.lastUpdate = new Date();
@@ -388,6 +596,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     this.saveWallet(walletToSave);
   }
 
+  /**@deprecated*/
   exchangeNewInvestment() {
     let assetToSave = deepCopy(this.assetInWallet);
     assetToSave.lastUpdate = new Date();
@@ -463,6 +672,32 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
       });
   }
 
+  editBalance() {
+    this.isEditBalance = false;
+    this.makeNewBalance();
+  }
+
+  /** Validation Button */
+  operationsValidation(form: any) {
+    switch (this.operationType) {
+      case OperationsType.NEWINVESTMENT:
+        return form.invalid || !this.disableOnEdit();
+      case (OperationsType.HOLDING, OperationsType.TRADING):
+        return form.invalid || !this.validateSelect() || !this.disableOnEdit();
+      case OperationsType.TRANSFER:
+        return (
+          form.invalid ||
+          !this.validateSelect() ||
+          !this.disableOnEdit() ||
+          !this.isWalletSelected
+        );
+      default:
+        return false;
+    }
+  }
+  disableOnEdit() {
+    return !this.isEditBalance && !this.isEditDate;
+  }
   validateSelect() {
     if (
       this.wallet.assets ||
@@ -472,13 +707,5 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     }
     return false;
   }
-
-  disableOnEdit() {
-    return !this.isEditBalance && !this.isEditDate;
-  }
-
-  editBalance() {
-    this.isEditBalance = false;
-    this.makeNewBalance();
-  }
+  /** END Validation Button */
 }

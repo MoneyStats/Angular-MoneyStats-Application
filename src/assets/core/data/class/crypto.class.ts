@@ -35,8 +35,8 @@ export class Asset extends GenericModel {
   invested: number = 0;
   lastUpdate: Date = new Date();
   // Performance and trend sono dell'ultimo Stats
-  performance?: number;
-  trend?: number;
+  performance: number = 0;
+  trend: number = 0;
   history?: Stats[] = [];
   operations: Array<any> = [];
 }
