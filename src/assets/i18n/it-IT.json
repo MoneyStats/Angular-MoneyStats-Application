@@ -584,7 +584,7 @@
         "opt4": "Impostazioni"
       },
       "performanceCard": {
-        "title": "Storico Performance",
+        "title": "Bitcoin Daily Change",
         "view": "Vedi",
         "holding": "Holding Performance",
         "trading": "Trading Performance",
@@ -734,7 +734,8 @@
       "closeP": "Posizione chiusa per",
       "pair": "Trading Pair",
       "quantity": "Quantità",
-      "value": "Quantità in moneta",
+      "value": "Eseguiti",
+      "fees": "Commissione",
       "price": "Prezzo d'acquisto di",
       "sellPrice": "Prezzo di vendita di",
       "edit": "Modifica",

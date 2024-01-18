@@ -119,7 +119,7 @@
                         {{ assetInWallet.symbol }}</strong
                       >
                     </div>
-                    <div *ngIf="isEditFees" class="row">
+                    <div *ngIf="isEditFees" class="row editFees">
                       <div class="col-7 col-md-8">
                         <div class="form-group basic">
                           <div class="input-wrapper">
@@ -221,10 +221,11 @@
                       {{ "crypto.operationExchange.fees" | translate }}:
                       <strong>
                         {{ fees }}
-                        {{ holdingAssetToSell.symbol }}</strong
+                        <!--{{ holdingAssetToSell.symbol }}-->
+                        {{ assetToSell.symbol }}</strong
                       >
                     </div>
-                    <div *ngIf="isEditFees" class="row">
+                    <div *ngIf="isEditFees" class="row editFees">
                       <div class="col-7 col-md-8">
                         <div class="form-group basic">
                           <div class="input-wrapper">
@@ -232,7 +233,8 @@
                               >{{
                                 "crypto.operationExchange.editFees" | translate
                               }}
-                              {{ holdingAssetToSell.symbol }}</label
+                              <!--{{ holdingAssetToSell.symbol }}-->
+                              {{ assetToSell.symbol }}</label
                             >
                             <input
                               type="number"
@@ -272,13 +274,17 @@
                     class="exchange-wallet-info"
                   >
                     {{ "crypto.operationExchange.balance" | translate }}
-                    <strong>
+                    <!--<strong>
                       {{
                         holdingAssetToSell.balance
                           ? holdingAssetToSell.balance
                           : 0
                       }}
                       {{ holdingAssetToSell.symbol }}</strong
+                    >-->
+                    <strong>
+                      {{ assetToSell.balance ? assetToSell.balance : 0 }}
+                      {{ assetToSell.symbol }}</strong
                     >
                   </div>
                 </div>
@@ -286,7 +292,7 @@
                   <div class="col-md-8 col-7 mt-1">
                     <div class="exchange-group">
                       <div class="input-col">
-                        <input
+                        <!--<input
                           type="number"
                           class="form-control form-control-lg pe-0 border-0"
                           id="toAmount"
@@ -300,17 +306,39 @@
                           value="{{ investedBalance }}"
                           maxlength="10"
                           max="{{ holdingAssetToSell.balance }}"
+                        />-->
+                        <input
+                          type="number"
+                          class="form-control form-control-lg pe-0 border-0"
+                          id="toAmount"
+                          placeholder="0"
+                          id="assetHoldingBalance"
+                          name="assetHoldingBalance"
+                          #assetHoldingBalance1="ngModel"
+                          required
+                          (keyup)="makeNewBalance()"
+                          [(ngModel)]="investedBalance"
+                          value="{{ investedBalance }}"
+                          maxlength="10"
+                          max="{{ assetToSell.balance }}"
                         />
                       </div>
                     </div>
                   </div>
                   <div class="col-md-4 col-5 mb-2" style="max-height: 55px">
-                    <app-asset-select
+                    <!--<app-asset-select
                       [wrapperID]="assetConstant.HOLDING"
                       [fiat]="fiat!"
                       [isOperation]="true"
                       [cryptoPrices]="wallet.assets"
                       (emitSelectAsset)="emitHoldingSelectAsset($event)"
+                    ></app-asset-select>-->
+                    <app-asset-select
+                      [wrapperID]="assetConstant.HOLDING"
+                      [fiat]="fiat!"
+                      [isOperation]="true"
+                      [cryptoPrices]="wallet.assets"
+                      (emitSelectAsset)="emitOperationSelectAsset($event)"
                     ></app-asset-select>
                   </div>
                 </div>
@@ -343,10 +371,11 @@
                       {{ "crypto.operationExchange.fees" | translate }}:
                       <strong>
                         {{ fees }}
-                        {{ tradingAssetToSell.symbol }}</strong
+                        <!--{{ tradingAssetToSell.symbol }}-->
+                        {{ assetToSell.symbol }}</strong
                       >
                     </div>
-                    <div *ngIf="isEditFees" class="row">
+                    <div *ngIf="isEditFees" class="row editFees">
                       <div class="col-7 col-md-8">
                         <div class="form-group basic">
                           <div class="input-wrapper">
@@ -354,7 +383,8 @@
                               >{{
                                 "crypto.operationExchange.editFees" | translate
                               }}
-                              {{ tradingAssetToSell.symbol }}</label
+                              <!--{{ tradingAssetToSell.symbol }}-->
+                              {{ assetToSell.symbol }}</label
                             >
                             <input
                               type="number"
@@ -394,20 +424,24 @@
                     class="exchange-wallet-info"
                   >
                     {{ "crypto.operationExchange.balance" | translate }}
-                    <strong>
+                    <!--<strong>
                       {{
                         tradingAssetToSell.balance
                           ? tradingAssetToSell.balance
                           : 0
                       }}
                       {{ tradingAssetToSell.symbol }}</strong
+                    >-->
+                    <strong>
+                      {{ assetToSell.balance ? assetToSell.balance : 0 }}
+                      {{ assetToSell.symbol }}</strong
                     >
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-8 col-7 mt-1">
                     <div class="exchange-group">
-                      <div class="input-col">
+                      <!--<div class="input-col">
                         <input
                           type="number"
                           class="form-control form-control-lg pe-0 border-0"
@@ -423,16 +457,40 @@
                           maxlength="10"
                           max="{{ tradingAssetToSell.balance }}"
                         />
+                      </div>-->
+                      <div class="input-col">
+                        <input
+                          type="number"
+                          class="form-control form-control-lg pe-0 border-0"
+                          id="toTradingAmount"
+                          placeholder="0"
+                          id="assetTradingBalance"
+                          name="assetTradingBalance"
+                          #assetTradingBalance1="ngModel"
+                          required
+                          (keyup)="makeNewBalance()"
+                          [(ngModel)]="investedBalance"
+                          value="{{ investedBalance }}"
+                          maxlength="10"
+                          max="{{ assetToSell.balance }}"
+                        />
                       </div>
                     </div>
                   </div>
                   <div class="col-md-4 col-5 mb-2" style="max-height: 55px">
-                    <app-asset-select
+                    <!--<app-asset-select
                       [wrapperID]="assetConstant.TRADING"
                       [fiat]="fiat!"
                       [isOperation]="true"
                       [cryptoPrices]="stablecoin"
                       (emitSelectAsset)="emitTradingSelectAsset($event)"
+                    ></app-asset-select>-->
+                    <app-asset-select
+                      [wrapperID]="assetConstant.TRADING"
+                      [fiat]="fiat!"
+                      [isOperation]="true"
+                      [cryptoPrices]="stablecoin"
+                      (emitSelectAsset)="emitOperationSelectAsset($event)"
                     ></app-asset-select>
                   </div>
                 </div>
@@ -475,12 +533,16 @@
                       class="clickable"
                     >
                       {{ "crypto.operationExchange.fees" | translate }}:
-                      <strong>
+                      <!--<strong>
                         {{ fees }}
                         {{ transferAssetToSell.symbol }}</strong
+                      >-->
+                      <strong>
+                        {{ fees }}
+                        {{ assetToSell.symbol }}</strong
                       >
                     </div>
-                    <div *ngIf="isEditFees" class="row">
+                    <div *ngIf="isEditFees" class="row editFees">
                       <div class="col-7 col-md-8">
                         <div class="form-group basic">
                           <div class="input-wrapper">
@@ -545,12 +607,19 @@
                     </div>
                   </div>
                   <div class="col-md-4 col-5" style="max-height: 55px">
-                    <app-asset-select
+                    <!--<app-asset-select
                       [wrapperID]="assetConstant.TRANSFER"
                       [fiat]="fiat!"
                       [isOperation]="true"
                       [cryptoPrices]="wallet.assets"
                       (emitSelectAsset)="emitTransferSelectAsset($event)"
+                    ></app-asset-select>-->
+                    <app-asset-select
+                      [wrapperID]="assetConstant.TRANSFER"
+                      [fiat]="fiat!"
+                      [isOperation]="true"
+                      [cryptoPrices]="wallet.assets"
+                      (emitSelectAsset)="emitOperationSelectAsset($event)"
                     ></app-asset-select>
                   </div>
                 </div>
@@ -727,7 +796,17 @@
       </section>
 
       <!-- Bottoni Mobile -->
-      <div
+      <div class="form-button-group transparent" *ngIf="operationType">
+        <button
+          [disabled]="operationsValidation(f)"
+          type="button"
+          class="btn btn-primary btn-block btn-lg"
+          (click)="exchangeInvestments()"
+        >
+          {{ "crypto.operationExchange.exchange" | translate }}
+        </button>
+      </div>
+      <!--<div
         class="form-button-group transparent"
         *ngIf="operationType == operations.NEWINVESTMENT"
       >
@@ -783,7 +862,7 @@
         >
           {{ "crypto.operationExchange.exchange" | translate }}
         </button>
-      </div>
+      </div>-->
       <!-- End Bottoni Mobile -->
     </form>
   </div>

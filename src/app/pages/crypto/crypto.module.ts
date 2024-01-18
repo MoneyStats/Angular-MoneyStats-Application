@@ -29,6 +29,7 @@ import { OperationExchangeComponent } from './operation-exchange/operation-excha
 import { OperationsComponent } from './operations/operations.component';
 import { TradingResumeComponent } from './crypto-resume/trading-resume/trading-resume.component';
 import { MarketDataComponent } from './market-data/market-data.component';
+import { AppComponentsModule } from 'src/app/shared/components/app/app-components.module';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { MarketDataComponent } from './market-data/market-data.component';
     CryptoComponentsModule,
     NgApexchartsModule,
     NgChartsModule,
+    AppComponentsModule,
     SharedModule,
     IonicModule.forRoot(),
     FormsModule,

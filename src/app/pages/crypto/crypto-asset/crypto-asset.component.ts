@@ -83,7 +83,7 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
             ]);
           } else
             this.chartOptions = this.charts.renderCryptoDatas(dashboard, [
-              ApexChartsOptions.DESKTOP_MODE,
+              ApexChartsOptions.ULTRA_WIDE,
               ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
             ]);
         }
@@ -121,7 +121,7 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
           ]);
         else
           this.chart1Y = this.charts.renderCryptoDatas(dashboard, [
-            ApexChartsOptions.DESKTOP_MODE,
+            ApexChartsOptions.ULTRA_WIDE,
             ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
           ]);
       }, 500);
@@ -160,7 +160,7 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
           ]);
         else
           this.chart3Y = this.charts.renderCryptoDatas(dashboard, [
-            ApexChartsOptions.DESKTOP_MODE,
+            ApexChartsOptions.ULTRA_WIDE,
             ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
           ]);
       }, 500);
