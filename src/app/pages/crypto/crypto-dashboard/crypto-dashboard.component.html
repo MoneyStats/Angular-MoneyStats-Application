@@ -203,7 +203,7 @@
         </div>
       </div>
       <!-- Portfolio -->
-      <div class="section mt-1 hidden_desktop">
+      <div class="section mt-1 mb-1 hidden_desktop">
         <div class="card">
           <div class="card-body">
             <!-- TradingView Widget BEGIN -->
@@ -215,7 +215,146 @@
           </div>
         </div>
       </div>
-      <div class="col-md-12 col-xl-8">
+      <!-- Stats -->
+      <div class="section stats-section col-xl-5">
+        <div class="row mt-1">
+          <div class="col-6">
+            <app-stats-card
+              [title]="'crypto.dashboard.performanceCard.holding' | translate"
+              value="<h5 class='card-text fs-3 m-0'>{{
+                (hidden
+                  ? amount
+                  : cryptoDashboard.holdingLong.balance
+                ).toString() +
+                  ' <small>' +
+                  cryptoDashboard.currency.toString() +
+                  '</small></h5>'
+              }}
+              "
+            >
+            </app-stats-card>
+          </div>
+          <div class="col-6">
+            <app-stats-card
+              title="{{
+                'crypto.dashboard.performanceCard.trading' | translate
+              }}"
+              value="<h5 class='card-text fs-3 m-0'>
+                {{ hidden ? amount : cryptoDashboard.trading.balance }}
+                <small>{{ cryptoDashboard.currency }}</small>
+              </h5>"
+              [class]="'date'"
+            >
+            </app-stats-card>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6">
+            <app-stats-card
+              title="{{
+                'crypto.dashboard.performanceCard.lastUpdate' | translate
+              }}
+                {{ cryptoDashboard.holdingLong.lastUpdate | date : 'd MMM y' }}"
+              value="{{
+                hidden
+                  ? amount
+                  : calculateTrend(
+                      cryptoDashboard.holdingLong.balance,
+                      cryptoDashboard.holdingLong.performance
+                    ) +
+                    ' ' +
+                    cryptoDashboard.currency
+              }}
+              <span class='badge align-top {{
+                cryptoDashboard.holdingLong.performance == 0
+                  ? 'badge-warning'
+                  : cryptoDashboard.holdingLong.performance > 0
+                  ? 'badge-success'
+                  : 'badge-danger'
+              }}'
+            >
+              <ion-icon
+                name='{{
+                cryptoDashboard.holdingLong.performance > 0
+                  ? 'arrow-up-outline'
+                  : 'arrow-down-outline'
+              }}'
+              ></ion-icon>
+              {{ cryptoDashboard.holdingLong.performance }}%
+            </span>"
+              [class]="
+                cryptoDashboard.holdingLong.performance == 0
+                  ? 'text-warning'
+                  : cryptoDashboard.holdingLong.performance > 0
+                  ? 'text-success'
+                  : 'text-danger'
+              "
+            >
+            </app-stats-card>
+          </div>
+          <div class="col-6">
+            <app-stats-card
+              title="{{
+                'crypto.dashboard.performanceCard.lastUpdate' | translate
+              }}
+                {{ cryptoDashboard.trading.lastUpdate | date : 'd MMM y' }}"
+              value="{{
+                hidden
+                  ? amount
+                  : calculateTrend(
+                      cryptoDashboard.trading.balance,
+                      cryptoDashboard.trading.performance
+                    ) +
+                    ' ' +
+                    cryptoDashboard.currency
+              }}
+              <span class='badge align-top {{
+                cryptoDashboard.trading.performance == 0
+                  ? 'badge-warning'
+                  : cryptoDashboard.trading.performance > 0
+                  ? 'badge-success'
+                  : 'badge-danger'
+              }}'
+            >
+              <ion-icon
+                name='{{
+                cryptoDashboard.trading.performance > 0
+                  ? 'arrow-up-outline'
+                  : 'arrow-down-outline'
+              }}'
+              ></ion-icon>
+              {{ cryptoDashboard.trading.performance }}%
+            </span>"
+              [class]="
+                cryptoDashboard.trading.performance == 0
+                  ? 'text-warning'
+                  : cryptoDashboard.trading.performance > 0
+                  ? 'text-success'
+                  : 'text-danger'
+              "
+            >
+            </app-stats-card>
+          </div>
+        </div>
+      </div>
+      <!-- * Stats -->
+      <div class="section col-12 col-md-3 section-performance mx-auto">
+        <div class="section-heading">
+          <p>
+            {{ "crypto.dashboard.performanceCard.title" | translate }}
+          </p>
+        </div>
+        <div class="card loading-hidden" style="margin-top: -30px">
+          <div class="card-body text-center mx-auto">
+            <!-- TradingView Widget BEGIN-->
+            <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <div #dayGraph></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--<div class="col-md-12 col-xl-8">
         <div class="section section-performance">
           <div class="section-heading">
             <h2 class="title">
@@ -313,13 +452,13 @@
                     </p>
                   </div>
                 </div>
-                <div class="line col-12 col-md-4">
-                  <!-- TradingView Widget BEGIN -->
+                <div class="line col-12 col-md-4"> -->
+      <!-- TradingView Widget BEGIN
                   <div class="tradingview-widget-container">
                     <div class="tradingview-widget-container__widget"></div>
                     <div #dayGraph></div>
-                  </div>
-                  <!-- TradingView Widget END
+                  </div>-->
+      <!-- TradingView Widget END
                   <div class="inline-block">
                     <hr class="hidden_desktop" />
                     <p class="title">
@@ -364,13 +503,13 @@
                         }}</small
                       >
                     </p>
-                  </div>-->
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
     </div>
 
     <div class="row">

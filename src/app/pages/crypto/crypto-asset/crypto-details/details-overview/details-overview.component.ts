@@ -336,4 +336,12 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
       ? (this.showZeroBalance = false)
       : (this.showZeroBalance = true);
   }
+
+  validateWallet(wallet: Wallet) {
+    return (
+      wallet.assets[0] == undefined ||
+      wallet.assets[0].history == undefined ||
+      wallet.assets[0].history.length == 0
+    );
+  }
 }

@@ -170,7 +170,7 @@
               }}</strong>
               <span
                 ><mark
-                  >{{ operation?.entryCoin }}/{{ operation?.exitCoin }}</mark
+                  >{{ operation?.entryCoin }}-{{ operation?.exitCoin }}</mark
                 ></span
               >
             </li>
@@ -213,13 +213,10 @@
               >
             </li>
             <li *ngIf="operation?.fees">
-              <strong
-                >{{ operation?.exitCoin }}
-                {{ "crypto.operationDetails.fees" | translate }}</strong
-              >
+              <strong> {{ "crypto.operationDetails.fees" | translate }}</strong>
               <strong
                 ><span
-                  >{{ operation?.fees }} {{ operation?.exitCoin }}</span
+                  >{{ operation?.fees }} {{ operation?.entryCoin }}</span
                 ></strong
               >
             </li>

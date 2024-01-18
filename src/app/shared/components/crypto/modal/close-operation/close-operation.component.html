@@ -70,7 +70,7 @@
                   "
                 >
                   <!-- timeline -->
-                  <div class="timeline timed ms-1 me-2">
+                  <div class="timeline timed ms-1 me-0">
                     <div class="item">
                       <span class="time">{{
                         operationToClose.entryDate | date : "d MMM y"
@@ -79,15 +79,15 @@
                       <div class="content">
                         <h5 class="title text-start">
                           {{ "crypto.closeOperation.open" | translate }}
-                          {{ operationToClose.asset?.symbol }}/{{
-                            operationToClose.assetSell?.symbol
+                          {{ operationToClose.assetSell?.symbol }}-{{
+                            operationToClose.asset?.symbol
                           }}
                         </h5>
                         <div class="text text-start">
                           <p>
                             {{ "crypto.closeOperation.pair" | translate }}:
                             <strong
-                              >{{ operationToClose.assetSell?.symbol }}/{{
+                              >{{ operationToClose.assetSell?.symbol }}-{{
                                 operationToClose.asset?.symbol
                               }}</strong
                             >
@@ -100,6 +100,7 @@
                             >
                           </p>
                           <p class="p">
+                            {{ operationToClose.assetSell?.symbol }}
                             {{ "crypto.closeOperation.value" | translate }}:
                             <strong
                               >{{ operationToClose.entryPriceValue }}
@@ -112,6 +113,13 @@
                             <strong
                               >{{ operationToClose.entryPrice }}
                               {{ cryptoCurrency }}</strong
+                            >
+                          </p>
+                          <p *ngIf="operationToClose.fees" class="p">
+                            {{ "crypto.closeOperation.fees" | translate }}:
+                            <strong
+                              >{{ operationToClose.fees }}
+                              {{ operationToClose.assetSell?.symbol }}</strong
                             >
                           </p>
                         </div>
@@ -204,7 +212,7 @@
                       <div *ngIf="!isEditActive" class="content">
                         <h5 class="title text-start">
                           {{ "crypto.closeOperation.closeP" | translate }}
-                          {{ operationToClose.asset?.symbol }}/{{
+                          {{ operationToClose.asset?.symbol }}-{{
                             operationToClose.assetSell?.symbol
                           }}
                         </h5>
@@ -212,9 +220,8 @@
                           <p>
                             {{ "crypto.closeOperation.pair" | translate }}:
                             <strong
-                              >{{ operationToClose.asset?.symbol }}/{{
-                                operationToClose.assetSell?.symbol
-                              }}</strong
+                              >{{ operationToClose.asset?.symbol
+                              }}{{ operationToClose.assetSell?.symbol }}</strong
                             >
                           </p>
                           <p class="p">
@@ -225,6 +232,7 @@
                             >
                           </p>
                           <p class="p">
+                            {{ operationToClose.assetSell?.symbol }}
                             {{ "crypto.closeOperation.value" | translate }}:
                             <strong
                               >{{ operationToClose.exitPriceValue }}

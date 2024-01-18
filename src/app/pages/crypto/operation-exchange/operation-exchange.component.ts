@@ -410,7 +410,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
       }
     }
     if (this.operationType != OperationsType.TRANSFER) {
-      assetOperation.operations = [operation];
+      assetToSave.operations = [operation];
 
       let walletToSave = deepCopy(this.wallet);
 

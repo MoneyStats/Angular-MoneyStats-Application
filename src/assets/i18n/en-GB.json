@@ -584,7 +584,7 @@
         "opt4": "Settings"
       },
       "performanceCard": {
-        "title": "Resume Performance",
+        "title": "Bitcoin Daily Change",
         "view": "View All",
         "holding": "Holding Long Term",
         "trading": "Trading Performance",
@@ -629,7 +629,9 @@
           "price": "Price",
           "invest": "Invested",
           "on": "on",
-          "more": "Load more"
+          "more": "Load more",
+          "info-trading": "No Stats avaiable for Trading Wallets",
+          "warning-empty-wallets": "Add a new Stats to get Datas"
         }
       }
     },
@@ -734,9 +736,10 @@
       "closeP": "Position Close on Coins",
       "pair": "Trading Pair",
       "quantity": "Quantity",
-      "value": "Quantity Value",
-      "price": "Buying Price of",
-      "sellPrice": "Selling Price of",
+      "value": "Executed Value",
+      "price": "Execution Price",
+      "fees": "Fees",
+      "sellPrice": "Execution Price",
       "edit": "Edit",
       "save": "Save",
       "selling": "Selling Price",

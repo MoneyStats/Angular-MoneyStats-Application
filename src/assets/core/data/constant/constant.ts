@@ -85,4 +85,5 @@ export const ApexChartsOptions = {
   NOT_LIVE_PRICE_AS_LAST_DATA: true,
   MOBILE_MODE: 200,
   DESKTOP_MODE: 350,
+  ULTRA_WIDE: 450,
 };

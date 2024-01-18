@@ -506,6 +506,26 @@
                 </div>
               </div>
               <hr />
+              <div
+                *ngIf="validateWallet(wallet)"
+                class="alert alert-secondary mb-1 text-center"
+                role="alert"
+              >
+                <div *ngIf="wallet.type == 'Trading'">
+                  {{ "crypto.asset.details.overview.info-trading" | translate }}
+                </div>
+                <div
+                  *ngIf="
+                    wallet.type != 'Trading' &&
+                    wallet.assets[0].history?.length == 0
+                  "
+                >
+                  {{
+                    "crypto.asset.details.overview.warning-empty-wallets"
+                      | translate
+                  }}
+                </div>
+              </div>
               <div class="card section-3">
                 <ul
                   class="listview flush transparent no-line image-listview detailed-list"

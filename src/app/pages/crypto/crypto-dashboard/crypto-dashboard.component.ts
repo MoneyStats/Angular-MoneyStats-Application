@@ -349,6 +349,11 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
       });
   }
 
+  calculateTrend(balance: number, performance: number) {
+    let oldBalance = balance / (1 + performance / 100);
+    return parseFloat((balance - oldBalance).toFixed(2));
+  }
+
   ngOnDestroy(): void {
     this.getDashboardSubscribe.unsubscribe();
     this.marketDataSubscribe.unsubscribe();
