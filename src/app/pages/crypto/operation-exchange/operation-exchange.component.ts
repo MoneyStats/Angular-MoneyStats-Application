@@ -517,7 +517,10 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     }
     tradingAsset.invested -= percentualeInvestitoCalcolata;
 
-    let assetToSave = deepCopy(this.assetInWallet);
+    const assetToString = JSON.stringify(this.assetInWallet);
+    const assetParsed = JSON.parse(assetToString);
+    let assetToSave = deepCopy(assetParsed);
+
     if (!assetToSave.performance) {
       assetToSave.performance = 0;
       assetToSave.trend = 0;
@@ -560,7 +563,10 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     }
     holdingAsset.invested -= percentualeInvestitoCalcolata;
 
-    let assetToSave = deepCopy(this.assetInWallet);
+    const assetToString = JSON.stringify(this.assetInWallet);
+    const assetParsed = JSON.parse(assetToString);
+    let assetToSave = deepCopy(assetParsed);
+
     if (!assetToSave.performance) {
       assetToSave.performance = 0;
       assetToSave.trend = 0;
