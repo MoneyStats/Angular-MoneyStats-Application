@@ -825,10 +825,25 @@
       "exception": "Credenziali Sbagliate",
       "message": "Lo username o la password inserita sono errate, prova nuovamente!"
     },
+    "ERR_AUTH_MSS_003": {
+      "status": "Errore",
+      "exception": "Chiave Duplicata",
+      "message": "La chiave corrente $KEY$ è statagià registrata, usare una nuova chiave."
+    },
     "ERR_AUTH_MSS_004": {
       "status": "Errore Interno",
       "exception": "Errore Sconosciuto",
       "message": "Un errore sconosciuto è apparso durante il processo, prova nuovamente."
+    },
+    "ERR_AUTH_MSS_005": {
+      "status": "Errore",
+      "exception": "Codice invito non valido",
+      "message": "Il codice d'invito fornito è errato o non valido, prova nuovamente."
+    },
+    "ERR_AUTH_MSS_006": {
+      "status": "Errore",
+      "exception": "Email non valida",
+      "message": "L'emaii inserita non è stata trovata, prova nuovamente."
     }
   },
   "copyright": "Copyright © MoneyStats 2024. All Rights Reserved."

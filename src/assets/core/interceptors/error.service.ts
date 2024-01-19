@@ -1,7 +1,12 @@
 import { HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { errorCode, UtilsException } from '../data/class/error';
+import {
+  ErrorCode,
+  ErrorCodeLogout,
+  ErrorMessageMetadata,
+  UtilsException,
+} from '../data/class/error';
 import { Error } from '../data/class/error';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -33,7 +38,11 @@ export class ErrorService {
       // Puoi accedere alla traduzione direttamente usando la chiave
       const error = exceptionMap[errorCode];
       // Assegna il messaggio tradotto all'oggetto UtilsException
-      this.exception.error!.message = error.message;
+      this.exception.error!.message = this.buildErrorMessage(
+        error,
+        this.exception,
+        errorCode
+      );
       this.exception.error!.status = error.status;
       this.exception.error!.exception = error.exception;
     }
@@ -44,7 +53,7 @@ export class ErrorService {
     this.exception.url = error.url;
     this.exception.dateTime = new Date();
     let errorModel: Error = new Error();
-    errorModel.errorCode = errorCode.GenericException;
+    errorModel.errorCode = ErrorCodeLogout.UnknowError;
     errorModel.message = error.message;
     errorModel.statusCode = HttpStatusCode.InternalServerError;
     errorModel.exception = error.statusText;
@@ -61,5 +70,17 @@ export class ErrorService {
     errorModel.statusCode = HttpStatusCode.BadRequest;
     //errorModel.exception = 'error.statusText';
     this.exception.error = errorModel;
+  }
+
+  buildErrorMessage(errorMap: any, exception: any, errorCode: string) {
+    switch (errorCode) {
+      case ErrorCode.Duplicate_Key:
+        return errorMap.message.replace(
+          ErrorMessageMetadata.KEY,
+          exception.error.message.split("'")[1]
+        );
+      default:
+        return errorMap.message;
+    }
   }
 }

@@ -110,6 +110,12 @@ export class CloseOperationComponent implements OnDestroy {
     //this.isEditActive = false;
   }
 
+  updateExitPrice() {
+    this.operationToClose.exitPriceValue = parseFloat(
+      this.operationToClose.exitQuantity?.toFixed(2)!
+    );
+  }
+
   closeOperation() {
     this.operationToClose!.status = 'CLOSED';
     let dashboard = deepCopy(this.cryptoService.cryptoDashboard);

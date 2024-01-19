@@ -827,10 +827,25 @@
       "exception": "Wrong Credentials",
       "message": "Wrong Credential for username or password. Try again!"
     },
+    "ERR_AUTH_MSS_003": {
+      "status": "Bad Request",
+      "exception": "Duplicate Key",
+      "message": "The current key $KEY$ already been registered, use different one."
+    },
     "ERR_AUTH_MSS_004": {
       "status": "Internal Server Error",
       "exception": "Unknown Error",
       "message": "An Unknown error happen during the process, please try again."
+    },
+    "ERR_AUTH_MSS_005": {
+      "status": "Bad Request",
+      "exception": "Invalid Invitation Code",
+      "message": "The provide invitation code is wrong, try a different one."
+    },
+    "ERR_AUTH_MSS_006": {
+      "status": "Bad Request",
+      "exception": "Invalid Email",
+      "message": "The provide email does not exist, try a different one."
     }
   },
   "copyright": "Copyright © MoneyStats 2024. All Rights Reserved."

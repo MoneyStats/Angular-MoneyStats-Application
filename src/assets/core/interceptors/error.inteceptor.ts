@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { errorCode } from '../data/class/error';
+import { ErrorCodeLogout } from '../data/class/error';
 import { UserService } from '../services/user.service';
 import { ErrorService } from './error.service';
 
@@ -59,6 +59,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   }
 
   isErrorCodeIncluded(value: string): boolean {
-    return Object.values(errorCode).includes(value as errorCode);
+    return Object.values(ErrorCodeLogout).includes(value as ErrorCodeLogout);
   }
 }
