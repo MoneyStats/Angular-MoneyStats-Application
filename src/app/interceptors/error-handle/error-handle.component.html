@@ -46,6 +46,9 @@
         <p>
           {{ exception?.error?.message }}
         </p>
+        <p *ngIf="showMoreData && exception?.error?.exceptionMessage">
+          {{ exception?.error?.exceptionMessage }}
+        </p>
         <p *ngIf="showMoreData">
           {{ exception?.error?.stackTrace }}
         </p>

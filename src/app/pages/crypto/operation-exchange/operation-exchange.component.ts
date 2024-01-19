@@ -112,6 +112,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   }
 
   getOperationExchange() {
+    this.operationDate = new Date();
     this.routeSubscribe = this.route.params.subscribe((a: any) => {
       this.operationType = a.operationType;
       this.walletSelect = a.wallet;
@@ -151,7 +152,6 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   }
 
   emitOperationSelectAsset(asset: Asset) {
-    console.log(this.operationType);
     this.assetToSell = asset;
     switch (this.operationType) {
       case OperationsType.HOLDING || OperationsType.TRADING:
@@ -284,67 +284,65 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   }
 
   exchangeInvestments() {
-    let assetOperation =
+    let assetBuying =
       this.operationType == OperationsType.NEWINVESTMENT
         ? deepCopy(this.assetInWallet)
         : deepCopy(this.assetToSell);
-    assetOperation.lastUpdate = new Date();
+    assetBuying.lastUpdate = new Date();
 
     let operation: Operation = new Operation();
-    let assetToSave = new Asset();
+    let assetSelling = new Asset();
     let percentualeInvestitoCalcolata = 0;
     let transferedAsset: any = new Asset();
 
     switch (this.operationType) {
       case OperationsType.NEWINVESTMENT:
         // Setting Invested Money into the Asset
-        this.isEmpty(assetOperation.invested)
-          ? (assetOperation.invested = this.investedMoney)
-          : (assetOperation.invested += this.investedMoney);
-        this.isEmpty(assetOperation.balance)
-          ? (assetOperation.balance = this.assetNewBalance)
-          : (assetOperation.balance += this.assetNewBalance);
+        this.isEmpty(assetBuying.invested)
+          ? (assetBuying.invested = this.investedMoney)
+          : (assetBuying.invested += this.investedMoney);
+        this.isEmpty(assetBuying.balance)
+          ? (assetBuying.balance = this.assetNewBalance)
+          : (assetBuying.balance += this.assetNewBalance);
 
         // Setting Operation for New Investment
         operation.entryCoin = this.fiat;
-        operation.entryPrice = assetOperation.current_price;
-        operation.exitCoin = assetOperation.symbol;
-        operation.exitPrice = assetOperation.current_price;
+        operation.entryPrice = assetBuying.current_price;
+        operation.exitCoin = assetBuying.symbol;
+        operation.exitPrice = assetBuying.current_price;
         break;
       case OperationsType.HOLDING || OperationsType.TRADING:
         percentualeInvestitoCalcolata =
-          assetOperation.invested *
-          (this.investedMoney / assetOperation.value!);
-        assetOperation.balance -= this.investedBalance;
-        if (assetOperation.balance == 0)
-          percentualeInvestitoCalcolata = assetOperation.invested;
-        assetOperation.invested -= percentualeInvestitoCalcolata;
+          assetBuying.invested * (this.investedMoney / assetBuying.value!);
+        assetBuying.balance -= this.investedBalance;
+        if (assetBuying.balance == 0)
+          percentualeInvestitoCalcolata = assetBuying.invested;
+        assetBuying.invested -= percentualeInvestitoCalcolata;
 
         const assetAsString = JSON.stringify(this.assetInWallet);
         const assetParse = JSON.parse(assetAsString);
-        assetToSave = deepCopy(assetParse);
+        assetSelling = deepCopy(assetParse);
 
-        this.isEmpty(assetToSave.invested)
-          ? (assetToSave.invested = percentualeInvestitoCalcolata)
-          : (assetToSave.invested += percentualeInvestitoCalcolata);
-        this.isEmpty(assetToSave.balance)
-          ? (assetToSave.balance = this.assetNewBalance)
-          : (assetToSave.balance += this.assetNewBalance);
+        this.isEmpty(assetSelling.invested)
+          ? (assetSelling.invested = percentualeInvestitoCalcolata)
+          : (assetSelling.invested += percentualeInvestitoCalcolata);
+        this.isEmpty(assetSelling.balance)
+          ? (assetSelling.balance = this.assetNewBalance)
+          : (assetSelling.balance += this.assetNewBalance);
         break;
       case OperationsType.TRANSFER:
         percentualeInvestitoCalcolata =
-          assetOperation.invested *
-          (this.balanceToTransfer / assetOperation.value!);
-        assetOperation.balance -= this.balanceToTransfer;
+          assetBuying.invested * (this.balanceToTransfer / assetBuying.value!);
+        assetBuying.balance -= this.balanceToTransfer;
 
-        if (assetOperation.balance == 0) {
-          percentualeInvestitoCalcolata = assetOperation.invested;
+        if (assetBuying.balance == 0) {
+          percentualeInvestitoCalcolata = assetBuying.invested;
         }
-        assetOperation.invested -= percentualeInvestitoCalcolata;
+        assetBuying.invested -= percentualeInvestitoCalcolata;
 
         transferedAsset = this.walletToTansfer.assets
           ? deepCopy(this.walletToTansfer.assets).find(
-              (as) => as.identifier == assetOperation.identifier
+              (as) => as.identifier == assetBuying.identifier
             )
           : undefined;
 
@@ -355,7 +353,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
           transferedAsset.invested = 0;
           transferedAsset.performance = 0;
           transferedAsset.trend = 0;
-          transferedAsset.lastUpdate = assetOperation.lastUpdate;
+          transferedAsset.lastUpdate = assetBuying.lastUpdate;
           transferedAsset.history = [];
         }
 
@@ -392,9 +390,9 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
 
     // Setting Operation for Holding & Trading and Transfer
     if (this.operationType != OperationsType.NEWINVESTMENT) {
-      operation.entryCoin = assetOperation.symbol;
+      operation.entryCoin = assetBuying.symbol;
       operation.entryPrice = this.marketDataSelected.current_price;
-      operation.exitCoin = assetToSave.symbol;
+      operation.exitCoin = assetSelling.symbol;
       if (this.operationType != OperationsType.TRADING)
         operation.exitPrice = this.marketDataSelected.current_price;
     }
@@ -410,13 +408,15 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
       }
     }
     if (this.operationType != OperationsType.TRANSFER) {
-      assetToSave.operations = [operation];
+      this.operationType != OperationsType.NEWINVESTMENT
+        ? (assetBuying.operations = [operation])
+        : (assetSelling.operations = [operation]);
 
       let walletToSave = deepCopy(this.wallet);
 
       if (this.operationType != OperationsType.NEWINVESTMENT)
-        walletToSave.assets = [assetToSave, assetOperation];
-      else walletToSave.assets = [assetOperation];
+        walletToSave.assets = [assetSelling, assetBuying];
+      else walletToSave.assets = [assetBuying];
 
       this.saveWallet(walletToSave);
     } else {
@@ -425,7 +425,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
       let walletSell = deepCopy(this.wallet);
       let walletBuy = deepCopy(this.walletToTansfer);
 
-      walletSell.assets = [assetOperation];
+      walletSell.assets = [assetBuying];
       walletBuy.assets = [transferedAsset];
 
       this.saveWallets([walletSell, walletBuy]);
@@ -604,18 +604,18 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
 
   /**@deprecated*/
   exchangeNewInvestment() {
-    let assetToSave = deepCopy(this.assetInWallet);
-    assetToSave.lastUpdate = new Date();
-    if (!assetToSave.performance) {
-      assetToSave.performance = 0;
-      assetToSave.trend = 0;
+    let assetBuying = deepCopy(this.assetInWallet);
+    assetBuying.lastUpdate = new Date();
+    if (!assetBuying.performance) {
+      assetBuying.performance = 0;
+      assetBuying.trend = 0;
     }
-    Number.isNaN(assetToSave.invested) || assetToSave.invested == undefined
-      ? (assetToSave.invested = this.investedMoney)
-      : (assetToSave.invested += this.investedMoney);
-    Number.isNaN(assetToSave.balance) || assetToSave.balance == undefined
-      ? (assetToSave.balance = this.assetNewBalance)
-      : (assetToSave.balance += this.assetNewBalance);
+    Number.isNaN(assetBuying.invested) || assetBuying.invested == undefined
+      ? (assetBuying.invested = this.investedMoney)
+      : (assetBuying.invested += this.investedMoney);
+    Number.isNaN(assetBuying.balance) || assetBuying.balance == undefined
+      ? (assetBuying.balance = this.assetNewBalance)
+      : (assetBuying.balance += this.assetNewBalance);
 
     let operation: Operation = new Operation();
     operation.identifier = uuidv4();
@@ -623,22 +623,22 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     operation.status = 'CLOSED';
     operation.entryDate = new Date(this.operationDate);
     operation.entryCoin = this.fiat;
-    operation.entryPrice = assetToSave.current_price;
+    operation.entryPrice = assetBuying.current_price;
     operation.entryPriceValue = this.investedMoney;
     //operation.entryQuantity = this.investedMoney;
     operation.entryQuantity = this.assetNewBalance;
     operation.exitDate = new Date(this.operationDate);
-    operation.exitCoin = assetToSave.symbol;
-    operation.exitPrice = assetToSave.current_price;
+    operation.exitCoin = assetBuying.symbol;
+    operation.exitPrice = assetBuying.current_price;
     operation.exitPriceValue = this.investedMoney;
     //operation.exitQuantity = this.assetNewBalance;
     operation.exitQuantity = this.investedMoney;
     operation.fees = this.fees;
 
-    assetToSave.operations = [operation];
+    assetBuying.operations = [operation];
 
     let walletToSave = deepCopy(this.wallet);
-    walletToSave.assets = [assetToSave];
+    walletToSave.assets = [assetBuying];
     this.saveWallet(walletToSave);
   }
 

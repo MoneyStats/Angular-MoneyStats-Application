@@ -693,100 +693,110 @@
         <div *ngIf="validateSelect()" class="section mt-2">
           <div class="row fontsize-caption">
             <!-- Edit Balance -->
-            <div class="col">
-              <div
-                *ngIf="!isEditBalance"
-                (click)="isEditBalance = true"
-                class="clickable"
-              >
-                <b>{{ marketDataSelected.symbol }}</b> =
-                {{ marketDataSelected.current_price }} {{ fiat }}
-              </div>
-              <div *ngIf="isEditBalance" class="row">
-                <div class="col-11">
-                  <div class="form-group basic">
-                    <div class="input-wrapper">
-                      <label class="label" for="price"
-                        >{{ "crypto.operationExchange.price" | translate }}
-                        {{ marketDataSelected.symbol }}</label
+            <div class="col-6">
+              <div class="row text-start">
+                <div
+                  *ngIf="!isEditBalance"
+                  (click)="isEditBalance = true"
+                  class="clickable"
+                >
+                  <b>{{ marketDataSelected.symbol }}</b> =
+                  {{ marketDataSelected.current_price }} {{ fiat }}
+                </div>
+                <div class="d-flex justify-content-start">
+                  <div
+                    *ngIf="isEditBalance"
+                    class="row"
+                    style="max-width: 300px"
+                  >
+                    <div class="col-md col-sm-12">
+                      <div class="form-group basic">
+                        <div class="input-wrapper">
+                          <label class="label" for="price"
+                            >{{ "crypto.operationExchange.price" | translate }}
+                            {{ marketDataSelected.symbol }}</label
+                          >
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="price"
+                            name="price"
+                            #price1="ngModel"
+                            [(ngModel)]="marketDataSelected.current_price"
+                            value="{{ marketDataSelected.current_price }}"
+                            required
+                            placeholder="{{
+                              'crypto.operationExchange.newPrice' | translate
+                            }}"
+                          />
+                          <i class="clear-input">
+                            <ion-icon name="close-circle"></ion-icon>
+                          </i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col" style="max-width: 80px">
+                      <button
+                        [disabled]="f.invalid"
+                        style="vertical-align: -25px"
+                        type="button"
+                        class="btn btn-primary rounded me-1"
+                        (click)="editBalance()"
                       >
-                      <input
-                        type="number"
-                        class="form-control"
-                        id="price"
-                        name="price"
-                        #price1="ngModel"
-                        [(ngModel)]="marketDataSelected.current_price"
-                        value="{{ marketDataSelected.current_price }}"
-                        required
-                        placeholder="{{
-                          'crypto.operationExchange.newPrice' | translate
-                        }}"
-                      />
-                      <i class="clear-input">
-                        <ion-icon name="close-circle"></ion-icon>
-                      </i>
+                        {{ "crypto.operationExchange.save" | translate }}
+                      </button>
                     </div>
                   </div>
-                </div>
-                <div class="col-1">
-                  <button
-                    [disabled]="f.invalid"
-                    style="vertical-align: -25px"
-                    type="button"
-                    class="btn btn-primary rounded me-1"
-                    (click)="editBalance()"
-                  >
-                    {{ "crypto.operationExchange.save" | translate }}
-                  </button>
                 </div>
               </div>
             </div>
             <!-- END Edit Balance -->
             <!-- Edit Date -->
-            <div class="col text-end">
-              <div
-                *ngIf="!isEditDate"
-                (click)="isEditDate = true"
-                class="clickable"
-              >
-                {{ "crypto.operationExchange.last" | translate }}
-                <b>{{
-                  marketDataSelected.lastUpdate
-                    ? (marketDataSelected.lastUpdate | date : "d MMM y")
-                    : "NEVER"
-                }}</b>
-              </div>
-              <div *ngIf="isEditDate" class="row">
-                <div class="col-11">
-                  <div class="form-group basic">
-                    <div class="input-wrapper">
-                      <label class="label" for="date"
-                        >{{ "crypto.operationExchange.date" | translate }}
-                      </label>
-                      <input
-                        type="date"
-                        class="form-control"
-                        id="editDate"
-                        name="date"
-                        #date1="ngModel"
-                        [(ngModel)]="operationDate"
-                        value="{{ operationDate }}"
-                        required
-                      />
+            <div class="col-6">
+              <div class="row text-end">
+                <div
+                  *ngIf="!isEditDate"
+                  (click)="isEditDate = true"
+                  class="clickable"
+                >
+                  {{ "crypto.operationExchange.last" | translate }}
+                  <b>{{
+                    operationDate ? (operationDate | date : "d MMM y") : "NEVER"
+                  }}</b>
+                </div>
+                <div class="d-flex justify-content-end">
+                  <div *ngIf="isEditDate" class="row" style="max-width: 300px">
+                    <div class="col">
+                      <div class="form-group basic">
+                        <div class="input-wrapper">
+                          <label class="label" for="date"
+                            >{{ "crypto.operationExchange.date" | translate }}
+                          </label>
+                          <input
+                            type="date"
+                            class="form-control"
+                            id="date"
+                            name="date"
+                            #date1="ngModel"
+                            [(ngModel)]="operationDate"
+                            value="{{ operationDate }}"
+                            required
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col" style="max-width: 80px">
+                      <button
+                        [disabled]="f.invalid"
+                        style="vertical-align: -25px"
+                        type="button"
+                        class="btn btn-primary rounded me-1"
+                        (click)="isEditDate = false"
+                      >
+                        {{ "crypto.operationExchange.save" | translate }}
+                      </button>
                     </div>
                   </div>
-                </div>
-                <div class="col-1">
-                  <button
-                    [disabled]="f.invalid"
-                    style="vertical-align: -25px"
-                    type="button"
-                    class="btn btn-primary rounded me-1"
-                    (click)="isEditDate = false"
-                  >
-                    {{ "crypto.operationExchange.save" | translate }}
-                  </button>
                 </div>
               </div>
             </div>
