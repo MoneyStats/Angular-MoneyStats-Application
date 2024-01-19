@@ -152,10 +152,13 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   }
 
   emitOperationSelectAsset(asset: Asset) {
+    console.log('DENTRO', this.operationType);
     this.assetToSell = asset;
     switch (this.operationType) {
-      case OperationsType.HOLDING || OperationsType.TRADING:
+      case OperationsType.HOLDING:
+      case OperationsType.TRADING:
         this.investedBalance = this.assetToSell.balance;
+        console.log(this.investedBalance);
 
         this.makeNewBalance();
         break;
@@ -210,7 +213,8 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
 
   makeNewBalance() {
     switch (this.operationType) {
-      case OperationsType.HOLDING || OperationsType.TRADING:
+      case OperationsType.HOLDING:
+      case OperationsType.TRADING:
         this.investedMoney =
           this.assetToSell.current_price! * this.investedBalance;
         this.assetNewBalance = parseFloat(
@@ -311,7 +315,8 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
         operation.exitCoin = assetBuying.symbol;
         operation.exitPrice = assetBuying.current_price;
         break;
-      case OperationsType.HOLDING || OperationsType.TRADING:
+      case OperationsType.HOLDING:
+      case OperationsType.TRADING:
         percentualeInvestitoCalcolata =
           assetBuying.invested * (this.investedMoney / assetBuying.value!);
         assetBuying.balance -= this.investedBalance;
@@ -384,7 +389,8 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     // Setting Operation
     operation.identifier = uuidv4();
     operation.type = this.operationType;
-    operation.status = 'CLOSED';
+    operation.status =
+      this.operationType != OperationsType.TRADING ? 'CLOSED' : 'OPEN';
     operation.entryDate = new Date(this.operationDate);
     operation.fees = this.fees;
 
@@ -397,18 +403,18 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
         operation.exitPrice = this.marketDataSelected.current_price;
     }
     if (this.operationType != OperationsType.TRANSFER) {
-      operation.entryPriceValue = this.investedMoney;
+      operation.entryPriceValue = parseFloat(this.investedMoney.toFixed(2));
       operation.entryQuantity = this.assetNewBalance;
     }
     if (this.operationType != OperationsType.TRADING) {
       operation.exitDate = new Date(this.operationDate);
       if (this.operationType != OperationsType.TRANSFER) {
-        operation.exitPriceValue = this.investedMoney;
+        operation.exitPriceValue = parseFloat(this.investedMoney.toFixed(2));
         operation.exitQuantity = this.investedMoney;
       }
     }
     if (this.operationType != OperationsType.TRANSFER) {
-      this.operationType != OperationsType.NEWINVESTMENT
+      this.operationType == OperationsType.NEWINVESTMENT
         ? (assetBuying.operations = [operation])
         : (assetSelling.operations = [operation]);
 
@@ -688,7 +694,8 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     switch (this.operationType) {
       case OperationsType.NEWINVESTMENT:
         return form.invalid || !this.disableOnEdit();
-      case (OperationsType.HOLDING, OperationsType.TRADING):
+      case OperationsType.HOLDING:
+      case OperationsType.TRADING:
         return form.invalid || !this.validateSelect() || !this.disableOnEdit();
       case OperationsType.TRANSFER:
         return (
