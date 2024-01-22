@@ -36,6 +36,8 @@ export class CloseOperationComponent implements OnDestroy {
   currentPrice: number = 0;
   isEditActive: boolean = false;
 
+  fees: number = 0;
+
   constructor(
     private cryptoService: CryptoService,
     private swal: SwalService,
@@ -57,6 +59,7 @@ export class CloseOperationComponent implements OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.modalId);
     if (this.operation) this.getData();
   }
 
@@ -95,8 +98,9 @@ export class CloseOperationComponent implements OnDestroy {
     let operation = this.operationToClose;
     let currentPrice =
       this.operationToClose?.entryQuantity! * this.operationToClose?.exitPrice!;
-    operation!.exitPriceValue = parseFloat(currentPrice.toFixed(2));
-    operation!.exitQuantity = parseFloat(currentPrice.toFixed(8));
+    let fees = this.fees * this.operationToClose?.exitPrice!;
+    operation!.exitPriceValue = parseFloat((currentPrice - fees).toFixed(2));
+    operation!.exitQuantity = parseFloat((currentPrice - fees).toFixed(8));
     operation!.performance = parseFloat(
       (
         ((currentPrice - this.operationToClose?.entryPriceValue!) /
@@ -105,7 +109,7 @@ export class CloseOperationComponent implements OnDestroy {
       ).toFixed(2)
     );
     operation!.trend = parseFloat(
-      (currentPrice - this.operationToClose?.entryPriceValue!).toFixed(2)
+      (currentPrice - fees - this.operationToClose?.entryPriceValue!).toFixed(2)
     );
     //this.isEditActive = false;
   }
@@ -138,6 +142,11 @@ export class CloseOperationComponent implements OnDestroy {
     this.operationToClose.asset = undefined;
     this.operationToClose.assetSell = undefined;
     this.operationToClose.wallet = undefined;
+
+    let fees = parseFloat(
+      (this.fees * this.operationToClose?.exitPrice!).toFixed(8)
+    );
+    this.operationToClose.fees! += fees;
 
     asset1!.operations = [this.operationToClose];
     asset1!.balance -= this.operationToClose?.entryQuantity!;

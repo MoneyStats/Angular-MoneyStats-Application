@@ -39,6 +39,7 @@ export class OperationDetailsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.modalId);
     this.getTradingData();
   }
 

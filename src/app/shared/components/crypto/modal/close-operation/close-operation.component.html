@@ -209,23 +209,25 @@
                               </div>
                             </div>
                           </div>
-                          <div hidden class="col-12 col-md-6">
+                          <div class="col-12 col-md-6">
                             <div class="form-group basic">
                               <div class="input-wrapper">
-                                <label class="label" for="price1"
+                                <label class="label" for="fees"
                                   >{{
-                                    "crypto.closeOperation.selling" | translate
+                                    "crypto.closeOperation.fees" | translate
                                   }}
                                   ({{ operationToClose.asset?.symbol }})</label
                                 >
                                 <input
-                                  name="price"
-                                  #price1="ngModel"
+                                  name="fees"
+                                  #fees1="ngModel"
                                   type="number"
                                   class="form-control"
-                                  id="price1"
-                                  placeholder="Enter an Amount"
-                                  [(ngModel)]="operationToClose.exitPrice"
+                                  id="fees"
+                                  placeholder="{{
+                                    'crypto.closeOperation.fees' | translate
+                                  }}"
+                                  [(ngModel)]="fees"
                                   (keyup)="refreshData()"
                                 />
                                 <i class="clear-input">
@@ -288,6 +290,13 @@
                               {{ cryptoCurrency }}</strong
                             >
                           </p>
+                          <p *ngIf="fees" class="p">
+                            {{ "crypto.closeOperation.fees" | translate }}:
+                            <strong
+                              >{{ fees }}
+                              {{ operationToClose.asset?.symbol }}</strong
+                            >
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -296,7 +305,7 @@
                 </div>
               </div>
             </div>
-            <div class="row">
+            <div class="row fixed-bar mx-auto border_round">
               <div class="col-6">
                 <a
                   *ngIf="!isEditActive"

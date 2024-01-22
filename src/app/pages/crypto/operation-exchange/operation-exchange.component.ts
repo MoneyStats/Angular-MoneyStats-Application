@@ -657,8 +657,8 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
           walletToSave.assets.length > 1
             ? this.translate
                 .instant('response.operation')
-                .replace('$OP1$', walletToSave.assets[0].symbol)
-                .replace('$OP2$', walletToSave.assets[1].symbol)
+                .replace('$OP1$', walletToSave.assets[1].symbol)
+                .replace('$OP2$', walletToSave.assets[0].symbol)
             : this.translate
                 .instant('response.operation')
                 .replace('$OP1$', 'USD')

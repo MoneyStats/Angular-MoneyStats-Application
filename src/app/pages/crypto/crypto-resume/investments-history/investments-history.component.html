@@ -206,25 +206,13 @@
           [legend]="lineChartJS!.lineChartLegend"
         >
         </canvas>
-        <!--<apx-chart
-      *ngIf="chartOptions"
-      [series]="chartOptions.series!"
-      [chart]="chartOptions.chart!"
-      [title]="chartOptions.title!"
-      [colors]="chartOptions.colors!"
-      [legend]="chartOptions.legend!"
-      [stroke]="chartOptions.stroke!"
-      [labels]="chartOptions.labels!"
-      type="area"
-    ></apx-chart>
-    <div id="chart-line"></div>-->
       </div>
     </div>
   </div>
   <!-- * Graph -->
   <div class="section mb-3 col-md-12" *ngIf="isOperationPresent">
     <!-- History -->
-    <div class="section mt-4">
+    <div class="section cards-op mt-4">
       <div class="section-heading">
         <h2 class="title">
           {{ "crypto.asset.details.overview.operations" | translate }}
@@ -238,94 +226,7 @@
         [cryptoDashboard]="cryptoService.cryptoDashboard"
         [walletsAsset]="cryptoService.cryptoDashboard.wallets"
       ></app-operations-list>
-      <!--<div class="card cards-op border_round">
-        <ul
-          class="listview flush transparent no-line image-listview detailed-list border_round"
-          *ngFor="let operation of operations; let i = index"
-        >
-           item
-          <li *ngIf="i < 4">
-            <a
-              class="item"
-              (click)="selectOperation(operation)"
-              data-bs-toggle="modal"
-              attr.data-bs-target="#{{ modalConstant.CRYPTOOPERATIONDETAILS }}"
-            >
-              <div class="icon-box-c me-4">
-                <img *ngIf="operation.type != operationTypeConstant.NEWINVESTMENT"
-                  class="rounded-pill img1"
-                  src="{{ operation?.assetSell?.icon }}"
-                  alt=""
-                />
-                <img *ngIf="operation.type == operationTypeConstant.NEWINVESTMENT"
-                  class="rounded-pill img1"
-                  src="{{ operation?.wallet?.img }}"
-                  alt=""
-                />
-                <img
-                  class="rounded-pill img2"
-                  src="{{ operation?.asset?.icon }}"
-                  alt=""
-                />
-              </div>
-              <div class="in">
-                <div>
-                  <strong>{{ operation?.wallet?.name }}</strong>
-                  <div class="text-small text-secondary">
-                    {{ operation?.asset?.name }}
-                    {{ "crypto.asset.details.overview.price" | translate }}
-                    {{ operation?.exitPrice }}
-                    {{ cryptoCurrency }}
-                  </div>
-                  <div class="text-small text-secondary">
-                    <strong>{{ operation?.type }}</strong> #{{ operation?.id }}
-                  </div>
-                </div>
-                <div class="text-end">
-                  <strong
-                    >{{ operation?.exitQuantity }}
-                    {{ operation?.asset?.symbol }}</strong
-                  >
-                  <div class="text-small">
-                    <span
-                      class="badge {{
-                        operation?.status == 'CLOSED'
-                          ? 'badge-danger'
-                          : 'badge-success'
-                      }} "
-                      >{{ operation?.status }}</span
-                    >
-                  </div>
-
-                  <div class="text-small">
-                    {{ "crypto.asset.details.overview.invest" | translate }}
-                    <strong
-                      >{{ operation?.entryPriceValue }}
-                      {{ cryptoCurrency }}</strong
-                    >
-                    {{ "crypto.asset.details.overview.on" | translate }}
-                    {{ operation?.exitDate | date : "d MMM yy" }}
-                  </div>
-                </div>
-              </div>
-            </a>
-          </li>-->
-      <!-- * item
-        </ul>
-        <div class="card-body pt-0">
-          <a
-            (click)="goToOperations()"
-            class="btn btn-block btn-outline-secondary"
-            >{{ "crypto.asset.details.overview.more" | translate }}</a
-          >
-        </div>
-      </div>-->
     </div>
     <!-- History -->
   </div>
 </div>
-<app-operation-details
-  [modalId]="modalConstant.CRYPTOOPERATIONDETAILS"
-  [operation]="operationSelect"
-  [currency]="cryptoCurrency"
-></app-operation-details>

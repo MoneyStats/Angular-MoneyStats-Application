@@ -283,7 +283,7 @@
         <a
           class="btn btn-primary btn-lg btn-block"
           data-bs-toggle="modal"
-          attr.data-bs-target="#{{ modalConstant.CLOSEOPERATION }}"
+          attr.data-bs-target="#{{ modalConstant.CLOSEOPERATION + modalId }}"
           >{{ "crypto.closeOperation.title" | translate }}</a
         >
       </div>
@@ -294,5 +294,5 @@
 
 <app-close-operation
   [operation]="operation"
-  [modalId]="modalConstant.CLOSEOPERATION"
+  [modalId]="modalConstant.CLOSEOPERATION + modalId"
 ></app-close-operation>
