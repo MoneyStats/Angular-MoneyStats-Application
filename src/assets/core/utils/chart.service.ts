@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Dashboard, Stats, Wallet } from '../data/class/dashboard.class';
-import * as ApexCharts from 'apexcharts';
 import { ApexOptions } from '../data/constant/apex.chart';
 import { CryptoDashboard, Operation } from '../data/class/crypto.class';
 import { ImageColorPickerService } from './image.color.picker.service';
@@ -27,7 +26,7 @@ export class ChartService {
   environment = environment;
   constructor(private imageColorPicker: ImageColorPickerService) {}
 
-  renderChartLine(dashboard: Dashboard): Partial<ApexOptions> {
+  appRenderWalletPerformance(dashboard: Dashboard): Partial<ApexOptions> {
     let series: Array<any> = [];
     let oldStats: any = new Stats();
     let oldDate: any;
@@ -68,7 +67,7 @@ export class ChartService {
             );
             index = count;
           }
-          historyBalance.push(h.balance);
+          historyBalance.push(this.roundToTwoDecimalPlaces(h.balance));
           index++;
         });
 
@@ -93,7 +92,6 @@ export class ChartService {
     let index = 0;
     totalMap.forEach((value: any, key: string) => {
       let historyBalance: Array<number> = [];
-      let date: string = '';
 
       value.forEach((v: any) => {
         historyBalance.push(v.balance);
@@ -162,7 +160,7 @@ export class ChartService {
     return chartExample1;
   }
 
-  renderChartPie(wallets: Wallet[]): Partial<ApexOptions> {
+  appRenderChartPie(wallets: Wallet[]): Partial<ApexOptions> {
     let series: Array<any> = [];
     let walletName: Array<string> = [];
     wallets.forEach((wallet) => {
@@ -203,7 +201,7 @@ export class ChartService {
     series = [];
     return chartExample1;
   }
-  renderChartBar(dates: string[], balances: number[]): Partial<ApexOptions> {
+  appRenderChartBar(dates: string[], balances: number[]): Partial<ApexOptions> {
     let series: Array<any> = [];
     let walletName: Array<string> = dates;
     let serie = [
@@ -270,7 +268,7 @@ export class ChartService {
           statsAssetsDays[statsAssetsDays.length - 1]
         );
         if (lastDay < today) {
-          historyBalance.push(asset.value!);
+          historyBalance.push(this.roundToTwoDecimalPlaces(asset.value!));
         }
       }
 

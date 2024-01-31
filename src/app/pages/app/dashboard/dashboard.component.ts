@@ -66,7 +66,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       if (!isAutoUpdate) toast.updateAvaiable();
     });
   }
-  
+
   ngOnDestroy(): void {
     this.dashboardSubscribe.unsubscribe();
   }
@@ -148,7 +148,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     let dashboardRender = deepCopy(dashboard);
     setTimeout(() => {
       if (this.dashboard.wallets) {
-        this.chartOptions = this.charts.renderChartLine(dashboardRender);
+        this.chartOptions =
+          this.charts.appRenderWalletPerformance(dashboardRender);
       }
     }, 500);
   }

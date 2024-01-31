@@ -67,9 +67,9 @@ export class DataComponent implements OnInit, OnChanges {
     this.chartBar = undefined;
     this.chartPie = undefined;
     setTimeout(() => {
-      this.chartOptions = this.charts.renderChartLine(dashboard);
-      this.chartPie = this.charts.renderChartPie(dashboard.wallets);
-      this.chartBar = this.charts.renderChartBar(
+      this.chartOptions = this.charts.appRenderWalletPerformance(dashboard);
+      this.chartPie = this.charts.appRenderChartPie(dashboard.wallets);
+      this.chartBar = this.charts.appRenderChartBar(
         dashboard.statsWalletDays,
         this.balances
       );
