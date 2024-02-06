@@ -2,6 +2,12 @@
   margin-top: 20px;
 }
 
+@media screen and (min-width: 780px) {
+  .tab-pane {
+    margin-bottom: -60px;
+  }
+}
+
 @media screen and (max-width: 780px) {
   .extraHeader {
     margin-top: 5px;
