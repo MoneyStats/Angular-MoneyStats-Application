@@ -23,6 +23,9 @@ export class CryptoService {
   public assets: Asset[] = [];
   public operationsMap: Map<string, any[]> = new Map();
 
+  // Market Data Cache
+  private marketDataCache: any;
+
   // Used for history table
   public cryptoResume: Map<string, CryptoDashboard> = new Map<
     string,
@@ -81,6 +84,7 @@ export class CryptoService {
   }
 
   getCryptoAssets(): Observable<ResponseModel> {
+    if (this.marketDataCache) return of(this.marketDataCache);
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
