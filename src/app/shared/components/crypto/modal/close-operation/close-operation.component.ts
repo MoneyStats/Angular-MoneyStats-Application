@@ -146,7 +146,8 @@ export class CloseOperationComponent implements OnDestroy {
     let fees = parseFloat(
       (this.fees * this.operationToClose?.exitPrice!).toFixed(8)
     );
-    this.operationToClose.fees! += fees;
+    if (this.operationToClose.fees) this.operationToClose.fees! += fees;
+    else this.operationToClose.fees = fees;
 
     asset1!.operations = [this.operationToClose];
     asset1!.balance -= this.operationToClose?.entryQuantity!;
@@ -164,6 +165,7 @@ export class CloseOperationComponent implements OnDestroy {
       '/' +
       asset1?.symbol +
       ' successfully closed';
+    console.log(wallet);
 
     this.closeSubscribe = this.cryptoService
       .addOrUpdateCryptoAsset(wallet!)
