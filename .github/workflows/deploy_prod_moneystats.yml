@@ -90,7 +90,7 @@ jobs:
     environment:
       name: prod-moneystats-angular
       url: https://moneystats.github.io
-    needs: [dependency-and-build, docker-login]
+    needs: [dependency-and-build]
     steps:
       - uses: actions/checkout@v4
 
