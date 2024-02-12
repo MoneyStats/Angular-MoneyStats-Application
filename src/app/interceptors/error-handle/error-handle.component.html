@@ -2,11 +2,19 @@
 <div class="appHeader no-border">
   <div class="left">
     <a href="#" (click)="goBack()" class="headerButton goBack">
-      <ion-icon name="chevron-back-outline"></ion-icon>
+      <!--<ion-icon name="chevron-back-outline"></ion-icon>-->
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </a>
+  </div>
+  <div class="right">
+    <a (click)="showDataSwitch()" class="headerButton goBack clickable">
+      <!--<ion-icon name="chevron-back-outline"></ion-icon>-->
+      <ion-icon name="bug"></ion-icon>
     </a>
   </div>
   <div class="pageTitle">
-    {{ exception?.error?.statusCode }} {{ exception?.error?.status }}
+    {{ exception?.error?.status }}
+    <!--{{ exception?.error?.statusCode }} {{ exception?.error?.status }}-->
   </div>
   <div class="right"></div>
 </div>
@@ -18,18 +26,31 @@
       <div class="splash-page mt-5 mb-5">
         <div class="icon-wrapper pt-5">
           <div class="iconbox">
-            <ion-icon name="skull-outline"></ion-icon>
+            <ion-icon class="error-icon" name="skull-outline"></ion-icon>
           </div>
         </div>
-        <h1>{{ exception?.error?.statusCode }}</h1>
-        <h2 class="mb-2">{{ exception?.error?.exceptionCode }}</h2>
-        <p ng *ngIf="exception?.correlationId">
+        <h2 class="mb-2">{{ exception?.error?.exception }}</h2>
+        <p *ngIf="showMoreData && exception?.url">
           Date: {{ exception?.dateTime | date : "d MMM y" }} <br />
           Correlation ID: {{ exception?.correlationId }} <br />
-          Exception: {{ exception?.error?.exceptionName }}
+          URL: <strong>{{ exception?.url }}</strong> <br />
+          Exception: {{ exception?.error?.errorCode }}
         </p>
+        <p *ngIf="!showMoreData && exception?.url">
+          Date: {{ exception?.dateTime | date : "d MMM y" }} <br />
+          Exception: {{ exception?.error?.errorCode }}
+        </p>
+        <h1 *ngIf="showMoreData">
+          {{ exception?.error?.statusCode }} {{ exception?.error?.status }}
+        </h1>
         <p>
           {{ exception?.error?.message }}
+        </p>
+        <p *ngIf="showMoreData && exception?.error?.exceptionMessage">
+          {{ exception?.error?.exceptionMessage }}
+        </p>
+        <p *ngIf="showMoreData">
+          {{ exception?.error?.stackTrace }}
         </p>
       </div>
     </div>

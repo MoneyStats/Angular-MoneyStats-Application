@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
+import { AppService } from 'src/assets/core/services/app.service';
 
 @Component({
   selector: 'app-header-mobile',
@@ -13,8 +14,9 @@ export class HeaderMobileComponent implements OnInit {
   @Input('rightBtn') rightBtn: string = '';
   @Input('dataBsTarget') dataBsTarget: string = '';
   @Input('restore') restore: boolean = false;
+  @Input('headerClass') headerClass: string = '';
 
-  constructor(private location: Location) {}
+  constructor(private location: Location, private appService: AppService) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -23,6 +25,11 @@ export class HeaderMobileComponent implements OnInit {
   ngOnInit(): void {}
 
   goBack() {
+    this.vibrate();
     this.location.back();
+  }
+
+  vibrate() {
+    this.appService.vibrate();
   }
 }

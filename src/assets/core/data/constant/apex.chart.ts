@@ -5,7 +5,7 @@ import {
   ApexTitleSubtitle,
 } from 'ng-apexcharts';
 
-import { ChartConfiguration, ChartOptions, ChartType } from 'chart.js';
+import { ChartConfiguration, ChartOptions } from 'chart.js';
 
 export type ApexOptions = {
   series: ApexAxisChartSeries;

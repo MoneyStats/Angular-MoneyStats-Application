@@ -1,22 +1,37 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Dashboard, Stats, Wallet } from '../data/class/dashboard.class';
-import * as ApexCharts from 'apexcharts';
 import { ApexOptions } from '../data/constant/apex.chart';
-
-//declare var ApexCharts: any;
+import { CryptoDashboard, Operation } from '../data/class/crypto.class';
+import { ImageColorPickerService } from './image.color.picker.service';
+import { deepCopy } from '@angular-devkit/core/src/utils/object';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChartService {
+  private colorsList: string[] = [
+    '#6236FF',
+    '#d119d0',
+    '#bb9df7',
+    '#de3454',
+    '#407306',
+    '#9c413c',
+    '#f2ed0a',
+    '#fa5c42',
+    '#57cb54',
+    '#500295',
+    '#f7eedc',
+  ];
   environment = environment;
-  constructor() {}
+  constructor(private imageColorPicker: ImageColorPickerService) {}
 
-  renderChartLine(dashboard: Dashboard): Partial<ApexOptions> {
+  appRenderWalletPerformance(dashboard: Dashboard): Partial<ApexOptions> {
     let series: Array<any> = [];
     let oldStats: any = new Stats();
     let oldDate: any;
+    let colors: string[] = [];
+
     if (dashboard.statsWalletDays.length === 1) {
       oldDate =
         parseInt(
@@ -26,88 +41,49 @@ export class ChartService {
         ) - 1;
       dashboard.statsWalletDays.splice(0, 0, oldDate.toString());
     }
-    /**let filterDate: string[] = [];
-    dashboard.statsWalletDays.forEach((d, index) => {
-      if (d.split('-')[1]) {
-        filterDate.push(d);
-      }
-    });
-    console.log(filterDate, dashboard);
-    dashboard.statsWalletDays = filterDate;**/
-    dashboard.wallets.forEach((wallet) => {
+    dashboard.wallets.forEach((wallet, indexWallet) => {
+      colors.push(this.imageColorPicker.getColor(wallet.img!, indexWallet));
       let oldBalance =
         wallet.differenceLastStats != 0
           ? wallet.balance - wallet.differenceLastStats
           : 0;
       let historyBalance: Array<number> = [];
       let index = 0;
-      if (wallet.history.length === 1) {
-        oldStats.balance = oldBalance;
+      if (wallet.history) {
+        if (wallet.history.length === 1) {
+          oldStats.balance = oldBalance;
 
-        oldStats.date = oldDate;
-        wallet.history.splice(0, 0, oldStats);
+          oldStats.date = oldDate;
+          wallet.history.splice(0, 0, oldStats);
+        }
+        wallet.history.forEach((h) => {
+          if (h.date == undefined) {
+            return;
+          }
+          let count = dashboard.statsWalletDays.indexOf(h.date.toString());
+          if (count != index) {
+            Array.from(Array(count - index)).forEach((d) =>
+              historyBalance.push(0)
+            );
+            index = count;
+          }
+          historyBalance.push(this.roundToTwoDecimalPlaces(h.balance));
+          index++;
+        });
+
+        let serie = {
+          name: wallet.name,
+          data: historyBalance,
+        };
+        series.push(serie);
       }
-      wallet.history.forEach((h) => {
-        if (h.date == undefined) {
-          return;
-        }
-        let count = dashboard.statsWalletDays.indexOf(h.date.toString());
-        if (count != index) {
-          Array.from(Array(count - index)).forEach((d) =>
-            historyBalance.push(0)
-          );
-          index = count;
-        }
-        historyBalance.push(h.balance);
-        index++;
-      });
-      let serie = {
-        name: wallet.name,
-        data: historyBalance,
-      };
-      series.push(serie);
       historyBalance = [];
     });
-    let chartOptions: Partial<ApexOptions> = {
-      series: series,
-      chart: {
-        type: 'area',
-        width: '100%',
-        height: 350,
-        sparkline: {
-          enabled: true,
-        },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        width: 2,
-      },
-      colors: [
-        '#6236FF',
-        '#d119d0',
-        '#bb9df7',
-        '#de3454',
-        '#407306',
-        '#9c413c',
-        '#f2ed0a',
-        '#fa5c42',
-        '#57cb54',
-        '#500295',
-        '#f7eedc',
-      ],
-      labels: dashboard.statsWalletDays,
-      legend: {
-        show: true,
-        position: 'top',
-        horizontalAlign: 'center',
-        floating: false,
-        fontFamily: 'Helvetica, Arial',
-      },
-    };
-    return chartOptions;
-    //chartLine(series, dashboard.statsWalletDays);
+    let finalStatsDays: string[] = [];
+    dashboard.statsWalletDays.forEach((d) =>
+      finalStatsDays.push(new Date(d).toDateString())
+    );
+    return this.createChartLine(colors, series, finalStatsDays, 380);
   }
 
   renderChartLineCategory(totalMap: Map<string, any>): Partial<ApexOptions> {
@@ -116,7 +92,6 @@ export class ChartService {
     let index = 0;
     totalMap.forEach((value: any, key: string) => {
       let historyBalance: Array<number> = [];
-      let date: string = '';
 
       value.forEach((v: any) => {
         historyBalance.push(v.balance);
@@ -134,43 +109,7 @@ export class ChartService {
       index++;
     });
 
-    let chartOptions: Partial<ApexOptions> = {
-      series: series,
-      chart: {
-        type: 'area',
-        width: '100%',
-        height: 350,
-        sparkline: {
-          enabled: true,
-        },
-      },
-      stroke: {
-        width: 2,
-      },
-      colors: [
-        '#6236FF',
-        '#d119d0',
-        '#bb9df7',
-        '#de3454',
-        '#407306',
-        '#9c413c',
-        '#f2ed0a',
-        '#fa5c42',
-        '#57cb54',
-        '#500295',
-        '#f7eedc',
-      ],
-      labels: labels,
-      legend: {
-        show: true,
-        position: 'top',
-        horizontalAlign: 'center',
-        floating: false,
-        fontFamily: 'Helvetica, Arial',
-      },
-    };
-    return chartOptions;
-    //chartLine(series, dashboard.statsWalletDays);
+    return this.createChartLine([], series, labels, 350);
   }
 
   renderChartWallet(name: string, stats: Stats[]): Partial<ApexOptions> {
@@ -195,6 +134,10 @@ export class ChartService {
     };
     series.push(serie);
     historyBalance = [];
+    let finalStatsDays: string[] = [];
+    historyDates.forEach((d) =>
+      finalStatsDays.push(new Date(d).toDateString())
+    );
     let chartExample1: Partial<ApexOptions> = {
       series: series,
       chart: {
@@ -217,7 +160,7 @@ export class ChartService {
     return chartExample1;
   }
 
-  renderChartPie(wallets: Wallet[]): Partial<ApexOptions> {
+  appRenderChartPie(wallets: Wallet[]): Partial<ApexOptions> {
     let series: Array<any> = [];
     let walletName: Array<string> = [];
     wallets.forEach((wallet) => {
@@ -258,7 +201,7 @@ export class ChartService {
     series = [];
     return chartExample1;
   }
-  renderChartBar(dates: string[], balances: number[]): Partial<ApexOptions> {
+  appRenderChartBar(dates: string[], balances: number[]): Partial<ApexOptions> {
     let series: Array<any> = [];
     let walletName: Array<string> = dates;
     let serie = [
@@ -282,48 +225,223 @@ export class ChartService {
     series = [];
     return chartExample1;
   }
-}
 
-// Obsolete
-function chartLine(series: any, data: Array<string>) {
-  var optionChartLine = {
-    series: series,
-    chart: {
-      type: 'area',
-      width: '100%',
-      height: '350px',
-      sparkline: {
-        enabled: true,
+  renderCryptoDatas(
+    cryptoDashboard: CryptoDashboard,
+    /**
+     * 1.Parametro: Dimensione Grafico
+     * 2.Parametro: Boolean Siamo in Resume (Setta il live price come ultimo dato)
+     */
+    ...optional: any[]
+  ): Partial<ApexOptions> {
+    let series: Array<any> = [];
+    let statsAssetsDays = cryptoDashboard.statsAssetsDays.slice();
+    let colors: string[] = [];
+
+    let options: Array<any> = optional[0];
+    let today = new Date();
+    cryptoDashboard.assets.forEach((asset, indexAsset) => {
+      colors.push(this.imageColorPicker.getColor(asset.icon!, indexAsset));
+      let historyBalance: Array<number> = [];
+      if (statsAssetsDays == undefined || statsAssetsDays.length == 0) {
+        historyBalance.push(0);
+        let yesterday = new Date();
+        yesterday.setDate(today.getDate() - 1);
+        statsAssetsDays = [yesterday.toDateString()];
+      } else
+        statsAssetsDays.forEach((day) => {
+          if (asset.history && asset.history.length > 0) {
+            let history = asset.history.find((h) => h.date.toString() == day);
+            if (history) {
+              return historyBalance.push(
+                this.roundToTwoDecimalPlaces(history?.balance!)
+              );
+            }
+          }
+          return historyBalance.push(0);
+        });
+
+      // Se non è in resume setto l'ultimo giorno
+      if (options != undefined && options[1] != undefined && !options[1]) {
+        // Aggiungo l'ultimo valore dell'asset corrente se l'ultimo stats non corrisponde ad oggi
+        const lastDay: Date = new Date(
+          statsAssetsDays[statsAssetsDays.length - 1]
+        );
+        if (lastDay < today) {
+          historyBalance.push(this.roundToTwoDecimalPlaces(asset.value!));
+        }
+      }
+
+      let serie = {
+        name: asset.name,
+        data: historyBalance,
+      };
+      series.push(serie);
+    });
+
+    /**
+     * Se non è in resume setto l'ultimo giorno
+     * Utilizzata per inserire l'ultima data
+     */
+    if (options != undefined && options[1] != undefined && !options[1]) {
+      // Aggiungo l'ultimo valore dell'asset corrente se l'ultimo stats non corrisponde ad oggi
+      const lastDay: Date = new Date(
+        statsAssetsDays[statsAssetsDays.length - 1]
+      );
+      if (lastDay < today) {
+        statsAssetsDays.push(today.toDateString());
+      }
+    }
+    let h = 350;
+    if (options != undefined && options[0] != undefined && options[0]) {
+      h = options[0];
+    }
+    let finalStatsDays: string[] = [];
+    statsAssetsDays.forEach((d) => {
+      finalStatsDays.push(
+        new Date(d).toDateString() == 'Invalid Date'
+          ? d
+          : new Date(d).toDateString()
+      );
+    });
+    return this.createChartLine(colors, series, finalStatsDays, h);
+  }
+
+  renderTradingOperations(
+    operations: Array<Operation>,
+    optional: any[]
+  ): Partial<ApexOptions> {
+    let operationsCopy = deepCopy(operations);
+    let tradingDate: Array<string> = [];
+    operationsCopy = operationsCopy.sort(
+      (b, a) =>
+        new Date(b.exitDate!).getTime() - new Date(a.exitDate!).getTime()
+    );
+    operationsCopy = operationsCopy.filter((o) => o.status == 'CLOSED');
+
+    let wallets: Array<Wallet> = [];
+
+    operationsCopy.forEach((operation) => {
+      let exitDate = operation.exitDate?.toString().split('T')[0]!;
+      if (!tradingDate.find((d) => d == exitDate)) tradingDate.push(exitDate);
+
+      if (!wallets.find((w) => w.id == operation?.wallet!.id))
+        wallets.push(operation?.wallet!);
+    });
+
+    let totalInvested: number = 0;
+
+    wallets.forEach((wallet) => {
+      wallet.assets.forEach((asset) => (totalInvested += asset.invested));
+    });
+
+    let investedSum: number = totalInvested;
+    let profit: number = 0;
+    let investedBalance: Array<number> = [];
+    let trendBalance: Array<number> = [];
+    let singleBalance: Array<number> = [];
+    investedBalance.push(parseFloat(totalInvested.toFixed(2)));
+    trendBalance.push(0);
+    singleBalance.push(0);
+
+    tradingDate.forEach((date) => {
+      let op = operationsCopy.filter(
+        (op) => op.exitDate?.toString().split('T')[0]! == date
+      );
+      let singleTrend: number = 0;
+      let title: string = '';
+      op.forEach((o) => {
+        investedSum += o.trend!;
+        profit += o.trend!;
+        singleTrend += o.trend!;
+        title += o.entryCoin + '/' + o.exitCoin + '</br>';
+      });
+
+      investedBalance.push(parseFloat(investedSum.toFixed(2)));
+      trendBalance.push(profit);
+      singleBalance.push(singleTrend);
+    });
+    tradingDate.splice(0, 0, '2023-01-01');
+
+    let serieInvested = {
+      name: 'Balance',
+      data: investedBalance,
+    };
+
+    let trend = {
+      name: 'Trend',
+      data: trendBalance,
+    };
+
+    let singlePerformace = {
+      name: 'Operation Performace',
+      data: singleBalance,
+    };
+
+    let series: Array<any> = [serieInvested, trend, singlePerformace];
+    let options: Array<any> = optional[0];
+
+    let h = 350;
+    if (options != undefined && options[0] != undefined && options[0]) {
+      h = options[0];
+    }
+    let finalStatsDays: string[] = [];
+    tradingDate.forEach((d) => finalStatsDays.push(new Date(d).toDateString()));
+    return this.createChartLine(
+      ['#6236FF', '#1DCC70', '#FF781F'],
+      series,
+      finalStatsDays,
+      h
+    );
+  }
+
+  /**
+   * Chart Line Rendering
+   * @param colors
+   * @param series
+   * @param finalStatsDays
+   * @param h
+   * @returns
+   */
+  createChartLine(
+    colors: string[],
+    series: Array<any>,
+    finalStatsDays: string[],
+    h: any
+  ) {
+    let chartOptions: Partial<ApexOptions> = {
+      series: series,
+      chart: {
+        type: 'area',
+        width: '100%',
+        height: h,
+        sparkline: {
+          enabled: true,
+        },
       },
-    },
-    stroke: {
-      width: 2,
-    },
-    colors: [
-      '#6236FF',
-      '#d119d0',
-      '#bb9df7',
-      '#de3454',
-      '#407306',
-      '#9c413c',
-      '#f2ed0a',
-      '#fa5c42',
-      '#57cb54',
-      '#500295',
-      '#f7eedc',
-    ],
-    labels: data,
-    legend: {
-      show: true,
-      position: 'top',
-      horizontalAlign: 'center',
-      floating: false,
-      fontFamily: 'Helvetica, Arial',
-    },
-  };
-  var chartLine = new ApexCharts(
-    document.querySelector('#chart-line'),
-    optionChartLine
-  );
-  chartLine.render();
+      dataLabels: {
+        enabled: false,
+        background: {
+          borderRadius: 20,
+        },
+      },
+      stroke: {
+        width: 2,
+      },
+      colors: colors.length != 0 ? colors : this.colorsList,
+      labels: finalStatsDays,
+      legend: {
+        show: true,
+        position: 'top',
+        horizontalAlign: 'center',
+        floating: false,
+        fontFamily: 'Helvetica, Arial',
+      },
+    };
+    return chartOptions;
+  }
+
+  roundToTwoDecimalPlaces(value: number): number {
+    return Math.round((value + Number.EPSILON) * 100) / 100;
+  }
 }

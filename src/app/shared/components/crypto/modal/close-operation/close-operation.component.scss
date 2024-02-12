@@ -1,0 +1,25 @@
+@media screen and (max-height: 870px) {
+  .fullbig-modal {
+    max-height: 550px !important;
+    height: 550px !important;
+  }
+}
+
+.fullbig-modal {
+  max-height: 800px !important;
+  height: 800px;
+}
+
+.p {
+  margin-top: -15px;
+}
+
+.item {
+  display: block;
+  padding-top: 0px;
+}
+
+.timeline:before {
+  top: 10px;
+  bottom: 25px;
+}

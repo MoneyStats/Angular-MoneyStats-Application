@@ -1,0 +1,137 @@
+.w30,
+.w30s {
+  width: 30px;
+  height: 30px;
+}
+
+// NEW
+
+::selection {
+  color: #fff;
+  background: #4285f4;
+}
+.wrapper {
+  width: 100%;
+}
+.select-btn,
+.select-btn-op,
+li {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.select-btn {
+  height: 55px;
+  padding: 0 20px;
+  font-size: 16px;
+  background: #141025;
+  border: 1px solid #372648;
+  border-radius: 10px;
+  justify-content: space-between;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+@media screen and (max-width: 780px) {
+  .select-btn-op {
+    margin-left: 0 !important;
+    padding: 0 !important;
+  }
+  .w30s {
+    width: 20px;
+    height: 20px;
+  }
+  .wrapper.active .content {
+    left: 0px;
+  }
+}
+.select-btn-op {
+  max-width: 180px !important;
+  margin-left: 50%;
+  height: 55px;
+  //padding: 0 20px;
+  font-size: 18px;
+  font-weight: bold;
+  background: #141025;
+  //border: 1px solid #372648;
+  border-radius: 10px;
+  justify-content: space-between;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+.select-btn,
+.select-btn-op ion-icon {
+  font-size: 16px;
+  transition: transform 0.3s linear;
+}
+.wrapper.active .select-btn i {
+  transform: rotate(-180deg);
+}
+.content {
+  display: none;
+  padding: 15px;
+  margin-top: 15px;
+  background: #141025;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+.wrapper.active .content {
+  display: block;
+}
+.content .search {
+  position: relative;
+}
+.search ion-icon {
+  top: 50%;
+  left: 15px;
+  color: #999;
+  font-size: 20px;
+  pointer-events: none;
+  transform: translateY(-50%);
+  position: absolute;
+}
+.search input {
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 0 20px 0 43px;
+  background: #141025;
+  border: 1px solid #372648;
+}
+.search input:focus {
+  padding-left: 42px;
+  border: 2px solid #4285f4;
+}
+.search input::placeholder {
+  color: #bfbfbf;
+}
+.content .options {
+  margin-top: 10px;
+  max-height: 250px;
+  overflow-y: auto;
+  padding-right: 7px;
+}
+.options::-webkit-scrollbar {
+  width: 7px;
+}
+.options::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 25px;
+}
+.options::-webkit-scrollbar-thumb {
+  background: #372648;
+  border-radius: 25px;
+}
+.options::-webkit-scrollbar-thumb:hover {
+  background: #27173e;
+}
+.options li {
+  height: 50px;
+  font-size: 16px;
+  margin-left: -20px;
+}
+.options li:hover,
+li.selected {
+  border-radius: 5px;
+  background: #27173e;
+}

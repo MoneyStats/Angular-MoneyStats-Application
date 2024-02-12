@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CoinSymbol } from '../data/class/coin';
 import { Dashboard, Wallet } from '../data/class/dashboard.class';
 import { ResponseModel } from '../data/class/generic.class';
 import { User } from '../data/class/user.class';
@@ -14,9 +13,6 @@ import { StorageConstant } from '../data/constant/constant';
 export class StatsService {
   environment = environment;
   public fullResume?: Map<string, Dashboard>;
-  //public dashboard: Dashboard = new Dashboard();
-  //public wallet?: Wallet;
-  //public coinSymbol?: string;
   user?: User;
   constructor(private http: HttpClient) {}
 
@@ -25,7 +21,7 @@ export class StatsService {
       return this.http.get<ResponseModel>(environment.getResumeDataUrlMock);
     } else {
       const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
-      const headers = new HttpHeaders({ authToken: authToken! });
+      const headers = new HttpHeaders({ Authorization: authToken! });
       return this.http.get<ResponseModel>(environment.getResumeDataUrl, {
         headers: headers,
       });
@@ -34,7 +30,7 @@ export class StatsService {
 
   addStats(wallets: Wallet[]): Observable<ResponseModel> {
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
-    const headers = new HttpHeaders({ authToken: authToken! });
+    const headers = new HttpHeaders({ Authorization: authToken! });
     if (this.user?.mockedUser) {
       let response: ResponseModel = new ResponseModel();
       response.data = wallets;

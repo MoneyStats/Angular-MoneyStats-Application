@@ -1,0 +1,463 @@
+<div class="row">
+  <app-content-box
+    *ngIf="!dashboard.statsWalletDays || !dashboard.statsWalletDays"
+    [header]="'dashboard.graph.nodata.header' | translate"
+    [body]="'dashboard.graph.nodata.body' | translate"
+    [footer]="'dashboard.graph.nodata.footer' | translate"
+  ></app-content-box>
+  <!-- App Capsule -->
+  <section *ngIf="dashboard.statsWalletDays">
+    <div class="row">
+      <div
+        class="section mt-2 col-xl-3 col-md-6"
+        *ngIf="mapWalletCategory.get(KEY_INVESTMENTS).data"
+      >
+        <div class="section-title">
+          {{ "stats.data.investments" | translate }}
+        </div>
+        <div class="card">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">{{ "stats.data.table_date" | translate }}</th>
+                  <th scope="col">
+                    {{ "stats.data.table_balance" | translate }}
+                  </th>
+                  <th scope="col" class="text-end">
+                    {{ "stats.data.table_performance" | translate }}
+                  </th>
+                  <th scope="col" class="text-end">
+                    {{ "stats.data.table_value" | translate }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                *ngFor="
+                  let balances of mapWalletCategory.get(KEY_INVESTMENTS);
+                  let i = index
+                "
+              >
+                <tr
+                  class="topics"
+                  *ngFor="let balance of balances; let y = index"
+                >
+                  <th scope="row">
+                    {{ balances[balances.length - 1].date | date : "d MMM y" }}
+                  </th>
+
+                  <td
+                    class="{{
+                      balance.percentage === 0
+                        ? 'text-warning'
+                        : balance.percentage > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    }} {{ balance.index === y ? 'text-end' : '' }}"
+                  >
+                    {{ coinSymbol }} {{ hidden ? amount : balance.balance }}
+                  </td>
+                  <td
+                    class="{{
+                      balance.percentage === 0
+                        ? 'text-warning'
+                        : balance.percentage > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    }} text-end"
+                  >
+                    {{
+                      balance.percentage >= 1000 ? "+1000" : balance.percentage
+                    }}%
+                  </td>
+                  <td
+                    class="{{
+                      balance.trend === 0
+                        ? 'text-warning'
+                        : balance.trend > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    }} text-end"
+                  >
+                    {{ coinSymbol }} {{ hidden ? amount : balance.trend }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="section mt-2 col-xl-3 col-md-6"
+        *ngIf="mapWalletCategory.get(KEY_CAPITAL).data"
+      >
+        <div class="section-title">{{ "stats.data.capital" | translate }}</div>
+        <div class="card">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">{{ "stats.data.table_date" | translate }}</th>
+                  <th scope="col">
+                    {{ "stats.data.table_balance" | translate }}
+                  </th>
+                  <th scope="col" class="text-end">
+                    {{ "stats.data.table_performance" | translate }}
+                  </th>
+                  <th scope="col" class="text-end">
+                    {{ "stats.data.table_value" | translate }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                *ngFor="
+                  let balances of mapWalletCategory.get(KEY_CAPITAL);
+                  let i = index
+                "
+              >
+                <tr
+                  class="topics"
+                  *ngFor="let balance of balances; let y = index"
+                >
+                  <th scope="row">
+                    {{ balances[balances.length - 1].date | date : "d MMM y" }}
+                  </th>
+
+                  <td
+                    class="{{
+                      balance.percentage === 0
+                        ? 'text-warning'
+                        : balance.percentage > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    }} {{ balance.index === y ? 'text-end' : '' }}"
+                  >
+                    {{ coinSymbol }} {{ hidden ? amount : balance.balance }}
+                  </td>
+                  <td
+                    class="{{
+                      balance.percentage === 0
+                        ? 'text-warning'
+                        : balance.percentage > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    }} text-end"
+                  >
+                    {{
+                      balance.percentage >= 1000 ? "+1000" : balance.percentage
+                    }}%
+                  </td>
+                  <td
+                    class="{{
+                      balance.trend === 0
+                        ? 'text-warning'
+                        : balance.trend > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    }} text-end"
+                  >
+                    {{ coinSymbol }} {{ hidden ? amount : balance.trend }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Graph -->
+      <div
+        class="section mt-4 col-xl-{{
+          mapWalletCategory.get(KEY_INVESTMENTS).data &&
+          mapWalletCategory.get(KEY_CAPITAL).data
+            ? 6
+            : '9'
+        }}"
+      >
+        <div class="section-heading">
+          <h2 class="title" id="year">
+            {{ "stats.data.graph1" | translate }}
+          </h2>
+        </div>
+
+        <div class="card border_round">
+          <div class="card-body mx-auto" style="min-height: 400px">
+            <div
+              *ngIf="!lineChartJS"
+              class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
+            >
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <canvas
+              baseChart
+              height="{{
+                mapWalletCategory.get(KEY_INVESTMENTS).data &&
+                mapWalletCategory.get(KEY_CAPITAL).data
+                  ? 400
+                  : 500
+              }}"
+              [type]="'line'"
+              [data]="lineChartJS!.lineChartData"
+              [options]="lineChartJS!.lineChartOptions"
+              [legend]="lineChartJS!.lineChartLegend"
+            >
+            </canvas>
+            <!--<apx-chart
+          *ngIf="chartCategory"
+          [series]="chartCategory.series!"
+          [chart]="chartCategory.chart!"
+          [title]="chartCategory.title!"
+          [colors]="chartCategory.colors!"
+          [legend]="chartCategory.legend!"
+          [stroke]="chartCategory.stroke!"
+          [labels]="chartCategory.labels!"
+          type="area"
+        ></apx-chart>
+        <div id="chart-line"></div>-->
+          </div>
+        </div>
+      </div>
+      <!-- * Graph -->
+
+      <div style="display: block"></div>
+
+      <div
+        class="section mt-2 col-xl-4 col-md-6"
+        *ngIf="mapWalletCategory.get(KEY_SAVING).data"
+      >
+        <div class="section-title">{{ "stats.data.saving" | translate }}</div>
+        <div class="card">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">{{ "stats.data.table_date" | translate }}</th>
+                  <th scope="col">
+                    {{ "stats.data.table_balance" | translate }}
+                  </th>
+                  <th scope="col" class="text-end">
+                    {{ "stats.data.table_performance" | translate }}
+                  </th>
+                  <th scope="col" class="text-end">
+                    {{ "stats.data.table_value" | translate }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                *ngFor="
+                  let balances of mapWalletCategory.get(KEY_SAVING);
+                  let i = index
+                "
+              >
+                <tr
+                  class="topics"
+                  *ngFor="let balance of balances; let y = index"
+                >
+                  <th scope="row">
+                    {{ balances[balances.length - 1].date | date : "d MMM y" }}
+                  </th>
+
+                  <td
+                    class="{{
+                      balance.percentage === 0
+                        ? 'text-warning'
+                        : balance.percentage > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    }} {{ balance.index === y ? 'text-end' : '' }}"
+                  >
+                    {{ coinSymbol }} {{ hidden ? amount : balance.balance }}
+                  </td>
+                  <td
+                    class="{{
+                      balance.percentage === 0
+                        ? 'text-warning'
+                        : balance.percentage > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    }} text-end"
+                  >
+                    {{
+                      balance.percentage >= 1000 ? "+1000" : balance.percentage
+                    }}%
+                  </td>
+                  <td
+                    class="{{
+                      balance.trend === 0
+                        ? 'text-warning'
+                        : balance.trend > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    }} text-end"
+                  >
+                    {{ coinSymbol }} {{ hidden ? amount : balance.trend }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="section mt-2 col-xl-4 col-md-6"
+        *ngIf="mapWalletCategory.get(KEY_DEBITS).data"
+      >
+        <div class="section-title">{{ "stats.data.debits" | translate }}</div>
+        <div class="card">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">{{ "stats.data.table_date" | translate }}</th>
+                  <th scope="col">
+                    {{ "stats.data.table_balance" | translate }}
+                  </th>
+                  <th scope="col" class="text-end">
+                    {{ "stats.data.table_performance" | translate }}
+                  </th>
+                  <th scope="col" class="text-end">
+                    {{ "stats.data.table_value" | translate }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                *ngFor="
+                  let balances of mapWalletCategory.get(KEY_DEBITS);
+                  let i = index
+                "
+              >
+                <tr
+                  class="topics"
+                  *ngFor="let balance of balances; let y = index"
+                >
+                  <th scope="row">
+                    {{ balances[balances.length - 1].date | date : "d MMM y" }}
+                  </th>
+
+                  <td
+                    class="{{
+                      balance.percentage === 0
+                        ? 'text-warning'
+                        : balance.percentage > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    }} {{ balance.index === y ? 'text-end' : '' }}"
+                  >
+                    {{ coinSymbol }} {{ hidden ? amount : balance.balance }}
+                  </td>
+                  <td
+                    class="{{
+                      balance.percentage === 0
+                        ? 'text-warning'
+                        : balance.percentage > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    }} text-end"
+                  >
+                    {{
+                      balance.percentage >= 1000 ? "+1000" : balance.percentage
+                    }}%
+                  </td>
+                  <td
+                    class="{{
+                      balance.trend === 0
+                        ? 'text-warning'
+                        : balance.trend > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    }} text-end"
+                  >
+                    {{ coinSymbol }} {{ hidden ? amount : balance.trend }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="section mt-2 col-xl-4 col-md-6"
+        *ngIf="mapWalletCategory.get(KEY_OTHER).data"
+      >
+        <div class="section-title">{{ "stats.data.others" | translate }}</div>
+        <div class="card">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">{{ "stats.data.table_date" | translate }}</th>
+                  <th scope="col">
+                    {{ "stats.data.table_balance" | translate }}
+                  </th>
+                  <th scope="col" class="text-end">
+                    {{ "stats.data.table_performance" | translate }}
+                  </th>
+                  <th scope="col" class="text-end">
+                    {{ "stats.data.table_value" | translate }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                *ngFor="
+                  let balances of mapWalletCategory.get(KEY_OTHER);
+                  let i = index
+                "
+              >
+                <tr
+                  class="topics"
+                  *ngFor="let balance of balances; let y = index"
+                >
+                  <th scope="row">
+                    {{ balances[balances.length - 1].date | date : "d MMM y" }}
+                  </th>
+
+                  <td
+                    class="{{
+                      balance.percentage === 0
+                        ? 'text-warning'
+                        : balance.percentage > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    }} {{ balance.index === y ? 'text-end' : '' }}"
+                  >
+                    {{ coinSymbol }} {{ hidden ? amount : balance.balance }}
+                  </td>
+                  <td
+                    class="{{
+                      balance.percentage === 0
+                        ? 'text-warning'
+                        : balance.percentage > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    }} text-end"
+                  >
+                    {{
+                      balance.percentage >= 1000 ? "+1000" : balance.percentage
+                    }}%
+                  </td>
+                  <td
+                    class="{{
+                      balance.trend === 0
+                        ? 'text-warning'
+                        : balance.trend > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    }} text-end"
+                  >
+                    {{ coinSymbol }} {{ hidden ? amount : balance.trend }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

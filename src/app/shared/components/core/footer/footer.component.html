@@ -6,29 +6,37 @@
       <strong>{{ "dashboard.footer.title1" | translate }}</strong>
     </div>
   </a>
-  <a id="stats" class="item" (click)="goToStats()" routerLink="stats">
+  <a id="stats" class="item" (click)="goToStats()" routerLink="/stats">
     <div class="col">
       <ion-icon name="bar-chart"></ion-icon>
       <strong>{{ "dashboard.footer.title2" | translate }}</strong>
     </div>
   </a>
-  <a routerLink="stats/insert" class="item">
+  <a routerLink="crypto/dashboard" class="item" (click)="vibrate()">
     <!-- href="#" data-bs-toggle="modal"
     attr.data-bs-target="#{{ modalConstant.VERSION }}"-->
     <div class="col">
-      <div class="action-button large">
-        <ion-icon name="add-circle"></ion-icon>
-        <!--<ion-icon name="arrow-up"></ion-icon>-->
+      <div class="action-button large bg-primary">
+        <img
+          src="{{
+            environment.baseUrlSettings
+          }}assets/images/crypto/Bitcoin-icon.png"
+          alt=""
+          srcset=""
+        />
+        <!--<ion-icon name="logo-bitcoin"></ion-icon>
+        <ion-icon name="arrow-up"></ion-icon>-->
       </div>
     </div>
   </a>
+
   <a id="wallet" (click)="goToWallet()" routerLink="wallet" class="item">
     <div class="col">
       <ion-icon name="card"></ion-icon>
       <strong>{{ "dashboard.footer.title3" | translate }}</strong>
     </div>
   </a>
-  <a id="settings" (click)="goToSettings()" routerLink="settings" class="item">
+  <a id="settings" (click)="goToSettings()" routerLink="/settings" class="item">
     <div class="col">
       <ion-icon name="settings"></ion-icon>
       <strong>{{ "dashboard.footer.title4" | translate }}</strong>

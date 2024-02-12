@@ -76,8 +76,7 @@
             ],
             "scripts": [
               "src/app/shared/js/splide.min.js",
-              "node_modules/apexcharts/dist/apexcharts.min.js",
-              "node_modules/jquery/dist/jquery.min.js"
+              "node_modules/apexcharts/dist/apexcharts.min.js"
             ],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"
@@ -105,7 +104,7 @@
               "outputHashing": "all"
             },
             "staging": {
-              "baseHref": "/stg-moneystats/",
+              "baseHref": "/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -114,6 +113,7 @@
               ]
             },
             "development": {
+              "baseHref": "/",
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
@@ -198,5 +198,8 @@
       }
     }
   },
-  "defaultProject": "angular-moneystats"
+  "defaultProject": "angular-moneystats",
+  "cli": {
+    "analytics": false
+  }
 }

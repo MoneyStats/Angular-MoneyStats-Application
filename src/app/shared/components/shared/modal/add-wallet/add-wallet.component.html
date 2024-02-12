@@ -1,0 +1,425 @@
+<!-- Send Action Sheet -->
+<div
+  class="modal fade action-sheet"
+  id="{{ modalId }}"
+  tabindex="-1"
+  role="dialog"
+  data-bs-focus="false"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal-round mx-auto">
+      <div *ngIf="!isCrypto" class="modal-header">
+        <h5 *ngIf="!wallet.id" class="modal-title">
+          {{ "wallet.modal.title" | translate }}
+        </h5>
+        <h5 *ngIf="wallet.id" class="modal-title">
+          {{ "wallet.modal.editWallet.title" | translate }}
+        </h5>
+      </div>
+      <div *ngIf="isCrypto" class="modal-header">
+        <h5 *ngIf="!wallet.id" class="modal-title">
+          {{ "wallet.modal.cryptoTitle" | translate }}
+        </h5>
+        <h5 *ngIf="wallet.id" class="modal-title">
+          {{ "wallet.modal.editWallet.cryptoTitle" | translate }}
+        </h5>
+      </div>
+      <div class="modal-body">
+        <form #fo="ngForm" type="submit" enctype="multipart/form-data">
+          <div *ngIf="!isNewWallet && isCrypto" class="action-sheet-content">
+            <h2 class="modal-title d-inline" style="vertical-align: -4px">
+              {{ "wallet.modal.crypto.title" | translate }}
+            </h2>
+            <p *ngIf="!isImportWallet">
+              <small>{{ "wallet.modal.crypto.subTitle" | translate }}</small>
+            </p>
+            <p *ngIf="isImportWallet">
+              <small>{{ "wallet.modal.crypto.subTitle2" | translate }}</small>
+            </p>
+
+            <div
+              *ngIf="!isImportWallet"
+              class="addWallet text-end hidden_mobile"
+            >
+              <button
+                (click)="isNewWallet = true"
+                type="button"
+                class="btn btn-primary me-1 mb-1"
+              >
+                {{ "wallet.modal.crypto.new" | translate }}
+              </button>
+              <button
+                (click)="isImportWallet = true"
+                type="button"
+                class="btn btn-primary me-1 mb-1"
+              >
+                {{ "wallet.modal.crypto.import" | translate }}
+              </button>
+            </div>
+            <div *ngIf="isImportWallet">
+              <div class="form-group boxed">
+                <div class="input-wrapper">
+                  <label class="label" for="walletName">{{
+                    "wallet.modal.selectWallet" | translate
+                  }}</label>
+                  <select
+                    id="walletName"
+                    name="walletName"
+                    rows="5"
+                    required
+                    [(ngModel)]="walletName"
+                    #walletName1="ngModel"
+                    class="form-control custom-select"
+                  >
+                    <option [value]="walletName" selected disabled>
+                      {{ "wallet.modal.selectWallet" | translate }}
+                    </option>
+                    <option
+                      [selected]="walletName === wallet.name"
+                      [value]="wallet.name"
+                      *ngFor="let wallet of notCryptoWallets"
+                    >
+                      {{ wallet.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="addWallet text-end hidden_mobile">
+                <button
+                  [disabled]="fo.invalid"
+                  (click)="importWallet()"
+                  type="button"
+                  class="btn btn-primary me-1 mb-1"
+                >
+                  {{ "wallet.modal.crypto.import" | translate }}
+                </button>
+              </div>
+              <div class="form-group basic hidden_desktop">
+                <button
+                  (click)="importWallet()"
+                  type="button"
+                  class="btn btn-primary btn-block btn-lg"
+                >
+                  {{ "wallet.modal.crypto.import" | translate }}
+                </button>
+              </div>
+            </div>
+            <div *ngIf="!isImportWallet" class="hidden_desktop">
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group basic">
+                    <button
+                      (click)="isNewWallet = true"
+                      type="button"
+                      class="btn btn-primary btn-block btn-lg"
+                    >
+                      {{ "wallet.modal.crypto.new" | translate }}
+                    </button>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group basic">
+                    <button
+                      (click)="isImportWallet = true"
+                      type="button"
+                      class="btn btn-primary btn-block btn-lg"
+                    >
+                      {{ "wallet.modal.crypto.import" | translate }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div
+          *ngIf="!isCrypto || (isCrypto && isNewWallet)"
+          class="action-sheet-content"
+        >
+          <form #f="ngForm" type="submit">
+            <div *ngIf="walletImg != ''" class="section mt-3 text-center">
+              <div class="avatar-section mb-2">
+                <a class="clickable">
+                  <img
+                    src="{{ walletImg }}"
+                    alt="avatar"
+                    class="imaged w100 rounded"
+                    (click)="file.click()"
+                  />
+                  <input
+                    type="file"
+                    style="display: none"
+                    accept=".png, .jpg, .jpeg"
+                    (change)="onFileSelected($event)"
+                    #file
+                  />
+                  <span class="button">
+                    <ion-icon name="camera-outline"></ion-icon>
+                  </span>
+                </a>
+              </div>
+              <div
+                *ngIf="warning"
+                class="mx-auto alert alert-danger mb-1 mt-2"
+                role="alert"
+              >
+                {{ "wallet.modal.sizeToBig" | translate
+                }}{{ environment.imageSizeMax / 1000 }}kb
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group boxed">
+                  <div class="input-wrapper">
+                    <label class="label" for="text11">{{
+                      "wallet.modal.name" | translate
+                    }}</label>
+                    <input
+                      name="name"
+                      class="form-control"
+                      rows="5"
+                      [(ngModel)]="wallet.name"
+                      #name="ngModel"
+                      required
+                      type="text"
+                      class="form-control"
+                      id="text11"
+                      placeholder="{{ 'wallet.modal.sub_name' | translate }}"
+                      value="{{ wallet.name }}"
+                    />
+                    <i class="clear-input">
+                      <ion-icon name="close-circle"></ion-icon>
+                    </i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group boxed">
+                  <div class="input-wrapper">
+                    <label class="label" for="category">{{
+                      "wallet.modal.category" | translate
+                    }}</label>
+                    <select
+                      *ngIf="!isCrypto"
+                      class="form-control custom-select"
+                      id="category"
+                      name="category"
+                      class="form-control"
+                      rows="5"
+                      [(ngModel)]="wallet.category"
+                      #category="ngModel"
+                    >
+                      <option
+                        *ngIf="!wallet.id"
+                        [value]="wallet.category"
+                        selected
+                        disabled
+                      >
+                        {{ "wallet.modal.categoryText" | translate }}
+                      </option>
+                      <!--<option
+                        *ngIf="wallet.id"
+                        [value]="wallet.category"
+                        selected
+                        disabled
+                      >
+                        {{ "wallet.modal.categoryTextEdit" | translate }}
+                      </option>-->
+                      <option
+                        *ngFor="
+                          let category of categoriesInput != undefined
+                            ? categoriesInput
+                            : categories
+                        "
+                        [selected]="category.name === wallet.category"
+                        value="{{ category.name }}"
+                      >
+                        {{ category.name }}
+                      </option>
+                    </select>
+                    <select
+                      disabled
+                      *ngIf="isCrypto"
+                      class="form-control custom-select"
+                      id="category"
+                      name="category"
+                      class="form-control"
+                      rows="5"
+                      [(ngModel)]="wallet.category"
+                      #category="ngModel"
+                    >
+                      <option
+                        [value]="wallet.category"
+                        [selected]="wallet.category"
+                        disabled
+                      >
+                        {{ wallet.category }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="isCrypto" class="col-md-6">
+                <div class="form-group boxed">
+                  <div class="input-wrapper">
+                    <label class="label" for="text11">{{
+                      "wallet.modal.balance" | translate
+                    }}</label>
+                    <input
+                      name="balance"
+                      class="form-control"
+                      rows="5"
+                      [(ngModel)]="wallet.balance"
+                      #balance="ngModel"
+                      disabled
+                      type="text"
+                      class="form-control"
+                      id="balance"
+                      placeholder="{{ 'wallet.modal.balanceText' | translate }}"
+                      value="{{ wallet.balance }}"
+                    />
+                    <i class="clear-input">
+                      <ion-icon name="close-circle"></ion-icon>
+                    </i>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="isCrypto" class="col-md-6">
+                <div class="form-group boxed">
+                  <div class="input-wrapper">
+                    <label class="label" for="type">{{
+                      "wallet.modal.type" | translate
+                    }}</label>
+                    <select
+                      class="form-control custom-select"
+                      id="type"
+                      required
+                      name="type"
+                      class="form-control"
+                      rows="5"
+                      [(ngModel)]="wallet.type"
+                      #type="ngModel"
+                    >
+                      <option [value]="wallet.type" selected disabled>
+                        {{ "wallet.modal.typeText" | translate }}
+                      </option>
+                      <!--<option
+                        *ngIf="wallet.id"
+                        [value]="wallet.category"
+                        selected
+                        disabled
+                      >
+                        {{ "wallet.modal.categoryTextEdit" | translate }}
+                      </option>-->
+                      <option
+                        *ngFor="let type of cryptoTypes"
+                        [selected]="type == wallet.type"
+                        [value]="type"
+                      >
+                        {{ type }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              *ngIf="!defaultImg && walletImg === ''"
+              class="form-group basic"
+            >
+              <div class="input-wrapper">
+                <label class="label" for="text11">{{
+                  "wallet.modal.img" | translate
+                }}</label>
+                <div class="custom-file-upload mt-1" id="fileUpload1">
+                  <input
+                    type="file"
+                    id="fileuploadInput"
+                    accept=".png, .jpg, .jpeg"
+                    (change)="onFileSelected($event)"
+                  />
+                  <label
+                    class="fileuploadInput clickable"
+                    for="fileuploadInput"
+                  >
+                    <span>
+                      <strong>
+                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                        <i>{{ "wallet.modal.imgContent" | translate }}</i>
+                      </strong>
+                    </span>
+                  </label>
+                </div>
+                <span class="float-end clickable" (click)="importimage()">{{
+                  "wallet.modal.imgFromURL" | translate
+                }}</span>
+                <i class="clear-input">
+                  <ion-icon name="close-circle"></ion-icon>
+                </i>
+              </div>
+              <div
+                *ngIf="warning"
+                class="alert alert-danger mb-1 mt-3"
+                role="alert"
+              >
+                {{ "wallet.modal.sizeToBig" | translate }}
+                {{ environment.imageSizeMax / 1000 }}kb
+              </div>
+            </div>
+
+            <!--<div *ngIf="walletImg != ''" class="form-group basic">
+              <div class="input-wrapper">
+                <label class="label" for="text11">{{
+                  "wallet.modal.image" | translate
+                }}</label>
+                <p>
+                  <img
+                    src="{{ walletImg }}"
+                    alt="image"
+                    class="imaged w48 m-1"
+                  />
+                  {{ wallet.name }}
+                </p>
+              </div>
+            </div>-->
+
+            <div *ngIf="checkbox" class="form-check mb-1">
+              <input
+                [(ngModel)]="defaultImg"
+                [ngModelOptions]="{ standalone: true }"
+                type="checkbox"
+                class="form-check-input"
+                id="defaultImg"
+              />
+              <label
+                *ngIf="!wallet.id"
+                class="form-check-label"
+                for="defaultImg"
+                >{{ "wallet.modal.default" | translate }}</label
+              >
+              <label
+                *ngIf="wallet.id"
+                class="form-check-label"
+                for="defaultImg"
+                >{{ "wallet.modal.editWallet.default" | translate }}</label
+              >
+            </div>
+            <div class="form-group basic">
+              <button
+                (click)="addUpdateWallet()"
+                [disabled]="f.invalid || !validateBtn()"
+                type="button"
+                class="btn btn-primary btn-block btn-lg"
+                data-bs-dismiss="modal"
+              >
+                {{ "wallet.modal.save" | translate }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- * Send Action Sheet -->

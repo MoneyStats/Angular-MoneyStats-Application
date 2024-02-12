@@ -1,0 +1,99 @@
+<div class="card cards-op border_round">
+  <ul
+    class="listview flush transparent no-line image-listview detailed-list border_round"
+    *ngFor="
+      let operation of !isFullList
+        ? operations
+        : operationsMapByYear?.get(year);
+      let i = index
+    "
+  >
+    <!-- item -->
+    <li *ngIf="filterByPage(i)">
+      <a
+        class="item"
+        (click)="selectOperation(operation)"
+        data-bs-toggle="modal"
+        attr.data-bs-target="#{{ modalID }}"
+      >
+        <div class="icon-box-c me-4">
+          <img
+            *ngIf="operation.type != operationTypeConstant.NEWINVESTMENT"
+            class="rounded-pill img1"
+            src="{{ operation?.assetSell?.icon }}"
+            alt=""
+          />
+          <img
+            *ngIf="operation.type == operationTypeConstant.NEWINVESTMENT"
+            class="rounded-pill img1"
+            src="{{ operation?.wallet?.img }}"
+            alt=""
+          />
+          <img
+            *ngIf="operation.type != operationTypeConstant.TRANSFER"
+            class="rounded-pill img2"
+            src="{{ operation?.asset?.icon }}"
+            alt=""
+          />
+          <img
+            *ngIf="operation.type == operationTypeConstant.TRANSFER"
+            class="rounded-pill img2"
+            src="{{ operation?.wallet?.img }}"
+            alt=""
+          />
+        </div>
+        <div class="in">
+          <div>
+            <strong>{{ operation?.wallet?.name }}</strong>
+            <div class="text-small text-secondary">
+              {{ operation?.asset?.name }}
+              {{ "crypto.asset.details.overview.price" | translate }}
+              {{ operation?.exitPrice }}
+              {{ cryptoDashboard.currency }}
+            </div>
+            <div class="text-small text-secondary">
+              <strong>{{ operation?.type }}</strong> #{{ operation?.id }}
+            </div>
+          </div>
+          <div class="text-end">
+            <strong
+              >{{ operation?.entryQuantity }}
+              {{ operation?.asset?.symbol }}</strong
+            >
+            <div class="text-small">
+              <span
+                class="badge {{
+                  operation?.status == 'CLOSED'
+                    ? 'badge-danger'
+                    : 'badge-success'
+                }} "
+                >{{ operation?.status }}</span
+              >
+            </div>
+
+            <div class="text-small">
+              {{ "crypto.asset.details.overview.invest" | translate }}
+              <strong
+                >{{ operation?.entryPriceValue }}
+                {{ cryptoDashboard.currency }}</strong
+              >
+              {{ "crypto.asset.details.overview.on" | translate }}
+              {{ operation?.entryDate | date : "d MMM yy" }}
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+    <!-- * item -->
+  </ul>
+  <div class="card-body pt-0" *ngIf="!isFullList">
+    <a (click)="goToOperations()" class="btn btn-block btn-outline-secondary">{{
+      "crypto.asset.details.overview.more" | translate
+    }}</a>
+  </div>
+</div>
+<app-operation-details
+  [modalId]="modalID"
+  [operation]="operationSelect"
+  [currency]="cryptoDashboard.currency"
+></app-operation-details>

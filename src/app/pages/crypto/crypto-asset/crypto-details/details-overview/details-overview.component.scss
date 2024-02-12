@@ -1,0 +1,68 @@
+@media screen and (max-width: 780px) {
+  .section {
+    margin-left: -20px !important;
+    margin-right: -20px !important;
+  }
+  .section-3 {
+    margin-left: -20px !important;
+    margin-right: -20px !important;
+  }
+  .accordion-button {
+    img {
+      margin-left: -4px !important;
+      margin-right: 10px !important;
+    }
+    .accordion-wallet-name {
+      max-width: 100px;
+    }
+    .accordion-right-title {
+      max-width: 180px;
+    }
+  }
+  .inner-round {
+    min-height: 200px !important;
+  }
+
+  .spaceOp {
+    width: 95%;
+    margin-left: 2.5%;
+  }
+}
+
+.w30 {
+  width: 50px;
+  height: 50px;
+}
+
+.accordion-header {
+  margin-top: 0px;
+}
+
+.space {
+  padding-bottom: 80px;
+}
+
+.accordion-right-title {
+  position: absolute;
+  right: 40px;
+}
+
+.img1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.img2 {
+  position: absolute;
+  left: 20px;
+}
+.icon-box-c {
+  width: 45px !important;
+  height: 45px !important;
+  position: relative;
+}
+
+.inner-round {
+  min-height: 350px;
+}

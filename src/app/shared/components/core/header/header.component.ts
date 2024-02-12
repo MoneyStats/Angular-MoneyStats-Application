@@ -6,6 +6,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Dashboard } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
@@ -23,15 +24,28 @@ import { environment } from 'src/environments/environment';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnChanges {
   @Input('user') user?: User;
   @Input() dashboard?: Dashboard;
   environment = environment;
+
+  isShadowActive: boolean = false;
   constructor(
     private toast: ToastService,
     private dashboardService: DashboardService,
-    public userService: UserService
-  ) {}
+    public userService: UserService,
+    private router: Router
+  ) {
+    router.events.subscribe((data: any) => {
+      if (data.url == '/') {
+        this.isShadowActive = true;
+      } else this.isShadowActive = false;
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.updateData();
+  }
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;

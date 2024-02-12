@@ -1,0 +1,191 @@
+<div class="mx-auto section-width">
+  <app-crypto-header
+    [routerLinks]="''"
+    [title]="'crypto.requirements.headerTitle' | translate"
+  ></app-crypto-header>
+
+  <!-- App Capsule -->
+  <div id="appCapsule">
+    <div class="title-section">
+      <h2 class="title">{{ "crypto.requirements.title" | translate }}</h2>
+      <p>
+        {{ "crypto.requirements.subTitle" | translate }}
+      </p>
+    </div>
+
+    <!-- Transactions -->
+    <div class="section mt-3 mx-auto" style="max-width: 600px">
+      <div class="card border_round mb-3">
+        <ul
+          class="listview flush transparent no-line image-listview detailed-list mt-1 mb-1"
+        >
+          <!-- item -->
+          <li>
+            <a
+              class="item clickable"
+              data-bs-toggle="modal"
+              attr.data-bs-target="#{{ modalConstant.ADDCRYPTOCURRENCY }}"
+            >
+              <div class="icon-box">
+                <ion-icon
+                  *ngIf="!isCurrencyAdded"
+                  class="icon-medium bg-orange"
+                  name="alert-circle-outline"
+                ></ion-icon>
+                <ion-icon
+                  *ngIf="isCurrencyAdded"
+                  class="icon-medium bg-blue"
+                  name="checkmark-circle"
+                ></ion-icon>
+              </div>
+              <div class="in">
+                <div>
+                  <strong>
+                    {{ "crypto.requirements.req4.title" | translate }}</strong
+                  >
+                  <div class="text-small text-secondary">
+                    {{ "crypto.requirements.req4.subTitle" | translate }}
+                  </div>
+                </div>
+                <div class="text-end"></div>
+              </div>
+            </a>
+          </li>
+          <!-- * item -->
+          <!-- item -->
+          <li>
+            <a
+              data-bs-toggle="modal"
+              attr.data-bs-target="#{{ modalConstant.ADDWALLET }}"
+              class="item clickable {{ isCurrencyAdded ? '' : 'disabled' }}"
+              (click)="enableModalCrypto = false"
+            >
+              <div class="icon-box">
+                <ion-icon
+                  *ngIf="!isWalletCreated"
+                  class="icon-medium bg-orange"
+                  name="alert-circle-outline"
+                ></ion-icon>
+                <ion-icon
+                  *ngIf="isWalletCreated"
+                  class="icon-medium bg-blue"
+                  name="checkmark-circle"
+                ></ion-icon>
+              </div>
+              <div class="in">
+                <div>
+                  <strong>{{
+                    "crypto.requirements.req1.title" | translate
+                  }}</strong>
+                  <div class="text-small text-secondary">
+                    {{ "crypto.requirements.req1.subTitle" | translate }}
+                  </div>
+                </div>
+                <div class="text-end"></div>
+              </div>
+            </a>
+          </li>
+          <!-- * item -->
+          <!-- item -->
+          <li>
+            <a
+              data-bs-toggle="modal"
+              attr.data-bs-target="#{{ modalConstant.ADDWALLET }}"
+              class="item clickable {{ isCurrencyAdded ? '' : 'disabled' }}"
+              (click)="enableModalCrypto = true"
+            >
+              <div class="icon-box">
+                <ion-icon
+                  *ngIf="!isCryptoWalletCreated"
+                  class="icon-medium bg-orange"
+                  name="alert-circle-outline"
+                ></ion-icon>
+                <ion-icon
+                  *ngIf="isCryptoWalletCreated"
+                  class="icon-medium bg-blue"
+                  name="checkmark-circle"
+                ></ion-icon>
+              </div>
+              <div class="in">
+                <div>
+                  <strong>{{
+                    "crypto.requirements.req2.title" | translate
+                  }}</strong>
+                  <div class="text-small text-secondary">
+                    {{ "crypto.requirements.req2.subTitle" | translate }}
+                  </div>
+                </div>
+                <div class="text-end"></div>
+              </div>
+            </a>
+          </li>
+          <!-- * item -->
+
+          <!-- item -->
+          <li>
+            <a
+              class="item clickable {{ isCryptoWalletCreated ? '' : 'disabled' }}"
+              data-bs-toggle="modal"
+              attr.data-bs-target="#{{ modalConstant.ADDASSET }}"
+            >
+              <div class="icon-box">
+                <ion-icon
+                  *ngIf="!isAssetCreated"
+                  class="icon-medium bg-orange"
+                  name="alert-circle-outline"
+                ></ion-icon>
+                <ion-icon
+                  *ngIf="isAssetCreated"
+                  class="icon-medium bg-blue"
+                  name="checkmark-circle"
+                ></ion-icon>
+              </div>
+              <div class="in">
+                <div>
+                  <strong>
+                    {{ "crypto.requirements.req3.title" | translate }}</strong
+                  >
+                  <div class="text-small text-secondary">
+                    {{ "crypto.requirements.req3.subTitle" | translate }}
+                  </div>
+                </div>
+                <div class="text-end"></div>
+              </div>
+            </a>
+          </li>
+          <!-- * item -->
+        </ul>
+      </div>
+    </div>
+    <!-- Transactions -->
+  </div>
+  <div class="form-button-group transparent section-width mx-auto">
+    <button
+      [disabled]="!validateBtn()"
+      class="btn btn-primary btn-block btn-lg"
+      type="button"
+      routerLink="/crypto/dashboard"
+    >
+      {{ "crypto.requirements.next" | translate }}
+    </button>
+  </div>
+</div>
+<app-add-wallet
+  (emitAddWallet)="saveWallet($event)"
+  [modalId]="modalConstant.ADDWALLET"
+  [categoriesInput]="dashboard?.categories"
+  [isCrypto]="enableModalCrypto"
+  [wallets]="wallets!"
+></app-add-wallet>
+
+<app-add-asset-modal
+  (emitAddAsset)="saveWallet($event)"
+  [modalId]="modalConstant.ADDASSET"
+  [wallets]="cryptoWallet!"
+  [cryptoCurrency]="currency"
+></app-add-asset-modal>
+
+<app-select-crypto-currency
+  (emitAddCurrency)="selectCurrency($event)"
+  [modalId]="modalConstant.ADDCRYPTOCURRENCY"
+></app-select-crypto-currency>

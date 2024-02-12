@@ -1,0 +1,215 @@
+<div class="mx-auto section-width">
+  <app-crypto-header
+    title="{{ 'crypto.asset.title' | translate }}"
+  ></app-crypto-header>
+
+  <!-- App Capsule -->
+  <div id="appCapsule" class="mx-auto">
+    <div class="row">
+      <div class="tradingview-widget-container">
+        <div #tradingViewDetails></div>
+        <div class="details_mobile"></div>
+      </div>
+      <!-- Nome e Performance Vecchi
+      <div hidden class="title-section col-md-6 col-sm-12">
+        <h3 class="title">
+          <img
+            src="{{ asset.icon }}"
+            alt="avatar"
+            class="imaged d-inline w30 rounded me-1"
+          />{{ asset.name }} ({{ asset.symbol }})
+        </h3>
+        <div class="hidden_desktop">
+          <div class="row" style="margin-top: -10px">
+            <div class="col-6">
+              <h5 class="card-text fs-3">
+                {{ hidden ? amount : asset.value }}
+                {{ cryptoDashboard.currency }}
+              </h5>
+              <p style="margin-top: -15px">
+                {{ hidden ? amount : asset.balance }} {{ asset.symbol }}
+              </p>
+            </div>
+            <div class="col-6 text-end">
+              <span
+                style="margin-right: 40px; margin-top: 30px"
+                class="badge {{
+                  asset.performance == 0
+                    ? 'badge-warning'
+                    : asset.performance! > 0
+                    ? 'badge-success'
+                    : 'badge-danger'
+                }}"
+              >
+                <ion-icon
+                  name="{{
+                    asset.performance == 0
+                      ? 'arrow-down-outline'
+                      : asset.performance! > 0
+                      ? 'arrow-up-outline'
+                      : 'arrow-down-outline'
+                  }}"
+                ></ion-icon>
+                {{ asset.performance }}%
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>-->
+      <div class="text-center hidden_desktop datas">
+        <h5 class="card-text fs-3 d-inline">
+          <span
+            style="vertical-align: 3px"
+            class="badge {{
+              asset.performance == 0
+                ? 'badge-warning'
+                : asset.performance! > 0
+                ? 'badge-success'
+                : 'badge-danger'
+            }}"
+          >
+            <ion-icon
+              name="{{
+                asset.performance == 0
+                  ? 'arrow-down-outline'
+                  : asset.performance! > 0
+                  ? 'arrow-up-outline'
+                  : 'arrow-down-outline'
+              }}"
+            ></ion-icon>
+            {{ asset.performance }}%
+          </span>
+          {{ hidden ? amount : asset.value }}
+          {{ cryptoDashboard.currency }}
+        </h5>
+        <p style="margin-top: -15px" class="d-inline">
+          {{ hidden ? amount : asset.balance }} {{ asset.symbol }}
+        </p>
+      </div>
+      <div class="title-section col-6 text-end hidden_mobile inside">
+        <h5 class="card-text fs-3">
+          <span
+            style="vertical-align: 3px"
+            class="badge {{
+              asset.performance == 0
+                ? 'badge-warning'
+                : asset.performance! > 0
+                ? 'badge-success'
+                : 'badge-danger'
+            }}"
+          >
+            <ion-icon
+              name="{{
+                asset.performance == 0
+                  ? 'arrow-down-outline'
+                  : asset.performance! > 0
+                  ? 'arrow-up-outline'
+                  : 'arrow-down-outline'
+              }}"
+            ></ion-icon>
+            {{ asset.performance }}%
+          </span>
+          {{ hidden ? amount : asset.value }}
+          {{ cryptoDashboard.currency }}
+        </h5>
+        <p style="margin-top: -15px">
+          {{ hidden ? amount : asset.balance }} {{ asset.symbol }}
+        </p>
+      </div>
+      <!-- END Nome e Performance Vecchi
+
+      <div class="title-section text-end inside">
+        <h5 class="card-text fs-3">
+          <span
+            style="vertical-align: 3px"
+            class="badge {{
+              asset.performance == 0
+                ? 'badge-warning'
+                : asset.performance! > 0
+                ? 'badge-success'
+                : 'badge-danger'
+            }}"
+          >
+            <ion-icon
+              name="{{
+                asset.performance == 0
+                  ? 'arrow-down-outline'
+                  : asset.performance! > 0
+                  ? 'arrow-up-outline'
+                  : 'arrow-down-outline'
+              }}"
+            ></ion-icon>
+            {{ asset.performance }}%
+          </span>
+          {{ hidden ? amount : asset.value }}
+          {{ cryptoDashboard.currency }}
+        </h5>
+        <p style="margin-top: -15px">
+          {{ hidden ? amount : asset.balance }} {{ asset.symbol }}
+        </p>
+      </div>
+    </div>-->
+      <!-- Prima aveva mt-3 <div class="section mt-3"> -->
+      <div class="section">
+        <div class="card transparent">
+          <div class="card-body">
+            <ul class="nav nav-tabs capsuled" role="tablist">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  data-bs-toggle="tab"
+                  href="#overview"
+                  role="tab"
+                >
+                  {{ "crypto.asset.tab1" | translate }}
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  data-bs-toggle="tab"
+                  href="#card"
+                  role="tab"
+                >
+                  {{ "crypto.asset.tab2" | translate }}
+                </a>
+              </li>
+              <li hidden class="nav-item">
+                <a
+                  class="nav-link"
+                  data-bs-toggle="tab"
+                  href="#settings"
+                  role="tab"
+                >
+                  {{ "crypto.asset.tab3" | translate }}
+                </a>
+              </li>
+            </ul>
+            <div class="tab-content mt-1 margin-bottom-size">
+              <div
+                class="tab-pane fade show active"
+                id="overview"
+                role="tabpanel"
+              >
+                <app-details-overview
+                  [hidden]="hidden"
+                  [asset]="asset"
+                  [cryptoDashboard]="cryptoDashboard"
+                  [assetName]="assetName"
+                ></app-details-overview>
+              </div>
+              <div class="tab-pane fade" id="card" role="tabpanel">
+                <app-tradingview-data
+                  [assetSymbol]="asset.symbol!"
+                ></app-tradingview-data>
+              </div>
+              <div class="tab-pane fade" id="settings" role="tabpanel">
+                <app-advanced-graph></app-advanced-graph>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

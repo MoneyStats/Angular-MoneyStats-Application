@@ -1,0 +1,96 @@
+<!-- App Header -->
+<div id="cryptoHeader" class="appHeader no-border mx-auto">
+  <div class="left">
+    <a (click)="goBack()" class="headerButton goBack clickable">
+      <!--<ion-icon name="chevron-back-outline"></ion-icon>-->
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </a>
+  </div>
+  <div
+    routerLink="{{ isMenuActive ? '/crypto/dashboard' : '' }}"
+    class="pageTitle clickable"
+    (click)="vibrate()"
+  >
+    {{ title }}
+  </div>
+  <div *ngIf="isInfoActive && !isMenuActive" class="right">
+    <a (click)="goToInfo()" class="headerButton goBack clickable">
+      <!--<ion-icon name="chevron-back-outline"></ion-icon>-->
+      <ion-icon name="alert-circle-outline"></ion-icon>
+    </a>
+  </div>
+  <div *ngIf="isMenuActive" class="right">
+    <div class="menu hidden_mobile">
+      <div class="dropdown d-inline">
+        <a href="#" class="d-inline me-2 title-page" data-bs-toggle="dropdown">
+          {{ "crypto.header.tabOpt" | translate }}
+        </a>
+        <div class="dropdown-menu dropdown-menu-end">
+          <h6 class="dropdown-header">
+            {{ "dashboard.sidebar.dropdown.options" | translate }}
+          </h6>
+          <a
+            [routerLink]="[
+              '/crypto/market-data',
+              userService.user.settings.cryptoCurrency
+            ]"
+            class="dropdown-item"
+            >{{ "crypto.header.tab5" | translate }}</a
+          >
+          <a routerLink="/crypto/asset" class="dropdown-item">{{
+            "crypto.header.tab2" | translate
+          }}</a>
+          <div class="dropdown-divider"></div>
+          <a routerLink="/wallet" class="dropdown-item">{{
+            "crypto.header.tab1" | translate
+          }}</a>
+        </div>
+      </div>
+
+      <a
+        data-bs-toggle="modal"
+        attr.data-bs-target="#{{ modalConstant.ADDOPERATIONS }}"
+        aria-disabled="true"
+        class="d-inline me-2 title-page clickable effect-underline"
+      >
+        {{ "crypto.header.tab3" | translate }}
+      </a>
+      <a routerLink="/crypto/resume" class="d-inline me-2 title-page">{{
+        "crypto.header.tab4" | translate
+      }}</a>
+    </div>
+    <div class="dropdown">
+      <a href="#" class="headerButton" data-bs-toggle="dropdown">
+        <img
+          src="{{ userService.user.profilePhoto }}"
+          alt="image"
+          class="imaged w32"
+        />
+        <span class="badge badge-danger"></span>
+      </a>
+      <div class="dropdown-menu dropdown-menu-end">
+        <h6 class="dropdown-header">
+          {{ "dashboard.sidebar.dropdown.options" | translate }}
+        </h6>
+        <a class="dropdown-item" routerLink="/settings">
+          {{ "dashboard.sidebar.dropdown.settings" | translate }}</a
+        >
+        <a
+          class="dropdown-item"
+          href="#"
+          data-bs-toggle="modal"
+          attr.data-bs-target="#{{ modalConstant.VERSION }}"
+        >
+          {{ "dashboard.sidebar.dropdown.version" | translate }}</a
+        >
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" (click)="logout()">{{
+          "dashboard.sidebar.dropdown.logout" | translate
+        }}</a>
+      </div>
+    </div>
+  </div>
+  <!-- * App Header -->
+</div>
+
+<app-version [modalId]="modalConstant.VERSION"></app-version>

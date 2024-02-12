@@ -1,0 +1,55 @@
+.title-section {
+  margin-left: 30px;
+  margin-top: 10px;
+  margin-right: -85px;
+  margin-bottom: -40px;
+}
+#appCapsule {
+  overflow-x: hidden !important;
+}
+@media screen and (max-width: 780px) {
+  .title-section {
+    margin-left: 20px;
+    margin-bottom: -40px !important;
+  }
+
+  .details_mobile {
+    position: absolute;
+    top: 235px;
+    height: 70px;
+    width: 95%;
+    background-color: #121212;
+  }
+
+  .datas {
+    position: absolute;
+    top: 240px;
+  }
+
+  .tradingview-widget-container {
+    height: 210px;
+    width: 95%;
+  }
+}
+
+.w30 {
+  width: 40px;
+  height: 40px;
+}
+
+.transparent {
+  background-color: transparent !important;
+  margin-left: -10px !important;
+  margin-right: -10px !important;
+}
+
+.inside {
+  position: absolute;
+  right: 110px;
+  top: 60px;
+}
+
+.tradingview-widget-container {
+  margin: 5px;
+  margin-bottom: 0px;
+}

@@ -1,0 +1,152 @@
+<div class="transactions row">
+  <hr />
+  <div class="section mb-2">
+    <form #f="ngForm" type="submit">
+      <div class="form-group boxed">
+        <div class="input-wrapper">
+          <label class="label" for="select4b">{{
+            "crypto.cryptoModal.operations.operation.selectOperation"
+              | translate
+          }}</label>
+          <select
+            class="form-control custom-select"
+            id="operationSelect"
+            name="operationSelect"
+            [(ngModel)]="operationSelect"
+            [disabled]="isOperationSel && operationSelect != ''"
+            (change)="selectOperation($event)"
+            #operationSelect1="ngModel"
+            required
+          >
+            <option [value]="operationSelect" selected disabled>
+              {{
+                "crypto.cryptoModal.operations.operation.selectOperation"
+                  | translate
+              }}
+            </option>
+            <option
+              *ngFor="let operation of operations"
+              value="{{ operation }}"
+              [selected]="operation == operationSelect"
+            >
+              {{ operation }}
+            </option>
+          </select>
+        </div>
+        <div class="input-info">
+          {{
+            "crypto.cryptoModal.operations.operation.selectDescription"
+              | translate
+          }}
+        </div>
+      </div>
+      <!-- Bottoni Desktop -->
+      <div class="text-end hidden_mobile">
+        <div *ngIf="!isOperationSel" class="addWallet d-inline">
+          <button
+            type="button"
+            [disabled]="f.invalid"
+            (click)="isOperationSel = true"
+            class="btn btn-primary me-1"
+          >
+            {{
+              "crypto.cryptoModal.operations.operation.selectType" | translate
+            }}
+          </button>
+        </div>
+      </div>
+      <!-- Bottoni Mobile -->
+      <div class="hidden_desktop">
+        <div *ngIf="!isOperationSel">
+          <div class="form-group basic" style="margin-bottom: -20px">
+            <button
+              [disabled]="f.invalid"
+              (click)="isOperationSel = true"
+              type="button"
+              class="btn btn-primary btn-block btn-lg"
+            >
+              {{
+                "crypto.cryptoModal.operations.operation.selectType" | translate
+              }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- End Bottoni Mobile -->
+    </form>
+    <form #g="ngForm" type="submit">
+      <div *ngIf="isOperationSel" class="form-group boxed">
+        <div class="input-wrapper">
+          <label class="label" for="select4b">{{
+            "crypto.cryptoModal.operations.operation.selectWallet" | translate
+          }}</label>
+          <select
+            class="form-control custom-select"
+            id="operationSelect"
+            name="operationSelect"
+            [(ngModel)]="walletSelect"
+            #operationSelect1="ngModel"
+            required
+          >
+            <!--<option value="{{ wallets[0] }}">Select Wallet</option>-->
+            <option [value]="walletSelect" selected disabled>
+              {{
+                "crypto.cryptoModal.operations.operation.selectWallet"
+                  | translate
+              }}
+            </option>
+            <option
+              selected="{{ wallet.name == walletSelect }}"
+              *ngFor="let wallet of filterWallets"
+              value="{{ wallet.name }}"
+            >
+              {{ wallet.name }}
+            </option>
+          </select>
+        </div>
+        <div class="input-info">
+          {{
+            "crypto.cryptoModal.operations.operation.selectWalletDesc"
+              | translate
+          }}
+        </div>
+      </div>
+      <!-- Bottoni Desktop -->
+      <div class="text-end hidden_mobile">
+        <div *ngIf="isOperationSel" class="addWallet d-inline">
+          <button
+            [disabled]="!isWalletPresent()"
+            (click)="selectWallet()"
+            type="button"
+            class="btn btn-primary me-1"
+            data-bs-toggle="modal"
+          >
+            {{
+              "crypto.cryptoModal.operations.operation.selectWallet" | translate
+            }}
+          </button>
+        </div>
+      </div>
+      <!-- Bottoni Mobile -->
+      <div class="hidden_desktop">
+        <div *ngIf="isOperationSel">
+          <div class="form-group basic" style="margin-bottom: -20px">
+            <button
+              [disabled]="!isWalletPresent()"
+              (click)="selectWallet()"
+              type="button"
+              class="btn btn-primary btn-block btn-lg"
+              data-bs-toggle="modal"
+            >
+              {{
+                "crypto.cryptoModal.operations.operation.selectWallet"
+                  | translate
+              }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- End Bottoni Mobile -->
+    </form>
+  </div>
+</div>

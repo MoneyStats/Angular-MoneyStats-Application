@@ -1,0 +1,298 @@
+<!-- Modal Basic -->
+<div class="modal fade modalbox" id="{{ modalId }}" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center">
+          <img
+            src="{{ operation?.asset?.icon }}"
+            alt="img"
+            class="image-block imaged w30 me-1"
+          />{{ operation?.asset?.name }}
+          {{ "crypto.operationDetails.title" | translate }}
+        </h5>
+        <a href="#" data-bs-dismiss="modal">{{
+          "crypto.operationDetails.close" | translate
+        }}</a>
+      </div>
+      <div class="modal-body">
+        <div class="section mt-2 mb-2 row">
+          <div
+            class="col-5"
+            *ngIf="operation?.type == operationTypeConstant.TRANSFER"
+          >
+            <div class="listed-detail mt-3">
+              <div class="float-end text-end">
+                <div class="icon-wrapper">
+                  <!--<div class="iconbox">
+                            <ion-icon name="arrow-forward-outline"></ion-icon>
+
+                        </div>-->
+                  <img
+                    src="{{ operation?.asset?.icon }}"
+                    alt="img"
+                    class="image-block imaged w48"
+                  />
+                </div>
+                <h3 class="text-center mt-2">
+                  {{ operation?.asset?.name }}
+                </h3>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-5"
+            *ngIf="operation?.type == operationTypeConstant.NEWINVESTMENT"
+          >
+            <div class="listed-detail mt-3">
+              <div class="float-end text-end">
+                <div class="icon-wrapper">
+                  <!--<div class="iconbox">
+                            <ion-icon name="arrow-forward-outline"></ion-icon>
+
+                        </div>-->
+                  <img
+                    src="{{ operation?.wallet?.img }}"
+                    alt="img"
+                    class="image-block imaged w48"
+                  />
+                </div>
+                <h3 class="text-center mt-2">
+                  {{ operation?.wallet?.name }}
+                </h3>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-5"
+            *ngIf="
+              operation?.type != operationTypeConstant.NEWINVESTMENT &&
+              operation?.type != operationTypeConstant.TRANSFER
+            "
+          >
+            <div class="listed-detail mt-3">
+              <div class="float-end text-end">
+                <div class="icon-wrapper">
+                  <!--<div class="iconbox">
+                            <ion-icon name="arrow-forward-outline"></ion-icon>
+
+                        </div>-->
+                  <img
+                    src="{{ operation?.assetSell?.icon }}"
+                    alt="img"
+                    class="image-block imaged w48"
+                  />
+                </div>
+                <h3 class="text-center mt-2">
+                  {{ operation?.assetSell?.name }}
+                </h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-2 text-center" style="align-self: center">
+            <ion-icon name="swap-horizontal-outline"></ion-icon>
+          </div>
+          <div
+            class="col-5"
+            *ngIf="operation?.type != operationTypeConstant.TRANSFER"
+          >
+            <div class="listed-detail mt-3">
+              <div class="float-start text-start">
+                <div class="icon-wrapper">
+                  <!--<div class="iconbox">
+                            <ion-icon name="arrow-forward-outline"></ion-icon>
+
+                        </div>-->
+                  <img
+                    src="{{ operation?.asset?.icon }}"
+                    alt="img"
+                    class="image-block imaged w48"
+                  />
+                </div>
+                <h3 class="text-center mt-2">
+                  {{ operation?.asset?.name }}
+                </h3>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-5"
+            *ngIf="operation?.type == operationTypeConstant.TRANSFER"
+          >
+            <div class="listed-detail mt-3">
+              <div class="float-start text-start">
+                <div class="icon-wrapper">
+                  <!--<div class="iconbox">
+                            <ion-icon name="arrow-forward-outline"></ion-icon>
+
+                        </div>-->
+                  <img
+                    src="{{ operation?.wallet?.img }}"
+                    alt="img"
+                    class="image-block imaged w48"
+                  />
+                </div>
+                <h3 class="text-center mt-2">
+                  {{ operation?.wallet?.name }}
+                </h3>
+              </div>
+            </div>
+          </div>
+          <ul class="listview flush transparent simple-listview no-space mt-3">
+            <li *ngIf="operation?.identifier">
+              <strong>{{
+                "crypto.operationDetails.identifier" | translate
+              }}</strong>
+              <span style="text-align: end"> {{ operation?.identifier }}</span>
+            </li>
+            <li>
+              <strong>{{
+                "crypto.operationDetails.status" | translate
+              }}</strong>
+              <div class="text-small">
+                <span
+                  class="badge {{
+                    operation?.status == 'CLOSED'
+                      ? 'badge-danger'
+                      : 'badge-success'
+                  }} "
+                  >{{ operation?.status }}</span
+                >
+              </div>
+            </li>
+            <li>
+              <strong>{{ "crypto.operationDetails.type" | translate }}</strong>
+              <span> {{ operation?.type }}</span>
+            </li>
+            <li>
+              <strong>{{
+                "crypto.operationDetails.currency" | translate
+              }}</strong>
+              <span
+                ><mark
+                  >{{ operation?.entryCoin }}-{{ operation?.exitCoin }}</mark
+                ></span
+              >
+            </li>
+            <li>
+              <strong>{{ "crypto.operationDetails.entry" | translate }}</strong>
+              <span>{{ operation?.entryDate | date : "MMM dd, y HH:mm" }}</span>
+            </li>
+            <li>
+              <strong>{{
+                "crypto.operationDetails.entryPrice" | translate
+              }}</strong>
+              <strong
+                ><span
+                  >{{ operation?.entryPrice }} {{ operation?.entryCoin }}</span
+                ></strong
+              >
+            </li>
+            <li>
+              <strong
+                >{{ currency }}
+                {{ "crypto.operationDetails.value" | translate }}</strong
+              >
+              <strong
+                ><span
+                  >{{ operation?.entryPriceValue }} {{ currency }}</span
+                ></strong
+              >
+            </li>
+            <li>
+              <strong
+                >{{ "crypto.operationDetails.quantity" | translate }} ({{
+                  operation?.exitCoin
+                }})</strong
+              >
+              <strong
+                ><span
+                  >{{ operation?.entryQuantity }}
+                  {{ operation?.exitCoin }}</span
+                ></strong
+              >
+            </li>
+            <li *ngIf="operation?.fees">
+              <strong> {{ "crypto.operationDetails.fees" | translate }}</strong>
+              <strong
+                ><span
+                  >{{ operation?.fees }} {{ operation?.entryCoin }}</span
+                ></strong
+              >
+            </li>
+            <li
+              *ngIf="
+                operation?.exitDate &&
+                operation?.type != operationTypeConstant.NEWINVESTMENT &&
+                operation?.type != operationTypeConstant.HOLDING
+              "
+            >
+              <strong>{{ "crypto.operationDetails.exit" | translate }}</strong>
+              <span>{{ operation?.exitDate | date : "MMM dd, y HH:mm" }}</span>
+            </li>
+            <li
+              *ngIf="
+                operation?.exitPrice &&
+                operation?.type != operationTypeConstant.NEWINVESTMENT &&
+                operation?.type != operationTypeConstant.HOLDING
+              "
+            >
+              <strong>{{
+                "crypto.operationDetails.exitPrice" | translate
+              }}</strong>
+              <strong
+                ><span>{{ operation?.exitPrice }} {{ currency }}</span></strong
+              >
+            </li>
+            <li
+              *ngIf="
+                operation?.exitPriceValue &&
+                operation?.type != operationTypeConstant.NEWINVESTMENT &&
+                operation?.type != operationTypeConstant.HOLDING
+              "
+            >
+              <strong
+                >{{ currency }}
+                {{ "crypto.operationDetails.value" | translate }}</strong
+              >
+              <strong
+                ><span
+                  >{{ operation?.exitPriceValue }} {{ currency }}</span
+                ></strong
+              >
+            </li>
+            <li>
+              <strong>Trend</strong>
+              <strong
+                ><span
+                  class="badge {{
+                    trend == 0
+                      ? 'badge-warning'
+                      : trend < 0
+                      ? 'badge-danger'
+                      : 'badge-success'
+                  }}"
+                  >{{ currency }} {{ trend }} ({{ percentage }}%)</span
+                ></strong
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer" *ngIf="operation?.status == 'OPEN'">
+        <a
+          class="btn btn-primary btn-lg btn-block"
+          data-bs-toggle="modal"
+          attr.data-bs-target="#{{ modalConstant.CLOSEOPERATION + modalId }}"
+          >{{ "crypto.closeOperation.title" | translate }}</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<!-- * Modal Basic -->
+
+<app-close-operation
+  [operation]="operation"
+  [modalId]="modalConstant.CLOSEOPERATION + modalId"
+></app-close-operation>

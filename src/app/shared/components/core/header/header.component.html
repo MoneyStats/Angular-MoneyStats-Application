@@ -12,7 +12,7 @@
     </a>
   </div>
   <div class="pageTitle" style="padding-top: 15px; padding-bottom: 15px">
-    <a routerLink="/" class="logo"
+    <a (click)="updateData()" routerLink="/" class="logo"
       ><img
         src="{{
           environment.baseUrlHeader
@@ -24,7 +24,12 @@
   </div>
   <!-- Options -->
   <div class="right dropdown">
-    <a href="#" class="headerButton" data-bs-toggle="dropdown">
+    <a
+      (click)="updateData()"
+      href="#"
+      class="headerButton"
+      data-bs-toggle="dropdown"
+    >
       <img src="{{ user?.profilePhoto }}" alt="image" class="imaged w32" />
       <span class="badge badge-danger"></span>
     </a>
@@ -51,6 +56,12 @@
   </div>
 </div>
 <!-- * App Header -->
+<div
+  *ngIf="isShadowActive"
+  id="shadow"
+  style="margin-top: 10px"
+  class="faded faded-bottom"
+></div>
 
 <!-- App Sidebar -->
 <div
@@ -157,6 +168,21 @@
               </div>
               <div class="in">
                 {{ "dashboard.sidebar.subMenu.title1" | translate }}
+              </div>
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="item"
+              data-bs-dismiss="modal"
+              routerLink="crypto/dashboard"
+            >
+              <div class="icon-box bg-primary">
+                <ion-icon name="logo-bitcoin"></ion-icon>
+              </div>
+              <div class="in">
+                Crypto <span class="badge badge-success">New</span>
               </div>
             </a>
           </li>

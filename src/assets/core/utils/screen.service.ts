@@ -8,6 +8,7 @@ export class ScreenService {
   screenHeight?: number;
   screenWidth?: number;
   environment = environment;
+  isCrypto: boolean = false;
   constructor() {}
 
   @HostListener('window:resize', ['$event'])
@@ -30,13 +31,20 @@ export class ScreenService {
       header!.style.display = 'none';
     }
   }
+
   hideFooter() {
-    const footer = document.getElementById('footer');
-    footer!.style.display = 'none';
+    this.getScreenSize();
+    if (this.screenWidth! <= 780) {
+      const footer = document.getElementById('footer');
+      if (footer) footer!.style.display = 'none';
+    }
   }
   showFooter() {
-    const footer = document.getElementById('footer');
-    footer!.style.display = 'flex';
+    this.getScreenSize();
+    if (this.screenWidth! <= 780) {
+      const footer = document.getElementById('footer');
+      footer!.style.display = 'flex';
+    } else this.hideFooter();
   }
 
   goToDashboard() {

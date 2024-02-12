@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Dashboard, Stats, Wallet } from '../data/class/dashboard.class';
+import { Stats } from '../data/class/dashboard.class';
 import * as ApexCharts from 'apexcharts';
-import { ApexOptions, ChartJSOptions } from '../data/constant/apex.chart';
+import { ChartJSOptions } from '../data/constant/apex.chart';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
 
 //declare var ApexCharts: any;
@@ -33,8 +33,6 @@ export class ChartJSService {
     let index = 0;
     totalMap.forEach((value: any, key: string) => {
       let historyBalance: Array<number> = [];
-      let date: string = '';
-      let oldStats: any = new Stats();
 
       value.forEach((v: any) => {
         historyBalance.push(v.balance);

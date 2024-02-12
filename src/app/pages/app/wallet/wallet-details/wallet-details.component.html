@@ -1,0 +1,649 @@
+<section class="section-width mx-auto">
+  <app-header-mobile
+    *ngIf="screenService?.screenWidth! <= 780"
+    [title]="wallet!.name"
+    [backBtn]="'wallet.details.mobile_back' | translate"
+    rightBtn="{{ 'wallet.details.mobile_edit' | translate }}"
+    [dataBsTarget]="modalConstant.EDITWALLET"
+    [restore]="wallet?.deletedDate ? true : false"
+  >
+  </app-header-mobile>
+
+  <!-- App Capsule -->
+  <div id="appCapsule">
+    <div class="row">
+      <app-title-desktop
+        class="col-md-6"
+        [title]="wallet?.name + ('wallet.details.title' | translate)"
+        [back]="'wallet.details.back' | translate"
+      ></app-title-desktop>
+      <div class="editWallet text-end col-md-6">
+        <button
+          type="button"
+          class="btn btn-primary me-1 mb-1"
+          data-bs-toggle="modal"
+          attr.data-bs-target="#{{ modalConstant.EDITWALLET }}"
+        >
+          {{ "wallet.details.edit" | translate }}
+        </button>
+        <button
+          *ngIf="!wallet?.deletedDate"
+          type="button"
+          class="btn btn-danger me-1 mb-1"
+          data-bs-toggle="modal"
+          attr.data-bs-target="#{{ modalConstant.DELETEWALLET }}"
+        >
+          {{ "wallet.details.delete" | translate }}
+        </button>
+        <button
+          *ngIf="wallet?.deletedDate"
+          type="button"
+          class="btn btn-success me-1 mb-1"
+          data-bs-toggle="modal"
+          attr.data-bs-target="#{{ modalConstant.RESTOREWALLET }}"
+        >
+          {{ "wallet.details.restore" | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <!-- Coin Status -->
+        <div id="gradientSection" class="section full gradientSection">
+          <div class="in coin-head">
+            <div class="row">
+              <div class="col-6">
+                <div class="hidden_mobile">
+                  <img
+                    src="{{ wallet?.img }}"
+                    alt="img"
+                    class="image-block imaged w50"
+                  />
+                  <h3 class="text-center walleName mt-2">{{ wallet?.name }}</h3>
+                </div>
+              </div>
+              <div class="col-6 w100">
+                <h1 class="total">
+                  {{ coinSymbol }} {{ !hidden ? wallet?.balance : amount }}
+                </h1>
+                <h4 class="caption">
+                  <span
+                    class="iconbox {{
+                      wallet!.differenceLastStats == 0
+                        ? 'text-warning'
+                        : wallet!.differenceLastStats > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    }}"
+                  >
+                    <ion-icon
+                      name="{{
+                        wallet!.differenceLastStats > 0
+                          ? 'caret-up'
+                          : 'caret-down'
+                      }}"
+                    ></ion-icon>
+                  </span>
+                  {{ coinSymbol
+                  }}{{ hidden ? amount : wallet?.differenceLastStats }}
+                  <strong
+                    >({{ wallet?.performanceLastStats! >= 1000 ? "+" : ""
+                    }}{{ wallet?.performanceLastStats }}%)</strong
+                  >
+                  <!--<strong>({{ percentageLastStats }})</strong>-->
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- * Coin Status -->
+
+        <!-- Coin Chart -->
+        <div class="section mb-2">
+          <div class="card coin-chart">
+            <div class="card-body pt-1">
+              <!-- tabs -->
+              <ul class="nav nav-tabs lined" role="tablist">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    data-bs-toggle="tab"
+                    href="#tab-1y"
+                    role="tab"
+                    (click)="graph1Y()"
+                  >
+                    {{ thisYear }}
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    data-bs-toggle="tab"
+                    href="#tab-3y"
+                    role="tab"
+                    (click)="graph3Y()"
+                  >
+                    3Y
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    data-bs-toggle="tab"
+                    href="#tab-all"
+                    role="tab"
+                    (click)="graphAll()"
+                  >
+                    All
+                  </a>
+                </li>
+              </ul>
+              <!-- * tabs -->
+            </div>
+
+            <!-- tab content -->
+            <div class="tab-content">
+              <div
+                class="tab-pane fade show active"
+                id="tab-1y"
+                role="tabpanel"
+              >
+                <div class="inner-round" style="height: 140px">
+                  <div
+                    *ngIf="!chart1Y"
+                    class="lds-ellipsis position-absolute top-60 start-50 translate-middle"
+                  >
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                  <apx-chart
+                    *ngIf="chart1Y"
+                    [series]="chart1Y.series!"
+                    [chart]="chart1Y.chart!"
+                    [title]="chart1Y.title!"
+                    [colors]="chart1Y.colors!"
+                    [legend]="chart1Y.legend!"
+                    [stroke]="chart1Y.stroke!"
+                    [labels]="chart1Y.labels!"
+                    type="area"
+                  ></apx-chart>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="tab-3y" role="tabpanel">
+                <div class="inner-round" style="height: 140px">
+                  <div
+                    *ngIf="!chart3Y"
+                    class="lds-ellipsis position-absolute top-60 start-50 translate-middle"
+                  >
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                  <apx-chart
+                    *ngIf="chart3Y"
+                    [series]="chart3Y.series!"
+                    [chart]="chart3Y.chart!"
+                    [title]="chart3Y.title!"
+                    [colors]="chart3Y.colors!"
+                    [legend]="chart3Y.legend!"
+                    [stroke]="chart3Y.stroke!"
+                    [labels]="chart3Y.labels!"
+                    type="area"
+                  ></apx-chart>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="tab-all" role="tabpanel">
+                <div class="inner-round" style="height: 140px">
+                  <div
+                    *ngIf="!chartAll"
+                    class="lds-ellipsis position-absolute top-60 start-50 translate-middle"
+                  >
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                  <apx-chart
+                    *ngIf="chartAll"
+                    [series]="chartAll.series!"
+                    [chart]="chartAll.chart!"
+                    [title]="chartAll.title!"
+                    [colors]="chartAll.colors!"
+                    [legend]="chartAll.legend!"
+                    [stroke]="chartAll.stroke!"
+                    [labels]="chartAll.labels!"
+                    type="area"
+                  ></apx-chart>
+                </div>
+              </div>
+            </div>
+            <!-- * tab content -->
+          </div>
+        </div>
+        <!-- Coin Chart -->
+      </div>
+      <div class="col-md-6">
+        <!-- Stats -->
+        <div class="section mt-2 mb-4">
+          <div class="card">
+            <ul class="listview no-line transparent flush simple-listview">
+              <li>
+                <div class="text-muted">
+                  {{ "wallet.details.status" | translate }}
+                </div>
+                <strong
+                  class="{{
+                    wallet?.deletedDate ? 'text-danger' : 'text-success'
+                  }}"
+                  >{{ wallet?.deletedDate ? "Deleted" : "Active" }}</strong
+                >
+              </li>
+              <li>
+                <div class="text-muted">
+                  {{ "wallet.details.allTimeHigh" | translate }}
+                  {{ wallet?.allTimeHighDate | date : "d MMM y" }}
+                </div>
+                <strong
+                  >{{ coinSymbol }}
+                  {{ hidden ? amount : wallet?.allTimeHigh }}</strong
+                >
+              </li>
+              <li>
+                <div class="text-muted">
+                  {{ "wallet.details.highPrice" | translate }}
+                  {{ wallet?.highPriceDate | date : "d MMM y" }}
+                </div>
+                <strong
+                  >{{ coinSymbol }}
+                  {{ hidden ? amount : wallet?.highPrice }}</strong
+                >
+              </li>
+              <li>
+                <div class="text-muted">
+                  {{ "wallet.details.lowPrice" | translate }}
+                  {{ wallet?.lowPriceDate | date : "d MMM y" }}
+                </div>
+                <strong
+                  >{{ coinSymbol }}
+                  {{ hidden ? amount : wallet?.lowPrice }}</strong
+                >
+              </li>
+              <li>
+                <div class="text-muted">
+                  {{ "wallet.details.category" | translate }}
+                </div>
+                <strong>{{ wallet?.category }}</strong>
+              </li>
+              <li *ngIf="wallet?.type">
+                <div class="text-muted">
+                  {{ "wallet.details.type" | translate }}
+                </div>
+                <strong>{{ wallet?.type }}</strong>
+              </li>
+              <li>
+                <div class="text-muted">
+                  {{ "wallet.details.dateLastStats" | translate }}
+                </div>
+                <strong>{{ wallet?.dateLastStats | date : "d MMM y" }}</strong>
+              </li>
+            </ul>
+          </div>
+          <div class="card mt-2">
+            <div class="card-body">
+              <div class="row mb-05 fontsize-sub">
+                <div class="col text-success">
+                  <strong
+                    >{{ percentageWalletInTotal() | number : "1.0-2" }}%
+                  </strong>
+                </div>
+                <div class="col text-secondary text-end">
+                  <strong
+                    >{{ coinSymbol }}
+                    {{ hidden ? amount : walletService.totalBalance }}</strong
+                  >
+                </div>
+              </div>
+              <div class="progress">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  attr.style="width: {{
+                    percentageWalletInTotal() | number : '1.0-2'
+                  }}%"
+                  attr.aria-valuenow="{{
+                    percentageWalletInTotal() | number : '1.0-2'
+                  }}"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+                <div
+                  class="progress-bar bg-secondary"
+                  role="progressbar"
+                  attr.style="width: {{
+                    100 - percentageWalletInTotal() | number : '1.0-2'
+                  }}%"
+                  attr.aria-valuenow="{{
+                    100 - percentageWalletInTotal() | number : '1.0-2'
+                  }}"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Stats -->
+      </div>
+      <div class="col-md-12">
+        <!-- Stats -->
+        <div class="section mt-2 mb-4">
+          <div class="section-heading">
+            <h2 class="title">
+              {{ "wallet.details.info.title" | translate }}
+            </h2>
+            <a
+              *ngIf="
+                wallet?.infoString != undefined || wallet?.info != undefined
+              "
+              (click)="
+                editShow == true ? (editShow = false) : (editShow = true)
+              "
+              class="link clickable"
+              >{{ "wallet.details.info.edit" | translate }}</a
+            >
+          </div>
+          <div class="card">
+            <ul class="listview no-line transparent flush simple-listview">
+              <li
+                *ngIf="
+                  (wallet?.infoString == undefined ||
+                    wallet?.infoString == '') &&
+                  wallet?.info == undefined
+                "
+              >
+                <div class="text-muted">
+                  {{ "wallet.details.info.subTitle" | translate }}
+                </div>
+              </li>
+              <li *ngFor="let key of infoKeys">
+                <div class="text-muted">
+                  {{ key }}
+                </div>
+                <strong (click)="copyMessage(mapInfo.get(key)!)"
+                  >{{ mapInfo.get(key) }}
+                  <button
+                    *ngIf="editShow"
+                    (click)="editInput(key)"
+                    type="button"
+                    class="btn btn-icon btn-secondary ms-1 rounded"
+                    style="height: 30px; width: 30px"
+                  >
+                    <ion-icon name="create-outline"></ion-icon></button
+                  ><button
+                    *ngIf="editShow"
+                    (click)="deleteInfo(key)"
+                    type="button"
+                    class="btn btn-icon btn-danger ms-1 rounded"
+                    style="height: 30px; width: 30px"
+                  >
+                    <ion-icon name="close-circle-outline"></ion-icon></button
+                ></strong>
+              </li>
+              <li *ngIf="addInput">
+                <form #f="ngForm" type="submit">
+                  <div class="row ms-2">
+                    <div class="col-md-4">
+                      <div class="form-group basic">
+                        <div class="input-wrapper">
+                          <input
+                            name="infoKey1"
+                            [(ngModel)]="infoKey"
+                            #infoKey1="ngModel"
+                            required
+                            type="text"
+                            class="form-control"
+                            id="text4"
+                            placeholder="{{
+                              'wallet.details.info.key' | translate
+                            }}"
+                          />
+                          <i class="clear-input">
+                            <ion-icon name="close-circle"></ion-icon>
+                          </i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-5">
+                      <div class="form-group basic">
+                        <div class="input-wrapper">
+                          <input
+                            name="infoValue1"
+                            [(ngModel)]="infoValue"
+                            #infoValue1="ngModel"
+                            required
+                            type="text"
+                            class="form-control"
+                            id="text4"
+                            placeholder="{{
+                              'wallet.details.info.value' | translate
+                            }}"
+                          />
+                          <i class="clear-input">
+                            <ion-icon name="close-circle"></ion-icon>
+                          </i>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="col-md-2 me-2 text-center"
+                      style="display: inline"
+                    >
+                      <div class="row">
+                        <div class="col-6">
+                          <button
+                            *ngIf="!editBtn"
+                            (click)="addInfo()"
+                            [disabled]="f.invalid"
+                            type="button"
+                            class="btn btn-icon btn-danger ms-1 rounded"
+                            style="
+                              height: 30px;
+                              width: 30px;
+                              vertical-align: -20px;
+                            "
+                          >
+                            <ion-icon name="save-outline"></ion-icon>
+                          </button>
+                        </div>
+                        <div class="col-6">
+                          <button
+                            *ngIf="!editBtn"
+                            (click)="addInput = false"
+                            type="button"
+                            class="btn btn-icon btn-secondary ms-1 rounded"
+                            style="
+                              height: 30px;
+                              width: 30px;
+                              vertical-align: -20px;
+                            "
+                          >
+                            <ion-icon name="close-outline"></ion-icon>
+                          </button>
+                        </div>
+
+                        <div class="col-6">
+                          <button
+                            *ngIf="editBtn"
+                            (click)="saveEdit()"
+                            [disabled]="f.invalid"
+                            type="button"
+                            class="btn btn-icon btn-warning ms-1 rounded"
+                            style="
+                              height: 30px;
+                              width: 30px;
+                              vertical-align: -20px;
+                            "
+                          >
+                            <ion-icon name="create-outline"></ion-icon>
+                          </button>
+                        </div>
+                      </div>
+                      <!--<button
+                        *ngIf="!editBtn"
+                        (click)="addInfo()"
+                        [disabled]="f.invalid"
+                        type="button"
+                        style="max-width: 90px; vertical-align: -20px"
+                        class="btn btn-primary rounded me-1 mx-auto"
+                      >
+                        {{ "wallet.details.info.save" | translate }}
+                      </button>
+                      <button
+                        *ngIf="editBtn"
+                        (click)="saveEdit()"
+                        [disabled]="f.invalid"
+                        type="button"
+                        style="max-width: 90px; vertical-align: -20px"
+                        class="btn btn-primary rounded me-1 mx-auto"
+                      >
+                        {{ "wallet.details.info.editBtn" | translate }}
+                      </button>-->
+                    </div>
+                  </div>
+                </form>
+              </li>
+              <li *ngIf="!addInput">
+                <div class="text-muted mx-auto">
+                  <a class="text-primary clickable" (click)="addInput = true"
+                    ><ion-icon
+                      name="add-circle-outline"
+                      style="vertical-align: -1px"
+                    ></ion-icon>
+                    <span style="margin-left: 2px">{{
+                      "wallet.details.info.addNew" | translate
+                    }}</span></a
+                  >
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- Stats -->
+      </div>
+
+      <div
+        *ngIf="wallet?.assets && (wallet?.assets)!.length > 0"
+        class="col-md-6 mt-2 mb-4"
+      >
+        <!-- Portfolio -->
+        <div class="section">
+          <div class="section-heading">
+            <h2 class="title">
+              {{ "crypto.asset.assetList" | translate }}
+            </h2>
+            <a
+              *ngIf="!showZeroBalance"
+              (click)="zeroBalanceSwitch()"
+              class="link clickable"
+            >
+              <ion-icon
+                name="eye-outline"
+                style="width: 20px; height: 20px; vertical-align: -5px"
+              ></ion-icon>
+              {{ "crypto.asset.show" | translate }}</a
+            >
+            <a
+              *ngIf="showZeroBalance"
+              (click)="zeroBalanceSwitch()"
+              class="link clickable"
+            >
+              <ion-icon
+                name="eye-off-outline"
+                style="width: 20px; height: 20px; vertical-align: -5px"
+              ></ion-icon>
+              {{ "crypto.asset.hidden" | translate }}</a
+            >
+          </div>
+          <div class="transactions">
+            <div *ngFor="let asset of wallet?.assets; let i = index">
+              <app-transaction-card
+                [hiddenAmount]="hidden"
+                *ngIf="
+                  !showZeroBalance ? asset.balance > 0 : asset.balance >= 0
+                "
+                [assets]="asset"
+                [currency]="appService.user.settings.cryptoCurrency"
+              >
+              </app-transaction-card>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mt-2 mb-4">
+        <!-- History -->
+        <div *ngIf="wallet!.history && wallet!.history.length" class="section">
+          <div class="section-heading">
+            <h2 class="title">
+              {{ "wallet.details.transaction.title" | translate }}
+            </h2>
+            <a href="#" routerLink="history" class="link">{{
+              "wallet.details.transaction.view" | translate
+            }}</a>
+          </div>
+          <div class="card">
+            <div
+              *ngFor="
+                let stats of wallet?.history?.slice()?.reverse();
+                let i = index
+              "
+            >
+              <app-wallet-history-card
+                *ngIf="i < 6 && stats.id"
+                [stats]="stats"
+                [hidden]="hidden"
+              ></app-wallet-history-card>
+            </div>
+            <div class="card-body pt-0">
+              <a
+                routerLink="history"
+                class="btn btn-block btn-outline-secondary"
+                >{{ "wallet.details.transaction.more" | translate }}</a
+              >
+            </div>
+          </div>
+        </div>
+        <!-- History -->
+      </div>
+    </div>
+    <div align="center">
+      <img
+        src="{{
+          environment.baseUrlDashboard
+        }}assets/images/logos/logo_transparent_gray_land.png"
+        alt=""
+        srcset=""
+        style="width: 150px"
+        class="pb-1"
+      />
+    </div>
+  </div>
+</section>
+
+<app-add-wallet
+  (emitAddWallet)="editWallet($event)"
+  [wallet]="wallet!"
+  [modalId]="modalConstant.EDITWALLET"
+></app-add-wallet>
+<app-delete-wallet
+  [modalId]="modalConstant.DELETEWALLET"
+  [wallet]="wallet!"
+></app-delete-wallet>
+<app-delete-wallet
+  *ngIf="wallet?.deletedDate"
+  [modalId]="modalConstant.RESTOREWALLET"
+  [wallet]="wallet!"
+></app-delete-wallet>

@@ -1,0 +1,162 @@
+// Image Resume dashboard
+.cover {
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  //z-index: 1;
+  border-radius: 20px;
+}
+.imgCover {
+  display: block;
+  object-fit: cover;
+  width: 100%;
+}
+
+// icon dashboard
+.icon-size {
+  height: 30px;
+  width: 30px;
+  margin-top: -10px;
+  margin-bottom: -10px;
+  margin-right: 10px;
+}
+.icon-color {
+  color: #5a75ff;
+}
+.badge {
+  margin-top: -10px;
+}
+
+.w50 {
+  max-width: 50% !important;
+}
+
+@media screen and (max-width: 580px) {
+  .line {
+    border-left: none !important;
+    p,
+    h5 {
+      margin-left: 0px !important;
+    }
+  }
+}
+
+.statics {
+  width: max-content;
+  align-items: center;
+  align-self: center;
+  text-align: center;
+}
+.card-body {
+  width: 100%;
+}
+.line {
+  border-left: solid 1px;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.title-section {
+  margin-left: 30px;
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 780px) {
+  .fixed {
+    width: 100%;
+    bottom: 0px;
+    height: 120px;
+    margin-top: -70px;
+  }
+
+  .balance {
+    font-size: xx-large !important;
+  }
+  .section-performance {
+    margin-top: 30px;
+    max-width: 98%;
+  }
+  .title-section {
+    margin-left: 20px;
+    //margin-top: 30px !important;
+    margin-bottom: 20px !important;
+  }
+  .marketData {
+    margin-bottom: 30px !important;
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+  }
+}
+
+@media screen and (min-width: 780px) {
+  .loading-hidden {
+    margin-right: 10px;
+  }
+}
+
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.quick-action {
+  width: 80px;
+  .user-card {
+    background-color: transparent;
+  }
+  .title_text {
+    width: 70px;
+    margin-left: calc(50% - 34px);
+    text-align: center;
+  }
+  .icon-wrapper {
+    border-radius: 50px;
+    width: 60px;
+    height: 60px;
+    ion-icon {
+      width: 30px !important;
+      height: 30px !important;
+      margin-top: calc(50% - 15px);
+    }
+  }
+}
+
+.priority {
+  position: absolute;
+  z-index: 999 !important;
+}
+
+@media screen and (min-width: 780px) and (max-width: 1200px) {
+  .section-performance {
+    margin-top: 40px;
+  }
+}
+
+@media screen and (min-width: 580px) and (max-width: 770px) {
+  .line {
+    border-left: solid 0px;
+  }
+}
+.card-title {
+  position: relative;
+  z-index: 9 !important;
+}
+
+.marketData {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: -30px;
+}
+
+.section-performance {
+  max-width: 98% !important;
+}
+
+.title {
+  margin-left: 5px;
+}

@@ -12,6 +12,7 @@ import { SwalService } from '../utils/swal.service';
 import { DashboardService } from './dashboard.service';
 import { StatsService } from './stats.service';
 import { WalletService } from './wallet.service';
+import { AppService } from './app.service';
 
 @Injectable({
   providedIn: 'root',
@@ -27,11 +28,12 @@ export class UserService {
     private walletService: WalletService,
     public swalService: SwalService,
     private router: Router,
-    private statsService: StatsService
+    private statsService: StatsService,
+    private appService: AppService
   ) {}
 
   setValue() {
-    switch (this.user?.currency) {
+    switch (this.user?.settings.currency) {
       case Coin.EUR:
         this.coinSymbol = CoinSymbol.EUR;
         break;
@@ -42,6 +44,7 @@ export class UserService {
         this.coinSymbol = CoinSymbol.GBP;
         break;
       default:
+        this.coinSymbol = CoinSymbol.USD;
         break;
     }
 
@@ -53,6 +56,7 @@ export class UserService {
     this.walletService.user = this.user;
     this.dashboardService.user = this.user;
     this.statsService.user = this.user;
+    this.appService.user = this.user;
   }
 
   syncGithubUser(user: string) {
@@ -61,21 +65,21 @@ export class UserService {
   }
 
   updateGithubUser() {
-    this.user.github = this.swalService.githubAccount;
+    this.user.settings.github = this.swalService.githubAccount;
   }
 
   updateGithubData() {
     this.updateGithubUser();
-    if (this.user.github === undefined) {
+    if (this.user.settings.github === undefined) {
       setTimeout(() => {
         this.updateGithubData();
       }, 100 * 10);
     } else {
-      this.user!.profilePhoto = this.user.github.avatar_url!;
-      this.user.githubUser = JSON.stringify(this.user.github);
+      this.user!.profilePhoto = this.user.settings.github.avatar_url!;
+      this.user.settings.githubUser = JSON.stringify(this.user.settings.github);
       this.updateUserData(this.user).subscribe((res) => {
         this.user = res.data;
-        this.user.github = JSON.parse(this.user.githubUser!);
+        this.user.settings.github = JSON.parse(this.user.settings.githubUser!);
       });
     }
   }
@@ -125,7 +129,7 @@ export class UserService {
     if (this.user?.mockedUser) {
       return this.http.get<ResponseModel>(environment.getUserUrl);
     } else {
-      const headers = new HttpHeaders({ authToken: authToken! });
+      const headers = new HttpHeaders({ Authorization: authToken! });
       return this.http.get<ResponseModel>(environment.checkLoginDataUrl, {
         headers: headers,
       });
@@ -153,7 +157,7 @@ export class UserService {
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      authToken: authToken!,
+      Authorization: authToken!,
     });
     if (this.user?.mockedUser) {
       let response: ResponseModel = new ResponseModel();
@@ -177,7 +181,7 @@ export class UserService {
     } else {
       const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
       const headers = new HttpHeaders({
-        authToken: authToken!,
+        Authorization: authToken!,
         'Content-Type': 'multipart/form-data',
       });
       const formData: FormData = new FormData();

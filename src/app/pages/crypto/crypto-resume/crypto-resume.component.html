@@ -1,0 +1,107 @@
+<div class="mx-auto section-width">
+  <app-crypto-header
+    title="{{ 'crypto.resume.title' | translate }}"
+  ></app-crypto-header>
+
+  <!-- App Capsule -->
+  <div id="appCapsule">
+    <div class="row" style="margin-top: 10px; margin-bottom: -60px">
+      <div class="col-md-6">
+        <div class="title-section">
+          <h2 class="title">{{ "crypto.resume.title" | translate }}</h2>
+        </div>
+      </div>
+      <div class="addWallet col-md-6">
+        <div class="form-group boxed">
+          <div class="input-wrapper" style="max-width: 150px; margin-left: 80%">
+            <select
+              class="form-control custom-select"
+              id="select4b"
+              (change)="onChange($event)"
+            >
+              <option
+                *ngFor="let year of years.slice().reverse()"
+                value="{{ year }}"
+              >
+                {{ year }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card transparent">
+    <div class="card-body">
+      <ul class="nav nav-tabs capsuled" role="tablist">
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            data-bs-toggle="tab"
+            href="#overview"
+            role="tab"
+          >
+            {{ "crypto.resume.tab.tab1" | translate }}
+          </a>
+        </li>
+        <li *ngIf="isOperationPresent() > 0" class="nav-item">
+          <a class="nav-link" data-bs-toggle="tab" href="#card" role="tab">
+            {{ "crypto.resume.tab.tab2" | translate }}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="tab" href="#resume" role="tab">
+            {{ "crypto.resume.tab.tab3" | translate }}
+          </a>
+        </li>
+      </ul>
+      <div class="tab-content mt-1 margin-bottom-size">
+        <div class="tab-pane fade show active" id="overview" role="tabpanel">
+          <app-resume-assets
+            [hidden]="hidden"
+            *ngIf="assets && assets.length"
+            [resumeData]="resumeData"
+            [isPast]="isPast"
+          ></app-resume-assets>
+        </div>
+        <div class="tab-pane fade" id="card" role="tabpanel">
+          <div hidden class="section mt-2">
+            <div class="card">
+              <div class="card-body text-center mt-5 mb-5">
+                <div class="mx-auto">
+                  <img
+                    src="https://www.colibriensemble.it/wp-content/uploads/2018/07/Work-in-Progress.png"
+                    alt=""
+                    srcset=""
+                  />
+                </div>
+                <hr />
+                <h1>Work in Progress</h1>
+              </div>
+            </div>
+          </div>
+          <app-trading-resume
+            [cryptoDashboard]="resumeData"
+            [wallets]="resumeData.wallets"
+          ></app-trading-resume>
+        </div>
+        <div class="tab-pane fade" id="resume" role="tabpanel">
+          <app-investments-history
+            [hidden]="hidden"
+            [cryptoResume]="resume"
+            [cryptoCurrency]="resumeData.currency"
+          ></app-investments-history>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-operations-modal
+  [modalId]="modalConstant.ADDOPERATIONS"
+  [wallets]="cryptoService.cryptoDashboard.wallets"
+  [assets]="cryptoService.cryptoDashboard.assets"
+  [currency]="cryptoService.cryptoDashboard.currency"
+  [statsAssetsDays]="cryptoService.cryptoDashboard.statsAssetsDays"
+  (emitAddStats)="getResume()"
+></app-operations-modal>

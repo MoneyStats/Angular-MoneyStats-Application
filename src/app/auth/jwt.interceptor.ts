@@ -7,12 +7,11 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { UserService } from 'src/assets/core/services/user.service';
 import { StorageConstant } from 'src/assets/core/data/constant/constant';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  constructor(private userService: UserService) {}
+  constructor() {}
 
   intercept(
     req: HttpRequest<any>,
@@ -27,9 +26,12 @@ export class JwtInterceptor implements HttpInterceptor {
 
         let authToken: string;
         if (httpEvent instanceof HttpResponse) {
-          if (httpEvent.headers.has('authToken')) {
-            authToken = httpEvent.headers.get('authToken')!;
-            localStorage.setItem(StorageConstant.ACCESSTOKEN, authToken);
+          if (httpEvent.headers.has('Authorization')) {
+            authToken = httpEvent.headers.get('Authorization')!;
+            localStorage.setItem(
+              StorageConstant.ACCESSTOKEN,
+              'Bearer ' + authToken
+            );
           }
         }
       })

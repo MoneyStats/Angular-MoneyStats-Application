@@ -1,8 +1,12 @@
 $whiteBg: #e5e5e5;
-$darkBg: #161129;
+$darkBg: #161129; //#161129
+$darkColor: #121212;
 
 @media screen and (min-width: 780px) {
   app-footer {
+    display: none;
+  }
+  #footer {
     display: none;
   }
   .section-width {
@@ -10,13 +14,27 @@ $darkBg: #161129;
     /*margin-left: calc(50% - 1000px);*/
   }
   .hidden_desktop {
-    display: none;
+    display: none !important;
   }
 }
 
 @media screen and (max-width: 780px) {
   .hidden_mobile {
-    display: none;
+    display: none !important;
+  }
+
+  .text-not-selected,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 a,
+  div,
+  span {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
   }
 }
 
@@ -29,22 +47,23 @@ $darkBg: #161129;
   user-select: none; /* Standard */
 }
 
-.text-not-selected,
-h1,
-h2,
-h3,
-h4,
-h5 a,
-div,
-span {
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+/Edge */
-  user-select: none; /* Standard */
-}
-
+// Border Round Funtions
 .border_round {
   border-radius: 20px !important;
+}
+// Border Round Funtions for Graphic
+.inner-round {
+  mask-image: radial-gradient();
+  -webkit-mask-image: radial-gradient(
+    circle 0px at 0 0,
+    transparent 0,
+    transparent 0px,
+    black 0px
+  );
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  -webkit-border-bottom-left-radius: 20px;
+  -webkit-border-bottom-right-radius: 20px;
 }
 
 .rounded-pill {
@@ -65,7 +84,24 @@ span {
   margin-bottom: 5px;
 }
 
+.margin-bottom-size {
+  margin-bottom: -50px !important;
+}
+
 body:not(.dark-mode) {
+  .selectCryptoAsset {
+    .select-btn,
+    .select-btn-op,
+    .content,
+    .search {
+      background: #e5e5e5;
+      border: none;
+      color: $darkColor;
+    }
+  }
+  #cryptoHeader {
+    background-color: $whiteBg !important;
+  }
   app-loading {
     .overlay {
       background-color: rgba(229, 229, 229, 0.9);
@@ -105,10 +141,145 @@ body:not(.dark-mode) {
 }
 
 body.dark-mode {
+  background-color: $darkColor !important;
   .color-grey {
     background-color: $darkBg;
   }
   .title-page {
     color: $whiteBg;
   }
+}
+
+.card {
+  box-shadow: -10px 5px 20px rgba(0, 0, 0, 0.2) !important;
+  transition: box-shadow 0.2s ease-in !important;
+}
+
+/*.card:hover {
+  box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.4) !important;
+}*/
+
+body.loading {
+  .loading-hidden {
+    display: none;
+  }
+  .w25w {
+    width: 25px;
+  }
+  .w50w {
+    width: 50px !important;
+  }
+  .w100w {
+    width: 100vh;
+  }
+  .load-text {
+    background: #0d0a18;
+    color: transparent;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    height: 25px;
+    margin-bottom: 20px;
+    .hidden {
+      display: none;
+    }
+    small {
+      max-height: 10px !important;
+    }
+  }
+
+  .load-text::before {
+    content: "";
+    position: absolute;
+    left: 0%;
+    top: 0;
+    height: 100%;
+    width: 50px;
+    background: linear-gradient(
+      to right,
+      #211a3c 25%,
+      #3a2c69 50%,
+      #5a45a5 100%
+    );
+    animation-name: gradient-animation;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    filter: blur(5px);
+  }
+
+  @keyframes gradient-animation {
+    from {
+      left: 0%;
+    }
+    to {
+      left: 100%;
+    }
+  }
+}
+
+body:not(.loading) {
+  .loading-card {
+    display: none;
+  }
+}
+
+// Animazione Loading Grafico
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ellipsis div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+// Fine Animazione Loading Grafico
+body.modal-open {
+  overflow: hidden !important;
 }

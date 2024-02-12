@@ -1,6 +1,39 @@
 {
   "loading": "Caricamento...",
+  "response": {
+    "marketData": "Importazione Market Data iniziato...",
+    "cache": "Cache Cancellata Correttamente",
+    "theme": "Cambio Tema",
+    "live": "Stato portafogli live: ",
+    "stats": "Stats salvato correttamente",
+    "support": "Supporto notificato correttamente!",
+    "register": "User $USER$ registrato",
+    "operation": "Operazione per $OP1$/$OP2$ eseguita",
+    "backup": "Backup dati completato!",
+    "restore": "Dati ripristinati correttamente!",
+    "bug": "Bug notificato correttamente",
+    "user": "Utente aggiornato",
+    "close": "Operazione chiusa"
+  },
   "onboard": {
+    "crypto": {
+      "tab1": {
+        "title": "Benvenuto su Crypto",
+        "text": "Questa è la prima login nell'app. <br /> Per continuare con l'onboard premi Avanti."
+      },
+      "tab2": {
+        "title": "Come funziona?",
+        "text": "Crea o importa il tuo wallet crypto, aggiungi i tuoi asset completanto il form ed ottieni dettagli, statistiche ed altro."
+      },
+      "tab3": {
+        "title": "Operazioni",
+        "text": "Apri operazioni di Holding o trading tramite la nostra sezione operazioni."
+      },
+      "tab4": {
+        "title": "Grazie per il tuo tempo",
+        "text": "Premi Prova ora e vai alla dashboard."
+      }
+    },
     "tab1": {
       "title": "Benvenuto su MoneyStats",
       "text": "Questa è la prima login nell'app. <br /> Per continuare con l'onboard premi Avanti."
@@ -152,11 +185,11 @@
     "title": "Transazioni",
     "subTitle": "Ultime performance",
     "difference": "Differenza",
-    "back": "Torna alla pagina precendete",
+    "back": "Torna alla pagina precedente",
     "mobile_back": "Indietro",
     "details": {
-      "title": "Dettagli Transazione",
-      "back": "Torna alla pagina precendete",
+      "title": "Dettagli della Transazione",
+      "back": "Torna alla pagina precedente",
       "status": "Stato",
       "success": "Completato",
       "category": "Categoria",
@@ -171,13 +204,23 @@
     "title": "Portafoglio",
     "mobile_back": "Indietro",
     "mobile_add": "Aggiungi",
-    "back": "Torna alla pagina precendete",
+    "back": "Torna alla pagina precedente",
     "add": "Aggiungi nuovo Portafoglio",
     "open": "Apri Portafoglio",
     "modal": {
       "title": "Aggiungi Portafoglio",
+      "cryptoTitle": "Aggiungi Portafoglio Crypto",
+      "selectWallet": "Seleziona Wallet",
+      "crypto": {
+        "title": "Portafoglio: Seleziona un'opzione",
+        "subTitle": "Vuoi aggiungere un nuovo portafoglio o importarne uno esistente?",
+        "subTitle2": "Seleziona il wallet",
+        "new": "Nuovo Wallet",
+        "import": "Importa Wallet"
+      },
       "editWallet": {
         "title": "Modifica Portafoglio",
+        "cryptoTitle": "Modifica Portafoglio Crypto",
         "default": "Mantieni la stessa immagine"
       },
       "name": "Nome",
@@ -185,6 +228,10 @@
       "category": "Categoria",
       "categoryText": "Scegli una categoria",
       "categoryTextEdit": "Lascia per mantenere la categoria",
+      "balance": "Saldo",
+      "balanceText": "Inserisci Saldo",
+      "type": "Tipo di wallet",
+      "typeText": "Scegli il tipo di wallet",
       "img": "Aggiungi immagine",
       "imgContent": "Upload Immagine",
       "imgFromURL": "Aggiungi immagine da URL",
@@ -206,7 +253,7 @@
     },
     "details": {
       "title": " Dettagli",
-      "back": "Torna alla pagina precendete",
+      "back": "Torna alla pagina precedente",
       "mobile_back": "Indietro",
       "mobile_edit": "Modifica",
       "mobile_delete": "Cancella",
@@ -216,10 +263,11 @@
       "highPrice": "Massimo annuale il ",
       "lowPrice": "Minimo annuale il ",
       "category": "Categoria",
+      "type": "Tipo di wallet",
       "dateLastStats": "Data Ultimo Stats",
       "edit": "Modifica Portafoglio",
       "delete": "Cancella Portafoglio",
-      "restore": "Riristina Portafoglio",
+      "restore": "Ripristina Portafoglio",
       "info": {
         "title": "Info",
         "subTitle": "Puoi aggiungere ogni info di cui hai bisogno (es IBAN per una Banca)",
@@ -255,14 +303,14 @@
         "history": {
           "title": "Storico Transazioni",
           "mobile_back": "Indietro",
-          "back": "Torna alla pagina precendete"
+          "back": "Torna alla pagina precedente"
         }
       }
     }
   },
   "settings": {
     "title": "Impostazioni",
-    "back": "Torna alla pagina precendete",
+    "back": "Torna alla pagina precedente",
     "mobile_back": "Indietro",
     "theme": {
       "title": "Tema",
@@ -298,6 +346,10 @@
         "title": "Modifica Portafoglio",
         "open": "Apri"
       },
+      "liveWallet": {
+        "title": "Live Wallet",
+        "description": "Attiva Live Wallet con Crypto"
+      },
       "languages": {
         "title": "Lingue",
         "open": "Modifica",
@@ -312,14 +364,21 @@
       "support": "Supporto",
       "howItWorks": "Come funziona?",
       "version": "Versione MoneyStats",
-      "version_open": "Apri"
+      "version_open": "Apri",
+      "service": "MoneyStats Service",
+      "auto_update": "Aggiornamento Automatico"
     },
-    "develop": "Info Sviluppi & Contatti"
+    "develop": "Info Sviluppi & Contatti",
+    "admin": {
+      "title": "Admin Features",
+      "cache": "Pulizia cache",
+      "marketData": "Importa Marketdata"
+    }
   },
   "stats": {
     "title": "Storico",
     "subTitle": "Dettagli delle transazioni e performance",
-    "back": "Torna alla pagina precendete",
+    "back": "Torna alla pagina precedente",
     "mobile_back": "Indietro",
     "total": "Saldo Totale",
     "since": "Da",
@@ -342,7 +401,7 @@
       "table_balance": "Saldo",
       "table_trend": "Trend",
       "table_performance": "Performance",
-      "table_value": "Saldo Trend",
+      "table_value": "Saldo del Trend",
       "investments": "Investimenti",
       "capital": "Capitali",
       "others": "Altro",
@@ -355,7 +414,7 @@
   },
   "insertStats": {
     "title": "Pagamenti",
-    "back": "Torna alla pagina precendete",
+    "back": "Torna alla pagina precedente",
     "mobile_back": "Indietro",
     "dataPresent": "Seleziona una data diversa",
     "balance": " saldo: ",
@@ -368,7 +427,7 @@
   "support": {
     "title": "Contatta Supporto",
     "mobile_back": "Indietro",
-    "back": "Torna alla pagina precendete",
+    "back": "Torna alla pagina precedente",
     "subtitle": "Contattaci inviandoci un'email",
     "formTitle": "Contattaci",
     "formSubTitle": "Completa il form per contattarci",
@@ -452,6 +511,13 @@
             "version_title": "MoneyStats V1.0.1",
             "version": "V1.0.1",
             "changelog": "&#183; Migrazione Servizi su Oracle Cloud. <br /> &#183; Bug Fixed."
+          },
+          {
+            "modalId": "v2",
+            "version_date": "2024-02-12",
+            "version_title": "MoneyStats V2.0.0",
+            "version": "V2.0.0",
+            "changelog": "&#183; Aggiunta Sezione Crypto <br> &#183; Aggiornata la sezione aggiungi e modifica wallet"
           }
         ]
       }
@@ -465,5 +531,320 @@
   "error": {
     "title": ""
   },
-  "copyright": "Copyright © MoneyStats 2023. All Rights Reserved."
+  "crypto": {
+    "header": {
+      "tabOpt": "Altre Opzioni",
+      "tab1": "Portafogli",
+      "tab2": "Assets",
+      "tab3": "Operazioni",
+      "tab4": "Storico",
+      "tab5": "Market Data"
+    },
+    "footer": {
+      "tab1": "Operazioni",
+      "tab2": "Storico Crypto",
+      "tab3": "Portafogli",
+      "tab4": "Market Data"
+    },
+    "requirements": {
+      "headerTitle": "Verifica Crypto",
+      "title": "Crypto: Ci sei quasi",
+      "subTitle": "Prima di accedere alla dashboard crypto, la nuova funzionalità di MoneyStats, abbiamo bisogno di verificare che tu rispecchi alcuni requisiti, altrimenti non ti sarà possibile accedere.",
+      "req1": {
+        "title": "Avere un Wallet",
+        "subTitle": "Avere creato un wallet"
+      },
+      "req2": {
+        "title": "Avere un Crypto Wallet",
+        "subTitle": "Avere creato un crypto wallet"
+      },
+      "req3": {
+        "title": "Avere un Asset",
+        "subTitle": "Avere un Crypto Asset tipo BTC, ETH"
+      },
+      "req4": {
+        "title": "Avere una Crypto Currency",
+        "subTitle": "Seleziona una Crypto Currency tipo USD, EUR, GBP..."
+      },
+      "next": "Vai alla Dashboard"
+    },
+    "dashboard": {
+      "title": "Crypto Dashboard",
+      "cardRes": {
+        "title": "Saldo Totale",
+        "lastUpdate": "Ultimo aggiornameneto",
+        "opt1": "Aggiungi Asset",
+        "opt2": "Vedi Assets",
+        "opt3": "Aggiungi Crypto Wallet"
+      },
+      "mobileBtn": {
+        "opt1": "Aggiungi Crypto Wallet",
+        "opt2": "Operazioni",
+        "opt3": "Crypto Resume",
+        "opt4": "Impostazioni"
+      },
+      "performanceCard": {
+        "title": "Bitcoin Daily Change",
+        "view": "Vedi",
+        "holding": "Holding Performance",
+        "trading": "Trading Performance",
+        "performance": "Performance",
+        "lastUpdate": "Ultimo aggiornameneto"
+      },
+      "assetsCard": {
+        "title": "I miei Assets",
+        "view": "Vedi",
+        "assetGraph": "Grafico Cryptocurrency"
+      },
+      "marketData": {
+        "title": "Market Data",
+        "view": "Vedi"
+      }
+    },
+    "asset": {
+      "title": "Crypto Assets",
+      "assetList": "Lista Asset",
+      "assetGraph": "Grafico Asset",
+      "tab1": "Overview",
+      "tab2": "Dati TradingView",
+      "tab3": "Grafico Avanzato",
+      "show": "Mostra con Saldo Zero",
+      "hidden": "Nascondi con Saldo Zero",
+      "details": {
+        "overview": {
+          "rank": "Rank",
+          "identifier": "Identificativo",
+          "balance": "Saldo",
+          "value": "Saldo Totale in ",
+          "invested": "Saldo Investito",
+          "editInvested": "Modifica Investiti",
+          "editBalance": "Modifica Saldo",
+          "save": "Salva",
+          "cancel": "Cancella",
+          "performance": "Performance dall'inizio",
+          "trend": "Trend dall'inizio",
+          "wallets": "Wallet possedenti ",
+          "operations": "Operazioni",
+          "view": "Vedi",
+          "price": "Prezzo",
+          "invest": "Investito",
+          "on": "il",
+          "more": "Vedi tutti"
+        }
+      }
+    },
+    "resume": {
+      "title": "Riepilogo Crypto",
+      "tab": {
+        "tab1": "Holding",
+        "tab2": "Trading",
+        "tab3": "Investimenti"
+      },
+      "assetList": "Asset in possesso",
+      "graphAsset": "Performance",
+      "tableAsset": "Storico performance annuale",
+      "warning": "Aggiungi un nuovo crypto stats per ottenere dei dati",
+      "investments": {
+        "price": {
+          "title": "Media di acquisto della currency",
+          "table": {
+            "tab1": "Asset",
+            "tab2": "Quantità",
+            "tab3": "Investito",
+            "tab4": "Media Asset",
+            "tab5": "MarketData Saldo",
+            "tab6": "Saldo Attuale",
+            "tab7": "Tendenza +/-",
+            "tab8": "Performance"
+          }
+        }
+      },
+      "trading": {
+        "table": {
+          "title": "Trading Performance, Saldo iniziale",
+          "tab1": "Data ingresso",
+          "tab2": "Scambio",
+          "tab3": "Quantità",
+          "tab4": "Prezzo",
+          "tab5": "Totale",
+          "tab6": "Data di uscita",
+          "tab7": "Quantità",
+          "tab8": "Prezzo",
+          "tab9": "Totale",
+          "tab10": "Trend",
+          "tab11": "Totale Trend",
+          "tab12": "Saldo"
+        }
+      }
+    },
+    "marketData": {
+      "title": "Market Data",
+      "currency": "Moneta:",
+      "updated": "Aggiornato il:",
+      "search": "Cerca un'asset",
+      "table": {
+        "tab1": "Rank",
+        "tab2": "Asset",
+        "tab3": "Prezzo",
+        "tab4": "Performance 24h",
+        "tab5": "Massimo 24h",
+        "tab6": "Minimo 24h",
+        "tab7": "Mkt Cap"
+      }
+    },
+    "operationExchange": {
+      "history": "Storico Operazioni",
+      "balance": "Saldo :",
+      "type": "Tipo Operazione",
+      "from": "Da",
+      "to": "A",
+      "commition": "Commissioni : <strong> Incluse</strong>",
+      "last": "Data :",
+      "warningBalance": "Il saldo inserito supera il massimo amount disponibile",
+      "exchange": "Exchange",
+      "warning": "Asset non presente nel portafoglio corrente, aggiungere nuovo asset e inserire del saldo da nuovo investimento per procedere!",
+      "price": "Modifica il prezzo d'acquisto di",
+      "newPrice": "Inserisci un nuovo saldo",
+      "date": "Modifica la data di acquisto",
+      "save": "Salva",
+      "select": "Seleziona il portafoglio dove ricevere l'asset",
+      "fees": "Fees",
+      "editFees": "Modifica Fees in",
+      "updateFees": "Aggiorna Fees"
+    },
+    "operationDetails": {
+      "identifier": "Identificativo Operazione",
+      "title": "Dettagli",
+      "close": "Chiudi",
+      "status": "Stato",
+      "type": "Tipo Operazione",
+      "currency": "Moneta",
+      "entry": "Data Ingresso",
+      "entryPrice": "Prezzo d'ingresso",
+      "value": "Valore",
+      "quantity": "Quantità",
+      "exit": "Data di uscita",
+      "exitPrice": "Prezzo d'uscita",
+      "fees": "Fees"
+    },
+    "closeOperation": {
+      "title": "Chiudi Operazione",
+      "subTitle": "Stai per chiudere l'operazione di trading corrente. Verifica e conferma il prezzo di uscita e la quantità. Se noti delle discrepanze o desideri apportare modifiche, clicca su <strong>'Modifica'</strong>. Una volta confermato, procedi con la chiusura.",
+      "open": "Posizione aperta su",
+      "closeP": "Posizione chiusa per",
+      "pair": "Trading Pair",
+      "quantity": "Quantità",
+      "value": "Eseguiti",
+      "fees": "Commissione",
+      "price": "Prezzo d'acquisto di",
+      "sellPrice": "Prezzo di vendita di",
+      "edit": "Modifica",
+      "save": "Salva",
+      "selling": "Prezzo di vendita",
+      "amount": "Saldo",
+      "close": "Exchange"
+    },
+    "cryptoModal": {
+      "addAsset": {
+        "title": "Importa un Asset",
+        "selectWalletTitle": "Seleziona Wallet",
+        "selectWalletSubTitle": "Seleziona un Wallet su cui aggiungere un Asset",
+        "selectedWallet": "Wallet Selezionato",
+        "currentBalance": "Il Saldo corrente è ",
+        "searchAsset": "Filtra un Asset",
+        "selectAsset": "Seleziona un Asset",
+        "selectedAsset": "Asset Selezionato",
+        "add": "Aggiungi Asset",
+        "warning": "L'Asset selezionato esiste già",
+        "balance": "Saldo",
+        "balancePla": "Inserisci il tuo saldo in ",
+        "invested": "Investito",
+        "investedPla": "Inserisci l'importo investito in "
+      },
+      "editAsset": {
+        "title": "Modifica Asset "
+      },
+      "selectCurrency": {
+        "title": "Seleziona Crypto Currency",
+        "subtitle": "Completa il form selzionando una Crypto currency",
+        "save": "Salva"
+      },
+      "operations": {
+        "title": "Aggiungi Operazione",
+        "subTitle": "Seleziona cosa desideri fare",
+        "stats": {
+          "title": "Aggiungi Stats",
+          "subTitle": "Aggiungi nuovo stats per l'asset corrente in tutti i tuoi portafogli",
+          "resumeTitle": "Riepilogo Stats",
+          "resumeSubTitle": "Riepilogo Stats, Salva per confermare l'operazione",
+          "next": "Prossimo Asset",
+          "save": "Salva Stats"
+        },
+        "operation": {
+          "title": "Aggiungi Operazione",
+          "subTitle": "Aggiungi una nuova operazione, investi moneta FIAT, apri una nuova Posizione Holding o Trading.",
+          "selectOperation": "Seleziona Operazione",
+          "selectDescription": "Selezione l'operazione che desideri effettuare.",
+          "selectType": "Conferma",
+          "selectWallet": "Seleziona Portafoglio",
+          "selectWalletDesc": "Seleziona il portafoglio dove effettuare l'investimento."
+        }
+      },
+      "info": {
+        "operation": {
+          "title": "Aggiungi Operazione",
+          "details": "Aggiungere un'operazione significa che puoi investire della moneta FIAT in Crypto selezionando l'opzione New investment, per aprire un'operazione Holding, che consiste nel trasferimento da Stable Coin a Crypto o Viceversa ed infine l'opzione Trading, che ti permette di aprire e chiudere un'operazione tra Stable Coin e Crypto con le relative statistiche."
+        },
+        "newInvestment": {
+          "title": "Nuovo Investimento",
+          "details": "In questa sezione puoi aggiungere un nuovo investimento, dal tuo portafoglio personale (Non è necessario specificare il portafoglio personale) nel tuo <strong>Crypto Wallet</strong>, verrà registrata una nuova operazione ed aggiornato o aggiunto l'asset corrente."
+        },
+        "holding": {
+          "title": "Holding",
+          "details": "In questa sezione puoi effettuare un'operazione di Holding.<br>Scegli l'<strong>Asset</strong> che vuoi utilizzare per l'investimento dal tuo portafoglio e l'<strong>Asset</strong> che vuoi acquistare.<br >Calcolerà automaticamente anche la percentuale di denaro investito trasferito sul nuovo conto.<br>Puoi sempre modificare il balance e il saldo investito nella pagina Dettagli del'Asset, nell'elenco dei portafogli."
+        },
+        "trading": {
+          "title": "Trading",
+          "details": "<p>La sezione Trading di MoneyStats ti permette di eseguire operazioni di trading direttamente dal tuo wallet. Puoi effettuare scambi tra <strong>Stablecoin</strong> e <strong>Cryptocurrency</strong>, con una interfaccia intuitiva e sicura. Le transazioni sono monitorate in tempo reale e, per una maggiore gestione, le operazioni aperte possono essere visionate e chiuse nella sezione <strong>Resume</strong> dell'applicazione.</p>"
+        },
+        "closeOperation": {
+          "title": "Chiudi Operazione",
+          "details": "<p>Stai per procedere con la chiusura dell'operazione corrente. Questa sezione ti permette di confermare o modificare i dettagli essenziali dell'operazione prima di finalizzarla.</p><h5>Dettagli dell'Operazione:</h5><ul><li><strong>Prezzo di Uscita:</strong> Questo rappresenta il prezzo al quale intendi vendere l'asset. Assicurati che rifletta le tue aspettative e le condizioni attuali del mercato.</li><li><strong>Quantità:</strong> Questa è la quantità dell'asset che intendi vendere. Assicurati che corrisponda alla quantità effettivamente detenuta.</li></ul><p>Se ritieni che ci siano discrepanze nei dati sopra indicati o desideri apportare modifiche, <button>Modifica</button> per aggiornare i dettagli dell'operazione.</p><p>Una volta che sei soddisfatto delle informazioni inserite, puoi procedere con la chiusura dell'operazione. Ricorda di operare con prudenza e di prendere decisioni informate.</p>"
+        },
+        "transfer": {
+          "title": "Crypto Transfer",
+          "details": "In questa sezione, puoi facilmente trasferire i tuoi asset da un wallet all'altro. Scegli il tuo <strong>wallet di destinazione</strong>, seleziona l'<strong>asset crypto</strong> desiderato e imposta la quantità che desideri spostare. Hai anche la possibilità di definire eventuali <strong>fees</strong> per garantire una transazione tempestiva e sicura. Assicurati di verificare attentamente tutti i dettagli prima di confermare il trasferimento."
+        },
+        "close": "Chiudi"
+      }
+    }
+  },
+  "exception": {
+    "ERR_AUTH_MSS_001": {
+      "status": "Non autorizzato",
+      "exception": "Credenziali Sbagliate",
+      "message": "Lo username o la password inserita sono errate, prova nuovamente!"
+    },
+    "ERR_AUTH_MSS_003": {
+      "status": "Errore",
+      "exception": "Chiave Duplicata",
+      "message": "La chiave corrente $KEY$ è statagià registrata, usare una nuova chiave."
+    },
+    "ERR_AUTH_MSS_004": {
+      "status": "Errore Interno",
+      "exception": "Errore Sconosciuto",
+      "message": "Un errore sconosciuto è apparso durante il processo, prova nuovamente."
+    },
+    "ERR_AUTH_MSS_005": {
+      "status": "Errore",
+      "exception": "Codice invito non valido",
+      "message": "Il codice d'invito fornito è errato o non valido, prova nuovamente."
+    },
+    "ERR_AUTH_MSS_006": {
+      "status": "Errore",
+      "exception": "Email non valida",
+      "message": "L'emaii inserita non è stata trovata, prova nuovamente."
+    }
+  },
+  "copyright": "Copyright © MoneyStats 2024. All Rights Reserved."
 }

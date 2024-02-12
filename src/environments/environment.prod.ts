@@ -1,10 +1,13 @@
 //const baseUrlApp: string = '../../';
 const baseUrlApp: string = 'https://moneystats.github.io/App/';
-const host: string = 'https://oraclewebserver.ddns.net/prod-moneystats-service';
-const subDomain = '';
+const host: string = 'https://prd.moneystats.service.hostwebserver.site';
+//const host: string = 'https://oraclewebserver.ddns.net/prod-moneystats-service';
+export const subDomain = '';
 
 export const environment = {
+  envType: 'PROD',
   production: true,
+  subDomain: subDomain,
   baseUrl: baseUrlApp,
   baseUrlHeader: baseUrlApp,
   baseUrlSettings: baseUrlApp,
@@ -15,7 +18,8 @@ export const environment = {
   //baseUrlSettings: '../../../../../' + subDomain,
   //baseUrlDashboard: '../../../' + subDomain,
   //baseUrlVersion: '../../../../../../' + subDomain,
-  version: '1.0.1',
+  version: '2.0.0',
+  hostService: host + subDomain,
 
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
@@ -23,6 +27,12 @@ export const environment = {
   getWalletDataUrl: baseUrlApp + 'assets/core/mock/wallets.mock.json',
   getResumeDataUrlMock: baseUrlApp + 'assets/core/mock/stats.mock.json',
   getTemplate: baseUrlApp + 'assets/template/template.json',
+  getCryptoDashboardMock: baseUrlApp + 'assets/core/mock/crypto.dash.mock.json',
+  getCryptoPriceMock: baseUrlApp + 'assets/core/mock/crypto.price.mock.json',
+  getCryptoResumeMock: baseUrlApp + 'assets/core/mock/crypto.stats.mock.json',
+  getCryptoAssetsMock: baseUrlApp + 'assets/core/mock/crypto.assets.mock.json',
+  getCryptoDetailsMock:
+    baseUrlApp + 'assets/core/mock/crypto.details.mock.json',
 
   // Datas
   registerDataUrl: host + '/v1/auth/sign-up',
@@ -43,4 +53,20 @@ export const environment = {
   backupDataUrl: host + '/v1/app/backup',
   restoreDataUrl: host + '/v1/app/restore',
   forgotPassword: true,
+
+  /*
+   * Crypto Section
+   */
+  cleanCacheUrl: host + '/v1/crypto/cache/clean',
+  marketDataUrl: host + '/v1/crypto/marketData/import',
+  addCryptoAssetDataUrl: host + '/v1/crypto/asset/addOrUpdate',
+  addCryptoAssetsDataUrl: host + '/v1/crypto/asset/list/addOrUpdate',
+  getCryptoAssetDataUrl: host + '/v1/crypto/asset/getAll',
+  getCryptoDetailsDataUrl: host + '/v1/crypto/asset/get',
+  getCryptoDashboardDataUrl: host + '/v1/crypto/dashboard',
+  getCryptoResumeDataUrl: host + '/v1/crypto/resume',
+  getMarketDataUrl: host + '/v1/market-data/get',
+
+  // Cache
+  cacheTimeout: 360000,
 };

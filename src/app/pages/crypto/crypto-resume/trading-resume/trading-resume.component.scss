@@ -1,0 +1,25 @@
+.transactions {
+  margin: 0px;
+}
+
+@media screen and (max-width: 780px) {
+  .transactions {
+    margin-left: -10px !important;
+    margin-right: -10px !important;
+  }
+  .inner-round {
+    min-height: 200px !important;
+  }
+  .cards-op {
+    margin-left: -10px !important;
+    margin-right: -10px !important;
+    margin-bottom: 15px;
+  }
+}
+.round-img {
+  border-radius: 50%;
+}
+
+.inner-round {
+  min-height: 350px;
+}

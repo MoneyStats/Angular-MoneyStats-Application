@@ -34,7 +34,7 @@ export class WalletService {
       return this.http.get<ResponseModel>(environment.getWalletDataUrl);
     } else {
       const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
-      const headers = new HttpHeaders({ authToken: authToken! });
+      const headers = new HttpHeaders({ Authorization: authToken! });
       return this.http.get<ResponseModel>(environment.listWalletDataurl, {
         headers: headers,
       });
@@ -49,7 +49,7 @@ export class WalletService {
     } else {
       const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
       const headers = new HttpHeaders({
-        authToken: authToken!,
+        Authorization: authToken!,
       });
       return this.http.post<ResponseModel>(
         environment.addUpdateWalletDataUrl,
@@ -58,6 +58,4 @@ export class WalletService {
       );
     }
   }
-
-  
 }

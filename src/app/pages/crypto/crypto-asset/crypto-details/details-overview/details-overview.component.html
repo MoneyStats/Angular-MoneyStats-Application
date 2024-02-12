@@ -1,0 +1,718 @@
+<div class="row">
+  <div class="col-md-7">
+    <div class="section mt-2">
+      <div class="card border_round">
+        <div class="card-body pt-1">
+          <!-- tabs -->
+          <ul class="nav nav-tabs lined" role="tablist">
+            <li class="nav-item">
+              <a
+                class="nav-link graph-tab active"
+                data-bs-toggle="tab"
+                href="#tab-1y"
+                role="tab"
+                (click)="graph1Y()"
+              >
+                {{ thisYear }}
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link graph-tab"
+                data-bs-toggle="tab"
+                href="#tab-3y"
+                role="tab"
+                (click)="graph3Y()"
+              >
+                3Y
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link graph-tab"
+                data-bs-toggle="tab"
+                href="#tab-all"
+                role="tab"
+                (click)="graphAll()"
+              >
+                All
+              </a>
+            </li>
+          </ul>
+          <!-- * tabs -->
+        </div>
+
+        <!-- tab content -->
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="tab-1y" role="tabpanel">
+            <div class="inner-round">
+              <div
+                *ngIf="!chart1Y"
+                class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
+              >
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <apx-chart
+                *ngIf="chart1Y"
+                [series]="chart1Y.series!"
+                [chart]="chart1Y.chart!"
+                [title]="chart1Y.title!"
+                [colors]="chart1Y.colors!"
+                [legend]="chart1Y.legend!"
+                [stroke]="chart1Y.stroke!"
+                [labels]="chart1Y.labels!"
+                type="area"
+              ></apx-chart>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="tab-3y" role="tabpanel">
+            <div class="inner-round">
+              <div
+                *ngIf="!chart3Y"
+                class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
+              >
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <apx-chart
+                *ngIf="chart3Y"
+                [series]="chart3Y.series!"
+                [chart]="chart3Y.chart!"
+                [title]="chart3Y.title!"
+                [colors]="chart3Y.colors!"
+                [legend]="chart3Y.legend!"
+                [stroke]="chart3Y.stroke!"
+                [labels]="chart3Y.labels!"
+                type="area"
+              ></apx-chart>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="tab-all" role="tabpanel">
+            <div class="inner-round">
+              <div
+                *ngIf="!chartOptions"
+                class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
+              >
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <apx-chart
+                *ngIf="chartOptions"
+                [series]="chartOptions.series!"
+                [chart]="chartOptions.chart!"
+                [title]="chartOptions.title!"
+                [colors]="chartOptions.colors!"
+                [legend]="chartOptions.legend!"
+                [stroke]="chartOptions.stroke!"
+                [labels]="chartOptions.labels!"
+                type="area"
+                class="border_round"
+              ></apx-chart>
+            </div>
+          </div>
+        </div>
+        <!-- * tab content -->
+      </div>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <!-- Stats -->
+    <div class="section mt-2 mb-4">
+      <div class="card border_round">
+        <ul class="listview no-line transparent flush simple-listview">
+          <li>
+            <div class="text-muted">
+              {{ "crypto.asset.details.overview.rank" | translate }}
+            </div>
+            <strong>#{{ asset.rank }}</strong>
+          </li>
+          <li>
+            <div class="text-muted">
+              {{ "crypto.asset.details.overview.identifier" | translate }}
+            </div>
+            <strong>{{ asset.identifier }}</strong>
+          </li>
+          <li>
+            <div class="text-muted">
+              {{ "crypto.asset.details.overview.balance" | translate }}
+            </div>
+            <strong
+              >{{ hidden ? amount : asset.balance }} {{ asset.symbol }}</strong
+            >
+          </li>
+          <li>
+            <div class="text-muted">
+              {{ "crypto.asset.details.overview.value" | translate
+              }}{{ cryptoService.currency }}
+            </div>
+            <strong
+              >{{ cryptoService.currency }}
+              {{ hidden ? amount : asset.value }}</strong
+            >
+          </li>
+          <li>
+            <div class="text-muted">
+              {{ "crypto.asset.details.overview.invested" | translate }}
+            </div>
+            <strong
+              >{{ cryptoService.currency }}
+              {{ hidden ? amount : asset.invested }}</strong
+            >
+          </li>
+          <li>
+            <div class="text-muted">
+              {{ "crypto.asset.details.overview.performance" | translate }}
+            </div>
+            <strong
+              ><span
+                class="badge {{
+                  ((asset.value! - asset.invested!) / asset.invested!) * 100! ==
+                  0
+                    ? 'badge-warning'
+                    : ((asset.value! - asset.invested!) / asset.invested!) *
+                        100! >
+                      0
+                    ? 'badge-success'
+                    : 'badge-danger'
+                }}"
+              >
+                <ion-icon
+                  name="{{
+                    ((asset.value! - asset.invested!) / asset.invested!) *
+                      100! ==
+                    0
+                      ? 'arrow-down-outline'
+                      : ((asset.value! - asset.invested!) / asset.invested!) *
+                          100! >
+                        0
+                      ? 'arrow-up-outline'
+                      : 'arrow-down-outline'
+                  }}"
+                ></ion-icon>
+                {{
+                  (
+                    ((asset.value! - asset.invested!) / asset.invested!) *
+                    100!
+                  ).toFixed(2)
+                }}%
+              </span></strong
+            >
+          </li>
+          <li>
+            <div class="text-muted">
+              {{ "crypto.asset.details.overview.trend" | translate }}
+            </div>
+            <strong
+              class="{{
+                (asset.value! - asset.invested!)! == 0
+                  ? 'text-warning'
+                  : (asset.value! - asset.invested!)! > 0
+                  ? 'text-success'
+                  : 'text-danger'
+              }}"
+              >{{ cryptoDashboard.currency }}
+              {{
+                hidden ? amount : (asset.value! - asset.invested!).toFixed(2)
+              }}</strong
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="card border_round mt-2">
+        <div class="card-body">
+          <div class="row mb-05 fontsize-sub">
+            <div class="col text-success">
+              <strong
+                >{{ percentageAssetInTotal() | number : "1.0-2" }}%
+              </strong>
+            </div>
+            <div class="col text-secondary text-end">
+              <strong
+                >{{ cryptoService.currency }}
+                {{ hidden ? amount : cryptoDashboard.balance }}</strong
+              >
+            </div>
+          </div>
+          <div class="progress">
+            <div
+              class="progress-bar bg-success"
+              role="progressbar"
+              attr.style="width: {{
+                percentageAssetInTotal() | number : '1.0-2'
+              }}%"
+              attr.aria-valuenow="{{
+                percentageAssetInTotal() | number : '1.0-2'
+              }}"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+            <div
+              class="progress-bar bg-secondary"
+              role="progressbar"
+              attr.style="width: {{
+                100 - percentageAssetInTotal() | number : '1.0-2'
+              }}%"
+              attr.aria-valuenow="{{
+                100 - percentageAssetInTotal() | number : '1.0-2'
+              }}"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Stats -->
+  </div>
+  <div class="col-md-12">
+    <div class="section inset mb-0">
+      <div class="section-heading mb-1">
+        <div class="section-title">
+          {{ "crypto.asset.details.overview.wallets" | translate
+          }}{{ asset.name }}
+        </div>
+        <a
+          *ngIf="!showZeroBalance"
+          (click)="zeroBalanceSwitch()"
+          class="link clickable"
+        >
+          <ion-icon
+            name="eye-outline"
+            style="width: 20px; height: 20px; vertical-align: -5px"
+          ></ion-icon>
+          {{ "crypto.asset.show" | translate }}</a
+        >
+        <a
+          *ngIf="showZeroBalance"
+          (click)="zeroBalanceSwitch()"
+          class="link clickable"
+        >
+          <ion-icon
+            name="eye-off-outline"
+            style="width: 20px; height: 20px; vertical-align: -5px"
+          ></ion-icon>
+          {{ "crypto.asset.hidden" | translate }}</a
+        >
+      </div>
+      <div class="accordion border_round" id="accordionExample2">
+        <div class="accordion-item" *ngFor="let wallet of walletsAsset">
+          <h2
+            class="accordion-header"
+            *ngIf="
+              !showZeroBalance
+                ? wallet.assets[0].balance > 0
+                : wallet.assets[0].balance >= 0
+            "
+          >
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              attr.data-bs-target="#{{ wallet.name.split('.')[0] + wallet.id }}"
+            >
+              <img
+                src="{{ wallet.img }}"
+                alt="avatar"
+                class="imaged d-inline w30 rounded me-2 ms-1"
+              />
+              <div class="accordion-wallet-name">{{ wallet.name }}</div>
+              <div class="title-section text-end accordion-right-title">
+                <h5 class="card-text fs-3">
+                  {{ hidden ? amount : wallet.assets[0].value }}
+                  <small>{{ cryptoDashboard.currency }}</small>
+                </h5>
+                <p style="margin-top: -15px">
+                  <small
+                    >{{
+                      hidden ? amount : wallet.assets[0].balance.toFixed(8)
+                    }}
+                    {{ asset.symbol }}</small
+                  >
+                </p>
+              </div>
+              <div class="space"></div>
+            </button>
+          </h2>
+          <div
+            id="{{ wallet.name.split('.')[0] + wallet.id }}"
+            class="accordion-collapse collapse"
+            data-bs-parent="#accordionExample2"
+            *ngIf="
+              !showZeroBalance
+                ? wallet.assets[0].balance > 0
+                : wallet.assets[0].balance >= 0
+            "
+          >
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col-6 text-center">
+                  <div class="text-muted" *ngIf="!isEditInvestmentActive">
+                    {{ "crypto.asset.details.overview.invested" | translate }}
+                  </div>
+                  <strong
+                    class="clickable"
+                    *ngIf="!isEditInvestmentActive"
+                    (click)="isEditInvestmentActive = true"
+                    ><p>
+                      {{ hidden ? amount : wallet.assets[0].invested }}
+                      {{ cryptoDashboard.currency }}
+                      <ion-icon
+                        style="vertical-align: -1px"
+                        name="create-outline"
+                      ></ion-icon>
+                    </p>
+                  </strong>
+                  <form
+                    *ngIf="isEditInvestmentActive"
+                    #f="ngForm"
+                    type="submit"
+                  >
+                    <div class="form-group boxed row">
+                      <div class="input-wrapper col-md-5 col-12 text-end">
+                        <label class="label" for="select4">{{
+                          "crypto.asset.details.overview.editInvested"
+                            | translate
+                        }}</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="investment"
+                          name="investment"
+                          required
+                          [(ngModel)]="wallet.assets[0].invested"
+                          #investment1="ngModel"
+                        />
+                        <i class="clear-input">
+                          <ion-icon name="close-circle"></ion-icon>
+                        </i>
+                      </div>
+                      <div class="input-wrapper col-md-5 col-12 text-end">
+                        <label class="label" for="select4">{{
+                          "crypto.asset.details.overview.editBalance"
+                            | translate
+                        }}</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="balance"
+                          name="balance"
+                          required
+                          [(ngModel)]="wallet.assets[0].balance"
+                          #investment1="ngModel"
+                          min="0.00000000"
+                        />
+                        <i class="clear-input">
+                          <ion-icon name="close-circle"></ion-icon>
+                        </i>
+                      </div>
+                      <div class="col-md-2 col-12 text-start d-flex mt-3">
+                        <button
+                          [disabled]="f.invalid"
+                          (click)="updateInvestment(wallet)"
+                          type="button"
+                          class="btn btn-outline-primary rounded shadowed me-1 mb-1 d-inline"
+                        >
+                          {{ "crypto.asset.details.overview.save" | translate }}
+                        </button>
+                        <button
+                          (click)="isEditInvestmentActive = false"
+                          type="button"
+                          class="btn btn-outline-secondary rounded shadowed me-1 mb-1 d-inline"
+                        >
+                          {{
+                            "crypto.asset.details.overview.cancel" | translate
+                          }}
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="col-6 text-center">
+                  <div class="text-muted">
+                    {{
+                      "crypto.asset.details.overview.performance" | translate
+                    }}
+                  </div>
+                  <strong
+                    class="{{
+                      wallet.assets[0].value! - wallet.assets[0].invested! == 0
+                        ? 'text-warning'
+                        : wallet.assets[0].value! - wallet.assets[0].invested! >
+                          0
+                        ? 'text-success'
+                        : 'text-danger'
+                    }}"
+                    >{{
+                      hidden
+                        ? amount
+                        : (
+                            wallet.assets[0].value! - wallet.assets[0].invested!
+                          ).toFixed(2)
+                    }}
+                    {{ cryptoDashboard.currency }}
+                    <span
+                      class="badge {{
+                        ((wallet.assets[0].value! -
+                          wallet.assets[0].invested!) /
+                          wallet.assets[0].invested!) *
+                          100! ==
+                        0
+                          ? 'badge-warning'
+                          : ((wallet.assets[0].value! -
+                              wallet.assets[0].invested!) /
+                              wallet.assets[0].invested!) *
+                              100! >
+                            0
+                          ? 'badge-success'
+                          : 'badge-danger'
+                      }}"
+                    >
+                      <ion-icon
+                        name="{{
+                          ((wallet.assets[0].value! -
+                            wallet.assets[0].invested!) /
+                            wallet.assets[0].invested!) *
+                            100! ==
+                          0
+                            ? 'arrow-down-outline'
+                            : ((wallet.assets[0].value! -
+                                wallet.assets[0].invested!) /
+                                wallet.assets[0].invested!) *
+                                100! >
+                              0
+                            ? 'arrow-up-outline'
+                            : 'arrow-down-outline'
+                        }}"
+                      ></ion-icon>
+                      {{
+                        hidden
+                          ? amount
+                          : (
+                              ((wallet.assets[0].value! -
+                                wallet.assets[0].invested!) /
+                                wallet.assets[0].invested!) *
+                              100!
+                            ).toFixed(2)
+                      }}%
+                    </span></strong
+                  >
+                </div>
+              </div>
+              <hr />
+              <div
+                *ngIf="validateWallet(wallet)"
+                class="alert alert-secondary mb-1 text-center"
+                role="alert"
+              >
+                <div *ngIf="wallet.type == 'Trading'">
+                  {{ "crypto.asset.details.overview.info-trading" | translate }}
+                </div>
+                <div
+                  *ngIf="
+                    wallet.type != 'Trading' &&
+                    wallet.assets[0].history?.length == 0
+                  "
+                >
+                  {{
+                    "crypto.asset.details.overview.warning-empty-wallets"
+                      | translate
+                  }}
+                </div>
+              </div>
+              <div class="card section-3">
+                <ul
+                  class="listview flush transparent no-line image-listview detailed-list"
+                >
+                  <!-- item -->
+                  <li
+                    *ngFor="
+                      let history of wallet.assets[0].history!.slice().reverse()
+                    "
+                  >
+                    <div class="item">
+                      <div
+                        class="icon-box {{
+                          history.trend == 0
+                            ? 'text-warning'
+                            : history.trend > 0
+                            ? 'text-success'
+                            : 'text-danger'
+                        }} "
+                      >
+                        <ion-icon
+                          name="{{
+                            history.trend == 0
+                              ? 'trending-down-outline'
+                              : history.trend > 0
+                              ? 'trending-up-outline'
+                              : 'trending-down-outline'
+                          }}"
+                        ></ion-icon>
+                      </div>
+                      <div class="in">
+                        <div>
+                          <strong>{{ wallet.assets[0].name }}</strong>
+                          <div class="text-small text-secondary">
+                            {{ history.date | date : "dd MMM y" }}
+                          </div>
+                        </div>
+                        <div class="text-end">
+                          <strong
+                            >{{ cryptoDashboard.currency }}
+                            {{ hidden ? amount : history.balance }}</strong
+                          >
+                          <div class="text-small">
+                            <span
+                              class="badge {{
+                                history.trend == 0
+                                  ? 'text-warning'
+                                  : history.trend > 0
+                                  ? 'badge-success'
+                                  : 'badge-danger'
+                              }} "
+                            >
+                              <ion-icon
+                                name="{{
+                                  history.trend == 0
+                                    ? 'trending-down-outline'
+                                    : history.trend > 0
+                                    ? 'arrow-up-outline'
+                                    : 'arrow-down-outline'
+                                }}"
+                              ></ion-icon>
+                              {{ history.percentage }}%
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- * item -->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="col-md-12 spaceOp"
+    *ngIf="asset.operations && asset.operations.length > 0"
+  >
+    <!-- History -->
+    <div class="section mt-4">
+      <div class="section-heading">
+        <h2 class="title">
+          {{ "crypto.asset.details.overview.operations" | translate }}
+        </h2>
+        <a (click)="goToOperations()" class="link clickable">{{
+          "crypto.asset.details.overview.view" | translate
+        }}</a>
+      </div>
+      <app-operations-list
+        [modalID]="modalConstant.CRYPTOOPERATIONDETAILS"
+        [cryptoDashboard]="cryptoDashboard"
+        [walletsAsset]="walletsAsset"
+        [isAssetOperations]="true"
+      ></app-operations-list>
+      <!--<div class="card border_round">
+        <ul
+          class="listview flush transparent no-line image-listview detailed-list border_round"
+          *ngFor="let operation of getOperations(); let i = index"
+        >
+
+          <li *ngIf="i < 4">
+            <a
+              class="item"
+              (click)="selectOperation(operation)"
+              data-bs-toggle="modal"
+              attr.data-bs-target="#{{ modalConstant.CRYPTOOPERATIONDETAILS }}"
+            >
+              <div
+                class="icon-box-c me-2"
+                *ngIf="operation.type == operationTypeConstant.NEWINVESTMENT"
+              >
+                <img
+                  class="rounded-pill"
+                  src="{{ operation.wallet.img }}"
+                  alt=""
+                />
+              </div>
+              <div
+                class="icon-box-c me-4"
+                *ngIf="operation.type != operationTypeConstant.NEWINVESTMENT"
+              >
+                <img
+                  class="rounded-pill img1"
+                  src="{{ operation?.assetSell?.icon }}"
+                  alt=""
+                />
+                <img
+                  class="rounded-pill img2"
+                  src="{{ operation?.asset?.icon }}"
+                  alt=""
+                />
+              </div>
+              <div class="in">
+                <div>
+                  <strong>{{ operation.wallet.name }}</strong>
+                  <div class="text-small text-secondary">
+                    {{ operation.wallet.assets[0].name }}
+                    {{ "crypto.asset.details.overview.price" | translate }}
+                    {{ operation.exitPrice }}
+                    {{ cryptoDashboard.currency }}
+                  </div>
+                  <div class="text-small text-secondary">
+                    <strong>{{ operation.type }}</strong> #{{ operation.id }}
+                  </div>
+                </div>
+                <div class="text-end">
+                  <strong
+                    >{{ operation.exitQuantity }}
+                    {{ operation.wallet.assets[0].symbol }}</strong
+                  >
+                  <div class="text-small">
+                    <span
+                      class="badge {{
+                        operation.status == 'CLOSED'
+                          ? 'badge-danger'
+                          : 'badge-success'
+                      }} "
+                      >{{ operation.status }}</span
+                    >
+                  </div>
+
+                  <div class="text-small">
+                    {{ "crypto.asset.details.overview.invest" | translate }}
+                    <strong
+                      >{{ operation.entryPriceValue }}
+                      {{ cryptoDashboard.currency }}</strong
+                    >
+                    {{ "crypto.asset.details.overview.on" | translate }}
+                    {{ operation.exitDate | date : "d MMM yy" }}
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <div class="card-body pt-0">
+          <a
+            class="btn btn-block btn-outline-secondary"
+            (click)="goToOperations()"
+            >{{ "crypto.asset.details.overview.more" | translate }}</a
+          >
+        </div>
+      </div>-->
+    </div>
+    <!-- History -->
+  </div>
+</div>

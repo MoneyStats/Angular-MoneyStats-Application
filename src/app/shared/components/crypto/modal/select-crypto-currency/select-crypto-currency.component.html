@@ -1,0 +1,94 @@
+<!-- Send Action Sheet -->
+<div
+  class="modal fade action-sheet"
+  id="{{ modalId }}"
+  tabindex="-1"
+  role="dialog"
+  data-bs-focus="false"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal-round mx-auto">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{ "crypto.cryptoModal.selectCurrency.title" | translate }}
+        </h5>
+      </div>
+      <div class="modal-body">
+        <form #f="ngForm" type="submit">
+          <div class="action-sheet-content">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card-title">
+                  <h2 class="modal-title d-inline" style="vertical-align: -4px">
+                    {{ "crypto.cryptoModal.selectCurrency.title" | translate }}
+                  </h2>
+                  <p>
+                    <small>{{
+                      "crypto.cryptoModal.selectCurrency.subtitle" | translate
+                    }}</small>
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group boxed">
+                  <div class="input-wrapper">
+                    <select
+                      class="form-control custom-select"
+                      id="currency"
+                      name="wallet"
+                      class="form-control"
+                      required
+                      rows="5"
+                      [(ngModel)]="currency"
+                      #currency1="ngModel"
+                    >
+                      <option [value]="currency" selected disabled>
+                        {{
+                          "crypto.cryptoModal.selectCurrency.title" | translate
+                        }}
+                      </option>
+                      <option
+                        *ngFor="let curr of currencies"
+                        [selected]="currency == curr"
+                        value="{{ curr }}"
+                      >
+                        {{ curr }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Desktop Button -->
+            <div class="addWallet text-end hidden_mobile">
+              <button
+                [disabled]="f.invalid"
+                type="button"
+                class="btn btn-primary me-1 mb-1"
+                data-bs-dismiss="modal"
+                (click)="selectCurrency()"
+              >
+                {{ "crypto.cryptoModal.selectCurrency.save" | translate }}
+              </button>
+            </div>
+
+            <!-- Mobile Button -->
+            <div class="mt-1 form-group basic hidden_desktop">
+              <button
+                [disabled]="f.invalid"
+                type="button"
+                class="btn btn-primary btn-block btn-lg"
+                data-bs-dismiss="modal"
+                (click)="selectCurrency()"
+              >
+                {{ "crypto.cryptoModal.selectCurrency.save" | translate }}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- * Send Action Sheet -->

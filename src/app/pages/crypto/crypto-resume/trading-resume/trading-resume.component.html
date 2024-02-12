@@ -1,0 +1,190 @@
+<div class="transactions row">
+  <div
+    *ngIf="trading && trading?.labels?.length != 1"
+    class="section col-xl-12"
+  >
+    <div class="section-title">
+      {{ "crypto.resume.graphAsset" | translate }}
+    </div>
+    <div class="card inner-round border_round">
+      <div
+        *ngIf="!trading"
+        class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
+      >
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <apx-chart
+        *ngIf="trading"
+        [series]="trading.series!"
+        [chart]="trading.chart!"
+        [title]="trading.title!"
+        [colors]="trading.colors!"
+        [legend]="trading.legend!"
+        [stroke]="trading.stroke!"
+        [labels]="trading.labels!"
+        type="area"
+        class="border_round"
+      ></apx-chart>
+    </div>
+  </div>
+  <!-- App Capsule -->
+  <div
+    *ngIf="operations && operations.length > 0"
+    class="section mt-2 mb-4 col-xl-12"
+  >
+    <div class="section-title">
+      {{ "crypto.resume.trading.table.title" | translate }} {{ invested }}
+      {{ cryptoDashboard.currency }}
+    </div>
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">
+                {{ "crypto.resume.trading.table.tab1" | translate }}
+              </th>
+              <th scope="col" class="text-center">
+                {{ "crypto.resume.trading.table.tab2" | translate }}
+              </th>
+              <th scope="col" class="text-center">
+                {{ "crypto.resume.trading.table.tab3" | translate }}
+              </th>
+              <th scope="col" class="text-center">
+                {{ "crypto.resume.trading.table.tab4" | translate }}
+              </th>
+              <th scope="col" class="text-center">
+                {{ "crypto.resume.trading.table.tab5" | translate }}
+              </th>
+              <th scope="col" class="text-center">
+                {{ "crypto.resume.trading.table.tab6" | translate }}
+              </th>
+              <th scope="col" class="text-center">
+                {{ "crypto.resume.trading.table.tab7" | translate }}
+              </th>
+              <th scope="col" class="text-center">
+                {{ "crypto.resume.trading.table.tab8" | translate }}
+              </th>
+              <th scope="col" class="text-center">
+                {{ "crypto.resume.trading.table.tab9" | translate }}
+              </th>
+              <th scope="col" class="text-center">
+                {{ "crypto.resume.trading.table.tab10" | translate }}
+              </th>
+              <th scope="col" class="text-center">
+                {{ "crypto.resume.trading.table.tab11" | translate }}
+              </th>
+              <th scope="col" class="text-end">
+                {{ "crypto.resume.trading.table.tab12" | translate }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let operation of operations; let i = index">
+              <th scope="row">
+                {{ operation.entryDate | date : "d MMM y" }}
+              </th>
+              <td class="text-center">
+                {{ operation.assetSell?.symbol }}/{{ operation.asset?.symbol }}
+              </td>
+              <td class="text-center">
+                {{ operation.entryQuantity }}
+                {{ operation.asset?.symbol }}
+              </td>
+              <td class="text-center">
+                {{ operation.entryPrice }}
+                {{ cryptoDashboard.currency }}
+              </td>
+              <td class="text-center">
+                {{ operation.entryPriceValue }}
+                {{ cryptoDashboard.currency }}
+              </td>
+              <th class="text-center" scope="row">
+                {{ operation.exitDate | date : "d MMM y" }}
+              </th>
+              <td class="text-center">
+                {{ operation.exitQuantity }}
+                {{ operation.assetSell?.symbol }}
+              </td>
+              <td class="text-center">
+                {{ operation.exitPrice }}
+                {{ cryptoDashboard.currency }}
+              </td>
+              <td class="text-center">
+                {{ operation.exitPriceValue }}
+                {{ cryptoDashboard.currency }}
+              </td>
+              <td
+                class="text-center {{
+                  operation.trend == 0
+                    ? 'text-warning'
+                    : operation.trend! > 0
+                    ? 'text-success'
+                    : 'text-danger'
+                }}"
+              >
+                {{ operation.trend }}
+                {{ cryptoDashboard.currency }}
+                ({{ operation.performance }}%)
+              </td>
+              <td
+                class="text-center {{
+                  operation.trend == 0
+                    ? 'text-warning'
+                    : operation.trend! > 0
+                    ? 'text-success'
+                    : 'text-danger'
+                }}"
+              >
+                {{ operation.trendSum }}
+                {{ cryptoDashboard.currency }}
+              </td>
+              <td
+                class="text-end {{
+                  operation.trend == 0
+                    ? 'text-warning'
+                    : operation.trend! > 0
+                    ? 'text-success'
+                    : 'text-danger'
+                }}"
+              >
+                {{ operation.balance }}
+                {{ cryptoDashboard.currency }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div
+          *ngIf="operations && operations.length == 0"
+          class="mx-auto text-center alert alert-danger mb-1"
+          role="alert"
+        >
+          {{ "crypto.resume.warning" | translate }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <!-- History -->
+    <div class="section cards-op mt-2">
+      <div class="section-heading">
+        <h2 class="title">
+          {{ "crypto.asset.details.overview.operations" | translate }}
+        </h2>
+        <a (click)="goToOperations()" class="link clickable">{{
+          "crypto.asset.details.overview.view" | translate
+        }}</a>
+      </div>
+      <app-operations-list
+        [modalID]="modalConstant.CRYPTOTRADINGRESUME"
+        [cryptoDashboard]="cryptoDashboard"
+        [walletsAsset]="walletsFilter"
+        [isAssetOperations]="true"
+      ></app-operations-list>
+    </div>
+    <!-- History -->
+  </div>
+</div>

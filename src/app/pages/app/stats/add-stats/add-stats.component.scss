@@ -1,0 +1,61 @@
+$darkColor: #121212;
+.section {
+  margin-top: 30px !important;
+  max-width: 1800px;
+}
+
+@media screen and (max-width: 780px) {
+  .section {
+    margin-top: 30px !important;
+    margin-bottom: -50px !important;
+  }
+  .box-shadow {
+    //margin-top: -20px !important;
+    //z-index: -1;
+    box-shadow: inset 0 0 0 1000px $darkColor !important;
+  }
+  .editWallet {
+    display: none;
+  }
+  .transactions {
+    margin: 0px !important;
+    margin-top: 0px !important;
+    margin-left: -15px !important;
+    margin-right: -15px !important;
+  }
+  .logo {
+    padding-top: 0px !important;
+  }
+}
+
+.box-shadow {
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3);
+}
+
+.editWallet {
+  margin-top: 65px;
+  padding-right: 20px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: rgba(255, 255, 255, 1) !important;
+  opacity: 1;
+  display: block;
+  //background: url(/*yourURLHere*/) no-repeat;
+  background-color: rgba(240, 248, 255, 0.466);
+  border-radius: 20px;
+  width: 25px;
+  height: 25px;
+  margin-right: -25px;
+  border-width: thin;
+}
+
+.date-form {
+  margin-top: -10px;
+}
+
+.card-footer {
+  margin-bottom: -20px;
+  margin-left: -8px !important;
+  margin-right: -8px !important;
+}
