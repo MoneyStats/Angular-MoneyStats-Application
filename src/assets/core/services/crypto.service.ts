@@ -1,7 +1,14 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, firstValueFrom, isObservable, of } from 'rxjs';
+import {
+  Observable,
+  firstValueFrom,
+  isObservable,
+  of,
+  switchMap,
+  timer,
+} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { Coin } from '../data/class/coin';
@@ -25,6 +32,8 @@ export class CryptoService {
 
   // Market Data Cache
   private marketDataCache: any;
+  private marketDataByCurrencyCache: any;
+  private cacheTimeout: number = environment.cacheTimeout;
 
   // Used for history table
   public cryptoResume: Map<string, CryptoDashboard> = new Map<
@@ -35,7 +44,16 @@ export class CryptoService {
   // Used for details
   public asset?: Asset;
 
-  constructor(private http: HttpClient, public swalService: SwalService) {}
+  constructor(private http: HttpClient, public swalService: SwalService) {
+    timer(0, this.cacheTimeout)
+      .pipe(switchMap(() => this.clearCache()))
+      .subscribe();
+  }
+
+  clearCache(): any {
+    this.marketDataCache = null;
+    this.marketDataByCurrencyCache = null;
+  }
 
   getCryptoDashboard(): Observable<ResponseModel> {
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
@@ -53,6 +71,8 @@ export class CryptoService {
   }
 
   getCryptoPrice(currency: string): Observable<ResponseModel> {
+    if (this.marketDataByCurrencyCache)
+      return of(this.marketDataByCurrencyCache);
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

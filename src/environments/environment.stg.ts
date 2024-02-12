@@ -13,7 +13,7 @@ export const environment = {
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: '1.16.91 (Beta)',
+  version: '2.0.0',
   hostService: host + subDomain,
 
   // Mock Data
@@ -47,6 +47,11 @@ export const environment = {
   updateUserDataUrl: host + '/v1/auth/update/user',
   backupDataUrl: host + '/v1/app/backup',
   restoreDataUrl: host + '/v1/app/restore',
+  forgotPassword: true,
+
+  /*
+   * Crypto Section
+   */
   cleanCacheUrl: host + '/v1/crypto/cache/clean',
   marketDataUrl: host + '/v1/crypto/marketData/import',
   addCryptoAssetDataUrl: host + '/v1/crypto/asset/addOrUpdate',
@@ -56,5 +61,7 @@ export const environment = {
   getCryptoDashboardDataUrl: host + '/v1/crypto/dashboard',
   getCryptoResumeDataUrl: host + '/v1/crypto/resume',
   getMarketDataUrl: host + '/v1/market-data/get',
-  forgotPassword: true,
+
+  // Cache
+  cacheTimeout: 360000,
 };

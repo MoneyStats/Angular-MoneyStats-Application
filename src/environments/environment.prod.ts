@@ -1,6 +1,7 @@
 //const baseUrlApp: string = '../../';
 const baseUrlApp: string = 'https://moneystats.github.io/App/';
-const host: string = 'https://oraclewebserver.ddns.net/prod-moneystats-service';
+const host: string = 'https://prd.moneystats.service.hostwebserver.site';
+//const host: string = 'https://oraclewebserver.ddns.net/prod-moneystats-service';
 export const subDomain = '';
 
 export const environment = {
@@ -51,6 +52,11 @@ export const environment = {
   updateUserDataUrl: host + '/v1/auth/update/user',
   backupDataUrl: host + '/v1/app/backup',
   restoreDataUrl: host + '/v1/app/restore',
+  forgotPassword: true,
+
+  /*
+   * Crypto Section
+   */
   cleanCacheUrl: host + '/v1/crypto/cache/clean',
   marketDataUrl: host + '/v1/crypto/marketData/import',
   addCryptoAssetDataUrl: host + '/v1/crypto/asset/addOrUpdate',
@@ -60,5 +66,7 @@ export const environment = {
   getCryptoDashboardDataUrl: host + '/v1/crypto/dashboard',
   getCryptoResumeDataUrl: host + '/v1/crypto/resume',
   getMarketDataUrl: host + '/v1/market-data/get',
-  forgotPassword: true,
+
+  // Cache
+  cacheTimeout: 360000,
 };
