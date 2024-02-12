@@ -94,11 +94,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      #- name: 📂 Build
-      #  run: |
-      #    npm install -g @angular/cli
-      #    npm install --force
-      #    ng build --configuration=production --output-hashing=none --base-href "https://${{ secrets.DESTINATION_REPOSITORY }}"
+      - name: 📂 Build
+        run: |
+          npm install -g @angular/cli
+          npm install --force
+          ng build --configuration=production --output-hashing=none --base-href "https://${{ secrets.DESTINATION_REPOSITORY }}"
+          
       - name: 🚀 Pushes to github pages
         uses: cpina/github-action-push-to-another-repository@main
         env:
