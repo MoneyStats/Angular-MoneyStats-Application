@@ -520,10 +520,10 @@
             "changelog": "&#183; Aggiunta Sezione Crypto <br> &#183; Aggiornata la sezione aggiungi e modifica wallet"
           },
           {
-            "modalId": "v202",
+            "modalId": "v203",
             "version_date": "2024-02-13",
-            "version_title": "MoneyStats V2.0.2",
-            "version": "V2.0.2",
+            "version_title": "MoneyStats V2.0.3",
+            "version": "V2.0.3",
             "changelog": "&#183; Migliorate le performance al caricamento tramite la cache. <br> &#183; Migliorato account, auto refresh token."
           }
         ]
