@@ -59,7 +59,6 @@ export class CloseOperationComponent implements OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.modalId);
     if (this.operation) this.getData();
   }
 

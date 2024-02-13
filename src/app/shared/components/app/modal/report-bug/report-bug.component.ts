@@ -5,6 +5,7 @@ import { UtilsException } from 'src/assets/core/data/class/error';
 import { GithubIssues } from 'src/assets/core/data/class/user.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
+import { AppService } from 'src/assets/core/services/app.service';
 import { UserService } from 'src/assets/core/services/user.service';
 import { LoggerService } from 'src/assets/core/utils/log.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
@@ -23,7 +24,7 @@ export class ReportBugComponent implements OnDestroy {
 
   constructor(
     private swal: SwalService,
-    private userService: UserService,
+    private appService: AppService,
     private logger: LoggerService,
     private translate: TranslateService
   ) {}
@@ -45,7 +46,7 @@ export class ReportBugComponent implements OnDestroy {
       this.exception?.error?.exception;
     githubIssues.assignees = ['giovannilamarmora'];
     githubIssues.labels = ['bug'];
-    this.userService.getTemplate().subscribe((t) => {
+    this.appService.getTemplate().subscribe((t) => {
       let template = t.template
         .replace('$DATETIME$', this.exception!.dateTime!.toString())
         .replace('$URL$', this.exception!.url!)
@@ -71,7 +72,7 @@ export class ReportBugComponent implements OnDestroy {
             window.navigator.userAgent
         );
       githubIssues.body = template;
-      this.userService.openIssues(githubIssues).subscribe((res) => {
+      this.appService.openIssues(githubIssues).subscribe((res) => {
         this.logger.LOG(res.message!, 'SettingsComponent');
         this.swal.toastMessage(
           SwalIcon.SUCCESS,

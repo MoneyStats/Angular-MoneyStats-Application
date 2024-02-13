@@ -2,12 +2,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CoinSymbol } from '../data/class/coin';
-import { Dashboard, Stats, Wallet } from '../data/class/dashboard.class';
+import { Stats, Wallet } from '../data/class/dashboard.class';
 import { ResponseModel } from '../data/class/generic.class';
 import { User } from '../data/class/user.class';
 import { StorageConstant } from '../data/constant/constant';
-import { UserService } from './user.service';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root',
@@ -27,9 +26,10 @@ export class WalletService {
   public walletHistory?: Wallet;
 
   user?: User;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, public cache: CacheService) {}
 
-  getWallet(): Observable<ResponseModel> {
+  getWalletsData(): Observable<ResponseModel> {
+    if (this.cache.getWalletsCache()) return of(this.cache.getWalletsCache());
     if (this.user?.mockedUser) {
       return this.http.get<ResponseModel>(environment.getWalletDataUrl);
     } else {
@@ -41,7 +41,8 @@ export class WalletService {
     }
   }
 
-  addUpdateWallet(wallet: Wallet): Observable<ResponseModel> {
+  addUpdateWalletData(wallet: Wallet): Observable<ResponseModel> {
+    this.cache.clearCache();
     if (this.user?.mockedUser) {
       let response: ResponseModel = new ResponseModel();
       response.data = wallet;

@@ -153,7 +153,7 @@ export class AddWalletComponent implements OnInit, OnChanges, OnDestroy {
         .subscribe((data) => {
           this.logger.LOG(data.message!, 'AddWalletComponent');
           this.addWalletSub = this.walletService
-            .addUpdateWallet(walletToSave)
+            .addUpdateWalletData(walletToSave)
             .subscribe((data) => {
               this.logger.LOG(data.message!, 'AddWalletComponent');
               this.wallet.img = data.data.img;
@@ -163,7 +163,7 @@ export class AddWalletComponent implements OnInit, OnChanges, OnDestroy {
         });
     } else {
       this.addWalletSub = this.walletService
-        .addUpdateWallet(walletToSave)
+        .addUpdateWalletData(walletToSave)
         .subscribe((data) => {
           this.logger.LOG(data.message!, 'AddWalletComponent');
           // Save Wallet

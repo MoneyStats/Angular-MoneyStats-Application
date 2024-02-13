@@ -58,8 +58,9 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
   getAssets() {
     this.cryptoDashboard = deepCopy(this.cryptoService.cryptoDashboard);
     this.cryptoAssetSubscribe = this.cryptoService
-      .getCryptoAssets()
+      .getCryptoAssetsData()
       .subscribe((data) => {
+        this.cryptoService.cache.cacheAssetsData(data);
         this.logger.LOG(data.message!, 'CryptoAssetComponent');
         this.assets = data.data;
         this.cryptoService.assets = data.data;

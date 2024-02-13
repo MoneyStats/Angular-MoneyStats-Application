@@ -90,7 +90,7 @@ export class AddStatsComponent implements OnInit, OnDestroy {
   save() {
     this.saveValidation = false;
     this.addStatsSubscribe = this.statsService
-      .addStats(this.walletsToSave)
+      .addStatsData(this.walletsToSave)
       .subscribe((data) => {
         this.logger.LOG(data.message!, 'AddStatsComponent');
         this.walletsToSave = data.data;

@@ -6,7 +6,7 @@ import {
   HttpInterceptor,
   HttpResponse,
 } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { StorageConstant } from 'src/assets/core/data/constant/constant';
 
 @Injectable()
@@ -23,7 +23,6 @@ export class JwtInterceptor implements HttpInterceptor {
         if (httpEvent.type === 0) {
           return;
         }
-
         let authToken: string;
         if (httpEvent instanceof HttpResponse) {
           if (httpEvent.headers.has('Authorization')) {

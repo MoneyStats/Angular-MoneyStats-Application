@@ -18,6 +18,7 @@ import { StorageConstant } from '../data/constant/constant';
 import { SwalService } from '../utils/swal.service';
 import { Wallet } from '../data/class/dashboard.class';
 import { Asset, CryptoDashboard } from '../data/class/crypto.class';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root',
@@ -30,11 +31,6 @@ export class CryptoService {
   public assets: Asset[] = [];
   public operationsMap: Map<string, any[]> = new Map();
 
-  // Market Data Cache
-  private marketDataCache: any;
-  private marketDataByCurrencyCache: any;
-  private cacheTimeout: number = environment.cacheTimeout;
-
   // Used for history table
   public cryptoResume: Map<string, CryptoDashboard> = new Map<
     string,
@@ -44,18 +40,15 @@ export class CryptoService {
   // Used for details
   public asset?: Asset;
 
-  constructor(private http: HttpClient, public swalService: SwalService) {
-    timer(0, this.cacheTimeout)
-      .pipe(switchMap(() => this.clearCache()))
-      .subscribe();
-  }
+  constructor(
+    private http: HttpClient,
+    public swalService: SwalService,
+    public cache: CacheService
+  ) {}
 
-  clearCache(): any {
-    this.marketDataCache = null;
-    this.marketDataByCurrencyCache = null;
-  }
-
-  getCryptoDashboard(): Observable<ResponseModel> {
+  getCryptoDashboardData(): Observable<ResponseModel> {
+    if (this.cache.getCryptoDashboardCache())
+      return of(this.cache.getCryptoDashboardCache());
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -70,9 +63,9 @@ export class CryptoService {
     }
   }
 
-  getCryptoPrice(currency: string): Observable<ResponseModel> {
-    if (this.marketDataByCurrencyCache)
-      return of(this.marketDataByCurrencyCache);
+  getCryptoPriceData(currency: string): Observable<ResponseModel> {
+    if (this.cache.getMarketDataByCurrencyCache())
+      return of(this.cache.getMarketDataByCurrencyCache());
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -88,7 +81,9 @@ export class CryptoService {
     }
   }
 
-  getCryptoResume(): Observable<ResponseModel> {
+  getCryptoResumeData(): Observable<ResponseModel> {
+    if (this.cache.getCryptoResumeCache())
+      return of(this.cache.getCryptoResumeCache());
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -103,8 +98,8 @@ export class CryptoService {
     }
   }
 
-  getCryptoAssets(): Observable<ResponseModel> {
-    if (this.marketDataCache) return of(this.marketDataCache);
+  getCryptoAssetsData(): Observable<ResponseModel> {
+    if (this.cache.getAssetsCache()) return of(this.cache.getAssetsCache());
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -137,6 +132,7 @@ export class CryptoService {
   }
 
   addOrUpdateCryptoAsset(wallet: Wallet): Observable<ResponseModel> {
+    this.cache.clearCache();
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -154,6 +150,7 @@ export class CryptoService {
   }
 
   addOrUpdateCryptoAssets(wallets: Wallet[]): Observable<ResponseModel> {
+    this.cache.clearCache();
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

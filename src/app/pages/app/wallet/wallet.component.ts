@@ -39,19 +39,22 @@ export class WalletComponent implements OnInit, OnDestroy {
     this.screenService.setupHeader();
     this.screenService.goToWallet();
     this.screenService.showFooter();
-    this.walletsSubscribe = this.walletService.getWallet().subscribe((res) => {
-      this.logger.LOG(res.message!, 'WalletComponent');
-      this.wallets = res.data;
-      this.walletService.walletActive = this.walletActive(res.data);
-      this.walletService.walletDeleted = this.walletDeleted(res.data);
-      this.walletDetails(res.data);
-      let isHidden = JSON.parse(
-        localStorage.getItem(StorageConstant.HIDDENAMOUNT)!
-      );
-      if (isHidden != null) {
-        this.hidden = isHidden;
-      }
-    });
+    this.walletsSubscribe = this.walletService
+      .getWalletsData()
+      .subscribe((res) => {
+        this.walletService.cache.cacheWalletsData(res);
+        this.logger.LOG(res.message!, 'WalletComponent');
+        this.wallets = res.data;
+        this.walletService.walletActive = this.walletActive(res.data);
+        this.walletService.walletDeleted = this.walletDeleted(res.data);
+        this.walletDetails(res.data);
+        let isHidden = JSON.parse(
+          localStorage.getItem(StorageConstant.HIDDENAMOUNT)!
+        );
+        if (isHidden != null) {
+          this.hidden = isHidden;
+        }
+      });
   }
 
   walletActive(wallets: Wallet[]): Array<Wallet> {

@@ -78,8 +78,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.user = this.userService.user;
     this.dashboardSubscribe = this.dashboardService
-      .getData()
+      .getDashboardData()
       .subscribe((data) => {
+        this.dashboardService.cache.cacheDashboardData(data);
         this.logger.LOG(data.message!, 'DashboardComponent');
         if (!data.data.balance) {
           this.dashboard.categories = data.data.categories;

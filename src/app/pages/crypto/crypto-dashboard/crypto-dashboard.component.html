@@ -69,7 +69,9 @@
               <p style="margin-top: -15px" class="card-text load-text">
                 <small
                   >{{ "crypto.dashboard.cardRes.lastUpdate" | translate }}
-                  {{ cryptoDashboard.lastUpdate | date : "d MMM y" }}</small
+                  {{
+                    cryptoDashboard.lastUpdate | date : "d MMM y HH:mm"
+                  }}</small
                 >
               </p>
               <hr />

@@ -46,8 +46,9 @@ export class CryptoResumeComponent implements OnInit, OnDestroy {
 
   getResume() {
     this.getResumeSub = this.cryptoService
-      .getCryptoResume()
+      .getCryptoResumeData()
       .subscribe((res) => {
+        this.cryptoService.cache.cacheCryptoResumeData(res);
         this.logger.LOG(res.message!, 'CryptoResumeComponent');
         this.resume = new Map<string, CryptoDashboard>(
           Object.entries(res.data)

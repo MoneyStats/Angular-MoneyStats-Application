@@ -258,7 +258,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
 
   saveOrUpdateWallet() {
     this.saveWalletSubscribe = this.walletService
-      .addUpdateWallet(this.wallet!)
+      .addUpdateWalletData(this.wallet!)
       .subscribe((data) => {
         this.logger.LOG(data.message!, 'WalletDetailsComponent');
         this.infoKey = '';
