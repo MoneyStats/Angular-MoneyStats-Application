@@ -99,6 +99,7 @@ export class UserService {
   }
 
   login(username: string, password: string): Observable<ResponseModel> {
+    this.cache.clearCache();
     const url =
       environment.loginDataUrl +
       '?username=' +
