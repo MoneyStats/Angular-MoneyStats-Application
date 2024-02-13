@@ -50,7 +50,7 @@ export class RouteGuardService implements CanActivate {
           StorageConstant.ACCESSTOKEN,
           'Bearer ' + resp.data.authToken.accessToken
         );
-        this.router.navigate(['']);
+        //this.router.navigate(['']);
       },
       error: (error) => {
         this.router.navigate(['auth/login']);

@@ -20,6 +20,7 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: CryptoDashboardComponent,
+        canActivate: [RouteGuardService],
       },
       {
         path: 'requirements',
