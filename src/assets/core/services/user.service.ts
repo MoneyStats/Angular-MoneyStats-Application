@@ -12,6 +12,7 @@ import { DashboardService } from './dashboard.service';
 import { StatsService } from './stats.service';
 import { WalletService } from './wallet.service';
 import { AppService } from './app.service';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +29,8 @@ export class UserService {
     public swalService: SwalService,
     private router: Router,
     private statsService: StatsService,
-    private appService: AppService
+    private appService: AppService,
+    private cache: CacheService
   ) {}
 
   setValue() {
@@ -84,6 +86,7 @@ export class UserService {
   }
 
   logout() {
+    this.cache.clearCache();
     localStorage.removeItem(StorageConstant.ACCESSTOKEN);
     this.router.navigate(['auth/login']);
   }
@@ -136,6 +139,7 @@ export class UserService {
   }
 
   updateUserData(user: User): Observable<ResponseModel> {
+    this.cache.clearCache();
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

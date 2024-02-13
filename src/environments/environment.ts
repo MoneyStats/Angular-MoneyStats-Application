@@ -17,7 +17,7 @@ export const environment = {
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: '2.0.1',
+  version: '2.0.2',
   hostService: host + subDomain,
   //version: require(baseUrlApp + subDomain + 'package.json').version,
 
@@ -68,6 +68,7 @@ export const environment = {
   getMarketDataUrl: host + '/v1/market-data/get',
 
   // Cache
+  cacheEnable: false,
   cacheTimeout: 180000,
 };
 

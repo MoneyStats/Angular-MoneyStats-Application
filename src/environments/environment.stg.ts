@@ -13,7 +13,7 @@ export const environment = {
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: '2.0.1',
+  version: '2.0.2',
   hostService: host + subDomain,
 
   // Mock Data
@@ -63,5 +63,6 @@ export const environment = {
   getMarketDataUrl: host + '/v1/market-data/get',
 
   // Cache
+  cacheEnable: true,
   cacheTimeout: 180000,
 };

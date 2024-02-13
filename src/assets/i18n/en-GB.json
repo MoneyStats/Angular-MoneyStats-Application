@@ -518,6 +518,13 @@
             "version_title": "MoneyStats V2.0.0",
             "version": "V2.0.0",
             "changelog": "&#183; Added new Crypto Section <br> &#183; Updated Add and Edit Wallets"
+          },
+          {
+            "modalId": "v202",
+            "version_date": "2024-02-13",
+            "version_title": "MoneyStats V2.0.2",
+            "version": "V2.0.2",
+            "changelog": "&#183; Improves loading performance via caching. <br> &#183; Improved account, automatic refresh token."
           }
         ]
       }

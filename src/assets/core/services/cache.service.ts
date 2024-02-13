@@ -44,7 +44,7 @@ export class CacheService {
   }
 
   cacheDashboardData(dashboard: any) {
-    this.dashboardDataCache = deepCopy(dashboard);
+    if (environment.cacheEnable) this.dashboardDataCache = deepCopy(dashboard);
   }
 
   getResumeCache() {
@@ -52,7 +52,7 @@ export class CacheService {
   }
 
   cacheResumeData(resume: any) {
-    this.resumeDataCache = deepCopy(resume);
+    if (environment.cacheEnable) this.resumeDataCache = deepCopy(resume);
   }
 
   getWalletsCache() {
@@ -60,7 +60,7 @@ export class CacheService {
   }
 
   cacheWalletsData(wallets: any) {
-    this.walletsDataCache = deepCopy(wallets);
+    if (environment.cacheEnable) this.walletsDataCache = deepCopy(wallets);
   }
 
   getCryptoDashboardCache() {
@@ -68,7 +68,8 @@ export class CacheService {
   }
 
   cacheCryptoDashboardData(dashboard: any) {
-    this.cryptoDashboardDataCache = deepCopy(dashboard);
+    if (environment.cacheEnable)
+      this.cryptoDashboardDataCache = deepCopy(dashboard);
   }
 
   getCryptoResumeCache() {
@@ -76,7 +77,7 @@ export class CacheService {
   }
 
   cacheCryptoResumeData(resume: any) {
-    this.cryptoResumeDataCache = deepCopy(resume);
+    if (environment.cacheEnable) this.cryptoResumeDataCache = deepCopy(resume);
   }
 
   getAssetsCache() {
@@ -84,7 +85,7 @@ export class CacheService {
   }
 
   cacheAssetsData(assets: any) {
-    this.assetsDataCache = deepCopy(assets);
+    if (environment.cacheEnable) this.assetsDataCache = deepCopy(assets);
   }
 
   /**
@@ -95,6 +96,7 @@ export class CacheService {
   }
 
   cacheMarketDataByCurrencyData(marketDatas: any) {
-    this.marketDataByCurrencyCache = deepCopy(marketDatas);
+    if (environment.cacheEnable)
+      this.marketDataByCurrencyCache = deepCopy(marketDatas);
   }
 }
