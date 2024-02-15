@@ -164,7 +164,6 @@ export class CloseOperationComponent implements OnDestroy {
       '/' +
       asset1?.symbol +
       ' successfully closed';
-    console.log(wallet);
 
     this.closeSubscribe = this.cryptoService
       .addOrUpdateCryptoAsset(wallet!)

@@ -145,7 +145,6 @@ export class ResumeAssetsComponent implements OnInit, OnChanges {
     array.push(trendStats);
     this.balances.push(total.balance);
     array.index = array.length - 1;
-    console.log(array);
     return array;
   }
 }

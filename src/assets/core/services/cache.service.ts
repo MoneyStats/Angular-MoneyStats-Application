@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { switchMap, timer } from 'rxjs';
+import { Observable, switchMap, timer } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
 
@@ -25,8 +25,16 @@ export class CacheService {
 
   constructor() {
     timer(0, this.cacheTimeout)
-      .pipe(switchMap(() => this.clearCache()))
+      .pipe(switchMap(() => this.clearCacheObservable()))
       .subscribe();
+  }
+
+  clearCacheObservable(): Observable<any> {
+    this.clearCache();
+    return new Observable((observer) => {
+      observer.next(null);
+      observer.complete();
+    });
   }
 
   clearCache(): any {

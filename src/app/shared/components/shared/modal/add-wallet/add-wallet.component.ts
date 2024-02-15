@@ -73,7 +73,10 @@ export class AddWalletComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (this.modalId == ModalConstant.EDITWALLET) {
+    if (
+      this.modalId == ModalConstant.EDITWALLET &&
+      this.wallet.category == 'Crypto'
+    ) {
       this.isNewWallet = true;
       this.isCrypto = true;
     }
@@ -85,6 +88,13 @@ export class AddWalletComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (
+      this.walletImg == '' &&
+      this.wallet.img !=
+        environment.baseUrlHeader + AppConfigConst.DEFAULT_WALLET_IMG
+    ) {
+      this.walletImg = this.wallet.img;
+    }
     if (this.isCrypto) {
       this.wallet.category = 'Crypto';
     }
@@ -183,7 +193,9 @@ export class AddWalletComponent implements OnInit, OnChanges, OnDestroy {
       (this.checkbox && this.defaultImg) || (!this.checkbox && !this.defaultImg)
         ? true
         : false;
-    return categoryValidation && imageValidation ? true : false;
+    if (this.modalId != ModalConstant.EDITWALLET)
+      return categoryValidation && imageValidation ? true : false;
+    else return categoryValidation;
   }
 
   onFileSelected(event: any): void {

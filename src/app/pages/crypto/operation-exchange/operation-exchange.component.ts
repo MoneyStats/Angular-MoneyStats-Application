@@ -158,7 +158,6 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
       case OperationsType.HOLDING:
       case OperationsType.TRADING:
         this.investedBalance = this.assetToSell.balance;
-        console.log(this.investedBalance);
 
         this.makeNewBalance();
         break;
