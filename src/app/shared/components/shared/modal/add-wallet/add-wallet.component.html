@@ -300,7 +300,11 @@
                       [(ngModel)]="wallet.type"
                       #type="ngModel"
                     >
-                      <option [value]="wallet.type" selected disabled>
+                      <option
+                        [selected]="!wallet.type"
+                        [value]="undefined"
+                        disabled
+                      >
                         {{ "wallet.modal.typeText" | translate }}
                       </option>
                       <!--<option
@@ -313,7 +317,7 @@
                       </option>-->
                       <option
                         *ngFor="let type of cryptoTypes"
-                        [selected]="type == wallet.type"
+                        [selected]="wallet.type == type"
                         [value]="type"
                       >
                         {{ type }}
@@ -398,12 +402,15 @@
                 for="defaultImg"
                 >{{ "wallet.modal.default" | translate }}</label
               >
+              <!-- TODO: Cancella se non serve -->
               <label
+                hidden
                 *ngIf="wallet.id"
                 class="form-check-label"
                 for="defaultImg"
                 >{{ "wallet.modal.editWallet.default" | translate }}</label
               >
+              <!-- END: Cancella se non serve -->
             </div>
             <div class="form-group basic">
               <button

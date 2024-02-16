@@ -140,8 +140,9 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
 
   getCryptoPrices(fiat: string) {
     this.getPriceSubscribe = this.cryptoService
-      .getCryptoPrice(fiat)
+      .getCryptoPriceData(fiat)
       .subscribe((data) => {
+        this.cryptoService.cache.cacheMarketDataByCurrencyData(data);
         this.logger.LOG(data.message!, 'OperationExchangeComponent');
         this.marketData = data.data;
       });
@@ -152,13 +153,11 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   }
 
   emitOperationSelectAsset(asset: Asset) {
-    console.log('DENTRO', this.operationType);
     this.assetToSell = asset;
     switch (this.operationType) {
       case OperationsType.HOLDING:
       case OperationsType.TRADING:
         this.investedBalance = this.assetToSell.balance;
-        console.log(this.investedBalance);
 
         this.makeNewBalance();
         break;

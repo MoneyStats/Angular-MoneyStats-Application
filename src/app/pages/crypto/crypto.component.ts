@@ -10,6 +10,7 @@ import { AppService } from 'src/assets/core/services/app.service';
 import { CryptoService } from 'src/assets/core/services/crypto.service';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
 import { environment } from 'src/environments/environment';
+import { DashboardComponent } from '../app/dashboard/dashboard.component';
 
 @Component({
   selector: 'app-crypto',
@@ -27,7 +28,8 @@ export class CryptoComponent implements OnInit, OnDestroy {
     private router: Router,
     private appService: AppService,
     private cryptoService: CryptoService,
-    private contexts: ChildrenOutletContexts
+    private contexts: ChildrenOutletContexts,
+    private dashboardService: DashboardService
   ) {
     router.events.subscribe((data: any) => {
       let url: string = data.url;
@@ -51,10 +53,10 @@ export class CryptoComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.user = this.appService.user;
     this.cryptoDashboardSub = this.cryptoService
-      .getCryptoDashboard()
+      .getCryptoDashboardData()
       .subscribe((data) => {
+        this.cryptoService.cache.cacheCryptoDashboardData(data);
         let dashboard = data.data;
-
         if (dashboard.wallets != undefined && dashboard.wallets.length != 0) {
           let wallets = dashboard.wallets.filter(
             (wallet: Wallet) => wallet.category == 'Crypto'
@@ -70,6 +72,20 @@ export class CryptoComponent implements OnInit, OnDestroy {
           }
         } else this.onBoard();
       });
+    /*let dashboard = this.dashboardService.dashboard;
+
+    if (dashboard.wallets != undefined && dashboard.wallets.length != 0) {
+      let wallets = dashboard.wallets.filter(
+        (wallet: Wallet) => wallet.category == 'Crypto'
+      );
+      if (
+        wallets == undefined ||
+        wallets.length == 0 ||
+        !wallets.find((w: any) => w.assets != undefined)
+      ) {
+        this.onBoard();
+      }
+    } else this.onBoard();*/
   }
 
   onBoard() {

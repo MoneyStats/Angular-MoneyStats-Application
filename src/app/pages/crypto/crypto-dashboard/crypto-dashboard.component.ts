@@ -80,8 +80,9 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
 
   getDashboard() {
     this.getDashboardSubscribe = this.cryptoService
-      .getCryptoDashboard()
+      .getCryptoDashboardData()
       .subscribe((data) => {
+        this.cryptoService.cache.cacheCryptoDashboardData(data);
         this.logger.LOG(data.message!, 'CryptoDashboardComponent');
         this.cryptoDashboard = data.data;
         this.cryptoService.cryptoDashboard = data.data;
@@ -343,8 +344,9 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
 
   getMarketData() {
     this.marketDataSubscribe = this.cryptoService
-      .getCryptoPrice(this.cryptoDashboard.currency)
+      .getCryptoPriceData(this.cryptoDashboard.currency)
       .subscribe((data) => {
+        this.cryptoService.cache.cacheMarketDataByCurrencyData(data);
         this.filterMarketData = data.data;
       });
   }

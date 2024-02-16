@@ -1,18 +1,18 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import Swal from 'sweetalert2';
 import { Coin, CoinSymbol } from '../data/class/coin';
 import { ResponseModel } from '../data/class/generic.class';
-import { Github, GithubIssues, MockUser, User } from '../data/class/user.class';
+import { MockUser, User } from '../data/class/user.class';
 import { StorageConstant } from '../data/constant/constant';
 import { SwalService } from '../utils/swal.service';
 import { DashboardService } from './dashboard.service';
 import { StatsService } from './stats.service';
 import { WalletService } from './wallet.service';
 import { AppService } from './app.service';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +29,8 @@ export class UserService {
     public swalService: SwalService,
     private router: Router,
     private statsService: StatsService,
-    private appService: AppService
+    private appService: AppService,
+    private cache: CacheService
   ) {}
 
   setValue() {
@@ -85,6 +86,7 @@ export class UserService {
   }
 
   logout() {
+    this.cache.clearCache();
     localStorage.removeItem(StorageConstant.ACCESSTOKEN);
     this.router.navigate(['auth/login']);
   }
@@ -97,6 +99,7 @@ export class UserService {
   }
 
   login(username: string, password: string): Observable<ResponseModel> {
+    this.cache.clearCache();
     const url =
       environment.loginDataUrl +
       '?username=' +
@@ -136,24 +139,8 @@ export class UserService {
     }
   }
 
-  getTemplate(): Observable<any> {
-    return this.http.get<any>(environment.getTemplate);
-  }
-
-  openIssues(githubIssues: GithubIssues): Observable<ResponseModel> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-    return this.http.post<ResponseModel>(
-      environment.openGithubIssues,
-      githubIssues,
-      {
-        headers: headers,
-      }
-    );
-  }
-
   updateUserData(user: User): Observable<ResponseModel> {
+    this.cache.clearCache();
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

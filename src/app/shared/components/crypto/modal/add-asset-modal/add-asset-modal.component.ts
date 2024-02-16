@@ -84,8 +84,9 @@ export class AddAssetModalComponent implements OnInit, OnDestroy {
 
   getCryptoPrices() {
     this.getMarketDataSubscribe = this.cryptoService
-      .getCryptoPrice(this.cryptoCurrency)
+      .getCryptoPriceData(this.cryptoCurrency)
       .subscribe((data) => {
+        this.cryptoService.cache.cacheMarketDataByCurrencyData(data);
         this.logger.LOG(data.message!, 'AddAssetModalComponent');
         this.marketData = data.data;
       });

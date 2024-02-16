@@ -86,8 +86,9 @@ export class CryptoDetailsComponent implements OnInit, OnDestroy {
 
   getCryptoDashboard() {
     this.cryptoDashSubscribe = this.cryptoService
-      .getCryptoDashboard()
+      .getCryptoDashboardData()
       .subscribe((data) => {
+        this.cryptoService.cache.cacheCryptoDashboardData(data);
         this.logger.LOG(data.message!, 'CryptoDetailsComponent');
         this.cryptoDashboard = data.data;
       });

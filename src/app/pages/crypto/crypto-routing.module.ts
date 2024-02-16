@@ -10,6 +10,7 @@ import { OperationExchangeComponent } from './operation-exchange/operation-excha
 import { OperationsComponent } from './operations/operations.component';
 import { fadeSlider } from 'src/app/shared/animations/route-animations';
 import { MarketDataComponent } from './market-data/market-data.component';
+import { RouteGuardService } from 'src/app/auth/route-guard.service';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: CryptoDashboardComponent,
+        canActivate: [RouteGuardService],
       },
       {
         path: 'requirements',
@@ -28,11 +30,12 @@ const routes: Routes = [
       {
         path: 'asset',
         component: CryptoAssetComponent,
+        data: { animation: fadeSlider },
       },
       {
         path: 'asset/details/:identifier',
         component: CryptoDetailsComponent,
-        data: { animation: fadeSlider },
+        //data: { animation: fadeSlider },
       },
       {
         path: 'resume',

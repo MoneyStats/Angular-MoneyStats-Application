@@ -4,11 +4,7 @@ import { AppPagesComponent } from './app.pages.component';
 import { RouteGuardService } from 'src/app/auth/route-guard.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TransactionsComponent } from './transactions/transactions.component';
-import {
-  fadeSlider,
-  fader,
-  slideUp,
-} from 'src/app/shared/animations/route-animations';
+import { fadeSlider } from 'src/app/shared/animations/route-animations';
 import { TransactionDetailsComponent } from './transactions/transaction-details/transaction-details.component';
 import { WalletComponent } from './wallet/wallet.component';
 import { WalletDetailsComponent } from './wallet/wallet-details/wallet-details.component';
@@ -22,11 +18,11 @@ const routes: Routes = [
   {
     path: '',
     component: AppPagesComponent,
-    canActivate: [RouteGuardService],
     children: [
       {
         path: '',
         component: DashboardComponent,
+        canActivate: [RouteGuardService],
       },
       {
         path: 'transaction',
@@ -43,6 +39,7 @@ const routes: Routes = [
       {
         path: 'wallet',
         component: WalletComponent,
+        data: { animation: fadeSlider },
         //data: { animation: fader },
       },
       {

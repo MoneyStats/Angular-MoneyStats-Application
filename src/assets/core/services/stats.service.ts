@@ -6,6 +6,7 @@ import { Dashboard, Wallet } from '../data/class/dashboard.class';
 import { ResponseModel } from '../data/class/generic.class';
 import { User } from '../data/class/user.class';
 import { StorageConstant } from '../data/constant/constant';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,9 +15,10 @@ export class StatsService {
   environment = environment;
   public fullResume?: Map<string, Dashboard>;
   user?: User;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, public cache: CacheService) {}
 
-  getResume(): Observable<ResponseModel> {
+  getResumeData(): Observable<ResponseModel> {
+    if (this.cache.getResumeCache()) return of(this.cache.getResumeCache());
     if (this.user?.mockedUser) {
       return this.http.get<ResponseModel>(environment.getResumeDataUrlMock);
     } else {
@@ -28,7 +30,8 @@ export class StatsService {
     }
   }
 
-  addStats(wallets: Wallet[]): Observable<ResponseModel> {
+  addStatsData(wallets: Wallet[]): Observable<ResponseModel> {
+    this.cache.clearCache();
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({ Authorization: authToken! });
     if (this.user?.mockedUser) {

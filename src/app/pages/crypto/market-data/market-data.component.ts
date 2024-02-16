@@ -52,8 +52,9 @@ export class MarketDataComponent implements OnInit, OnDestroy {
     this.route.params.subscribe((a: any) => {
       this.cryptoCurrency = a.currency;
       this.marketDataSubscribe = this.cryptoService
-        .getCryptoPrice(a.currency)
+        .getCryptoPriceData(a.currency)
         .subscribe((data) => {
+          this.cryptoService.cache.cacheMarketDataByCurrencyData(data);
           this.marketData = data.data;
           this.updateDate = this.marketData[0].updateDate;
           this.filterMarketData = data.data;

@@ -186,7 +186,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
           ? Status.NOT_ACTIVE
           : Status.ACTIVE;
     this.updateUser(
-      this.translate.instant('response.live') + this.user?.settings.liveWallets
+      this.translate.instant('response.live') +
+        (this.user?.settings.liveWallets == 'ACTIVE' ? 'Active' : 'Not Active')
     );
     this.isLiveWallet == true ? false : true;
   }

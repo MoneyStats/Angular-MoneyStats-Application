@@ -44,12 +44,15 @@ export class StatsComponent implements OnInit, OnDestroy {
     this.screenService.setupHeader();
     this.screenService.showFooter();
     this.screenService.goToStats();
-    this.resumeSubscribe = this.statsService.getResume().subscribe((res) => {
-      this.logger.LOG(res.message!, 'StatsComponent');
-      this.resume = new Map<string, Dashboard>(Object.entries(res.data));
-      this.years = Array.from(this.resume.keys());
-      this.updateData(this.years[this.years.length - 1]);
-    });
+    this.resumeSubscribe = this.statsService
+      .getResumeData()
+      .subscribe((res) => {
+        this.statsService.cache.cacheResumeData(res);
+        this.logger.LOG(res.message!, 'StatsComponent');
+        this.resume = new Map<string, Dashboard>(Object.entries(res.data));
+        this.years = Array.from(this.resume.keys());
+        this.updateData(this.years[this.years.length - 1]);
+      });
     this.resumeData = this.dashboardService.dashboard;
   }
 

@@ -23,9 +23,10 @@ export class RouteGuardService implements CanActivate {
   ): boolean {
     let accessToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     if (accessToken != null) {
-      if (this.authService.user.name === 'DEFAULT_NAME') {
-        this.isUserLoggedIn(accessToken);
-      }
+      //if (this.authService.user.name === 'DEFAULT_NAME') {
+      //  this.isUserLoggedIn(accessToken);
+      //}
+      this.isUserLoggedIn(accessToken);
       return true;
     }
     this.router.navigate(['auth/login']);
@@ -45,7 +46,11 @@ export class RouteGuardService implements CanActivate {
           StorageConstant.USERACCOUNT,
           JSON.stringify(resp.data)
         );
-        this.router.navigate(['']);
+        localStorage.setItem(
+          StorageConstant.ACCESSTOKEN,
+          'Bearer ' + resp.data.authToken.accessToken
+        );
+        //this.router.navigate(['']);
       },
       error: (error) => {
         this.router.navigate(['auth/login']);
