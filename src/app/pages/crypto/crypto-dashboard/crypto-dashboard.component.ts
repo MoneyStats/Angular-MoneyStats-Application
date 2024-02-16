@@ -347,6 +347,8 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
       .getCryptoPriceData(this.cryptoDashboard.currency)
       .subscribe((data) => {
         this.cryptoService.cache.cacheMarketDataByCurrencyData(data);
+        console.log(data.data);
+        this.cryptoDashboard.lastUpdate = data.data[0].updateDate;
         this.filterMarketData = data.data;
       });
   }
