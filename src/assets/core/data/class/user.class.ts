@@ -22,13 +22,20 @@ export class UserSettings {
   cryptoCurrency?: string;
   github: Github = new Github();
   githubUser?: string;
-  darkMode?: string;
+  completeRequirement?: string;
   liveWallets?: string;
 }
 
 export enum Status {
   ACTIVE = 'ACTIVE',
   NOT_ACTIVE = 'NOT_ACTIVE',
+  // Requirements
+  COMPLETED = 'COMPLETED',
+  CURRENCY = 'CURRENCY',
+  WALLET = 'WALLET',
+  CRYPTO_WALLET = 'CRYPTO_WALLET',
+  ASSET = 'ASSET',
+  NOT_COMPLETED = 'NOT_COMPLETED',
 }
 
 export class Github implements GithubInterface {
