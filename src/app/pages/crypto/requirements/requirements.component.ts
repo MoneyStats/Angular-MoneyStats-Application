@@ -59,6 +59,10 @@ export class RequirementsComponent implements OnInit, OnDestroy {
     if (this.wallets != undefined && this.wallets.length != 0) {
       this.isWalletCreated = true;
     }
+    if (user.settings.cryptoCurrency) {
+      this.isCurrencyAdded = true;
+      this.currency = user.settings.cryptoCurrency;
+    }
     /*let user = this.dashboardService.user;
     this.wallets = this.dashboardService.dashboard.wallets;
     this.dashboard = this.dashboardService.dashboard;
