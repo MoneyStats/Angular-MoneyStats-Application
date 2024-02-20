@@ -193,7 +193,7 @@ export class AddWalletComponent implements OnInit, OnChanges, OnDestroy {
       (this.checkbox && this.defaultImg) || (!this.checkbox && !this.defaultImg)
         ? true
         : false;
-    if (this.modalId != ModalConstant.EDITWALLET)
+    if (this.modalId != ModalConstant.EDITWALLET && !this.isImportWallet)
       return categoryValidation && imageValidation ? true : false;
     else return categoryValidation;
   }

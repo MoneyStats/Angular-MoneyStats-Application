@@ -17,7 +17,7 @@ export const environment = {
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: '2.0.7',
+  version: '2.0.8',
   hostService: host + subDomain,
   //version: require(baseUrlApp + subDomain + 'package.json').version,
 
