@@ -111,8 +111,4 @@ export class AppService {
   getTemplate(): Observable<any> {
     return this.http.get<any>(environment.getTemplate);
   }
-
-  vibrate() {
-    navigator.vibrate([5]);
-  }
 }

@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { UserService } from 'src/assets/core/services/user.service';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
-import { AppService } from 'src/assets/core/services/app.service';
+import { Utils } from 'src/assets/core/services/utils.service';
 
 @Component({
   selector: 'app-crypto-header',
@@ -22,8 +22,7 @@ export class CryptoHeaderComponent implements OnInit {
   constructor(
     private location: Location,
     private router: Router,
-    public userService: UserService,
-    private appService: AppService
+    public userService: UserService
   ) {
     router.events.subscribe((data: any) => {
       if (data.url == '/crypto/requirements') {
@@ -55,6 +54,6 @@ export class CryptoHeaderComponent implements OnInit {
     this.emitInfo.emit('go');
   }
   vibrate() {
-    this.appService.vibrate();
+    Utils.vibrate();
   }
 }

@@ -71,7 +71,7 @@ export class CryptoDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.appendTradingViewDetails();
+    if (this.asset.symbol) this.appendTradingViewDetails();
   }
 
   getCryptoDetails(identifier: string) {
@@ -81,6 +81,7 @@ export class CryptoDetailsComponent implements OnInit, OnDestroy {
         this.logger.LOG(details.message!, 'CryptoDetailsComponent');
         this.asset = details.data;
         this.cryptoService.asset = details.data;
+        this.ngAfterViewInit();
       });
   }
 
@@ -106,6 +107,7 @@ export class CryptoDetailsComponent implements OnInit, OnDestroy {
   appendTradingViewDetails() {
     let div = this._renderer2.createElement('div');
     div.style.height = '100%';
+    div.id = 'trading-details';
     let symbol = this.asset.symbol!;
     let script = this._renderer2.createElement('script');
     script.type = `text/javascript`;

@@ -519,11 +519,11 @@
             "changelog": "&#183; Added new Crypto Section <br> &#183; Updated Add and Edit Wallets"
           },
           {
-            "modalId": "v209",
-            "version_date": "2024-02-20",
-            "version_title": "MoneyStats V2.0.9",
-            "version": "V2.0.9",
-            "changelog": "&#183; Improved loading performance through caching. <br> &#183; Enhanced account functionality, auto-refresh token, now the session lasts more than an hour. <br> &#183; Fixed an issue on Edit Wallet that set all wallets as Crypto."
+            "modalId": "v2010",
+            "version_date": "2024-02-22",
+            "version_title": "MoneyStats V2.0.10",
+            "version": "V2.0.10",
+            "changelog": "&#183; Improved loading performance through caching. <br> &#183; Enhanced account functionality, auto-refresh token, now the session lasts more than an hour. <br> &#183; Fixed an issue on Edit Wallet that set all wallets as Crypto. <br> &#183; Fixed Wallet details tradingview data."
           }
         ]
       }
