@@ -176,4 +176,11 @@ export class UserService {
       return this.http.post<ResponseModel>(environment.uploadImage, formData);
     }
   }
+
+  public static getUserFromStorage(): User {
+    const storage = localStorage.getItem(StorageConstant.USERACCOUNT);
+    let user: User = new User();
+    if (storage) return JSON.parse(storage);
+    return user;
+  }
 }

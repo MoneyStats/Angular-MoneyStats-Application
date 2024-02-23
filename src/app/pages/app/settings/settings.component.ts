@@ -169,13 +169,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
       });
   }
 
-  changeTheme() {
-    let dark = parseInt(localStorage.getItem('MoneyStatsDarkMode')!);
-    this.user!.settings.darkMode =
-      dark == 1 ? Status.NOT_ACTIVE : Status.ACTIVE;
-    this.updateUser(this.translate.instant('response.theme'));
-  }
-
   liveWallet() {
     if (this.user?.settings.liveWallets == undefined)
       this.user!.settings.liveWallets = Status.NOT_ACTIVE;

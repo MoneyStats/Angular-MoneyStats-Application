@@ -47,21 +47,15 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   assetNewBalance: number = 0;
 
   // Holding
-  /**@deprecated*/
-  holdingAssetToSell: Asset = new Asset();
   investedBalance: number = 0;
 
   // Trading
-  /**@deprecated*/
-  tradingAssetToSell: Asset = new Asset();
   stablecoin: Asset[] = [];
 
   // Transfer
   walletToTansfer: Wallet = new Wallet();
   wallets?: Wallet[] = [];
   isWalletSelected: boolean = false;
-  /**@deprecated*/
-  transferAssetToSell: Asset = new Asset();
   balanceToTransfer: number = 0;
   isEditFees: boolean = false;
   fees: number = 0;
@@ -148,10 +142,6 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
       });
   }
 
-  isWalletPresent() {
-    return this.walletSelect != undefined;
-  }
-
   emitOperationSelectAsset(asset: Asset) {
     this.assetToSell = asset;
     switch (this.operationType) {
@@ -168,29 +158,6 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
       default:
         break;
     }
-  }
-
-  /**@deprecated*/
-  emitHoldingSelectAsset(asset: Asset) {
-    this.holdingAssetToSell = asset;
-    this.investedBalance = this.holdingAssetToSell.balance;
-
-    this.makeNewBalance();
-  }
-
-  /**@deprecated*/
-  emitTradingSelectAsset(asset: Asset) {
-    this.tradingAssetToSell = asset;
-    this.investedBalance = this.tradingAssetToSell.balance;
-
-    this.makeNewBalance();
-  }
-
-  /**@deprecated*/
-  emitTransferSelectAsset(asset: Asset) {
-    this.transferAssetToSell = asset;
-    this.balanceToTransfer = this.transferAssetToSell.balance;
-    this.marketDataSelected = asset;
   }
 
   emitSelectAsset(asset: Asset) {
@@ -219,45 +186,6 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
         this.assetNewBalance = parseFloat(
           (
             (this.assetToSell.current_price! *
-              (this.investedBalance - this.fees)) /
-            this.marketDataSelected.current_price!
-          ).toFixed(8)
-        );
-        break;
-      case OperationsType.NEWINVESTMENT:
-        this.assetNewBalance = parseFloat(
-          (
-            this.investedMoney / this.marketDataSelected.current_price! -
-            this.fees
-          ).toFixed(8)
-        );
-        break;
-      default:
-        break;
-    }
-    this.isEditFees = false;
-  }
-
-  /** @deprecated */
-  makeNewBalance_OLD() {
-    switch (this.operationType) {
-      case OperationsType.HOLDING:
-        this.investedMoney =
-          this.holdingAssetToSell.current_price! * this.investedBalance;
-        this.assetNewBalance = parseFloat(
-          (
-            (this.holdingAssetToSell.current_price! *
-              (this.investedBalance - this.fees)) /
-            this.marketDataSelected.current_price!
-          ).toFixed(8)
-        );
-        break;
-      case OperationsType.TRADING:
-        this.investedMoney =
-          this.tradingAssetToSell.current_price! * this.investedBalance;
-        this.assetNewBalance = parseFloat(
-          (
-            (this.tradingAssetToSell.current_price! *
               (this.investedBalance - this.fees)) /
             this.marketDataSelected.current_price!
           ).toFixed(8)
@@ -435,216 +363,6 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
 
       this.saveWallets([walletSell, walletBuy]);
     }
-  }
-
-  /**@deprecated*/
-  exchangeTransferInvestment() {
-    let transferAsset = deepCopy(this.transferAssetToSell);
-    transferAsset.lastUpdate = new Date();
-
-    let percentualeInvestitoCalcolata =
-      transferAsset.invested * (this.balanceToTransfer / transferAsset.value!);
-    transferAsset.balance -= this.balanceToTransfer;
-
-    if (transferAsset.balance == 0) {
-      percentualeInvestitoCalcolata = transferAsset.invested;
-    }
-    transferAsset.invested -= percentualeInvestitoCalcolata;
-
-    let transferedAsset = this.walletToTansfer.assets
-      ? deepCopy(this.walletToTansfer.assets).find(
-          (as) => as.identifier == transferAsset.identifier
-        )
-      : undefined;
-
-    if (transferedAsset == undefined) {
-      transferedAsset = deepCopy(this.marketDataSelected);
-      transferedAsset.balance = 0;
-      transferedAsset.id = undefined;
-      transferedAsset.invested = 0;
-      transferedAsset.performance = 0;
-      transferedAsset.trend = 0;
-      transferedAsset.lastUpdate = transferAsset.lastUpdate;
-      transferedAsset.history = [];
-    }
-
-    transferedAsset!.balance += this.balanceToTransfer - this.fees;
-    transferedAsset.invested += percentualeInvestitoCalcolata;
-
-    let operation: Operation = new Operation();
-    operation.identifier = uuidv4();
-    operation.type = this.operationType;
-    operation.status = 'CLOSED';
-    operation.entryDate = new Date(this.operationDate);
-    operation.entryCoin = transferAsset.symbol;
-    operation.entryPrice = this.marketDataSelected.current_price;
-    operation.entryPriceValue = parseFloat(
-      (this.balanceToTransfer * this.marketDataSelected.current_price!).toFixed(
-        2
-      )
-    );
-    operation.entryQuantity = this.balanceToTransfer;
-    operation.exitDate = new Date(this.operationDate);
-    operation.exitCoin = transferAsset.symbol;
-    operation.exitPrice = this.marketDataSelected.current_price;
-    operation.exitPriceValue = parseFloat(
-      (
-        (this.balanceToTransfer - this.fees) *
-        this.marketDataSelected.current_price!
-      ).toFixed(2)
-    );
-    operation.exitQuantity = this.balanceToTransfer - this.fees;
-    operation.performance = 0;
-    operation.trend = 0;
-    operation.fees = this.fees;
-
-    transferedAsset.operations = [operation];
-
-    let walletSell = deepCopy(this.wallet);
-    let walletBuy = deepCopy(this.walletToTansfer);
-
-    walletSell.assets = [transferAsset];
-    walletBuy.assets = [transferedAsset];
-
-    this.saveWallets([walletSell, walletBuy]);
-  }
-
-  /**@deprecated*/
-  exchangeTradingInvestment() {
-    let tradingAsset = deepCopy(this.tradingAssetToSell);
-    tradingAsset.lastUpdate = new Date();
-
-    let percentualeInvestitoCalcolata =
-      tradingAsset.invested * (this.investedMoney / tradingAsset.value!);
-    tradingAsset.balance -= this.investedBalance;
-    if (tradingAsset.balance == 0) {
-      percentualeInvestitoCalcolata = tradingAsset.invested;
-    }
-    tradingAsset.invested -= percentualeInvestitoCalcolata;
-
-    const assetToString = JSON.stringify(this.assetInWallet);
-    const assetParsed = JSON.parse(assetToString);
-    let assetToSave = deepCopy(assetParsed);
-
-    if (!assetToSave.performance) {
-      assetToSave.performance = 0;
-      assetToSave.trend = 0;
-    }
-    Number.isNaN(assetToSave.invested) || assetToSave.invested == undefined
-      ? (assetToSave.invested = percentualeInvestitoCalcolata)
-      : (assetToSave.invested += percentualeInvestitoCalcolata);
-    Number.isNaN(assetToSave.balance) || assetToSave.balance == undefined
-      ? (assetToSave.balance = this.assetNewBalance)
-      : (assetToSave.balance += this.assetNewBalance);
-    let operation: Operation = new Operation();
-    operation.identifier = uuidv4();
-    operation.type = this.operationType;
-    operation.status = 'OPEN';
-    operation.entryDate = new Date(this.operationDate);
-    operation.entryCoin = tradingAsset.symbol;
-    operation.entryPrice = this.marketDataSelected.current_price;
-    operation.entryPriceValue = this.investedMoney;
-    operation.entryQuantity = this.assetNewBalance;
-    operation.exitCoin = assetToSave.symbol;
-    operation.fees = this.fees;
-
-    assetToSave.operations = [operation];
-
-    let walletToSave = deepCopy(this.wallet);
-    walletToSave.assets = [assetToSave, tradingAsset];
-    this.saveWallet(walletToSave);
-  }
-
-  /**@deprecated*/
-  exchangeHoldingInvestment() {
-    let holdingAsset = deepCopy(this.holdingAssetToSell);
-    holdingAsset.lastUpdate = new Date();
-
-    let percentualeInvestitoCalcolata =
-      holdingAsset.invested * (this.investedMoney / holdingAsset.value!);
-    holdingAsset.balance -= this.investedBalance;
-    if (holdingAsset.balance == 0) {
-      percentualeInvestitoCalcolata = holdingAsset.invested;
-    }
-    holdingAsset.invested -= percentualeInvestitoCalcolata;
-
-    const assetToString = JSON.stringify(this.assetInWallet);
-    const assetParsed = JSON.parse(assetToString);
-    let assetToSave = deepCopy(assetParsed);
-
-    if (!assetToSave.performance) {
-      assetToSave.performance = 0;
-      assetToSave.trend = 0;
-    }
-    Number.isNaN(assetToSave.invested) || assetToSave.invested == undefined
-      ? (assetToSave.invested = percentualeInvestitoCalcolata)
-      : (assetToSave.invested += percentualeInvestitoCalcolata);
-    Number.isNaN(assetToSave.balance) || assetToSave.balance == undefined
-      ? (assetToSave.balance = this.assetNewBalance)
-      : (assetToSave.balance += this.assetNewBalance);
-    let operation: Operation = new Operation();
-    operation.identifier = uuidv4();
-    operation.type = this.operationType;
-    operation.status = 'CLOSED';
-    operation.entryDate = new Date(this.operationDate);
-    operation.entryCoin = holdingAsset.symbol;
-    operation.entryPrice = this.marketDataSelected.current_price;
-    operation.entryPriceValue = this.investedMoney;
-    //operation.entryQuantity = this.investedBalance;
-    operation.entryQuantity = this.assetNewBalance;
-    operation.exitDate = new Date(this.operationDate);
-    operation.exitCoin = assetToSave.symbol;
-    operation.exitPrice = this.marketDataSelected.current_price;
-    operation.exitPriceValue = this.investedMoney;
-    //operation.exitQuantity = this.assetNewBalance;
-    operation.exitQuantity = this.investedMoney;
-    operation.fees = this.fees;
-
-    assetToSave.operations = [operation];
-
-    let walletToSave = deepCopy(this.wallet);
-    walletToSave.assets = [assetToSave, holdingAsset];
-    this.saveWallet(walletToSave);
-  }
-
-  /**@deprecated*/
-  exchangeNewInvestment() {
-    let assetBuying = deepCopy(this.assetInWallet);
-    assetBuying.lastUpdate = new Date();
-    if (!assetBuying.performance) {
-      assetBuying.performance = 0;
-      assetBuying.trend = 0;
-    }
-    Number.isNaN(assetBuying.invested) || assetBuying.invested == undefined
-      ? (assetBuying.invested = this.investedMoney)
-      : (assetBuying.invested += this.investedMoney);
-    Number.isNaN(assetBuying.balance) || assetBuying.balance == undefined
-      ? (assetBuying.balance = this.assetNewBalance)
-      : (assetBuying.balance += this.assetNewBalance);
-
-    let operation: Operation = new Operation();
-    operation.identifier = uuidv4();
-    operation.type = this.operationType;
-    operation.status = 'CLOSED';
-    operation.entryDate = new Date(this.operationDate);
-    operation.entryCoin = this.fiat;
-    operation.entryPrice = assetBuying.current_price;
-    operation.entryPriceValue = this.investedMoney;
-    //operation.entryQuantity = this.investedMoney;
-    operation.entryQuantity = this.assetNewBalance;
-    operation.exitDate = new Date(this.operationDate);
-    operation.exitCoin = assetBuying.symbol;
-    operation.exitPrice = assetBuying.current_price;
-    operation.exitPriceValue = this.investedMoney;
-    //operation.exitQuantity = this.assetNewBalance;
-    operation.exitQuantity = this.investedMoney;
-    operation.fees = this.fees;
-
-    assetBuying.operations = [operation];
-
-    let walletToSave = deepCopy(this.wallet);
-    walletToSave.assets = [assetBuying];
-    this.saveWallet(walletToSave);
   }
 
   saveWallet(walletToSave: Wallet) {

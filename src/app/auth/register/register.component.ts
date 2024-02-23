@@ -65,8 +65,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
     user.surname = this.surname;
     user.username = this.username;
     user.settings.currency = this.currency;
-    let dark = parseInt(localStorage.getItem('MoneyStatsDarkMode')!);
-    user.settings.darkMode = dark == 1 ? Status.NOT_ACTIVE : Status.ACTIVE;
     user.settings.liveWallets = Status.NOT_ACTIVE;
 
     this.registerSubscribe = this.userService

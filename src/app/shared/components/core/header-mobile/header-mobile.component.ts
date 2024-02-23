@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { AppService } from 'src/assets/core/services/app.service';
+import { Utils } from 'src/assets/core/services/utils.service';
 
 @Component({
   selector: 'app-header-mobile',
@@ -30,6 +31,6 @@ export class HeaderMobileComponent implements OnInit {
   }
 
   vibrate() {
-    this.appService.vibrate();
+    Utils.vibrate();
   }
 }

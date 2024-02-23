@@ -22,6 +22,7 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { environment } from 'src/environments/environment';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { Subscription } from 'rxjs';
+import { Utils } from 'src/assets/core/services/utils.service';
 
 declare const TradingView: any;
 
@@ -97,8 +98,9 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
       });
     this.isWalletBalanceHidden();
   }
+
   vibrate() {
-    this.appService.vibrate();
+    Utils.vibrate();
   }
 
   getCoinForGraph() {
@@ -245,7 +247,6 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
     script.text = text.replace('$SYMBOL$', 'BTCUSDT');
     this._renderer2.appendChild(div, script);
     this._renderer2.appendChild(this.dayGraph?.nativeElement, div);
-    //this.selectGraph?.nativeElement.appendChild(script);
   }
 
   appendSelectGraph(symbol: string) {
@@ -254,22 +255,6 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
     div.id = 'selectSymbol';
     let script = this._renderer2.createElement('script');
     script.type = `text/javascript`;
-    //script.src =
-    //  'https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js';
-    //
-    //let text = `
-    //  {
-    //    "container_id": "test",
-    //    "symbol": "$SYMBOL$",
-    //    "width": "100%",
-    //    "height": "100%",
-    //    "locale": "it",
-    //    "dateRange": "1M",
-    //    "colorTheme": "dark",
-    //    "isTransparent": true,
-    //    "autosize": true,
-    //    "largeChartUrl": ""
-    //  }`;
 
     script.src =
       'https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js';
@@ -347,7 +332,6 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
       .getCryptoPriceData(this.cryptoDashboard.currency)
       .subscribe((data) => {
         this.cryptoService.cache.cacheMarketDataByCurrencyData(data);
-        console.log(data.data);
         this.cryptoDashboard.lastUpdate = data.data[0].updateDate;
         this.filterMarketData = data.data;
       });

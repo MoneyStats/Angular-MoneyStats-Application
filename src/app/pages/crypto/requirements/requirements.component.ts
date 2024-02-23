@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { Status, User } from 'src/assets/core/data/class/user.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { DashboardService } from 'src/assets/core/services/dashboard.service';
+import { UserService } from 'src/assets/core/services/user.service';
+import { LoggerService } from 'src/assets/core/utils/log.service';
 
 @Component({
   selector: 'app-requirements',
   templateUrl: './requirements.component.html',
   styleUrls: ['./requirements.component.scss'],
 })
-export class RequirementsComponent implements OnInit {
+export class RequirementsComponent implements OnInit, OnDestroy {
+  updateUserSub: Subscription = new Subscription();
+
   isWalletCreated: boolean = false;
   isCryptoWalletCreated: boolean = false;
   isAssetCreated: boolean = false;
@@ -26,15 +32,38 @@ export class RequirementsComponent implements OnInit {
 
   constructor(
     private dashboardService: DashboardService,
-    private router: Router
+    private userService: UserService,
+    private router: Router,
+    private logger: LoggerService
   ) {}
+
+  ngOnDestroy(): void {
+    this.updateUserSub.unsubscribe();
+  }
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
   }
 
   ngOnInit(): void {
-    let user = this.dashboardService.user;
+    let user = this.userService.user;
+    let requirements: Array<string> =
+      user.settings.completeRequirement?.split(';')!;
+    if (requirements.includes(Status.ASSET)) this.isAssetCreated = true;
+    if (requirements.includes(Status.CRYPTO_WALLET))
+      this.isCryptoWalletCreated = true;
+    if (requirements.includes(Status.WALLET)) this.isWalletCreated = true;
+    if (requirements.includes(Status.CURRENCY)) this.isCurrencyAdded = true;
+
+    this.wallets = this.dashboardService.dashboard.wallets;
+    if (this.wallets != undefined && this.wallets.length != 0) {
+      this.isWalletCreated = true;
+    }
+    if (user.settings.cryptoCurrency) {
+      this.isCurrencyAdded = true;
+      this.currency = user.settings.cryptoCurrency;
+    }
+    /*let user = this.dashboardService.user;
     this.wallets = this.dashboardService.dashboard.wallets;
     this.dashboard = this.dashboardService.dashboard;
     if (this.wallets && this.wallets != undefined)
@@ -54,7 +83,7 @@ export class RequirementsComponent implements OnInit {
     if (user?.settings.cryptoCurrency) {
       this.isCurrencyAdded = true;
       this.currency = user.settings.cryptoCurrency;
-    }
+    }*/
     this.goToDashboard();
     //if (this.validateBtn()) this.router.navigate(['/crypto/dashboard']);
   }
@@ -69,6 +98,7 @@ export class RequirementsComponent implements OnInit {
   }
 
   saveWallet(wallet: Wallet) {
+    let user = this.userService.user;
     if (this.wallets != undefined) {
       let index = this.wallets?.indexOf(
         this.wallets.find((w) => w.name == wallet.name)!
@@ -97,11 +127,51 @@ export class RequirementsComponent implements OnInit {
       this.wallets = [wallet];
       this.isWalletCreated = true;
     }
+
+    if (this.isWalletCreated)
+      user.settings.completeRequirement = user.settings.completeRequirement
+        ? user.settings.completeRequirement.concat(Status.WALLET).concat(';')
+        : Status.WALLET.concat(';');
+
+    if (this.isCryptoWalletCreated)
+      user.settings.completeRequirement = user.settings.completeRequirement
+        ? user.settings.completeRequirement
+            .concat(Status.CRYPTO_WALLET)
+            .concat(';')
+        : Status.CRYPTO_WALLET.concat(';');
+
+    if (this.isAssetCreated)
+      user.settings.completeRequirement = user.settings.completeRequirement
+        ? user.settings.completeRequirement.concat(Status.ASSET).concat(';')
+        : Status.ASSET.concat(';');
+
+    this.updateUser(user);
   }
 
-  selectCurrency(currency: string) {
+  selectCurrency(user: User) {
+    user.settings.completeRequirement = user.settings.completeRequirement
+      ? user.settings.completeRequirement.concat(Status.CURRENCY).concat(';')
+      : Status.CURRENCY.concat(';');
+    this.updateUser(user);
     this.isCurrencyAdded = true;
-    this.currency = currency;
+    this.currency = user.settings.currency;
+  }
+
+  updateUser(user: User) {
+    if (
+      this.isAssetCreated &&
+      this.isCryptoWalletCreated &&
+      this.isCurrencyAdded &&
+      this.isWalletCreated
+    )
+      user.settings.completeRequirement = Status.COMPLETED;
+    this.updateUserSub = this.userService
+      .updateUserData(user)
+      .subscribe((data) => {
+        this.logger.LOG(data.message!, 'RequirementsComponent');
+        this.userService.user = data.data;
+        this.userService.setUserGlobally();
+      });
   }
 
   goToDashboard() {

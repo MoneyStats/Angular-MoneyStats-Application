@@ -26,6 +26,7 @@ import {
   OperationsType,
 } from 'src/assets/core/data/constant/constant';
 import { Subscription } from 'rxjs';
+import { Utils } from 'src/assets/core/services/utils.service';
 
 @Component({
   selector: 'app-details-overview',
@@ -124,7 +125,7 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
   graphAll() {
     this.setColor();
     if (!this.chartOptions) {
-      let dashboard: CryptoDashboard = deepCopy(this.cryptoDashboard);
+      let dashboard: CryptoDashboard = Utils.copyObject(this.cryptoDashboard);
       dashboard.assets = [
         this.asset.name == undefined
           ? deepCopy(this.cryptoService.asset!)
@@ -152,7 +153,7 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
   graph1Y() {
     this.setColor();
     if (!this.chart1Y) {
-      let dashboard: CryptoDashboard = deepCopy(this.cryptoDashboard);
+      let dashboard: CryptoDashboard = Utils.copyObject(this.cryptoDashboard);
       dashboard.assets = [
         this.asset.name == undefined
           ? deepCopy(this.cryptoService.asset!)
@@ -190,7 +191,7 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
   graph3Y() {
     this.setColor();
     if (!this.chart3Y) {
-      let dashboard: CryptoDashboard = deepCopy(this.cryptoDashboard);
+      let dashboard: CryptoDashboard = Utils.copyObject(this.cryptoDashboard);
 
       dashboard.assets = [
         this.asset.name == undefined
