@@ -18,11 +18,16 @@ export class Utils {
     }
   }
 
-  public static isNullOrEmpty(obj: any) {
-    if (obj != undefined && obj) {
-      if (obj instanceof Number) return Number.isNaN(obj);
+  public static isNullOrEmpty(obj: any): boolean {
+    if (obj != undefined) {
+      if (typeof obj === 'number') return Number.isNaN(obj) || obj === Infinity;
+      return obj == undefined;
     }
     return true;
+  }
+
+  public static roundToTwoDecimalPlaces(value: number): number {
+    return Math.round((value + Number.EPSILON) * 100) / 100;
   }
 
   public static vibrate() {

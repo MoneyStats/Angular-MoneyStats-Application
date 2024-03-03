@@ -1,24 +1,15 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import {
-  Observable,
-  firstValueFrom,
-  isObservable,
-  of,
-  switchMap,
-  timer,
-} from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import Swal from 'sweetalert2';
-import { Coin } from '../data/class/coin';
-import { ResponseModel } from '../data/class/generic.class';
-import { User } from '../data/class/user.class';
-import { StorageConstant } from '../data/constant/constant';
-import { SwalService } from '../utils/swal.service';
-import { Wallet } from '../data/class/dashboard.class';
-import { Asset, CryptoDashboard } from '../data/class/crypto.class';
-import { CacheService } from './cache.service';
+import { Coin } from '../../data/class/coin';
+import { ResponseModel } from '../../data/class/generic.class';
+import { User } from '../../data/class/user.class';
+import { StorageConstant } from '../../data/constant/constant';
+import { SwalService } from '../../utils/swal.service';
+import { Wallet } from '../../data/class/dashboard.class';
+import { Asset, CryptoDashboard } from '../../data/class/crypto.class';
+import { CacheService } from '../config/cache.service';
 
 @Injectable({
   providedIn: 'root',

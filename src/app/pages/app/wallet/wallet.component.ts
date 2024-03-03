@@ -5,8 +5,8 @@ import {
   ModalConstant,
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
-import { WalletService } from 'src/assets/core/services/wallet.service';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { WalletService } from 'src/assets/core/services/api/wallet.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
@@ -23,8 +23,7 @@ export class WalletComponent implements OnInit, OnDestroy {
 
   constructor(
     public walletService: WalletService,
-    public screenService: ScreenService,
-    private logger: LoggerService
+    public screenService: ScreenService
   ) {}
 
   ngOnDestroy(): void {
@@ -35,15 +34,19 @@ export class WalletComponent implements OnInit, OnDestroy {
     return ModalConstant;
   }
 
+  screenWidth() {
+    return ScreenService.screenWidth;
+  }
+
   ngOnInit(): void {
-    this.screenService.setupHeader();
-    this.screenService.goToWallet();
-    this.screenService.showFooter();
+    ScreenService.setupHeader();
+    ScreenService.goToWallet();
+    ScreenService.showFooter();
     this.walletsSubscribe = this.walletService
       .getWalletsData()
       .subscribe((res) => {
         this.walletService.cache.cacheWalletsData(res);
-        this.logger.LOG(res.message!, 'WalletComponent');
+        LOG.info(res.message!, 'WalletComponent');
         this.wallets = res.data;
         this.walletService.walletActive = this.walletActive(res.data);
         this.walletService.walletDeleted = this.walletDeleted(res.data);

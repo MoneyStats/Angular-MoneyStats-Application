@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { slideUp } from 'src/app/shared/animations/route-animations';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
-import { DashboardService } from 'src/assets/core/services/dashboard.service';
+import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
@@ -19,9 +19,13 @@ export class TransactionDetailsComponent implements OnInit {
     public dashboardService: DashboardService
   ) {}
 
+  screenWidth() {
+    return ScreenService.screenWidth;
+  }
+
   ngOnInit(): void {
-    this.screenService.setupHeader();
-    this.screenService.hideFooter();
+    ScreenService.setupHeader();
+    ScreenService.hideFooter();
     this.wallet = this.dashboardService.wallet;
 
     if (this.wallet?.history.find((w) => w.id == undefined)) {

@@ -4,11 +4,12 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class LoggerService {
-  environment = environment;
-  LOG_Formatter: string = '[$DATE$] [$ENV$] [LOG] [$CLASS$]: $TEXT$';
+export class LOG {
+  private environment = environment;
+  private static LOG_Formatter: string =
+    '[$DATE$] [$ENV$] [LOG] [$CLASS$]: $TEXT$';
 
-  LOG(text: string, classType: string): void {
+  public static info(text: string, classType: string): void {
     console.log(
       this.LOG_Formatter.replace('$DATE$', new Date().toDateString())
         .replace('$ENV$', environment.envType)

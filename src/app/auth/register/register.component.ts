@@ -2,11 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Coin } from 'src/assets/core/data/class/coin';
 import { Status, User } from 'src/assets/core/data/class/user.class';
-import { UserService } from 'src/assets/core/services/user.service';
+import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { Router } from '@angular/router';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -28,12 +28,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
   currencyList: string[] = [];
   check: boolean = false;
   invitationCode: string = '';
+
   constructor(
     private location: Location,
-    private userService: UserService,
-    private swal: SwalService,
+    private authService: AuthService,
     private router: Router,
-    private logger: LoggerService,
     private translate: TranslateService
   ) {}
 
@@ -67,11 +66,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
     user.settings.currency = this.currency;
     user.settings.liveWallets = Status.NOT_ACTIVE;
 
-    this.registerSubscribe = this.userService
+    this.registerSubscribe = this.authService
       .register(user, this.invitationCode)
       .subscribe((data) => {
-        this.logger.LOG(data.message!, 'RegisterComponent');
-        this.swal.toastMessage(
+        LOG.info(data.message!, 'RegisterComponent');
+        SwalService.toastMessage(
           SwalIcon.SUCCESS,
           this.translate
             .instant('response.register')

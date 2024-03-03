@@ -1,10 +1,10 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
-import { AppService } from 'src/assets/core/services/app.service';
+import { AppService } from 'src/assets/core/services/api/app.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 import { saveAs } from 'file-saver';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
@@ -22,8 +22,6 @@ export class BackupDataComponent implements OnDestroy {
 
   constructor(
     private appService: AppService,
-    private swal: SwalService,
-    private logger: LoggerService,
     private translate: TranslateService
   ) {}
 
@@ -34,11 +32,11 @@ export class BackupDataComponent implements OnDestroy {
 
   backupData() {
     this.appService.backupData().subscribe((data) => {
-      this.logger.LOG(data.message!, 'BackupDataComponent');
+      LOG.info(data.message!, 'BackupDataComponent');
       this.walletEntities = data.data;
       let fileName = 'Backup_Moneystats_' + new Date().toISOString();
       this.downloadObjectAsJson(this.walletEntities, fileName);
-      this.swal.toastMessage(
+      SwalService.toastMessage(
         SwalIcon.SUCCESS,
         this.translate.instant('response.backup')
       );
@@ -55,8 +53,8 @@ export class BackupDataComponent implements OnDestroy {
       reader.onload = (event: any) => {
         this.walletEntities = JSON.parse(event.target.result);
         this.appService.restoreData(this.walletEntities).subscribe((data) => {
-          this.logger.LOG(data.message!, 'BackupDataComponent');
-          this.swal.toastMessage(
+          LOG.info(data.message!, 'BackupDataComponent');
+          SwalService.toastMessage(
             SwalIcon.SUCCESS,
             this.translate.instant('response.restore')
           );

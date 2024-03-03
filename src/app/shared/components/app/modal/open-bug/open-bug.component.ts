@@ -5,9 +5,9 @@ import { UtilsException } from 'src/assets/core/data/class/error';
 import { GithubIssues } from 'src/assets/core/data/class/user.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
-import { AppService } from 'src/assets/core/services/app.service';
-import { UserService } from 'src/assets/core/services/user.service';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { AppService } from 'src/assets/core/services/api/app.service';
+import { AuthService } from 'src/assets/core/services/api/auth.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 
 @Component({
@@ -23,9 +23,7 @@ export class OpenBugComponent implements OnDestroy {
   description: string = '';
 
   constructor(
-    private swal: SwalService,
     private appService: AppService,
-    private logger: LoggerService,
     private translate: TranslateService
   ) {}
 
@@ -49,8 +47,8 @@ export class OpenBugComponent implements OnDestroy {
       'Device Datas: <br>' +
       window.navigator.userAgent;
     this.appService.openIssues(githubIssues).subscribe((res) => {
-      this.logger.LOG(res.message!, 'SettingsComponent');
-      this.swal.toastMessage(
+      LOG.info(res.message!, 'SettingsComponent');
+      SwalService.toastMessage(
         SwalIcon.SUCCESS,
         this.translate.instant('response.bug')
       );

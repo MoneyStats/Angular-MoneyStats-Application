@@ -15,14 +15,12 @@ import {
   ModalConstant,
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
-import { AppService } from 'src/assets/core/services/app.service';
-import { CryptoService } from 'src/assets/core/services/crypto.service';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { CryptoService } from 'src/assets/core/services/api/crypto.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { environment } from 'src/environments/environment';
-import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { Subscription } from 'rxjs';
-import { Utils } from 'src/assets/core/services/utils.service';
+import { Utils } from 'src/assets/core/services/config/utils.service';
 
 declare const TradingView: any;
 
@@ -57,9 +55,7 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
   constructor(
     public screenService: ScreenService,
     private _renderer2: Renderer2,
-    private cryptoService: CryptoService,
-    private logger: LoggerService,
-    private appService: AppService
+    private cryptoService: CryptoService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -68,7 +64,7 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getDashboard();
-    this.screenService.showFooter();
+    ScreenService.showFooter();
   }
 
   ngAfterViewInit(): void {
@@ -84,7 +80,7 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
       .getCryptoDashboardData()
       .subscribe((data) => {
         this.cryptoService.cache.cacheCryptoDashboardData(data);
-        this.logger.LOG(data.message!, 'CryptoDashboardComponent');
+        LOG.info(data.message!, 'CryptoDashboardComponent');
         this.cryptoDashboard = data.data;
         this.cryptoService.cryptoDashboard = data.data;
         this.assets = data.data.assets;
@@ -105,9 +101,9 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
 
   getCoinForGraph() {
     this.symbolList = [];
-    let assets = deepCopy(this.assets);
-    assets = assets.filter((a) => a.balance > 0 && a.symbol != 'USDT');
-    assets.forEach((a) => this.symbolList.push(a.symbol + '-USDT'));
+    let assets = Utils.copyObject(this.assets);
+    assets = assets.filter((a: any) => a.balance > 0 && a.symbol != 'USDT');
+    assets.forEach((a: any) => this.symbolList.push(a.symbol + '-USDT'));
     if (this.symbolList.length == 0) this.symbolList.push('BTC-USDT');
   }
 

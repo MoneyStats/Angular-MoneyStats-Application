@@ -10,9 +10,10 @@ import {
   UserRole,
 } from 'src/assets/core/data/constant/constant';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
-import { AppService } from 'src/assets/core/services/app.service';
-import { UserService } from 'src/assets/core/services/user.service';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { AppService } from 'src/assets/core/services/api/app.service';
+import { AuthService } from 'src/assets/core/services/api/auth.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 import { ThemeService } from 'src/assets/core/utils/theme.service';
@@ -40,13 +41,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   constructor(
     public screenService: ScreenService,
-    private userService: UserService,
-    private themeService: ThemeService,
-    private toast: ToastService,
-    private swal: SwalService,
+    private authService: AuthService,
     private appService: AppService,
-    private logger: LoggerService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private userService: UserService
   ) {}
 
   ngOnDestroy(): void {
@@ -68,13 +66,13 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.screenService.setupHeader();
-    this.screenService.showFooter();
-    this.screenService.goToSettings();
-    this.user = this.userService.user;
-    this.themeService.switchDarkMode();
+    ScreenService.setupHeader();
+    ScreenService.showFooter();
+    ScreenService.goToSettings();
+    this.user = this.authService.user;
+    ThemeService.switchDarkMode();
     if (this.user?.name === 'DEFAULT_NAME') {
-      this.user = this.userService.user;
+      this.user = this.authService.user;
     }
     if (this.user?.name === 'DEFAULT_NAME') {
       this.user = JSON.parse(
@@ -91,6 +89,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }
   }
 
+  screenWidth() {
+    return ScreenService.screenWidth;
+  }
+
   disconnect(user: User) {
     this.user = user;
   }
@@ -100,11 +102,11 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   availableSoon() {
-    this.toast.availableSoon();
+    ToastService.availableSoon();
   }
 
   logout() {
-    this.userService.logout();
+    this.authService.logout();
   }
 
   onFileSelected(event: any): void {
@@ -125,13 +127,14 @@ export class SettingsComponent implements OnInit, OnDestroy {
       reader.readAsDataURL(event.target.files[0]);
       this.user!.imgName = file.name;
 
-      this.userService.uploadImage(file).subscribe((data) => {
+      this.appService.uploadImage(file).subscribe((data) => {
         this.user!.imgName = undefined;
-        this.userService.updateUserData(this.user!).subscribe((res) => {
-          this.userService.user! = res.data;
-          this.userService.setUserGlobally();
-          this.userService.setValue();
-          this.swal.toastMessage(SwalIcon.SUCCESS, res.message!);
+        this.authService.updateUserData(this.user!).subscribe((res) => {
+          this.userService.setUserGlobally(res.data);
+          /*this.authService.user! = res.data;
+          this.authService.setUserGlobally();
+          this.authService.setValue();*/
+          SwalService.toastMessage(SwalIcon.SUCCESS, res.message!);
         });
       });
     } else if (file.size > environment.imageSizeMax) {
@@ -149,8 +152,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   cleanCache() {
     this.cacheSubscribe = this.appService.cleanCache().subscribe((res) => {
-      this.logger.LOG(res.message!, 'SettingsComponent');
-      this.swal.toastMessage(
+      LOG.info(res.message!, 'SettingsComponent');
+      SwalService.toastMessage(
         SwalIcon.SUCCESS,
         this.translate.instant('response.cache')
       );
@@ -161,8 +164,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.marketDataSubscribe = this.appService
       .importMarketData()
       .subscribe((res) => {
-        this.logger.LOG(res.message!, 'SettingsComponent');
-        this.swal.toastMessage(
+        LOG.info(res.message!, 'SettingsComponent');
+        SwalService.toastMessage(
           SwalIcon.SUCCESS,
           this.translate.instant('response.marketData')
         );
@@ -186,14 +189,15 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   updateUser(message: string) {
-    this.updateUserSubscribe = this.userService
+    this.updateUserSubscribe = this.authService
       .updateUserData(this.user!)
       .subscribe((res) => {
-        this.logger.LOG(res.message!, 'SettingsComponent');
-        this.userService.user! = res.data;
-        this.userService.setUserGlobally();
-        this.userService.setValue();
-        this.swal.toastMessage(SwalIcon.SUCCESS, message);
+        LOG.info(res.message!, 'SettingsComponent');
+        this.userService.setUserGlobally(res.data);
+        //this.authService.user! = res.data;
+        //this.authService.setUserGlobally();
+        //this.authService.setValue();
+        SwalService.toastMessage(SwalIcon.SUCCESS, message);
       });
   }
 }

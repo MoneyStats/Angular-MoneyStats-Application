@@ -6,14 +6,13 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { Dashboard, Stats } from 'src/assets/core/data/class/dashboard.class';
-//import { ChartOptions } from 'src/assets/core/data/constant/apex.chart';
-import { ChartService } from 'src/assets/core/utils/chart.service';
 import { ChartOptions } from 'chart.js';
 import {
   ApexOptions,
   ChartJSOptions,
 } from 'src/assets/core/data/constant/apex.chart';
 import { ChartJSService } from 'src/assets/core/utils/chartjs.service';
+import { Utils } from 'src/assets/core/services/config/utils.service';
 
 @Component({
   selector: 'app-category',
@@ -49,7 +48,7 @@ export class CategoryComponent implements OnInit, OnChanges {
   public lineChartJS?: ChartJSOptions = new ChartJSOptions();
   public chartCategory?: Partial<ApexOptions>;
   public chartBar?: Partial<ChartOptions>;
-  constructor(private charts: ChartService, private chartsJS: ChartJSService) {}
+  constructor() {}
 
   ngOnInit(): void {
     if (this.dashboard.statsWalletDays) {
@@ -66,10 +65,7 @@ export class CategoryComponent implements OnInit, OnChanges {
   }
 
   renderChart() {
-    this.lineChartJS = this.chartsJS.renderChartLine(this.totalMap);
-    //setTimeout(() => {
-    //  this.chartCategory = this.charts.renderChartLineCategory(this.totalMap);
-    //}, 200);
+    this.lineChartJS = ChartJSService.renderChartLine(this.totalMap);
   }
 
   generateData() {
@@ -219,19 +215,19 @@ export class CategoryComponent implements OnInit, OnChanges {
     total.balance = 0;
     total.date = date;
     history.forEach((h: any) => {
-      total.balance = parseFloat((total.balance + h.balance).toFixed(2));
+      total.balance = Utils.roundToTwoDecimalPlaces(total.balance + h.balance);
     });
-    let percentage = (
+    let percentage = Utils.roundToTwoDecimalPlaces(
       ((total.balance - this.balances[this.balances.length - 1]) /
         this.balances[this.balances.length - 1]) *
-      100
-    ).toFixed(2);
-    let trend = parseFloat(
-      (total.balance - this.balances[this.balances.length - 1]).toFixed(2)
+        100
     );
-    total.percentage = parseFloat(percentage);
+    let trend = Utils.roundToTwoDecimalPlaces(
+      total.balance - this.balances[this.balances.length - 1]
+    );
+    total.percentage = percentage;
     total.trend = trend;
-    if (total.percentage === Infinity || Number.isNaN(total.percentage)) {
+    if (Utils.isNullOrEmpty(total.percentage)) {
       total.percentage = 0;
       total.trend = 0;
     }

@@ -8,8 +8,8 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { User } from 'src/assets/core/data/class/user.class';
-import { UserService } from 'src/assets/core/services/user.service';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { AuthService } from 'src/assets/core/services/api/auth.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -25,7 +25,7 @@ export class SelectCryptoCurrencyComponent {
 
   currencies: string[] = ['EUR', 'USD', 'GBP'];
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: AuthService) {}
 
   selectCurrency() {
     let user = this.userService.user;

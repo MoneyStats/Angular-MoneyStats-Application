@@ -1,20 +1,19 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { ActivatedRoute } from '@angular/router';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { ChartService } from 'src/assets/core/utils/chart.service';
-import { WalletService } from 'src/assets/core/services/wallet.service';
+import { WalletService } from 'src/assets/core/services/api/wallet.service';
 import {
   ModalConstant,
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
 import { environment } from 'src/environments/environment';
 import { ToastService } from 'src/assets/core/utils/toast.service';
-import { AppService } from 'src/assets/core/services/app.service';
-import { deepCopy } from '@angular-devkit/core/src/utils/object';
+import { AppService } from 'src/assets/core/services/api/app.service';
 import { Subscription } from 'rxjs';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 
 @Component({
   selector: 'app-wallet-details',
@@ -56,11 +55,8 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
   constructor(
     public screenService: ScreenService,
     private route: ActivatedRoute,
-    private charts: ChartService,
     public walletService: WalletService,
-    private toast: ToastService,
-    public appService: AppService,
-    private logger: LoggerService
+    public appService: AppService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -71,10 +67,13 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
     this.routeSubscribe.unsubscribe();
     this.saveWalletSubscribe.unsubscribe();
   }
+  screenWidth() {
+    return ScreenService.screenWidth;
+  }
 
   ngOnInit(): void {
-    this.screenService.setupHeader();
-    this.screenService.hideFooter();
+    ScreenService.setupHeader();
+    ScreenService.hideFooter();
     this.routeSubscribe = this.route.params.subscribe((w: any) => {
       this.walletId = w.id;
       this.walletName = w.wallet;
@@ -107,7 +106,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
   }
 
   renderImage() {
-    if (this.screenService!.screenWidth! <= 780) {
+    if (ScreenService.screenWidth! <= 780) {
       const image = document.getElementById('gradientSection');
       image!.style.backgroundImage = 'url(' + this.wallet!.img + ')';
     }
@@ -116,7 +115,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
   graphAll() {
     if (!this.chartAll && this.wallet?.history) {
       setTimeout(() => {
-        this.chartAll = this.charts.renderChartWallet(
+        this.chartAll = ChartService.renderChartWallet(
           this.wallet?.name!,
           this.wallet?.history!
         );
@@ -132,7 +131,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
           new Date().getFullYear().toString()
       );
       setTimeout(() => {
-        this.chart1Y = this.charts.renderChartWallet(
+        this.chart1Y = ChartService.renderChartWallet(
           this.wallet?.name!,
           lastYear!
         );
@@ -151,7 +150,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
         last3.includes(h.date.toString().split('-')[0])
       );
       setTimeout(() => {
-        this.chart3Y = this.charts.renderChartWallet(
+        this.chart3Y = ChartService.renderChartWallet(
           this.wallet?.name!,
           last3Year!
         );
@@ -237,7 +236,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
       .writeText(val)
       .then()
       .catch((e) => console.error(e));*/
-    this.toast.copiedAvaiable();
+    ToastService.copiedAvaiable();
   }
 
   // Crypto
@@ -260,7 +259,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
     this.saveWalletSubscribe = this.walletService
       .addUpdateWalletData(this.wallet!)
       .subscribe((data) => {
-        this.logger.LOG(data.message!, 'WalletDetailsComponent');
+        LOG.info(data.message!, 'WalletDetailsComponent');
         this.infoKey = '';
         this.infoValue = '';
         this.addInput = false;

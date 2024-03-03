@@ -1,15 +1,13 @@
 import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { Location } from '@angular/common';
-import { UserService } from 'src/assets/core/services/user.service';
+import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { User } from 'src/assets/core/data/class/user.class';
-import {
-  ModalConstant,
-  StorageConstant,
-} from 'src/assets/core/data/constant/constant';
+import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { Subscription } from 'rxjs';
+import { UserService } from 'src/assets/core/services/api/user.service';
 
 @Component({
   selector: 'app-login',
@@ -27,9 +25,9 @@ export class LoginComponent implements OnDestroy {
   password: string = '';
   constructor(
     private location: Location,
-    private userService: UserService,
+    private authService: AuthService,
     private router: Router,
-    private logger: LoggerService
+    private userService: UserService
   ) {}
 
   ngOnDestroy(): void {
@@ -45,10 +43,11 @@ export class LoginComponent implements OnDestroy {
   }
 
   login() {
-    const user = this.userService.login(this.username, this.password);
+    const user = this.authService.login(this.username, this.password);
     this.loginSubscribe = user.subscribe((data) => {
-      this.logger.LOG(data.message!, 'LoginComponent');
-      if (data.data.githubUser) {
+      LOG.info(data.message!, 'LoginComponent');
+      this.userService.setUserGlobally(data.data);
+      /*if (data.data.githubUser) {
         data.data.github = JSON.parse(data.data.githubUser);
         localStorage.setItem(
           StorageConstant.GITHUBACCOUNT,
@@ -56,14 +55,14 @@ export class LoginComponent implements OnDestroy {
         );
       }
       this.user = data.data;
-      this.userService.user = data.data;
+      this.authService.user = data.data;
 
       localStorage.setItem(
         StorageConstant.ACCESSTOKEN,
         data.data.authToken.type + ' ' + data.data.authToken.accessToken
       );
-      this.userService.setValue();
-      this.userService.setUserGlobally();
+      this.authService.setValue();
+      this.authService.setUserGlobally();*/
       this.router.navigate(['']);
     });
   }

@@ -1,6 +1,6 @@
 <section class="section-width mx-auto">
   <app-header-mobile
-    *ngIf="screenService?.screenWidth! <= 780"
+    *ngIf="screenWidth()! <= 780"
     [title]="'transaction.title' | translate"
     [backBtn]="'transaction.mobile_back' | translate"
   >
@@ -54,7 +54,9 @@
     <!-- * Transactions -->
     <div align="center">
       <img
-        src="{{environment.baseUrlDashboard}}assets/images/logos/logo_transparent_gray_land.png"
+        src="{{
+          environment.baseUrlDashboard
+        }}assets/images/logos/logo_transparent_gray_land.png"
         alt=""
         srcset=""
         style="width: 150px"

@@ -4,10 +4,10 @@ import { Subscription } from 'rxjs';
 import { fadeSlider } from 'src/app/shared/animations/route-animations';
 import { Status, User } from 'src/assets/core/data/class/user.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
-import { AppService } from 'src/assets/core/services/app.service';
+import { AppService } from 'src/assets/core/services/api/app.service';
 import { environment } from 'src/environments/environment';
-import { Utils } from 'src/assets/core/services/utils.service';
-import { UserService } from 'src/assets/core/services/user.service';
+import { Utils } from 'src/assets/core/services/config/utils.service';
+import { AuthService } from 'src/assets/core/services/api/auth.service';
 
 @Component({
   selector: 'app-crypto',
@@ -48,7 +48,7 @@ export class CryptoComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.user = this.appService.user;
     if (this.user.name === 'DEFAULT_NAME') {
-      this.user = UserService.getUserFromStorage();
+      this.user = AuthService.getUserFromStorage();
     }
     if (!this.user.settings.completeRequirement?.match(Status.COMPLETED)) {
       this.onBoard();

@@ -6,8 +6,9 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import { UserService } from 'src/assets/core/services/user.service';
+import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { StorageConstant } from 'src/assets/core/data/constant/constant';
+import { UserService } from 'src/assets/core/services/api/user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,11 @@ import { StorageConstant } from 'src/assets/core/data/constant/constant';
 export class RouteGuardService implements CanActivate {
   isUserLoggedSubscribe: Subscription = new Subscription();
   resp: Response | undefined;
-  constructor(private router: Router, private authService: UserService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private userService: UserService
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -23,9 +28,6 @@ export class RouteGuardService implements CanActivate {
   ): boolean {
     let accessToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     if (accessToken != null) {
-      //if (this.authService.user.name === 'DEFAULT_NAME') {
-      //  this.isUserLoggedIn(accessToken);
-      //}
       this.isUserLoggedIn(accessToken);
       return true;
     }
@@ -36,7 +38,8 @@ export class RouteGuardService implements CanActivate {
   isUserLoggedIn(accessToken: string) {
     this.authService.checkLogin(accessToken).subscribe({
       next: (resp) => {
-        if (resp.data.githubUser) {
+        this.userService.setUserGlobally(resp.data);
+        /*       if (resp.data.githubUser) {
           resp.data.github = JSON.parse(resp.data.githubUser);
         }
         this.authService.user = resp.data;
@@ -49,7 +52,7 @@ export class RouteGuardService implements CanActivate {
         localStorage.setItem(
           StorageConstant.ACCESSTOKEN,
           'Bearer ' + resp.data.authToken.accessToken
-        );
+        );*/
         //this.router.navigate(['']);
       },
       error: (error) => {

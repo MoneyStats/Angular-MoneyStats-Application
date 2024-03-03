@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { Location } from '@angular/common';
-import { DashboardService } from 'src/assets/core/services/dashboard.service';
+import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
 import { environment } from 'src/environments/environment';
-import { AppService } from 'src/assets/core/services/app.service';
+import { AppService } from 'src/assets/core/services/api/app.service';
 
 @Component({
   selector: 'app-onboarding',

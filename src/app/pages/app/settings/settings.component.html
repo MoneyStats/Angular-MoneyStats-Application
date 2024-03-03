@@ -1,7 +1,7 @@
 <app-header [user]="user" *ngIf="screenService.isCrypto"></app-header>
 <section class="section-width mx-auto">
   <app-header-mobile
-    *ngIf="screenService?.screenWidth! <= 780"
+    *ngIf="screenWidth()! <= 780"
     [title]="'settings.title' | translate"
     [backBtn]="'settings.mobile_back' | translate"
   >

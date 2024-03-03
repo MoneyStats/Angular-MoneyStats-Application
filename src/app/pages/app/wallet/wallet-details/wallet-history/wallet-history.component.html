@@ -1,6 +1,6 @@
 <section class="section-width mx-auto">
   <app-header-mobile
-    *ngIf="screenService?.screenWidth! <= 780"
+    *ngIf="screenWidth()! <= 780"
     [title]="'wallet.details.transaction.history.title' | translate"
     [backBtn]="'wallet.details.transaction.history.mobile_back' | translate"
   >

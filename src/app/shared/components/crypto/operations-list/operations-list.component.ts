@@ -5,7 +5,6 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import {
   ModalConstant,
@@ -16,8 +15,9 @@ import {
   Operation,
 } from 'src/assets/core/data/class/crypto.class';
 import { v4 as uuidv4 } from 'uuid';
-import { CryptoService } from 'src/assets/core/services/crypto.service';
+import { CryptoService } from 'src/assets/core/services/api/crypto.service';
 import { Router } from '@angular/router';
+import { Utils } from 'src/assets/core/services/config/utils.service';
 
 @Component({
   selector: 'app-operations-list',
@@ -59,16 +59,16 @@ export class OperationsListComponent implements OnInit, OnChanges {
 
   getOperations() {
     let operations: Operation[] = [];
-    let wallets = deepCopy(this.walletsAsset);
-    wallets.forEach((wallet) => {
+    let wallets = Utils.copyObject(this.walletsAsset);
+    wallets.forEach((wallet: any) => {
       if (wallet.assets && wallet.assets.length > 0)
-        wallet.assets.forEach((asset) => {
+        wallet.assets.forEach((asset: any) => {
           if (asset.operations && asset.operations.length > 0)
-            asset.operations.forEach((operation) => {
+            asset.operations.forEach((operation: any) => {
               operation.asset = asset;
               operation.wallet = wallet;
               if (operation.type != OperationsType.NEWINVESTMENT)
-                operation.assetSell = deepCopy(
+                operation.assetSell = Utils.copyObject(
                   this.cryptoService.cryptoDashboard.assets.find(
                     (a) => a.symbol == operation.entryCoin
                   )

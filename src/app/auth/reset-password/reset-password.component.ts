@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
-import { UserService } from 'src/assets/core/services/user.service';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { AuthService } from 'src/assets/core/services/api/auth.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 
 @Component({
@@ -17,10 +17,8 @@ export class ResetPasswordComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private userService: UserService,
-    private swal: SwalService,
-    private router: Router,
-    private logger: LoggerService
+    private userService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -40,8 +38,8 @@ export class ResetPasswordComponent implements OnInit {
   resetPassword() {
     const user = this.userService.resetPassword(this.password, this.token);
     user.subscribe((data) => {
-      this.logger.LOG(data.message!, 'ResetPasswordComponent');
-      this.swal.toastMessage(SwalIcon.SUCCESS, data.message!);
+      LOG.info(data.message!, 'ResetPasswordComponent');
+      SwalService.toastMessage(SwalIcon.SUCCESS, data.message!);
     });
     this.router.navigate(['auth/login']);
   }

@@ -10,16 +10,16 @@ import {
   ModalConstant,
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
-import { DashboardService } from 'src/assets/core/services/dashboard.service';
-import { UserService } from 'src/assets/core/services/user.service';
-import { WalletService } from 'src/assets/core/services/wallet.service';
+import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
+import { AuthService } from 'src/assets/core/services/api/auth.service';
+import { WalletService } from 'src/assets/core/services/api/wallet.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
 import { environment } from 'src/environments/environment';
-import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { Subscription } from 'rxjs';
+import { Utils } from 'src/assets/core/services/config/utils.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -50,20 +50,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private dashboardService: DashboardService,
-    public userService: UserService,
+    public userService: AuthService,
     private datePipe: DatePipe,
-    private charts: ChartService,
-    private toast: ToastService,
-    public screenService: ScreenService,
     private walletService: WalletService,
     private translate: TranslateService,
     private router: Router,
-    private readonly updates: SwUpdate,
-    private logger: LoggerService
+    private readonly updates: SwUpdate
   ) {
     this.updates.versionUpdates.subscribe((event) => {
       let isAutoUpdate = !localStorage.getItem(StorageConstant.AUTOUPDATE);
-      if (!isAutoUpdate) toast.updateAvaiable();
+      if (!isAutoUpdate) ToastService.updateAvaiable();
     });
   }
 
@@ -81,7 +77,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .getDashboardData()
       .subscribe((data) => {
         this.dashboardService.cache.cacheDashboardData(data);
-        this.logger.LOG(data.message!, 'DashboardComponent');
+        LOG.info(data.message!, 'DashboardComponent');
         if (!data.data.balance) {
           this.dashboard.categories = data.data.categories;
           this.dashboard.wallets = data.data.wallets;
@@ -141,22 +137,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
       });
 
     this.isWalletBalanceHidden();
-    this.screenService.activeHeaderAndFooter();
-    this.screenService.goToDashboard();
+    ScreenService.activeHeaderAndFooter();
+    ScreenService.goToDashboard();
   }
 
   renderChart(dashboard: Dashboard) {
-    let dashboardRender = deepCopy(dashboard);
+    let dashboardRender = Utils.copyObject(dashboard);
     setTimeout(() => {
       if (this.dashboard.wallets) {
         this.chartOptions =
-          this.charts.appRenderWalletPerformance(dashboardRender);
+          ChartService.appRenderWalletPerformance(dashboardRender);
       }
     }, 500);
   }
 
   availableSoon() {
-    this.toast.availableSoon();
+    ToastService.availableSoon();
   }
 
   currentYear(): string {

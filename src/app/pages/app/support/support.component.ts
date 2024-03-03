@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
-import { DashboardService } from 'src/assets/core/services/dashboard.service';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 import { environment } from 'src/environments/environment';
@@ -23,8 +23,6 @@ export class SupportComponent implements OnInit, OnDestroy {
   constructor(
     public screenService: ScreenService,
     private dashboardService: DashboardService,
-    private swal: SwalService,
-    private logger: LoggerService,
     private translate: TranslateService
   ) {}
 
@@ -33,16 +31,20 @@ export class SupportComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.screenService.setupHeader();
-    this.screenService.hideFooter();
+    ScreenService.setupHeader();
+    ScreenService.hideFooter();
+  }
+
+  screenWidth() {
+    return ScreenService.screenWidth;
   }
 
   contactSupport() {
     this.contactSubscribe = this.dashboardService
       .contactUs(this.name, this.email, this.message)
       .subscribe((data) => {
-        this.logger.LOG(data.message!, 'SupportComponent');
-        this.swal.toastMessage(
+        LOG.info(data.message!, 'SupportComponent');
+        SwalService.toastMessage(
           SwalIcon.SUCCESS,
           this.translate.instant('response.support')
         );

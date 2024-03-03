@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Stats } from 'src/assets/core/data/class/dashboard.class';
-import { WalletService } from 'src/assets/core/services/wallet.service';
+import { WalletService } from 'src/assets/core/services/api/wallet.service';
 
 @Component({
   selector: 'app-wallet-history-card',

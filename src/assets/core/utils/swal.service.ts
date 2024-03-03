@@ -11,14 +11,18 @@ export class SwalService {
   githubAccount: any;
   walletImg?: string;
 
-  environment = environment;
   private BACKGROUND_COLOR: string = 'rgba(56, 62, 66, 1)';
   private BACKDROP_COLOR: string = 'rgba(0, 0, 0, 0.5)';
   private TEXT_COLOR: string = '#FFFFFF';
 
+  environment = environment;
+  private static BACKGROUND_COLOR: string = 'rgba(56, 62, 66, 1)';
+  private static BACKDROP_COLOR: string = 'rgba(0, 0, 0, 0.5)';
+  private static TEXT_COLOR: string = '#FFFFFF';
+
   constructor() {}
 
-  toastMessage(icon: any, message: string) {
+  public static toastMessage(icon: any, message: string) {
     const Toast = Swal.mixin({
       customClass: {
         popup: 'border_round',
@@ -41,7 +45,7 @@ export class SwalService {
     });
   }
 
-  confirmDialog(
+  public static confirmDialog(
     title: string,
     text: string,
     confirmButtonText: string,
@@ -69,25 +73,7 @@ export class SwalService {
     });
   }
 
-  /*
-    this.swalService
-      .confirmDialog(
-        this.translate
-          .instant('contact.send_email.title')
-          .replace('$NAME$', this.name),
-        '',
-        this.translate.instant('contact.send_email.send'),
-        this.translate.instant('contact.send_email.not_send')
-      )
-      .then(async (result: any) => {
-        if (result.isConfirmed) {
-          ...
-        } else if (result.isDenied) {
-          ...
-        }
-  */
-
-  simpleDialog(icon: any, title: string, text: string) {
+  public static simpleDialog(icon: any, title: string, text: string) {
     const customClassSwal = Swal.mixin({
       customClass: {
         confirmButton: 'rounded-pill buttonInput',

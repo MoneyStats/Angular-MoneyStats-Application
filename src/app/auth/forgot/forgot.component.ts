@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { UserService } from 'src/assets/core/services/user.service';
+import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { Router } from '@angular/router';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -18,12 +18,10 @@ export class ForgotComponent implements OnDestroy {
   email: string = '';
   constructor(
     private location: Location,
-    private userService: UserService,
-    private swal: SwalService,
-    private router: Router,
-    private logger: LoggerService
+    private userService: AuthService,
+    private router: Router
   ) {}
-  
+
   ngOnDestroy(): void {
     this.forgotSubscribe.unsubscribe;
   }
@@ -35,8 +33,8 @@ export class ForgotComponent implements OnDestroy {
   resetPassword() {
     const user = this.userService.forgotPassword(this.email);
     this.forgotSubscribe = user.subscribe((data) => {
-      this.logger.LOG(data.message!, 'ForgotComponent');
-      this.swal.toastMessage(SwalIcon.SUCCESS, data.message!);
+      LOG.info(data.message!, 'ForgotComponent');
+      SwalService.toastMessage(SwalIcon.SUCCESS, data.message!);
     });
     this.router.navigate(['auth/login']);
   }

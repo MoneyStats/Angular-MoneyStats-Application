@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from 'src/assets/core/utils/toast.service';
 
 @Component({
@@ -7,14 +6,10 @@ import { ToastService } from 'src/assets/core/utils/toast.service';
   templateUrl: './available-soon.component.html',
   styleUrls: ['./available-soon.component.scss'],
 })
-export class AvailableSoonComponent implements OnInit {
-  constructor(private toast: ToastService) {}
-
-  ngOnInit(): void {}
-
+export class AvailableSoonComponent {
   closingModal() {
-    this.toast.closeToast();
-    this.toast.closeUpdateToast();
-    this.toast.closeCopiedToast();
+    ToastService.closeToast();
+    ToastService.closeUpdateToast();
+    ToastService.closeCopiedToast();
   }
 }
