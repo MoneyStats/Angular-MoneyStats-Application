@@ -169,6 +169,7 @@ export class AddStatsComponent implements OnInit, OnDestroy {
       );
     }
     if (days[indexDate - 1]) {
+      console.log('VECCHIO');
       beforeThisStats = wallet.history
         ? wallet.history.find(
             (w) =>
@@ -192,6 +193,7 @@ export class AddStatsComponent implements OnInit, OnDestroy {
       parseFloat(percentageThisStats) > 10000
         ? 1000
         : parseFloat(percentageThisStats);
+    stats.percentage = Number.isNaN(stats.percentage) ? 0 : stats.percentage;
     stats.trend = parseFloat(
       (
         stats.balance -
