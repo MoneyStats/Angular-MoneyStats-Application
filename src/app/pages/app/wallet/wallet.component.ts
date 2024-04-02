@@ -5,6 +5,7 @@ import {
   ModalConstant,
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
+import { UserService } from 'src/assets/core/services/api/user.service';
 import { WalletService } from 'src/assets/core/services/api/wallet.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
@@ -21,8 +22,10 @@ export class WalletComponent implements OnInit, OnDestroy {
   amount: string = '******';
   hidden: boolean = false;
 
+  coinSymbol: string = UserService.getUserData().settings.currencySymbol;
+
   constructor(
-    public walletService: WalletService,
+    private walletService: WalletService,
     public screenService: ScreenService
   ) {}
 

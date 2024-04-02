@@ -19,7 +19,7 @@ export class StatsService {
 
   getResumeData(): Observable<ResponseModel> {
     if (this.cache.getResumeCache()) return of(this.cache.getResumeCache());
-    if (UserService.getUserStorage().mockedUser) {
+    if (UserService.getUserData().mockedUser) {
       return this.http.get<ResponseModel>(environment.getResumeDataUrlMock);
     } else {
       const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
@@ -34,7 +34,7 @@ export class StatsService {
     this.cache.clearCache();
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({ Authorization: authToken! });
-    if (UserService.getUserStorage().mockedUser) {
+    if (UserService.getUserData().mockedUser) {
       let response: ResponseModel = new ResponseModel();
       response.data = wallets;
       return of(response);

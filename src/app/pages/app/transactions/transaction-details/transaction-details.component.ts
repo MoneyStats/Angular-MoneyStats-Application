@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { slideUp } from 'src/app/shared/animations/route-animations';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
@@ -13,10 +14,10 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 export class TransactionDetailsComponent implements OnInit {
   @Input('wallet') wallet?: Wallet;
   @Input('class') class?: string;
-  coinSymbol: string = '';
+  coinSymbol: string = UserService.getUserData().settings.currencySymbol;
   constructor(
     public screenService: ScreenService,
-    public dashboardService: DashboardService
+    private dashboardService: DashboardService
   ) {}
 
   screenWidth() {
@@ -41,6 +42,5 @@ export class TransactionDetailsComponent implements OnInit {
         : this.wallet!.differenceLastStats > 0
         ? 'text-success'
         : 'text-danger';
-    this.coinSymbol = this.dashboardService.coinSymbol!;
   }
 }

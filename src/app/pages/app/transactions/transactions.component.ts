@@ -1,8 +1,7 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Dashboard } from 'src/assets/core/data/class/dashboard.class';
 import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
-import { AuthService } from 'src/assets/core/services/api/auth.service';
-import { Output, EventEmitter } from '@angular/core';
+import { UserService } from 'src/assets/core/services/api/user.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { environment } from 'src/environments/environment';
 
@@ -14,10 +13,10 @@ import { environment } from 'src/environments/environment';
 export class TransactionsComponent implements OnInit {
   environment = environment;
   dashboard?: Dashboard;
+  currency: string = UserService.getUserData().settings.currencySymbol;
 
   constructor(
     private dashService: DashboardService,
-    public userService: AuthService,
     public screenService: ScreenService
   ) {}
 

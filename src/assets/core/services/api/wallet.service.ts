@@ -16,7 +16,6 @@ export class WalletService {
   totalBalance?: number;
   public walletActive?: Wallet[];
   public walletDeleted?: Wallet[];
-  public coinSymbol?: string;
 
   //Used for WalletDetails
   public walletDetails: Wallet[] = [];
@@ -29,7 +28,7 @@ export class WalletService {
 
   getWalletsData(): Observable<ResponseModel> {
     if (this.cache.getWalletsCache()) return of(this.cache.getWalletsCache());
-    if (UserService.getUserStorage().mockedUser) {
+    if (UserService.getUserData().mockedUser) {
       return this.http.get<ResponseModel>(environment.getWalletDataUrl);
     } else {
       const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
@@ -42,7 +41,7 @@ export class WalletService {
 
   addUpdateWalletData(wallet: Wallet): Observable<ResponseModel> {
     this.cache.clearCache();
-    if (UserService.getUserStorage().mockedUser) {
+    if (UserService.getUserData().mockedUser) {
       let response: ResponseModel = new ResponseModel();
       response.data = wallet;
       return of(response);

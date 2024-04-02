@@ -6,7 +6,7 @@
         <app-dashboard-wallet
           (changeAmountStatus)="changeAmountStatus($event)"
           [dashboard]="dashboard"
-          [value]="userService.coinSymbol"
+          [value]="user.settings.currencySymbol"
           [user]="user"
         >
         </app-dashboard-wallet>
@@ -105,7 +105,7 @@
                   : 'text-danger'
               "
               [differenceLastStats]="
-                wallet.differenceLastStats + ' ' + userService.coinSymbol
+                wallet.differenceLastStats + ' ' + user.settings.currencySymbol
               "
               [wallet]="wallet"
             >
@@ -192,7 +192,7 @@
               wallet!.img +
               ') !important; box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7)'
             "
-            [coinSymbol]="userService.coinSymbol"
+            [coinSymbol]="user.settings.currencySymbol"
             [wallet]="wallet"
             [btn]="'wallet.open' | translate"
             [hiddenAmount]="hidden!"

@@ -42,9 +42,7 @@
                 ? 'text-success'
                 : 'text-danger'
             "
-            [differenceLastStats]="
-              wallet.differenceLastStats + ' ' + userService.coinSymbol
-            "
+            [differenceLastStats]="wallet.differenceLastStats + ' ' + currency"
             [wallet]="wallet"
           >
           </app-transaction-card>

@@ -7,6 +7,7 @@ import {
 } from 'src/assets/core/data/constant/constant';
 import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
 import { StatsService } from 'src/assets/core/services/api/stats.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
@@ -17,6 +18,7 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 })
 export class StatsComponent implements OnInit, OnDestroy {
   resumeSubscribe: Subscription = new Subscription();
+  coinSymbol: string = UserService.getUserData().settings.currencySymbol;
 
   wallets: Wallet[] = [];
   resumeData: Dashboard = new Dashboard();
@@ -27,7 +29,7 @@ export class StatsComponent implements OnInit, OnDestroy {
   hidden: boolean = false;
   constructor(
     public screenService: ScreenService,
-    public dashboardService: DashboardService,
+    private dashboardService: DashboardService,
     private statsService: StatsService
   ) {}
 

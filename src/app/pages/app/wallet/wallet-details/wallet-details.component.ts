@@ -14,6 +14,8 @@ import { ToastService } from 'src/assets/core/utils/toast.service';
 import { AppService } from 'src/assets/core/services/api/app.service';
 import { Subscription } from 'rxjs';
 import { LOG } from 'src/assets/core/utils/log.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
+import { User } from 'src/assets/core/data/class/user.class';
 
 @Component({
   selector: 'app-wallet-details',
@@ -21,6 +23,7 @@ import { LOG } from 'src/assets/core/utils/log.service';
   styleUrls: ['./wallet-details.component.scss'],
 })
 export class WalletDetailsComponent implements OnInit, OnDestroy {
+  user: User = UserService.getUserData();
   routeSubscribe: Subscription = new Subscription();
   saveWalletSubscribe: Subscription = new Subscription();
 
@@ -101,7 +104,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
 
     this.renderImage();
     this.walletService.walletHistory = this.wallet;
-    this.coinSymbol = this.walletService.coinSymbol;
+    this.coinSymbol = UserService.getUserData().settings.currencySymbol;
     this.isWalletBalanceHidden();
   }
 

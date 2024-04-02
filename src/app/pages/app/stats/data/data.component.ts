@@ -21,8 +21,7 @@ export class DataComponent implements OnInit, OnChanges {
   public chartPie?: Partial<ApexOptions>;
   public chartBar?: Partial<ApexOptions>;
   @Input('dashboard') dashboard: Dashboard = new Dashboard();
-  @Input('coinSymbol') coinSymbol1: string = '';
-  coinSymbol: string = '';
+  @Input('coinSymbol') coinSymbol: string = '';
   balances: Array<number> = [];
   tableBalance: Array<any> = [];
   filterDateHistory: string[] = [];
@@ -39,7 +38,6 @@ export class DataComponent implements OnInit, OnChanges {
   ngOnInit(): void {}
 
   renderTable() {
-    this.coinSymbol = this.userService.coinSymbol;
     this.tableBalance = [];
     this.balances = [];
     if (this.dashboard.statsWalletDays) {

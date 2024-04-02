@@ -1,11 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { ChildrenOutletContexts, RouterOutlet } from '@angular/router';
-import {
-  fadeAnimation,
-  fadeSlider,
-  fader,
-  slideUp,
-} from 'src/app/shared/animations/route-animations';
+import { ChildrenOutletContexts } from '@angular/router';
+import { fadeSlider } from 'src/app/shared/animations/route-animations';
 import { User } from 'src/assets/core/data/class/user.class';
 import { AuthService } from 'src/assets/core/services/api/auth.service';
 

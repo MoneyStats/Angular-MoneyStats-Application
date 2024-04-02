@@ -12,6 +12,7 @@ import { StorageConstant } from '../../data/constant/constant';
 export class UserService {
   environment = environment;
   public user: User = new User();
+  private static userStatic: User = new User();
   public currency: string = CoinSymbol.USD;
   public cryptoCurrency: string = CoinSymbol.USD;
 
@@ -61,9 +62,13 @@ export class UserService {
         JSON.stringify(user.settings.githubUser)
       );
     }
-    localStorage.setItem(StorageConstant.USERACCOUNT, JSON.stringify(user));
     this.setValue(user.settings.currency);
+    user.settings.cryptoCurrencySymbol = this.cryptoCurrency;
+    user.settings.currencySymbol = this.currency;
+    localStorage.setItem(StorageConstant.USERACCOUNT, JSON.stringify(user));
     this.user = user;
+    const u = Object.getPrototypeOf(this).constructor;
+    u.userStatic = user;
     this.authService.user = user;
   }
 
@@ -82,13 +87,12 @@ export class UserService {
         this.currency = CoinSymbol.USD;
         break;
     }
-    this.authService.coinSymbol = this.currency;
     this.cryptoCurrency = this.user.settings.cryptoCurrency!;
   }
 
-  public static getUserStorage(): User {
+  public static getUserData(): User {
     const storage = localStorage.getItem(StorageConstant.USERACCOUNT);
-    let user: User = new User();
+    let user: User = this.userStatic;
     if (storage) return JSON.parse(storage);
     return user;
   }

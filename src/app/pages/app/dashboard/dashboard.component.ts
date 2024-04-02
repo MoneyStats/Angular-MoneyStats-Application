@@ -11,7 +11,6 @@ import {
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
 import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
-import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { WalletService } from 'src/assets/core/services/api/wallet.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
 import { LOG } from 'src/assets/core/utils/log.service';
@@ -20,6 +19,7 @@ import { ToastService } from 'src/assets/core/utils/toast.service';
 import { environment } from 'src/environments/environment';
 import { Subscription } from 'rxjs';
 import { Utils } from 'src/assets/core/services/config/utils.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -50,7 +50,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private dashboardService: DashboardService,
-    public userService: AuthService,
     private datePipe: DatePipe,
     private walletService: WalletService,
     private translate: TranslateService,
@@ -72,7 +71,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.user = this.userService.user;
+    this.user = UserService.getUserData();
     this.dashboardSubscribe = this.dashboardService
       .getDashboardData()
       .subscribe((data) => {
@@ -130,7 +129,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.lastStatsBalanceDifference =
           this.dashboard.lastStatsBalanceDifference +
           ' ' +
-          this.userService.coinSymbol;
+          this.user.settings.currencySymbol;
         this.walletService.totalBalance = this.dashboard.balance;
         this.renderChart(this.dashboard);
         this.walletDetails(data.data.wallets);

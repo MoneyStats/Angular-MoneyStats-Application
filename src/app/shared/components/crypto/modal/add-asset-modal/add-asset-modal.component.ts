@@ -15,6 +15,7 @@ import {
 } from 'src/assets/core/data/constant/constant';
 import { CryptoService } from 'src/assets/core/services/api/crypto.service';
 import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { environment } from 'src/environments/environment';
 
@@ -30,6 +31,7 @@ export class AddAssetModalComponent implements OnInit, OnDestroy {
   environment = environment;
   @Input('modalId') modalId: string = '';
   @Input('cryptoCurrency') cryptoCurrency: string = '';
+  coinSymbol: string = UserService.getUserData().settings.currencySymbol;
   @Output('emitAddAsset') emitAddAsset = new EventEmitter<Wallet>();
 
   asset?: Asset;

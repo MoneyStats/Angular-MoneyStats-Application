@@ -7,6 +7,7 @@ import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { ErrorService } from 'src/assets/core/interceptors/error.service';
 import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
 import { StatsService } from 'src/assets/core/services/api/stats.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
@@ -51,7 +52,7 @@ export class AddStatsComponent implements OnInit, OnDestroy {
         (w) => !w.deletedDate
       );
     }
-    this.coinSymbol = this.dashboardService.coinSymbol;
+    this.coinSymbol = UserService.getUserData().settings.currencySymbol;
     this.getTodayAsString();
   }
 

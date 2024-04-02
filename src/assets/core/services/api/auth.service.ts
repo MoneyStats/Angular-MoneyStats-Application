@@ -16,7 +16,6 @@ import { CacheService } from '../config/cache.service';
 export class AuthService {
   environment = environment;
   public user: User = new User();
-  public coinSymbol: string = CoinSymbol.USD;
 
   constructor(
     private http: HttpClient,
