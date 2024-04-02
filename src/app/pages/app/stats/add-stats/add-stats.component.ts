@@ -169,7 +169,6 @@ export class AddStatsComponent implements OnInit, OnDestroy {
       );
     }
     if (days[indexDate - 1]) {
-      console.log('VECCHIO');
       beforeThisStats = wallet.history
         ? wallet.history.find(
             (w) =>
