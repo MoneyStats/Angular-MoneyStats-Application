@@ -524,6 +524,20 @@
             "version_title": "MoneyStats V2.0.10",
             "version": "V2.0.10",
             "changelog": "&#183; Migliorate le performance al caricamento tramite la cache. <br> &#183; Migliorato account, auto refresh token, ora la sessione dura più di un'ora. <br> &#183; Fixato problema su Edit Wallet che settava tutti gli Wallet come Crypto. <br> &#183; Fixato Wallet details tradingview data."
+          },
+          {
+            "modalId": "v2011",
+            "version_date": "2024-03-04",
+            "version_title": "MoneyStats V2.0.11",
+            "version": "V2.0.11",
+            "changelog": "&#183; Fixato errore Add Stats con balance 0. <br> &#183; Fixato gestione errori."
+          },
+          {
+            "modalId": "v2012",
+            "version_date": "2024-04-02",
+            "version_title": "MoneyStats V2.0.12",
+            "version": "V2.0.12",
+            "changelog": "&#183; Fixato errore Add Crypto Stats se wallet non contiene asset."
           }
         ]
       }

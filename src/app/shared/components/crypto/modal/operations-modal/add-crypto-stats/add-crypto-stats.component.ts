@@ -77,18 +77,15 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
   filterWallets(wallets: Wallet[], assetName: string): Wallet[] {
     let wallAsset = wallets.filter((w) => {
       if (w.assets != undefined && w.assets.length > 0)
-        return w.assets.find((a) => a.name == assetName);
+        return w.assets.find((a) => a.name == assetName && a.balance > 0);
       return null;
     });
-    /*wallAsset.forEach((w) => {
-      w.assets = w.assets.filter((a) => a.name == assetName);
-    });*/
     return wallAsset;
   }
 
   // Mi serve per filtrare gli asset prima di fare Add Stats
   filterAsset(wallet: Wallet, assetName: string): Asset {
-    return wallet.assets.find((a) => a.name == assetName)!;
+    return wallet.assets.find((a) => a.name == assetName && a.balance > 0)!;
   }
 
   changeAsset() {
