@@ -47,11 +47,17 @@ export class UserService {
   }
 
   public setUserGlobally(user: User): void {
-    if (user.authToken)
+    if (user.authToken) {
       localStorage.setItem(
         StorageConstant.ACCESSTOKEN,
         user.authToken.type + ' ' + user.authToken.accessToken
       );
+      localStorage.setItem(
+        StorageConstant.AUTHTOKEN,
+        JSON.stringify(user.authToken)
+      );
+    }
+
     if (user.settings.githubUser) {
       user.settings.github = JSON.parse(user.settings.githubUser);
     }

@@ -13,6 +13,7 @@ import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { AppService } from 'src/assets/core/services/api/app.service';
 import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
+import { CacheService } from 'src/assets/core/services/config/cache.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
@@ -44,7 +45,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private appService: AppService,
     private translate: TranslateService,
-    private userService: UserService
+    private userService: UserService,
+    private cacheService: CacheService
   ) {}
 
   ngOnDestroy(): void {
@@ -112,7 +114,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
   onFileSelected(event: any): void {
     this.warning = false;
     let file: File = event.target.files[0];
-    //this.wallet.image = this.fileUpload.append(file.name, file, file.name);
     if (
       event.target.files &&
       event.target.files[0] &&
@@ -131,9 +132,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.user!.imgName = undefined;
         this.authService.updateUserData(this.user!).subscribe((res) => {
           this.userService.setUserGlobally(res.data);
-          /*this.authService.user! = res.data;
-          this.authService.setUserGlobally();
-          this.authService.setValue();*/
           SwalService.toastMessage(SwalIcon.SUCCESS, res.message!);
         });
       });
@@ -186,6 +184,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
         (this.user?.settings.liveWallets == 'ACTIVE' ? 'Active' : 'Not Active')
     );
     this.isLiveWallet == true ? false : true;
+    this.cacheService.clearCache();
   }
 
   updateUser(message: string) {
@@ -194,9 +193,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
       .subscribe((res) => {
         LOG.info(res.message!, 'SettingsComponent');
         this.userService.setUserGlobally(res.data);
-        //this.authService.user! = res.data;
-        //this.authService.setUserGlobally();
-        //this.authService.setValue();
         SwalService.toastMessage(SwalIcon.SUCCESS, message);
       });
   }

@@ -38,6 +38,8 @@ export const environment = {
   registerDataUrl: host + '/v1/auth/sign-up',
   loginDataUrl: host + '/v1/auth/login',
   checkLoginDataUrl: host + '/v1/auth/check-login',
+  refreshTokenUrl: host + '/v1/auth/token/refresh',
+  refreshTime: 900000,
   forgotPasswordUrl: host + '/v1/auth/forgot-password',
   resetPasswordUrl: host + '/v1/auth/reset-password',
   addUpdateWalletDataUrl: host + '/v1/wallet/insert-update',

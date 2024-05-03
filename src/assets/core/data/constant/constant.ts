@@ -38,6 +38,7 @@ export enum SelectAssetConstant {
 export enum StorageConstant {
   GITHUBACCOUNT = 'github_account',
   ACCESSTOKEN = 'accessToken',
+  AUTHTOKEN = 'authToken',
   USERACCOUNT = 'userAccount',
   HIDDENAMOUNT = 'hiddenAmount',
   AUTOUPDATE = 'auto_update',

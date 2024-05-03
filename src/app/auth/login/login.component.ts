@@ -47,22 +47,6 @@ export class LoginComponent implements OnDestroy {
     this.loginSubscribe = user.subscribe((data) => {
       LOG.info(data.message!, 'LoginComponent');
       this.userService.setUserGlobally(data.data);
-      /*if (data.data.githubUser) {
-        data.data.github = JSON.parse(data.data.githubUser);
-        localStorage.setItem(
-          StorageConstant.GITHUBACCOUNT,
-          JSON.stringify(data.data.githubUser)
-        );
-      }
-      this.user = data.data;
-      this.authService.user = data.data;
-
-      localStorage.setItem(
-        StorageConstant.ACCESSTOKEN,
-        data.data.authToken.type + ' ' + data.data.authToken.accessToken
-      );
-      this.authService.setValue();
-      this.authService.setUserGlobally();*/
       this.router.navigate(['']);
     });
   }

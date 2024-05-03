@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { OnboardingComponent } from './onboarding/onboarding.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { SharedModule } from '../shared/components/shared/shared.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../app.module';
 import { HttpClient } from '@angular/common/http';

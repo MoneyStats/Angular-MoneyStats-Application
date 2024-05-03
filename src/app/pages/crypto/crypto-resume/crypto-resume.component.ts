@@ -7,6 +7,7 @@ import {
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import {
   ModalConstant,
+  OperationsType,
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
 import { CryptoService } from 'src/assets/core/services/api/crypto.service';
@@ -75,10 +76,14 @@ export class CryptoResumeComponent implements OnInit, OnDestroy {
       this.resumeData.wallets.forEach((w) => {
         if (w.assets && w.assets.length > 0)
           w.assets.forEach((a) => {
-            if (a.operations != undefined && a.operations.length > 0)
+            let operations = a.operations.filter(
+              (o) => o.operationsType == OperationsType.TRADING
+            );
+            if (operations != undefined && operations.length > 0)
               indexPresent += 1;
           });
       });
+    console.log(indexPresent);
     return indexPresent;
   }
 

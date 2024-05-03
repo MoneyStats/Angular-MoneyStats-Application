@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CoinSymbol } from '../../data/class/coin';
 import { ResponseModel } from '../../data/class/generic.class';
 import { MockUser, User } from '../../data/class/user.class';
 import { StorageConstant } from '../../data/constant/constant';
@@ -71,8 +70,27 @@ export class AuthService {
     if (this.user?.mockedUser) {
       return this.http.get<ResponseModel>(environment.getUserUrl);
     } else {
-      const headers = new HttpHeaders({ Authorization: authToken! });
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: authToken!,
+      });
       return this.http.get<ResponseModel>(environment.checkLoginDataUrl, {
+        headers: headers,
+      });
+    }
+  }
+
+  refreshToken(authToken: string): Observable<ResponseModel> {
+    if (this.user?.mockedUser) {
+      return this.http.get<ResponseModel>(environment.getUserUrl);
+    } else {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+      });
+      const token = {
+        accessToken: authToken,
+      };
+      return this.http.post<ResponseModel>(environment.refreshTokenUrl, token, {
         headers: headers,
       });
     }

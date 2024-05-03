@@ -1,7 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { SwUpdate } from '@angular/service-worker';
 import { TranslateService } from '@ngx-translate/core';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
@@ -53,14 +52,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private datePipe: DatePipe,
     private walletService: WalletService,
     private translate: TranslateService,
-    private router: Router,
-    private readonly updates: SwUpdate
-  ) {
-    this.updates.versionUpdates.subscribe((event) => {
-      let isAutoUpdate = !localStorage.getItem(StorageConstant.AUTOUPDATE);
-      if (!isAutoUpdate) ToastService.updateAvaiable();
-    });
-  }
+    private router: Router
+  ) {}
 
   ngOnDestroy(): void {
     this.dashboardSubscribe.unsubscribe();
