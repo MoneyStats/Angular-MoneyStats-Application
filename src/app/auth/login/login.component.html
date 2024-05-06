@@ -20,7 +20,7 @@
     <h1>{{ "auth.login.title" | translate }}</h1>
     <h4>{{ "auth.login.subtitle" | translate }}</h4>
   </div>
-  <div class="section mb-5 p-2">
+  <div class="section mb-5 p-2 mx-auto" style="max-width: 1000px">
     <form #f="ngForm" type="submit">
       <div class="card">
         <div class="card-body pb-1">
@@ -78,11 +78,6 @@
         </div>
       </div>
       <div class="form-links mt-2">
-        <!--<div>
-          <a routerLink="/auth/register">{{
-            "auth.login.register" | translate
-          }}</a>
-        </div>-->
         <div>
           <a
             class="text-muted"

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RegEx } from 'src/assets/core/data/constant/constant';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { LOG } from 'src/assets/core/utils/log.service';
@@ -15,6 +16,10 @@ export class ResetPasswordComponent implements OnInit {
   passwordR: string = '';
   token: string = '';
 
+  public EMPTY: string = '';
+
+  isPasswordShow: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private userService: AuthService,
@@ -27,12 +32,16 @@ export class ResetPasswordComponent implements OnInit {
     });
   }
 
-  validatePassword() {
-    let validate = false;
-    if (this.password != this.passwordR) {
-      validate = true;
-    }
-    return validate;
+  validateRegexPassword() {
+    const regex: RegExp = new RegExp(RegEx.PASSWORD_FULL);
+    // Se la password è vuota non mostro l'errore
+    return this.password != this.EMPTY ? regex.test(this.password) : true;
+  }
+
+  checkIfPasswordMatch() {
+    return this.password != this.EMPTY && this.passwordR != this.EMPTY
+      ? this.password === this.passwordR
+      : true;
   }
 
   resetPassword() {
@@ -42,5 +51,11 @@ export class ResetPasswordComponent implements OnInit {
       SwalService.toastMessage(SwalIcon.SUCCESS, data.message!);
     });
     this.router.navigate(['auth/login']);
+  }
+
+  hideShowPassword() {
+    this.isPasswordShow
+      ? (this.isPasswordShow = false)
+      : (this.isPasswordShow = true);
   }
 }

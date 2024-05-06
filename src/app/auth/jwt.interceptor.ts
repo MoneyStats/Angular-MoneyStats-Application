@@ -6,7 +6,7 @@ import {
   HttpInterceptor,
   HttpResponse,
 } from '@angular/common/http';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { StorageConstant } from 'src/assets/core/data/constant/constant';
 
 @Injectable()

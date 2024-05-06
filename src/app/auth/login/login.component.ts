@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, Output } from '@angular/core';
 import { Location } from '@angular/common';
 import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { User } from 'src/assets/core/data/class/user.class';

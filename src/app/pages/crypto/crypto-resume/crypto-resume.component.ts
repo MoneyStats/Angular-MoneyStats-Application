@@ -76,14 +76,17 @@ export class CryptoResumeComponent implements OnInit, OnDestroy {
       this.resumeData.wallets.forEach((w) => {
         if (w.assets && w.assets.length > 0)
           w.assets.forEach((a) => {
-            let operations = a.operations.filter(
-              (o) => o.operationsType == OperationsType.TRADING
-            );
-            if (operations != undefined && operations.length > 0)
-              indexPresent += 1;
+            if (a.operations && a.operations.length > 0) {
+              let operations = a.operations.filter(
+                (o) =>
+                  o.operationsType == OperationsType.TRADING ||
+                  o.type == OperationsType.TRADING
+              );
+              if (operations != undefined && operations.length > 0)
+                indexPresent += 1;
+            }
           });
       });
-    console.log(indexPresent);
     return indexPresent;
   }
 

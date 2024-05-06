@@ -38,16 +38,16 @@ export class AuthService {
 
   login(username: string, password: string): Observable<ResponseModel> {
     this.cache.clearCache();
-    const url =
-      environment.loginDataUrl +
-      '?username=' +
-      username +
-      '&password=' +
-      password;
+    const url = environment.loginDataUrl + '?username=' + username;
     if (username === MockUser.USERNAME && password === MockUser.PASSWORD) {
       return this.http.get<ResponseModel>(environment.getUserUrl);
     } else {
-      return this.http.post<ResponseModel>(url, {});
+      password = btoa(password);
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Basic ' + btoa(username + ':' + password),
+      });
+      return this.http.post<ResponseModel>(url, {}, { headers: headers });
     }
   }
 
@@ -57,6 +57,7 @@ export class AuthService {
   }
 
   resetPassword(password: string, token: string): Observable<ResponseModel> {
+    password = btoa(password);
     const url =
       environment.resetPasswordUrl +
       '?password=' +
@@ -74,7 +75,7 @@ export class AuthService {
         'Content-Type': 'application/json',
         Authorization: authToken!,
       });
-      return this.http.get<ResponseModel>(environment.checkLoginDataUrl, {
+      return this.http.get<ResponseModel>(environment.userInfoDataUrl, {
         headers: headers,
       });
     }
@@ -98,16 +99,17 @@ export class AuthService {
 
   updateUserData(user: User): Observable<ResponseModel> {
     this.cache.clearCache();
-    const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: authToken!,
-    });
     if (this.user?.mockedUser) {
       let response: ResponseModel = new ResponseModel();
       response.data = user;
       return of(response);
     } else {
+      user.password = btoa(user.password);
+      const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: authToken!,
+      });
       return this.http.post<ResponseModel>(
         environment.updateUserDataUrl,
         user,

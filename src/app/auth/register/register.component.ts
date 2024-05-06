@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { RegEx } from 'src/assets/core/data/constant/constant';
 
 @Component({
   selector: 'app-register',
@@ -28,6 +29,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
   currencyList: string[] = [];
   check: boolean = false;
   invitationCode: string = '';
+  public EMPTY: string = '';
+
+  isPasswordShow: boolean = false;
 
   constructor(
     private location: Location,
@@ -48,12 +52,22 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.location.back();
   }
 
-  verifyPassword() {
-    let validate = false;
-    if (this.password != this.passwordAgain) {
-      validate = true;
-    }
-    return validate;
+  validateRegexEmail() {
+    const regex: RegExp = new RegExp(RegEx.EMAIL);
+    // Se l' email è vuota non mostro l'errore
+    return this.email != this.EMPTY ? regex.test(this.email) : true;
+  }
+
+  validateRegexPassword() {
+    const regex: RegExp = new RegExp(RegEx.PASSWORD_FULL);
+    // Se la password è vuota non mostro l'errore
+    return this.password != this.EMPTY ? regex.test(this.password) : true;
+  }
+
+  checkIfPasswordMatch() {
+    return this.password != this.EMPTY && this.passwordAgain != this.EMPTY
+      ? this.password === this.passwordAgain
+      : true;
   }
 
   register() {
@@ -78,5 +92,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
         );
         this.router.navigate(['auth/login']);
       });
+  }
+
+  hideShowPassword() {
+    this.isPasswordShow
+      ? (this.isPasswordShow = false)
+      : (this.isPasswordShow = true);
   }
 }

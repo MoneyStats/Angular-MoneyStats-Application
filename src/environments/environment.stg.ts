@@ -29,14 +29,24 @@ export const environment = {
   getCryptoDetailsMock:
     baseUrlApp + 'assets/core/mock/crypto.details.mock.json',
 
-  // Datas
+  /*
+   * Authentication Datas
+   */
   registerDataUrl: host + '/v1/auth/sign-up',
   loginDataUrl: host + '/v1/auth/login',
-  checkLoginDataUrl: host + '/v1/auth/check-login',
-  refreshTokenUrl: host + '/v1/auth/token/refresh',
-  refreshTime: 900000,
   forgotPasswordUrl: host + '/v1/auth/forgot-password',
   resetPasswordUrl: host + '/v1/auth/reset-password',
+
+  /*
+   * Token
+   */
+  userInfoDataUrl: host + '/v1/oAuth/userInfo',
+  refreshTokenUrl: host + '/v1/oAuth/token/refresh',
+  refreshTime: 900000,
+
+  /*
+   * App
+   */
   addUpdateWalletDataUrl: host + '/v1/wallet/insert-update',
   uploadImage: host + '/v1/upload/attachment',
   imageSizeMax: 1000000,

@@ -48,9 +48,13 @@ export class RouteGuardService implements CanActivate {
   }
 
   checkUpdates() {
-    LOG.info('Looking for updates', 'RouteGuardService');
+    LOG.info('Looking for updates...', 'RouteGuardService');
     this.updates.versionUpdates.subscribe((event) => {
       let isAutoUpdate = !localStorage.getItem(StorageConstant.AUTOUPDATE);
+      LOG.info(
+        'Update Found! Is AutoUpdate Active: ' + isAutoUpdate,
+        'RouteGuardService'
+      );
       if (!isAutoUpdate) ToastService.updateAvaiable();
       if (isAutoUpdate)
         this.updates.activateUpdate().then(() => document.location.reload());

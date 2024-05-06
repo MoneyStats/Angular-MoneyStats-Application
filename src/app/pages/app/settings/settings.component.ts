@@ -171,6 +171,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   liveWallet() {
+    this.cacheService.clearCache();
     if (this.user?.settings.liveWallets == undefined)
       this.user!.settings.liveWallets = Status.NOT_ACTIVE;
     else
@@ -184,7 +185,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
         (this.user?.settings.liveWallets == 'ACTIVE' ? 'Active' : 'Not Active')
     );
     this.isLiveWallet == true ? false : true;
-    this.cacheService.clearCache();
   }
 
   updateUser(message: string) {
