@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
-import { AppService } from 'src/assets/core/services/app.service';
-import { Utils } from 'src/assets/core/services/utils.service';
+import { AppService } from 'src/assets/core/services/api/app.service';
+import { Utils } from 'src/assets/core/services/config/utils.service';
 
 @Component({
   selector: 'app-header-mobile',

@@ -3,7 +3,7 @@ import {
   LanguagesSettings,
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 
 @Component({
   selector: 'app-auth',
@@ -11,7 +11,7 @@ import { LoggerService } from 'src/assets/core/utils/log.service';
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit {
-  constructor(private logger: LoggerService) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.cleanLocalStorage();
@@ -22,7 +22,7 @@ export class AuthComponent implements OnInit {
     let languages = localStorage.getItem(LanguagesSettings.ATTR_LANGUAGE);
     let autoUpdate = localStorage.getItem(StorageConstant.AUTOUPDATE);
 
-    this.logger.LOG(
+    LOG.info(
       'Cleaning localStorage and getting language: ' +
         languages +
         ' and Auto Update Data ' +

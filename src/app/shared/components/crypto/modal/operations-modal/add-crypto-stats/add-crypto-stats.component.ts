@@ -13,9 +13,9 @@ import { Subscription } from 'rxjs';
 import { Asset } from 'src/assets/core/data/class/crypto.class';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ErrorService } from 'src/assets/core/interceptors/error.service';
-import { CryptoService } from 'src/assets/core/services/crypto.service';
-import { StatsService } from 'src/assets/core/services/stats.service';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { CryptoService } from 'src/assets/core/services/api/crypto.service';
+import { StatsService } from 'src/assets/core/services/api/stats.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 
 @Component({
   selector: 'app-add-crypto-stats',
@@ -46,8 +46,7 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
     private cryptoService: CryptoService,
     private errorService: ErrorService,
     private router: Router,
-    private statsService: StatsService,
-    private logger: LoggerService
+    private statsService: StatsService
   ) {}
 
   ngOnInit(): void {
@@ -254,7 +253,7 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
     this.addStats = this.statsService
       .addStatsData(this.wallets)
       .subscribe((data) => {
-        this.logger.LOG(data.message!, 'AddCryptoStatsComponent');
+        LOG.info(data.message!, 'AddCryptoStatsComponent');
         this.wallets = data.data;
         this.emitAddStats.emit(this.wallets);
       });

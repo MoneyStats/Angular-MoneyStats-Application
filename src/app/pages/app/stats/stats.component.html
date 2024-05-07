@@ -1,6 +1,6 @@
 <section class="section-width mx-auto">
   <app-header-mobile
-    *ngIf="screenService?.screenWidth! <= 780"
+    *ngIf="screenWidth()! <= 780"
     title="{{ 'stats.title' | translate }}"
     backBtn="{{ 'stats.mobile_back' | translate }}"
   >
@@ -103,7 +103,7 @@
           </div>
           <div class="right float-end">
             <div class="price" id="totale">
-              {{ dashboardService.coinSymbol }}
+              {{ coinSymbol }}
               {{ hidden ? amount : resumeData.balance }}
             </div>
             <div class="price performancetot float-end">
@@ -159,7 +159,7 @@
               }}"
               id="pil"
             >
-              {{ dashboardService.coinSymbol }}
+              {{ coinSymbol }}
               {{ hidden ? amount : resumeData.performanceValue }}
             </div>
             <div class="price float-end performancetot">
@@ -191,7 +191,7 @@
           <app-data
             *ngIf="wallets && wallets.length"
             [dashboard]="resumeData"
-            [coinSymbol]="dashboardService.coinSymbol!"
+            [coinSymbol]="coinSymbol!"
             [hidden]="hidden"
           ></app-data>
         </div>
@@ -203,7 +203,7 @@
         <div class="row">
           <app-category
             *ngIf="wallets && wallets.length"
-            [coinSymbol]="dashboardService.coinSymbol!"
+            [coinSymbol]="coinSymbol!"
             [dashboard]="resumeData"
             [hidden]="hidden"
           ></app-category>
@@ -216,7 +216,7 @@
         <div class="row">
           <app-history
             *ngIf="wallets && wallets.length"
-            [coinSymbol]="dashboardService.coinSymbol!"
+            [coinSymbol]="coinSymbol!"
             [resume]="resume"
             [hidden]="hidden"
           ></app-history>

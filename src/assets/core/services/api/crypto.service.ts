@@ -1,31 +1,22 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import {
-  Observable,
-  firstValueFrom,
-  isObservable,
-  of,
-  switchMap,
-  timer,
-} from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import Swal from 'sweetalert2';
-import { Coin } from '../data/class/coin';
-import { ResponseModel } from '../data/class/generic.class';
-import { User } from '../data/class/user.class';
-import { StorageConstant } from '../data/constant/constant';
-import { SwalService } from '../utils/swal.service';
-import { Wallet } from '../data/class/dashboard.class';
-import { Asset, CryptoDashboard } from '../data/class/crypto.class';
-import { CacheService } from './cache.service';
+import { Coin } from '../../data/class/coin';
+import { ResponseModel } from '../../data/class/generic.class';
+import { User } from '../../data/class/user.class';
+import { StorageConstant } from '../../data/constant/constant';
+import { SwalService } from '../../utils/swal.service';
+import { Wallet } from '../../data/class/dashboard.class';
+import { Asset, CryptoDashboard } from '../../data/class/crypto.class';
+import { CacheService } from '../config/cache.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CryptoService {
   environment = environment;
-  public user: User = new User();
   public currency: string = Coin.USD;
   public cryptoDashboard: CryptoDashboard = new CryptoDashboard();
   public assets: Asset[] = [];
@@ -54,7 +45,7 @@ export class CryptoService {
       'Content-Type': 'application/json',
       Authorization: authToken!,
     });
-    if (this.user.mockedUser) {
+    if (UserService.getUserData().mockedUser) {
       return this.http.get<any>(environment.getCryptoDashboardMock);
     } else {
       return this.http.get<any>(environment.getCryptoDashboardDataUrl, {
@@ -71,7 +62,7 @@ export class CryptoService {
       'Content-Type': 'application/json',
       Authorization: authToken!,
     });
-    if (this.user.mockedUser) {
+    if (UserService.getUserData().mockedUser) {
       return this.http.get<any>(environment.getCryptoPriceMock);
     } else {
       const url = environment.getMarketDataUrl + '?currency=' + currency;
@@ -89,7 +80,7 @@ export class CryptoService {
       'Content-Type': 'application/json',
       Authorization: authToken!,
     });
-    if (this.user.mockedUser) {
+    if (UserService.getUserData().mockedUser) {
       return this.http.get<any>(environment.getCryptoResumeMock);
     } else {
       return this.http.get<any>(environment.getCryptoResumeDataUrl, {
@@ -105,7 +96,7 @@ export class CryptoService {
       'Content-Type': 'application/json',
       Authorization: authToken!,
     });
-    if (this.user.mockedUser) {
+    if (UserService.getUserData().mockedUser) {
       return this.http.get<any>(environment.getCryptoAssetsMock);
     } else {
       return this.http.get<any>(environment.getCryptoAssetDataUrl, {
@@ -120,7 +111,7 @@ export class CryptoService {
       'Content-Type': 'application/json',
       Authorization: authToken!,
     });
-    if (this.user.mockedUser) {
+    if (UserService.getUserData().mockedUser) {
       return this.http.get<any>(environment.getCryptoDetailsMock);
     } else {
       const url =
@@ -138,7 +129,7 @@ export class CryptoService {
       'Content-Type': 'application/json',
       Authorization: authToken!,
     });
-    if (this.user.mockedUser) {
+    if (UserService.getUserData().mockedUser) {
       let response: ResponseModel = new ResponseModel();
       response.data = wallet;
       return of(response);
@@ -156,7 +147,7 @@ export class CryptoService {
       'Content-Type': 'application/json',
       Authorization: authToken!,
     });
-    if (this.user.mockedUser) {
+    if (UserService.getUserData().mockedUser) {
       let response: ResponseModel = new ResponseModel();
       response.data = wallets;
       return of(response);

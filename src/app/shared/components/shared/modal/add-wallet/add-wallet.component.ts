@@ -15,12 +15,12 @@ import {
   AppConfigConst,
   ModalConstant,
 } from 'src/assets/core/data/constant/constant';
-import { DashboardService } from 'src/assets/core/services/dashboard.service';
-import { UserService } from 'src/assets/core/services/user.service';
-import { WalletService } from 'src/assets/core/services/wallet.service';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
+import { WalletService } from 'src/assets/core/services/api/wallet.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 import { environment } from 'src/environments/environment';
+import { AppService } from 'src/assets/core/services/api/app.service';
 
 @Component({
   selector: 'app-add-wallet',
@@ -59,8 +59,7 @@ export class AddWalletComponent implements OnInit, OnChanges, OnDestroy {
     private swalService: SwalService,
     private translate: TranslateService,
     private walletService: WalletService,
-    private userService: UserService,
-    private logger: LoggerService
+    private appService: AppService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -158,14 +157,14 @@ export class AddWalletComponent implements OnInit, OnChanges, OnDestroy {
     if (walletToSave.fileImage != undefined && walletToSave.fileImage.name) {
       walletToSave.imgName = walletToSave.fileImage.name;
 
-      this.updateuserSub = this.userService
+      this.updateuserSub = this.appService
         .uploadImage(walletToSave.fileImage)
         .subscribe((data) => {
-          this.logger.LOG(data.message!, 'AddWalletComponent');
+          LOG.info(data.message!, 'AddWalletComponent');
           this.addWalletSub = this.walletService
             .addUpdateWalletData(walletToSave)
             .subscribe((data) => {
-              this.logger.LOG(data.message!, 'AddWalletComponent');
+              LOG.info(data.message!, 'AddWalletComponent');
               this.wallet.img = data.data.img;
               // Save Wallet
               this.emitAddWallet.emit(data.data);
@@ -175,7 +174,7 @@ export class AddWalletComponent implements OnInit, OnChanges, OnDestroy {
       this.addWalletSub = this.walletService
         .addUpdateWalletData(walletToSave)
         .subscribe((data) => {
-          this.logger.LOG(data.message!, 'AddWalletComponent');
+          LOG.info(data.message!, 'AddWalletComponent');
           // Save Wallet
           this.emitAddWallet.emit(data.data);
         });

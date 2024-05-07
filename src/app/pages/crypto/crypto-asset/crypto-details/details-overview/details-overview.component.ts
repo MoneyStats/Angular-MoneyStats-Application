@@ -13,12 +13,11 @@ import {
 } from 'src/assets/core/data/class/crypto.class';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
-import { CryptoService } from 'src/assets/core/services/crypto.service';
+import { CryptoService } from 'src/assets/core/services/api/crypto.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
-import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { ImageColorPickerService } from 'src/assets/core/utils/image.color.picker.service';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { v4 as uuidv4 } from 'uuid';
 import {
   ApexChartsOptions,
@@ -26,7 +25,7 @@ import {
   OperationsType,
 } from 'src/assets/core/data/constant/constant';
 import { Subscription } from 'rxjs';
-import { Utils } from 'src/assets/core/services/utils.service';
+import { Utils } from 'src/assets/core/services/config/utils.service';
 
 @Component({
   selector: 'app-details-overview',
@@ -56,14 +55,7 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
 
   thisYear: number = new Date().getFullYear();
 
-  constructor(
-    public cryptoService: CryptoService,
-    private screenService: ScreenService,
-    private charts: ChartService,
-    public imageColorPicker: ImageColorPickerService,
-    private logger: LoggerService,
-    private router: Router
-  ) {}
+  constructor(public cryptoService: CryptoService, private router: Router) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -74,18 +66,11 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.screenService.hideFooter();
+    ScreenService.hideFooter();
     this.getAsset();
   }
 
   ngOnInit(): void {
-    //this.cryptoDashboard = deepCopy(this.cryptoService.cryptoDashboard);
-
-    /*let dashboard: CryptoDashboard = new CryptoDashboard();
-    dashboard.statsAssetsDays = this.cryptoDashboard.statsAssetsDays;
-    dashboard.assets = [
-      this.asset.name == undefined ? this.cryptoService.asset! : this.asset,
-    ];*/
     this.getAsset();
   }
 
@@ -98,7 +83,7 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
     const activeElem = document.querySelectorAll('.active');
     activeElem.forEach((e, index) => {
       if (e.getAttribute('class')?.includes('graph-tab')) {
-        let color = this.imageColorPicker.getColor(this.asset.icon!, 0);
+        let color = ImageColorPickerService.getColor(this.asset.icon!, 0);
         e.setAttribute(
           'style',
           'color: ' + color + '; border-bottom-color: ' + color + ' !important'
@@ -128,20 +113,20 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
       let dashboard: CryptoDashboard = Utils.copyObject(this.cryptoDashboard);
       dashboard.assets = [
         this.asset.name == undefined
-          ? deepCopy(this.cryptoService.asset!)
-          : deepCopy(this.asset),
+          ? Utils.copyObject(this.cryptoService.asset!)
+          : Utils.copyObject(this.asset),
       ];
       // Get All Date serve a prendere tutte le date per i grafici
       dashboard.statsAssetsDays = this.getAllDate(dashboard.assets);
       setTimeout(() => {
         if (this.cryptoDashboard.wallets) {
-          if (this.screenService?.screenWidth! <= 780) {
-            this.chartOptions = this.charts.renderCryptoDatas(dashboard, [
+          if (ScreenService.screenWidth! <= 780) {
+            this.chartOptions = ChartService.renderCryptoDatas(dashboard, [
               ApexChartsOptions.MOBILE_MODE,
               ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
             ]);
           } else
-            this.chartOptions = this.charts.renderCryptoDatas(dashboard, [
+            this.chartOptions = ChartService.renderCryptoDatas(dashboard, [
               ApexChartsOptions.DESKTOP_MODE,
               ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
             ]);
@@ -156,8 +141,8 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
       let dashboard: CryptoDashboard = Utils.copyObject(this.cryptoDashboard);
       dashboard.assets = [
         this.asset.name == undefined
-          ? deepCopy(this.cryptoService.asset!)
-          : deepCopy(this.asset),
+          ? Utils.copyObject(this.cryptoService.asset!)
+          : Utils.copyObject(this.asset),
       ];
       // Get All Date serve a prendere tutte le date per i grafici
       dashboard.statsAssetsDays = this.getAllDate(dashboard.assets);
@@ -173,13 +158,13 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
               s.toString().split('-')[0] === new Date().getFullYear().toString()
           );
         setTimeout(() => {
-          if (this.screenService?.screenWidth! <= 780)
-            this.chart1Y = this.charts.renderCryptoDatas(dashboard, [
+          if (ScreenService.screenWidth! <= 780)
+            this.chart1Y = ChartService.renderCryptoDatas(dashboard, [
               ApexChartsOptions.MOBILE_MODE,
               ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
             ]);
           else
-            this.chart1Y = this.charts.renderCryptoDatas(dashboard, [
+            this.chart1Y = ChartService.renderCryptoDatas(dashboard, [
               ApexChartsOptions.DESKTOP_MODE,
               ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
             ]);
@@ -195,8 +180,8 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
 
       dashboard.assets = [
         this.asset.name == undefined
-          ? deepCopy(this.cryptoService.asset!)
-          : deepCopy(this.asset),
+          ? Utils.copyObject(this.cryptoService.asset!)
+          : Utils.copyObject(this.asset),
       ];
       // Get All Date serve a prendere tutte le date per i grafici
       dashboard.statsAssetsDays = this.getAllDate(dashboard.assets);
@@ -215,13 +200,13 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
           last3.includes(s.toString().split('-')[0])
         );
       setTimeout(() => {
-        if (this.screenService?.screenWidth! <= 780)
-          this.chart3Y = this.charts.renderCryptoDatas(dashboard, [
+        if (ScreenService.screenWidth! <= 780)
+          this.chart3Y = ChartService.renderCryptoDatas(dashboard, [
             ApexChartsOptions.MOBILE_MODE,
             ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
           ]);
         else
-          this.chart3Y = this.charts.renderCryptoDatas(dashboard, [
+          this.chart3Y = ChartService.renderCryptoDatas(dashboard, [
             ApexChartsOptions.DESKTOP_MODE,
             ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
           ]);
@@ -238,16 +223,16 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
       this.asset.name == undefined
         ? this.cryptoService.asset?.name
         : this.asset.name;
-    const dashboard = deepCopy(this.cryptoDashboard);
+    const dashboard = Utils.copyObject(this.cryptoDashboard);
     let wallAsset = dashboard.wallets
-      ? dashboard.wallets.filter((w) => {
+      ? dashboard.wallets.filter((w: { assets: any[] | undefined }) => {
           if (w.assets != undefined && w.assets.length != 0)
             return w.assets.slice().find((a) => a.name == name);
           return null;
         })
       : [];
-    wallAsset.forEach((w) => {
-      w.assets = w.assets.slice().filter((a) => a.name == name);
+    wallAsset.forEach((w: any) => {
+      w.assets = w.assets.slice().filter((a: any) => a.name == name);
       if (w.assets[0].history == undefined) {
         w.assets[0].history = [];
       }
@@ -256,16 +241,16 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getOperations() {
-    let wallets = deepCopy(this.walletsAsset);
+    let wallets = Utils.copyObject(this.walletsAsset);
     let operations: any[] = [];
-    wallets.forEach((wallet) => {
+    wallets.forEach((wallet: any) => {
       if (
         wallet.assets &&
         wallet.assets.length > 0 &&
         wallet.assets[0].operations &&
         wallet.assets[0].operations.length > 0
       )
-        wallet.assets[0].operations.forEach((operation) => {
+        wallet.assets[0].operations.forEach((operation: any) => {
           operation.wallet = wallet;
           operation.asset = wallet.assets[0];
           if (operation.type != OperationsType.NEWINVESTMENT)
@@ -284,13 +269,13 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
     this.updateinvestmentSubscribe = this.cryptoService
       .addOrUpdateCryptoAsset(wallet)
       .subscribe((data) => {
-        this.logger.LOG(data.message!, 'DetailsOverviewComponent');
+        LOG.info(data.message!, 'DetailsOverviewComponent');
       });
 
-    let wallets = deepCopy(this.walletsAsset);
+    let wallets = Utils.copyObject(this.walletsAsset);
     let invested = 0;
     let balance = 0;
-    wallets.forEach((w) => {
+    wallets.forEach((w: any) => {
       invested += w.assets[0].invested;
       balance += w.assets[0].balance;
       this.cryptoService.cryptoDashboard.wallets

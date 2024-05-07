@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ChildrenOutletContexts } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import {
-  LanguagesSettings,
-  StorageConstant,
-} from 'src/assets/core/data/constant/constant';
+import { LanguagesSettings } from 'src/assets/core/data/constant/constant';
 import { ThemeService } from 'src/assets/core/utils/theme.service';
 import { fader, slideUp } from './shared/animations/route-animations';
-import { SwUpdate } from '@angular/service-worker';
-import { LoggerService } from 'src/assets/core/utils/log.service';
 
 @Component({
   selector: 'app-root',
@@ -25,21 +20,12 @@ export class AppComponent implements OnInit {
   public showHeader: boolean = true;
   constructor(
     private translate: TranslateService,
-    private themeService: ThemeService,
-    private contexts: ChildrenOutletContexts,
-    private readonly updates: SwUpdate,
-    private logger: LoggerService
+    private contexts: ChildrenOutletContexts
   ) {
-    this.updates.versionUpdates.subscribe((event) => {
-      logger.LOG('A new update is available', 'AppComponent');
-      let isAutoUpdate = !localStorage.getItem(StorageConstant.AUTOUPDATE);
-      if (isAutoUpdate)
-        this.updates.activateUpdate().then(() => document.location.reload());
-    });
     this.setLanguages();
   }
   ngOnInit(): void {
-    this.themeService.darkMode();
+    ThemeService.darkMode();
   }
   setLanguages() {
     let languages = localStorage.getItem(LanguagesSettings.ATTR_LANGUAGE);

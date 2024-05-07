@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { deepCopy } from '@angular-devkit/core/src/utils/object';
-import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
-import { CryptoService } from 'src/assets/core/services/crypto.service';
+import { CryptoService } from 'src/assets/core/services/api/crypto.service';
 import { ActivatedRoute } from '@angular/router';
 import { Operation } from 'src/assets/core/data/class/crypto.class';
 import { Subscription } from 'rxjs';

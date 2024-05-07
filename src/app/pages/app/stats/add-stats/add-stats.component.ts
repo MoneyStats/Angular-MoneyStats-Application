@@ -5,9 +5,11 @@ import { Subscription } from 'rxjs';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { ErrorService } from 'src/assets/core/interceptors/error.service';
-import { DashboardService } from 'src/assets/core/services/dashboard.service';
-import { StatsService } from 'src/assets/core/services/stats.service';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
+import { StatsService } from 'src/assets/core/services/api/stats.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
+import { Utils } from 'src/assets/core/services/config/utils.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 import { environment } from 'src/environments/environment';
@@ -35,8 +37,6 @@ export class AddStatsComponent implements OnInit, OnDestroy {
     private statsService: StatsService,
     private errorService: ErrorService,
     private router: Router,
-    private logger: LoggerService,
-    private swal: SwalService,
     private translate: TranslateService
   ) {}
 
@@ -45,15 +45,19 @@ export class AddStatsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.screenService.setupHeader();
-    this.screenService.hideFooter();
+    ScreenService.setupHeader();
+    ScreenService.hideFooter();
     if (this.dashboardService.dashboard.wallets) {
       this.walletsToSave = this.dashboardService.dashboard.wallets.filter(
         (w) => !w.deletedDate
       );
     }
-    this.coinSymbol = this.dashboardService.coinSymbol;
+    this.coinSymbol = UserService.getUserData().settings.currencySymbol;
     this.getTodayAsString();
+  }
+
+  screenWidth() {
+    return ScreenService.screenWidth;
   }
 
   validate() {
@@ -92,9 +96,9 @@ export class AddStatsComponent implements OnInit, OnDestroy {
     this.addStatsSubscribe = this.statsService
       .addStatsData(this.walletsToSave)
       .subscribe((data) => {
-        this.logger.LOG(data.message!, 'AddStatsComponent');
+        LOG.info(data.message!, 'AddStatsComponent');
         this.walletsToSave = data.data;
-        this.swal.toastMessage(
+        SwalService.toastMessage(
           SwalIcon.SUCCESS,
           this.translate.instant('response.stats')
         );
@@ -154,18 +158,16 @@ export class AddStatsComponent implements OnInit, OnDestroy {
       )!;
 
       // Modifico i dati delle percentuali e trend
-      let percentageAfterThisStats = (
+      let percentageAfterThisStats = Utils.roundToTwoDecimalPlaces(
         ((afterThisStats.balance -
           (wallet.newBalance != 0 ? wallet.newBalance : 0.001)) /
           (wallet.newBalance != 0 ? wallet.newBalance : 0.001)) *
-        100
-      ).toFixed(2);
+          100
+      );
       afterThisStats.percentage =
-        parseFloat(percentageAfterThisStats) > 10000
-          ? 1000
-          : parseFloat(percentageAfterThisStats);
-      afterThisStats.trend = parseFloat(
-        (afterThisStats.balance - wallet.newBalance).toFixed(2)
+        percentageAfterThisStats > 10000 ? 1000 : percentageAfterThisStats;
+      afterThisStats.trend = Utils.roundToTwoDecimalPlaces(
+        afterThisStats.balance - wallet.newBalance
       );
     }
     if (days[indexDate - 1]) {
@@ -180,24 +182,18 @@ export class AddStatsComponent implements OnInit, OnDestroy {
         beforeThisStats.balance = 0.001;
       }
     }
-    let percentageThisStats = (
+    let percentageThisStats = Utils.roundToTwoDecimalPlaces(
       ((wallet.newBalance - beforeThisStats.balance) /
         beforeThisStats.balance) *
-      100
-    ).toFixed(2);
+        100
+    );
 
     stats.balance = wallet.newBalance;
     stats.date = new Date(this.dateStats);
-    stats.percentage =
-      parseFloat(percentageThisStats) > 10000
-        ? 1000
-        : parseFloat(percentageThisStats);
-    stats.percentage = Number.isNaN(stats.percentage) ? 0 : stats.percentage;
-    stats.trend = parseFloat(
-      (
-        stats.balance -
+    stats.percentage = percentageThisStats > 10000 ? 1000 : percentageThisStats;
+    stats.trend = Utils.roundToTwoDecimalPlaces(
+      stats.balance -
         (beforeThisStats.balance != 0.001 ? beforeThisStats.balance : 0)
-      ).toFixed(2)
     );
 
     // Ultimo

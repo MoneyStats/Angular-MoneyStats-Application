@@ -77,15 +77,19 @@
       "usernamePlaceholder": "Il tuo username",
       "password": "Password",
       "passPlaceholder": "La tua password",
-      "passwordAgain": "Ripeti Password",
-      "passAgainPlaceholder": "Digita password di nuovo",
+      "passwordAgain": "Conferma Password",
+      "passAgainPlaceholder": "Digita nuovamente la password",
       "invitationCode": "Invitation Code",
       "invitationCodePlaceholder": "Digita il codice invito",
       "currency": "Moneta",
       "selectCurrency": "Seleziona Moneta",
       "terms": "Io accetto",
       "terms2": "termini e condizioni",
-      "register": "Registrati"
+      "register": "Registrati",
+      "warning": {
+        "password": "<p><strong>Attenzione:</strong> La tua password deve rispettare i seguenti criteri:<ul><li>Deve essere lunga da 8 a 10 caratteri.</li><li>Deve contenere almeno una lettera maiuscola e una minuscola.</li><li>Deve includere almeno un numero e un carattere speciale tra i seguenti: @$!%*?&.,</li></ul>Per garantire la sicurezza del tuo account, assicurati che la tua password rispetti questi criteri. Una password forte è essenziale per proteggere i tuoi dati personali e la tua privacy online.</p>",
+        "invalidEmail": "L'indirizzo email inserito non è valido. Per favore, inserisci un indirizzo email valido."
+      }
     },
     "forgot": {
       "title": "Password Dimenticata?",
@@ -96,8 +100,8 @@
     "reset": {
       "title": "Reset password",
       "subtitle": "Inserisci la nuova password",
-      "passPlace": "Inserisci di nuovo la nuova password",
-      "pass2": "Digita Password",
+      "passPlace": "Inserisci la nuova password",
+      "pass2": "Conferma Password",
       "passPlace2": "Digita nuovamente la Password",
       "reset": "Reset Password"
     }
@@ -337,7 +341,7 @@
       "new_placeholder": "Digita la tua nuova password",
       "repete_label": "Ripeti Password",
       "repete_placeholder": "Digita la tua nuova password di nuovo",
-      "warning": "Le password non coincidono!"
+      "warning": "Le password inserite non corrispondono. Per favore, assicurati di inserire la stessa password nei campi 'Password' e 'Conferma password'."
     },
     "app": {
       "title": "Impostazioni",
@@ -455,7 +459,7 @@
     },
     "infoApp": {
       "title": "Info Registrazione",
-      "text": "Per la registrazione su MoneyStats occorre il codice invito. <br> Se non si ha il codice potete chiederlo direttamente a <a href='https://giovannilamarmoraproject.github.io/Portfolio/' target='_blank'>Giovanni</a> nella sezione contattami. <br>Nel frattempo potete dare un'occhiata all'applicazione utilizzando i seguenti dati: <br>&bull; Username: moneystats<br>&bull; Password: moneystats<br>Questo account vi darà la possibilità di vedere come appare l'app.<br>Attenzione: Non vi sarà possibile modificare o aggiungere nuovi dati.",
+      "text": "Per registrarti all'applicazione MoneyStats, hai bisogno di un Codice di Invito. Se non possiedi il codice, puoi richiederlo a <a href='https://giovannilamarmora.github.io/#contact' target='_blank'>Giovanni</a> nella sezione Contatti. Nel frattempo, puoi esplorare l'applicazione utilizzando le seguenti credenziali:<br>• Nome utente: moneystats<br>• Password: moneystats<br>Questo account ti fornisce un'anteprima dell'interfaccia dell'applicazione. Si prega di notare che non sarai in grado di modificare o aggiungere nuovi dati.",
       "close": "Chiudi"
     },
     "socialList": {
@@ -538,6 +542,13 @@
             "version_title": "MoneyStats V2.0.12",
             "version": "V2.0.12",
             "changelog": "&#183; Fixato errore Add Crypto Stats se wallet non contiene asset."
+          },
+          {
+            "modalId": "v210",
+            "version_date": "2024-05-07",
+            "version_title": "MoneyStats V2.1.0",
+            "version": "V2.1.0",
+            "changelog": "&#183; Sistemato errore cache sui liv wallet. <br> &#183; Performance migliorate. <br> &#183; Sicurezza migliorata."
           }
         ]
       }
@@ -840,7 +851,7 @@
     }
   },
   "exception": {
-    "ERR_AUTH_MSS_001": {
+    "ERR_AUTH_MSS_002": {
       "status": "Non autorizzato",
       "exception": "Credenziali Sbagliate",
       "message": "Lo username o la password inserita sono errate, prova nuovamente!"

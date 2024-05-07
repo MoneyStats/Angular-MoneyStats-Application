@@ -16,8 +16,8 @@
     <h1>{{ "auth.forgot.title" | translate }}</h1>
     <h4>{{ "auth.forgot.subtitle" | translate }}</h4>
   </div>
-  <div class="section mb-5 p-2">
-    <form action="index.html">
+  <div class="section mb-5 p-2 mx-auto" style="max-width: 1000px">
+    <form #f="ngForm" type="submit">
       <div class="card">
         <div class="card-body pb-1">
           <div class="form-group basic">
@@ -33,9 +33,12 @@
                 id="email1"
                 placeholder="{{ 'auth.forgot.place' | translate }}"
               />
-              <i class="clear-input">
-                <ion-icon name="close-circle"></ion-icon>
-              </i>
+              <div
+                *ngIf="!validateRegexEmail()"
+                class="alert alert-danger mb-1"
+                role="alert"
+                [innerHTML]="'auth.register.warning.invalidEmail' | translate"
+              ></div>
             </div>
           </div>
         </div>
@@ -43,6 +46,7 @@
 
       <div class="form-button-group transparent section-width mx-auto">
         <button
+          [disabled]="f.invalid || !validateRegexEmail()"
           type="submit"
           (click)="resetPassword()"
           class="btn btn-primary btn-block btn-lg"

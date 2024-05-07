@@ -1,6 +1,6 @@
 <section class="section-width mx-auto">
   <app-header-mobile
-    *ngIf="screenService?.screenWidth! <= 780"
+    *ngIf="screenWidth()! <= 780"
     [title]="wallet!.name"
     [backBtn]="'wallet.details.mobile_back' | translate"
     rightBtn="{{ 'wallet.details.mobile_edit' | translate }}"
@@ -575,7 +575,7 @@
                   !showZeroBalance ? asset.balance > 0 : asset.balance >= 0
                 "
                 [assets]="asset"
-                [currency]="appService.user.settings.cryptoCurrency"
+                [currency]="user.settings.cryptoCurrency"
               >
               </app-transaction-card>
             </div>

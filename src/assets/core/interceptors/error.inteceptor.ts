@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ErrorCodeLogout } from '../data/class/error';
-import { UserService } from '../services/user.service';
+import { AuthService } from '../services/api/auth.service';
 import { ErrorService } from './error.service';
 
 @Injectable({
@@ -21,7 +21,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   constructor(
     private router: Router,
     private errorService: ErrorService,
-    private userService: UserService
+    private userService: AuthService
   ) {}
   intercept(
     request: HttpRequest<any>,

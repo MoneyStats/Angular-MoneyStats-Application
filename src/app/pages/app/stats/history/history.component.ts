@@ -4,7 +4,7 @@ import {
   ApexOptions,
   ChartJSOptions,
 } from 'src/assets/core/data/constant/apex.chart';
-import { ChartService } from 'src/assets/core/utils/chart.service';
+import { Utils } from 'src/assets/core/services/config/utils.service';
 import { ChartJSService } from 'src/assets/core/utils/chartjs.service';
 
 @Component({
@@ -29,7 +29,7 @@ export class HistoryComponent implements OnInit {
   tableBalance: Array<any> = [];
 
   public lineChartJS?: ChartJSOptions = new ChartJSOptions();
-  constructor(private charts: ChartService, private chartsJS: ChartJSService) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.resume.forEach((value: Dashboard, key: string) => {
@@ -40,7 +40,7 @@ export class HistoryComponent implements OnInit {
   }
 
   renderChart() {
-    this.lineChartJS = this.chartsJS.renderChartLine(this.totalMap);
+    this.lineChartJS = ChartJSService.renderChartLine(this.totalMap);
     //setTimeout(() => {
     //  this.chartOptions = this.charts.renderChartLineCategory(this.totalMap);
     //}, 200);
@@ -62,15 +62,15 @@ export class HistoryComponent implements OnInit {
       (total.balance - this.balances[this.balances.length - 1]).toFixed(2)
     );
 
-    if (Number.isNaN(total.balance) || total.balance == undefined) {
+    if (Utils.isNullOrEmpty(total.balance)) {
       total.balance = 0;
     }
     total.percentage = parseFloat(percentage);
-    if (Number.isNaN(total.percentage)) {
+    if (Utils.isNullOrEmpty(total.percentage)) {
       total.percentage = 0;
     }
     total.trend = trend;
-    if (Number.isNaN(total.trend)) {
+    if (Utils.isNullOrEmpty(total.trend)) {
       total.trend = 0;
     }
     array.push(total);

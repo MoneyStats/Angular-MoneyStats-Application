@@ -4,18 +4,16 @@ import {
   OnChanges,
   OnInit,
   SimpleChanges,
-  ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Dashboard } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
 import {
   ModalConstant,
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
-import { DashboardService } from 'src/assets/core/services/dashboard.service';
-import { UserService } from 'src/assets/core/services/user.service';
+import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
+import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
 import { environment } from 'src/environments/environment';
 
@@ -31,9 +29,8 @@ export class HeaderComponent implements OnInit, OnChanges {
 
   isShadowActive: boolean = false;
   constructor(
-    private toast: ToastService,
     private dashboardService: DashboardService,
-    public userService: UserService,
+    public userService: AuthService,
     private router: Router
   ) {
     router.events.subscribe((data: any) => {
@@ -68,7 +65,7 @@ export class HeaderComponent implements OnInit, OnChanges {
   }
 
   availableSoon() {
-    this.toast.availableSoon();
+    ToastService.availableSoon();
   }
 
   logout() {

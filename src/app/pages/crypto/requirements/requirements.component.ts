@@ -4,9 +4,10 @@ import { Subscription } from 'rxjs';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { Status, User } from 'src/assets/core/data/class/user.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
-import { DashboardService } from 'src/assets/core/services/dashboard.service';
-import { UserService } from 'src/assets/core/services/user.service';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
+import { AuthService } from 'src/assets/core/services/api/auth.service';
+import { LOG } from 'src/assets/core/utils/log.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
 
 @Component({
   selector: 'app-requirements',
@@ -32,9 +33,9 @@ export class RequirementsComponent implements OnInit, OnDestroy {
 
   constructor(
     private dashboardService: DashboardService,
-    private userService: UserService,
+    private authService: AuthService,
     private router: Router,
-    private logger: LoggerService
+    private userService: UserService
   ) {}
 
   ngOnDestroy(): void {
@@ -46,7 +47,7 @@ export class RequirementsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    let user = this.userService.user;
+    let user = this.authService.user;
     let requirements: Array<string> =
       user.settings.completeRequirement?.split(';')!;
     if (requirements.includes(Status.ASSET)) this.isAssetCreated = true;
@@ -98,7 +99,7 @@ export class RequirementsComponent implements OnInit, OnDestroy {
   }
 
   saveWallet(wallet: Wallet) {
-    let user = this.userService.user;
+    let user = this.authService.user;
     if (this.wallets != undefined) {
       let index = this.wallets?.indexOf(
         this.wallets.find((w) => w.name == wallet.name)!
@@ -165,12 +166,13 @@ export class RequirementsComponent implements OnInit, OnDestroy {
       this.isWalletCreated
     )
       user.settings.completeRequirement = Status.COMPLETED;
-    this.updateUserSub = this.userService
+    this.updateUserSub = this.authService
       .updateUserData(user)
       .subscribe((data) => {
-        this.logger.LOG(data.message!, 'RequirementsComponent');
-        this.userService.user = data.data;
-        this.userService.setUserGlobally();
+        LOG.info(data.message!, 'RequirementsComponent');
+        this.userService.setUserGlobally(data.data);
+        //this.authService.user = data.data;
+        //this.authService.setUserGlobally();
       });
   }
 

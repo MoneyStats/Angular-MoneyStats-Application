@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
-import { CryptoService } from 'src/assets/core/services/crypto.service';
-import { deepCopy } from '@angular-devkit/core/src/utils/object';
+import { CryptoService } from 'src/assets/core/services/api/crypto.service';
 import {
   MarketDataCategory,
   ModalConstant,
@@ -11,13 +10,14 @@ import {
 } from 'src/assets/core/data/constant/constant';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { Asset, Operation } from 'src/assets/core/data/class/crypto.class';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { v4 as uuidv4 } from 'uuid';
+import { Utils } from 'src/assets/core/services/config/utils.service';
 
 @Component({
   selector: 'app-operation-exchange',
@@ -68,14 +68,11 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   constructor(
     private cryptoService: CryptoService,
     private route: ActivatedRoute,
-    private screenService: ScreenService,
-    private logger: LoggerService,
-    private swal: SwalService,
     private router: Router,
     private cdref: ChangeDetectorRef,
     private translate: TranslateService
   ) {
-    this.screenService.hideFooter();
+    ScreenService.hideFooter();
   }
 
   ngOnDestroy(): void {
@@ -111,24 +108,24 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
       this.operationType = a.operationType;
       this.walletSelect = a.wallet;
       this.fiat = a.fiat;
-      let wallets = deepCopy(
+      let wallets = Utils.copyObject(
         this.cryptoService.cryptoDashboard.wallets.slice()
       );
       this.filterWalletsTransfer(wallets);
-      this.wallet = wallets.find((w) => w.name == this.walletSelect)!;
+      this.wallet = wallets.find((w: any) => w.name == this.walletSelect)!;
       this.getCryptoPrices(a.fiat);
       if (this.operationType == this.operations.TRADING) {
-        let marketData = deepCopy(this.wallet.assets);
+        let marketData = Utils.copyObject(this.wallet.assets);
         this.stablecoin = marketData.filter(
-          (md) => md.category == MarketDataCategory.STABLECOIN
+          (md: any) => md.category == MarketDataCategory.STABLECOIN
         );
       }
     });
   }
 
   filterWalletsTransfer(wallets: Wallet[]) {
-    this.wallets = deepCopy(wallets).filter(
-      (wallet) => wallet.name != this.walletSelect
+    this.wallets = Utils.copyObject(wallets).filter(
+      (wallet: any) => wallet.name != this.walletSelect
     );
   }
 
@@ -137,7 +134,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
       .getCryptoPriceData(fiat)
       .subscribe((data) => {
         this.cryptoService.cache.cacheMarketDataByCurrencyData(data);
-        this.logger.LOG(data.message!, 'OperationExchangeComponent');
+        LOG.info(data.message!, 'OperationExchangeComponent');
         this.marketData = data.data;
       });
   }
@@ -168,10 +165,10 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     asset.performance = 0;
     asset.trend = 0;
     this.marketDataSelected = asset;
-    let assets = deepCopy(this.wallet.assets);
-    if (assets && assets.find((a) => a.identifier == asset.identifier)!)
+    let assets = Utils.copyObject(this.wallet.assets);
+    if (assets && assets.find((a: any) => a.identifier == asset.identifier)!)
       this.assetInWallet = assets.find(
-        (a) => a.identifier == asset.identifier
+        (a: any) => a.identifier == asset.identifier
       )!;
     else this.assetInWallet = asset;
     this.makeNewBalance();
@@ -210,15 +207,11 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     this.isWalletSelected = true;
   }
 
-  isEmpty(number: number) {
-    return Number.isNaN(number) || number == undefined;
-  }
-
   exchangeInvestments() {
     let assetBuying =
       this.operationType == OperationsType.NEWINVESTMENT
-        ? deepCopy(this.assetInWallet)
-        : deepCopy(this.assetToSell);
+        ? Utils.copyObject(this.assetInWallet)
+        : Utils.copyObject(this.assetToSell);
     assetBuying.lastUpdate = new Date();
 
     let operation: Operation = new Operation();
@@ -229,10 +222,10 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     switch (this.operationType) {
       case OperationsType.NEWINVESTMENT:
         // Setting Invested Money into the Asset
-        this.isEmpty(assetBuying.invested)
+        Utils.isNullOrEmpty(assetBuying.invested)
           ? (assetBuying.invested = this.investedMoney)
           : (assetBuying.invested += this.investedMoney);
-        this.isEmpty(assetBuying.balance)
+        Utils.isNullOrEmpty(assetBuying.balance)
           ? (assetBuying.balance = this.assetNewBalance)
           : (assetBuying.balance += this.assetNewBalance);
 
@@ -253,12 +246,12 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
 
         const assetAsString = JSON.stringify(this.assetInWallet);
         const assetParse = JSON.parse(assetAsString);
-        assetSelling = deepCopy(assetParse);
+        assetSelling = Utils.copyObject(assetParse);
 
-        this.isEmpty(assetSelling.invested)
+        Utils.isNullOrEmpty(assetSelling.invested)
           ? (assetSelling.invested = percentualeInvestitoCalcolata)
           : (assetSelling.invested += percentualeInvestitoCalcolata);
-        this.isEmpty(assetSelling.balance)
+        Utils.isNullOrEmpty(assetSelling.balance)
           ? (assetSelling.balance = this.assetNewBalance)
           : (assetSelling.balance += this.assetNewBalance);
         break;
@@ -273,13 +266,13 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
         assetBuying.invested -= percentualeInvestitoCalcolata;
 
         transferedAsset = this.walletToTansfer.assets
-          ? deepCopy(this.walletToTansfer.assets).find(
-              (as) => as.identifier == assetBuying.identifier
+          ? Utils.copyObject(this.walletToTansfer.assets).find(
+              (as: any) => as.identifier == assetBuying.identifier
             )
           : undefined;
 
         if (transferedAsset == undefined) {
-          transferedAsset = deepCopy(this.marketDataSelected);
+          transferedAsset = Utils.copyObject(this.marketDataSelected);
           transferedAsset.balance = 0;
           transferedAsset.id = undefined;
           transferedAsset.invested = 0;
@@ -308,6 +301,29 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
         operation.exitQuantity = this.balanceToTransfer - this.fees;
         operation.performance = 0;
         operation.trend = 0;
+
+        // Chiud eventuali operazioni di trading se sono presenti e Aperte
+        if (assetBuying.operations.filter((o: any) => o.status === 'OPEN')) {
+          let open = assetBuying.operations.filter(
+            (o: Operation) => o.status === 'OPEN'
+          )[0];
+          open.status = 'CLOSED';
+          open.exitDate = new Date();
+          open.exitPrice = assetBuying.current_price;
+          let currentPrice = open.entryQuantity! * assetBuying.current_price!;
+          open.exitPriceValue = parseFloat(currentPrice.toFixed(2));
+          open.exitQuantity = parseFloat(currentPrice.toFixed(8));
+          open.performance = parseFloat(
+            (
+              ((currentPrice - open.entryPriceValue!) / currentPrice) *
+              100
+            ).toFixed(2)
+          );
+          open.trend = parseFloat(
+            (currentPrice - open.entryPriceValue!).toFixed(2)
+          );
+          assetBuying.operations = [open];
+        }
         break;
       default:
         break;
@@ -345,7 +361,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
         ? (assetBuying.operations = [operation])
         : (assetSelling.operations = [operation]);
 
-      let walletToSave = deepCopy(this.wallet);
+      let walletToSave = Utils.copyObject(this.wallet);
 
       if (this.operationType != OperationsType.NEWINVESTMENT)
         walletToSave.assets = [assetSelling, assetBuying];
@@ -355,8 +371,8 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     } else {
       transferedAsset.operations = [operation];
 
-      let walletSell = deepCopy(this.wallet);
-      let walletBuy = deepCopy(this.walletToTansfer);
+      let walletSell = Utils.copyObject(this.wallet);
+      let walletBuy = Utils.copyObject(this.walletToTansfer);
 
       walletSell.assets = [assetBuying];
       walletBuy.assets = [transferedAsset];
@@ -369,7 +385,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     this.saveWalletSubscribe = this.cryptoService
       .addOrUpdateCryptoAsset(walletToSave)
       .subscribe((data) => {
-        this.logger.LOG(data.message!, 'OperationExchangeComponent');
+        LOG.info(data.message!, 'OperationExchangeComponent');
         let message =
           walletToSave.assets.length > 1
             ? this.translate
@@ -380,7 +396,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
                 .instant('response.operation')
                 .replace('$OP1$', 'USD')
                 .replace('$OP2$', walletToSave.assets[0].symbol);
-        this.swal.toastMessage(SwalIcon.SUCCESS, message);
+        SwalService.toastMessage(SwalIcon.SUCCESS, message);
         this.router.navigate(['/crypto/dashboard']);
       });
   }
@@ -389,8 +405,8 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     this.saveWalletsSubscribe = this.cryptoService
       .addOrUpdateCryptoAssets(wallets)
       .subscribe((data) => {
-        this.logger.LOG(data.message!, 'OperationExchangeComponent');
-        this.swal.toastMessage(
+        LOG.info(data.message!, 'OperationExchangeComponent');
+        SwalService.toastMessage(
           SwalIcon.SUCCESS,
           this.translate
             .instant('response.operation')

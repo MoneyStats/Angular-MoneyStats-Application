@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RegEx } from 'src/assets/core/data/constant/constant';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
-import { UserService } from 'src/assets/core/services/user.service';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { AuthService } from 'src/assets/core/services/api/auth.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 
 @Component({
@@ -15,12 +16,14 @@ export class ResetPasswordComponent implements OnInit {
   passwordR: string = '';
   token: string = '';
 
+  public EMPTY: string = '';
+
+  isPasswordShow: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
-    private userService: UserService,
-    private swal: SwalService,
-    private router: Router,
-    private logger: LoggerService
+    private userService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -29,20 +32,30 @@ export class ResetPasswordComponent implements OnInit {
     });
   }
 
-  validatePassword() {
-    let validate = false;
-    if (this.password != this.passwordR) {
-      validate = true;
-    }
-    return validate;
+  validateRegexPassword() {
+    const regex: RegExp = new RegExp(RegEx.PASSWORD_FULL);
+    // Se la password è vuota non mostro l'errore
+    return this.password != this.EMPTY ? regex.test(this.password) : true;
+  }
+
+  checkIfPasswordMatch() {
+    return this.password != this.EMPTY && this.passwordR != this.EMPTY
+      ? this.password === this.passwordR
+      : true;
   }
 
   resetPassword() {
     const user = this.userService.resetPassword(this.password, this.token);
     user.subscribe((data) => {
-      this.logger.LOG(data.message!, 'ResetPasswordComponent');
-      this.swal.toastMessage(SwalIcon.SUCCESS, data.message!);
+      LOG.info(data.message!, 'ResetPasswordComponent');
+      SwalService.toastMessage(SwalIcon.SUCCESS, data.message!);
     });
     this.router.navigate(['auth/login']);
+  }
+
+  hideShowPassword() {
+    this.isPasswordShow
+      ? (this.isPasswordShow = false)
+      : (this.isPasswordShow = true);
   }
 }

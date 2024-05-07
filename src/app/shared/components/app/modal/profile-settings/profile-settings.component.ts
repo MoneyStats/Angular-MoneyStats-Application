@@ -1,11 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  Input,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { User } from 'src/assets/core/data/class/user.class';
@@ -14,8 +7,9 @@ import {
   ProfileSettings,
 } from 'src/assets/core/data/constant/constant';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
-import { UserService } from 'src/assets/core/services/user.service';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { AuthService } from 'src/assets/core/services/api/auth.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 
 @Component({
@@ -37,10 +31,9 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
   warning: boolean = false;
 
   constructor(
-    private userService: UserService,
-    private swal: SwalService,
-    private logger: LoggerService,
-    private translate: TranslateService
+    private authService: AuthService,
+    private translate: TranslateService,
+    private userService: UserService
   ) {}
 
   public get profileConstant(): typeof ProfileSettings {
@@ -49,7 +42,7 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (this.user === undefined) {
-      this.user = this.userService.user;
+      this.user = this.authService.user;
     }
   }
 
@@ -77,14 +70,15 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
       }
     }
 
-    this.updateUserSubscribe = this.userService
+    this.updateUserSubscribe = this.authService
       .updateUserData(this.user!)
       .subscribe((res) => {
-        this.logger.LOG(res.message!, 'ProfileSettingsComponent');
-        this.userService.user! = res.data;
-        this.userService.setUserGlobally();
-        this.userService.setValue();
-        this.swal.toastMessage(
+        LOG.info(res.message!, 'ProfileSettingsComponent');
+        this.userService.setUserGlobally(res.data);
+        //this.authService.user! = res.data;
+        //this.authService.setUserGlobally();
+        //this.authService.setValue();
+        SwalService.toastMessage(
           SwalIcon.SUCCESS,
           this.translate.instant('response.user')
         );
@@ -92,7 +86,7 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
     // DELETE PASSWORD
     this.user!.password = '';
 
-    this.userService.user = this.user!;
+    this.authService.user = this.user!;
     this.warning = false;
     var a = document.getElementById(ModalConstant.PROFILESETTINGS);
     setTimeout(() => {

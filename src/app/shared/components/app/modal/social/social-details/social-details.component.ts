@@ -5,7 +5,8 @@ import {
   ModalConstant,
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
-import { UserService } from 'src/assets/core/services/user.service';
+import { AuthService } from 'src/assets/core/services/api/auth.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -19,7 +20,10 @@ export class SocialDetailsComponent implements OnInit {
   @Output('emitDisconnect') emitDisconnect = new EventEmitter<User>();
 
   @Input('github') github: Github = new Github();
-  constructor(private userService: UserService) {}
+  constructor(
+    private authService: AuthService,
+    private userService: UserService
+  ) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -53,7 +57,7 @@ export class SocialDetailsComponent implements OnInit {
       environment.baseUrlHeader + AppConfigConst.DEFAULT_USER_IMG;
     this.userService.user.settings.github = new Github();
     this.userService.user.settings.githubUser = undefined;
-    this.userService.updateUserData(this.userService.user).subscribe((res) => {
+    this.authService.updateUserData(this.userService.user).subscribe((res) => {
       this.userService.user = res.data;
       this.emitDisconnect.emit(res.data);
     });

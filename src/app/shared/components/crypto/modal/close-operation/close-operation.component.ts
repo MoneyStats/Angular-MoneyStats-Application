@@ -1,24 +1,17 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnDestroy, SimpleChanges } from '@angular/core';
 import { Operation } from 'src/assets/core/data/class/crypto.class';
 import {
   ModalConstant,
   OperationsType,
 } from 'src/assets/core/data/constant/constant';
-import { CryptoService } from 'src/assets/core/services/crypto.service';
-import { deepCopy } from '@angular-devkit/core/src/utils/object';
+import { CryptoService } from 'src/assets/core/services/api/crypto.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 import { Router } from '@angular/router';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { Subscription } from 'rxjs';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Utils } from 'src/assets/core/services/config/utils.service';
 
 @Component({
   selector: 'app-close-operation',
@@ -40,9 +33,7 @@ export class CloseOperationComponent implements OnDestroy {
 
   constructor(
     private cryptoService: CryptoService,
-    private swal: SwalService,
     private router: Router,
-    private logger: LoggerService,
     private translate: TranslateService
   ) {}
 
@@ -74,7 +65,7 @@ export class CloseOperationComponent implements OnDestroy {
     let currentPrice =
       this.operation?.entryQuantity! * this.operation?.asset?.current_price!;
     this.currentPrice = parseFloat(currentPrice.toFixed(2));
-    let operation = deepCopy(this.operation);
+    let operation = Utils.copyObject(this.operation);
     //let operation = this.operation;
     operation!.exitDate = new Date();
     operation!.exitPrice = operation?.asset?.current_price;
@@ -121,22 +112,22 @@ export class CloseOperationComponent implements OnDestroy {
 
   closeOperation() {
     this.operationToClose!.status = 'CLOSED';
-    let dashboard = deepCopy(this.cryptoService.cryptoDashboard);
+    let dashboard = Utils.copyObject(this.cryptoService.cryptoDashboard);
     let wallet = dashboard.wallets.find(
-      (w) =>
+      (w: any) =>
         w.assets != undefined &&
         w.assets.find(
-          (a) =>
+          (a: any) =>
             a.operations != undefined &&
-            a.operations.find((o) => o.id == this.operation?.id)
+            a.operations.find((o: any) => o.id == this.operation?.id)
         )
     );
     //let wallet = this.operation?.wallet;
     let asset1 = wallet?.assets.find(
-      (a) => a.symbol == this.operationToClose?.exitCoin
+      (a: any) => a.symbol == this.operationToClose?.exitCoin
     );
     let asset2 = wallet?.assets.find(
-      (a) => a.symbol == this.operationToClose?.entryCoin
+      (a: any) => a.symbol == this.operationToClose?.entryCoin
     );
     this.operationToClose.asset = undefined;
     this.operationToClose.assetSell = undefined;
@@ -158,18 +149,12 @@ export class CloseOperationComponent implements OnDestroy {
     asset2!.updateDate = new Date();
 
     wallet!.assets = [asset1!, asset2!];
-    let message =
-      'Operation ' +
-      asset2?.symbol +
-      '/' +
-      asset1?.symbol +
-      ' successfully closed';
 
     this.closeSubscribe = this.cryptoService
       .addOrUpdateCryptoAsset(wallet!)
       .subscribe((data) => {
-        this.logger.LOG(data.message!, 'CloseOperationComponent');
-        this.swal.toastMessage(
+        LOG.info(data.message!, 'CloseOperationComponent');
+        SwalService.toastMessage(
           SwalIcon.SUCCESS,
           this.translate.instant('response.close')
         );

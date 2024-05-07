@@ -12,8 +12,8 @@ import { Asset } from 'src/assets/core/data/class/crypto.class';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { ErrorService } from 'src/assets/core/interceptors/error.service';
-import { CryptoService } from 'src/assets/core/services/crypto.service';
-import { StatsService } from 'src/assets/core/services/stats.service';
+import { CryptoService } from 'src/assets/core/services/api/crypto.service';
+import { StatsService } from 'src/assets/core/services/api/stats.service';
 
 @Component({
   selector: 'app-operations-modal',

@@ -8,12 +8,12 @@ export class ThemeService {
   environment = environment;
   constructor() {}
 
-  darkMode() {
+  public static darkMode() {
     //localStorage.setItem('MoneyStatsDarkMode', '1');
     darkMode();
   }
 
-  switchDarkMode() {
+  public static switchDarkMode() {
     switchDarkMode();
   }
 }

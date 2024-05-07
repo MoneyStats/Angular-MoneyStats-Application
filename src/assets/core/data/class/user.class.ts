@@ -19,7 +19,9 @@ export class User implements UserInterface {
 
 export class UserSettings {
   currency: string = 'USD';
+  currencySymbol: string = '$';
   cryptoCurrency?: string;
+  cryptoCurrencySymbol?: string;
   github: Github = new Github();
   githubUser?: string;
   completeRequirement?: string;

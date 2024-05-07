@@ -12,7 +12,7 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
 })
 export class ChartJSService {
   environment = environment;
-  BACKGROUND: Array<string> = [
+  private static BACKGROUND: Array<string> = [
     'rgba(98, 54, 255, 0.3)',
     'rgba(209, 25, 208, 0.3)',
     'rgba(187, 157, 247, 0.3)',
@@ -27,7 +27,7 @@ export class ChartJSService {
   ];
   constructor() {}
 
-  renderChartLine(totalMap: Map<string, any>) {
+  public static renderChartLine(totalMap: Map<string, any>) {
     let labels: Array<string> = [];
     let datasets: Array<any> = [];
     let index = 0;
