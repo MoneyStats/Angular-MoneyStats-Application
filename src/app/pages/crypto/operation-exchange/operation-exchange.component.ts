@@ -301,6 +301,29 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
         operation.exitQuantity = this.balanceToTransfer - this.fees;
         operation.performance = 0;
         operation.trend = 0;
+
+        // Chiud eventuali operazioni di trading se sono presenti e Aperte
+        if (assetBuying.operations.filter((o: any) => o.status === 'OPEN')) {
+          let open = assetBuying.operations.filter(
+            (o: Operation) => o.status === 'OPEN'
+          )[0];
+          open.status = 'CLOSED';
+          open.exitDate = new Date();
+          open.exitPrice = assetBuying.current_price;
+          let currentPrice = open.entryQuantity! * assetBuying.current_price!;
+          open.exitPriceValue = parseFloat(currentPrice.toFixed(2));
+          open.exitQuantity = parseFloat(currentPrice.toFixed(8));
+          open.performance = parseFloat(
+            (
+              ((currentPrice - open.entryPriceValue!) / currentPrice) *
+              100
+            ).toFixed(2)
+          );
+          open.trend = parseFloat(
+            (currentPrice - open.entryPriceValue!).toFixed(2)
+          );
+          assetBuying.operations = [open];
+        }
         break;
       default:
         break;

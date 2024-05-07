@@ -542,6 +542,13 @@
             "version_title": "MoneyStats V2.0.12",
             "version": "V2.0.12",
             "changelog": "&#183; Fixed error Add Crypto Stats if wallet does not have asset."
+          },
+          {
+            "modalId": "v210",
+            "version_date": "2024-05-07",
+            "version_title": "MoneyStats V2.1.0",
+            "version": "V2.1.0",
+            "changelog": "&#183; Fixed cache error on live wallet. <br> &#183; Improved performance. <br> &#183; Improved security."
           }
         ]
       }
