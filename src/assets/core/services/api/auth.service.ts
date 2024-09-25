@@ -104,7 +104,7 @@ export class AuthService {
       response.data = user;
       return of(response);
     } else {
-      user.password = btoa(user.password);
+      if (user.password) user.password = btoa(user.password);
       const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',

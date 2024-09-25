@@ -544,11 +544,11 @@
             "changelog": "&#183; Fixato errore Add Crypto Stats se wallet non contiene asset."
           },
           {
-            "modalId": "v210",
+            "modalId": "v211",
             "version_date": "2024-05-07",
             "version_title": "MoneyStats V2.1.0",
-            "version": "V2.1.0",
-            "changelog": "&#183; Sistemato errore cache sui liv wallet. <br> &#183; Performance migliorate. <br> &#183; Sicurezza migliorata."
+            "version": "V2.1.1",
+            "changelog": "&#183; Sistemato errore cache sui live wallet. <br> &#183; Performance migliorate. <br> &#183; Sicurezza migliorata. <br> &#183; Sistemato sezione resume Crypto in caso di dati mancanti. <br> &#183; Aggiunte regole sull'email e password di validazione e migliorata la schermata di autenticazione."
           }
         ]
       }
@@ -660,7 +660,9 @@
           "price": "Prezzo",
           "invest": "Investito",
           "on": "il",
-          "more": "Vedi tutti"
+          "more": "Vedi tutti",
+          "info-trading": "Nessuno Stats disponibile per Trading Wallets",
+          "warning-empty-wallets": "Aggiungi un nuovo Stats per ottenere i dati"
         }
       }
     },

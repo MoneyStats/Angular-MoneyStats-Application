@@ -77,9 +77,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
       this.user = this.authService.user;
     }
     if (this.user?.name === 'DEFAULT_NAME') {
-      this.user = JSON.parse(
-        localStorage.getItem(StorageConstant.USERACCOUNT)!
-      );
+      this.user = UserService.getUserData();
     }
     let autoUpdate = !localStorage.getItem(StorageConstant.AUTOUPDATE);
     if (autoUpdate) {

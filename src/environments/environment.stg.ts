@@ -1,6 +1,5 @@
 const baseUrlApp: string = '../../';
 const host: string = 'https://stg.moneystats.service.giovannilamarmora.com';
-//const host: string = 'https://oraclewebserver.ddns.net/stg-moneystats-service';
 //const subDomain = 'stg-moneystats/';
 const subDomain = '';
 
@@ -13,7 +12,7 @@ export const environment = {
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: '2.1.0',
+  version: '2.1.1 (Beta)',
   hostService: host + subDomain,
 
   // Mock Data
