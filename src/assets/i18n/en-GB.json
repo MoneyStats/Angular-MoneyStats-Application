@@ -544,10 +544,10 @@
             "changelog": "&#183; Fixed error Add Crypto Stats if wallet does not have asset."
           },
           {
-            "modalId": "v211",
+            "modalId": "v212",
             "version_date": "2024-05-07",
-            "version_title": "MoneyStats V2.1.0",
-            "version": "V2.1.1",
+            "version_title": "MoneyStats V2.1.2",
+            "version": "V2.1.2",
             "changelog": "&#183; Fixed cache issue on live wallets. <br> &#183; Improved performance. <br> &#183; Enhanced security. <br> &#183; Fixed Crypto resume section when data is missing. <br> &#183; Added validation rules for email and password, and improved the authentication screen."
           }
         ]

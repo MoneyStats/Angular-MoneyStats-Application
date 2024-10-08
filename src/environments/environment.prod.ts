@@ -17,7 +17,7 @@ export const environment = {
   //baseUrlSettings: '../../../../../' + subDomain,
   //baseUrlDashboard: '../../../' + subDomain,
   //baseUrlVersion: '../../../../../../' + subDomain,
-  version: '2.1.1',
+  version: '2.1.2',
   hostService: host + subDomain,
 
   // Mock Data
