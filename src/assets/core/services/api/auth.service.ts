@@ -42,7 +42,7 @@ export class AuthService {
     if (username === MockUser.USERNAME && password === MockUser.PASSWORD) {
       return this.http.get<ResponseModel>(environment.getUserUrl);
     } else {
-      password = btoa(password);
+      //password = btoa(password);
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Basic ' + btoa(username + ':' + password),
