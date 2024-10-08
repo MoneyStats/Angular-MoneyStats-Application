@@ -1,25 +1,23 @@
 import {
   Component,
   ElementRef,
-  OnChanges,
   OnDestroy,
   OnInit,
   Output,
   Renderer2,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import {
   Asset,
   CryptoDashboard,
 } from 'src/assets/core/data/class/crypto.class';
-import { CryptoService } from 'src/assets/core/services/crypto.service';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { CryptoService } from 'src/assets/core/services/api/crypto.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { StorageConstant } from 'src/assets/core/data/constant/constant';
 import { Subscription } from 'rxjs';
+import { Utils } from 'src/assets/core/services/config/utils.service';
 
 @Component({
   selector: 'app-crypto-details',
@@ -41,8 +39,6 @@ export class CryptoDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private cryptoService: CryptoService,
-    private screenService: ScreenService,
-    private logger: LoggerService,
     private _renderer2: Renderer2
   ) {}
 
@@ -53,7 +49,7 @@ export class CryptoDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.screenService.hideFooter();
+    ScreenService.hideFooter();
 
     let assets = [...this.cryptoService.assets];
     //let assets = deepCopy(this.cryptoDashboard.assets);
@@ -64,7 +60,9 @@ export class CryptoDetailsComponent implements OnInit, OnDestroy {
       } else this.getCryptoDetails(a.identifier);
 
       if (this.cryptoService.cryptoDashboard.balance != 0 && assets.length != 0)
-        this.cryptoDashboard = deepCopy(this.cryptoService.cryptoDashboard);
+        this.cryptoDashboard = Utils.copyObject(
+          this.cryptoService.cryptoDashboard
+        );
       else this.getCryptoDashboard();
     });
     this.isWalletBalanceHidden();
@@ -78,7 +76,7 @@ export class CryptoDetailsComponent implements OnInit, OnDestroy {
     this.detailsSubscribe = this.cryptoService
       .getCryptoDetails(identifier)
       .subscribe((details) => {
-        this.logger.LOG(details.message!, 'CryptoDetailsComponent');
+        LOG.info(details.message!, 'CryptoDetailsComponent');
         this.asset = details.data;
         this.cryptoService.asset = details.data;
         this.ngAfterViewInit();
@@ -90,7 +88,7 @@ export class CryptoDetailsComponent implements OnInit, OnDestroy {
       .getCryptoDashboardData()
       .subscribe((data) => {
         this.cryptoService.cache.cacheCryptoDashboardData(data);
-        this.logger.LOG(data.message!, 'CryptoDetailsComponent');
+        LOG.info(data.message!, 'CryptoDetailsComponent');
         this.cryptoDashboard = data.data;
       });
   }

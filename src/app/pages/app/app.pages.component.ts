@@ -1,13 +1,8 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { ChildrenOutletContexts, RouterOutlet } from '@angular/router';
-import {
-  fadeAnimation,
-  fadeSlider,
-  fader,
-  slideUp,
-} from 'src/app/shared/animations/route-animations';
+import { ChildrenOutletContexts } from '@angular/router';
+import { fadeSlider } from 'src/app/shared/animations/route-animations';
 import { User } from 'src/assets/core/data/class/user.class';
-import { UserService } from 'src/assets/core/services/user.service';
+import { AuthService } from 'src/assets/core/services/api/auth.service';
 
 @Component({
   selector: 'app-pages',
@@ -24,7 +19,7 @@ export class AppPagesComponent implements OnInit {
   @Output('user') user?: User = new User();
 
   constructor(
-    private userService: UserService,
+    private userService: AuthService,
     private contexts: ChildrenOutletContexts
   ) {}
 

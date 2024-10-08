@@ -4,13 +4,13 @@ import { Dashboard, Stats, Wallet } from '../data/class/dashboard.class';
 import { ApexOptions } from '../data/constant/apex.chart';
 import { CryptoDashboard, Operation } from '../data/class/crypto.class';
 import { ImageColorPickerService } from './image.color.picker.service';
-import { deepCopy } from '@angular-devkit/core/src/utils/object';
+import { Utils } from '../services/config/utils.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChartService {
-  private colorsList: string[] = [
+  private static colorsList: string[] = [
     '#6236FF',
     '#d119d0',
     '#bb9df7',
@@ -26,7 +26,9 @@ export class ChartService {
   environment = environment;
   constructor(private imageColorPicker: ImageColorPickerService) {}
 
-  appRenderWalletPerformance(dashboard: Dashboard): Partial<ApexOptions> {
+  public static appRenderWalletPerformance(
+    dashboard: Dashboard
+  ): Partial<ApexOptions> {
     let series: Array<any> = [];
     let oldStats: any = new Stats();
     let oldDate: any;
@@ -42,7 +44,7 @@ export class ChartService {
       dashboard.statsWalletDays.splice(0, 0, oldDate.toString());
     }
     dashboard.wallets.forEach((wallet, indexWallet) => {
-      colors.push(this.imageColorPicker.getColor(wallet.img!, indexWallet));
+      colors.push(ImageColorPickerService.getColor(wallet.img!, indexWallet));
       let oldBalance =
         wallet.differenceLastStats != 0
           ? wallet.balance - wallet.differenceLastStats
@@ -67,7 +69,7 @@ export class ChartService {
             );
             index = count;
           }
-          historyBalance.push(this.roundToTwoDecimalPlaces(h.balance));
+          historyBalance.push(Utils.roundToTwoDecimalPlaces(h.balance));
           index++;
         });
 
@@ -86,7 +88,9 @@ export class ChartService {
     return this.createChartLine(colors, series, finalStatsDays, 380);
   }
 
-  renderChartLineCategory(totalMap: Map<string, any>): Partial<ApexOptions> {
+  public static renderChartLineCategory(
+    totalMap: Map<string, any>
+  ): Partial<ApexOptions> {
     let labels: Array<string> = [];
     let series: Array<any> = [];
     let index = 0;
@@ -112,7 +116,10 @@ export class ChartService {
     return this.createChartLine([], series, labels, 350);
   }
 
-  renderChartWallet(name: string, stats: Stats[]): Partial<ApexOptions> {
+  public static renderChartWallet(
+    name: string,
+    stats: Stats[]
+  ): Partial<ApexOptions> {
     let series: Array<any> = [];
     let historyBalance: Array<number> = [];
     let historyDates: Array<string> = [];
@@ -160,7 +167,7 @@ export class ChartService {
     return chartExample1;
   }
 
-  appRenderChartPie(wallets: Wallet[]): Partial<ApexOptions> {
+  public static appRenderChartPie(wallets: Wallet[]): Partial<ApexOptions> {
     let series: Array<any> = [];
     let walletName: Array<string> = [];
     wallets.forEach((wallet) => {
@@ -201,7 +208,10 @@ export class ChartService {
     series = [];
     return chartExample1;
   }
-  appRenderChartBar(dates: string[], balances: number[]): Partial<ApexOptions> {
+  public static appRenderChartBar(
+    dates: string[],
+    balances: number[]
+  ): Partial<ApexOptions> {
     let series: Array<any> = [];
     let walletName: Array<string> = dates;
     let serie = [
@@ -226,7 +236,7 @@ export class ChartService {
     return chartExample1;
   }
 
-  renderCryptoDatas(
+  public static renderCryptoDatas(
     cryptoDashboard: CryptoDashboard,
     /**
      * 1.Parametro: Dimensione Grafico
@@ -241,7 +251,7 @@ export class ChartService {
     let options: Array<any> = optional[0];
     let today = new Date();
     cryptoDashboard.assets.forEach((asset, indexAsset) => {
-      colors.push(this.imageColorPicker.getColor(asset.icon!, indexAsset));
+      colors.push(ImageColorPickerService.getColor(asset.icon!, indexAsset));
       let historyBalance: Array<number> = [];
       if (statsAssetsDays == undefined || statsAssetsDays.length == 0) {
         historyBalance.push(0);
@@ -254,7 +264,7 @@ export class ChartService {
             let history = asset.history.find((h) => h.date.toString() == day);
             if (history) {
               return historyBalance.push(
-                this.roundToTwoDecimalPlaces(history?.balance!)
+                Utils.roundToTwoDecimalPlaces(history?.balance!)
               );
             }
           }
@@ -268,7 +278,7 @@ export class ChartService {
           statsAssetsDays[statsAssetsDays.length - 1]
         );
         if (lastDay < today) {
-          historyBalance.push(this.roundToTwoDecimalPlaces(asset.value!));
+          historyBalance.push(Utils.roundToTwoDecimalPlaces(asset.value!));
         }
       }
 
@@ -307,21 +317,21 @@ export class ChartService {
     return this.createChartLine(colors, series, finalStatsDays, h);
   }
 
-  renderTradingOperations(
+  public static renderTradingOperations(
     operations: Array<Operation>,
     optional: any[]
   ): Partial<ApexOptions> {
-    let operationsCopy = deepCopy(operations);
+    let operationsCopy = Utils.copyObject(operations);
     let tradingDate: Array<string> = [];
     operationsCopy = operationsCopy.sort(
-      (b, a) =>
+      (b: any, a: any) =>
         new Date(b.exitDate!).getTime() - new Date(a.exitDate!).getTime()
     );
-    operationsCopy = operationsCopy.filter((o) => o.status == 'CLOSED');
+    operationsCopy = operationsCopy.filter((o: any) => o.status == 'CLOSED');
 
     let wallets: Array<Wallet> = [];
 
-    operationsCopy.forEach((operation) => {
+    operationsCopy.forEach((operation: any) => {
       let exitDate = operation.exitDate?.toString().split('T')[0]!;
       if (!tradingDate.find((d) => d == exitDate)) tradingDate.push(exitDate);
 
@@ -346,11 +356,11 @@ export class ChartService {
 
     tradingDate.forEach((date) => {
       let op = operationsCopy.filter(
-        (op) => op.exitDate?.toString().split('T')[0]! == date
+        (op: any) => op.exitDate?.toString().split('T')[0]! == date
       );
       let singleTrend: number = 0;
       let title: string = '';
-      op.forEach((o) => {
+      op.forEach((o: any) => {
         investedSum += o.trend!;
         profit += o.trend!;
         singleTrend += o.trend!;
@@ -403,7 +413,7 @@ export class ChartService {
    * @param h
    * @returns
    */
-  createChartLine(
+  public static createChartLine(
     colors: string[],
     series: Array<any>,
     finalStatsDays: string[],
@@ -439,9 +449,5 @@ export class ChartService {
       },
     };
     return chartOptions;
-  }
-
-  roundToTwoDecimalPlaces(value: number): number {
-    return Math.round((value + Number.EPSILON) * 100) / 100;
   }
 }

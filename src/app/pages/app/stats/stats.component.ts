@@ -5,9 +5,10 @@ import {
   ModalConstant,
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
-import { DashboardService } from 'src/assets/core/services/dashboard.service';
-import { StatsService } from 'src/assets/core/services/stats.service';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
+import { StatsService } from 'src/assets/core/services/api/stats.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
@@ -17,6 +18,7 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 })
 export class StatsComponent implements OnInit, OnDestroy {
   resumeSubscribe: Subscription = new Subscription();
+  coinSymbol: string = UserService.getUserData().settings.currencySymbol;
 
   wallets: Wallet[] = [];
   resumeData: Dashboard = new Dashboard();
@@ -27,9 +29,8 @@ export class StatsComponent implements OnInit, OnDestroy {
   hidden: boolean = false;
   constructor(
     public screenService: ScreenService,
-    public dashboardService: DashboardService,
-    private statsService: StatsService,
-    private logger: LoggerService
+    private dashboardService: DashboardService,
+    private statsService: StatsService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -40,15 +41,19 @@ export class StatsComponent implements OnInit, OnDestroy {
     this.resumeSubscribe.unsubscribe();
   }
 
+  screenWidth() {
+    return ScreenService.screenWidth;
+  }
+
   ngOnInit(): void {
-    this.screenService.setupHeader();
-    this.screenService.showFooter();
-    this.screenService.goToStats();
+    ScreenService.setupHeader();
+    ScreenService.showFooter();
+    ScreenService.goToStats();
     this.resumeSubscribe = this.statsService
       .getResumeData()
       .subscribe((res) => {
         this.statsService.cache.cacheResumeData(res);
-        this.logger.LOG(res.message!, 'StatsComponent');
+        LOG.info(res.message!, 'StatsComponent');
         this.resume = new Map<string, Dashboard>(Object.entries(res.data));
         this.years = Array.from(this.resume.keys());
         this.updateData(this.years[this.years.length - 1]);

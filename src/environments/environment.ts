@@ -17,7 +17,7 @@ export const environment = {
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: '2.0.12',
+  version: '2.1.2',
   hostService: host + subDomain,
   //version: require(baseUrlApp + subDomain + 'package.json').version,
 
@@ -34,12 +34,24 @@ export const environment = {
   getCryptoDetailsMock:
     baseUrlApp + 'assets/core/mock/crypto.details.mock.json',
 
-  // Datas
+  /*
+   * Authentication Datas
+   */
   registerDataUrl: host + '/v1/auth/sign-up',
   loginDataUrl: host + '/v1/auth/login',
   forgotPasswordUrl: host + '/v1/auth/forgot-password',
   resetPasswordUrl: host + '/v1/auth/reset-password',
-  checkLoginDataUrl: host + '/v1/auth/check-login',
+
+  /*
+   * Token
+   */
+  userInfoDataUrl: host + '/v1/oAuth/userInfo',
+  refreshTokenUrl: host + '/v1/oAuth/token/refresh',
+  refreshTime: 900000,
+
+  /*
+   * App
+   */
   addUpdateWalletDataUrl: host + '/v1/wallet/insert-update',
   uploadImage: host + '/v1/upload/attachment',
   imageSizeMax: 2000000,

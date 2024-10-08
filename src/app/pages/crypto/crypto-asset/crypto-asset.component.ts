@@ -4,17 +4,17 @@ import {
   CryptoDashboard,
 } from 'src/assets/core/data/class/crypto.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
-import { CryptoService } from 'src/assets/core/services/crypto.service';
+import { CryptoService } from 'src/assets/core/services/api/crypto.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
-import { deepCopy } from '@angular-devkit/core/src/utils/object';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import {
   ApexChartsOptions,
   ModalConstant,
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
 import { Subscription } from 'rxjs';
+import { Utils } from 'src/assets/core/services/config/utils.service';
 
 @Component({
   selector: 'app-crypto-asset',
@@ -35,12 +35,7 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
   showZeroBalance: boolean = false;
   thisYear: number = new Date().getFullYear();
 
-  constructor(
-    private cryptoService: CryptoService,
-    private charts: ChartService,
-    private screenService: ScreenService,
-    private logger: LoggerService
-  ) {}
+  constructor(private cryptoService: CryptoService) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -51,17 +46,17 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.screenService.hideFooter();
+    ScreenService.hideFooter();
     this.getAssets();
   }
 
   getAssets() {
-    this.cryptoDashboard = deepCopy(this.cryptoService.cryptoDashboard);
+    this.cryptoDashboard = Utils.copyObject(this.cryptoService.cryptoDashboard);
     this.cryptoAssetSubscribe = this.cryptoService
       .getCryptoAssetsData()
       .subscribe((data) => {
         this.cryptoService.cache.cacheAssetsData(data);
-        this.logger.LOG(data.message!, 'CryptoAssetComponent');
+        LOG.info(data.message!, 'CryptoAssetComponent');
         this.assets = data.data;
         this.cryptoService.assets = data.data;
         this.cryptoDashboard.assets = data.data;
@@ -72,18 +67,18 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
 
   graphAll() {
     if (!this.chartOptions) {
-      let dashboard = deepCopy(this.cryptoDashboard);
+      let dashboard = Utils.copyObject(this.cryptoDashboard);
       // Get All Date serve a prendere tutte le date per i grafici
       dashboard.statsAssetsDays = this.getAllDate();
       setTimeout(() => {
         if (this.cryptoDashboard.wallets) {
-          if (this.screenService?.screenWidth! <= 780) {
-            this.chartOptions = this.charts.renderCryptoDatas(dashboard, [
+          if (ScreenService.screenWidth! <= 780) {
+            this.chartOptions = ChartService.renderCryptoDatas(dashboard, [
               ApexChartsOptions.MOBILE_MODE,
               ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
             ]);
           } else
-            this.chartOptions = this.charts.renderCryptoDatas(dashboard, [
+            this.chartOptions = ChartService.renderCryptoDatas(dashboard, [
               ApexChartsOptions.ULTRA_WIDE,
               ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
             ]);
@@ -94,12 +89,12 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
 
   graph1Y() {
     if (!this.chart1Y) {
-      let dashboard = deepCopy(this.cryptoDashboard);
+      let dashboard = Utils.copyObject(this.cryptoDashboard);
       // Get All Date serve a prendere tutte le date per i grafici
       dashboard.statsAssetsDays = this.getAllDate();
 
       let assets: Asset[] = [];
-      dashboard.assets.forEach((asset) => {
+      dashboard.assets.forEach((asset: Asset) => {
         let last1Year = asset.history?.filter(
           (h) =>
             h.date.toString().split('-')[0] ===
@@ -111,17 +106,17 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
       dashboard.assets = assets;
       if (dashboard.statsAssetsDays)
         dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter(
-          (s) =>
+          (s: { toString: () => string }) =>
             s.toString().split('-')[0] === new Date().getFullYear().toString()
         );
       setTimeout(() => {
-        if (this.screenService?.screenWidth! <= 780)
-          this.chart1Y = this.charts.renderCryptoDatas(dashboard, [
+        if (ScreenService.screenWidth! <= 780)
+          this.chart1Y = ChartService.renderCryptoDatas(dashboard, [
             ApexChartsOptions.MOBILE_MODE,
             ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
           ]);
         else
-          this.chart1Y = this.charts.renderCryptoDatas(dashboard, [
+          this.chart1Y = ChartService.renderCryptoDatas(dashboard, [
             ApexChartsOptions.ULTRA_WIDE,
             ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
           ]);
@@ -131,7 +126,7 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
 
   graph3Y() {
     if (!this.chart3Y) {
-      let dashboard = deepCopy(this.cryptoDashboard);
+      let dashboard = Utils.copyObject(this.cryptoDashboard);
       // Get All Date serve a prendere tutte le date per i grafici
       dashboard.statsAssetsDays = this.getAllDate();
       let last3 = [
@@ -140,7 +135,7 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
         (new Date().getFullYear() - 2).toString(),
       ];
       let assets: Asset[] = [];
-      dashboard.assets.forEach((asset, index) => {
+      dashboard.assets.forEach((asset: Asset) => {
         let last3Hist = asset.history?.filter((h) =>
           last3.includes(h.date.toString().split('-')[0])
         );
@@ -150,17 +145,18 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
       });
       dashboard.assets = assets;
       if (dashboard.statsAssetsDays)
-        dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter((s) =>
-          last3.includes(s.toString().split('-')[0])
+        dashboard.statsAssetsDays = dashboard.statsAssetsDays.filter(
+          (s: { toString: () => string }) =>
+            last3.includes(s.toString().split('-')[0])
         );
       setTimeout(() => {
-        if (this.screenService?.screenWidth! <= 780)
-          this.chart3Y = this.charts.renderCryptoDatas(dashboard, [
+        if (ScreenService.screenWidth! <= 780)
+          this.chart3Y = ChartService.renderCryptoDatas(dashboard, [
             ApexChartsOptions.MOBILE_MODE,
             ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
           ]);
         else
-          this.chart3Y = this.charts.renderCryptoDatas(dashboard, [
+          this.chart3Y = ChartService.renderCryptoDatas(dashboard, [
             ApexChartsOptions.ULTRA_WIDE,
             ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
           ]);

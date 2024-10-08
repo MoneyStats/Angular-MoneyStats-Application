@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, switchMap, timer } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { deepCopy } from '@angular-devkit/core/src/utils/object';
+import { Utils } from './utils.service';
 
 @Injectable({
   providedIn: 'root',
@@ -48,63 +48,68 @@ export class CacheService {
   }
 
   getDashboardCache() {
-    return deepCopy(this.dashboardDataCache);
+    return Utils.copyObject(this.dashboardDataCache);
   }
 
   cacheDashboardData(dashboard: any) {
-    if (environment.cacheEnable) this.dashboardDataCache = deepCopy(dashboard);
+    if (environment.cacheEnable)
+      this.dashboardDataCache = Utils.copyObject(dashboard);
   }
 
   getResumeCache() {
-    return deepCopy(this.resumeDataCache);
+    return Utils.copyObject(this.resumeDataCache);
   }
 
   cacheResumeData(resume: any) {
-    if (environment.cacheEnable) this.resumeDataCache = deepCopy(resume);
+    if (environment.cacheEnable)
+      this.resumeDataCache = Utils.copyObject(resume);
   }
 
   getWalletsCache() {
-    return deepCopy(this.walletsDataCache);
+    return Utils.copyObject(this.walletsDataCache);
   }
 
   cacheWalletsData(wallets: any) {
-    if (environment.cacheEnable) this.walletsDataCache = deepCopy(wallets);
+    if (environment.cacheEnable)
+      this.walletsDataCache = Utils.copyObject(wallets);
   }
 
   getCryptoDashboardCache() {
-    return deepCopy(this.cryptoDashboardDataCache);
+    return Utils.copyObject(this.cryptoDashboardDataCache);
   }
 
   cacheCryptoDashboardData(dashboard: any) {
     if (environment.cacheEnable)
-      this.cryptoDashboardDataCache = deepCopy(dashboard);
+      this.cryptoDashboardDataCache = Utils.copyObject(dashboard);
   }
 
   getCryptoResumeCache() {
-    return deepCopy(this.cryptoResumeDataCache);
+    return Utils.copyObject(this.cryptoResumeDataCache);
   }
 
   cacheCryptoResumeData(resume: any) {
-    if (environment.cacheEnable) this.cryptoResumeDataCache = deepCopy(resume);
+    if (environment.cacheEnable)
+      this.cryptoResumeDataCache = Utils.copyObject(resume);
   }
 
   getAssetsCache() {
-    return deepCopy(this.assetsDataCache);
+    return Utils.copyObject(this.assetsDataCache);
   }
 
   cacheAssetsData(assets: any) {
-    if (environment.cacheEnable) this.assetsDataCache = deepCopy(assets);
+    if (environment.cacheEnable)
+      this.assetsDataCache = Utils.copyObject(assets);
   }
 
   /**
    * @MarketDatas
    */
   getMarketDataByCurrencyCache() {
-    return deepCopy(this.marketDataByCurrencyCache);
+    return Utils.copyObject(this.marketDataByCurrencyCache);
   }
 
   cacheMarketDataByCurrencyData(marketDatas: any) {
     if (environment.cacheEnable)
-      this.marketDataByCurrencyCache = deepCopy(marketDatas);
+      this.marketDataByCurrencyCache = Utils.copyObject(marketDatas);
   }
 }

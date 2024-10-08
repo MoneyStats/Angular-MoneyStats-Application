@@ -11,19 +11,21 @@
     "email": "email@email.com",
     "username": "moneystats",
     "role": "MOCK",
-    "profilePhoto": "https://moneystats.github.io/App/assets/images/sample/avatar.png",
+    "profilePhoto": "https://moneystats.github.io/assets/images/sample/avatar.png",
     "currency": "EUR",
     "mockedUser": true,
     "authToken": {
       "expirationTime": 3600000,
       "accessToken": "mockAccessToken"
+    },
+    "settings": {
+      "id": 1,
+      "creationDate": "2023-11-12T17:07:17",
+      "updateDate": "2023-11-12T17:07:17",
+      "currency": "EUR",
+      "cryptoCurrency": "USD",
+      "completeRequirement": "COMPLETED",
+      "liveWallets": "ACTIVE"
     }
-  },
-  "settings": {
-    "id": 1,
-    "creationDate": "2023-11-12T17:07:17",
-    "updateDate": "2023-11-12T17:07:17",
-    "currency": "EUR",
-    "cryptoCurrency": "USD"
   }
 }

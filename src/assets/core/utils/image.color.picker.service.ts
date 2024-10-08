@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ImageColorPickerService {
   environment = environment;
-  colors: string[] = [
+  private static colors: string[] = [
     '#6236FF',
     '#3c3c3d',
     '#bb9df7',
@@ -21,7 +21,7 @@ export class ImageColorPickerService {
     '#f7eedc',
   ];
 
-  getColor(img: string, index: number): string {
+  public static getColor(img: string, index: number): string {
     if (img && !img.includes('data:image'))
       return this.colors[index] || this.getRandomColor();
 
@@ -50,7 +50,7 @@ export class ImageColorPickerService {
     }
   }
 
-  rgbaToHex(color: string): string {
+  public static rgbaToHex(color: string): string {
     if (/^rgb/.test(color)) {
       const rgba = color.replace(/^rgba?\(|\s+|\)$/g, '').split(',');
 
@@ -80,7 +80,7 @@ export class ImageColorPickerService {
     return color;
   }
 
-  getRandomColor(): string {
+  public static getRandomColor(): string {
     const letters = '0123456789ABCDEF';
     let color = '#';
     for (let i = 0; i < 6; i++) {

@@ -12,7 +12,7 @@
     </a>
   </div>
   <div class="pageTitle" style="padding-top: 15px; padding-bottom: 15px">
-    <a (click)="updateData()" routerLink="/" class="logo"
+    <a routerLink="/" class="logo"
       ><img
         src="{{
           environment.baseUrlHeader
@@ -102,7 +102,8 @@
           </div>
           <div class="in">
             <h1 id="reportStatement1" class="amount title-page">
-              {{ userService.coinSymbol }} {{ dashboard?.balance | number }}
+              {{ user?.settings?.currencySymbol }}
+              {{ dashboard?.balance | number }}
             </h1>
           </div>
         </div>

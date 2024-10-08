@@ -4,7 +4,7 @@ import {
   ModalConstant,
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
-import { UserService } from 'src/assets/core/services/user.service';
+import { AuthService } from 'src/assets/core/services/api/auth.service';
 
 @Component({
   selector: 'app-social-list',
@@ -17,7 +17,7 @@ export class SocialListComponent implements OnInit {
   @Output('emitDisconnectSocial') emitDisconnectSocial =
     new EventEmitter<User>();
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: AuthService) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;

@@ -13,9 +13,10 @@ import {
   ModalConstant,
   SelectAssetConstant,
 } from 'src/assets/core/data/constant/constant';
-import { CryptoService } from 'src/assets/core/services/crypto.service';
-import { DashboardService } from 'src/assets/core/services/dashboard.service';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { CryptoService } from 'src/assets/core/services/api/crypto.service';
+import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -30,6 +31,7 @@ export class AddAssetModalComponent implements OnInit, OnDestroy {
   environment = environment;
   @Input('modalId') modalId: string = '';
   @Input('cryptoCurrency') cryptoCurrency: string = '';
+  coinSymbol: string = UserService.getUserData().settings.currencySymbol;
   @Output('emitAddAsset') emitAddAsset = new EventEmitter<Wallet>();
 
   asset?: Asset;
@@ -56,8 +58,7 @@ export class AddAssetModalComponent implements OnInit, OnDestroy {
 
   constructor(
     public dashboardService: DashboardService,
-    public cryptoService: CryptoService,
-    private logger: LoggerService
+    public cryptoService: CryptoService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -87,7 +88,7 @@ export class AddAssetModalComponent implements OnInit, OnDestroy {
       .getCryptoPriceData(this.cryptoCurrency)
       .subscribe((data) => {
         this.cryptoService.cache.cacheMarketDataByCurrencyData(data);
-        this.logger.LOG(data.message!, 'AddAssetModalComponent');
+        LOG.info(data.message!, 'AddAssetModalComponent');
         this.marketData = data.data;
       });
   }
@@ -130,7 +131,7 @@ export class AddAssetModalComponent implements OnInit, OnDestroy {
       this.saveAssetSubscription = this.cryptoService
         .addOrUpdateCryptoAsset(this.wallet!)
         .subscribe((data) => {
-          this.logger.LOG(data.message!, 'AddAssetModalComponent');
+          LOG.info(data.message!, 'AddAssetModalComponent');
           this.emitAddAsset.emit(data.data);
           this.resetModal();
         });

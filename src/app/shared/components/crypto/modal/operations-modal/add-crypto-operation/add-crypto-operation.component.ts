@@ -6,7 +6,7 @@ import {
   Operations,
   OperationsType,
 } from 'src/assets/core/data/constant/constant';
-import { deepCopy } from '@angular-devkit/core/src/utils/object';
+import { Utils } from 'src/assets/core/services/config/utils.service';
 
 @Component({
   selector: 'app-add-crypto-operation',
@@ -39,12 +39,12 @@ export class AddCryptoOperationComponent implements OnInit {
 
   selectOperation(e: any) {
     let operation = e.target.value;
-    let wallet = deepCopy(this.wallets);
+    let wallet = Utils.copyObject(this.wallets);
     if (
       operation != OperationsType.NEWINVESTMENT &&
       operation != OperationsType.TRANSFER
     ) {
-      this.filterWallets = wallet.filter((w) => w.type == e.target.value);
+      this.filterWallets = wallet.filter((w: any) => w.type == e.target.value);
     } else this.filterWallets = wallet;
   }
 

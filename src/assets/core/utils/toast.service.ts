@@ -8,27 +8,27 @@ export class ToastService {
   environment = environment;
   constructor() {}
 
-  availableSoon() {
+  public static availableSoon() {
     toastbox('soon');
   }
 
-  closeToast() {
+  public static closeToast() {
     closeToastBox('soon');
   }
 
-  updateAvaiable() {
+  public static updateAvaiable() {
     toastbox('update');
   }
 
-  closeUpdateToast() {
+  public static closeUpdateToast() {
     closeToastBox('update');
   }
 
-  copiedAvaiable() {
+  public static copiedAvaiable() {
     toastbox('copied');
   }
 
-  closeCopiedToast() {
+  public static closeCopiedToast() {
     closeToastBox('copied');
   }
 }

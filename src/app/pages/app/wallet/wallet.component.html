@@ -1,6 +1,6 @@
 <section class="section-width mx-auto">
   <app-header-mobile
-    *ngIf="screenService?.screenWidth! <= 780"
+    *ngIf="screenWidth()! <= 780"
     title="{{ 'wallet.title' | translate }}"
     backBtn="{{ 'wallet.mobile_back' | translate }}"
     rightBtn="{{ 'wallet.mobile_add' | translate }}"
@@ -63,7 +63,7 @@
           <app-wallet-card
             *ngFor="let wallet of walletActive(wallets)"
             class="col-md-3 mt-3 col-sm-4 col-6"
-            [coinSymbol]="walletService.coinSymbol"
+            [coinSymbol]="coinSymbol"
             [wallet]="wallet"
             [btn]="'wallet.open' | translate"
             [hiddenAmount]="hidden"

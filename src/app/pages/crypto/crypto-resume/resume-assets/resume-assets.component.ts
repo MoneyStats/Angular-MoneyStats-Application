@@ -8,9 +8,9 @@ import {
 import { CryptoDashboard } from 'src/assets/core/data/class/crypto.class';
 import { Stats } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
+import { Utils } from 'src/assets/core/services/config/utils.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
-import { deepCopy } from '@angular-devkit/core/src/utils/object';
 
 @Component({
   selector: 'app-resume-assets',
@@ -30,10 +30,7 @@ export class ResumeAssetsComponent implements OnInit, OnChanges {
   resumeDataFilterOnDate: CryptoDashboard = new CryptoDashboard();
 
   tableBalance: Array<any> = [];
-  constructor(
-    private screenService: ScreenService,
-    private charts: ChartService
-  ) {}
+  constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.getDatas();
@@ -47,17 +44,17 @@ export class ResumeAssetsComponent implements OnInit, OnChanges {
       (1 + this.resumeData.holdingLong.performance / 100);
     setTimeout(() => {
       if (this.resumeData.assets) {
-        this.resumeDataFilterOnDate = deepCopy(this.resumeData);
+        this.resumeDataFilterOnDate = Utils.copyObject(this.resumeData);
         if (!this.isPast)
           this.resumeDataFilterOnDate.assets =
             this.resumeDataFilterOnDate.assets.filter((a) => a.balance != 0);
-        if (this.screenService?.screenWidth! <= 780) {
-          this.chartOptions = this.charts.renderCryptoDatas(this.resumeData, [
+        if (ScreenService.screenWidth! <= 780) {
+          this.chartOptions = ChartService.renderCryptoDatas(this.resumeData, [
             200,
             this.isPast,
           ]);
         } else
-          this.chartOptions = this.charts.renderCryptoDatas(this.resumeData, [
+          this.chartOptions = ChartService.renderCryptoDatas(this.resumeData, [
             350,
             this.isPast,
           ]);
@@ -123,11 +120,7 @@ export class ResumeAssetsComponent implements OnInit, OnChanges {
     ).toFixed(2);
     total.percentage = parseFloat(percentage);
 
-    if (
-      total.percentage === Infinity ||
-      Number.isNaN(total.percentage) ||
-      index == 0
-    ) {
+    if (Utils.isNullOrEmpty(total.percentage) || index == 0) {
       total.percentage = 0;
     }
 
@@ -137,7 +130,7 @@ export class ResumeAssetsComponent implements OnInit, OnChanges {
     ).toFixed(2);
     trendStats.balance = parseFloat(trend);
 
-    if (Number.isNaN(trendStats.balance)) {
+    if (Utils.isNullOrEmpty(trendStats.balance)) {
       trendStats.balance = 0;
     }
 

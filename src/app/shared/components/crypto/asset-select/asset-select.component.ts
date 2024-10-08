@@ -8,8 +8,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { Asset } from 'src/assets/core/data/class/crypto.class';
-import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { SelectAssetConstant } from 'src/assets/core/data/constant/constant';
+import { Utils } from 'src/assets/core/services/config/utils.service';
 
 declare var jQuery: any;
 
@@ -70,24 +70,13 @@ export class AssetSelectComponent implements OnInit, OnChanges {
   getCryptoPrices() {
     if (this.cryptoPrices && this.cryptoPrices.length > 0) {
       this.filterCryptoPrices = this.cryptoPrices.slice();
-      this.assetSelected = deepCopy(this.cryptoPrices[0]);
+      this.assetSelected = Utils.copyObject(this.cryptoPrices[0]);
       this.emitSelectAsset.emit(this.assetSelected);
     }
     if (this.wrapperID == SelectAssetConstant.TRANSFER)
       this.filterCryptoPrices = this.filterCryptoPrices.filter(
         (asset) => asset.balance > 0
       );
-    /*else {
-      this.cryptoService
-        .getCryptoPrice(this.cryptoCurrency)
-        .subscribe((data) => {
-          this.logger.LOG(data.message!, 'AssetSelectComponent');
-          this.cryptoPrices = data.data;
-          this.filterCryptoPrices = data.data;
-          this.assetSelected = data.data[0];
-          this.emitSelectAsset.emit(this.assetSelected);
-        });
-    }*/
   }
 
   openCloseSelect() {

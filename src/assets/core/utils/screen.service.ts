@@ -5,26 +5,26 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class ScreenService {
-  screenHeight?: number;
-  screenWidth?: number;
+  public static screenHeight?: number = window.innerHeight;
+  public static screenWidth?: number = window.innerWidth;
   environment = environment;
   isCrypto: boolean = false;
   constructor() {}
 
   @HostListener('window:resize', ['$event'])
-  getScreenSize(event?: any) {
+  public static getScreenSize(event?: any) {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
   }
 
-  activeHeaderAndFooter() {
+  public static activeHeaderAndFooter() {
     const header = document.getElementById('header');
     header!.style.display = 'flex';
     const footer = document.getElementById('footer');
     footer!.style.display = 'flex';
   }
 
-  setupHeader() {
+  public static setupHeader() {
     this.getScreenSize();
     if (this.screenWidth! <= 780) {
       const header = document.getElementById('header');
@@ -32,14 +32,14 @@ export class ScreenService {
     }
   }
 
-  hideFooter() {
+  public static hideFooter() {
     this.getScreenSize();
     if (this.screenWidth! <= 780) {
       const footer = document.getElementById('footer');
       if (footer) footer!.style.display = 'none';
     }
   }
-  showFooter() {
+  public static showFooter() {
     this.getScreenSize();
     if (this.screenWidth! <= 780) {
       const footer = document.getElementById('footer');
@@ -47,31 +47,31 @@ export class ScreenService {
     } else this.hideFooter();
   }
 
-  goToDashboard() {
+  public static goToDashboard() {
     this.resetAllBtn();
     const dashboard = document.getElementById('dashboard');
     dashboard!.classList.add('active');
   }
 
-  goToWallet() {
+  public static goToWallet() {
     this.resetAllBtn();
     const wallet = document.getElementById('wallet');
     wallet!.classList.add('active');
   }
 
-  goToSettings() {
+  public static goToSettings() {
     this.resetAllBtn();
     const settings = document.getElementById('settings');
     settings!.classList.add('active');
   }
 
-  goToStats() {
+  public static goToStats() {
     this.resetAllBtn();
     const stats = document.getElementById('stats');
     stats!.classList.add('active');
   }
 
-  resetAllBtn() {
+  public static resetAllBtn() {
     const dashboard = document.getElementById('dashboard');
     dashboard!.classList.remove('active');
 

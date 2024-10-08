@@ -6,9 +6,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
-import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { Router } from '@angular/router';
-import { CryptoService } from 'src/assets/core/services/crypto.service';
+import { CryptoService } from 'src/assets/core/services/api/crypto.service';
 import {
   ModalConstant,
   OperationsType,
@@ -21,6 +20,7 @@ import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'ng-apexcharts';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
+import { Utils } from 'src/assets/core/services/config/utils.service';
 
 @Component({
   selector: 'app-trading-resume',
@@ -37,12 +37,7 @@ export class TradingResumeComponent implements OnInit, OnChanges {
   walletsFilter: Wallet[] = [];
   invested: number = 0;
 
-  constructor(
-    public cryptoService: CryptoService,
-    private router: Router,
-    private screenService: ScreenService,
-    private charts: ChartService
-  ) {}
+  constructor(public cryptoService: CryptoService, private router: Router) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -58,9 +53,11 @@ export class TradingResumeComponent implements OnInit, OnChanges {
   }
 
   filterWallet() {
-    let wall = deepCopy(this.wallets);
+    let wall = Utils.copyObject(this.wallets);
     if (wall) {
-      this.walletsFilter = wall.filter((w) => w.type == OperationsType.TRADING);
+      this.walletsFilter = wall.filter(
+        (w: any) => w.type == OperationsType.TRADING
+      );
       this.walletsFilter.forEach((w) => {
         if (w.assets && w.assets.length > 0)
           w.assets.forEach((a) => {
@@ -77,23 +74,23 @@ export class TradingResumeComponent implements OnInit, OnChanges {
     let totalInvested: number = 0;
 
     let operations: Operation[] = [];
-    let wallets = deepCopy(this.wallets);
+    let wallets = Utils.copyObject(this.wallets);
     if (wallets)
-      wallets.forEach((wallet) => {
+      wallets.forEach((wallet: any) => {
         if (wallet.assets && wallet.assets.length > 0)
-          wallet.assets.forEach((asset) => {
+          wallet.assets.forEach((asset: any) => {
             if (wallet.type == OperationsType.TRADING) {
               totalInvested += asset.invested;
             }
             if (asset.operations && asset.operations.length > 0) {
               asset.operations = asset.operations.filter(
-                (o) => o.type == OperationsType.TRADING
+                (o: any) => o.type == OperationsType.TRADING
               );
-              asset.operations.forEach((operation) => {
+              asset.operations.forEach((operation: any) => {
                 operation.asset = asset;
                 operation.wallet = wallet;
                 if (operation.type != OperationsType.NEWINVESTMENT)
-                  operation.assetSell = deepCopy(
+                  operation.assetSell = Utils.copyObject(
                     this.cryptoService.cryptoDashboard.assets.find(
                       (a) => a.symbol == operation.entryCoin
                     )
@@ -105,10 +102,10 @@ export class TradingResumeComponent implements OnInit, OnChanges {
       });
     operations = operations.filter((o) => o.type == OperationsType.TRADING);
     operations.sort((a, b) => (a.entryDate! < b.entryDate! ? 1 : -1));
-    if (this.screenService?.screenWidth! <= 780) {
-      this.trading = this.charts.renderTradingOperations(operations, [200]);
+    if (ScreenService.screenWidth! <= 780) {
+      this.trading = ChartService.renderTradingOperations(operations, [200]);
     } else
-      this.trading = this.charts.renderTradingOperations(operations, [350]);
+      this.trading = ChartService.renderTradingOperations(operations, [350]);
     this.getOperationTable(operations, totalInvested);
     return operations;
   }
@@ -124,7 +121,9 @@ export class TradingResumeComponent implements OnInit, OnChanges {
   getOperationTable(operations: Array<Operation>, totalInvested: number) {
     let balance = totalInvested;
     let trendSum = 0;
-    this.operations = deepCopy(operations).filter((o) => o.status == 'CLOSED');
+    this.operations = Utils.copyObject(operations).filter(
+      (o: any) => o.status == 'CLOSED'
+    );
     this.operations.reverse().forEach((o) => {
       o.trendSum = parseFloat((trendSum += o.trend!).toFixed(2));
       o.balance = parseFloat((balance += o.trend!).toFixed(2));

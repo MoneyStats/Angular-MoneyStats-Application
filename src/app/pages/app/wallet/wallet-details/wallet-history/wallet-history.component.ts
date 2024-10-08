@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { StorageConstant } from 'src/assets/core/data/constant/constant';
-import { WalletService } from 'src/assets/core/services/wallet.service';
+import { WalletService } from 'src/assets/core/services/api/wallet.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { environment } from 'src/environments/environment';
 
@@ -22,6 +22,10 @@ export class WalletHistoryComponent implements OnInit {
     public screenService: ScreenService,
     private walletService: WalletService
   ) {}
+
+  screenWidth() {
+    return ScreenService.screenWidth;
+  }
 
   ngOnInit(): void {
     this.wallet = this.walletService.walletHistory;

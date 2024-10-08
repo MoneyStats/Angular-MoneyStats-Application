@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
-import { WalletService } from 'src/assets/core/services/wallet.service';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { WalletService } from 'src/assets/core/services/api/wallet.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 
 @Component({
   selector: 'app-delete-wallet',
@@ -17,11 +17,7 @@ export class DeleteWalletComponent implements OnDestroy {
   @Input('modalId') modalId: string = '';
   @Input('wallet') wallet?: Wallet;
 
-  constructor(
-    private route: Router,
-    private walletService: WalletService,
-    private logger: LoggerService
-  ) {}
+  constructor(private route: Router, private walletService: WalletService) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -49,7 +45,7 @@ export class DeleteWalletComponent implements OnDestroy {
   restoreWallet(wallet: Wallet) {
     wallet.deletedDate = undefined;
     this.walletService.addUpdateWalletData(wallet).subscribe((data) => {
-      this.logger.LOG(data.message!, 'DeleteWalletComponent');
+      LOG.info(data.message!, 'DeleteWalletComponent');
       this.wallet = data.data;
       wallet = data.data;
     });

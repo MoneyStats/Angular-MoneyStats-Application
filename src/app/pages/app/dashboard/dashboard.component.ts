@@ -1,7 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { SwUpdate } from '@angular/service-worker';
 import { TranslateService } from '@ngx-translate/core';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
@@ -10,16 +9,16 @@ import {
   ModalConstant,
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
-import { DashboardService } from 'src/assets/core/services/dashboard.service';
-import { UserService } from 'src/assets/core/services/user.service';
-import { WalletService } from 'src/assets/core/services/wallet.service';
+import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
+import { WalletService } from 'src/assets/core/services/api/wallet.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
-import { LoggerService } from 'src/assets/core/utils/log.service';
+import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
 import { environment } from 'src/environments/environment';
-import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { Subscription } from 'rxjs';
+import { Utils } from 'src/assets/core/services/config/utils.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -50,22 +49,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private dashboardService: DashboardService,
-    public userService: UserService,
     private datePipe: DatePipe,
-    private charts: ChartService,
-    private toast: ToastService,
-    public screenService: ScreenService,
     private walletService: WalletService,
     private translate: TranslateService,
-    private router: Router,
-    private readonly updates: SwUpdate,
-    private logger: LoggerService
-  ) {
-    this.updates.versionUpdates.subscribe((event) => {
-      let isAutoUpdate = !localStorage.getItem(StorageConstant.AUTOUPDATE);
-      if (!isAutoUpdate) toast.updateAvaiable();
-    });
-  }
+    private router: Router
+  ) {}
 
   ngOnDestroy(): void {
     this.dashboardSubscribe.unsubscribe();
@@ -76,12 +64,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.user = this.userService.user;
+    this.user = UserService.getUserData();
     this.dashboardSubscribe = this.dashboardService
       .getDashboardData()
       .subscribe((data) => {
         this.dashboardService.cache.cacheDashboardData(data);
-        this.logger.LOG(data.message!, 'DashboardComponent');
+        LOG.info(data.message!, 'DashboardComponent');
         if (!data.data.balance) {
           this.dashboard.categories = data.data.categories;
           this.dashboard.wallets = data.data.wallets;
@@ -134,29 +122,29 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.lastStatsBalanceDifference =
           this.dashboard.lastStatsBalanceDifference +
           ' ' +
-          this.userService.coinSymbol;
+          this.user.settings.currencySymbol;
         this.walletService.totalBalance = this.dashboard.balance;
         this.renderChart(this.dashboard);
         this.walletDetails(data.data.wallets);
       });
 
     this.isWalletBalanceHidden();
-    this.screenService.activeHeaderAndFooter();
-    this.screenService.goToDashboard();
+    ScreenService.activeHeaderAndFooter();
+    ScreenService.goToDashboard();
   }
 
   renderChart(dashboard: Dashboard) {
-    let dashboardRender = deepCopy(dashboard);
+    let dashboardRender = Utils.copyObject(dashboard);
     setTimeout(() => {
       if (this.dashboard.wallets) {
         this.chartOptions =
-          this.charts.appRenderWalletPerformance(dashboardRender);
+          ChartService.appRenderWalletPerformance(dashboardRender);
       }
     }, 500);
   }
 
   availableSoon() {
-    this.toast.availableSoon();
+    ToastService.availableSoon();
   }
 
   currentYear(): string {

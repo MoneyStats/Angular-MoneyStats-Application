@@ -20,7 +20,7 @@
     <h1>{{ "auth.register.title" | translate }}</h1>
     <h4>{{ "auth.register.subtitle" | translate }}</h4>
   </div>
-  <div class="section mb-5 p-2">
+  <div class="section mb-5 p-2 mx-auto" style="max-width: 1000px">
     <form #f="ngForm" type="submit">
       <div class="card">
         <div class="card-body">
@@ -39,9 +39,6 @@
                 id="name"
                 placeholder="{{ 'auth.register.namePlaceholder' | translate }}"
               />
-              <i class="clear-input">
-                <ion-icon name="close-circle"></ion-icon>
-              </i>
             </div>
           </div>
 
@@ -62,9 +59,6 @@
                   'auth.register.surnamePlaceholder' | translate
                 }}"
               />
-              <i class="clear-input">
-                <ion-icon name="close-circle"></ion-icon>
-              </i>
             </div>
           </div>
 
@@ -83,9 +77,12 @@
                 id="email1"
                 placeholder="{{ 'auth.register.emailPlaceholder' | translate }}"
               />
-              <i class="clear-input">
-                <ion-icon name="close-circle"></ion-icon>
-              </i>
+              <div
+                *ngIf="!validateRegexEmail()"
+                class="alert alert-danger mb-1"
+                role="alert"
+                [innerHTML]="'auth.register.warning.invalidEmail' | translate"
+              ></div>
             </div>
           </div>
 
@@ -106,9 +103,6 @@
                   'auth.register.usernamePlaceholder' | translate
                 }}"
               />
-              <i class="clear-input">
-                <ion-icon name="close-circle"></ion-icon>
-              </i>
             </div>
           </div>
 
@@ -122,15 +116,30 @@
                 #password1="ngModel"
                 [(ngModel)]="password"
                 required
-                type="password"
+                [type]="isPasswordShow ? 'text' : 'password'"
                 class="form-control"
                 id="password1"
                 autocomplete="off"
                 placeholder="{{ 'auth.register.passPlaceholder' | translate }}"
               />
-              <i class="clear-input">
-                <ion-icon name="close-circle"></ion-icon>
-              </i>
+              <div class="clickable" (click)="hideShowPassword()">
+                <ion-icon
+                  *ngIf="!isPasswordShow"
+                  name="eye"
+                  class="showPass"
+                ></ion-icon>
+                <ion-icon
+                  *ngIf="isPasswordShow"
+                  name="eye-off"
+                  class="showPass"
+                ></ion-icon>
+              </div>
+              <div
+                *ngIf="!validateRegexPassword()"
+                class="alert alert-danger mb-1"
+                role="alert"
+                [innerHTML]="'auth.register.warning.password' | translate"
+              ></div>
             </div>
           </div>
 
@@ -144,7 +153,7 @@
                 #passwordAgain1="ngModel"
                 [(ngModel)]="passwordAgain"
                 required
-                type="password"
+                [type]="isPasswordShow ? 'text' : 'password'"
                 class="form-control"
                 id="password2"
                 autocomplete="off"
@@ -152,12 +161,9 @@
                   'auth.register.passAgainPlaceholder' | translate
                 }}"
               />
-              <i class="clear-input">
-                <ion-icon name="close-circle"></ion-icon>
-              </i>
             </div>
             <div
-              *ngIf="verifyPassword()"
+              *ngIf="!checkIfPasswordMatch()"
               class="alert alert-danger mb-1"
               role="alert"
             >
@@ -178,13 +184,13 @@
                 [(ngModel)]="currency"
                 required
               >
-                <option selected disabled>
+                <option [value]="currency" selected disabled>
                   {{ "auth.register.selectCurrency" | translate }}
                 </option>
                 <option
                   [value]="coin"
                   *ngFor="let coin of currencyList"
-                  [selected]="coin"
+                  [selected]="currency === coin"
                 >
                   {{ coin }}
                 </option>
@@ -210,9 +216,6 @@
                   'auth.register.invitationCodePlaceholder' | translate
                 }}"
               />
-              <i class="clear-input">
-                <ion-icon name="close-circle"></ion-icon>
-              </i>
             </div>
           </div>
 
@@ -242,7 +245,12 @@
 
       <div class="form-button-group transparent section-width mx-auto">
         <button
-          [disabled]="f.invalid || verifyPassword()"
+          [disabled]="
+            f.invalid ||
+            !checkIfPasswordMatch() ||
+            !validateRegexPassword() ||
+            !validateRegexEmail()
+          "
           type="submit"
           class="btn btn-primary btn-block btn-lg"
           (click)="register()"

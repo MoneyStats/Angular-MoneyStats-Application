@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CryptoDashboard } from 'src/assets/core/data/class/crypto.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
-import { CryptoService } from 'src/assets/core/services/crypto.service';
+import { CryptoService } from 'src/assets/core/services/api/crypto.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
@@ -30,8 +30,7 @@ export class MarketDataComponent implements OnInit, OnDestroy {
 
   constructor(
     private cryptoService: CryptoService,
-    private route: ActivatedRoute,
-    private screenService: ScreenService
+    private route: ActivatedRoute
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -43,7 +42,7 @@ export class MarketDataComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.screenService.hideFooter();
+    ScreenService.hideFooter();
     this.getMarketData();
   }
 

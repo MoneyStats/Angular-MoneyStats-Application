@@ -38,6 +38,7 @@ export enum SelectAssetConstant {
 export enum StorageConstant {
   GITHUBACCOUNT = 'github_account',
   ACCESSTOKEN = 'accessToken',
+  AUTHTOKEN = 'authToken',
   USERACCOUNT = 'userAccount',
   HIDDENAMOUNT = 'hiddenAmount',
   AUTOUPDATE = 'auto_update',
@@ -87,3 +88,29 @@ export const ApexChartsOptions = {
   DESKTOP_MODE: 350,
   ULTRA_WIDE: 450,
 };
+
+/*
+ * Regex:
+ * Minimo otto caratteri, almeno una lettera ed un numero:
+ * ^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$
+ *
+ * Minimo otto caratteri, almeno una lettera, un numero ed un carattere speciale:
+ *
+ * ^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$
+ *
+ * Minimo otto caratteri, almeno una lettera maiuscola, una lettera minuscola ed un numero:
+ *
+ * ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$
+ *
+ * Minimo otto caratteri, almeno una lettera maiuscola, una lettera minuscola, un numero ed un carattere speciale:
+ *
+ * ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$
+ *
+ * Minimo otto caratteri e massimo dieci caratteri, almeno una lettera maiuscola, una lettera minuscola, un numero ed un carattere speciale:
+ *
+ * ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$
+ */
+export enum RegEx {
+  EMAIL = `^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$`,
+  PASSWORD_FULL = `^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\d)(?=.*[@$!%*?&.,])[A-Za-z\\\d@$!%*?&.,]{8,20}$`,
+}
