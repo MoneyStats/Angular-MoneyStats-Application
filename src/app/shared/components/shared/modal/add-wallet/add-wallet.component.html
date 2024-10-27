@@ -224,13 +224,20 @@
                         disabled
                       >
                         {{ "wallet.modal.categoryTextEdit" | translate }}
-                      </option>-->
+                      </option>
                       <option
                         *ngFor="
                           let category of categoriesInput != undefined
                             ? categoriesInput
                             : categories
                         "
+                        [selected]="category.name === wallet.category"
+                        value="{{ category.name }}"
+                      >
+                        {{ category.name }}
+                      </option>-->
+                      <option
+                        *ngFor="let category of categories"
                         [selected]="category.name === wallet.category"
                         value="{{ category.name }}"
                       >

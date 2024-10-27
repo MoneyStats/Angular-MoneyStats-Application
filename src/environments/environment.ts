@@ -24,7 +24,9 @@ export const environment = {
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
   getDashboardDataUrlMock: baseUrlApp + 'assets/core/mock/dashboard.mock.json',
-  getWalletDataUrl: baseUrlApp + 'assets/core/mock/wallets.mock.json',
+  mockedGetWalletsDataUrl: baseUrlApp + 'assets/core/mock/wallets.mock.json',
+  mockedGetWalletByIdDataUrl:
+    baseUrlApp + 'assets/core/mock/walletById.mock.json',
   getResumeDataUrlMock: baseUrlApp + 'assets/core/mock/stats.mock.json',
   getTemplate: baseUrlApp + 'assets/template/template.json',
   getCryptoDashboardMock: baseUrlApp + 'assets/core/mock/crypto.dash.mock.json',
@@ -55,7 +57,6 @@ export const environment = {
   addUpdateWalletDataUrl: host + '/v1/wallet/insert-update',
   uploadImage: host + '/v1/upload/attachment',
   imageSizeMax: 2000000,
-  listWalletDataurl: host + '/v1/wallet/list',
   getDashboardDataUrl: host + '/v1/app/dashboard',
   getResumeDataUrl: host + '/v1/app/resume',
   addStatsDataUrl: host + '/v1/app/add/stats',
@@ -66,6 +67,17 @@ export const environment = {
   restoreDataUrl: host + '/v1/app/restore',
   cleanCacheUrl: host + '/v1/crypto/cache/clean',
   marketDataUrl: host + '/v1/crypto/marketData/import',
+
+  /*
+   * Wallets
+   */
+  listWalletDataurlOLD: host + '/v1/wallet/list',
+  getWalletsDataUrl: host + '/v1/wallets',
+  getWalletByIdUrl: host + '/v1/wallets/:id',
+  postWalletsDataUrl: host + '/v1/wallets',
+  updateWalletsDataUrl: host + '/v1/wallets',
+  deleteWalletsDataUrl: host + '/v1/wallets/:id',
+
   forgotPassword: true,
 
   /*

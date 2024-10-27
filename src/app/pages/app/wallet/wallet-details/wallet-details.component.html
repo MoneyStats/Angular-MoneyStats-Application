@@ -68,6 +68,7 @@
                 </h1>
                 <h4 class="caption">
                   <span
+                    *ngIf="wallet"
                     class="iconbox {{
                       wallet!.differenceLastStats == 0
                         ? 'text-warning'
@@ -585,7 +586,12 @@
 
       <div class="col-md-6 mt-2 mb-4">
         <!-- History -->
-        <div *ngIf="wallet!.history && wallet!.history.length" class="section">
+        <div
+          *ngIf="
+            wallet != undefined && wallet!.history && wallet!.history.length
+          "
+          class="section"
+        >
           <div class="section-heading">
             <h2 class="title">
               {{ "wallet.details.transaction.title" | translate }}
@@ -634,6 +640,7 @@
 </section>
 
 <app-add-wallet
+  *ngIf="wallet != undefined"
   (emitAddWallet)="editWallet($event)"
   [wallet]="wallet!"
   [modalId]="modalConstant.EDITWALLET"

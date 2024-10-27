@@ -13,7 +13,8 @@ export class CacheService {
   // App Data
   private dashboardDataCache: any;
   private resumeDataCache: any;
-  private walletsDataCache: any;
+  private getWalletsDataCache: any;
+  private getWalletByIdDataCache: { [walletId: number]: any } = {};
 
   // Crypto Data
   private cryptoDashboardDataCache: any;
@@ -41,12 +42,34 @@ export class CacheService {
     this.cryptoDashboardDataCache = null;
     this.cryptoResumeDataCache = null;
     this.assetsDataCache = null;
-    this.walletsDataCache = null;
+    this.getWalletsDataCache = null;
     this.dashboardDataCache = null;
     this.resumeDataCache = null;
     this.marketDataByCurrencyCache = null;
+    this.getWalletByIdDataCache = {};
   }
 
+  /** Wallets */
+  getWalletsCache() {
+    return Utils.copyObject(this.getWalletsDataCache);
+  }
+
+  cacheWalletsData(wallets: any) {
+    if (environment.cacheEnable)
+      this.getWalletsDataCache = Utils.copyObject(wallets);
+  }
+
+  getWalletByIdCache(id: number) {
+    return Utils.copyObject(this.getWalletByIdDataCache[id] || null);
+  }
+
+  cacheWalletByIdData(wallet: any) {
+    if (environment.cacheEnable)
+      this.getWalletByIdDataCache[wallet.id] = Utils.copyObject(wallet);
+  }
+  /** END Wallets */
+
+  /** OLD DATA */
   getDashboardCache() {
     return Utils.copyObject(this.dashboardDataCache);
   }
@@ -63,15 +86,6 @@ export class CacheService {
   cacheResumeData(resume: any) {
     if (environment.cacheEnable)
       this.resumeDataCache = Utils.copyObject(resume);
-  }
-
-  getWalletsCache() {
-    return Utils.copyObject(this.walletsDataCache);
-  }
-
-  cacheWalletsData(wallets: any) {
-    if (environment.cacheEnable)
-      this.walletsDataCache = Utils.copyObject(wallets);
   }
 
   getCryptoDashboardCache() {

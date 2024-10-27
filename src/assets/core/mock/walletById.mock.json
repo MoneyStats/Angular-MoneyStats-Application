@@ -1,0 +1,286 @@
+{
+  "status": 200,
+  "message": "Found 6 Wallets",
+  "correlationId": "8dacd409-2bdc-45be-a0af-01c1ccc0a5c1",
+  "data": {
+    "id": 1,
+    "creationDate": "2023-02-21T14:46:44",
+    "updateDate": "2023-02-21T15:40:57",
+    "name": "Coinbase",
+    "balance": 11000.0,
+    "img": "https://images.ctfassets.net/c5bd0wqjc7v0/3dFdY6GvgLgCIXmBiN6eiA/d4acc5d4c5d557566cf0e46f9b58de43/icon-buy-and-sell.svg",
+    "allTimeHigh": 11000.0,
+    "allTimeHighDate": "2023-02-22",
+    "highPrice": 11000.0,
+    "highPriceDate": "2023-02-22",
+    "lowPrice": 4250.5,
+    "lowPriceDate": "2023-01-01",
+    "performanceLastStats": 29.4,
+    "differenceLastStats": 2499.5,
+    "dateLastStats": "2023-02-22",
+    "category": "Investments",
+    "history": [
+      {
+        "id": 1,
+        "creationDate": "2023-02-21T15:19:14",
+        "updateDate": "2023-02-21T15:19:14",
+        "date": "2021-01-01",
+        "balance": 10.0,
+        "percentage": 999900.0,
+        "trend": 10.0
+      },
+      {
+        "id": 7,
+        "creationDate": "2023-02-21T15:20:35",
+        "updateDate": "2023-02-21T15:20:35",
+        "date": "2021-02-21",
+        "balance": 21.4,
+        "percentage": 114.0,
+        "trend": 11.4
+      },
+      {
+        "id": 13,
+        "creationDate": "2023-02-21T15:21:10",
+        "updateDate": "2023-02-21T15:21:10",
+        "date": "2021-03-01",
+        "balance": 20.2,
+        "percentage": -5.61,
+        "trend": -1.2
+      },
+      {
+        "id": 19,
+        "creationDate": "2023-02-21T15:21:44",
+        "updateDate": "2023-02-21T15:21:44",
+        "date": "2021-04-01",
+        "balance": 25.4,
+        "percentage": 25.74,
+        "trend": 5.2
+      },
+      {
+        "id": 25,
+        "creationDate": "2023-02-21T15:22:30",
+        "updateDate": "2023-02-21T15:22:30",
+        "date": "2021-05-10",
+        "balance": 50.2,
+        "percentage": 97.64,
+        "trend": 24.8
+      },
+      {
+        "id": 31,
+        "creationDate": "2023-02-21T15:23:18",
+        "updateDate": "2023-02-21T15:23:18",
+        "date": "2021-06-01",
+        "balance": 70.6,
+        "percentage": 40.64,
+        "trend": 20.4
+      },
+      {
+        "id": 37,
+        "creationDate": "2023-02-21T15:23:53",
+        "updateDate": "2023-02-21T15:23:53",
+        "date": "2021-07-01",
+        "balance": 90.4,
+        "percentage": 28.05,
+        "trend": 19.8
+      },
+      {
+        "id": 43,
+        "creationDate": "2023-02-21T15:24:27",
+        "updateDate": "2023-02-21T15:24:27",
+        "date": "2021-08-01",
+        "balance": 130.5,
+        "percentage": 44.36,
+        "trend": 40.1
+      },
+      {
+        "id": 49,
+        "creationDate": "2023-02-21T15:25:02",
+        "updateDate": "2023-02-21T15:25:02",
+        "date": "2021-09-01",
+        "balance": 160.3,
+        "percentage": 22.84,
+        "trend": 29.8
+      },
+      {
+        "id": 55,
+        "creationDate": "2023-02-21T15:25:32",
+        "updateDate": "2023-02-21T15:25:32",
+        "date": "2021-10-21",
+        "balance": 200.3,
+        "percentage": 24.95,
+        "trend": 40.0
+      },
+      {
+        "id": 61,
+        "creationDate": "2023-02-21T15:25:59",
+        "updateDate": "2023-02-21T15:25:59",
+        "date": "2021-11-21",
+        "balance": 250.1,
+        "percentage": 24.86,
+        "trend": 49.8
+      },
+      {
+        "id": 67,
+        "creationDate": "2023-02-21T15:26:26",
+        "updateDate": "2023-02-21T15:26:26",
+        "date": "2021-12-21",
+        "balance": 284.8,
+        "percentage": 13.87,
+        "trend": 34.7
+      },
+      {
+        "id": 73,
+        "creationDate": "2023-02-21T15:27:23",
+        "updateDate": "2023-02-21T15:27:23",
+        "date": "2022-01-01",
+        "balance": 320.6,
+        "percentage": 12.57,
+        "trend": 35.8
+      },
+      {
+        "id": 79,
+        "creationDate": "2023-02-21T15:27:59",
+        "updateDate": "2023-02-21T15:27:59",
+        "date": "2022-02-21",
+        "balance": 370.2,
+        "percentage": 15.47,
+        "trend": 49.6
+      },
+      {
+        "id": 85,
+        "creationDate": "2023-02-21T15:28:39",
+        "updateDate": "2023-02-21T15:28:39",
+        "date": "2022-03-01",
+        "balance": 440.2,
+        "percentage": 18.91,
+        "trend": 70.0
+      },
+      {
+        "id": 91,
+        "creationDate": "2023-02-21T15:29:14",
+        "updateDate": "2023-02-21T15:29:14",
+        "date": "2022-04-01",
+        "balance": 520.6,
+        "percentage": 18.26,
+        "trend": 80.4
+      },
+      {
+        "id": 97,
+        "creationDate": "2023-02-21T15:29:56",
+        "updateDate": "2023-02-21T15:29:56",
+        "date": "2022-05-01",
+        "balance": 630.2,
+        "percentage": 21.05,
+        "trend": 109.6
+      },
+      {
+        "id": 103,
+        "creationDate": "2023-02-21T15:30:36",
+        "updateDate": "2023-02-21T15:30:36",
+        "date": "2022-06-01",
+        "balance": 760.3,
+        "percentage": 20.64,
+        "trend": 130.1
+      },
+      {
+        "id": 109,
+        "creationDate": "2023-02-21T15:31:22",
+        "updateDate": "2023-02-21T15:31:22",
+        "date": "2022-07-01",
+        "balance": 830.7,
+        "percentage": 9.26,
+        "trend": 70.4
+      },
+      {
+        "id": 115,
+        "creationDate": "2023-02-21T15:32:04",
+        "updateDate": "2023-02-21T15:32:04",
+        "date": "2022-08-01",
+        "balance": 1145.6,
+        "percentage": 37.91,
+        "trend": 314.9
+      },
+      {
+        "id": 121,
+        "creationDate": "2023-02-21T15:32:39",
+        "updateDate": "2023-02-21T15:32:39",
+        "date": "2022-09-01",
+        "balance": 1506.3,
+        "percentage": 31.49,
+        "trend": 360.7
+      },
+      {
+        "id": 127,
+        "creationDate": "2023-02-21T15:33:28",
+        "updateDate": "2023-02-21T15:33:28",
+        "date": "2022-10-01",
+        "balance": 2134.5,
+        "percentage": 41.7,
+        "trend": 628.2
+      },
+      {
+        "id": 133,
+        "creationDate": "2023-02-21T15:34:07",
+        "updateDate": "2023-02-21T15:34:07",
+        "date": "2022-11-11",
+        "balance": 2950.2,
+        "percentage": 38.22,
+        "trend": 815.7
+      },
+      {
+        "id": 139,
+        "creationDate": "2023-02-21T15:34:44",
+        "updateDate": "2023-02-21T15:34:44",
+        "date": "2022-12-21",
+        "balance": 3472.7,
+        "percentage": 17.71,
+        "trend": 522.5
+      },
+      {
+        "id": 145,
+        "creationDate": "2023-02-21T15:35:45",
+        "updateDate": "2023-02-21T15:35:45",
+        "date": "2023-01-01",
+        "balance": 4250.5,
+        "percentage": 22.4,
+        "trend": 777.8
+      },
+      {
+        "id": 151,
+        "creationDate": "2023-02-21T15:36:30",
+        "updateDate": "2023-02-21T15:36:30",
+        "date": "2023-02-01",
+        "balance": 4840.3,
+        "percentage": 13.88,
+        "trend": 589.8
+      },
+      {
+        "id": 157,
+        "creationDate": "2023-02-21T15:37:24",
+        "updateDate": "2023-02-21T15:37:24",
+        "date": "2023-02-10",
+        "balance": 6702.5,
+        "percentage": 38.47,
+        "trend": 1862.2
+      },
+      {
+        "id": 163,
+        "creationDate": "2023-02-21T15:38:51",
+        "updateDate": "2023-02-21T15:38:51",
+        "date": "2023-02-21",
+        "balance": 8500.5,
+        "percentage": 26.83,
+        "trend": 1798.0
+      },
+      {
+        "id": 169,
+        "creationDate": "2023-02-21T15:40:57",
+        "updateDate": "2023-02-21T15:40:57",
+        "date": "2023-02-22",
+        "balance": 11000.0,
+        "percentage": 29.4,
+        "trend": 2499.5
+      }
+    ]
+  }
+}

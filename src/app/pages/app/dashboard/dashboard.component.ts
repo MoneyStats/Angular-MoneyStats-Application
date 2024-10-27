@@ -71,7 +71,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.dashboardService.cache.cacheDashboardData(data);
         LOG.info(data.message!, 'DashboardComponent');
         if (!data.data.balance) {
-          this.dashboard.categories = data.data.categories;
+          //this.dashboard.categories = data.data.categories;
           this.dashboard.wallets = data.data.wallets;
 
           if (!this.dashboardService.isOnboarding) {

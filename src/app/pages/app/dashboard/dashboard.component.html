@@ -251,10 +251,14 @@
   <!-- * app footer -->
 </div>
 
-<app-add-wallet
+<!--<app-add-wallet
   (emitAddWallet)="addWallet($event)"
   [modalId]="modalConstant.ADDWALLET"
   [categoriesInput]="dashboard.categories"
+></app-add-wallet>-->
+<app-add-wallet
+  (emitAddWallet)="addWallet($event)"
+  [modalId]="modalConstant.ADDWALLET"
 ></app-add-wallet>
 <app-category-modal
   [modalId]="modalConstant.CATEGORY"

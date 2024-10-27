@@ -24,6 +24,7 @@ import { User } from 'src/assets/core/data/class/user.class';
 })
 export class WalletDetailsComponent implements OnInit, OnDestroy {
   user: User = UserService.getUserData();
+  walletByIdSubscribe: Subscription = new Subscription();
   routeSubscribe: Subscription = new Subscription();
   saveWalletSubscribe: Subscription = new Subscription();
 
@@ -69,6 +70,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.routeSubscribe.unsubscribe();
     this.saveWalletSubscribe.unsubscribe();
+    this.walletByIdSubscribe.unsubscribe();
   }
   screenWidth() {
     return ScreenService.screenWidth;
@@ -80,12 +82,20 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
     this.routeSubscribe = this.route.params.subscribe((w: any) => {
       this.walletId = w.id;
       this.walletName = w.wallet;
+
+      // Chiamata al servizio
+      this.walletByIdSubscribe = this.walletService
+        .getWalletByID(this.walletId!)
+        .subscribe((res) => {
+          this.walletService.cache.cacheWalletByIdData(res);
+          LOG.info(res.message!, 'WalletDetailsComponent');
+          this.wallet = res.data;
+          this.renderDetailsPage();
+        });
     });
+  }
 
-    this.wallet = this.walletService.walletDetails?.find(
-      (w: Wallet) => w.id == this.walletId && w.name === this.walletName
-    );
-
+  renderDetailsPage() {
     this.graph1Y();
 
     if (this.wallet?.info != undefined) {
@@ -162,7 +172,9 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
   }
 
   percentageWalletInTotal(): number {
-    return (this.wallet!.balance * 100) / this.walletService?.totalBalance!;
+    if (this.wallet != undefined)
+      return (this.wallet!.balance * 100) / this.walletService?.totalBalance!;
+    return 0;
   }
 
   addInfo() {
@@ -260,7 +272,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
 
   saveOrUpdateWallet() {
     this.saveWalletSubscribe = this.walletService
-      .addUpdateWalletData(this.wallet!)
+      .addOrUpdateWalletsData(this.wallet!)
       .subscribe((data) => {
         LOG.info(data.message!, 'WalletDetailsComponent');
         this.infoKey = '';

@@ -19,7 +19,7 @@ export class Dashboard implements DashboardInterface {
   lastStatsPerformance: number = 0;
   lastStatsBalanceDifference: number = 0;
   statsWalletDays: string[] = [];
-  categories: Category[] = [];
+  categories: Category[] = categories;
   wallets: Wallet[] = [];
 }
 
@@ -58,3 +58,56 @@ export class Category extends GenericModel implements CategoryInterface {
   name!: string;
   img!: string;
 }
+
+export const categories: Array<Category> = [
+  {
+    id: 1,
+    name: 'Cash',
+    img: 'cash-outline',
+  },
+  {
+    id: 2,
+    name: 'Credit Card',
+    img: 'card-outline',
+  },
+  {
+    id: 3,
+    name: 'Debit Card',
+    img: 'card-outline',
+  },
+  {
+    id: 4,
+    name: 'Recurrence',
+    img: 'alarm-outline',
+  },
+  {
+    id: 5,
+    name: 'Bank Account',
+    img: 'wallet-outline',
+  },
+  {
+    id: 6,
+    name: 'Save',
+    img: 'lock-closed-outline',
+  },
+  {
+    id: 7,
+    name: 'Coupon',
+    img: 'ticket-outline',
+  },
+  {
+    id: 8,
+    name: 'Check',
+    img: 'id-card-outline',
+  },
+  {
+    id: 9,
+    name: 'Investments',
+    img: 'bar-chart-outline',
+  },
+  {
+    id: 10,
+    name: 'Others',
+    img: 'cube-outline',
+  },
+];

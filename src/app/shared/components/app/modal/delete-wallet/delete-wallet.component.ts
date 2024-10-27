@@ -31,7 +31,7 @@ export class DeleteWalletComponent implements OnDestroy {
     if (!wallet.deletedDate) {
       wallet.deletedDate = new Date();
       this.deleteWalletSub = this.walletService
-        .addUpdateWalletData(wallet)
+        .addOrUpdateWalletsData(wallet)
         .subscribe((data) => {
           this.wallet = data.data;
           wallet = data.data;
@@ -44,7 +44,7 @@ export class DeleteWalletComponent implements OnDestroy {
 
   restoreWallet(wallet: Wallet) {
     wallet.deletedDate = undefined;
-    this.walletService.addUpdateWalletData(wallet).subscribe((data) => {
+    this.walletService.addOrUpdateWalletsData(wallet).subscribe((data) => {
       LOG.info(data.message!, 'DeleteWalletComponent');
       this.wallet = data.data;
       wallet = data.data;

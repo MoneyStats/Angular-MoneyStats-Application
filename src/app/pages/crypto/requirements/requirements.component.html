@@ -124,7 +124,9 @@
           <!-- item -->
           <li>
             <a
-              class="item clickable {{ isCryptoWalletCreated ? '' : 'disabled' }}"
+              class="item clickable {{
+                isCryptoWalletCreated ? '' : 'disabled'
+              }}"
               data-bs-toggle="modal"
               attr.data-bs-target="#{{ modalConstant.ADDASSET }}"
             >
@@ -170,10 +172,16 @@
     </button>
   </div>
 </div>
-<app-add-wallet
+<!--<app-add-wallet
   (emitAddWallet)="saveWallet($event)"
   [modalId]="modalConstant.ADDWALLET"
   [categoriesInput]="dashboard?.categories"
+  [isCrypto]="enableModalCrypto"
+  [wallets]="wallets!"
+></app-add-wallet>-->
+<app-add-wallet
+  (emitAddWallet)="saveWallet($event)"
+  [modalId]="modalConstant.ADDWALLET"
   [isCrypto]="enableModalCrypto"
   [wallets]="wallets!"
 ></app-add-wallet>
