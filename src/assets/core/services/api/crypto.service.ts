@@ -65,7 +65,7 @@ export class CryptoService {
     if (UserService.getUserData().mockedUser) {
       return this.http.get<any>(environment.getCryptoPriceMock);
     } else {
-      const url = environment.getMarketDataUrl + '?currency=' + currency;
+      const url = environment.getMarketDataUrl.replace(':currency', currency);
       return this.http.get<any>(url, {
         headers: headers,
       });

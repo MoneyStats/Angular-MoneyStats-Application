@@ -114,11 +114,16 @@ export class AppService {
       const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
       const headers = new HttpHeaders({
         Authorization: authToken!,
-        'Content-Type': 'multipart/form-data',
       });
       const formData: FormData = new FormData();
       formData.append('file', file, file.name);
-      return this.http.post<ResponseModel>(environment.uploadImage, formData);
+      return this.http.post<ResponseModel>(
+        environment.uploadImageUrl,
+        formData,
+        {
+          headers: headers,
+        }
+      );
     }
   }
 

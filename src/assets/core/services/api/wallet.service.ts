@@ -121,24 +121,4 @@ export class WalletService {
       });
     }
   }
-
-  /* TODO: OLD DATA */
-  addUpdateWalletData(wallet: Wallet): Observable<ResponseModel> {
-    this.cache.clearCache();
-    if (UserService.getUserData().mockedUser) {
-      let response: ResponseModel = new ResponseModel();
-      response.data = wallet;
-      return of(response);
-    } else {
-      const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
-      const headers = new HttpHeaders({
-        Authorization: authToken!,
-      });
-      return this.http.post<ResponseModel>(
-        environment.addUpdateWalletDataUrl,
-        wallet,
-        { headers: headers }
-      );
-    }
-  }
 }

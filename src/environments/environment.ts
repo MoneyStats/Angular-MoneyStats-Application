@@ -55,8 +55,6 @@ export const environment = {
    * App
    */
   addUpdateWalletDataUrl: host + '/v1/wallet/insert-update',
-  uploadImage: host + '/v1/upload/attachment',
-  imageSizeMax: 2000000,
   getDashboardDataUrl: host + '/v1/app/dashboard',
   getResumeDataUrl: host + '/v1/app/resume',
   addStatsDataUrl: host + '/v1/app/add/stats',
@@ -71,12 +69,22 @@ export const environment = {
   /*
    * Wallets
    */
-  listWalletDataurlOLD: host + '/v1/wallet/list',
   getWalletsDataUrl: host + '/v1/wallets',
   getWalletByIdUrl: host + '/v1/wallets/:id',
   postWalletsDataUrl: host + '/v1/wallets',
   updateWalletsDataUrl: host + '/v1/wallets',
   deleteWalletsDataUrl: host + '/v1/wallets/:id',
+
+  /*
+   * Image Upload
+   */
+  uploadImageUrl: host + '/v1/attachment/upload',
+  imageSizeMax: 2000000,
+
+  /*
+   * Market Data
+   */
+  getMarketDataUrl: host + '/v1/market-data/:currency',
 
   forgotPassword: true,
 
@@ -89,7 +97,6 @@ export const environment = {
   getCryptoDetailsDataUrl: host + '/v1/crypto/asset/get',
   getCryptoDashboardDataUrl: host + '/v1/crypto/dashboard',
   getCryptoResumeDataUrl: host + '/v1/crypto/resume',
-  getMarketDataUrl: host + '/v1/market-data/get',
 
   // Cache
   cacheEnable: false,
