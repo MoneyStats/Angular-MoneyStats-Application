@@ -877,6 +877,11 @@
       "status": "Errore",
       "exception": "Email non valida",
       "message": "L'emaii inserita non è stata trovata, prova nuovamente."
+    },
+    "ERR_VALID_MSS_001": {
+      "status": "Errore",
+      "exception": "Immagine Invalida",
+      "message": "L'immagine fornita è troppo grande, prova con una più piccola."
     }
   },
   "copyright": "Copyright © MoneyStats 2024. All Rights Reserved."

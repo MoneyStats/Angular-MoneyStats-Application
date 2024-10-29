@@ -877,6 +877,11 @@
       "status": "Bad Request",
       "exception": "Invalid Email",
       "message": "The provide email does not exist, try a different one."
+    },
+    "ERR_VALID_MSS_001": {
+      "status": "Bad Request",
+      "exception": "Invalid Image",
+      "message": "The provide image is too big, try with a small one."
     }
   },
   "copyright": "Copyright © MoneyStats 2024. All Rights Reserved."
