@@ -52,12 +52,13 @@ export class CryptoDetailsComponent implements OnInit, OnDestroy {
     ScreenService.hideFooter();
 
     let assets = [...this.cryptoService.assets];
-    //let assets = deepCopy(this.cryptoDashboard.assets);
     this.routeSubscribe = this.route.params.subscribe((a: any) => {
       this.assetName = a.identifier;
-      if (assets.length != 0) {
-        this.asset = assets.find((as) => as.identifier == a.identifier)!;
-      } else this.getCryptoDetails(a.identifier);
+      //if (assets.length != 0) {
+      //  this.asset = assets.find((as) => as.identifier == a.identifier)!;
+      //} else this.getCryptoDetails(a.identifier);
+
+      this.getCryptoDetails(a.identifier);
 
       if (this.cryptoService.cryptoDashboard.balance != 0 && assets.length != 0)
         this.cryptoDashboard = Utils.copyObject(

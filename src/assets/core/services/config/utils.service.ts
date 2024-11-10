@@ -19,11 +19,29 @@ export class Utils {
   }
 
   public static isNullOrEmpty(obj: any): boolean {
-    if (obj != undefined) {
-      if (typeof obj === 'number') return Number.isNaN(obj) || obj === Infinity;
-      return obj == undefined;
+    if (obj === undefined || obj === null) return true;
+
+    if (typeof obj === 'number') {
+      return Number.isNaN(obj) || obj === Infinity;
     }
-    return true;
+
+    if (typeof obj === 'string') {
+      return obj.trim().length === 0;
+    }
+
+    if (Array.isArray(obj)) {
+      return obj.length === 0;
+    }
+
+    if (obj instanceof Map || obj instanceof Set) {
+      return obj.size === 0;
+    }
+
+    if (typeof obj === 'object') {
+      return Object.keys(obj).length === 0;
+    }
+
+    return false;
   }
 
   public static roundToTwoDecimalPlaces(value: number): number {

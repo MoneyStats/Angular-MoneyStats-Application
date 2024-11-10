@@ -4,7 +4,6 @@ import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Coin } from '../../data/class/coin';
 import { ResponseModel } from '../../data/class/generic.class';
-import { User } from '../../data/class/user.class';
 import { StorageConstant } from '../../data/constant/constant';
 import { SwalService } from '../../utils/swal.service';
 import { Wallet } from '../../data/class/dashboard.class';
@@ -99,23 +98,27 @@ export class CryptoService {
     if (UserService.getUserData().mockedUser) {
       return this.http.get<any>(environment.getCryptoAssetsMock);
     } else {
-      return this.http.get<any>(environment.getCryptoAssetDataUrl, {
+      return this.http.get<any>(environment.getCryptoAssetsDataUrl, {
         headers: headers,
       });
     }
   }
 
   getCryptoDetails(identifier: string): Observable<ResponseModel> {
+    if (this.cache.getAssetsByIdentifierCache(identifier))
+      return of(this.cache.getAssetsByIdentifierCache(identifier));
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: authToken!,
     });
     if (UserService.getUserData().mockedUser) {
-      return this.http.get<any>(environment.getCryptoDetailsMock);
+      return this.http.get<any>(environment.getCryptoAssetsDetailsMock);
     } else {
-      const url =
-        environment.getCryptoDetailsDataUrl + '?identifier=' + identifier;
+      const url = environment.getCryptoAssetsDetailsDataUrl.replace(
+        ':identifier',
+        identifier
+      );
       return this.http.get<any>(url, {
         headers: headers,
       });
@@ -134,7 +137,7 @@ export class CryptoService {
       response.data = wallet;
       return of(response);
     } else {
-      return this.http.post<any>(environment.addCryptoAssetDataUrl, wallet, {
+      return this.http.post<any>(environment.postCryptoAssetDataUrl, wallet, {
         headers: headers,
       });
     }
@@ -152,7 +155,7 @@ export class CryptoService {
       response.data = wallets;
       return of(response);
     } else {
-      return this.http.post<any>(environment.addCryptoAssetsDataUrl, wallets, {
+      return this.http.post<any>(environment.postCryptoAssetsDataUrl, wallets, {
         headers: headers,
       });
     }

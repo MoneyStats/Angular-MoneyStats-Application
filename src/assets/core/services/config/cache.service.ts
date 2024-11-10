@@ -12,7 +12,8 @@ export class CacheService {
 
   // App Data
   private dashboardDataCache: any;
-  private resumeDataCache: any;
+  private resumeDataCache: { [year: number]: any } = {};
+  private historyDataCache: any;
   private getWalletsDataCache: any;
   private getWalletByIdDataCache: { [walletId: number]: any } = {};
 
@@ -20,6 +21,7 @@ export class CacheService {
   private cryptoDashboardDataCache: any;
   private cryptoResumeDataCache: any;
   private assetsDataCache: any;
+  private getAssetsByIdentifierDataCache: { [identifier: string]: any } = {};
 
   // Market Data Cache
   private marketDataByCurrencyCache: any;
@@ -44,12 +46,13 @@ export class CacheService {
     this.assetsDataCache = null;
     this.getWalletsDataCache = null;
     this.dashboardDataCache = null;
-    this.resumeDataCache = null;
+    this.resumeDataCache = {};
     this.marketDataByCurrencyCache = null;
     this.getWalletByIdDataCache = {};
+    this.getAssetsByIdentifierDataCache = {};
   }
 
-  /** Wallets */
+  /** @Wallets */
   getWalletsCache() {
     return Utils.copyObject(this.getWalletsDataCache);
   }
@@ -69,6 +72,68 @@ export class CacheService {
   }
   /** END Wallets */
 
+  /** @Assets  */
+  getAssetsCache() {
+    return Utils.copyObject(this.assetsDataCache);
+  }
+
+  cacheAssetsData(assets: any) {
+    if (environment.cacheEnable)
+      this.assetsDataCache = Utils.copyObject(assets);
+  }
+
+  getAssetsByIdentifierCache(identifier: string) {
+    return Utils.copyObject(
+      this.getAssetsByIdentifierDataCache[identifier] || null
+    );
+  }
+
+  cacheAssetsByIdentifierCache(asset: any) {
+    if (environment.cacheEnable)
+      this.getAssetsByIdentifierDataCache[asset.identifier] =
+        Utils.copyObject(asset);
+  }
+  /** END Assets  */
+
+  /**
+   * @MarketDatas
+   */
+  getMarketDataByCurrencyCache() {
+    return Utils.copyObject(this.marketDataByCurrencyCache);
+  }
+
+  cacheMarketDataByCurrencyData(marketDatas: any) {
+    if (environment.cacheEnable)
+      this.marketDataByCurrencyCache = Utils.copyObject(marketDatas);
+  }
+  /**
+   * END @MarketDatas
+   */
+
+  /**
+   * @App
+   */
+  getResumeCache(year: number) {
+    return Utils.copyObject(this.resumeDataCache[year] || null);
+  }
+
+  cacheResumeData(resume: any, year: number) {
+    if (environment.cacheEnable)
+      this.resumeDataCache[year] = Utils.copyObject(resume);
+  }
+
+  getHistoryCache() {
+    return Utils.copyObject(this.historyDataCache);
+  }
+
+  cacheHistoryData(history: any) {
+    if (environment.cacheEnable)
+      this.historyDataCache = Utils.copyObject(history);
+  }
+  /**
+   * END @App
+   */
+
   /** OLD DATA */
   getDashboardCache() {
     return Utils.copyObject(this.dashboardDataCache);
@@ -77,15 +142,6 @@ export class CacheService {
   cacheDashboardData(dashboard: any) {
     if (environment.cacheEnable)
       this.dashboardDataCache = Utils.copyObject(dashboard);
-  }
-
-  getResumeCache() {
-    return Utils.copyObject(this.resumeDataCache);
-  }
-
-  cacheResumeData(resume: any) {
-    if (environment.cacheEnable)
-      this.resumeDataCache = Utils.copyObject(resume);
   }
 
   getCryptoDashboardCache() {
@@ -104,26 +160,5 @@ export class CacheService {
   cacheCryptoResumeData(resume: any) {
     if (environment.cacheEnable)
       this.cryptoResumeDataCache = Utils.copyObject(resume);
-  }
-
-  getAssetsCache() {
-    return Utils.copyObject(this.assetsDataCache);
-  }
-
-  cacheAssetsData(assets: any) {
-    if (environment.cacheEnable)
-      this.assetsDataCache = Utils.copyObject(assets);
-  }
-
-  /**
-   * @MarketDatas
-   */
-  getMarketDataByCurrencyCache() {
-    return Utils.copyObject(this.marketDataByCurrencyCache);
-  }
-
-  cacheMarketDataByCurrencyData(marketDatas: any) {
-    if (environment.cacheEnable)
-      this.marketDataByCurrencyCache = Utils.copyObject(marketDatas);
   }
 }

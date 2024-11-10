@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { Dashboard, Stats } from 'src/assets/core/data/class/dashboard.class';
 import {
   ApexOptions,
@@ -12,7 +18,7 @@ import { ChartJSService } from 'src/assets/core/utils/chartjs.service';
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.scss'],
 })
-export class HistoryComponent implements OnInit {
+export class HistoryComponent implements OnChanges {
   public chartOptions?: Partial<ApexOptions>;
   @Input('resume') resume: Map<string, Dashboard> = new Map<
     string,
@@ -31,12 +37,17 @@ export class HistoryComponent implements OnInit {
   public lineChartJS?: ChartJSOptions = new ChartJSOptions();
   constructor() {}
 
-  ngOnInit(): void {
-    this.resume.forEach((value: Dashboard, key: string) => {
-      this.tableBalance.push(this.tableCreate(key, value));
-    });
-    this.totalMap.set('History', this.totalList);
-    this.renderChart();
+  ngOnChanges(): void {
+    if (
+      !Utils.isNullOrEmpty(this.resume) &&
+      Utils.isNullOrEmpty(this.totalMap)
+    ) {
+      this.resume.forEach((value: Dashboard, key: string) => {
+        this.tableBalance.push(this.tableCreate(key, value));
+      });
+      this.totalMap.set('History', this.totalList);
+      this.renderChart();
+    }
   }
 
   renderChart() {

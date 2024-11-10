@@ -17,14 +17,33 @@ export class StatsService {
 
   constructor(private http: HttpClient, public cache: CacheService) {}
 
-  getResumeData(): Observable<ResponseModel> {
-    if (this.cache.getResumeCache()) return of(this.cache.getResumeCache());
+  getResumeData(year: number): Observable<ResponseModel> {
+    if (this.cache.getResumeCache(year))
+      return of(this.cache.getResumeCache(year));
     if (UserService.getUserData().mockedUser) {
       return this.http.get<ResponseModel>(environment.getResumeDataUrlMock);
     } else {
       const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
       const headers = new HttpHeaders({ Authorization: authToken! });
-      return this.http.get<ResponseModel>(environment.getResumeDataUrl, {
+      const url = environment.getResumeDataUrl.replace(
+        ':year',
+        year.toString()
+      );
+      return this.http.get<ResponseModel>(url, {
+        headers: headers,
+      });
+    }
+  }
+
+  getHistoryData(): Observable<ResponseModel> {
+    if (this.cache.getHistoryCache()) return of(this.cache.getHistoryCache());
+    if (UserService.getUserData().mockedUser) {
+      return this.http.get<ResponseModel>(environment.getHistoryDataUrlMock);
+    } else {
+      const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
+      const headers = new HttpHeaders({ Authorization: authToken! });
+      const url = environment.getHistoryDataUrl;
+      return this.http.get<ResponseModel>(url, {
         headers: headers,
       });
     }
@@ -40,7 +59,7 @@ export class StatsService {
       return of(response);
     } else {
       return this.http.post<ResponseModel>(
-        environment.addStatsDataUrl,
+        environment.postStatsDataUrl,
         wallets,
         {
           headers: headers,

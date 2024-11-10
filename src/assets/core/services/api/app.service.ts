@@ -87,9 +87,13 @@ export class AppService {
       let response: ResponseModel = new ResponseModel();
       return of(response);
     } else {
-      return this.http.patch<ResponseModel>(environment.marketDataUrl, null, {
-        headers: headers,
-      });
+      return this.http.patch<ResponseModel>(
+        environment.importMarketDataUrl,
+        null,
+        {
+          headers: headers,
+        }
+      );
     }
   }
 

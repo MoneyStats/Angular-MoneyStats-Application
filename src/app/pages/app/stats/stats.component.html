@@ -30,7 +30,13 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="tab" href="#tab_history" role="tab">
+        <a
+          class="nav-link"
+          data-bs-toggle="tab"
+          href="#tab_history"
+          role="tab"
+          (click)="getHistoryData()"
+        >
           {{ "stats.tab_history" | translate }}
         </a>
       </li>
@@ -63,8 +69,9 @@
               (change)="onChange($event)"
             >
               <option
-                *ngFor="let year of years.slice().reverse()"
-                value="{{ year }}"
+                [selected]="currentYear.toString() === year"
+                *ngFor="let year of resumeFullYears.slice().reverse()"
+                [value]="year"
               >
                 {{ year }}
               </option>
@@ -217,7 +224,7 @@
           <app-history
             *ngIf="wallets && wallets.length"
             [coinSymbol]="coinSymbol!"
-            [resume]="resume"
+            [resume]="historyData"
             [hidden]="hidden"
           ></app-history>
         </div>
