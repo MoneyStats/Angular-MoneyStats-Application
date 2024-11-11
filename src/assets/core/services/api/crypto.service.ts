@@ -53,6 +53,27 @@ export class CryptoService {
     }
   }
 
+  /**
+   * Get the full List of Wallets Crypto
+   * @returns List of Wallets
+   */
+  getWalletsCryptoData(): Observable<ResponseModel> {
+    if (this.cache.getWalletsCryptoCache())
+      return of(this.cache.getWalletsCryptoCache());
+    if (UserService.getUserData().mockedUser) {
+      return this.http.get<ResponseModel>(
+        environment.mockedGetWalletsCryptoDataUrl
+      );
+    } else {
+      const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
+      const headers = new HttpHeaders({ Authorization: authToken! });
+      const url = environment.getWalletsCryptoDataUrl;
+      return this.http.get<ResponseModel>(url, {
+        headers: headers,
+      });
+    }
+  }
+
   getCryptoPriceData(currency: string): Observable<ResponseModel> {
     if (this.cache.getMarketDataByCurrencyCache())
       return of(this.cache.getMarketDataByCurrencyCache());
@@ -71,9 +92,9 @@ export class CryptoService {
     }
   }
 
-  getCryptoResumeData(): Observable<ResponseModel> {
-    if (this.cache.getCryptoResumeCache())
-      return of(this.cache.getCryptoResumeCache());
+  getCryptoResumeData(year: number): Observable<ResponseModel> {
+    if (this.cache.getCryptoResumeCache(year))
+      return of(this.cache.getCryptoResumeCache(year));
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -82,7 +103,11 @@ export class CryptoService {
     if (UserService.getUserData().mockedUser) {
       return this.http.get<any>(environment.getCryptoResumeMock);
     } else {
-      return this.http.get<any>(environment.getCryptoResumeDataUrl, {
+      const url = environment.getCryptoResumeDataUrl.replace(
+        ':year',
+        year.toString()
+      );
+      return this.http.get<any>(url, {
         headers: headers,
       });
     }
@@ -159,47 +184,5 @@ export class CryptoService {
         headers: headers,
       });
     }
-  }
-
-  getAssetList(wallets: Wallet[]): Asset[] {
-    const allAssets: Array<Asset> = [];
-    wallets.forEach((wallet) => {
-      wallet.assets.forEach((asset) => {
-        if (allAssets.find((a) => a.name == asset.name)) {
-          const index = allAssets.indexOf(
-            allAssets.find((a) => a.name == asset.name)!
-          );
-          allAssets[index].balance! += asset.balance!;
-          allAssets[index].value! += asset.value!;
-          allAssets[index].performance! =
-            (allAssets[index].performance! + asset.performance!) / 2;
-
-          allAssets[index].trend! = allAssets[index].trend! + asset.trend!;
-
-          asset.history?.forEach((history) => {
-            let hist = allAssets[index].history!.find(
-              (h) => h.date == history.date
-            )!;
-            allAssets[index].history!.find(
-              (h) => h.date == history.date
-            )!.balance += history.balance;
-            allAssets[index].history!.find(
-              (h) => h.date == history.date
-            )!.trend += history.trend;
-            allAssets[index].history!.find(
-              (h) => h.date == history.date
-            )!.percentage = (hist.percentage + history.percentage) / 2;
-          });
-
-          asset.operations.forEach((o) => {
-            allAssets[index].operations.push(o);
-          });
-          allAssets[index].operations.sort((o) =>
-            o.exitDate != undefined ? o.exitDate : o.entryDate
-          );
-        } else allAssets.push(asset);
-      });
-    });
-    return allAssets;
   }
 }

@@ -21,6 +21,7 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { environment } from 'src/environments/environment';
 import { Subscription } from 'rxjs';
 import { Utils } from 'src/assets/core/services/config/utils.service';
+import { SharedService } from 'src/assets/core/services/config/shared.service';
 
 declare const TradingView: any;
 
@@ -31,6 +32,7 @@ declare const TradingView: any;
 })
 export class CryptoDashboardComponent implements OnInit, OnDestroy {
   getDashboardSubscribe: Subscription = new Subscription();
+  getCryptoWalletSubscribe: Subscription = new Subscription();
   marketDataSubscribe: Subscription = new Subscription();
 
   filterMarketData: Array<any> = [];
@@ -55,7 +57,8 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
   constructor(
     public screenService: ScreenService,
     private _renderer2: Renderer2,
-    private cryptoService: CryptoService
+    private cryptoService: CryptoService,
+    private shared: SharedService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -86,13 +89,29 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
         this.assets = data.data.assets;
         //this.cryptoService.cryptoDashboard.assets = this.assets;
         //this.cryptoDashboard.assets = this.assets;
-        this.cryptoWallet = this.cryptoDashboard.wallets.filter(
-          (w) => w.category == 'Crypto'
-        );
         this.getCoinForGraph();
         this.getMarketData();
       });
     this.isWalletBalanceHidden();
+  }
+
+  emitOperationClick(click: boolean) {
+    this.getWalletsCryptoData();
+  }
+
+  getWalletsCryptoData() {
+    if (Utils.isNullOrEmpty(this.cryptoWallet))
+      this.getCryptoWalletSubscribe = this.cryptoService
+        .getWalletsCryptoData()
+        .subscribe((data) => {
+          this.cryptoService.cache.cacheWalletsCryptoData(data);
+          LOG.info(data.message!, 'CryptoDashboardComponent');
+          const wallets = data.data;
+          this.cryptoWallet = !Utils.isNullOrEmpty(wallets)
+            ? wallets.filter((w: any) => w.category == 'Crypto')
+            : [];
+          this.shared.setCryptoWallets(this.cryptoWallet!);
+        });
   }
 
   vibrate() {
@@ -341,5 +360,6 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.getDashboardSubscribe.unsubscribe();
     this.marketDataSubscribe.unsubscribe();
+    this.getCryptoWalletSubscribe.unsubscribe();
   }
 }

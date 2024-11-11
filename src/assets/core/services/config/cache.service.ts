@@ -15,11 +15,12 @@ export class CacheService {
   private resumeDataCache: { [year: number]: any } = {};
   private historyDataCache: any;
   private getWalletsDataCache: any;
+  private getWalletsCryptoDataCache: any;
   private getWalletByIdDataCache: { [walletId: number]: any } = {};
 
   // Crypto Data
   private cryptoDashboardDataCache: any;
-  private cryptoResumeDataCache: any;
+  private cryptoResumeDataCache: { [year: number]: any } = {};
   private assetsDataCache: any;
   private getAssetsByIdentifierDataCache: { [identifier: string]: any } = {};
 
@@ -42,7 +43,7 @@ export class CacheService {
 
   clearCache(): any {
     this.cryptoDashboardDataCache = null;
-    this.cryptoResumeDataCache = null;
+    this.cryptoResumeDataCache = {};
     this.assetsDataCache = null;
     this.getWalletsDataCache = null;
     this.dashboardDataCache = null;
@@ -50,6 +51,7 @@ export class CacheService {
     this.marketDataByCurrencyCache = null;
     this.getWalletByIdDataCache = {};
     this.getAssetsByIdentifierDataCache = {};
+    this.getWalletsCryptoDataCache = null;
   }
 
   /** @Wallets */
@@ -69,6 +71,15 @@ export class CacheService {
   cacheWalletByIdData(wallet: any) {
     if (environment.cacheEnable)
       this.getWalletByIdDataCache[wallet.id] = Utils.copyObject(wallet);
+  }
+
+  getWalletsCryptoCache() {
+    return Utils.copyObject(this.getWalletsCryptoDataCache);
+  }
+
+  cacheWalletsCryptoData(wallets: any) {
+    if (environment.cacheEnable)
+      this.getWalletsCryptoDataCache = Utils.copyObject(wallets);
   }
   /** END Wallets */
 
@@ -113,6 +124,15 @@ export class CacheService {
   /**
    * @App
    */
+  getDashboardCache() {
+    return Utils.copyObject(this.dashboardDataCache);
+  }
+
+  cacheDashboardData(dashboard: any) {
+    if (environment.cacheEnable)
+      this.dashboardDataCache = Utils.copyObject(dashboard);
+  }
+
   getResumeCache(year: number) {
     return Utils.copyObject(this.resumeDataCache[year] || null);
   }
@@ -134,16 +154,9 @@ export class CacheService {
    * END @App
    */
 
-  /** OLD DATA */
-  getDashboardCache() {
-    return Utils.copyObject(this.dashboardDataCache);
-  }
-
-  cacheDashboardData(dashboard: any) {
-    if (environment.cacheEnable)
-      this.dashboardDataCache = Utils.copyObject(dashboard);
-  }
-
+  /**
+   * @Crypto_Data
+   */
   getCryptoDashboardCache() {
     return Utils.copyObject(this.cryptoDashboardDataCache);
   }
@@ -153,12 +166,15 @@ export class CacheService {
       this.cryptoDashboardDataCache = Utils.copyObject(dashboard);
   }
 
-  getCryptoResumeCache() {
-    return Utils.copyObject(this.cryptoResumeDataCache);
+  getCryptoResumeCache(year: number) {
+    return Utils.copyObject(this.cryptoResumeDataCache[year] || null);
   }
 
-  cacheCryptoResumeData(resume: any) {
+  cacheCryptoResumeData(resume: any, year: number) {
     if (environment.cacheEnable)
-      this.cryptoResumeDataCache = Utils.copyObject(resume);
+      this.cryptoResumeDataCache[year] = Utils.copyObject(resume);
   }
+  /**
+   * END @Crypto_Data
+   */
 }

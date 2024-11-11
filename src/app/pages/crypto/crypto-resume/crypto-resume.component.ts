@@ -4,7 +4,6 @@ import {
   Asset,
   CryptoDashboard,
 } from 'src/assets/core/data/class/crypto.class';
-import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import {
   ModalConstant,
   OperationsType,
@@ -26,7 +25,9 @@ export class CryptoResumeComponent implements OnInit, OnDestroy {
   assets: Asset[] = [];
   resumeData: CryptoDashboard = new CryptoDashboard();
   resume: Map<string, CryptoDashboard> = new Map<string, CryptoDashboard>();
-  years: Array<string> = [];
+  resumeFullYears: Array<string> = [];
+
+  currentYear = new Date().getFullYear();
 
   isPast: boolean = false;
 
@@ -38,32 +39,46 @@ export class CryptoResumeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     ScreenService.hideFooter();
-    this.getResume();
+    this.getResume(this.currentYear);
   }
 
-  getResume() {
+  getResume(year: number) {
     this.getResumeSub = this.cryptoService
-      .getCryptoResumeData()
+      .getCryptoResumeData(year)
       .subscribe((res) => {
-        this.cryptoService.cache.cacheCryptoResumeData(res);
+        this.cryptoService.cache.cacheCryptoResumeData(res, year);
         LOG.info(res.message!, 'CryptoResumeComponent');
         this.resume = new Map<string, CryptoDashboard>(
           Object.entries(res.data)
         );
-        this.years = Array.from(this.resume.keys());
-        this.updateData(this.years[this.years.length - 1]);
-        this.cryptoService.cryptoResume = this.resume;
+
+        this.resumeFullYears = [];
+        // Ottieni l'array di anni senza duplicati e in ordine decrescente
+        const uniqueYears = Array.from(
+          new Set(this.resume.get(year.toString())?.yearsWalletStats ?? [])
+        ).sort((a, b) => a - b);
+
+        // Aggiungi gli anni ordinati in ordine decrescente all'array resumeFullYears
+        uniqueYears.forEach((y) => {
+          this.resumeFullYears.push(y.toString());
+        });
+
+        this.updateData(year.toString());
+
+        //this.resumeFullYears = Array.from(this.resume.keys());
+        //this.updateData(this.resumeFullYears[this.resumeFullYears.length - 1]);
+        //this.cryptoService.cryptoResume = this.resume;
       });
     //this.resumeData = this.cryptoService.cryptoDashboard;
     this.isWalletBalanceHidden();
   }
 
   onChange(e: any) {
-    this.updateData(e.target.value);
+    this.getResume(e.target.value);
   }
 
   updateData(year: string) {
-    if (this.years[this.years.length - 1] != year) {
+    if (this.resumeFullYears[this.resumeFullYears.length - 1] != year) {
       this.isPast = true;
     } else this.isPast = false;
     this.resumeData = this.resume.get(year)!;

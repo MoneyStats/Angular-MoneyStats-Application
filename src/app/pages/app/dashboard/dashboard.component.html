@@ -86,7 +86,9 @@
           }}</a>
         </div>
         <div class="transactions">
-          <app-loading-card *ngFor="let item of [1, 2, 3]"></app-loading-card>
+          <div *ngIf="!dashboard.wallets || !dashboard.wallets.length">
+            <app-loading-card *ngFor="let item of [1, 2, 3]"></app-loading-card>
+          </div>
           <app-content-box
             *ngIf="!dashboard.wallets || !dashboard.wallets.length"
             [header]="'dashboard.transaction.nodata.header' | translate"

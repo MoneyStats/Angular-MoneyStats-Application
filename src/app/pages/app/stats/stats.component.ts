@@ -65,7 +65,18 @@ export class StatsComponent implements OnInit, OnDestroy {
         LOG.info(res.message!, 'StatsComponent');
         this.resume = new Map<string, Dashboard>(Object.entries(res.data));
 
-        this.resumeFullYears = this.mapYears(this.resume, year);
+        this.resumeFullYears = [];
+        // Ottieni l'array di anni senza duplicati e in ordine decrescente
+        const uniqueYears = Array.from(
+          new Set(this.resume.get(year.toString())?.yearsWalletStats ?? [])
+        ).sort((a, b) => a - b);
+
+        // Aggiungi gli anni ordinati in ordine decrescente all'array resumeFullYears
+        uniqueYears.forEach((y) => {
+          this.resumeFullYears.push(y.toString());
+        });
+
+        //this.resumeFullYears = this.mapYears(this.resume, year);
         //this.updateData(this.years[this.years.length - 1]);
         this.updateData(year.toString());
       });

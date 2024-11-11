@@ -4,7 +4,6 @@
 const baseUrlApp: string = '../../';
 //const host: string = 'http://pc-giovanni:8080/moneystats-service';
 const host: string = 'http://pc-giovanni:8080';
-//const host: string = 'https://prod-moneystats-service.up.railway.app';
 const subDomain = '';
 //const subDomain = 'moneystats/';
 
@@ -25,6 +24,8 @@ export const environment = {
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
   getDashboardDataUrlMock: baseUrlApp + 'assets/core/mock/dashboard.mock.json',
   mockedGetWalletsDataUrl: baseUrlApp + 'assets/core/mock/wallets.mock.json',
+  mockedGetWalletsCryptoDataUrl:
+    baseUrlApp + 'assets/core/mock/wallets.crypto.mock.json',
   mockedGetWalletByIdDataUrl:
     baseUrlApp + 'assets/core/mock/walletById.mock.json',
   getResumeDataUrlMock: baseUrlApp + 'assets/core/mock/stats.mock.json',
@@ -82,6 +83,7 @@ export const environment = {
   postWalletsDataUrl: host + '/v1/wallets',
   updateWalletsDataUrl: host + '/v1/wallets',
   deleteWalletsDataUrl: host + '/v1/wallets/:id',
+  getWalletsCryptoDataUrl: host + '/v1/wallets/crypto',
 
   /**
    * @Image_Upload
@@ -107,7 +109,7 @@ export const environment = {
    * @Crypto_Section
    */
   getCryptoDashboardDataUrl: host + '/v1/crypto/dashboard',
-  getCryptoResumeDataUrl: host + '/v1/crypto/resume',
+  getCryptoResumeDataUrl: host + '/v1/crypto/resume/:year',
 
   // Cache
   cacheEnable: false,

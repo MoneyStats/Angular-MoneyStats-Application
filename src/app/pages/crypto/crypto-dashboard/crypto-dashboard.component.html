@@ -1,5 +1,8 @@
 <div class="mx-auto section-width">
-  <app-crypto-header [routerLinks]="''"></app-crypto-header>
+  <app-crypto-header
+    [routerLinks]="''"
+    (emitOperationClick)="emitOperationClick($event)"
+  ></app-crypto-header>
 
   <!-- App Capsule -->
   <div id="appCapsule">
@@ -92,9 +95,12 @@
                     class="icon-size icon-color"
                     name="add-circle"
                   ></ion-icon>
-                  <a style="vertical-align: -1px" (click)="vibrate()">{{
-                    "crypto.dashboard.cardRes.opt1" | translate
-                  }}</a>
+                  <a
+                    style="vertical-align: -1px"
+                    (click)="vibrate()"
+                    (click)="getWalletsCryptoData()"
+                    >{{ "crypto.dashboard.cardRes.opt1" | translate }}</a
+                  >
                 </div>
                 <div
                   style="
@@ -526,7 +532,9 @@
           }}</a>
         </div>
         <div class="transactions">
-          <app-loading-card *ngFor="let item of [1, 2, 3]"></app-loading-card>
+          <div *ngIf="!assets || assets.length == 0">
+            <app-loading-card *ngFor="let item of [1, 2, 3]"></app-loading-card>
+          </div>
           <div *ngFor="let asset of assets; let i = index">
             <app-transaction-card
               *ngIf="i < 4"
@@ -637,7 +645,7 @@
 ></app-add-asset-modal>
 <app-operations-modal
   [modalId]="modalConstant.ADDOPERATIONS"
-  [wallets]="cryptoDashboard.wallets"
+  [wallets]="cryptoWallet!"
   [assets]="cryptoDashboard.assets"
   [currency]="cryptoDashboard.currency"
   [statsAssetsDays]="cryptoDashboard.statsAssetsDays"

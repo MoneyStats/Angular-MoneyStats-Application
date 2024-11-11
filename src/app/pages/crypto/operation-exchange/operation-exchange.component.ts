@@ -18,6 +18,7 @@ import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { v4 as uuidv4 } from 'uuid';
 import { Utils } from 'src/assets/core/services/config/utils.service';
+import { SharedService } from 'src/assets/core/services/config/shared.service';
 
 @Component({
   selector: 'app-operation-exchange',
@@ -29,6 +30,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   routeSubscribe: Subscription = new Subscription();
   saveWalletsSubscribe: Subscription = new Subscription();
   getPriceSubscribe: Subscription = new Subscription();
+  getCryptoWalletSubscribe: Subscription = new Subscription();
 
   fiat: string = '';
   operationType: string = '';
@@ -67,6 +69,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
 
   constructor(
     private cryptoService: CryptoService,
+    private shared: SharedService,
     private route: ActivatedRoute,
     private router: Router,
     private cdref: ChangeDetectorRef,
@@ -80,6 +83,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     this.saveWalletsSubscribe.unsubscribe();
     this.routeSubscribe.unsubscribe();
     this.getPriceSubscribe.unsubscribe();
+    this.getCryptoWalletSubscribe.unsubscribe();
   }
 
   public get modalConstant(): typeof ModalConstant {
@@ -108,19 +112,37 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
       this.operationType = a.operationType;
       this.walletSelect = a.wallet;
       this.fiat = a.fiat;
-      let wallets = Utils.copyObject(
-        this.cryptoService.cryptoDashboard.wallets.slice()
-      );
-      this.filterWalletsTransfer(wallets);
-      this.wallet = wallets.find((w: any) => w.name == this.walletSelect)!;
-      this.getCryptoPrices(a.fiat);
-      if (this.operationType == this.operations.TRADING) {
-        let marketData = Utils.copyObject(this.wallet.assets);
-        this.stablecoin = marketData.filter(
-          (md: any) => md.category == MarketDataCategory.STABLECOIN
-        );
-      }
+      let wallets = Utils.isNullOrEmpty(this.shared.getCryptoWallets())
+        ? null
+        : Utils.copyObject(this.shared.getCryptoWallets().slice());
+
+      if (Utils.isNullOrEmpty(wallets)) {
+        this.getWalletsCryptoData(a.fiat);
+      } else this.resumeData(wallets, a.fiat);
     });
+  }
+
+  getWalletsCryptoData(currency: string) {
+    this.getCryptoWalletSubscribe = this.cryptoService
+      .getWalletsCryptoData()
+      .subscribe((data) => {
+        this.cryptoService.cache.cacheWalletsCryptoData(data);
+        LOG.info(data.message!, 'CryptoDashboardComponent');
+        const wallets = data.data;
+        this.resumeData(wallets, currency);
+      });
+  }
+
+  resumeData(wallets: any, currency: string) {
+    this.filterWalletsTransfer(wallets);
+    this.wallet = wallets.find((w: any) => w.name == this.walletSelect)!;
+    this.getCryptoPrices(currency);
+    if (this.operationType == this.operations.TRADING) {
+      let marketData = Utils.copyObject(this.wallet.assets);
+      this.stablecoin = marketData.filter(
+        (md: any) => md.category == MarketDataCategory.STABLECOIN
+      );
+    }
   }
 
   filterWalletsTransfer(wallets: Wallet[]) {

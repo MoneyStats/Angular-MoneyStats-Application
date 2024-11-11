@@ -127,23 +127,24 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
     this.assets = assets.filter((a: any) => a.balance > 0);
     this.operations = [];
     let wallets = Utils.copyObject(this.cryptoService.cryptoDashboard.wallets);
-    wallets.forEach((wallet: any) => {
-      if (wallet.assets && wallet.assets.length > 0)
-        wallet.assets.forEach((asset: any) => {
-          if (asset.operations && asset.operations.length > 0)
-            asset.operations.forEach((operation: any) => {
-              operation.asset = asset;
-              operation.wallet = wallet;
-              if (operation.type != OperationsType.NEWINVESTMENT)
-                operation.assetSell = Utils.copyObject(
-                  this.cryptoService.cryptoDashboard.assets.find(
-                    (a) => a.symbol == operation.entryCoin
-                  )
-                );
-              this.operations.push(operation);
-            });
-        });
-    });
+    if (!Utils.isNullOrEmpty(wallets))
+      wallets.forEach((wallet: any) => {
+        if (wallet.assets && wallet.assets.length > 0)
+          wallet.assets.forEach((asset: any) => {
+            if (asset.operations && asset.operations.length > 0)
+              asset.operations.forEach((operation: any) => {
+                operation.asset = asset;
+                operation.wallet = wallet;
+                if (operation.type != OperationsType.NEWINVESTMENT)
+                  operation.assetSell = Utils.copyObject(
+                    this.cryptoService.cryptoDashboard.assets.find(
+                      (a) => a.symbol == operation.entryCoin
+                    )
+                  );
+                this.operations.push(operation);
+              });
+          });
+      });
     this.operations.sort((a, b) => (a.exitDate! < b.exitDate! ? 1 : -1));
     if (this.operations.length > 0) this.isOperationPresent = true;
   }

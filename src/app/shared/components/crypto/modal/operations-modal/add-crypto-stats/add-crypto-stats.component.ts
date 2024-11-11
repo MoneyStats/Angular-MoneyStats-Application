@@ -15,6 +15,7 @@ import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ErrorService } from 'src/assets/core/interceptors/error.service';
 import { CryptoService } from 'src/assets/core/services/api/crypto.service';
 import { StatsService } from 'src/assets/core/services/api/stats.service';
+import { Utils } from 'src/assets/core/services/config/utils.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 
 @Component({
@@ -63,14 +64,15 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
         (wallet) => wallet.type && wallet.type == 'Holding'
       );
     let assetList: Array<string> = [];
-    this.wallets.forEach((w) => {
-      if (w.assets)
-        w.assets.forEach((a) => {
-          if (!assetList.includes(a.symbol!)) {
-            assetList.push(a.symbol!);
-          }
-        });
-    });
+    if (!Utils.isNullOrEmpty(this.wallets))
+      this.wallets.forEach((w) => {
+        if (w.assets)
+          w.assets.forEach((a) => {
+            if (!assetList.includes(a.symbol!)) {
+              assetList.push(a.symbol!);
+            }
+          });
+      });
     this.assets = this.assets.filter((a) => assetList.includes(a.symbol!));
   }
 

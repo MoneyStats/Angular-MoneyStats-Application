@@ -20,8 +20,9 @@
               (change)="onChange($event)"
             >
               <option
-                *ngFor="let year of years.slice().reverse()"
-                value="{{ year }}"
+                [selected]="currentYear.toString() === year"
+                *ngFor="let year of resumeFullYears.slice().reverse()"
+                [value]="year"
               >
                 {{ year }}
               </option>
@@ -113,5 +114,5 @@
   [assets]="cryptoService.cryptoDashboard.assets"
   [currency]="cryptoService.cryptoDashboard.currency"
   [statsAssetsDays]="cryptoService.cryptoDashboard.statsAssetsDays"
-  (emitAddStats)="getResume()"
+  (emitAddStats)="getResume(currentYear)"
 ></app-operations-modal>

@@ -10,7 +10,9 @@ import { Utils } from 'src/assets/core/services/config/utils.service';
   templateUrl: './crypto-header.component.html',
   styleUrls: ['./crypto-header.component.scss'],
 })
-export class CryptoHeaderComponent implements OnInit {
+export class CryptoHeaderComponent {
+  @Output('emitOperationClick') emitOperationClick =
+    new EventEmitter<boolean>();
   @Input('routerLinks') routerLinks?: string;
   @Input('title') title: string = 'Crypto';
 
@@ -35,7 +37,9 @@ export class CryptoHeaderComponent implements OnInit {
     return ModalConstant;
   }
 
-  ngOnInit(): void {}
+  clickOperation(): void {
+    this.emitOperationClick.emit(true);
+  }
 
   goBack() {
     this.vibrate();
