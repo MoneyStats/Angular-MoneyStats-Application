@@ -85,6 +85,7 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
         this.cryptoService.cache.cacheCryptoDashboardData(data);
         LOG.info(data.message!, 'CryptoDashboardComponent');
         this.cryptoDashboard = data.data;
+        this.shared.setCryptoDashboardData(data.data);
         this.cryptoService.cryptoDashboard = data.data;
         this.assets = data.data.assets;
         //this.cryptoService.cryptoDashboard.assets = this.assets;

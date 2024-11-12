@@ -35,7 +35,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let asset of assets">
+            <tr *ngFor="let asset of cryptoAssets">
               <th scope="row">
                 <img
                   src="{{ asset.icon }}"
@@ -224,7 +224,7 @@
       <app-operations-list
         [modalID]="modalConstant.CRYPTOHISTORY"
         [cryptoDashboard]="cryptoService.cryptoDashboard"
-        [walletsAsset]="cryptoService.cryptoDashboard.wallets"
+        [walletsAsset]="cryptoWallets"
       ></app-operations-list>
     </div>
     <!-- History -->

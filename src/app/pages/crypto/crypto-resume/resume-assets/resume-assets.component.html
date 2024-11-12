@@ -175,7 +175,8 @@
                 >{{ "stats.since" | translate }}
                 {{
                   asset.history != undefined
-                    ? asset.history![asset.history!.length - 1].date
+                    ? (asset.history![asset.history!.length - 1].date
+                      | date : "dd MMM y")
                     : ("" | date : "dd MMM y")
                 }}</span
               >

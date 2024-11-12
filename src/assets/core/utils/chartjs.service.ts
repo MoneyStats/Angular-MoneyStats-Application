@@ -4,6 +4,7 @@ import { Stats } from '../data/class/dashboard.class';
 import * as ApexCharts from 'apexcharts';
 import { ChartJSOptions } from '../data/constant/apex.chart';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
+import { Utils } from '../services/config/utils.service';
 
 //declare var ApexCharts: any;
 
@@ -37,7 +38,8 @@ export class ChartJSService {
       value.forEach((v: any) => {
         historyBalance.push(v.balance);
         if (index === 0) {
-          labels.push(v.date);
+          if (v.date.length === 4) labels.push(v.date);
+          else labels.push(new Date(v.date).toLocaleDateString());
         }
       });
       let dataset = {

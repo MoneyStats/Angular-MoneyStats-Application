@@ -1,15 +1,18 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import {
   Asset,
   CryptoDashboard,
 } from 'src/assets/core/data/class/crypto.class';
+import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import {
   ModalConstant,
   OperationsType,
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
 import { CryptoService } from 'src/assets/core/services/api/crypto.service';
+import { SharedService } from 'src/assets/core/services/config/shared.service';
+import { Utils } from 'src/assets/core/services/config/utils.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
@@ -20,18 +23,28 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 })
 export class CryptoResumeComponent implements OnInit, OnDestroy {
   getResumeSub: Subscription = new Subscription();
+  getCryptoWalletSubscribe: Subscription = new Subscription();
+  cryptoAssetSubscribe: Subscription = new Subscription();
+
   amount: string = '******';
   hidden: boolean = false;
-  assets: Asset[] = [];
+  resumeAssets: Asset[] = [];
   resumeData: CryptoDashboard = new CryptoDashboard();
   resume: Map<string, CryptoDashboard> = new Map<string, CryptoDashboard>();
   resumeFullYears: Array<string> = [];
+
+  /** History Object */
+  @Output('cryptoAssets') cryptoAssets: Array<Asset> = [];
+  @Output('cryptoWallets') cryptoWallets: Array<Wallet> = [];
 
   currentYear = new Date().getFullYear();
 
   isPast: boolean = false;
 
-  constructor(public cryptoService: CryptoService) {}
+  constructor(
+    public cryptoService: CryptoService,
+    private shared: SharedService
+  ) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -82,7 +95,7 @@ export class CryptoResumeComponent implements OnInit, OnDestroy {
       this.isPast = true;
     } else this.isPast = false;
     this.resumeData = this.resume.get(year)!;
-    this.assets = this.resumeData.assets;
+    this.resumeAssets = this.resumeData.assets;
   }
 
   isOperationPresent() {
@@ -114,7 +127,33 @@ export class CryptoResumeComponent implements OnInit, OnDestroy {
     }
   }
 
+  getAssets() {
+    if (Utils.isNullOrEmpty(this.shared.getCryptoAssets()))
+      this.cryptoAssetSubscribe = this.cryptoService
+        .getCryptoAssetsData()
+        .subscribe((data) => {
+          this.cryptoService.cache.cacheAssetsData(data);
+          LOG.info(data.message!, 'CryptoAssetComponent');
+          this.cryptoAssets = this.shared.setCryptoAssets(data.data);
+        });
+    else this.cryptoAssets = this.shared.getCryptoAssets();
+  }
+
+  getWalletsCryptoData() {
+    if (Utils.isNullOrEmpty(this.shared.getCryptoWallets()))
+      this.getCryptoWalletSubscribe = this.cryptoService
+        .getWalletsCryptoData()
+        .subscribe((data) => {
+          this.cryptoService.cache.cacheWalletsCryptoData(data);
+          LOG.info(data.message!, 'CryptoDashboardComponent');
+          this.cryptoWallets = this.shared.setCryptoWallets(data.data);
+        });
+    else this.cryptoWallets = this.shared.getCryptoWallets();
+  }
+
   ngOnDestroy(): void {
     this.getResumeSub.unsubscribe();
+    this.cryptoAssetSubscribe.unsubscribe();
+    this.cryptoAssetSubscribe.unsubscribe();
   }
 }

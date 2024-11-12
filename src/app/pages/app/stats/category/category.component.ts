@@ -13,6 +13,7 @@ import {
 } from 'src/assets/core/data/constant/apex.chart';
 import { ChartJSService } from 'src/assets/core/utils/chartjs.service';
 import { Utils } from 'src/assets/core/services/config/utils.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
 
 @Component({
   selector: 'app-category',
@@ -52,7 +53,7 @@ export class CategoryComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     if (this.dashboard.statsWalletDays) {
-      this.generateData();
+      // this.generateData();
       this.renderChart();
     }
   }
@@ -70,6 +71,7 @@ export class CategoryComponent implements OnInit, OnChanges {
 
   generateData() {
     let moreThanOneInAMonth: Array<string> = [];
+    let wallets: Array<any> = [...this.dashboard.wallets];
     if (this.dashboard.statsWalletDays) {
       this.dashboard.statsWalletDays.forEach((date) => {
         let yearMonth: string = date.split('-')[0] + '-' + date.split('-')[1];
@@ -82,13 +84,32 @@ export class CategoryComponent implements OnInit, OnChanges {
           moreThanOneInAMonth.push(date);
         }
       });
+      if (UserService.getUserData().settings.liveWallets === 'ACTIVE')
+        if (
+          !moreThanOneInAMonth.includes(new Date().toString()) &&
+          moreThanOneInAMonth.filter(
+            (d) => new Date(d).getFullYear() === new Date().getFullYear()
+          ).length > 0
+        ) {
+          let date = new Date();
+          moreThanOneInAMonth.push(date.toString());
+          wallets.map((w) => {
+            if (w.balance) {
+              let stats = new Stats();
+              stats.balance = w.balance;
+              stats.date = date;
+              if (!w.history.includes(stats)) w.history.push(stats);
+            }
+            return w;
+          });
+        }
     }
     // INVESTMENTS
     this.categoryTableBalance = [];
     this.totalList = [];
     this.balances = [];
 
-    let table = this.dashboard.wallets.filter((wallet) =>
+    let table = wallets.filter((wallet) =>
       this.INVESTMENTS.includes(wallet.category)
     );
     moreThanOneInAMonth.forEach((date) => {
@@ -110,9 +131,7 @@ export class CategoryComponent implements OnInit, OnChanges {
     this.totalList = [];
     this.balances = [];
 
-    table = this.dashboard.wallets.filter((wallet) =>
-      this.CAPITAL.includes(wallet.category)
-    );
+    table = wallets.filter((wallet) => this.CAPITAL.includes(wallet.category));
     moreThanOneInAMonth.forEach((date) => {
       this.categoryTableBalance.push(this.tableCreate(date, table));
     });
@@ -132,9 +151,7 @@ export class CategoryComponent implements OnInit, OnChanges {
     this.totalList = [];
     this.balances = [];
 
-    table = this.dashboard.wallets.filter((wallet) =>
-      this.SAVING.includes(wallet.category)
-    );
+    table = wallets.filter((wallet) => this.SAVING.includes(wallet.category));
     moreThanOneInAMonth.forEach((date) => {
       this.categoryTableBalance.push(this.tableCreate(date, table));
     });
@@ -154,9 +171,7 @@ export class CategoryComponent implements OnInit, OnChanges {
     this.totalList = [];
     this.balances = [];
 
-    table = this.dashboard.wallets.filter((wallet) =>
-      this.DEBITS.includes(wallet.category)
-    );
+    table = wallets.filter((wallet) => this.DEBITS.includes(wallet.category));
     moreThanOneInAMonth.forEach((date) => {
       this.categoryTableBalance.push(this.tableCreate(date, table));
     });
@@ -176,9 +191,7 @@ export class CategoryComponent implements OnInit, OnChanges {
     this.totalList = [];
     this.balances = [];
 
-    table = this.dashboard.wallets.filter((wallet) =>
-      this.OTHER.includes(wallet.category)
-    );
+    table = wallets.filter((wallet) => this.OTHER.includes(wallet.category));
     moreThanOneInAMonth.forEach((date) => {
       this.categoryTableBalance.push(this.tableCreate(date, table));
     });
@@ -200,7 +213,11 @@ export class CategoryComponent implements OnInit, OnChanges {
 
     wallet.forEach((w: any) => {
       let hist = w.history
-        ? w.history.find((h: any) => h.date === date)
+        ? w.history.find(
+            (h: any) =>
+              new Date(h.date).toLocaleDateString() ===
+              new Date(date).toLocaleDateString()
+          )
         : undefined;
       if (!hist) {
         hist = new Stats();

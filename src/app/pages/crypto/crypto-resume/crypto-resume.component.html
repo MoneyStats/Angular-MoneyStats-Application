@@ -36,7 +36,7 @@
     <div class="card-body">
       <ul class="nav nav-tabs capsuled" role="tablist">
         <!-- Se Cambi *ngIf="assets" devi cambiare anche altra -->
-        <li *ngIf="assets" class="nav-item">
+        <li *ngIf="resumeAssets" class="nav-item">
           <a
             class="nav-link active"
             data-bs-toggle="tab"
@@ -53,7 +53,9 @@
         </li>
         <li class="nav-item">
           <a
-            class="nav-link {{ assets ? '' : 'active' }}"
+            (click)="getAssets()"
+            (click)="getWalletsCryptoData()"
+            class="nav-link {{ resumeAssets ? '' : 'active' }}"
             data-bs-toggle="tab"
             href="#resume"
             role="tab"
@@ -66,7 +68,7 @@
         <div class="tab-pane fade show active" id="overview" role="tabpanel">
           <app-resume-assets
             [hidden]="hidden"
-            *ngIf="assets && assets.length"
+            *ngIf="resumeAssets && resumeAssets.length"
             [resumeData]="resumeData"
             [isPast]="isPast"
           ></app-resume-assets>
@@ -93,7 +95,7 @@
           ></app-trading-resume>
         </div>
         <div
-          class="tab-pane fade {{ assets ? '' : 'show active' }}"
+          class="tab-pane fade {{ resumeAssets ? '' : 'show active' }}"
           id="resume"
           role="tabpanel"
         >
@@ -101,6 +103,8 @@
             [hidden]="hidden"
             [cryptoResume]="resume"
             [cryptoCurrency]="resumeData.currency"
+            [cryptoAssets]="cryptoAssets"
+            [cryptoWallets]="cryptoWallets"
           ></app-investments-history>
         </div>
       </div>

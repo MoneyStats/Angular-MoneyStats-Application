@@ -71,7 +71,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     ScreenService.setupHeader();
     ScreenService.showFooter();
     ScreenService.goToSettings();
-    this.user = this.authService.user;
+    this.user = UserService.getUserData();
     ThemeService.switchDarkMode();
     if (this.user?.name === 'DEFAULT_NAME') {
       this.user = this.authService.user;
