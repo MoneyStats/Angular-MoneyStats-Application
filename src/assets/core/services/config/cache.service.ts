@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, switchMap, timer } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Utils } from './utils.service';
+import { SharedService } from './shared.service';
 
 @Injectable({
   providedIn: 'root',
@@ -21,13 +22,14 @@ export class CacheService {
   // Crypto Data
   private cryptoDashboardDataCache: any;
   private cryptoResumeDataCache: { [year: number]: any } = {};
+  private historyCryptoDataCache: any;
   private assetsDataCache: any;
   private getAssetsByIdentifierDataCache: { [identifier: string]: any } = {};
 
   // Market Data Cache
   private marketDataByCurrencyCache: any;
 
-  constructor() {
+  constructor(private shared: SharedService) {
     timer(0, this.cacheTimeout)
       .pipe(switchMap(() => this.clearCacheObservable()))
       .subscribe();
@@ -42,6 +44,7 @@ export class CacheService {
   }
 
   clearCache(): any {
+    this.shared.clearData();
     this.cryptoDashboardDataCache = null;
     this.cryptoResumeDataCache = {};
     this.assetsDataCache = null;
@@ -52,6 +55,7 @@ export class CacheService {
     this.getWalletByIdDataCache = {};
     this.getAssetsByIdentifierDataCache = {};
     this.getWalletsCryptoDataCache = null;
+    this.historyCryptoDataCache = null;
   }
 
   /** @Wallets */
@@ -173,6 +177,15 @@ export class CacheService {
   cacheCryptoResumeData(resume: any, year: number) {
     if (environment.cacheEnable)
       this.cryptoResumeDataCache[year] = Utils.copyObject(resume);
+  }
+
+  getCryptoHistoryCache() {
+    return Utils.copyObject(this.historyCryptoDataCache);
+  }
+
+  cacheCryptoHistoryData(history: any) {
+    if (environment.cacheEnable)
+      this.historyCryptoDataCache = Utils.copyObject(history);
   }
   /**
    * END @Crypto_Data

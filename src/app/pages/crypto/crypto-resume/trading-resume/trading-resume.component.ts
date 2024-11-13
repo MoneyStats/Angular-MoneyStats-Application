@@ -13,6 +13,7 @@ import {
   OperationsType,
 } from 'src/assets/core/data/constant/constant';
 import {
+  Asset,
   CryptoDashboard,
   Operation,
 } from 'src/assets/core/data/class/crypto.class';
@@ -31,6 +32,7 @@ export class TradingResumeComponent implements OnInit, OnChanges {
   public trading?: Partial<ApexOptions>;
   @Input('cryptoDashboard') cryptoDashboard: CryptoDashboard =
     new CryptoDashboard();
+  @Input('cryptoAssets') cryptoAssets: Asset[] = [];
   @Input('wallets') wallets: Wallet[] = [];
   operations: Array<Operation> = [];
 
@@ -72,7 +74,7 @@ export class TradingResumeComponent implements OnInit, OnChanges {
 
   getOperations() {
     let totalInvested: number = 0;
-
+    console.log(this.cryptoAssets);
     let operations: Operation[] = [];
     let wallets = Utils.copyObject(this.wallets);
     if (wallets)
@@ -91,7 +93,7 @@ export class TradingResumeComponent implements OnInit, OnChanges {
                 operation.wallet = wallet;
                 if (operation.type != OperationsType.NEWINVESTMENT)
                   operation.assetSell = Utils.copyObject(
-                    this.cryptoService.cryptoDashboard.assets.find(
+                    this.cryptoAssets.find(
                       (a) => a.symbol == operation.entryCoin
                     )
                   );

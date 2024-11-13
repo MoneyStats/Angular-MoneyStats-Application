@@ -15,6 +15,7 @@ import {
 } from 'src/assets/core/data/constant/constant';
 import { Subscription } from 'rxjs';
 import { Utils } from 'src/assets/core/services/config/utils.service';
+import { SharedService } from 'src/assets/core/services/config/shared.service';
 
 @Component({
   selector: 'app-crypto-asset',
@@ -35,7 +36,10 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
   showZeroBalance: boolean = false;
   thisYear: number = new Date().getFullYear();
 
-  constructor(private cryptoService: CryptoService) {}
+  constructor(
+    private cryptoService: CryptoService,
+    private shared: SharedService
+  ) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -51,7 +55,10 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
   }
 
   getAssets() {
-    this.cryptoDashboard = Utils.copyObject(this.cryptoService.cryptoDashboard);
+    const dashboard = this.shared.getCryptoDashboardData();
+    this.cryptoDashboard = !Utils.isNullOrEmpty(dashboard)
+      ? dashboard
+      : new CryptoDashboard();
     this.cryptoAssetSubscribe = this.cryptoService
       .getCryptoAssetsData()
       .subscribe((data) => {
@@ -60,18 +67,19 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
         this.assets = data.data;
         this.cryptoService.assets = data.data;
         this.cryptoDashboard.assets = data.data;
+        this.graph1Y();
       });
-    this.graph1Y();
     this.isWalletBalanceHidden();
   }
 
   graphAll() {
     if (!this.chartOptions) {
-      let dashboard = Utils.copyObject(this.cryptoDashboard);
+      let dashboard = new CryptoDashboard();
       // Get All Date serve a prendere tutte le date per i grafici
+      dashboard.assets = this.assets;
       dashboard.statsAssetsDays = this.getAllDate();
       setTimeout(() => {
-        if (this.cryptoDashboard.wallets) {
+        if (dashboard.assets) {
           if (ScreenService.screenWidth! <= 780) {
             this.chartOptions = ChartService.renderCryptoDatas(dashboard, [
               ApexChartsOptions.MOBILE_MODE,
@@ -89,16 +97,15 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
 
   graph1Y() {
     if (!this.chart1Y) {
-      let dashboard = Utils.copyObject(this.cryptoDashboard);
+      let dashboard = new CryptoDashboard();
       // Get All Date serve a prendere tutte le date per i grafici
+      dashboard.assets = this.assets;
       dashboard.statsAssetsDays = this.getAllDate();
 
       let assets: Asset[] = [];
       dashboard.assets.forEach((asset: Asset) => {
         let last1Year = asset.history?.filter(
-          (h) =>
-            h.date.toString().split('-')[0] ===
-            new Date().getFullYear().toString()
+          (h) => new Date(h.date).getFullYear() === new Date().getFullYear()
         );
         asset.history = last1Year;
         if (asset.balance != 0) assets.push(asset);
@@ -126,7 +133,8 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
 
   graph3Y() {
     if (!this.chart3Y) {
-      let dashboard = Utils.copyObject(this.cryptoDashboard);
+      let dashboard = new CryptoDashboard();
+      dashboard.assets = this.assets;
       // Get All Date serve a prendere tutte le date per i grafici
       dashboard.statsAssetsDays = this.getAllDate();
       let last3 = [

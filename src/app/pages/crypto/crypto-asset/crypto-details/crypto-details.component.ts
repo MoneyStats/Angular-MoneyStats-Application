@@ -18,6 +18,7 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { StorageConstant } from 'src/assets/core/data/constant/constant';
 import { Subscription } from 'rxjs';
 import { Utils } from 'src/assets/core/services/config/utils.service';
+import { SharedService } from 'src/assets/core/services/config/shared.service';
 
 @Component({
   selector: 'app-crypto-details',
@@ -39,7 +40,8 @@ export class CryptoDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private cryptoService: CryptoService,
-    private _renderer2: Renderer2
+    private _renderer2: Renderer2,
+    private shared: SharedService
   ) {}
 
   ngOnDestroy(): void {
@@ -51,7 +53,7 @@ export class CryptoDetailsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     ScreenService.hideFooter();
 
-    let assets = [...this.cryptoService.assets];
+    let assets = [...this.shared.getCryptoAssets()];
     this.routeSubscribe = this.route.params.subscribe((a: any) => {
       this.assetName = a.identifier;
       //if (assets.length != 0) {
@@ -60,9 +62,12 @@ export class CryptoDetailsComponent implements OnInit, OnDestroy {
 
       this.getCryptoDetails(a.identifier);
 
-      if (this.cryptoService.cryptoDashboard.balance != 0 && assets.length != 0)
+      if (
+        this.shared.getCryptoDashboardData().balance != 0 &&
+        assets.length != 0
+      )
         this.cryptoDashboard = Utils.copyObject(
-          this.cryptoService.cryptoDashboard
+          this.shared.getCryptoDashboardData()
         );
       else this.getCryptoDashboard();
     });

@@ -18,19 +18,18 @@
         }}</a>
       </div>
       <app-operations-list
-        [modalID]="modalConstant.CRYPTOOPERATION"
+        [modalID]="modalConstant.CRYPTOOPERATION + year"
         [cryptoDashboard]="cryptoService.cryptoDashboard"
-        [walletsAsset]="cryptoService.cryptoDashboard.wallets"
+        [walletsAsset]="cryptoWallets"
         [isFullList]="true"
         [operationsMapByYear]="operationsMapByYear"
         [year]="year"
       ></app-operations-list>
     </div>
-    <!-- History -->
   </div>
 </div>
-<app-operation-details
+<!--<app-operation-details
   [modalId]="modalConstant.CRYPTOOPERATIONDETAILS"
   [operation]="operationSelect"
   [currency]="cryptoCurrency"
-></app-operation-details>
+></app-operation-details>-->

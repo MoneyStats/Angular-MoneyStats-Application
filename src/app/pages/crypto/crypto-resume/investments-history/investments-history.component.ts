@@ -22,7 +22,6 @@ import { ChartJSOptions } from 'src/assets/core/data/constant/apex.chart';
 import { ChartJSService } from 'src/assets/core/utils/chartjs.service';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { SharedService } from 'src/assets/core/services/config/shared.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-investments-history',
@@ -33,6 +32,7 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
   amount: string = '******';
   @Input('hidden') hidden: boolean = false;
   @Input('cryptoResume') cryptoResume!: Map<string, CryptoDashboard>;
+  @Input('cryptoHistory') cryptoHistory!: Map<number, CryptoDashboard>;
   @Input('cryptoCurrency') cryptoCurrency: string = '';
   @Input('cryptoAssets') cryptoAssets: Asset[] = [];
   @Input('cryptoWallets') cryptoWallets: Wallet[] = [];
@@ -74,12 +74,21 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
 
   getResume() {
     this.tableBalance = [];
-    if (!this.cryptoResume) {
-      this.cryptoResume = this.shared.getCryptoResumeData();
+    this.balances = [];
+    if (!Utils.isNullOrEmpty(this.cryptoHistory)) {
+      this.cryptoHistory = this.shared.getCryptoHistoryData();
     }
-    this.cryptoResume.forEach((value: CryptoDashboard, key: string) => {
-      this.tableBalance.push(this.tableCreate(key, value));
-    });
+    if (!Utils.isNullOrEmpty(this.cryptoHistory)) {
+      if (this.cryptoHistory instanceof Map) {
+        this.cryptoHistory.forEach((value: CryptoDashboard, key: number) => {
+          this.tableBalance.push(this.tableCreate(key.toString(), value));
+        });
+      } else {
+        Object.entries(this.cryptoHistory).forEach(([key, value]) => {
+          this.tableBalance.push(this.tableCreate(key.toString(), value));
+        });
+      }
+    }
     this.totalMap.set('History', this.totalList);
     this.renderChart();
   }
@@ -130,7 +139,8 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
    * END History Tab Section
    */
   getOperations() {
-    this.cryptoAssets = this.cryptoAssets.filter((a: any) => a.balance > 0);
+    let assets = Utils.copyObject(this.cryptoAssets);
+    this.cryptoAssets = assets.filter((a: any) => a.balance > 0);
     this.operations = [];
     if (!Utils.isNullOrEmpty(this.cryptoWallets))
       this.cryptoWallets.forEach((wallet: any) => {
@@ -142,7 +152,7 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
                 operation.wallet = wallet;
                 if (operation.type != OperationsType.NEWINVESTMENT)
                   operation.assetSell = Utils.copyObject(
-                    this.cryptoService.cryptoDashboard.assets.find(
+                    this.cryptoAssets.find(
                       (a) => a.symbol == operation.entryCoin
                     )
                   );

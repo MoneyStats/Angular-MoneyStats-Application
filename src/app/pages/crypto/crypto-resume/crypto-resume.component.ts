@@ -25,6 +25,7 @@ export class CryptoResumeComponent implements OnInit, OnDestroy {
   getResumeSub: Subscription = new Subscription();
   getCryptoWalletSubscribe: Subscription = new Subscription();
   cryptoAssetSubscribe: Subscription = new Subscription();
+  cryptoHistorySubscribe: Subscription = new Subscription();
 
   amount: string = '******';
   hidden: boolean = false;
@@ -36,6 +37,7 @@ export class CryptoResumeComponent implements OnInit, OnDestroy {
   /** History Object */
   @Output('cryptoAssets') cryptoAssets: Array<Asset> = [];
   @Output('cryptoWallets') cryptoWallets: Array<Wallet> = [];
+  @Output('cryptoHistory') cryptoHistory?: Map<number, CryptoDashboard>;
 
   currentYear = new Date().getFullYear();
 
@@ -149,6 +151,18 @@ export class CryptoResumeComponent implements OnInit, OnDestroy {
           this.cryptoWallets = this.shared.setCryptoWallets(data.data);
         });
     else this.cryptoWallets = this.shared.getCryptoWallets();
+  }
+
+  getCryptoHistoryData() {
+    if (Utils.isNullOrEmpty(this.shared.getCryptoHistoryData()))
+      this.cryptoHistorySubscribe = this.cryptoService
+        .getCryptoHistoryData()
+        .subscribe((data) => {
+          this.cryptoService.cache.cacheCryptoHistoryData(data.data);
+          LOG.info(data.message!, 'CryptoDashboardComponent');
+          this.cryptoHistory = this.shared.setCryptoHistoryData(data.data);
+        });
+    else this.cryptoHistory = this.shared.getCryptoHistoryData();
   }
 
   ngOnDestroy(): void {

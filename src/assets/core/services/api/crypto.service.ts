@@ -10,6 +10,7 @@ import { Wallet } from '../../data/class/dashboard.class';
 import { Asset, CryptoDashboard } from '../../data/class/crypto.class';
 import { CacheService } from '../config/cache.service';
 import { UserService } from './user.service';
+import { Utils } from '../config/utils.service';
 
 @Injectable({
   providedIn: 'root',
@@ -113,6 +114,23 @@ export class CryptoService {
     }
   }
 
+  getCryptoHistoryData(): Observable<ResponseModel> {
+    if (this.cache.getCryptoHistoryCache())
+      return of(this.cache.getCryptoHistoryCache());
+    if (UserService.getUserData().mockedUser) {
+      return this.http.get<ResponseModel>(
+        environment.getCryptoHistoryDataUrlMock
+      );
+    } else {
+      const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
+      const headers = new HttpHeaders({ Authorization: authToken! });
+      const url = environment.getCryptoHistoryDataUrl;
+      return this.http.get<ResponseModel>(url, {
+        headers: headers,
+      });
+    }
+  }
+
   getCryptoAssetsData(): Observable<ResponseModel> {
     if (this.cache.getAssetsCache()) return of(this.cache.getAssetsCache());
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
@@ -184,5 +202,48 @@ export class CryptoService {
         headers: headers,
       });
     }
+  }
+
+  getAssetList(wallets: Wallet[]): Asset[] {
+    const allAssets: Array<Asset> = [];
+    wallets.forEach((wallet) => {
+      wallet.assets.forEach((asset) => {
+        if (allAssets.find((a) => a.name == asset.name)) {
+          const index = allAssets.indexOf(
+            allAssets.find((a) => a.name == asset.name)!
+          );
+          if (!Utils.isNullOrEmpty(allAssets[index].balance))
+            allAssets[index].balance! += asset.balance!;
+          allAssets[index].value! += asset.value!;
+          allAssets[index].performance! =
+            (allAssets[index].performance! + asset.performance!) / 2;
+
+          allAssets[index].trend! = allAssets[index].trend! + asset.trend!;
+
+          asset.history?.forEach((history) => {
+            let hist = allAssets[index].history!.find(
+              (h) => h.date == history.date
+            )!;
+            allAssets[index].history!.find(
+              (h) => h.date == history.date
+            )!.balance += history.balance;
+            allAssets[index].history!.find(
+              (h) => h.date == history.date
+            )!.trend += history.trend;
+            allAssets[index].history!.find(
+              (h) => h.date == history.date
+            )!.percentage = (hist.percentage + history.percentage) / 2;
+          });
+
+          asset.operations.forEach((o) => {
+            allAssets[index].operations.push(o);
+          });
+          allAssets[index].operations.sort((o) =>
+            o.exitDate != undefined ? o.exitDate : o.entryDate
+          );
+        } else allAssets.push(asset);
+      });
+    });
+    return allAssets;
   }
 }

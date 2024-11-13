@@ -3,6 +3,7 @@ import {
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
@@ -11,6 +12,7 @@ import {
   OperationsType,
 } from 'src/assets/core/data/constant/constant';
 import {
+  Asset,
   CryptoDashboard,
   Operation,
 } from 'src/assets/core/data/class/crypto.class';
@@ -26,6 +28,7 @@ import { Utils } from 'src/assets/core/services/config/utils.service';
 })
 export class OperationsListComponent implements OnInit, OnChanges {
   @Input('walletsAsset') walletsAsset: Wallet[] = [];
+  @Input('cryptoAssets') cryptoAssets: Asset[] = [];
   @Input('cryptoDashboard') cryptoDashboard: CryptoDashboard =
     new CryptoDashboard();
   @Input('isAssetOperations') isAssetOperations: boolean = false;
@@ -38,7 +41,7 @@ export class OperationsListComponent implements OnInit, OnChanges {
   @Input('isFullList') isFullList: boolean = false;
   @Input('modalID') modalID: string = uuidv4();
 
-  operationSelect: any;
+  @Output('operationSelect') operationSelect: any;
 
   operations: Operation[] = [];
   constructor(private cryptoService: CryptoService, private router: Router) {}
@@ -58,6 +61,9 @@ export class OperationsListComponent implements OnInit, OnChanges {
   }
 
   getOperations() {
+    let assets = Utils.isNullOrEmpty(this.cryptoAssets)
+      ? this.cryptoService.getAssetList(this.walletsAsset)
+      : this.cryptoAssets;
     let operations: Operation[] = [];
     let wallets = Utils.copyObject(this.walletsAsset);
     wallets.forEach((wallet: any) => {
@@ -69,9 +75,7 @@ export class OperationsListComponent implements OnInit, OnChanges {
               operation.wallet = wallet;
               if (operation.type != OperationsType.NEWINVESTMENT)
                 operation.assetSell = Utils.copyObject(
-                  this.cryptoService.cryptoDashboard.assets.find(
-                    (a) => a.symbol == operation.entryCoin
-                  )
+                  assets.find((a) => a.symbol == operation.entryCoin)
                 );
               operations.push(operation);
             });

@@ -10,10 +10,25 @@ import { Asset, CryptoDashboard } from '../../data/class/crypto.class';
 export class SharedService {
   environment = environment;
 
+  private cryptoCurrency: string = '';
+
   private cryptoDashboard?: CryptoDashboard;
   private cryptoAssets: Array<Asset> = [];
   private cryptoWallets: Array<Wallet> = [];
-  private cryptoResumeData: any = [];
+  private cryptoResumeData: any;
+  private cryptoHistoryData: { [year: number]: any } = {};
+
+  /**
+   * Cleaned By @CacheService
+   */
+  clearData() {
+    this.cryptoCurrency = '';
+    this.cryptoDashboard = undefined;
+    this.cryptoAssets = [];
+    this.cryptoWallets = [];
+    this.cryptoResumeData = null;
+    this.cryptoHistoryData = {};
+  }
 
   getCryptoDashboardData(): CryptoDashboard {
     return Utils.copyObject(this.cryptoDashboard);
@@ -59,5 +74,14 @@ export class SharedService {
   setCryptoAssets(assets: Array<Asset>) {
     this.cryptoAssets = Utils.copyObject(assets);
     return assets;
+  }
+
+  getCryptoHistoryData() {
+    return Utils.copyObject(this.cryptoHistoryData);
+  }
+
+  setCryptoHistoryData(history: any) {
+    this.cryptoHistoryData = Utils.copyObject(history);
+    return history;
   }
 }

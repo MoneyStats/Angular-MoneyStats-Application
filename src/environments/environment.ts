@@ -37,6 +37,8 @@ export const environment = {
   getCryptoAssetsMock: baseUrlApp + 'assets/core/mock/crypto.assets.mock.json',
   getCryptoAssetsDetailsMock:
     baseUrlApp + 'assets/core/mock/crypto.details.mock.json',
+  getCryptoHistoryDataUrlMock:
+    baseUrlApp + 'assets/core/mock/history.crypto.mock.json',
 
   /*
    * Authentication Datas
@@ -110,6 +112,7 @@ export const environment = {
    */
   getCryptoDashboardDataUrl: host + '/v1/crypto/dashboard',
   getCryptoResumeDataUrl: host + '/v1/crypto/resume/:year',
+  getCryptoHistoryDataUrl: host + '/v1/crypto/history',
 
   // Cache
   cacheEnable: false,
