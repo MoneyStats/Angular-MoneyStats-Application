@@ -140,4 +140,15 @@ export class ResumeAssetsComponent implements OnInit, OnChanges {
     array.index = array.length - 1;
     return array;
   }
+
+  calculatePercentage(
+    balance: number,
+    oldBalance: number,
+    isPast: boolean,
+    pastPercentage: number
+  ) {
+    if (isPast) return pastPercentage;
+    const res = (((balance - oldBalance) / oldBalance) * 100).toFixed(2);
+    return Number.parseFloat(res);
+  }
 }

@@ -44,6 +44,21 @@ export class AddStatsComponent implements OnInit, OnDestroy {
     this.addStatsSubscribe.unsubscribe();
   }
 
+  calculatePerformance(wallet: Wallet) {
+    if (!wallet.newBalance) return 0;
+    const res = (wallet.newBalance - wallet.balance).toFixed(2);
+    return Number.parseFloat(res);
+  }
+
+  calculatePercentage(wallet: Wallet) {
+    if (!wallet.newBalance) return 0;
+    const res = (
+      ((wallet.newBalance - wallet.balance) / wallet.balance) *
+      100
+    ).toFixed(2);
+    return Number.parseFloat(res);
+  }
+
   ngOnInit(): void {
     ScreenService.setupHeader();
     ScreenService.hideFooter();

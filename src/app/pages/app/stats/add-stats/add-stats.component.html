@@ -6,7 +6,7 @@
   >
   </app-header-mobile>
   <div id="appCapsule">
-    <form #f="ngForm" type="submit">
+    <form #f="ngForm" type="submit" style="cursor: auto">
       <div class="row">
         <app-title-desktop
           class="col-md-6"
@@ -70,6 +70,127 @@
             <small>{{ "insertStats.card_subtitle" | translate }}</small>
           </p>
         </div>
+        <div class="card mb-2">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Logo</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">New Stats</th>
+                  <th scope="col" class="text-end hidden_mobile">
+                    Current Balance
+                  </th>
+                  <th scope="col" class="text-end hidden_mobile">
+                    Performance
+                  </th>
+                  <th scope="col" class="text-end hidden_mobile">
+                    Date last Stats
+                  </th>
+                  <th
+                    *ngIf="!saveValidation"
+                    scope="col"
+                    class="text-end hidden_mobile"
+                  >
+                    New Performance
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let wallet of walletsToSave">
+                  <td>
+                    <img
+                      src="{{ wallet.img }}"
+                      alt="img"
+                      class="image-block imaged w48 me-2"
+                      style="border-radius: 50%"
+                    />
+                  </td>
+                  <th scope="row" class="align-middle">{{ wallet.name }}</th>
+                  <td class="align-middle text-primary">
+                    <div *ngIf="!saveValidation" class="form-group boxed">
+                      <div class="input-wrapper">
+                        <input
+                          name="newStatsBalance"
+                          [(ngModel)]="wallet.newBalance"
+                          #newStatsBalance="ngModel"
+                          type="number"
+                          min="0"
+                          class="form-control"
+                          id="newStatsBalance"
+                          placeholder="{{ 'insertStats.newBal' | translate }}"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <span *ngIf="saveValidation" class="h5 mb-0" id="tot1"
+                      >{{ coinSymbol }} {{ wallet.balance }}</span
+                    >
+                  </td>
+                  <td class="align-middle text-primary hidden_mobile text-end">
+                    {{ coinSymbol }} {{ wallet.balance }}
+                  </td>
+                  <td class="align-middle text-end hidden_mobile">
+                    <div class="text-small">
+                      <span
+                        class="badge {{
+                          wallet.performanceLastStats == 0
+                            ? 'badge-warning'
+                            : wallet.performanceLastStats > 0
+                            ? 'badge-success'
+                            : 'badge-danger'
+                        }}"
+                      >
+                        <ion-icon
+                          name="{{
+                            wallet.performanceLastStats > 0
+                              ? 'arrow-up-outline'
+                              : 'arrow-down-outline'
+                          }}"
+                        ></ion-icon>
+                        {{ coinSymbol }} {{ wallet.differenceLastStats }} ({{
+                          wallet.performanceLastStats
+                        }}%)
+                      </span>
+                    </div>
+                  </td>
+                  <td class="align-middle text-end hidden_mobile">
+                    {{ wallet.dateLastStats | date : "dd MMM y" }}
+                  </td>
+                  <td
+                    *ngIf="!saveValidation"
+                    style="max-width: 50px"
+                    class="align-middle text-end hidden_mobile"
+                  >
+                    <div class="text-small">
+                      <span
+                        class="badge {{
+                          calculatePerformance(wallet) == 0
+                            ? 'badge-warning'
+                            : calculatePerformance(wallet) > 0
+                            ? 'badge-success'
+                            : 'badge-danger'
+                        }}"
+                      >
+                        <ion-icon
+                          name="{{
+                            calculatePerformance(wallet) >= 0
+                              ? 'arrow-up-outline'
+                              : 'arrow-down-outline'
+                          }}"
+                        ></ion-icon>
+                        {{ coinSymbol }}
+                        {{ calculatePerformance(wallet) }} ({{
+                          calculatePercentage(wallet)
+                        }}%)
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
         <app-content-box
           *ngIf="!walletsToSave || !walletsToSave.length"
           [header]="'dashboard.wallet_splide.nodata.header' | translate"
@@ -77,6 +198,7 @@
           [footer]="'dashboard.wallet_splide.nodata.footer' | translate"
         ></app-content-box>
         <div
+          hidden
           *ngIf="walletsToSave && walletsToSave.length"
           class="card box-shadow"
         >
@@ -179,26 +301,6 @@
                 </div>
               </div>
             </div>
-            <div class="form-group boxed hidden_desktop">
-              <div class="input-wrapper">
-                <input
-                  name="date"
-                  [(ngModel)]="dateStats"
-                  #date="ngModel"
-                  type="date"
-                  class="form-control"
-                  id="text4b"
-                  required
-                />
-                <div
-                  *ngIf="dateValidation"
-                  class="alert alert-danger mb-1"
-                  role="alert"
-                >
-                  {{ "insertStats.dataPresent" | translate }}
-                </div>
-              </div>
-            </div>
           </div>
         </div>
         <!--<div align="center">
@@ -212,6 +314,29 @@
             class="pb-1 pt-3 logo"
           />
         </div>-->
+        <div
+          *ngIf="walletsToSave && walletsToSave.length"
+          class="form-group boxed hidden_desktop"
+        >
+          <div class="input-wrapper">
+            <input
+              name="date"
+              [(ngModel)]="dateStats"
+              #date="ngModel"
+              type="date"
+              class="form-control"
+              id="text4b"
+              required
+            />
+            <div
+              *ngIf="dateValidation"
+              class="alert alert-danger mb-1"
+              role="alert"
+            >
+              {{ "insertStats.dataPresent" | translate }}
+            </div>
+          </div>
+        </div>
         <div class="card-footer hidden_desktop card-btn">
           <div class="form-group basic">
             <button

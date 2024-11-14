@@ -133,11 +133,19 @@
                   *ngIf="!asset.deletedDate"
                   class="{{
                     asset.history != undefined
-                      ? asset.history![asset.history!.length - 1].percentage ==
-                        0
+                      ? calculatePercentage(
+                          asset.value!,
+                          asset.history![asset.history!.length - 1].balance,
+                          isPast,
+                          asset.history![asset.history!.length - 1].percentage
+                        ) == 0
                         ? 'text-warning'
-                        : asset.history![asset.history!.length - 1].percentage >
-                          0
+                        : calculatePercentage(
+                            asset.value!,
+                            asset.history![asset.history!.length - 1].balance,
+                            isPast,
+                            asset.history![asset.history!.length - 1].percentage
+                          ) > 0
                         ? 'text-success'
                         : 'text-danger'
                       : 'text-warning'
@@ -145,22 +153,36 @@
                   ><i
                     class="fa {{
                       asset.history != undefined &&
-                      asset.history![asset.history!.length - 1].percentage > 0
+                      calculatePercentage(
+                        asset.value!,
+                        asset.history![asset.history!.length - 1].balance,
+                        isPast,
+                        asset.history![asset.history!.length - 1].percentage
+                      ) > 0
                         ? 'fa-arrow-up'
                         : 'fa-arrow-down'
                     }}"
                   ></i
                   >{{
                     asset.history != undefined
-                      ? asset.history![asset.history!.length - 1].percentage >=
-                        1000
+                      ? calculatePercentage(
+                          asset.value!,
+                          asset.history![asset.history!.length - 1].balance,
+                          isPast,
+                          asset.history![asset.history!.length - 1].percentage
+                        ) >= 1000
                         ? "+"
                         : ""
                       : ""
                   }}
                   {{
                     asset.history != undefined
-                      ? asset.history![asset.history!.length - 1].percentage
+                      ? calculatePercentage(
+                          asset.value!,
+                          asset.history![asset.history!.length - 1].balance,
+                          isPast,
+                          asset.history![asset.history!.length - 1].percentage
+                        )
                       : 0
                   }}%</span
                 >
