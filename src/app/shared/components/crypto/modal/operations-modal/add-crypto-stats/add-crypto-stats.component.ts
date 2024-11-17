@@ -144,12 +144,12 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
           }
         });
     });
-    if (this.cryptoService.cryptoDashboard.statsAssetsDays) {
-      this.cryptoService.cryptoDashboard.statsAssetsDays.push(this.dateStats);
-    } else
-      this.cryptoService.cryptoDashboard.statsAssetsDays = [this.dateStats];
-
-    this.cryptoService.cryptoDashboard.statsAssetsDays.sort();
+    //if (this.cryptoService.cryptoDashboard.statsAssetsDays) {
+    //  this.cryptoService.cryptoDashboard.statsAssetsDays.push(this.dateStats);
+    //} else
+    //  this.cryptoService.cryptoDashboard.statsAssetsDays = [this.dateStats];
+    //
+    //this.cryptoService.cryptoDashboard.statsAssetsDays.sort();
     this.saveValidation = true;
   }
 

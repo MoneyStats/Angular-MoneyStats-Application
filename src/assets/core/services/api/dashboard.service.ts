@@ -15,7 +15,6 @@ import { UserService } from './user.service';
 export class DashboardService {
   environment = environment;
   public dashboard: Dashboard = new Dashboard();
-  public wallet?: Wallet;
   public isOnboarding = false;
   constructor(private http: HttpClient, public cache: CacheService) {}
 

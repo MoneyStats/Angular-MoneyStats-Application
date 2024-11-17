@@ -1,6 +1,7 @@
 <div class="mx-auto section-width">
   <app-crypto-header
     title="{{ 'crypto.resume.title' | translate }}"
+    (emitOperationClick)="emitOperationClick($event)"
   ></app-crypto-header>
 
   <!-- App Capsule -->
@@ -42,6 +43,7 @@
             data-bs-toggle="tab"
             href="#overview"
             role="tab"
+            id="resumeData"
           >
             {{ "crypto.resume.tab.tab1" | translate }}
           </a>
@@ -91,6 +93,7 @@
             </div>
           </div>
           <app-trading-resume
+            (emptyTradingData)="goToResume()"
             [cryptoDashboard]="resumeData"
             [wallets]="resumeData.wallets"
             [cryptoAssets]="resumeAssets"
@@ -117,9 +120,9 @@
 
 <app-operations-modal
   [modalId]="modalConstant.ADDOPERATIONS"
-  [wallets]="cryptoService.cryptoDashboard.wallets"
-  [assets]="cryptoService.cryptoDashboard.assets"
-  [currency]="cryptoService.cryptoDashboard.currency"
-  [statsAssetsDays]="cryptoService.cryptoDashboard.statsAssetsDays"
+  [wallets]="cryptoWallets"
+  [assets]="cryptoAssets"
+  [currency]="cryptoDashboard.currency"
+  [statsAssetsDays]="cryptoDashboard.statsAssetsDays"
   (emitAddStats)="getResume(currentYear)"
 ></app-operations-modal>

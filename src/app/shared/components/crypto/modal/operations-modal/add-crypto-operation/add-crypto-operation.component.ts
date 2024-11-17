@@ -42,7 +42,8 @@ export class AddCryptoOperationComponent implements OnInit {
     let wallet = Utils.copyObject(this.wallets);
     if (
       operation != OperationsType.NEWINVESTMENT &&
-      operation != OperationsType.TRANSFER
+      operation != OperationsType.TRANSFER &&
+      !Utils.isNullOrEmpty(wallet)
     ) {
       this.filterWallets = wallet.filter((w: any) => w.type == e.target.value);
     } else this.filterWallets = wallet;

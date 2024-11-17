@@ -11,6 +11,7 @@
     <ul class="nav nav-tabs lined" role="tablist">
       <li class="nav-item">
         <a
+          (click)="goToData()"
           class="nav-link active"
           data-bs-toggle="tab"
           href="#tab_stats"
@@ -197,9 +198,10 @@
         <div class="row">
           <app-data
             *ngIf="wallets && wallets.length"
-            [dashboard]="resumeData"
+            [dashboard]="dashboardData"
             [coinSymbol]="coinSymbol!"
             [hidden]="hidden"
+            [change]="change"
           ></app-data>
         </div>
       </div>

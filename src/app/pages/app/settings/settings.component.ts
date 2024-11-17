@@ -37,7 +37,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
   user?: User;
 
   warning: boolean = false;
-  isAutoUpdate: boolean = false;
   isLiveWallet: boolean = false;
 
   constructor(
@@ -78,10 +77,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }
     if (this.user?.name === 'DEFAULT_NAME') {
       this.user = UserService.getUserData();
-    }
-    let autoUpdate = !localStorage.getItem(StorageConstant.AUTOUPDATE);
-    if (autoUpdate) {
-      this.isAutoUpdate = autoUpdate;
     }
     if (this.user?.settings.liveWallets != undefined) {
       this.isLiveWallet =
@@ -136,14 +131,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
     } else if (file.size > environment.imageSizeMax) {
       this.warning = true;
     }
-  }
-
-  autoUpdate() {
-    this.isAutoUpdate == true ? false : true;
-    localStorage.setItem(
-      StorageConstant.AUTOUPDATE,
-      JSON.stringify(this.isAutoUpdate)
-    );
   }
 
   cleanCache() {

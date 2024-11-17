@@ -1,11 +1,18 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import {
   ModalConstant,
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
-import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
+import { v4 as uuidv4 } from 'uuid';
 import { StatsService } from 'src/assets/core/services/api/stats.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
 import { Utils } from 'src/assets/core/services/config/utils.service';
@@ -32,6 +39,10 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   amount: string = '******';
   hidden: boolean = false;
+
+  change: string = '';
+
+  @Output('dashboardData') dashboardData: Dashboard = new Dashboard();
   constructor(
     public screenService: ScreenService,
     private statsService: StatsService
@@ -101,6 +112,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   updateData(year: string) {
     this.resumeData = this.resume.get(year)!;
+    this.dashboardData = Utils.copyObject(this.resumeData);
     this.resumeData.statsWalletDays = this.resumeData.statsWalletDays.filter(
       (date) => new Date(date).getFullYear().toString() === year
     );
@@ -130,5 +142,9 @@ export class StatsComponent implements OnInit, OnDestroy {
     ).sort((a, b) => parseInt(a) - parseInt(b));
 
     return years;
+  }
+
+  goToData() {
+    this.change = uuidv4();
   }
 }

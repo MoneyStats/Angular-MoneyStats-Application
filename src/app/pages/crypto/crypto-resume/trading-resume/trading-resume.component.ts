@@ -1,8 +1,10 @@
 import {
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
@@ -29,6 +31,8 @@ import { Utils } from 'src/assets/core/services/config/utils.service';
   styleUrls: ['./trading-resume.component.scss'],
 })
 export class TradingResumeComponent implements OnInit, OnChanges {
+  @Output('emptyTradingData') emptyTradingData = new EventEmitter<boolean>();
+
   public trading?: Partial<ApexOptions>;
   @Input('cryptoDashboard') cryptoDashboard: CryptoDashboard =
     new CryptoDashboard();
@@ -74,7 +78,6 @@ export class TradingResumeComponent implements OnInit, OnChanges {
 
   getOperations() {
     let totalInvested: number = 0;
-    console.log(this.cryptoAssets);
     let operations: Operation[] = [];
     let wallets = Utils.copyObject(this.wallets);
     if (wallets)
@@ -109,6 +112,9 @@ export class TradingResumeComponent implements OnInit, OnChanges {
     } else
       this.trading = ChartService.renderTradingOperations(operations, [350]);
     this.getOperationTable(operations, totalInvested);
+    if (Utils.isNullOrEmpty(operations)) {
+      this.emptyTradingData.emit(true);
+    }
     return operations;
   }
 

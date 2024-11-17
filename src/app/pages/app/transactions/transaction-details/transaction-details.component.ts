@@ -4,6 +4,7 @@ import { slideUp } from 'src/app/shared/animations/route-animations';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
+import { SharedService } from 'src/assets/core/services/config/shared.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class TransactionDetailsComponent implements OnInit {
   coinSymbol: string = UserService.getUserData().settings.currencySymbol;
   constructor(
     public screenService: ScreenService,
-    private dashboardService: DashboardService
+    private shared: SharedService
   ) {}
 
   screenWidth() {
@@ -27,7 +28,7 @@ export class TransactionDetailsComponent implements OnInit {
   ngOnInit(): void {
     ScreenService.setupHeader();
     ScreenService.hideFooter();
-    this.wallet = this.dashboardService.wallet;
+    this.wallet = this.shared.getWallet();
 
     if (this.wallet?.history.find((w) => w.id == undefined)) {
       let index = this.wallet.history.indexOf(

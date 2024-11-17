@@ -7,6 +7,7 @@ import {
 } from 'src/assets/core/data/constant/constant';
 import { UserService } from 'src/assets/core/services/api/user.service';
 import { WalletService } from 'src/assets/core/services/api/wallet.service';
+import { SharedService } from 'src/assets/core/services/config/shared.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
@@ -24,9 +25,13 @@ export class WalletComponent implements OnInit, OnDestroy {
 
   coinSymbol: string = UserService.getUserData().settings.currencySymbol;
 
+  walletsActive: Wallet[] = [];
+  walletsDeleted: Wallet[] = [];
+
   constructor(
     private walletService: WalletService,
-    public screenService: ScreenService
+    public screenService: ScreenService,
+    private shared: SharedService
   ) {}
 
   ngOnDestroy(): void {
@@ -51,9 +56,9 @@ export class WalletComponent implements OnInit, OnDestroy {
         this.walletService.cache.cacheWalletsData(res);
         LOG.info(res.message!, 'WalletComponent');
         this.wallets = res.data;
-        this.walletService.walletActive = this.walletActive(res.data);
-        this.walletService.walletDeleted = this.walletDeleted(res.data);
-        this.walletDetails(res.data);
+        this.shared.setWallets(this.wallets);
+        this.walletsActive = this.walletActive(res.data);
+        this.walletsDeleted = this.walletDeleted(res.data);
         let isHidden = JSON.parse(
           localStorage.getItem(StorageConstant.HIDDENAMOUNT)!
         );
@@ -69,10 +74,6 @@ export class WalletComponent implements OnInit, OnDestroy {
 
   walletDeleted(wallets: Wallet[]): Array<Wallet> {
     return wallets.filter((w) => w.deletedDate);
-  }
-
-  walletDetails(res: Wallet[]) {
-    this.walletService.walletDetails = res;
   }
 
   addWallet(wallet: Wallet) {

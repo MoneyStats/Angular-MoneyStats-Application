@@ -3,6 +3,7 @@ import { Observable, switchMap, timer } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Utils } from './utils.service';
 import { SharedService } from './shared.service';
+import { ResponseModel } from '../../data/class/generic.class';
 
 @Injectable({
   providedIn: 'root',
@@ -12,18 +13,18 @@ export class CacheService {
   private cacheTimeout: number = environment.cacheTimeout;
 
   // App Data
-  private dashboardDataCache: any;
+  private dashboardDataCache?: ResponseModel;
   private resumeDataCache: { [year: number]: any } = {};
-  private historyDataCache: any;
-  private getWalletsDataCache: any;
-  private getWalletsCryptoDataCache: any;
+  private historyDataCache?: ResponseModel;
+  private getWalletsDataCache?: ResponseModel;
+  private getWalletsCryptoDataCache?: ResponseModel;
   private getWalletByIdDataCache: { [walletId: number]: any } = {};
 
   // Crypto Data
-  private cryptoDashboardDataCache: any;
+  private cryptoDashboardDataCache?: ResponseModel;
   private cryptoResumeDataCache: { [year: number]: any } = {};
-  private historyCryptoDataCache: any;
-  private assetsDataCache: any;
+  private historyCryptoDataCache?: ResponseModel;
+  private assetsDataCache?: ResponseModel;
   private getAssetsByIdentifierDataCache: { [identifier: string]: any } = {};
 
   // Market Data Cache
@@ -45,17 +46,17 @@ export class CacheService {
 
   clearCache(): any {
     this.shared.clearData();
-    this.cryptoDashboardDataCache = null;
+    this.cryptoDashboardDataCache = undefined;
     this.cryptoResumeDataCache = {};
-    this.assetsDataCache = null;
-    this.getWalletsDataCache = null;
-    this.dashboardDataCache = null;
+    this.assetsDataCache = undefined;
+    this.getWalletsDataCache = undefined;
+    this.dashboardDataCache = undefined;
     this.resumeDataCache = {};
     this.marketDataByCurrencyCache = null;
     this.getWalletByIdDataCache = {};
     this.getAssetsByIdentifierDataCache = {};
-    this.getWalletsCryptoDataCache = null;
-    this.historyCryptoDataCache = null;
+    this.getWalletsCryptoDataCache = undefined;
+    this.historyCryptoDataCache = undefined;
   }
 
   /** @Wallets */
@@ -72,18 +73,18 @@ export class CacheService {
     return Utils.copyObject(this.getWalletByIdDataCache[id] || null);
   }
 
-  cacheWalletByIdData(wallet: any) {
+  cacheWalletByIdData(response: any, walletId: number) {
     if (environment.cacheEnable)
-      this.getWalletByIdDataCache[wallet.id] = Utils.copyObject(wallet);
+      this.getWalletByIdDataCache[walletId] = Utils.copyObject(response);
   }
 
   getWalletsCryptoCache() {
     return Utils.copyObject(this.getWalletsCryptoDataCache);
   }
 
-  cacheWalletsCryptoData(wallets: any) {
+  cacheWalletsCryptoData(response: any) {
     if (environment.cacheEnable)
-      this.getWalletsCryptoDataCache = Utils.copyObject(wallets);
+      this.getWalletsCryptoDataCache = Utils.copyObject(response);
   }
   /** END Wallets */
 
@@ -92,9 +93,9 @@ export class CacheService {
     return Utils.copyObject(this.assetsDataCache);
   }
 
-  cacheAssetsData(assets: any) {
+  cacheAssetsData(response: any) {
     if (environment.cacheEnable)
-      this.assetsDataCache = Utils.copyObject(assets);
+      this.assetsDataCache = Utils.copyObject(response);
   }
 
   getAssetsByIdentifierCache(identifier: string) {
@@ -103,10 +104,10 @@ export class CacheService {
     );
   }
 
-  cacheAssetsByIdentifierCache(asset: any) {
+  cacheAssetsByIdentifierCache(response: any, identifier: string) {
     if (environment.cacheEnable)
-      this.getAssetsByIdentifierDataCache[asset.identifier] =
-        Utils.copyObject(asset);
+      this.getAssetsByIdentifierDataCache[identifier] =
+        Utils.copyObject(response);
   }
   /** END Assets  */
 
@@ -117,9 +118,9 @@ export class CacheService {
     return Utils.copyObject(this.marketDataByCurrencyCache);
   }
 
-  cacheMarketDataByCurrencyData(marketDatas: any) {
+  cacheMarketDataByCurrencyData(response: any) {
     if (environment.cacheEnable)
-      this.marketDataByCurrencyCache = Utils.copyObject(marketDatas);
+      this.marketDataByCurrencyCache = Utils.copyObject(response);
   }
   /**
    * END @MarketDatas
@@ -132,27 +133,27 @@ export class CacheService {
     return Utils.copyObject(this.dashboardDataCache);
   }
 
-  cacheDashboardData(dashboard: any) {
+  cacheDashboardData(response: any) {
     if (environment.cacheEnable)
-      this.dashboardDataCache = Utils.copyObject(dashboard);
+      this.dashboardDataCache = Utils.copyObject(response);
   }
 
   getResumeCache(year: number) {
     return Utils.copyObject(this.resumeDataCache[year] || null);
   }
 
-  cacheResumeData(resume: any, year: number) {
+  cacheResumeData(response: any, year: number) {
     if (environment.cacheEnable)
-      this.resumeDataCache[year] = Utils.copyObject(resume);
+      this.resumeDataCache[year] = Utils.copyObject(response);
   }
 
   getHistoryCache() {
     return Utils.copyObject(this.historyDataCache);
   }
 
-  cacheHistoryData(history: any) {
+  cacheHistoryData(response: any) {
     if (environment.cacheEnable)
-      this.historyDataCache = Utils.copyObject(history);
+      this.historyDataCache = Utils.copyObject(response);
   }
   /**
    * END @App
@@ -165,27 +166,27 @@ export class CacheService {
     return Utils.copyObject(this.cryptoDashboardDataCache);
   }
 
-  cacheCryptoDashboardData(dashboard: any) {
+  cacheCryptoDashboardData(response: any) {
     if (environment.cacheEnable)
-      this.cryptoDashboardDataCache = Utils.copyObject(dashboard);
+      this.cryptoDashboardDataCache = Utils.copyObject(response);
   }
 
   getCryptoResumeCache(year: number) {
     return Utils.copyObject(this.cryptoResumeDataCache[year] || null);
   }
 
-  cacheCryptoResumeData(resume: any, year: number) {
+  cacheCryptoResumeData(response: any, year: number) {
     if (environment.cacheEnable)
-      this.cryptoResumeDataCache[year] = Utils.copyObject(resume);
+      this.cryptoResumeDataCache[year] = Utils.copyObject(response);
   }
 
   getCryptoHistoryCache() {
     return Utils.copyObject(this.historyCryptoDataCache);
   }
 
-  cacheCryptoHistoryData(history: any) {
+  cacheCryptoHistoryData(response: any) {
     if (environment.cacheEnable)
-      this.historyCryptoDataCache = Utils.copyObject(history);
+      this.historyCryptoDataCache = Utils.copyObject(response);
   }
   /**
    * END @Crypto_Data

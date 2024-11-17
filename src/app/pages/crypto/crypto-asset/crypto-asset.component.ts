@@ -65,8 +65,7 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
         this.cryptoService.cache.cacheAssetsData(data);
         LOG.info(data.message!, 'CryptoAssetComponent');
         this.assets = data.data;
-        this.cryptoService.assets = data.data;
-        this.cryptoDashboard.assets = data.data;
+        this.cryptoDashboard.assets = this.shared.setCryptoAssets(data.data);
         this.graph1Y();
       });
     this.isWalletBalanceHidden();
@@ -76,7 +75,7 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
     if (!this.chartOptions) {
       let dashboard = new CryptoDashboard();
       // Get All Date serve a prendere tutte le date per i grafici
-      dashboard.assets = this.assets;
+      dashboard.assets = Utils.copyObject(this.assets);
       dashboard.statsAssetsDays = this.getAllDate();
       setTimeout(() => {
         if (dashboard.assets) {
@@ -99,7 +98,7 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
     if (!this.chart1Y) {
       let dashboard = new CryptoDashboard();
       // Get All Date serve a prendere tutte le date per i grafici
-      dashboard.assets = this.assets;
+      dashboard.assets = Utils.copyObject(this.assets);
       dashboard.statsAssetsDays = this.getAllDate();
 
       let assets: Asset[] = [];
@@ -134,7 +133,7 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
   graph3Y() {
     if (!this.chart3Y) {
       let dashboard = new CryptoDashboard();
-      dashboard.assets = this.assets;
+      dashboard.assets = Utils.copyObject(this.assets);
       // Get All Date serve a prendere tutte le date per i grafici
       dashboard.statsAssetsDays = this.getAllDate();
       let last3 = [
@@ -180,7 +179,7 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
 
   getAllDate(): string[] {
     let date: string[] = [];
-    this.cryptoDashboard.assets.forEach((a) =>
+    this.assets.forEach((a) =>
       a.history?.forEach((h) => {
         if (!date.find((d) => d == h.date.toString()))
           date.push(h.date.toString());

@@ -13,16 +13,6 @@ import { UserService } from './user.service';
 })
 export class WalletService {
   environment = environment;
-  totalBalance?: number;
-  public walletActive?: Wallet[];
-  public walletDeleted?: Wallet[];
-
-  //Used for WalletDetails
-  public walletDetails: Wallet[] = [];
-  public statsList?: Stats[];
-
-  // Used for History
-  public walletHistory?: Wallet;
 
   constructor(private http: HttpClient, public cache: CacheService) {}
 

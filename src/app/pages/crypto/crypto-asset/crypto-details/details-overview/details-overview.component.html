@@ -150,11 +150,10 @@
           <li>
             <div class="text-muted">
               {{ "crypto.asset.details.overview.value" | translate
-              }}{{ cryptoService.currency }}
+              }}{{ cryptoCurrency }}
             </div>
             <strong
-              >{{ cryptoService.currency }}
-              {{ hidden ? amount : asset.value }}</strong
+              >{{ cryptoCurrency }} {{ hidden ? amount : asset.value }}</strong
             >
           </li>
           <li>
@@ -162,7 +161,7 @@
               {{ "crypto.asset.details.overview.invested" | translate }}
             </div>
             <strong
-              >{{ cryptoService.currency }}
+              >{{ cryptoCurrency }}
               {{ hidden ? amount : asset.invested }}</strong
             >
           </li>
@@ -235,7 +234,7 @@
             </div>
             <div class="col text-secondary text-end">
               <strong
-                >{{ cryptoService.currency }}
+                >{{ cryptoCurrency }}
                 {{ hidden ? amount : cryptoDashboard.balance }}</strong
               >
             </div>
@@ -619,7 +618,7 @@
       </div>
       <app-operations-list
         [modalID]="modalConstant.CRYPTOOPERATIONDETAILS"
-        [cryptoDashboard]="cryptoDashboard"
+        [cryptoAssets]="cryptoAssets"
         [walletsAsset]="walletsAsset"
         [isAssetOperations]="true"
       ></app-operations-list>

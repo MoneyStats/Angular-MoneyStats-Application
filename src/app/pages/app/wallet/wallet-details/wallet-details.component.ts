@@ -16,6 +16,8 @@ import { Subscription } from 'rxjs';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
 import { User } from 'src/assets/core/data/class/user.class';
+import { SharedService } from 'src/assets/core/services/config/shared.service';
+import { Utils } from 'src/assets/core/services/config/utils.service';
 
 @Component({
   selector: 'app-wallet-details',
@@ -56,11 +58,14 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
 
   thisYear: number = new Date().getFullYear();
 
+  totalBalance: number = 0;
+
   constructor(
     public screenService: ScreenService,
     private route: ActivatedRoute,
     public walletService: WalletService,
-    public appService: AppService
+    public appService: AppService,
+    private shared: SharedService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -79,6 +84,8 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     ScreenService.setupHeader();
     ScreenService.hideFooter();
+    if (!Utils.isNullOrEmpty(this.shared.getCryptoDashboardData()))
+      this.totalBalance = this.shared.getCryptoDashboardData().balance;
     this.routeSubscribe = this.route.params.subscribe((w: any) => {
       this.walletId = w.id;
       this.walletName = w.wallet;
@@ -87,7 +94,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
       this.walletByIdSubscribe = this.walletService
         .getWalletByID(this.walletId!)
         .subscribe((res) => {
-          this.walletService.cache.cacheWalletByIdData(res);
+          this.walletService.cache.cacheWalletByIdData(res, this.walletId!);
           LOG.info(res.message!, 'WalletDetailsComponent');
           this.wallet = res.data;
           this.renderDetailsPage();
@@ -113,7 +120,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
     }
 
     this.renderImage();
-    this.walletService.walletHistory = this.wallet;
+    this.shared.setWallet(this.wallet!);
     this.coinSymbol = UserService.getUserData().settings.currencySymbol;
     this.isWalletBalanceHidden();
   }
@@ -173,7 +180,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
 
   percentageWalletInTotal(): number {
     if (this.wallet != undefined)
-      return (this.wallet!.balance * 100) / this.walletService?.totalBalance!;
+      return (this.wallet!.balance * 100) / this.totalBalance;
     return 0;
   }
 

@@ -13,7 +13,6 @@ import { UserService } from './user.service';
 })
 export class StatsService {
   environment = environment;
-  public fullResume?: Map<string, Dashboard>;
 
   constructor(private http: HttpClient, public cache: CacheService) {}
 

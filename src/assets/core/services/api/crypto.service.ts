@@ -2,12 +2,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Coin } from '../../data/class/coin';
 import { ResponseModel } from '../../data/class/generic.class';
 import { StorageConstant } from '../../data/constant/constant';
 import { SwalService } from '../../utils/swal.service';
-import { Wallet } from '../../data/class/dashboard.class';
-import { Asset, CryptoDashboard } from '../../data/class/crypto.class';
+import { Stats, Wallet } from '../../data/class/dashboard.class';
+import { Asset } from '../../data/class/crypto.class';
 import { CacheService } from '../config/cache.service';
 import { UserService } from './user.service';
 import { Utils } from '../config/utils.service';
@@ -17,19 +16,7 @@ import { Utils } from '../config/utils.service';
 })
 export class CryptoService {
   environment = environment;
-  public currency: string = Coin.USD;
-  public cryptoDashboard: CryptoDashboard = new CryptoDashboard();
-  public assets: Asset[] = [];
   public operationsMap: Map<string, any[]> = new Map();
-
-  // Used for history table
-  public cryptoResume: Map<string, CryptoDashboard> = new Map<
-    string,
-    CryptoDashboard
-  >();
-
-  // Used for details
-  public asset?: Asset;
 
   constructor(
     private http: HttpClient,
@@ -168,7 +155,7 @@ export class CryptoService {
     }
   }
 
-  addOrUpdateCryptoAsset(wallet: Wallet): Observable<ResponseModel> {
+  addCryptoAsset(wallet: Wallet): Observable<ResponseModel> {
     this.cache.clearCache();
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
@@ -181,6 +168,24 @@ export class CryptoService {
       return of(response);
     } else {
       return this.http.post<any>(environment.postCryptoAssetDataUrl, wallet, {
+        headers: headers,
+      });
+    }
+  }
+
+  updateCryptoAsset(wallet: Wallet): Observable<ResponseModel> {
+    this.cache.clearCache();
+    const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: authToken!,
+    });
+    if (UserService.getUserData().mockedUser) {
+      let response: ResponseModel = new ResponseModel();
+      response.data = wallet;
+      return of(response);
+    } else {
+      return this.http.put<any>(environment.putCryptoAssetDataUrl, wallet, {
         headers: headers,
       });
     }
@@ -207,42 +212,59 @@ export class CryptoService {
   getAssetList(wallets: Wallet[]): Asset[] {
     const allAssets: Array<Asset> = [];
     wallets.forEach((wallet) => {
-      wallet.assets.forEach((asset) => {
-        if (allAssets.find((a) => a.name == asset.name)) {
-          const index = allAssets.indexOf(
-            allAssets.find((a) => a.name == asset.name)!
-          );
-          if (!Utils.isNullOrEmpty(allAssets[index].balance))
-            allAssets[index].balance! += asset.balance!;
-          allAssets[index].value! += asset.value!;
-          allAssets[index].performance! =
-            (allAssets[index].performance! + asset.performance!) / 2;
+      if (!Utils.isNullOrEmpty(wallet.assets))
+        wallet.assets.forEach((asset) => {
+          if (allAssets.find((a) => a.name == asset.name)) {
+            const index = allAssets.indexOf(
+              allAssets.find((a) => a.name == asset.name)!
+            );
+            if (!Utils.isNullOrEmpty(allAssets[index].balance))
+              allAssets[index].balance! += asset.balance!;
+            allAssets[index].value! += asset.value!;
+            allAssets[index].performance! =
+              (allAssets[index].performance! + asset.performance!) / 2;
 
-          allAssets[index].trend! = allAssets[index].trend! + asset.trend!;
+            allAssets[index].trend! = allAssets[index].trend! + asset.trend!;
 
-          asset.history?.forEach((history) => {
-            let hist = allAssets[index].history!.find(
-              (h) => h.date == history.date
-            )!;
-            allAssets[index].history!.find(
-              (h) => h.date == history.date
-            )!.balance += history.balance;
-            allAssets[index].history!.find(
-              (h) => h.date == history.date
-            )!.trend += history.trend;
-            allAssets[index].history!.find(
-              (h) => h.date == history.date
-            )!.percentage = (hist.percentage + history.percentage) / 2;
-          });
+            asset.history?.forEach((history) => {
+              let hist = new Stats();
+              if (!Utils.isNullOrEmpty(allAssets[index].history))
+                hist = allAssets[index].history!.find(
+                  (h) => h.date == history.date
+                )!;
+              if (!Utils.isNullOrEmpty(hist)) {
+                if (!Utils.isNullOrEmpty(hist.balance)) {
+                  hist.balance += history.balance;
+                }
+                if (!Utils.isNullOrEmpty(hist.trend)) {
+                  hist.trend += history.trend;
+                }
+                if (!Utils.isNullOrEmpty(hist.percentage)) {
+                  hist.percentage = (hist.percentage + history.percentage) / 2;
+                }
+              }
+              //allAssets[index].history!.find(
+              //  (h) => h.date == history.date
+              //)!.balance += history.balance;
+              //allAssets[index].history!.find(
+              //  (h) => h.date == history.date
+              //)!.trend += history.trend;
+              //allAssets[index].history!.find(
+              //  (h) => h.date == history.date
+              //)!.percentage = (hist.percentage + history.percentage) / 2;
+            });
 
-          asset.operations.forEach((o) => {
-            allAssets[index].operations.push(o);
-          });
-          allAssets[index].operations.sort((o) =>
-            o.exitDate != undefined ? o.exitDate : o.entryDate
-          );
-        } else allAssets.push(asset);
-      });
+            if (!Utils.isNullOrEmpty(asset.operations))
+              asset.operations.forEach((o) => {
+                if (!Utils.isNullOrEmpty(allAssets[index].operations))
+                  allAssets[index].operations.push(o);
+              });
+            if (!Utils.isNullOrEmpty(allAssets[index].operations))
+              allAssets[index].operations.sort((o) =>
+                o.exitDate != undefined ? o.exitDate : o.entryDate
+              );
+          } else allAssets.push(asset);
+        });
     });
     return allAssets;
   }

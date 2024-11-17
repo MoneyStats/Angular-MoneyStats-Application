@@ -26,6 +26,7 @@ export class CryptoResumeComponent implements OnInit, OnDestroy {
   getCryptoWalletSubscribe: Subscription = new Subscription();
   cryptoAssetSubscribe: Subscription = new Subscription();
   cryptoHistorySubscribe: Subscription = new Subscription();
+  getDashboardSubscribe: Subscription = new Subscription();
 
   amount: string = '******';
   hidden: boolean = false;
@@ -38,13 +39,15 @@ export class CryptoResumeComponent implements OnInit, OnDestroy {
   @Output('cryptoAssets') cryptoAssets: Array<Asset> = [];
   @Output('cryptoWallets') cryptoWallets: Array<Wallet> = [];
   @Output('cryptoHistory') cryptoHistory?: Map<number, CryptoDashboard>;
+  @Output('cryptoDashboard') cryptoDashboard: CryptoDashboard =
+    new CryptoDashboard();
 
   currentYear = new Date().getFullYear();
 
   isPast: boolean = false;
 
   constructor(
-    public cryptoService: CryptoService,
+    private cryptoService: CryptoService,
     private shared: SharedService
   ) {}
 
@@ -135,7 +138,7 @@ export class CryptoResumeComponent implements OnInit, OnDestroy {
         .getCryptoAssetsData()
         .subscribe((data) => {
           this.cryptoService.cache.cacheAssetsData(data);
-          LOG.info(data.message!, 'CryptoAssetComponent');
+          LOG.info(data.message!, 'CryptoResumeComponent');
           this.cryptoAssets = this.shared.setCryptoAssets(data.data);
         });
     else this.cryptoAssets = this.shared.getCryptoAssets();
@@ -147,7 +150,7 @@ export class CryptoResumeComponent implements OnInit, OnDestroy {
         .getWalletsCryptoData()
         .subscribe((data) => {
           this.cryptoService.cache.cacheWalletsCryptoData(data);
-          LOG.info(data.message!, 'CryptoDashboardComponent');
+          LOG.info(data.message!, 'CryptoResumeComponent');
           this.cryptoWallets = this.shared.setCryptoWallets(data.data);
         });
     else this.cryptoWallets = this.shared.getCryptoWallets();
@@ -159,15 +162,39 @@ export class CryptoResumeComponent implements OnInit, OnDestroy {
         .getCryptoHistoryData()
         .subscribe((data) => {
           this.cryptoService.cache.cacheCryptoHistoryData(data.data);
-          LOG.info(data.message!, 'CryptoDashboardComponent');
+          LOG.info(data.message!, 'CryptoResumeComponent');
           this.cryptoHistory = this.shared.setCryptoHistoryData(data.data);
         });
     else this.cryptoHistory = this.shared.getCryptoHistoryData();
   }
 
+  getDashboard() {
+    if (Utils.isNullOrEmpty(this.shared.getCryptoDashboardData()))
+      this.getDashboardSubscribe = this.cryptoService
+        .getCryptoDashboardData()
+        .subscribe((data) => {
+          this.cryptoService.cache.cacheCryptoDashboardData(data);
+          LOG.info(data.message!, 'CryptoResumeComponent');
+          this.cryptoDashboard = this.shared.setCryptoDashboardData(data.data);
+        });
+    else this.cryptoDashboard = this.shared.getCryptoDashboardData();
+  }
+
+  goToResume() {
+    const resume = document.getElementById('resumeData');
+    resume?.click();
+  }
+
+  emitOperationClick(click: boolean) {
+    this.getWalletsCryptoData();
+    this.getDashboard();
+  }
+
   ngOnDestroy(): void {
     this.getResumeSub.unsubscribe();
+    this.getCryptoWalletSubscribe.unsubscribe();
     this.cryptoAssetSubscribe.unsubscribe();
-    this.cryptoAssetSubscribe.unsubscribe();
+    this.cryptoHistorySubscribe.unsubscribe();
+    this.getDashboardSubscribe.unsubscribe();
   }
 }

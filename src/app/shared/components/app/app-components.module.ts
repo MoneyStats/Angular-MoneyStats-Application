@@ -10,7 +10,6 @@ import { environment } from 'src/environments/environment';
 import { RouterModule } from '@angular/router';
 import { ContentBoxComponent } from './card/content-box/content-box.component';
 import { DashboardWalletComponent } from './card/dashboard-wallet/dashboard-wallet.component';
-import { SplideSlideComponent } from './card/splide-slide/splide-slide.component';
 import { StatsCardComponent } from './card/stats-card/stats-card.component';
 import { AvailableSoonComponent } from './modal/available-soon/available-soon.component';
 import { BackupDataComponent } from './modal/backup-data/backup-data.component';
@@ -33,7 +32,6 @@ import { WalletHistoryCardComponent } from './wallet/wallet-history/wallet-histo
   declarations: [
     ContentBoxComponent,
     DashboardWalletComponent,
-    SplideSlideComponent,
     StatsCardComponent,
     AvailableSoonComponent,
     BackupDataComponent,
@@ -55,7 +53,6 @@ import { WalletHistoryCardComponent } from './wallet/wallet-history/wallet-histo
   exports: [
     ContentBoxComponent,
     DashboardWalletComponent,
-    SplideSlideComponent,
     StatsCardComponent,
     AvailableSoonComponent,
     BackupDataComponent,

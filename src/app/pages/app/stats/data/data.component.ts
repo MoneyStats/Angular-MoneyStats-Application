@@ -5,7 +5,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { UserService } from 'src/assets/core/services/api/user.service';
+import { CryptoDashboard } from 'src/assets/core/data/class/crypto.class';
 import { Dashboard, Stats } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { Utils } from 'src/assets/core/services/config/utils.service';
@@ -28,8 +28,9 @@ export class DataComponent implements OnInit, OnChanges {
 
   amount: string = '******';
   @Input('hidden') hidden: boolean = false;
+  @Input('change') change: string = '';
 
-  constructor(private userService: UserService) {}
+  constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.renderTable();
@@ -38,11 +39,12 @@ export class DataComponent implements OnInit, OnChanges {
   ngOnInit(): void {}
 
   renderTable() {
+    const dashboard: Dashboard = Utils.copyObject(this.dashboard);
     this.tableBalance = [];
     this.balances = [];
-    if (this.dashboard.statsWalletDays) {
+    if (dashboard.statsWalletDays) {
       let moreThanOneInAMonth: Array<string> = [];
-      this.dashboard.statsWalletDays.forEach((date, index) => {
+      dashboard.statsWalletDays.forEach((date, index) => {
         let yearMonth: string = date.split('-')[0] + '-' + date.split('-')[1];
 
         let find = moreThanOneInAMonth.find((d) => d.includes(yearMonth));
@@ -83,8 +85,9 @@ export class DataComponent implements OnInit, OnChanges {
 
   tableColumsCreateRefactor(date: string, index: number) {
     let array: any = [];
+    const dashboard: Dashboard = Utils.copyObject(this.dashboard);
 
-    this.dashboard.wallets.forEach((w, index) => {
+    dashboard.wallets.forEach((w, index) => {
       let history = w.history
         ? w.history.find((h) => h.date.toString() === date)
         : undefined;
@@ -95,7 +98,7 @@ export class DataComponent implements OnInit, OnChanges {
         history.percentage = 0;
         history.trend = 0;
       } else {
-        if (index === this.dashboard.wallets.length - 1) {
+        if (index === dashboard.wallets.length - 1) {
           this.filterDateHistory.push(history.date.toString());
         }
       }

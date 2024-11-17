@@ -12,6 +12,8 @@ import { Subscription } from 'rxjs';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from 'src/assets/core/services/config/utils.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
+import { SharedService } from 'src/assets/core/services/config/shared.service';
 
 @Component({
   selector: 'app-close-operation',
@@ -34,7 +36,8 @@ export class CloseOperationComponent implements OnDestroy {
   constructor(
     private cryptoService: CryptoService,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private shared: SharedService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -61,7 +64,7 @@ export class CloseOperationComponent implements OnDestroy {
     ) {
       return;
     }
-    this.cryptoCurrency = this.cryptoService.cryptoDashboard.currency;
+    this.cryptoCurrency = UserService.getUserData().settings.cryptoCurrency!;
     let currentPrice =
       this.operation?.entryQuantity! * this.operation?.asset?.current_price!;
     this.currentPrice = parseFloat(currentPrice.toFixed(2));
@@ -112,7 +115,7 @@ export class CloseOperationComponent implements OnDestroy {
 
   closeOperation() {
     this.operationToClose!.status = 'CLOSED';
-    let dashboard = Utils.copyObject(this.cryptoService.cryptoDashboard);
+    let dashboard = Utils.copyObject(this.shared.getCryptoDashboardData());
     let wallet = dashboard.wallets.find(
       (w: any) =>
         w.assets != undefined &&
@@ -151,7 +154,7 @@ export class CloseOperationComponent implements OnDestroy {
     wallet!.assets = [asset1!, asset2!];
 
     this.closeSubscribe = this.cryptoService
-      .addOrUpdateCryptoAsset(wallet!)
+      .updateCryptoAsset(wallet!)
       .subscribe((data) => {
         LOG.info(data.message!, 'CloseOperationComponent');
         SwalService.toastMessage(

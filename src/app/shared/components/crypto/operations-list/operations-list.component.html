@@ -48,8 +48,12 @@
             <div class="text-small text-secondary">
               {{ operation?.asset?.name }}
               {{ "crypto.asset.details.overview.price" | translate }}
-              {{ operation?.exitPrice }}
-              {{ cryptoDashboard.currency }}
+              {{
+                operation.type != operationTypeConstant.TRADING
+                  ? operation?.exitPrice
+                  : operation.entryPrice
+              }}
+              {{ cryptoCurrency }}
             </div>
             <div class="text-small text-secondary">
               <strong>{{ operation?.type }}</strong> #{{ operation?.id }}
@@ -74,8 +78,7 @@
             <div class="text-small">
               {{ "crypto.asset.details.overview.invest" | translate }}
               <strong
-                >{{ operation?.entryPriceValue }}
-                {{ cryptoDashboard.currency }}</strong
+                >{{ operation?.entryPriceValue }} {{ cryptoCurrency }}</strong
               >
               {{ "crypto.asset.details.overview.on" | translate }}
               {{ operation?.entryDate | date : "d MMM yy" }}
@@ -95,5 +98,5 @@
 <app-operation-details
   [modalId]="modalID"
   [operation]="operationSelect"
-  [currency]="cryptoDashboard.currency"
+  [currency]="cryptoCurrency!"
 ></app-operation-details>

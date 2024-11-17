@@ -405,7 +405,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
 
   saveWallet(walletToSave: Wallet) {
     this.saveWalletSubscribe = this.cryptoService
-      .addOrUpdateCryptoAsset(walletToSave)
+      .updateCryptoAsset(walletToSave)
       .subscribe((data) => {
         LOG.info(data.message!, 'OperationExchangeComponent');
         let message =

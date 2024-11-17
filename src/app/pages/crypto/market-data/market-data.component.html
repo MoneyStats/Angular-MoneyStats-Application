@@ -1,6 +1,7 @@
 <div class="mx-auto section-width">
   <app-crypto-header
     title="{{ 'crypto.marketData.title' | translate }}"
+    (emitOperationClick)="emitOperationClick($event)"
   ></app-crypto-header>
   <div id="appCapsule">
     <div class="section mt-2">
@@ -50,7 +51,7 @@
 
 <app-operations-modal
   [modalId]="modalConstant.ADDOPERATIONS"
-  [wallets]="cryptoDashboard.wallets"
+  [wallets]="cryptoWallets"
   [assets]="cryptoDashboard.assets"
   [currency]="cryptoDashboard.currency"
   [statsAssetsDays]="cryptoDashboard.statsAssetsDays"

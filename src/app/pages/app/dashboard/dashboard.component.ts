@@ -10,7 +10,6 @@ import {
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
 import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
-import { WalletService } from 'src/assets/core/services/api/wallet.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
@@ -50,7 +49,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     private dashboardService: DashboardService,
     private datePipe: DatePipe,
-    private walletService: WalletService,
     private translate: TranslateService,
     private router: Router
   ) {}
@@ -123,9 +121,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.dashboard.lastStatsBalanceDifference +
           ' ' +
           this.user.settings.currencySymbol;
-        this.walletService.totalBalance = this.dashboard.balance;
         this.renderChart(this.dashboard);
-        this.walletDetails(data.data.wallets);
       });
 
     this.isWalletBalanceHidden();
@@ -177,9 +173,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       evt.preventDefault();
       scrollContainer.scrollLeft += evt.deltaY * 2;
     });
-  }
-  walletDetails(res: Wallet[]) {
-    this.walletService.walletDetails = res;
   }
 
   changeAmountStatus(hidden: boolean) {

@@ -16,7 +16,7 @@ export const environment = {
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: '2.1.2',
+  version: '3.0.0 Alpha',
   hostService: host + subDomain,
   //version: require(baseUrlApp + subDomain + 'package.json').version,
 
@@ -105,6 +105,7 @@ export const environment = {
   getCryptoAssetsDataUrl: host + '/v1/crypto/assets',
   getCryptoAssetsDetailsDataUrl: host + '/v1/crypto/assets/:identifier',
   postCryptoAssetDataUrl: host + '/v1/crypto/assets',
+  putCryptoAssetDataUrl: host + '/v1/crypto/assets',
   postCryptoAssetsDataUrl: host + '/v1/crypto/assets/list',
 
   /**
