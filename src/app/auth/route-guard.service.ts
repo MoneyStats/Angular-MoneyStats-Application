@@ -1,11 +1,6 @@
 import { Subscription } from 'rxjs';
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  Router,
-  RouterStateSnapshot,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { StorageConstant } from 'src/assets/core/data/constant/constant';
 import { UserService } from 'src/assets/core/services/api/user.service';
@@ -18,7 +13,7 @@ import { LOG } from 'src/assets/core/utils/log.service';
 @Injectable({
   providedIn: 'root',
 })
-export class RouteGuardService implements CanActivate {
+export class RouteGuardService  {
   environment = environment;
   isUserLoggedSubscribe: Subscription = new Subscription();
   resp: Response | undefined;
