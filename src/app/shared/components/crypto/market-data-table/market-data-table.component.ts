@@ -7,9 +7,10 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'app-market-data-table',
-  templateUrl: './market-data-table.component.html',
-  styleUrls: ['./market-data-table.component.scss'],
+    selector: 'app-market-data-table',
+    templateUrl: './market-data-table.component.html',
+    styleUrls: ['./market-data-table.component.scss'],
+    standalone: false
 })
 export class MarketDataTableComponent implements OnInit, OnChanges {
   @Input('filterMarketData') filterMarketData: Array<any> = [];

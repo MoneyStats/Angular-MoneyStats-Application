@@ -7,9 +7,10 @@ import { WalletService } from 'src/assets/core/services/api/wallet.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 
 @Component({
-  selector: 'app-delete-wallet',
-  templateUrl: './delete-wallet.component.html',
-  styleUrls: ['./delete-wallet.component.scss'],
+    selector: 'app-delete-wallet',
+    templateUrl: './delete-wallet.component.html',
+    styleUrls: ['./delete-wallet.component.scss'],
+    standalone: false
 })
 export class DeleteWalletComponent implements OnDestroy {
   deleteWalletSub: Subscription = new Subscription();

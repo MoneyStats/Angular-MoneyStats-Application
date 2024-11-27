@@ -16,9 +16,10 @@ import { Utils } from 'src/assets/core/services/config/utils.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
 
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss'],
+    selector: 'app-category',
+    templateUrl: './category.component.html',
+    styleUrls: ['./category.component.scss'],
+    standalone: false
 })
 export class CategoryComponent implements OnInit, OnChanges {
   @Input('dashboard') dashboard: Dashboard = new Dashboard();

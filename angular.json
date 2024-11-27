@@ -132,13 +132,13 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angular-moneystats:build:production"
+              "buildTarget": "angular-moneystats:build:production"
             },
             "staging": {
-              "browserTarget": "angular-moneystats:build:staging"
+              "buildTarget": "angular-moneystats:build:staging"
             },
             "development": {
-              "browserTarget": "angular-moneystats:build:development"
+              "buildTarget": "angular-moneystats:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -146,7 +146,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-moneystats:build"
+            "buildTarget": "angular-moneystats:build"
           }
         },
         "test": {
@@ -187,11 +187,11 @@
         "ionic-cordova-build": {
           "builder": "@ionic/angular-toolkit:cordova-build",
           "options": {
-            "browserTarget": "angular-moneystats:build"
+            "buildTarget": "angular-moneystats:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-moneystats:build:production"
+              "buildTarget": "angular-moneystats:build:production"
             }
           }
         }

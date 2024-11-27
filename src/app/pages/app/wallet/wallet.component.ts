@@ -12,9 +12,10 @@ import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
-  selector: 'app-wallet',
-  templateUrl: './wallet.component.html',
-  styleUrls: ['./wallet.component.scss'],
+    selector: 'app-wallet',
+    templateUrl: './wallet.component.html',
+    styleUrls: ['./wallet.component.scss'],
+    standalone: false
 })
 export class WalletComponent implements OnInit, OnDestroy {
   walletsSubscribe: Subscription = new Subscription();

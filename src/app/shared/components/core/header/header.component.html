@@ -56,12 +56,9 @@
   </div>
 </div>
 <!-- * App Header -->
-<div
-  *ngIf="isShadowActive"
-  id="shadow"
-  style="margin-top: 10px"
-  class="faded faded-bottom"
-></div>
+@if (isShadowActive) {
+<div id="shadow" style="margin-top: 10px" class="faded faded-bottom"></div>
+}
 
 <!-- App Sidebar -->
 <div

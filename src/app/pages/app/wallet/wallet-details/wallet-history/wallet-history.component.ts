@@ -6,9 +6,10 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-wallet-history',
-  templateUrl: './wallet-history.component.html',
-  styleUrls: ['./wallet-history.component.scss'],
+    selector: 'app-wallet-history',
+    templateUrl: './wallet-history.component.html',
+    styleUrls: ['./wallet-history.component.scss'],
+    standalone: false
 })
 export class WalletHistoryComponent implements OnInit {
   environment = environment;

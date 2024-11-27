@@ -9,9 +9,10 @@ import { SwalService } from 'src/assets/core/utils/swal.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-support',
-  templateUrl: './support.component.html',
-  styleUrls: ['./support.component.scss'],
+    selector: 'app-support',
+    templateUrl: './support.component.html',
+    styleUrls: ['./support.component.scss'],
+    standalone: false
 })
 export class SupportComponent implements OnInit, OnDestroy {
   contactSubscribe: Subscription = new Subscription();

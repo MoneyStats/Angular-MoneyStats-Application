@@ -22,12 +22,12 @@ import { SharedModule } from 'src/app/shared/components/shared/shared.module';
 import { CoreModule } from 'src/app/shared/components/core/core.module';
 import { AppPagesComponent } from './app.pages.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { NgChartsModule } from 'ng2-charts';
 import { HistoryComponent } from './stats/history/history.component';
 import { CategoryComponent } from './stats/category/category.component';
 import { DataComponent } from './stats/data/data.component';
 import { AppPagesRoutingModule } from './app.pages-routing.module';
 import { AppComponentsModule } from 'src/app/shared/components/app/app-components.module';
+import { BaseChartDirective } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -55,7 +55,7 @@ import { AppComponentsModule } from 'src/app/shared/components/app/app-component
     IonicModule.forRoot(),
     FormsModule,
     NgApexchartsModule,
-    NgChartsModule,
+    BaseChartDirective,
     InterceptorsModule,
     TranslateModule.forChild({
       loader: {

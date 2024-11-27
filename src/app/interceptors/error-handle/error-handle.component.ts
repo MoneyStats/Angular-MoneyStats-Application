@@ -6,10 +6,11 @@ import { Location } from '@angular/common';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 
 @Component({
-  selector: 'app-error-handle',
-  templateUrl: './error-handle.component.html',
-  styleUrls: ['./error-handle.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-error-handle',
+    templateUrl: './error-handle.component.html',
+    styleUrls: ['./error-handle.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class ErrorHandleComponent implements OnInit {
   exception?: UtilsException;

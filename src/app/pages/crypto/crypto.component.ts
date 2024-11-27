@@ -11,10 +11,11 @@ import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
 
 @Component({
-  selector: 'app-crypto',
-  templateUrl: './crypto.component.html',
-  styleUrls: ['./crypto.component.scss'],
-  animations: [fadeSlider],
+    selector: 'app-crypto',
+    templateUrl: './crypto.component.html',
+    styleUrls: ['./crypto.component.scss'],
+    animations: [fadeSlider],
+    standalone: false
 })
 export class CryptoComponent implements OnInit, OnDestroy {
   cryptoDashboardSub: Subscription = new Subscription();

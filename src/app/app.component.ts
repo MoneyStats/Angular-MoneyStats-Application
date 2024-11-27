@@ -6,15 +6,16 @@ import { ThemeService } from 'src/assets/core/utils/theme.service';
 import { fader, slideUp } from './shared/animations/route-animations';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  animations: [
-    // <-- add your animations here
-    fader,
-    slideUp,
-    // transformer,
-  ],
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    animations: [
+        // <-- add your animations here
+        fader,
+        slideUp,
+        // transformer,
+    ],
+    standalone: false
 })
 export class AppComponent implements OnInit {
   public showHeader: boolean = true;

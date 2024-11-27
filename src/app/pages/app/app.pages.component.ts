@@ -5,15 +5,16 @@ import { User } from 'src/assets/core/data/class/user.class';
 import { AuthService } from 'src/assets/core/services/api/auth.service';
 
 @Component({
-  selector: 'app-pages',
-  templateUrl: './app.pages.component.html',
-  styleUrls: ['./app.pages.component.scss'],
-  animations: [
-    // <-- add your animations here
-    //fader,
-    //slideUp,
-    fadeSlider,
-  ],
+    selector: 'app-pages',
+    templateUrl: './app.pages.component.html',
+    styleUrls: ['./app.pages.component.scss'],
+    animations: [
+        // <-- add your animations here
+        //fader,
+        //slideUp,
+        fadeSlider,
+    ],
+    standalone: false
 })
 export class AppPagesComponent implements OnInit {
   @Output('user') user?: User = new User();

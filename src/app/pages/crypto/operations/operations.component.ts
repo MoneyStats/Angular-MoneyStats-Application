@@ -9,9 +9,10 @@ import { SharedService } from 'src/assets/core/services/config/shared.service';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 
 @Component({
-  selector: 'app-operations',
-  templateUrl: './operations.component.html',
-  styleUrls: ['./operations.component.scss'],
+    selector: 'app-operations',
+    templateUrl: './operations.component.html',
+    styleUrls: ['./operations.component.scss'],
+    standalone: false
 })
 export class OperationsComponent implements OnInit, OnDestroy {
   routeSubscribe: Subscription = new Subscription();

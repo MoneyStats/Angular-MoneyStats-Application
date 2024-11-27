@@ -16,9 +16,10 @@ import { CryptoService } from 'src/assets/core/services/api/crypto.service';
 import { StatsService } from 'src/assets/core/services/api/stats.service';
 
 @Component({
-  selector: 'app-operations-modal',
-  templateUrl: './operations-modal.component.html',
-  styleUrls: ['./operations-modal.component.scss'],
+    selector: 'app-operations-modal',
+    templateUrl: './operations-modal.component.html',
+    styleUrls: ['./operations-modal.component.scss'],
+    standalone: false
 })
 export class OperationsModalComponent implements OnInit {
   @Input('modalId') modalId: string = '';

@@ -5,9 +5,10 @@ import { AppService } from 'src/assets/core/services/api/app.service';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 
 @Component({
-  selector: 'app-header-mobile',
-  templateUrl: './header-mobile.component.html',
-  styleUrls: ['./header-mobile.component.scss'],
+    selector: 'app-header-mobile',
+    templateUrl: './header-mobile.component.html',
+    styleUrls: ['./header-mobile.component.scss'],
+    standalone: false
 })
 export class HeaderMobileComponent implements OnInit {
   @Input('backBtn') backBtn: string = '';

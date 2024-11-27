@@ -9,9 +9,10 @@ import { Subscription } from 'rxjs';
 import { RegEx } from 'src/assets/core/data/constant/constant';
 
 @Component({
-  selector: 'app-forgot',
-  templateUrl: './forgot.component.html',
-  styleUrls: ['./forgot.component.scss'],
+    selector: 'app-forgot',
+    templateUrl: './forgot.component.html',
+    styleUrls: ['./forgot.component.scss'],
+    standalone: false
 })
 export class ForgotComponent implements OnDestroy {
   forgotSubscribe: Subscription = new Subscription();

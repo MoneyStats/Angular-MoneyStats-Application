@@ -20,15 +20,16 @@ import {
   Operation,
 } from 'src/assets/core/data/class/crypto.class';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
-import { ApexOptions } from 'ng-apexcharts';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
 import { Utils } from 'src/assets/core/services/config/utils.service';
+import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 
 @Component({
   selector: 'app-trading-resume',
   templateUrl: './trading-resume.component.html',
   styleUrls: ['./trading-resume.component.scss'],
+  standalone: false,
 })
 export class TradingResumeComponent implements OnInit, OnChanges {
   @Output('emptyTradingData') emptyTradingData = new EventEmitter<boolean>();

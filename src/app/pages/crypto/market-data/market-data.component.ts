@@ -18,9 +18,10 @@ import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
-  selector: 'app-market-data',
-  templateUrl: './market-data.component.html',
-  styleUrls: ['./market-data.component.scss'],
+    selector: 'app-market-data',
+    templateUrl: './market-data.component.html',
+    styleUrls: ['./market-data.component.scss'],
+    standalone: false
 })
 export class MarketDataComponent implements OnInit, OnDestroy, OnChanges {
   getDashboardSubscribe: Subscription = new Subscription();

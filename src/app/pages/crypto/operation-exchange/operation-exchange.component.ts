@@ -21,9 +21,10 @@ import { Utils } from 'src/assets/core/services/config/utils.service';
 import { SharedService } from 'src/assets/core/services/config/shared.service';
 
 @Component({
-  selector: 'app-operation-exchange',
-  templateUrl: './operation-exchange.component.html',
-  styleUrls: ['./operation-exchange.component.scss'],
+    selector: 'app-operation-exchange',
+    templateUrl: './operation-exchange.component.html',
+    styleUrls: ['./operation-exchange.component.scss'],
+    standalone: false
 })
 export class OperationExchangeComponent implements OnInit, OnDestroy {
   saveWalletSubscribe: Subscription = new Subscription();

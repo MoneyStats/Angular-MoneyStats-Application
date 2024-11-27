@@ -12,9 +12,10 @@ import { Utils } from 'src/assets/core/services/config/utils.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
 
 @Component({
-  selector: 'app-data',
-  templateUrl: './data.component.html',
-  styleUrls: ['./data.component.scss'],
+    selector: 'app-data',
+    templateUrl: './data.component.html',
+    styleUrls: ['./data.component.scss'],
+    standalone: false
 })
 export class DataComponent implements OnInit, OnChanges {
   public chartOptions?: Partial<ApexOptions>;

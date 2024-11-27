@@ -9,9 +9,10 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'app-tradingview-data',
-  templateUrl: './tradingview-data.component.html',
-  styleUrls: ['./tradingview-data.component.scss'],
+    selector: 'app-tradingview-data',
+    templateUrl: './tradingview-data.component.html',
+    styleUrls: ['./tradingview-data.component.scss'],
+    standalone: false
 })
 export class TradingviewDataComponent implements OnChanges {
   @ViewChild('tradingView') tradingView?: ElementRef;

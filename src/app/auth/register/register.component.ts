@@ -12,9 +12,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { RegEx } from 'src/assets/core/data/constant/constant';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.scss'],
+    standalone: false
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   registerSubscribe: Subscription = new Subscription();

@@ -29,9 +29,10 @@ import { WalletService } from 'src/assets/core/services/api/wallet.service';
 declare const TradingView: any;
 
 @Component({
-  selector: 'app-crypto-dashboard',
-  templateUrl: './crypto-dashboard.component.html',
-  styleUrls: ['./crypto-dashboard.component.scss'],
+    selector: 'app-crypto-dashboard',
+    templateUrl: './crypto-dashboard.component.html',
+    styleUrls: ['./crypto-dashboard.component.scss'],
+    standalone: false
 })
 export class CryptoDashboardComponent implements OnInit, OnDestroy {
   getDashboardSubscribe: Subscription = new Subscription();

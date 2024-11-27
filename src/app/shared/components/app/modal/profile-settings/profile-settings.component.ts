@@ -13,9 +13,10 @@ import { LOG } from 'src/assets/core/utils/log.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 
 @Component({
-  selector: 'app-profile-settings',
-  templateUrl: './profile-settings.component.html',
-  styleUrls: ['./profile-settings.component.scss'],
+    selector: 'app-profile-settings',
+    templateUrl: './profile-settings.component.html',
+    styleUrls: ['./profile-settings.component.scss'],
+    standalone: false
 })
 export class ProfileSettingsComponent implements OnInit, OnDestroy {
   updateUserSubscribe: Subscription = new Subscription();

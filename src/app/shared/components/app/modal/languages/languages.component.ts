@@ -4,9 +4,10 @@ import { LanguagesSettings } from 'src/assets/core/data/constant/constant';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-languages',
-  templateUrl: './languages.component.html',
-  styleUrls: ['./languages.component.scss'],
+    selector: 'app-languages',
+    templateUrl: './languages.component.html',
+    styleUrls: ['./languages.component.scss'],
+    standalone: false
 })
 export class LanguagesComponent implements OnInit {
   @Input('modalId') modalId: string = '';

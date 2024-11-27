@@ -20,9 +20,10 @@ import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
-  selector: 'app-stats',
-  templateUrl: './stats.component.html',
-  styleUrls: ['./stats.component.scss'],
+    selector: 'app-stats',
+    templateUrl: './stats.component.html',
+    styleUrls: ['./stats.component.scss'],
+    standalone: false
 })
 export class StatsComponent implements OnInit, OnDestroy {
   resumeSubscribe: Subscription = new Subscription();

@@ -19,9 +19,10 @@ import { Utils } from 'src/assets/core/services/config/utils.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 
 @Component({
-  selector: 'app-add-crypto-stats',
-  templateUrl: './add-crypto-stats.component.html',
-  styleUrls: ['./add-crypto-stats.component.scss'],
+    selector: 'app-add-crypto-stats',
+    templateUrl: './add-crypto-stats.component.html',
+    styleUrls: ['./add-crypto-stats.component.scss'],
+    standalone: false
 })
 export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
   // Subscribe

@@ -22,10 +22,11 @@ import { ToastService } from 'src/assets/core/utils/toast.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss'],
-  animations: [fader],
+    selector: 'app-settings',
+    templateUrl: './settings.component.html',
+    styleUrls: ['./settings.component.scss'],
+    animations: [fader],
+    standalone: false
 })
 export class SettingsComponent implements OnInit, OnDestroy {
   marketDataSubscribe: Subscription = new Subscription();

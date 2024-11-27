@@ -12,9 +12,10 @@ import {
 } from 'src/assets/core/data/constant/constant';
 
 @Component({
-  selector: 'app-operation-details',
-  templateUrl: './operation-details.component.html',
-  styleUrls: ['./operation-details.component.scss'],
+    selector: 'app-operation-details',
+    templateUrl: './operation-details.component.html',
+    styleUrls: ['./operation-details.component.scss'],
+    standalone: false
 })
 export class OperationDetailsComponent implements OnInit, OnChanges {
   @Input('operation') operation?: Operation = new Operation();

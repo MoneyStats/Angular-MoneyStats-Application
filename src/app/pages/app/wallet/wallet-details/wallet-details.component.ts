@@ -20,9 +20,10 @@ import { SharedService } from 'src/assets/core/services/config/shared.service';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 
 @Component({
-  selector: 'app-wallet-details',
-  templateUrl: './wallet-details.component.html',
-  styleUrls: ['./wallet-details.component.scss'],
+    selector: 'app-wallet-details',
+    templateUrl: './wallet-details.component.html',
+    styleUrls: ['./wallet-details.component.scss'],
+    standalone: false
 })
 export class WalletDetailsComponent implements OnInit, OnDestroy {
   user: User = UserService.getUserData();

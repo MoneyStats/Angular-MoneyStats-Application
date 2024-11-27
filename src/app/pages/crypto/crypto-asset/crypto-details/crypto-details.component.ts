@@ -23,9 +23,10 @@ import { SharedService } from 'src/assets/core/services/config/shared.service';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 
 @Component({
-  selector: 'app-crypto-details',
-  templateUrl: './crypto-details.component.html',
-  styleUrls: ['./crypto-details.component.scss'],
+    selector: 'app-crypto-details',
+    templateUrl: './crypto-details.component.html',
+    styleUrls: ['./crypto-details.component.scss'],
+    standalone: false
 })
 export class CryptoDetailsComponent
   implements OnInit, AfterViewInit, OnDestroy

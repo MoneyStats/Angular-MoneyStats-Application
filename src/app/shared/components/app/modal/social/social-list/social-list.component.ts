@@ -7,9 +7,10 @@ import {
 import { AuthService } from 'src/assets/core/services/api/auth.service';
 
 @Component({
-  selector: 'app-social-list',
-  templateUrl: './social-list.component.html',
-  styleUrls: ['./social-list.component.scss'],
+    selector: 'app-social-list',
+    templateUrl: './social-list.component.html',
+    styleUrls: ['./social-list.component.scss'],
+    standalone: false
 })
 export class SocialListComponent implements OnInit {
   @Input('modalId') modalId: string = '';

@@ -26,9 +26,10 @@ import { environment } from 'src/environments/environment';
 import { AppService } from 'src/assets/core/services/api/app.service';
 
 @Component({
-  selector: 'app-add-wallet',
-  templateUrl: './add-wallet.component.html',
-  styleUrls: ['./add-wallet.component.scss'],
+    selector: 'app-add-wallet',
+    templateUrl: './add-wallet.component.html',
+    styleUrls: ['./add-wallet.component.scss'],
+    standalone: false
 })
 export class AddWalletComponent implements OnInit, OnChanges, OnDestroy {
   @Output('emitAddWallet') emitAddWallet = new EventEmitter<Wallet>();

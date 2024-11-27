@@ -14,9 +14,10 @@ import { Utils } from 'src/assets/core/services/config/utils.service';
 import { ChartJSService } from 'src/assets/core/utils/chartjs.service';
 
 @Component({
-  selector: 'app-history',
-  templateUrl: './history.component.html',
-  styleUrls: ['./history.component.scss'],
+    selector: 'app-history',
+    templateUrl: './history.component.html',
+    styleUrls: ['./history.component.scss'],
+    standalone: false
 })
 export class HistoryComponent implements OnChanges {
   public chartOptions?: Partial<ApexOptions>;

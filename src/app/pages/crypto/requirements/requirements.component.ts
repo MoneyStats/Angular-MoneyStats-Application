@@ -12,9 +12,10 @@ import { SharedService } from 'src/assets/core/services/config/shared.service';
 import { WalletService } from 'src/assets/core/services/api/wallet.service';
 
 @Component({
-  selector: 'app-requirements',
-  templateUrl: './requirements.component.html',
-  styleUrls: ['./requirements.component.scss'],
+    selector: 'app-requirements',
+    templateUrl: './requirements.component.html',
+    styleUrls: ['./requirements.component.scss'],
+    standalone: false
 })
 export class RequirementsComponent implements OnInit, OnDestroy {
   walletsSubscribe: Subscription = new Subscription();

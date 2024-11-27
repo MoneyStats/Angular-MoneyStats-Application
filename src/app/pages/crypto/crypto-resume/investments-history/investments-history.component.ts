@@ -24,9 +24,10 @@ import { Utils } from 'src/assets/core/services/config/utils.service';
 import { SharedService } from 'src/assets/core/services/config/shared.service';
 
 @Component({
-  selector: 'app-investments-history',
-  templateUrl: './investments-history.component.html',
-  styleUrls: ['./investments-history.component.scss'],
+    selector: 'app-investments-history',
+    templateUrl: './investments-history.component.html',
+    styleUrls: ['./investments-history.component.scss'],
+    standalone: false
 })
 export class InvestmentsHistoryComponent implements OnInit, OnChanges {
   amount: string = '******';

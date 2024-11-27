@@ -10,9 +10,10 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-transactions',
-  templateUrl: './transactions.component.html',
-  styleUrls: ['./transactions.component.scss'],
+    selector: 'app-transactions',
+    templateUrl: './transactions.component.html',
+    styleUrls: ['./transactions.component.scss'],
+    standalone: false
 })
 export class TransactionsComponent implements OnInit, OnDestroy {
   environment = environment;

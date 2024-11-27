@@ -21,9 +21,10 @@ import { UserService } from 'src/assets/core/services/api/user.service';
 import { SharedService } from 'src/assets/core/services/config/shared.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss'],
+    standalone: false
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   dashboardSubscribe: Subscription = new Subscription();

@@ -23,9 +23,10 @@ import { Utils } from 'src/assets/core/services/config/utils.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
 
 @Component({
-  selector: 'app-operations-list',
-  templateUrl: './operations-list.component.html',
-  styleUrls: ['./operations-list.component.scss'],
+    selector: 'app-operations-list',
+    templateUrl: './operations-list.component.html',
+    styleUrls: ['./operations-list.component.scss'],
+    standalone: false
 })
 export class OperationsListComponent implements OnInit, OnChanges {
   @Input('walletsAsset') walletsAsset: Wallet[] = [];

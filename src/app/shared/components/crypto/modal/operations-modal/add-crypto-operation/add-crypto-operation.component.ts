@@ -9,9 +9,10 @@ import {
 import { Utils } from 'src/assets/core/services/config/utils.service';
 
 @Component({
-  selector: 'app-add-crypto-operation',
-  templateUrl: './add-crypto-operation.component.html',
-  styleUrls: ['./add-crypto-operation.component.scss'],
+    selector: 'app-add-crypto-operation',
+    templateUrl: './add-crypto-operation.component.html',
+    styleUrls: ['./add-crypto-operation.component.scss'],
+    standalone: false
 })
 export class AddCryptoOperationComponent implements OnInit {
   @Input('wallets') wallets: Wallet[] = [];

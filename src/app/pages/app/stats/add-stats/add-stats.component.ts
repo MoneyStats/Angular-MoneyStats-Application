@@ -20,9 +20,10 @@ import { SwalService } from 'src/assets/core/utils/swal.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-add-stats',
-  templateUrl: './add-stats.component.html',
-  styleUrls: ['./add-stats.component.scss'],
+    selector: 'app-add-stats',
+    templateUrl: './add-stats.component.html',
+    styleUrls: ['./add-stats.component.scss'],
+    standalone: false
 })
 export class AddStatsComponent implements OnInit, OnDestroy {
   dashboardSubscribe: Subscription = new Subscription();

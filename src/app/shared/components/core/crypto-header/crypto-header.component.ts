@@ -6,9 +6,10 @@ import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 
 @Component({
-  selector: 'app-crypto-header',
-  templateUrl: './crypto-header.component.html',
-  styleUrls: ['./crypto-header.component.scss'],
+    selector: 'app-crypto-header',
+    templateUrl: './crypto-header.component.html',
+    styleUrls: ['./crypto-header.component.scss'],
+    standalone: false
 })
 export class CryptoHeaderComponent {
   @Output('emitOperationClick') emitOperationClick =

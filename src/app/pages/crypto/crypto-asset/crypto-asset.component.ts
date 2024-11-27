@@ -18,9 +18,10 @@ import { Utils } from 'src/assets/core/services/config/utils.service';
 import { SharedService } from 'src/assets/core/services/config/shared.service';
 
 @Component({
-  selector: 'app-crypto-asset',
-  templateUrl: './crypto-asset.component.html',
-  styleUrls: ['./crypto-asset.component.scss'],
+    selector: 'app-crypto-asset',
+    templateUrl: './crypto-asset.component.html',
+    styleUrls: ['./crypto-asset.component.scss'],
+    standalone: false
 })
 export class CryptoAssetComponent implements OnInit, OnDestroy {
   cryptoAssetSubscribe: Subscription = new Subscription();

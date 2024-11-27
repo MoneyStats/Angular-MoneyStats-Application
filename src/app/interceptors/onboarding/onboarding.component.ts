@@ -6,9 +6,10 @@ import { environment } from 'src/environments/environment';
 import { AppService } from 'src/assets/core/services/api/app.service';
 
 @Component({
-  selector: 'app-onboarding',
-  templateUrl: './onboarding.component.html',
-  styleUrls: ['./onboarding.component.scss'],
+    selector: 'app-onboarding',
+    templateUrl: './onboarding.component.html',
+    styleUrls: ['./onboarding.component.scss'],
+    standalone: false
 })
 export class OnboardingComponent implements OnInit {
   isCrypto: boolean = false;

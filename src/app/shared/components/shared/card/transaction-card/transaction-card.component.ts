@@ -6,9 +6,10 @@ import { DashboardService } from 'src/assets/core/services/api/dashboard.service
 import { SharedService } from 'src/assets/core/services/config/shared.service';
 
 @Component({
-  selector: 'app-transaction-card',
-  templateUrl: './transaction-card.component.html',
-  styleUrls: ['./transaction-card.component.scss'],
+    selector: 'app-transaction-card',
+    templateUrl: './transaction-card.component.html',
+    styleUrls: ['./transaction-card.component.scss'],
+    standalone: false
 })
 export class TransactionCardComponent implements OnInit {
   amount: string = '******';

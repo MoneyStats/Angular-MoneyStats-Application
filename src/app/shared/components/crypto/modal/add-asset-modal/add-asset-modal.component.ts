@@ -19,9 +19,10 @@ import { LOG } from 'src/assets/core/utils/log.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-add-asset-modal',
-  templateUrl: './add-asset-modal.component.html',
-  styleUrls: ['./add-asset-modal.component.scss'],
+    selector: 'app-add-asset-modal',
+    templateUrl: './add-asset-modal.component.html',
+    styleUrls: ['./add-asset-modal.component.scss'],
+    standalone: false
 })
 export class AddAssetModalComponent implements OnInit, OnDestroy {
   getMarketDataSubscribe: Subscription = new Subscription();

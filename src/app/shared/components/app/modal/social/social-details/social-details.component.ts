@@ -10,9 +10,10 @@ import { UserService } from 'src/assets/core/services/api/user.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-social-details',
-  templateUrl: './social-details.component.html',
-  styleUrls: ['./social-details.component.scss'],
+    selector: 'app-social-details',
+    templateUrl: './social-details.component.html',
+    styleUrls: ['./social-details.component.scss'],
+    standalone: false
 })
 export class SocialDetailsComponent implements OnInit {
   @Input('username') username: string = '';

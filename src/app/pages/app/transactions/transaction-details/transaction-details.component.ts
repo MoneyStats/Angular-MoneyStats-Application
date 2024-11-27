@@ -8,9 +8,10 @@ import { SharedService } from 'src/assets/core/services/config/shared.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
-  selector: 'app-transaction-details',
-  templateUrl: './transaction-details.component.html',
-  styleUrls: ['./transaction-details.component.scss'],
+    selector: 'app-transaction-details',
+    templateUrl: './transaction-details.component.html',
+    styleUrls: ['./transaction-details.component.scss'],
+    standalone: false
 })
 export class TransactionDetailsComponent implements OnInit {
   @Input('wallet') wallet?: Wallet;

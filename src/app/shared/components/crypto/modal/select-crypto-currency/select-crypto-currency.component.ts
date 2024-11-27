@@ -13,9 +13,10 @@ import { LOG } from 'src/assets/core/utils/log.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-select-crypto-currency',
-  templateUrl: './select-crypto-currency.component.html',
-  styleUrls: ['./select-crypto-currency.component.scss'],
+    selector: 'app-select-crypto-currency',
+    templateUrl: './select-crypto-currency.component.html',
+    styleUrls: ['./select-crypto-currency.component.scss'],
+    standalone: false
 })
 export class SelectCryptoCurrencyComponent {
   environment = environment;

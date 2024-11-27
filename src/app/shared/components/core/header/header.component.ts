@@ -19,6 +19,7 @@ import { SharedService } from 'src/assets/core/services/config/shared.service';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  standalone: false,
 })
 export class HeaderComponent implements OnInit, OnChanges {
   @Input('user') user?: User;
@@ -32,7 +33,7 @@ export class HeaderComponent implements OnInit, OnChanges {
     private router: Router
   ) {
     router.events.subscribe((data: any) => {
-      if (data.url == '/') {
+      if (data.routerEvent.url == '/') {
         this.isShadowActive = true;
       } else this.isShadowActive = false;
     });

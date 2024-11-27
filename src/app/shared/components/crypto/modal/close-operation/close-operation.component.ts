@@ -16,9 +16,10 @@ import { UserService } from 'src/assets/core/services/api/user.service';
 import { SharedService } from 'src/assets/core/services/config/shared.service';
 
 @Component({
-  selector: 'app-close-operation',
-  templateUrl: './close-operation.component.html',
-  styleUrls: ['./close-operation.component.scss'],
+    selector: 'app-close-operation',
+    templateUrl: './close-operation.component.html',
+    styleUrls: ['./close-operation.component.scss'],
+    standalone: false
 })
 export class CloseOperationComponent implements OnDestroy {
   closeSubscribe: Subscription = new Subscription();

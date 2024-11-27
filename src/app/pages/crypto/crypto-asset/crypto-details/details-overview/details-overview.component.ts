@@ -30,9 +30,10 @@ import { Utils } from 'src/assets/core/services/config/utils.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
 
 @Component({
-  selector: 'app-details-overview',
-  templateUrl: './details-overview.component.html',
-  styleUrls: ['./details-overview.component.scss'],
+    selector: 'app-details-overview',
+    templateUrl: './details-overview.component.html',
+    styleUrls: ['./details-overview.component.scss'],
+    standalone: false
 })
 export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
   updateinvestmentSubscribe: Subscription = new Subscription();

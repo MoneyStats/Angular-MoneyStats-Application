@@ -11,9 +11,10 @@ import { LOG } from 'src/assets/core/utils/log.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 
 @Component({
-  selector: 'app-open-bug',
-  templateUrl: './open-bug.component.html',
-  styleUrls: ['./open-bug.component.scss'],
+    selector: 'app-open-bug',
+    templateUrl: './open-bug.component.html',
+    styleUrls: ['./open-bug.component.scss'],
+    standalone: false
 })
 export class OpenBugComponent implements OnDestroy {
   issuesSubscribe: Subscription = new Subscription();

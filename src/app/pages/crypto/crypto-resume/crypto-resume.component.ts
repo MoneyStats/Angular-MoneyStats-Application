@@ -17,9 +17,10 @@ import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
-  selector: 'app-crypto-resume',
-  templateUrl: './crypto-resume.component.html',
-  styleUrls: ['./crypto-resume.component.scss'],
+    selector: 'app-crypto-resume',
+    templateUrl: './crypto-resume.component.html',
+    styleUrls: ['./crypto-resume.component.scss'],
+    standalone: false
 })
 export class CryptoResumeComponent implements OnInit, OnDestroy {
   getResumeSub: Subscription = new Subscription();

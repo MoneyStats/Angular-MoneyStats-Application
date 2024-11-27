@@ -13,9 +13,10 @@ import { ChartService } from 'src/assets/core/utils/chart.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
-  selector: 'app-resume-assets',
-  templateUrl: './resume-assets.component.html',
-  styleUrls: ['./resume-assets.component.scss'],
+    selector: 'app-resume-assets',
+    templateUrl: './resume-assets.component.html',
+    styleUrls: ['./resume-assets.component.scss'],
+    standalone: false
 })
 export class ResumeAssetsComponent implements OnInit, OnChanges {
   amount: string = '******';

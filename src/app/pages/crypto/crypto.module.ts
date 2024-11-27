@@ -17,7 +17,6 @@ import { CoreModule } from 'src/app/shared/components/core/core.module';
 import { CryptoRoutingModule } from './crypto-routing.module';
 import { CryptoAssetComponent } from './crypto-asset/crypto-asset.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { NgChartsModule } from 'ng2-charts';
 import { CryptoDetailsComponent } from './crypto-asset/crypto-details/crypto-details.component';
 import { DetailsOverviewComponent } from './crypto-asset/crypto-details/details-overview/details-overview.component';
 import { TradingviewDataComponent } from './crypto-asset/crypto-details/tradingview-data/tradingview-data.component';
@@ -30,6 +29,7 @@ import { OperationsComponent } from './operations/operations.component';
 import { TradingResumeComponent } from './crypto-resume/trading-resume/trading-resume.component';
 import { MarketDataComponent } from './market-data/market-data.component';
 import { AppComponentsModule } from 'src/app/shared/components/app/app-components.module';
+import { BaseChartDirective } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -55,7 +55,7 @@ import { AppComponentsModule } from 'src/app/shared/components/app/app-component
     CoreModule,
     CryptoComponentsModule,
     NgApexchartsModule,
-    NgChartsModule,
+    BaseChartDirective,
     AppComponentsModule,
     SharedModule,
     IonicModule.forRoot(),

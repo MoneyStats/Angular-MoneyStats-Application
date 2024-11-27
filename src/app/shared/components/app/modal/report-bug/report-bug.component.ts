@@ -11,9 +11,10 @@ import { LOG } from 'src/assets/core/utils/log.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 
 @Component({
-  selector: 'app-report-bug',
-  templateUrl: './report-bug.component.html',
-  styleUrls: ['./report-bug.component.scss'],
+    selector: 'app-report-bug',
+    templateUrl: './report-bug.component.html',
+    styleUrls: ['./report-bug.component.scss'],
+    standalone: false
 })
 export class ReportBugComponent implements OnDestroy {
   bugSubscribe: Subscription = new Subscription();

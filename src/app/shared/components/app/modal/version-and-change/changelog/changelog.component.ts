@@ -3,9 +3,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-changelog',
-  templateUrl: './changelog.component.html',
-  styleUrls: ['./changelog.component.scss'],
+    selector: 'app-changelog',
+    templateUrl: './changelog.component.html',
+    styleUrls: ['./changelog.component.scss'],
+    standalone: false
 })
 export class ChangelogComponent implements OnInit {
   @Input('modalId') modalId: string = '';
