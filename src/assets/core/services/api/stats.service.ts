@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Dashboard, Wallet } from '../../data/class/dashboard.class';
 import { ResponseModel } from '../../data/class/generic.class';
 import { StorageConstant } from '../../data/constant/constant';
-import { CacheService } from '../config/cache.service';
+import { CacheService } from '../config/cache/cache.service';
 import { UserService } from './user.service';
 
 @Injectable({

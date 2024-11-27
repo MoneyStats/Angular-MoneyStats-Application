@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Utils } from './utils.service';
-import { Wallet } from '../../data/class/dashboard.class';
+import { Dashboard, Wallet } from '../../data/class/dashboard.class';
 import { Asset, CryptoDashboard } from '../../data/class/crypto.class';
 import { Coin } from '../../data/class/coin';
 
@@ -11,6 +11,7 @@ import { Coin } from '../../data/class/coin';
 export class SharedService {
   environment = environment;
 
+  private dashboard?: Dashboard;
   private wallets: Array<Wallet> = [];
   private wallet?: Wallet;
 
@@ -25,6 +26,7 @@ export class SharedService {
    * Cleaned By @CacheService
    */
   clearData() {
+    this.dashboard = undefined;
     this.wallet = undefined;
     this.wallets = [];
     this.cryptoCurrency = Coin.USD;
@@ -33,6 +35,20 @@ export class SharedService {
     this.cryptoWallets = [];
     this.cryptoResumeData = null;
     this.cryptoHistoryData = {};
+  }
+
+  getDashboard() {
+    return Utils.copyObject(this.dashboard);
+  }
+
+  setDashboard(dashboard: Dashboard) {
+    this.wallet = Utils.copyObject(dashboard);
+    if (
+      Utils.isNullOrEmpty(this.wallets) &&
+      !Utils.isNullOrEmpty(dashboard.wallets)
+    )
+      this.wallets = Utils.copyObject(dashboard.wallets);
+    return Utils.copyObject(dashboard);
   }
 
   getWallet() {

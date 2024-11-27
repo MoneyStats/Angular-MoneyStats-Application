@@ -3,6 +3,7 @@ import {
   ElementRef,
   OnDestroy,
   OnInit,
+  Output,
   Renderer2,
   ViewChild,
 } from '@angular/core';
@@ -10,7 +11,7 @@ import {
   Asset,
   CryptoDashboard,
 } from 'src/assets/core/data/class/crypto.class';
-import { Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import {
   ModalConstant,
   StorageConstant,
@@ -22,6 +23,8 @@ import { environment } from 'src/environments/environment';
 import { Subscription } from 'rxjs';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { SharedService } from 'src/assets/core/services/config/shared.service';
+import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
+import { WalletService } from 'src/assets/core/services/api/wallet.service';
 
 declare const TradingView: any;
 
@@ -34,6 +37,7 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
   getDashboardSubscribe: Subscription = new Subscription();
   getCryptoWalletSubscribe: Subscription = new Subscription();
   marketDataSubscribe: Subscription = new Subscription();
+  walletsSubscribe: Subscription = new Subscription();
 
   filterMarketData: Array<any> = [];
 
@@ -50,12 +54,14 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
 
   symbolList: Array<string> = [];
 
+  @Output('wallets') wallets: Wallet[] = [];
   cryptoDashboard: CryptoDashboard = new CryptoDashboard();
   cryptoWallet?: Wallet[];
   assets: Asset[] = [];
 
   constructor(
     public screenService: ScreenService,
+    private walletService: WalletService,
     private _renderer2: Renderer2,
     private cryptoService: CryptoService,
     private shared: SharedService
@@ -66,7 +72,7 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getDashboard();
+    this.getCryptoDashboard();
     ScreenService.showFooter();
   }
 
@@ -78,7 +84,7 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
     this.appendDayGraph();
   }
 
-  getDashboard() {
+  getCryptoDashboard() {
     this.getDashboardSubscribe = this.cryptoService
       .getCryptoDashboardData()
       .subscribe((data) => {
@@ -110,6 +116,18 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
             : [];
           this.shared.setCryptoWallets(this.cryptoWallet!);
         });
+  }
+
+  getWalletsData() {
+    if (Utils.isNullOrEmpty(this.shared.getWallets()))
+      this.walletsSubscribe = this.walletService
+        .getWalletsData()
+        .subscribe((data) => {
+          this.walletService.cache.cacheWalletsData(data);
+          LOG.info(data.message!, 'CryptoDashboardComponent');
+          this.wallets = this.shared.setWallets(data.data);
+        });
+    else this.wallets = this.shared.getWallets();
   }
 
   vibrate() {
@@ -320,7 +338,7 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
     //this.selectGraph?.nativeElement.appendChild(script);
   }
   saveWallet(wallet: Wallet) {
-    this.getDashboard();
+    this.getCryptoDashboard();
   }
   hiddenShowAmount() {
     if (this.hidden) {
@@ -359,5 +377,6 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
     this.getDashboardSubscribe.unsubscribe();
     this.marketDataSubscribe.unsubscribe();
     this.getCryptoWalletSubscribe.unsubscribe();
+    this.walletsSubscribe.unsubscribe();
   }
 }

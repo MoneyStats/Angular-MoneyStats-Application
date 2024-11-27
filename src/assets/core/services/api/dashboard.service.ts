@@ -2,11 +2,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Dashboard, Wallet } from '../../data/class/dashboard.class';
+import { Dashboard } from '../../data/class/dashboard.class';
 import { ResponseModel } from '../../data/class/generic.class';
-import { User } from '../../data/class/user.class';
 import { StorageConstant } from '../../data/constant/constant';
-import { CacheService } from '../config/cache.service';
+import { CacheService } from '../config/cache/cache.service';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -14,7 +13,6 @@ import { UserService } from './user.service';
 })
 export class DashboardService {
   environment = environment;
-  public dashboard: Dashboard = new Dashboard();
   public isOnboarding = false;
   constructor(private http: HttpClient, public cache: CacheService) {}
 

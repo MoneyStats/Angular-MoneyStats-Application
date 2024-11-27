@@ -14,7 +14,6 @@ import {
   SelectAssetConstant,
 } from 'src/assets/core/data/constant/constant';
 import { CryptoService } from 'src/assets/core/services/api/crypto.service';
-import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { environment } from 'src/environments/environment';
@@ -41,7 +40,7 @@ export class AddAssetModalComponent implements OnInit, OnDestroy {
   balance?: number;
   invested?: number;
 
-  marketData: Asset[] = [];
+  @Input('marketData') marketData: Asset[] = [];
 
   @Input('wallets') wallets: Wallet[] = [];
   wallet?: Wallet;
@@ -56,10 +55,7 @@ export class AddAssetModalComponent implements OnInit, OnDestroy {
 
   falseIf: boolean = false;
 
-  constructor(
-    public dashboardService: DashboardService,
-    public cryptoService: CryptoService
-  ) {}
+  constructor(public cryptoService: CryptoService) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -70,27 +66,7 @@ export class AddAssetModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getCryptoPrices();
-    this.categories = this.dashboardService.dashboard.categories;
-    if (this.wallets == undefined && this.dashboardService.dashboard.wallets) {
-      this.wallets = this.dashboardService.dashboard.wallets.filter(
-        (w) => w.category == 'Crypto'
-      );
-      //if (this.wallets && this.wallets.length != 0) {
-      //  //if (this.wallets && this.wallets.length == 1) {
-      //  this.modelWallet = this.wallets[0].name;
-      //}
-    } else this.wallets;
-  }
-
-  getCryptoPrices() {
-    this.getMarketDataSubscribe = this.cryptoService
-      .getCryptoPriceData(this.cryptoCurrency)
-      .subscribe((data) => {
-        this.cryptoService.cache.cacheMarketDataByCurrencyData(data);
-        LOG.info(data.message!, 'AddAssetModalComponent');
-        this.marketData = data.data;
-      });
+    this.wallets = this.wallets.filter((w) => w.category == 'Crypto');
   }
 
   selectWallet() {

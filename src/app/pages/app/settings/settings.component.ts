@@ -13,7 +13,7 @@ import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { AppService } from 'src/assets/core/services/api/app.service';
 import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
-import { CacheService } from 'src/assets/core/services/config/cache.service';
+import { CacheService } from 'src/assets/core/services/config/cache/cache.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';

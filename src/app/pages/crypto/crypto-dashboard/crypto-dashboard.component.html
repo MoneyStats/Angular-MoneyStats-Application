@@ -140,9 +140,11 @@
                     class="icon-size icon-color"
                     name="add-circle"
                   ></ion-icon>
-                  <a style="vertical-align: -1px; color: #958d9e">{{
-                    "crypto.dashboard.cardRes.opt3" | translate
-                  }}</a>
+                  <a
+                    style="vertical-align: -1px; color: #958d9e"
+                    (click)="getWalletsData()"
+                    >{{ "crypto.dashboard.cardRes.opt3" | translate }}</a
+                  >
                 </div>
               </div>
             </div>
@@ -362,162 +364,6 @@
           </div>
         </div>
       </div>
-      <!--<div class="col-md-12 col-xl-8">
-        <div class="section section-performance">
-          <div class="section-heading">
-            <h2 class="title">
-              {{ "crypto.dashboard.performanceCard.title" | translate }}
-            </h2>
-          </div>
-          <app-loading-card [isThreeValue]="true"></app-loading-card>
-          <div class="card loading-hidden">
-            <div class="card-body text-center mx-auto">
-              <div class="row">
-                <div class="col-6 col-md-4">
-                  <div class="inline-block">
-                    <p class="title">
-                      {{
-                        "crypto.dashboard.performanceCard.holding" | translate
-                      }}
-                    </p>
-                    <h5 class="card-text fs-3">
-                      {{
-                        hidden ? amount : cryptoDashboard.holdingLong.balance
-                      }}
-                      <small>{{ cryptoDashboard.currency }}</small>
-                    </h5>
-                    <span
-                      class="badge {{
-                        cryptoDashboard.holdingLong.performance == 0
-                          ? 'badge-warning'
-                          : cryptoDashboard.holdingLong.performance > 0
-                          ? 'badge-success'
-                          : 'badge-danger'
-                      }}"
-                    >
-                      <ion-icon
-                        name="{{
-                          cryptoDashboard.holdingLong.performance > 0
-                            ? 'arrow-up-outline'
-                            : 'arrow-down-outline'
-                        }}"
-                      ></ion-icon>
-                      {{ cryptoDashboard.holdingLong.performance }}%
-                    </span>
-                    <p class="card-text">
-                      <small
-                        >{{
-                          "crypto.dashboard.performanceCard.lastUpdate"
-                            | translate
-                        }}
-                        {{
-                          cryptoDashboard.holdingLong.lastUpdate
-                            | date : "d MMM y"
-                        }}</small
-                      >
-                    </p>
-                  </div>
-                </div>
-                <div class="line col-6 col-md-4">
-                  <div class="inline-block">
-                    <p class="title">
-                      {{
-                        "crypto.dashboard.performanceCard.trading" | translate
-                      }}
-                    </p>
-                    <h5 class="card-text fs-3">
-                      {{ hidden ? amount : cryptoDashboard.trading.balance }}
-                      <small>{{ cryptoDashboard.currency }}</small>
-                    </h5>
-                    <span
-                      class="badge {{
-                        cryptoDashboard.trading.performance == 0
-                          ? 'badge-warning'
-                          : cryptoDashboard.trading.performance > 0
-                          ? 'badge-success'
-                          : 'badge-danger'
-                      }}"
-                    >
-                      <ion-icon
-                        name="{{
-                          cryptoDashboard.trading.performance > 0
-                            ? 'arrow-up-outline'
-                            : 'arrow-down-outline'
-                        }}"
-                      ></ion-icon>
-                      {{ cryptoDashboard.trading.performance }}%
-                    </span>
-                    <p class="card-text">
-                      <small
-                        >{{
-                          "crypto.dashboard.performanceCard.lastUpdate"
-                            | translate
-                        }}
-                        {{
-                          cryptoDashboard.trading.lastUpdate | date : "d MMM y"
-                        }}</small
-                      >
-                    </p>
-                  </div>
-                </div>
-                <div class="line col-12 col-md-4"> -->
-      <!-- TradingView Widget BEGIN
-                  <div class="tradingview-widget-container">
-                    <div class="tradingview-widget-container__widget"></div>
-                    <div #dayGraph></div>
-                  </div>-->
-      <!-- TradingView Widget END
-                  <div class="inline-block">
-                    <hr class="hidden_desktop" />
-                    <p class="title">
-                      {{
-                        "crypto.dashboard.performanceCard.performance"
-                          | translate
-                      }}
-                    </p>
-                    <h5 class="card-text fs-3">
-                      {{
-                        hidden ? amount : cryptoDashboard.performance.balance
-                      }}
-                      <small>{{ cryptoDashboard.currency }}</small>
-                    </h5>
-                    <span
-                      class="badge {{
-                        cryptoDashboard.performance.performance == 0
-                          ? 'badge-warning'
-                          : cryptoDashboard.performance.performance > 0
-                          ? 'badge-success'
-                          : 'badge-danger'
-                      }}"
-                    >
-                      <ion-icon
-                        name="{{
-                          cryptoDashboard.performance.performance > 0
-                            ? 'arrow-up-outline'
-                            : 'arrow-down-outline'
-                        }}"
-                      ></ion-icon>
-                      {{ cryptoDashboard.performance.performance }}%
-                    </span>
-                    <p class="card-text">
-                      <small
-                        >{{
-                          "crypto.dashboard.performanceCard.lastUpdate"
-                            | translate
-                        }}
-                        {{
-                          cryptoDashboard.performance.lastUpdate
-                            | date : "d MMM y"
-                        }}</small
-                      >
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>-->
     </div>
 
     <div class="row">
@@ -634,11 +480,13 @@
 
 <app-add-wallet
   (emitAddWallet)="saveWallet($event)"
+  [wallets]="wallets"
   [modalId]="modalConstant.ADDWALLET"
   [isCrypto]="true"
 ></app-add-wallet>
 <app-add-asset-modal
   (emitAddAsset)="saveWallet($event)"
+  [marketData]="filterMarketData"
   [cryptoCurrency]="cryptoDashboard.currency"
   [modalId]="modalConstant.ADDASSET"
   [wallets]="cryptoWallet!"
@@ -649,5 +497,5 @@
   [assets]="cryptoDashboard.assets"
   [currency]="cryptoDashboard.currency"
   [statsAssetsDays]="cryptoDashboard.statsAssetsDays"
-  (emitAddStats)="getDashboard()"
+  (emitAddStats)="getCryptoDashboard()"
 ></app-operations-modal>

@@ -7,7 +7,7 @@ import { ResponseModel } from '../../data/class/generic.class';
 import { MockUser, User } from '../../data/class/user.class';
 import { StorageConstant } from '../../data/constant/constant';
 import { SwalService } from '../../utils/swal.service';
-import { CacheService } from '../config/cache.service';
+import { CacheService } from '../config/cache/cache.service';
 
 @Injectable({
   providedIn: 'root',

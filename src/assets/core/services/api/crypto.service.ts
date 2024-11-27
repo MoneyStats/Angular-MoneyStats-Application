@@ -7,7 +7,7 @@ import { StorageConstant } from '../../data/constant/constant';
 import { SwalService } from '../../utils/swal.service';
 import { Stats, Wallet } from '../../data/class/dashboard.class';
 import { Asset } from '../../data/class/crypto.class';
-import { CacheService } from '../config/cache.service';
+import { CacheService } from '../config/cache/cache.service';
 import { UserService } from './user.service';
 import { Utils } from '../config/utils.service';
 

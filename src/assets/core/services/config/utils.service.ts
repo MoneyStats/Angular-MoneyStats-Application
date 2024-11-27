@@ -57,4 +57,18 @@ export class Utils {
     var db = JSON.stringify(obj);
     return JSON.parse(db);
   }
+
+  public static getFromSession(name: string) {
+    const data = sessionStorage.getItem(name);
+    if (data) return JSON.parse(data);
+    return null;
+  }
+
+  public static setInSession(name: string, value: any) {
+    sessionStorage.setItem(name, JSON.stringify(value));
+  }
+
+  public static removeFromSession(name: string) {
+    sessionStorage.removeItem(name);
+  }
 }

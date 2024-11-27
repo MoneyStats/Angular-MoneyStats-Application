@@ -18,6 +18,7 @@ import { environment } from 'src/environments/environment';
 import { Subscription } from 'rxjs';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
+import { SharedService } from 'src/assets/core/services/config/shared.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -50,7 +51,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private dashboardService: DashboardService,
     private datePipe: DatePipe,
     private translate: TranslateService,
-    private router: Router
+    private router: Router,
+    private shared: SharedService
   ) {}
 
   ngOnDestroy(): void {
@@ -68,6 +70,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         this.dashboardService.cache.cacheDashboardData(data);
         LOG.info(data.message!, 'DashboardComponent');
+        this.shared.setDashboard(data.data);
         if (!data.data.balance) {
           //this.dashboard.categories = data.data.categories;
           this.dashboard.wallets = data.data.wallets;
@@ -85,7 +88,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
           }
           this.dashboard = data.data;
         }
-        this.dashboardService.dashboard = data.data;
         if (this.dashboard.wallets && this.dashboard.wallets.length) {
           this.scrollX();
         } else {

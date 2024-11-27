@@ -1,13 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { Status, User } from 'src/assets/core/data/class/user.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
-import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
 import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
+import { Utils } from 'src/assets/core/services/config/utils.service';
+import { SharedService } from 'src/assets/core/services/config/shared.service';
+import { WalletService } from 'src/assets/core/services/api/wallet.service';
 
 @Component({
   selector: 'app-requirements',
@@ -15,13 +17,13 @@ import { UserService } from 'src/assets/core/services/api/user.service';
   styleUrls: ['./requirements.component.scss'],
 })
 export class RequirementsComponent implements OnInit, OnDestroy {
+  walletsSubscribe: Subscription = new Subscription();
   updateUserSub: Subscription = new Subscription();
 
   isWalletCreated: boolean = false;
   isCryptoWalletCreated: boolean = false;
   isAssetCreated: boolean = false;
   isCurrencyAdded: boolean = false;
-  dashboard?: Dashboard;
   wallets?: Wallet[];
   cryptoWallet?: Wallet[];
 
@@ -32,14 +34,16 @@ export class RequirementsComponent implements OnInit, OnDestroy {
   enableModalCrypto: boolean = false;
 
   constructor(
-    private dashboardService: DashboardService,
+    private walletService: WalletService,
     private authService: AuthService,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private shared: SharedService
   ) {}
 
   ngOnDestroy(): void {
     this.updateUserSub.unsubscribe();
+    this.walletsSubscribe.unsubscribe();
   }
 
   public get modalConstant(): typeof ModalConstant {
@@ -56,14 +60,17 @@ export class RequirementsComponent implements OnInit, OnDestroy {
     if (requirements.includes(Status.WALLET)) this.isWalletCreated = true;
     if (requirements.includes(Status.CURRENCY)) this.isCurrencyAdded = true;
 
-    this.wallets = this.dashboardService.dashboard.wallets;
-    if (this.wallets != undefined && this.wallets.length != 0) {
-      this.isWalletCreated = true;
-    }
-    if (user.settings.cryptoCurrency) {
-      this.isCurrencyAdded = true;
-      this.currency = user.settings.cryptoCurrency;
-    }
+    this.getWallets().then((wal) => {
+      this.wallets = wal;
+      if (wal != undefined && wal.length != 0) {
+        this.isWalletCreated = true;
+      }
+      if (user.settings.cryptoCurrency) {
+        this.isCurrencyAdded = true;
+        this.currency = user.settings.cryptoCurrency;
+      }
+    });
+
     /*let user = this.dashboardService.user;
     this.wallets = this.dashboardService.dashboard.wallets;
     this.dashboard = this.dashboardService.dashboard;
@@ -99,32 +106,33 @@ export class RequirementsComponent implements OnInit, OnDestroy {
   }
 
   saveWallet(wallet: Wallet) {
-    let user = this.authService.user;
-    if (this.wallets != undefined) {
-      let index = this.wallets?.indexOf(
-        this.wallets.find((w) => w.name == wallet.name)!
+    let user = UserService.getUserData();
+    const walletsToSave: Wallet[] = Utils.copyObject(this.wallets);
+    if (walletsToSave != undefined) {
+      let index = walletsToSave.indexOf(
+        walletsToSave.find((w) => w.name == wallet.name)!
       );
-      this.wallets![index!] = wallet!;
+      walletsToSave[index!] = wallet!;
       this.isWalletCreated = true;
-      this.cryptoWallet = this.wallets!.filter(
+      this.cryptoWallet = walletsToSave!.filter(
         (w) => w.category == this.CRYPTO
       );
-      if (this.wallets![index!].category == this.CRYPTO) {
+      if (walletsToSave[index!].category == this.CRYPTO) {
         this.isCryptoWalletCreated = true;
       }
       if (
-        this.wallets![index!].assets != undefined &&
-        this.wallets![index!].assets.length != 0
+        walletsToSave[index!].assets != undefined &&
+        walletsToSave[index!].assets.length != 0
       )
         this.isAssetCreated = true;
-    } else if (this.wallets == undefined && wallet.category == this.CRYPTO) {
+    } else if (walletsToSave == undefined && wallet.category == this.CRYPTO) {
       this.isCryptoWalletCreated = true;
-      this.dashboardService.dashboard.wallets = [wallet];
+      //this.dashboardService.dashboard.wallets = [wallet];
       this.cryptoWallet = [wallet];
       this.wallets = [wallet];
       this.isWalletCreated = true;
     } else {
-      this.dashboardService.dashboard.wallets = [wallet];
+      //this.dashboardService.dashboard.wallets = [wallet];
       this.wallets = [wallet];
       this.isWalletCreated = true;
     }
@@ -174,6 +182,27 @@ export class RequirementsComponent implements OnInit, OnDestroy {
         //this.authService.user = data.data;
         //this.authService.setUserGlobally();
       });
+  }
+
+  getWallets(): Promise<any> {
+    if (Utils.isNullOrEmpty(this.shared.getWallets())) {
+      return new Promise((resolve, reject) => {
+        this.walletsSubscribe = this.walletService.getWalletsData().subscribe({
+          next: (res) => {
+            this.walletService.cache.cacheWalletsData(res);
+            LOG.info(res.message!, 'RequirementsComponent');
+            this.wallets = this.shared.setWallets(res.data);
+            resolve(res.data);
+          },
+          error: (err) => {
+            reject(err); // In caso di errore, rifiuta la Promise
+          },
+        });
+      });
+    } else {
+      this.wallets = this.shared.getWallets();
+      return Promise.resolve(this.shared.getWallets());
+    }
   }
 
   goToDashboard() {

@@ -8,14 +8,12 @@ import {
 import { Router } from '@angular/router';
 import { Dashboard } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
-import {
-  ModalConstant,
-  StorageConstant,
-} from 'src/assets/core/data/constant/constant';
-import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
+import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
 import { environment } from 'src/environments/environment';
+import { UserService } from 'src/assets/core/services/api/user.service';
+import { SharedService } from 'src/assets/core/services/config/shared.service';
 
 @Component({
   selector: 'app-header',
@@ -29,7 +27,7 @@ export class HeaderComponent implements OnInit, OnChanges {
 
   isShadowActive: boolean = false;
   constructor(
-    private dashboardService: DashboardService,
+    private shared: SharedService,
     public userService: AuthService,
     private router: Router
   ) {
@@ -53,15 +51,13 @@ export class HeaderComponent implements OnInit, OnChanges {
       this.user = this.userService.user;
     }
     if (this.user?.name === 'DEFAULT_NAME') {
-      this.user = JSON.parse(
-        localStorage.getItem(StorageConstant.USERACCOUNT)!
-      );
+      this.user = UserService.getUserData();
     }
   }
 
   updateData(): void {
-    this.dashboard = this.dashboardService.dashboard;
-    this.user = this.userService.user;
+    this.dashboard = this.shared.getDashboard();
+    this.user = UserService.getUserData();
   }
 
   availableSoon() {

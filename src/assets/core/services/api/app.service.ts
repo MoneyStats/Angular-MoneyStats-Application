@@ -7,7 +7,7 @@ import { GithubIssues, User } from '../../data/class/user.class';
 import { StorageConstant } from '../../data/constant/constant';
 import { SwalService } from '../../utils/swal.service';
 import { Wallet } from '../../data/class/dashboard.class';
-import { CacheService } from '../config/cache.service';
+import { CacheService } from '../config/cache/cache.service';
 import { UserService } from './user.service';
 
 @Injectable({

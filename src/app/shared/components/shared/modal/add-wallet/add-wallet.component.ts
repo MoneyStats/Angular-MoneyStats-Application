@@ -19,7 +19,6 @@ import {
   AppConfigConst,
   ModalConstant,
 } from 'src/assets/core/data/constant/constant';
-import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
 import { WalletService } from 'src/assets/core/services/api/wallet.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
@@ -57,7 +56,6 @@ export class AddWalletComponent implements OnInit, OnChanges, OnDestroy {
   notCryptoWallets: Wallet[] = [];
 
   constructor(
-    private dashboardService: DashboardService,
     private swalService: SwalService,
     private translate: TranslateService,
     private walletService: WalletService,
@@ -81,10 +79,6 @@ export class AddWalletComponent implements OnInit, OnChanges, OnDestroy {
       this.isNewWallet = true;
       this.isCrypto = true;
     }
-    //this.categories = this.dashboardService.dashboard.categories;
-    if (this.wallets && this.wallets.length == 0) {
-      this.wallets = this.dashboardService.dashboard.wallets;
-    }
     this.filterWallet();
   }
 
@@ -105,7 +99,7 @@ export class AddWalletComponent implements OnInit, OnChanges, OnDestroy {
   filterWallet() {
     if (this.wallets) {
       this.notCryptoWallets = this.wallets.filter(
-        (w) => w.category != 'Crypto'
+        (w) => w.category != 'Crypto' && w.deletedDate == null
       );
     }
   }
