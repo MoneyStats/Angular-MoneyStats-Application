@@ -1,7 +1,7 @@
 <div *ngIf="resumeData.assets" class="transactions row">
   <div class="col-md-6 mt-2">
     <!-- item -->
-    <a routerLink="/crypto/asset" class="item">
+    <a routerLink="/crypto/asset" class="item zoom">
       <div class="detail">
         <div class="col-auto" style="padding-right: 20px">
           <div
@@ -28,7 +28,7 @@
   </div>
   <div class="col-md-6 mt-2">
     <!-- item -->
-    <a routerLink="/crypto/asset" class="item">
+    <a routerLink="/crypto/asset" class="item zoom">
       <div class="detail">
         <div class="col-auto" style="padding-right: 20px">
           <div
@@ -230,6 +230,9 @@
         [colors]="chartOptions.colors!"
         [legend]="chartOptions.legend!"
         [labels]="chartOptions.labels!"
+        [tooltip]="chartOptions.tooltip!"
+        [dataLabels]="chartOptions.dataLabels!"
+        [grid]="chartOptions.grid!"
         type="area"
         class="border_round"
       ></apx-chart>

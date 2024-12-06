@@ -35,10 +35,10 @@
     </a>
     <div class="dropdown-menu dropdown-menu-end">
       <h6 class="dropdown-header">
-        {{ "dashboard.sidebar.dropdown.options" | translate }}
+        {{ "core_header_footer.dropdown_menu.options" | translate }}
       </h6>
       <a class="dropdown-item" href="#" routerLink="settings">
-        {{ "dashboard.sidebar.dropdown.settings" | translate }}</a
+        {{ "shared_text.settings" | translate }}</a
       >
       <a
         class="dropdown-item"
@@ -46,11 +46,11 @@
         data-bs-toggle="modal"
         attr.data-bs-target="#{{ modalConstant.VERSION }}"
       >
-        {{ "dashboard.sidebar.dropdown.version" | translate }}</a
+        {{ "core_header_footer.dropdown_menu.version" | translate }}</a
       >
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" (click)="logout()">{{
-        "dashboard.sidebar.dropdown.logout" | translate
+        "shared_text.logout" | translate
       }}</a>
     </div>
   </div>
@@ -95,12 +95,12 @@
         <!-- balance -->
         <div class="sidebar-balance">
           <div class="listview-title title-page">
-            {{ "dashboard.sidebar.overviewTitle" | translate }}
+            {{ "core_header_footer.sidebar_menu.balance" | translate }}
           </div>
           <div class="in">
             <h1 id="reportStatement1" class="amount title-page">
               {{ user?.settings?.currencySymbol }}
-              {{ dashboard?.balance | number }}
+              {{ (dashboard?.balance | number) ?? 0 }}
             </h1>
           </div>
         </div>
@@ -108,16 +108,16 @@
 
         <!-- menu -->
         <div class="listview-title mt-1">
-          {{ "dashboard.sidebar.menuTitle" | translate }}
+          {{ "core_header_footer.sidebar_menu.group1_title" | translate }}
         </div>
         <ul class="listview flush transparent no-line image-listview">
           <li>
-            <a routerLink="" data-bs-dismiss="modal" class="item">
+            <a routerLink="" data-bs-dismiss="modal" class="item zoom">
               <div class="icon-box bg-primary">
                 <ion-icon name="pie-chart"></ion-icon>
               </div>
               <div class="in">
-                {{ "dashboard.sidebar.menu.title1" | translate }}
+                {{ "shared_text.dashboard" | translate }}
               </div>
             </a>
           </li>
@@ -126,23 +126,28 @@
               href="#"
               routerLink="wallet"
               data-bs-dismiss="modal"
-              class="item"
+              class="item zoom"
             >
               <div class="icon-box bg-primary">
                 <ion-icon name="card"></ion-icon>
               </div>
               <div class="in">
-                {{ "dashboard.sidebar.menu.title2" | translate }}
+                {{ "shared_text.wallets" | translate }}
               </div>
             </a>
           </li>
           <li>
-            <a href="#" routerLink="stats" data-bs-dismiss="modal" class="item">
+            <a
+              href="#"
+              routerLink="stats"
+              data-bs-dismiss="modal"
+              class="item zoom"
+            >
               <div class="icon-box bg-primary">
                 <ion-icon name="bar-chart"></ion-icon>
               </div>
               <div class="in">
-                {{ "dashboard.sidebar.menu.title3" | translate }}
+                {{ "shared_text.resume" | translate }}
               </div>
             </a>
           </li>
@@ -151,13 +156,13 @@
 
         <!-- others -->
         <div class="listview-title mt-1">
-          {{ "dashboard.sidebar.subMenuTitle" | translate }}
+          {{ "core_header_footer.sidebar_menu.group2_title" | translate }}
         </div>
         <ul class="listview flush transparent no-line image-listview">
           <li>
             <a
               href="#"
-              class="item"
+              class="item zoom"
               data-bs-dismiss="modal"
               routerLink="settings"
             >
@@ -165,14 +170,14 @@
                 <ion-icon name="settings"></ion-icon>
               </div>
               <div class="in">
-                {{ "dashboard.sidebar.subMenu.title1" | translate }}
+                {{ "shared_text.settings" | translate }}
               </div>
             </a>
           </li>
           <li>
             <a
               href="#"
-              class="item"
+              class="item zoom"
               data-bs-dismiss="modal"
               routerLink="crypto/dashboard"
             >
@@ -187,7 +192,7 @@
           <li>
             <a
               href="#"
-              class="item"
+              class="item zoom"
               data-bs-dismiss="modal"
               routerLink="support"
             >
@@ -195,7 +200,7 @@
                 <ion-icon name="chatbubble"></ion-icon>
               </div>
               <div class="in">
-                {{ "dashboard.sidebar.subMenu.title2" | translate }}
+                {{ "core_header_footer.sidebar_menu.support" | translate }}
               </div>
             </a>
           </li>
@@ -205,13 +210,13 @@
               data-bs-dismiss="modal"
               (click)="logout()"
               id="logout"
-              class="item"
+              class="item zoom"
             >
               <div class="icon-box bg-primary">
                 <ion-icon name="log-out"></ion-icon>
               </div>
               <div class="in">
-                {{ "dashboard.sidebar.subMenu.title3" | translate }}
+                {{ "shared_text.logout" | translate }}
               </div>
             </a>
           </li>

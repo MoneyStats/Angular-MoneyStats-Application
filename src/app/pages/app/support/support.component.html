@@ -1,6 +1,6 @@
 <section class="section-width mx-auto">
   <app-header-mobile
-    *ngIf="screenWidth()! <= 780"
+    *ngIf="isMobile()"
     [title]="'support.title' | translate"
     [backBtn]="'support.mobile_back' | translate"
   >

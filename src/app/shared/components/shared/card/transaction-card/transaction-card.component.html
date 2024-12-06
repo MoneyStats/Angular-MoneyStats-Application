@@ -4,7 +4,7 @@
   href="#"
   [routerLink]="['/transaction/details', wallet.id, wallet.name]"
   (click)="parsingWallet()"
-  class="item"
+  class="item zoom"
 >
   <div class="detail">
     <img src="{{ wallet.img }}" alt="img" class="image-block imaged w48" />
@@ -17,7 +17,7 @@
     <div class="text-end price {{ class }}">
       {{ hiddenAmount ? amount : differenceLastStats }}
     </div>
-    <p class="text-end">{{ "transaction.difference" | translate }}</p>
+    <p class="text-end">{{ "transactions_page.difference" | translate }}</p>
   </div>
 </a>
 <!-- * item -->
@@ -26,7 +26,7 @@
 <a
   *ngIf="asset"
   [routerLink]="['/crypto/asset/details', asset.identifier]"
-  class="item crypto clickable"
+  class="item crypto clickable zoom"
 >
   <div class="detail">
     <img src="{{ asset.icon }}" alt="img" class="image-block imaged w48" />

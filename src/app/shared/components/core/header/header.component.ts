@@ -5,7 +5,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Dashboard } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
@@ -23,7 +23,7 @@ import { SharedService } from 'src/assets/core/services/config/shared.service';
 })
 export class HeaderComponent implements OnInit, OnChanges {
   @Input('user') user?: User;
-  @Input() dashboard?: Dashboard;
+  @Input('dashboard') dashboard?: Dashboard;
   environment = environment;
 
   isShadowActive: boolean = false;
@@ -32,10 +32,15 @@ export class HeaderComponent implements OnInit, OnChanges {
     public userService: AuthService,
     private router: Router
   ) {
-    router.events.subscribe((data: any) => {
-      if (data.routerEvent.url == '/') {
-        this.isShadowActive = true;
-      } else this.isShadowActive = false;
+    router.events.subscribe((event: any) => {
+      // Controlla se l'evento è di tipo NavigationEnd e contiene la proprietà url
+      if (event instanceof NavigationEnd) {
+        if (event.url === '/') {
+          this.isShadowActive = true;
+        } else {
+          this.isShadowActive = false;
+        }
+      }
     });
   }
 
@@ -57,7 +62,7 @@ export class HeaderComponent implements OnInit, OnChanges {
   }
 
   updateData(): void {
-    this.dashboard = this.shared.getDashboard();
+    if (!this.dashboard) this.dashboard = this.shared.getDashboard();
     this.user = UserService.getUserData();
   }
 

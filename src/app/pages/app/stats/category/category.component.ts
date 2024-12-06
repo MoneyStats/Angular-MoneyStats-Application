@@ -1,27 +1,17 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Dashboard, Stats } from 'src/assets/core/data/class/dashboard.class';
-import { ChartOptions } from 'chart.js';
-import {
-  ApexOptions,
-  ChartJSOptions,
-} from 'src/assets/core/data/constant/apex.chart';
-import { ChartJSService } from 'src/assets/core/utils/chartjs.service';
+import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
+import { ChartService } from 'src/assets/core/utils/chart.service';
 
 @Component({
-    selector: 'app-category',
-    templateUrl: './category.component.html',
-    styleUrls: ['./category.component.scss'],
-    standalone: false
+  selector: 'app-category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.scss'],
+  standalone: false,
 })
-export class CategoryComponent implements OnInit, OnChanges {
+export class CategoryComponent implements OnChanges {
   @Input('dashboard') dashboard: Dashboard = new Dashboard();
   @Input('coinSymbol') coinSymbol: string = '';
 
@@ -47,19 +37,11 @@ export class CategoryComponent implements OnInit, OnChanges {
   totalMap: Map<string, any> = new Map<string, any>();
   totalList: Array<any> = [];
 
-  public lineChartJS?: ChartJSOptions = new ChartJSOptions();
   public chartCategory?: Partial<ApexOptions>;
-  public chartBar?: Partial<ChartOptions>;
+  @Input('change') change: string = '';
   constructor() {}
 
-  ngOnInit(): void {
-    if (this.dashboard.statsWalletDays) {
-      // this.generateData();
-      this.renderChart();
-    }
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (this.dashboard.statsWalletDays) {
       this.generateData();
       this.renderChart();
@@ -67,7 +49,10 @@ export class CategoryComponent implements OnInit, OnChanges {
   }
 
   renderChart() {
-    this.lineChartJS = ChartJSService.renderChartLine(this.totalMap);
+    this.chartCategory = undefined;
+    setTimeout(() => {
+      this.chartCategory = ChartService.renderChartLineCategory(this.totalMap);
+    }, 200);
   }
 
   generateData() {

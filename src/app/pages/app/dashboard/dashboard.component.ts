@@ -21,10 +21,10 @@ import { UserService } from 'src/assets/core/services/api/user.service';
 import { SharedService } from 'src/assets/core/services/config/shared.service';
 
 @Component({
-    selector: 'app-dashboard',
-    templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.scss'],
-    standalone: false
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss'],
+  standalone: false,
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   dashboardSubscribe: Subscription = new Subscription();
@@ -113,11 +113,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.graphTitle =
           this.performanceSince != this.performanceLastDate
             ? this.translate
-                .instant('dashboard.graph.title')
+                .instant('dashboard_page.graph.title')
                 .replace('&FROM&', this.performanceSince)
                 .replace('&TO&', this.performanceLastDate)
             : this.translate
-                .instant('dashboard.graph.titleFirst')
+                .instant('dashboard_page.graph.titleFirst')
                 .replace('&FROM&', this.performanceSince);
         this.lastStatsPerformance = this.dashboard.lastStatsPerformance + ' %';
         this.lastStatsBalanceDifference =

@@ -3,13 +3,13 @@
   <a id="dashboard" (click)="goToDashboard()" routerLink="" class="item active">
     <div class="col">
       <ion-icon name="home"></ion-icon>
-      <strong>{{ "dashboard.footer.title1" | translate }}</strong>
+      <strong>{{ "shared_text.dashboard" | translate }}</strong>
     </div>
   </a>
   <a id="stats" class="item" (click)="goToStats()" routerLink="/stats">
     <div class="col">
       <ion-icon name="bar-chart"></ion-icon>
-      <strong>{{ "dashboard.footer.title2" | translate }}</strong>
+      <strong>{{ "shared_text.resume" | translate }}</strong>
     </div>
   </a>
   <a routerLink="crypto/dashboard" class="item" (click)="vibrate()">
@@ -33,13 +33,13 @@
   <a id="wallet" (click)="goToWallet()" routerLink="wallet" class="item">
     <div class="col">
       <ion-icon name="card"></ion-icon>
-      <strong>{{ "dashboard.footer.title3" | translate }}</strong>
+      <strong>{{ "shared_text.wallets" | translate }}</strong>
     </div>
   </a>
   <a id="settings" (click)="goToSettings()" routerLink="/settings" class="item">
     <div class="col">
       <ion-icon name="settings"></ion-icon>
-      <strong>{{ "dashboard.footer.title4" | translate }}</strong>
+      <strong>{{ "shared_text.settings" | translate }}</strong>
     </div>
   </a>
 </div>

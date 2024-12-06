@@ -1,6 +1,6 @@
 <section class="section-width mx-auto">
   <app-header-mobile
-    *ngIf="screenWidth()! <= 780"
+    *ngIf="isMobile()"
     title="{{ 'wallet.title' | translate }}"
     backBtn="{{ 'wallet.mobile_back' | translate }}"
     rightBtn="{{ 'wallet.mobile_add' | translate }}"
@@ -62,7 +62,12 @@
         <div class="row">
           <app-wallet-card
             *ngFor="let wallet of walletActive(wallets)"
-            class="col-md-3 mt-3 col-sm-4 col-6"
+            [style]="
+              'background-image: url(' +
+              wallet!.img +
+              ') !important; box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.85)'
+            "
+            class="col-xl-2 col-md-3 mt-3 col-sm-4 col-6"
             [coinSymbol]="coinSymbol"
             [wallet]="wallet"
             [btn]="'wallet.open' | translate"
@@ -78,7 +83,12 @@
         <div class="row">
           <app-wallet-card
             *ngFor="let wallet of walletDeleted(wallets)"
-            class="col-md-3 mt-3 col-sm-4 col-6"
+            [style]="
+              'background-image: url(' +
+              wallet!.img +
+              ') !important; box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.85)'
+            "
+            class="col-xl-2 col-md-3 mt-3 col-sm-4 col-6"
             [wallet]="wallet"
             [btn]="'wallet.open' | translate"
             [hiddenAmount]="hidden"

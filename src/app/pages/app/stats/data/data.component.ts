@@ -5,17 +5,16 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { CryptoDashboard } from 'src/assets/core/data/class/crypto.class';
 import { Dashboard, Stats } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
 
 @Component({
-    selector: 'app-data',
-    templateUrl: './data.component.html',
-    styleUrls: ['./data.component.scss'],
-    standalone: false
+  selector: 'app-data',
+  templateUrl: './data.component.html',
+  styleUrls: ['./data.component.scss'],
+  standalone: false,
 })
 export class DataComponent implements OnInit, OnChanges {
   public chartOptions?: Partial<ApexOptions>;
@@ -30,6 +29,8 @@ export class DataComponent implements OnInit, OnChanges {
   amount: string = '******';
   @Input('hidden') hidden: boolean = false;
   @Input('change') change: string = '';
+
+  effectiveDates: string[] = [];
 
   constructor() {}
 
@@ -59,6 +60,7 @@ export class DataComponent implements OnInit, OnChanges {
       moreThanOneInAMonth.forEach((date, index) => {
         this.tableBalance.push(this.tableColumsCreateRefactor(date, index));
       });
+      this.effectiveDates = moreThanOneInAMonth;
       this.tableBalance = this.tableBalance.reverse();
       //this.dashboard.statsWalletDays = moreThanOneInAMonth;
       this.renderChart();
@@ -73,8 +75,15 @@ export class DataComponent implements OnInit, OnChanges {
     setTimeout(() => {
       this.chartOptions = ChartService.appRenderWalletPerformance(dashboard);
       this.chartPie = ChartService.appRenderChartPie(dashboard.wallets);
+      const dates: string[] = Utils.copyObject(this.effectiveDates).map(
+        (d: string) => {
+          let dataLabels = new Date(d).toLocaleDateString();
+          return Utils.formatDateIntl(dataLabels);
+        }
+      );
       this.chartBar = ChartService.appRenderChartBar(
-        dashboard.statsWalletDays,
+        dates,
+        this.coinSymbol,
         this.balances
       );
     }, 500);

@@ -108,7 +108,7 @@ export class TradingResumeComponent implements OnInit, OnChanges {
       });
     operations = operations.filter((o) => o.type == OperationsType.TRADING);
     operations.sort((a, b) => (a.entryDate! < b.entryDate! ? 1 : -1));
-    if (ScreenService.screenWidth! <= 780) {
+    if (ScreenService.isMobileDevice()) {
       this.trading = ChartService.renderTradingOperations(operations, [200]);
     } else
       this.trading = ChartService.renderTradingOperations(operations, [350]);

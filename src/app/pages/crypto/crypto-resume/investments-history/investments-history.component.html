@@ -189,7 +189,7 @@
     <div *ngIf="cryptoResume" class="card border_round">
       <div class="card-body" style="min-height: 380px">
         <div
-          *ngIf="!lineChartJS"
+          *ngIf="!chartHistory"
           class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
         >
           <div></div>
@@ -197,15 +197,16 @@
           <div></div>
           <div></div>
         </div>
-        <canvas
-          baseChart
-          height="400"
-          [type]="'line'"
-          [data]="lineChartJS!.lineChartData"
-          [options]="lineChartJS!.lineChartOptions"
-          [legend]="lineChartJS!.lineChartLegend"
-        >
-        </canvas>
+        <apx-chart
+          *ngIf="chartHistory"
+          [series]="chartHistory.series!"
+          [chart]="chartHistory.chart!"
+          [title]="chartHistory.title!"
+          [colors]="chartHistory.colors!"
+          [legend]="chartHistory.legend!"
+          [labels]="chartHistory.labels!"
+          type="area"
+        ></apx-chart>
       </div>
     </div>
   </div>

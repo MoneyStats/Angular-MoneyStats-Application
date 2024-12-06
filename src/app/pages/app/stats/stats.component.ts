@@ -57,8 +57,8 @@ export class StatsComponent implements OnInit, OnDestroy {
     this.resumeSubscribe.unsubscribe();
   }
 
-  screenWidth() {
-    return ScreenService.screenWidth;
+  isMobile() {
+    return ScreenService.isMobileDevice()
   }
 
   ngOnInit(): void {

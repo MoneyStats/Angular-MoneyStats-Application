@@ -71,4 +71,15 @@ export class Utils {
   public static removeFromSession(name: string) {
     sessionStorage.removeItem(name);
   }
+
+  public static formatDateIntl(inputDate: string) {
+    const [day, month, year] = inputDate.split('/');
+    const date = new Date(`${year}-${month}-${day}`);
+
+    return new Intl.DateTimeFormat('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    }).format(date);
+  }
 }

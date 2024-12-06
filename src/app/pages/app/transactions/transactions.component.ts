@@ -38,8 +38,8 @@ export class TransactionsComponent implements OnInit, OnDestroy {
     ScreenService.hideFooter();
   }
 
-  screenWidth() {
-    return ScreenService.screenWidth;
+  isMobile() {
+    return ScreenService.isMobileDevice();
   }
 
   getDashboard() {

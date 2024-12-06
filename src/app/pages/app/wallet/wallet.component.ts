@@ -12,10 +12,10 @@ import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
-    selector: 'app-wallet',
-    templateUrl: './wallet.component.html',
-    styleUrls: ['./wallet.component.scss'],
-    standalone: false
+  selector: 'app-wallet',
+  templateUrl: './wallet.component.html',
+  styleUrls: ['./wallet.component.scss'],
+  standalone: false,
 })
 export class WalletComponent implements OnInit, OnDestroy {
   walletsSubscribe: Subscription = new Subscription();
@@ -43,8 +43,8 @@ export class WalletComponent implements OnInit, OnDestroy {
     return ModalConstant;
   }
 
-  screenWidth() {
-    return ScreenService.screenWidth;
+  isMobile() {
+    return ScreenService.isMobileDevice();
   }
 
   ngOnInit(): void {
@@ -70,11 +70,13 @@ export class WalletComponent implements OnInit, OnDestroy {
   }
 
   walletActive(wallets: Wallet[]): Array<Wallet> {
-    return wallets.filter((w) => !w.deletedDate);
+    if (wallets) return wallets.filter((w) => !w.deletedDate);
+    else return [];
   }
 
   walletDeleted(wallets: Wallet[]): Array<Wallet> {
-    return wallets.filter((w) => w.deletedDate);
+    if (wallets) return wallets.filter((w) => w.deletedDate);
+    else return [];
   }
 
   addWallet(wallet: Wallet) {

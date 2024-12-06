@@ -1,6 +1,6 @@
 <section class="section-width mx-auto">
   <app-header-mobile
-    *ngIf="screenWidth()! <= 780"
+    *ngIf="isMobile()"
     [title]="'wallet.details.transaction.history.title' | translate"
     [backBtn]="'wallet.details.transaction.history.mobile_back' | translate"
   >
@@ -16,10 +16,10 @@
     <!-- History -->
     <div class="hidden_desktop mt-4 ms-2">
       <p class="text-start fs-2 title-page">
-        {{ "transaction.title" | translate }}
+        {{ "transactions_page.title" | translate }}
       </p>
       <p class="card-subtitle text-start mb-1 fs-6">
-        <small>{{ "transaction.subTitle" | translate }}</small>
+        <small>{{ "transactions_page.sub_title" | translate }}</small>
       </p>
     </div>
     <!-- History -->

@@ -1,23 +1,14 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Dashboard, Stats } from 'src/assets/core/data/class/dashboard.class';
-import {
-  ApexOptions,
-  ChartJSOptions,
-} from 'src/assets/core/data/constant/apex.chart';
+import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { Utils } from 'src/assets/core/services/config/utils.service';
-import { ChartJSService } from 'src/assets/core/utils/chartjs.service';
+import { ChartService } from 'src/assets/core/utils/chart.service';
 
 @Component({
-    selector: 'app-history',
-    templateUrl: './history.component.html',
-    styleUrls: ['./history.component.scss'],
-    standalone: false
+  selector: 'app-history',
+  templateUrl: './history.component.html',
+  styleUrls: ['./history.component.scss'],
+  standalone: false,
 })
 export class HistoryComponent implements OnChanges {
   public chartOptions?: Partial<ApexOptions>;
@@ -35,7 +26,6 @@ export class HistoryComponent implements OnChanges {
 
   tableBalance: Array<any> = [];
 
-  public lineChartJS?: ChartJSOptions = new ChartJSOptions();
   constructor() {}
 
   ngOnChanges(): void {
@@ -52,10 +42,9 @@ export class HistoryComponent implements OnChanges {
   }
 
   renderChart() {
-    this.lineChartJS = ChartJSService.renderChartLine(this.totalMap);
-    //setTimeout(() => {
-    //  this.chartOptions = this.charts.renderChartLineCategory(this.totalMap);
-    //}, 200);
+    setTimeout(() => {
+      this.chartOptions = ChartService.renderChartLineCategory(this.totalMap);
+    }, 200);
   }
 
   tableCreate(date: string, dashboard: any) {

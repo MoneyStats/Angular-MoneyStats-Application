@@ -6,10 +6,10 @@ import { environment } from 'src/environments/environment';
 import { AppService } from 'src/assets/core/services/api/app.service';
 
 @Component({
-    selector: 'app-onboarding',
-    templateUrl: './onboarding.component.html',
-    styleUrls: ['./onboarding.component.scss'],
-    standalone: false
+  selector: 'app-onboarding',
+  templateUrl: './onboarding.component.html',
+  styleUrls: ['./onboarding.component.scss'],
+  standalone: false,
 })
 export class OnboardingComponent implements OnInit {
   isCrypto: boolean = false;
@@ -34,11 +34,15 @@ export class OnboardingComponent implements OnInit {
   }
 
   next() {
-    return (this.counter += 1);
+    if (this.counter < 4) {
+      this.counter += 1;
+    }
   }
 
   prev() {
-    return (this.counter -= 1);
+    if (this.counter > 1) {
+      this.counter -= 1;
+    }
   }
 
   goBack() {

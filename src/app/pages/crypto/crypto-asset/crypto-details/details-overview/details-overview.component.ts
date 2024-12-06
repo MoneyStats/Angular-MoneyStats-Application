@@ -12,7 +12,7 @@ import {
   Asset,
   CryptoDashboard,
 } from 'src/assets/core/data/class/crypto.class';
-import { Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { CryptoService } from 'src/assets/core/services/api/crypto.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
@@ -30,10 +30,10 @@ import { Utils } from 'src/assets/core/services/config/utils.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
 
 @Component({
-    selector: 'app-details-overview',
-    templateUrl: './details-overview.component.html',
-    styleUrls: ['./details-overview.component.scss'],
-    standalone: false
+  selector: 'app-details-overview',
+  templateUrl: './details-overview.component.html',
+  styleUrls: ['./details-overview.component.scss'],
+  standalone: false,
 })
 export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
   updateinvestmentSubscribe: Subscription = new Subscription();
@@ -76,6 +76,7 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges): void {
     ScreenService.hideFooter();
     this.getAsset();
+    console.log(this.walletsAsset);
   }
 
   ngOnInit(): void {
@@ -123,18 +124,16 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
       // Get All Date serve a prendere tutte le date per i grafici
       dashboard.statsAssetsDays = this.getAllDate(dashboard.assets);
       setTimeout(() => {
-        if (this.cryptoDashboard.wallets) {
-          if (ScreenService.screenWidth! <= 780) {
-            this.chartOptions = ChartService.renderCryptoDatas(dashboard, [
-              ApexChartsOptions.MOBILE_MODE,
-              ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
-            ]);
-          } else
-            this.chartOptions = ChartService.renderCryptoDatas(dashboard, [
-              ApexChartsOptions.DESKTOP_MODE,
-              ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
-            ]);
-        }
+        if (ScreenService.isMobileDevice()) {
+          this.chartOptions = ChartService.renderCryptoDatas(dashboard, true, [
+            ApexChartsOptions.MOBILE_MODE,
+            ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
+          ]);
+        } else
+          this.chartOptions = ChartService.renderCryptoDatas(dashboard, true, [
+            ApexChartsOptions.DESKTOP_MODE,
+            ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
+          ]);
       }, 500);
     }
   }
@@ -158,13 +157,13 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
               s.toString().split('-')[0] === new Date().getFullYear().toString()
           );
         setTimeout(() => {
-          if (ScreenService.screenWidth! <= 780)
-            this.chart1Y = ChartService.renderCryptoDatas(dashboard, [
+          if (ScreenService.isMobileDevice())
+            this.chart1Y = ChartService.renderCryptoDatas(dashboard, true, [
               ApexChartsOptions.MOBILE_MODE,
               ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
             ]);
           else
-            this.chart1Y = ChartService.renderCryptoDatas(dashboard, [
+            this.chart1Y = ChartService.renderCryptoDatas(dashboard, true, [
               ApexChartsOptions.DESKTOP_MODE,
               ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
             ]);
@@ -196,13 +195,13 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
           last3.includes(s.toString().split('-')[0])
         );
       setTimeout(() => {
-        if (ScreenService.screenWidth! <= 780)
-          this.chart3Y = ChartService.renderCryptoDatas(dashboard, [
+        if (ScreenService.isMobileDevice())
+          this.chart3Y = ChartService.renderCryptoDatas(dashboard, true, [
             ApexChartsOptions.MOBILE_MODE,
             ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
           ]);
         else
-          this.chart3Y = ChartService.renderCryptoDatas(dashboard, [
+          this.chart3Y = ChartService.renderCryptoDatas(dashboard, true, [
             ApexChartsOptions.DESKTOP_MODE,
             ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
           ]);
@@ -228,6 +227,12 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
       w.assets = w.assets.slice().filter((a: any) => a.name == name);
       if (w.assets[0].history == undefined) {
         w.assets[0].history = [];
+      } else if (w.assets[0].history) {
+        w.assets[0].history = w.assets[0].history.filter(
+          (h: Stats) =>
+            h.date.toString().split('-')[0] ===
+            new Date().getFullYear().toString()
+        );
       }
     });
     return wallAsset;

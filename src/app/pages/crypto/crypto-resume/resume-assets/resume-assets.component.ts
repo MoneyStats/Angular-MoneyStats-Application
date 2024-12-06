@@ -13,10 +13,10 @@ import { ChartService } from 'src/assets/core/utils/chart.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
-    selector: 'app-resume-assets',
-    templateUrl: './resume-assets.component.html',
-    styleUrls: ['./resume-assets.component.scss'],
-    standalone: false
+  selector: 'app-resume-assets',
+  templateUrl: './resume-assets.component.html',
+  styleUrls: ['./resume-assets.component.scss'],
+  standalone: false,
 })
 export class ResumeAssetsComponent implements OnInit, OnChanges {
   amount: string = '******';
@@ -49,16 +49,18 @@ export class ResumeAssetsComponent implements OnInit, OnChanges {
         if (!this.isPast)
           this.resumeDataFilterOnDate.assets =
             this.resumeDataFilterOnDate.assets.filter((a) => a.balance != 0);
-        if (ScreenService.screenWidth! <= 780) {
-          this.chartOptions = ChartService.renderCryptoDatas(this.resumeData, [
-            200,
-            this.isPast,
-          ]);
+        if (ScreenService.isMobileDevice()) {
+          this.chartOptions = ChartService.renderCryptoDatas(
+            this.resumeData,
+            ScreenService.isMobileDevice(),
+            [200, this.isPast]
+          );
         } else
-          this.chartOptions = ChartService.renderCryptoDatas(this.resumeData, [
-            350,
-            this.isPast,
-          ]);
+          this.chartOptions = ChartService.renderCryptoDatas(
+            this.resumeData,
+            ScreenService.isMobileDevice(),
+            [350, this.isPast]
+          );
       }
     }, 100);
     this.renderTable();

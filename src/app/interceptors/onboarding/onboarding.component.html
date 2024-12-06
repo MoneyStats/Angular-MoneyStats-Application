@@ -65,8 +65,8 @@
           />
         </div>
         <div class="section mt-2 text-center">
-          <h1>{{ "onboard.tab1.title" | translate }}</h1>
-          <p [innerHTML]="'onboard.tab1.text' | translate"></p>
+          <h1>{{ "onboarding_page.tab1.app_title" | translate }}</h1>
+          <p [innerHTML]="'onboarding_page.tab1.app_text' | translate"></p>
         </div>
       </div>
       <div class="carousel-item">
@@ -78,8 +78,8 @@
           />
         </div>
         <div class="section mt-2 text-center">
-          <h1>{{ "onboard.tab2.title" | translate }}</h1>
-          <p [innerHTML]="'onboard.tab2.text' | translate"></p>
+          <h1>{{ "onboarding_page.tab2.app_title" | translate }}</h1>
+          <p [innerHTML]="'onboarding_page.tab2.app_text' | translate"></p>
         </div>
       </div>
       <div class="carousel-item">
@@ -93,8 +93,8 @@
           />
         </div>
         <div class="section mt-2 text-center">
-          <h1>{{ "onboard.tab3.title" | translate }}</h1>
-          <p [innerHTML]="'onboard.tab3.text' | translate"></p>
+          <h1>{{ "onboarding_page.tab3.app_title" | translate }}</h1>
+          <p [innerHTML]="'onboarding_page.tab3.app_text' | translate"></p>
         </div>
       </div>
       <div class="carousel-item">
@@ -108,8 +108,8 @@
           />
         </div>
         <div class="section mt-2 text-center">
-          <h1>{{ "onboard.tab4.title" | translate }}</h1>
-          <p [innerHTML]="'onboard.tab4.text' | translate"></p>
+          <h1>{{ "onboarding_page.tab4.app_title" | translate }}</h1>
+          <p [innerHTML]="'onboarding_page.tab4.app_text' | translate"></p>
         </div>
       </div>
     </div>
@@ -125,8 +125,8 @@
           />
         </div>
         <div class="section mt-2 text-center">
-          <h1>{{ "onboard.crypto.tab1.title" | translate }}</h1>
-          <p [innerHTML]="'onboard.crypto.tab1.text' | translate"></p>
+          <h1>{{ "onboarding_page.tab1.crypto_title" | translate }}</h1>
+          <p [innerHTML]="'onboarding_page.tab1.crypto_text' | translate"></p>
         </div>
       </div>
       <div class="carousel-item">
@@ -138,8 +138,8 @@
           />
         </div>
         <div class="section mt-2 text-center">
-          <h1>{{ "onboard.crypto.tab2.title" | translate }}</h1>
-          <p [innerHTML]="'onboard.crypto.tab2.text' | translate"></p>
+          <h1>{{ "onboarding_page.tab2.crypto_title" | translate }}</h1>
+          <p [innerHTML]="'onboarding_page.tab2.crypto_text' | translate"></p>
         </div>
       </div>
       <div class="carousel-item">
@@ -153,8 +153,8 @@
           />
         </div>
         <div class="section mt-2 text-center">
-          <h1>{{ "onboard.crypto.tab3.title" | translate }}</h1>
-          <p [innerHTML]="'onboard.crypto.tab3.text' | translate"></p>
+          <h1>{{ "onboarding_page.tab3.crypto_title" | translate }}</h1>
+          <p [innerHTML]="'onboarding_page.tab3.crypto_text' | translate"></p>
         </div>
       </div>
       <div class="carousel-item">
@@ -168,8 +168,8 @@
           />
         </div>
         <div class="section mt-2 text-center">
-          <h1>{{ "onboard.crypto.tab4.title" | translate }}</h1>
-          <p [innerHTML]="'onboard.crypto.tab4.text' | translate"></p>
+          <h1>{{ "onboarding_page.tab4.crypto_title" | translate }}</h1>
+          <p [innerHTML]="'onboarding_page.tab4.crypto_text' | translate"></p>
         </div>
       </div>
     </div>
@@ -184,7 +184,7 @@
       data-bs-slide="next"
       (click)="next()"
     >
-      {{ "onboard.next" | translate }}
+      {{ "shared_text.next" | translate }}
     </button>
     <button
       *ngIf="counter === 4 && !isCrypto"
@@ -192,7 +192,7 @@
       type="button"
       routerLink=""
     >
-      {{ "onboard.try" | translate }}
+      {{ "shared_text.try" | translate }}
     </button>
     <button
       *ngIf="counter === 4 && isCrypto"
@@ -200,7 +200,7 @@
       type="button"
       routerLink="/crypto/requirements"
     >
-      {{ "onboard.try" | translate }}
+      {{ "shared_text.try" | translate }}
     </button>
   </div>
 </div>

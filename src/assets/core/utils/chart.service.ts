@@ -5,11 +5,25 @@ import { ApexOptions } from '../data/constant/apex.chart';
 import { CryptoDashboard, Operation } from '../data/class/crypto.class';
 import { ImageColorPickerService } from './image.color.picker.service';
 import { Utils } from '../services/config/utils.service';
+import { ScreenService } from './screen.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChartService {
+  private static BACKGROUND: Array<string> = [
+    'rgba(98, 54, 255, 0.3)',
+    'rgba(209, 25, 208, 0.3)',
+    'rgba(187, 157, 247, 0.3)',
+    'rgba(222, 52, 84, 0.3)',
+    'rgba(64, 115, 6, 0.3)',
+    'rgba(156, 65, 60, 0.3)',
+    'rgba(242, 237, 10, 0.3)',
+    'rgba(250, 92, 66, 0.3)',
+    'rgba(87, 203, 84, 0.3)',
+    'rgba(80, 2, 149, 0.3)',
+    'rgba(247, 238, 220, 0.3)',
+  ];
   private static colorsList: string[] = [
     '#6236FF',
     '#d119d0',
@@ -82,10 +96,21 @@ export class ChartService {
       historyBalance = [];
     });
     let finalStatsDays: string[] = [];
-    dashboard.statsWalletDays.forEach((d) =>
-      finalStatsDays.push(new Date(d).toDateString())
+    dashboard.statsWalletDays.forEach(
+      (d) =>
+        finalStatsDays.push(
+          Utils.formatDateIntl(new Date(d).toLocaleDateString())
+        )
+      /** Mostra le date come Wed 01 Nov 2024*/
+      //finalStatsDays.push(new Date(d).toDateString())
     );
-    return this.createChartLine(colors, series, finalStatsDays, 380);
+    return this.createChartLine(
+      colors,
+      series,
+      finalStatsDays,
+      380,
+      ScreenService.isMobileDevice()
+    );
   }
 
   public static renderChartLineCategory(
@@ -100,7 +125,11 @@ export class ChartService {
       value.forEach((v: any) => {
         historyBalance.push(v.balance);
         if (index === 0) {
-          labels.push(v.date);
+          if (v.date.length === 4) labels.push(v.date);
+          else
+            labels.push(
+              Utils.formatDateIntl(new Date(v.date).toLocaleDateString())
+            );
         }
       });
       let serie = {
@@ -113,7 +142,13 @@ export class ChartService {
       index++;
     });
 
-    return this.createChartLine([], series, labels, 350);
+    return this.createChartLine(
+      [],
+      series,
+      labels,
+      '400',
+      ScreenService.isMobileDevice() ?? false
+    );
   }
 
   public static renderChartWallet(
@@ -160,7 +195,7 @@ export class ChartService {
       },
       colors: ['#1DCC70'],
       tooltip: {
-        enabled: false,
+        theme: 'dark',
       },
       labels: historyDates,
     };
@@ -210,12 +245,14 @@ export class ChartService {
   }
   public static appRenderChartBar(
     dates: string[],
+    currency: string,
     balances: number[]
   ): Partial<ApexOptions> {
     let series: Array<any> = [];
     let walletName: Array<string> = dates;
     let serie = [
       {
+        name: 'Total ' + currency,
         data: balances,
       },
     ];
@@ -225,9 +262,33 @@ export class ChartService {
         width: '100%',
         height: 400,
         type: 'bar',
+        sparkline: {
+          enabled: ScreenService.isMobileDevice(),
+        },
       },
-      stroke: {
-        width: 2,
+      plotOptions: {
+        bar: {
+          borderRadius: 20,
+          borderRadiusApplication: 'end',
+          horizontal: false,
+        },
+      },
+      grid: {
+        show: false,
+        borderColor: '#555',
+        xaxis: {
+          lines: {
+            show: false,
+          },
+        },
+        yaxis: {
+          lines: {
+            show: false,
+          },
+        },
+      },
+      tooltip: {
+        theme: 'dark',
       },
       colors: ['#6236FF'],
       labels: walletName,
@@ -238,6 +299,7 @@ export class ChartService {
 
   public static renderCryptoDatas(
     cryptoDashboard: CryptoDashboard,
+    isMobileDevice: boolean = true,
     /**
      * 1.Parametro: Dimensione Grafico
      * 2.Parametro: Boolean Siamo in Resume (Setta il live price come ultimo dato)
@@ -314,7 +376,13 @@ export class ChartService {
           : new Date(d).toDateString()
       );
     });
-    return this.createChartLine(colors, series, finalStatsDays, h);
+    return this.createChartLine(
+      colors,
+      series,
+      finalStatsDays,
+      h,
+      isMobileDevice
+    );
   }
 
   public static renderTradingOperations(
@@ -401,7 +469,8 @@ export class ChartService {
       ['#6236FF', '#1DCC70', '#FF781F'],
       series,
       finalStatsDays,
-      h
+      h,
+      ScreenService.isMobileDevice()
     );
   }
 
@@ -417,7 +486,8 @@ export class ChartService {
     colors: string[],
     series: Array<any>,
     finalStatsDays: string[],
-    h: any
+    h: any,
+    disableOptions: boolean = true
   ) {
     let chartOptions: Partial<ApexOptions> = {
       series: series,
@@ -426,7 +496,7 @@ export class ChartService {
         width: '100%',
         height: h,
         sparkline: {
-          enabled: true,
+          enabled: disableOptions,
         },
       },
       dataLabels: {
@@ -435,8 +505,22 @@ export class ChartService {
           borderRadius: 20,
         },
       },
-      stroke: {
-        width: 2,
+      grid: {
+        show: false,
+        borderColor: '#555',
+        xaxis: {
+          lines: {
+            show: false,
+          },
+        },
+        yaxis: {
+          lines: {
+            show: false,
+          },
+        },
+      },
+      tooltip: {
+        theme: 'dark',
       },
       colors: colors.length != 0 ? colors : this.colorsList,
       labels: finalStatsDays,

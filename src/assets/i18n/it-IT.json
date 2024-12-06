@@ -14,43 +14,43 @@
     "user": "Utente aggiornato",
     "close": "Operazione chiusa"
   },
-  "onboard": {
-    "crypto": {
-      "tab1": {
-        "title": "Benvenuto su Crypto",
-        "text": "Questa è la prima login nell'app. <br /> Per continuare con l'onboard premi Avanti."
-      },
-      "tab2": {
-        "title": "Come funziona?",
-        "text": "Crea o importa il tuo wallet crypto, aggiungi i tuoi asset completanto il form ed ottieni dettagli, statistiche ed altro."
-      },
-      "tab3": {
-        "title": "Operazioni",
-        "text": "Apri operazioni di Holding o trading tramite la nostra sezione operazioni."
-      },
-      "tab4": {
-        "title": "Grazie per il tuo tempo",
-        "text": "Premi Prova ora e vai alla dashboard."
-      }
-    },
+  "onboarding_page": {
     "tab1": {
-      "title": "Benvenuto su MoneyStats",
-      "text": "Questa è la prima login nell'app. <br /> Per continuare con l'onboard premi Avanti."
+      "app_title": "Benvenuto su MoneyStats",
+      "app_text": "Questa è la tua prima login nell'app. <br /> Per iniziare il tuo percorso di configurazione, premi *Avanti*.",
+      "crypto_title": "Benvenuto su Crypto",
+      "crypto_text": "Questa è la tua prima volta nell'app. <br /> Per continuare con l'onboarding, premi 'Avanti'."
     },
     "tab2": {
-      "title": "Perchè utilizzarla?",
-      "text": "La differenza tra MoneyStats e le altre app di gestione del denaro è che non è necessario tenere traccia delle tue spese giorno per giorno, basta uno Stats una volta alla settimana o una volta al mese, consigliato, per ottenere le migliori prestazioni."
+      "app_title": "Perché scegliere MoneyStats?",
+      "app_text": "La differenza di MoneyStats rispetto ad altre app di gestione del denaro è che non devi monitorare ogni spesa quotidiana. <br /> Ti basta inserire uno *Stats* una volta alla settimana o, preferibilmente, una volta al mese per ottenere il massimo delle funzionalità.",
+      "crypto_title": "Come funziona?",
+      "crypto_text": "Crea o importa il tuo wallet crypto, aggiungi i tuoi asset completando il form e ottieni dettagli, statistiche e molto altro."
     },
     "tab3": {
-      "title": "Come funziona?",
-      "text": "Quasi tutta l'applicazione è toccabile. <br /> Dopo essere entrato nella Dashboard per iniziare ad avere alcuni dati, dovresti aggiungere un nuovo Portafoglio. <br /> Il processo sarà completato una volta che inizi ad aggiungere nuovi Stats, grafici e tabelle con i dettagli verranno visualizzati."
+      "app_title": "Come funziona?",
+      "app_text": "Quasi tutte le funzionalità dell'app sono interattive. <br /> Dopo essere entrato nella Dashboard, inizia creando un nuovo Portafoglio. <br /> Una volta aggiunti nuovi *Stats*, potrai visualizzare grafici e tabelle con tutti i dettagli.",
+      "crypto_title": "Operazioni",
+      "crypto_text": "Gestisci operazioni di holding o trading nella sezione dedicata alle operazioni."
     },
     "tab4": {
-      "title": "Grazie per il tuo tempo",
-      "text": "Divertiamoci insieme, premi Prova ora e vai alla dashboard."
+      "app_title": "Grazie per il tuo tempo!",
+      "app_text": "È il momento di iniziare! Premi *Prova ora* per accedere alla Dashboard e scoprire tutte le funzionalità.",
+      "crypto_title": "Grazie per il tuo tempo",
+      "crypto_text": "Premi 'Prova ora' per accedere alla dashboard."
+    }
+  },
+  "core_header_footer": {
+    "dropdown_menu": {
+      "options": "Opzioni Menu",
+      "version": "Versione"
     },
-    "next": "Avanti",
-    "try": "Prova ora"
+    "sidebar_menu": {
+      "balance": "Saldo",
+      "group1_title": "Menu",
+      "group2_title": "Altro",
+      "support": "Supporto"
+    }
   },
   "auth": {
     "login": {
@@ -106,100 +106,59 @@
       "reset": "Reset Password"
     }
   },
-  "headerMobile": {
-    "options": "Opzioni Menu",
-    "delete": "Cancella",
-    "restore": "Ripristina"
-  },
-  "dashboard": {
-    "sidebar": {
-      "dropdown": {
-        "options": "Opzioni Menu",
-        "version": "Versione",
-        "settings": "Impostazioni",
-        "logout": "Log Out"
-      },
-      "overviewTitle": "Saldo",
-      "menuTitle": "Menu",
-      "menu": {
-        "title1": "Dashboard",
-        "title2": "Portafogli",
-        "title3": "Storico"
-      },
-      "subMenuTitle": "Altro",
-      "subMenu": {
-        "title1": "Impostazioni",
-        "title2": "Supporto",
-        "title3": "Log out"
-      }
-    },
-    "footer": {
-      "title1": "Dashboard",
-      "title2": "Storico",
-      "title3": "Portafogli",
-      "title4": "Impostazioni"
-    },
-    "dashboardCard": {
+  "dashboard_page": {
+    "dashboard_card": {
       "title": "Saldo Totale",
-      "footer": {
+      "icons": {
         "title1": "Aggiungi Portfoglio",
-        "title2": "Categorie",
-        "title3": "Portafoglio",
-        "title4": "Storico"
+        "title2": "Categorie"
       },
-      "stats": {
-        "title1": "Performance Da ",
-        "title2": "Giorno dell'ultimo Stats",
-        "title3": "Performance Ultimo Stats",
-        "title4": "Differenza Ultimo Stats"
-      }
-    },
-    "transaction": {
-      "title": "Transazioni",
-      "view": "Vedi",
-      "nodata": {
-        "header": "Transazioni",
-        "body": "Inserisci dati per avere la lista transazioni.",
-        "footer": "MoneyStats"
+      "stats_card": {
+        "title1": "Andamento dal ",
+        "title2": "Giorno dell'ultima analisi",
+        "title3": "Andamento dell'ultima analisi",
+        "title4": "Differenza rispetto all'ultima analisi"
       }
     },
     "graph": {
       "title": "Grafico da &FROM& a &TO&",
       "titleFirst": "Grafico del &FROM&",
-      "view": "Vedi",
-      "nodata": {
-        "header": "Grafico",
-        "body": "Inserisci dei dati per avere il grafico.",
-        "footer": "MoneyStats"
-      }
+      "graph": "Grafico",
+      "empty_body_text": "Inserisci i dati per generare il grafico."
     },
     "wallet_splide": {
       "title": "Portafogli",
-      "view": "Vedi",
       "btn": "Apri Portafoglio",
-      "nodata": {
-        "header": "Portafoglio",
-        "body": "Inserisci dei dati per avere i portafogli.",
-        "footer": "MoneyStats"
-      }
+      "empty_body_text": "Inserisci i dati per visualizzare i portafogli."
     }
   },
-  "transaction": {
+  "transactions_page": {
     "title": "Transazioni",
-    "subTitle": "Ultime performance",
+    "sub_title": "Ultime performance",
+    "empty_body_text": "Inserisci i dati per visualizzare la lista delle transazioni.",
     "difference": "Differenza",
-    "back": "Torna alla pagina precedente",
-    "mobile_back": "Indietro",
     "details": {
       "title": "Dettagli della Transazione",
-      "back": "Torna alla pagina precedente",
       "status": "Stato",
       "success": "Completato",
-      "category": "Categoria",
-      "lastStats": "Differenza",
-      "date": "Data",
-      "amount": "Saldo"
+      "date": "Data"
     }
+  },
+  "shared_text": {
+    "dashboard": "Dashboard",
+    "wallets": "Portafogli",
+    "resume": "Storico",
+    "settings": "Impostazioni",
+    "logout": "Log Out",
+    "next": "Avanti",
+    "try": "Prova ora",
+    "delete": "Cancella",
+    "restore": "Ripristina",
+    "view": "Visualizza",
+    "back": "Torna alla pagina precedente",
+    "mobile_back": "Indietro",
+    "category": "Categoria",
+    "amount": "Saldo"
   },
   "wallet": {
     "active": "Portafogli Attivi",
@@ -236,7 +195,7 @@
       "type": "Tipo di wallet",
       "typeText": "Scegli il tipo di wallet",
       "img": "Aggiungi immagine",
-      "imgContent": "Upload Immagine",
+      "imgContent": "Carica Immagine",
       "imgFromURL": "Aggiungi immagine da URL",
       "sizeToBig": "Immagine troppo grande, la massima grandezza è ",
       "image": "Immagine",

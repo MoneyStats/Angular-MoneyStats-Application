@@ -283,3 +283,40 @@ body:not(.loading) {
 body.modal-open {
   overflow: hidden !important;
 }
+
+/* Card Base Style */
+.zoom {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* ombra iniziale leggera */
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* animazione fluida */
+  transform: scale(1); /* dimensione originale */
+}
+
+/* Hover Effect: Ingrandisce con ombra */
+.zoom:hover {
+  transform: scale(0.99); /* ingrandisce del 10% */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* ombra più forte */
+}
+
+.zoom:focus {
+  transform: scale(0.98); /* ingrandisce del 10% */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* ombra più forte */
+}
+
+.zoomx2 {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* ombra iniziale leggera */
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* animazione fluida */
+  transform: scale(1); /* dimensione originale */
+}
+
+/* Hover Effect: Ingrandisce con ombra */
+.zoomx2:hover {
+  transform: scale(0.96); /* ingrandisce del 10% */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* ombra più forte */
+}
+
+.zoomx2:focus {
+  transform: scale(0.94); /* ingrandisce del 10% */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* ombra più forte */
+}

@@ -27,7 +27,6 @@ import { CategoryComponent } from './stats/category/category.component';
 import { DataComponent } from './stats/data/data.component';
 import { AppPagesRoutingModule } from './app.pages-routing.module';
 import { AppComponentsModule } from 'src/app/shared/components/app/app-components.module';
-import { BaseChartDirective } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -55,7 +54,6 @@ import { BaseChartDirective } from 'ng2-charts';
     IonicModule.forRoot(),
     FormsModule,
     NgApexchartsModule,
-    BaseChartDirective,
     InterceptorsModule,
     TranslateModule.forChild({
       loader: {

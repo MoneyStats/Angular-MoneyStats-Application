@@ -18,12 +18,13 @@ import { UserService } from 'src/assets/core/services/api/user.service';
 import { User } from 'src/assets/core/data/class/user.class';
 import { SharedService } from 'src/assets/core/services/config/shared.service';
 import { Utils } from 'src/assets/core/services/config/utils.service';
+import { ImageColorPickerService } from 'src/assets/core/utils/image.color.picker.service';
 
 @Component({
-    selector: 'app-wallet-details',
-    templateUrl: './wallet-details.component.html',
-    styleUrls: ['./wallet-details.component.scss'],
-    standalone: false
+  selector: 'app-wallet-details',
+  templateUrl: './wallet-details.component.html',
+  styleUrls: ['./wallet-details.component.scss'],
+  standalone: false,
 })
 export class WalletDetailsComponent implements OnInit, OnDestroy {
   user: User = UserService.getUserData();
@@ -61,6 +62,8 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
 
   totalBalance: number = 0;
 
+  theme: string = '';
+
   constructor(
     public screenService: ScreenService,
     private route: ActivatedRoute,
@@ -78,8 +81,8 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
     this.saveWalletSubscribe.unsubscribe();
     this.walletByIdSubscribe.unsubscribe();
   }
-  screenWidth() {
-    return ScreenService.screenWidth;
+  isMobile() {
+    return ScreenService.isMobileDevice();
   }
 
   ngOnInit(): void {
@@ -120,6 +123,16 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
       this.wallet!.history = [];
     }
 
+    if (this.wallet?.img) {
+      ImageColorPickerService.getColorFromImage(
+        this.wallet?.img,
+        '284bff'
+      ).then((color) => {
+        let backgroud = document.getElementById('gradientSection');
+        backgroud!.style.background = color;
+      });
+    }
+
     this.renderImage();
     this.shared.setWallet(this.wallet!);
     this.coinSymbol = UserService.getUserData().settings.currencySymbol;
@@ -127,7 +140,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
   }
 
   renderImage() {
-    if (ScreenService.screenWidth! <= 780) {
+    if (ScreenService.isMobileDevice()) {
       const image = document.getElementById('gradientSection');
       image!.style.backgroundImage = 'url(' + this.wallet!.img + ')';
     }

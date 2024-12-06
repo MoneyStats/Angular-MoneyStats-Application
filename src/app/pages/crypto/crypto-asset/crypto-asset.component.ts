@@ -18,10 +18,10 @@ import { Utils } from 'src/assets/core/services/config/utils.service';
 import { SharedService } from 'src/assets/core/services/config/shared.service';
 
 @Component({
-    selector: 'app-crypto-asset',
-    templateUrl: './crypto-asset.component.html',
-    styleUrls: ['./crypto-asset.component.scss'],
-    standalone: false
+  selector: 'app-crypto-asset',
+  templateUrl: './crypto-asset.component.html',
+  styleUrls: ['./crypto-asset.component.scss'],
+  standalone: false,
 })
 export class CryptoAssetComponent implements OnInit, OnDestroy {
   cryptoAssetSubscribe: Subscription = new Subscription();
@@ -80,16 +80,24 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
       dashboard.statsAssetsDays = this.getAllDate();
       setTimeout(() => {
         if (dashboard.assets) {
-          if (ScreenService.screenWidth! <= 780) {
-            this.chartOptions = ChartService.renderCryptoDatas(dashboard, [
-              ApexChartsOptions.MOBILE_MODE,
-              ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
-            ]);
+          if (ScreenService.isMobileDevice()) {
+            this.chartOptions = ChartService.renderCryptoDatas(
+              dashboard,
+              true,
+              [
+                ApexChartsOptions.MOBILE_MODE,
+                ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
+              ]
+            );
           } else
-            this.chartOptions = ChartService.renderCryptoDatas(dashboard, [
-              ApexChartsOptions.ULTRA_WIDE,
-              ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
-            ]);
+            this.chartOptions = ChartService.renderCryptoDatas(
+              dashboard,
+              true,
+              [
+                ApexChartsOptions.ULTRA_WIDE,
+                ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
+              ]
+            );
         }
       }, 500);
     }
@@ -117,13 +125,13 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
             s.toString().split('-')[0] === new Date().getFullYear().toString()
         );
       setTimeout(() => {
-        if (ScreenService.screenWidth! <= 780)
-          this.chart1Y = ChartService.renderCryptoDatas(dashboard, [
+        if (ScreenService.isMobileDevice())
+          this.chart1Y = ChartService.renderCryptoDatas(dashboard, true, [
             ApexChartsOptions.MOBILE_MODE,
             ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
           ]);
         else
-          this.chart1Y = ChartService.renderCryptoDatas(dashboard, [
+          this.chart1Y = ChartService.renderCryptoDatas(dashboard, true, [
             ApexChartsOptions.ULTRA_WIDE,
             ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
           ]);
@@ -158,13 +166,13 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
             last3.includes(s.toString().split('-')[0])
         );
       setTimeout(() => {
-        if (ScreenService.screenWidth! <= 780)
-          this.chart3Y = ChartService.renderCryptoDatas(dashboard, [
+        if (ScreenService.isMobileDevice())
+          this.chart3Y = ChartService.renderCryptoDatas(dashboard, true, [
             ApexChartsOptions.MOBILE_MODE,
             ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
           ]);
         else
-          this.chart3Y = ChartService.renderCryptoDatas(dashboard, [
+          this.chart3Y = ChartService.renderCryptoDatas(dashboard, true, [
             ApexChartsOptions.ULTRA_WIDE,
             ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
           ]);

@@ -42,7 +42,7 @@ export class SharedService {
   }
 
   setDashboard(dashboard: Dashboard) {
-    this.wallet = Utils.copyObject(dashboard);
+    this.dashboard = Utils.copyObject(dashboard);
     if (
       Utils.isNullOrEmpty(this.wallets) &&
       !Utils.isNullOrEmpty(dashboard.wallets)

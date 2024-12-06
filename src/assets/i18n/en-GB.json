@@ -14,43 +14,43 @@
     "user": "User Updated",
     "close": "Operation Closed"
   },
-  "onboard": {
-    "crypto": {
-      "tab1": {
-        "title": "Welcome to Crypto",
-        "text": "This is the first login through the section. <br /> To continue the onboarding process, press Next."
-      },
-      "tab2": {
-        "title": "How it works?",
-        "text": "Create o import a cryptocurrency wallet, add your asset by filling the form with all the coin details."
-      },
-      "tab3": {
-        "title": "Operations",
-        "text": "Open Holding o trading position by using the operation section to manage your crypto wallet."
-      },
-      "tab4": {
-        "title": "Thanks for your time",
-        "text": "Press Try It to get into the Dashboard."
-      }
-    },
+  "onboarding_page": {
     "tab1": {
-      "title": "Welcome to MoneyStats",
-      "text": "This is the first login thru the app. <br /> To continue the on-board process press Next."
+      "app_title": "Welcome to MoneyStats",
+      "app_text": "This is your first login to the app. <br /> To begin your setup process, press *Next*.",
+      "crypto_title": "Welcome to Crypto",
+      "crypto_text": "This is your first time in the app. <br /> To continue with the onboarding, press 'Next'."
     },
     "tab2": {
-      "title": "Why use it?",
-      "text": "The difference between MoneyStats and other money management apps is that you don't need to keep track of your expenses. Checking once a week or once a month is recommended to achieve the best performance."
+      "app_title": "Why choose MoneyStats?",
+      "app_text": "What sets MoneyStats apart from other money management apps is that you don’t need to track every daily expense. <br /> Simply input *Stats* once a week or, preferably, once a month to get the most out of the features.",
+      "crypto_title": "How does it work?",
+      "crypto_text": "Create or import your crypto wallet, add your assets by completing the form, and get details, stats, and much more."
     },
     "tab3": {
-      "title": "How it works?",
-      "text": "Almost all the application is touchable. <br /> After you get into the Dashboard to start having some data you should add a new Wallet. <br /> The process would be completed once you start adding new Stats, Graphic and Tables with details will be showed."
+      "app_title": "How does it work?",
+      "app_text": "Almost all features of the app are interactive. <br /> After entering the Dashboard, start by creating a new Wallet. <br /> Once you’ve added new *Stats*, you can view graphs and tables with all the details.",
+      "crypto_title": "Transactions",
+      "crypto_text": "Manage holding or trading operations in the transactions section."
     },
     "tab4": {
-      "title": "Thanks for your time",
-      "text": "Let's having fun, press Try It to get into the Dashboard."
+      "app_title": "Thanks for your time!",
+      "app_text": "It’s time to get started! Press *Try Now* to access the Dashboard and discover all the features.",
+      "crypto_title": "Thanks for your time",
+      "crypto_text": "Press 'Try Now' to access the dashboard."
+    }
+  },
+  "core_header_footer": {
+    "dropdown_menu": {
+      "options": "Menu Options",
+      "version": "Version"
     },
-    "next": "Next",
-    "try": "Try It"
+    "sidebar_menu": {
+      "balance": "Balance",
+      "group1_title": "Menu",
+      "group2_title": "Others",
+      "support": "Support"
+    }
   },
   "auth": {
     "login": {
@@ -106,100 +106,59 @@
       "reset": "Reset Password"
     }
   },
-  "headerMobile": {
-    "options": "Menu Options",
-    "delete": "Delete",
-    "restore": "Restore"
-  },
-  "dashboard": {
-    "sidebar": {
-      "dropdown": {
-        "options": "Menu Options",
-        "version": "Version",
-        "settings": "Settings",
-        "logout": "Log Out"
-      },
-      "overviewTitle": "Balance",
-      "menuTitle": "Menu",
-      "menu": {
-        "title1": "Dashboard",
-        "title2": "My Wallet",
-        "title3": "Resume Data"
-      },
-      "subMenuTitle": "Others",
-      "subMenu": {
-        "title1": "Settings",
-        "title2": "Support",
-        "title3": "Log out"
-      }
-    },
-    "footer": {
-      "title1": "Dashboard",
-      "title2": "Resume",
-      "title3": "Wallets",
-      "title4": "Settings"
-    },
-    "dashboardCard": {
+  "dashboard_page": {
+    "dashboard_card": {
       "title": "Total Balance",
-      "footer": {
+      "icons": {
         "title1": "Add Wallet",
-        "title2": "Category",
-        "title3": "Wallet",
-        "title4": "Resume Data"
+        "title2": "Category"
       },
-      "stats": {
+      "stats_card": {
         "title1": "Performance Since ",
-        "title2": "Day of the Last Stats",
-        "title3": "Last Stats Performance",
-        "title4": "Last Stats Difference"
-      }
-    },
-    "transaction": {
-      "title": "Transactions",
-      "view": "View All",
-      "nodata": {
-        "header": "Transaction",
-        "body": "Add new data to view the transaction history.",
-        "footer": "MoneyStats"
+        "title2": "Day of Last Analysis",
+        "title3": "Performance of Last Analysis",
+        "title4": "Difference from Last Analysis"
       }
     },
     "graph": {
-      "title": "Performance from &FROM& to &TO&",
-      "titleFirst": "Performance of &FROM&",
-      "view": "View All",
-      "nodata": {
-        "header": "Graph",
-        "body": "Insert new data to get graph.",
-        "footer": "MoneyStats"
-      }
+      "title": "Graph from &FROM& to &TO&",
+      "titleFirst": "Graph of &FROM&",
+      "graph": "Graph",
+      "empty_body_text": "Please enter data to generate the graph."
     },
     "wallet_splide": {
-      "title": "Wallet",
-      "view": "View All",
+      "title": "Wallets",
       "btn": "Open Wallet",
-      "nodata": {
-        "header": "Wallet",
-        "body": "Add new data to view the wallet.",
-        "footer": "MoneyStats"
-      }
+      "empty_body_text": "Please enter data to view your wallets."
     }
   },
-  "transaction": {
+  "transactions_page": {
     "title": "Transactions",
-    "subTitle": "Wallets last performance",
+    "sub_title": "Wallets last performance",
+    "empty_body_text": "Please enter data to view your transactions list.",
     "difference": "Difference",
-    "back": "Go back to previous page",
-    "mobile_back": "Back",
     "details": {
       "title": "Transaction Details",
-      "back": "Go back to previous page",
       "status": "Status",
       "success": "Success",
-      "category": "Category",
-      "lastStats": "Difference",
-      "date": "Date",
-      "amount": "Balance"
+      "date": "Date"
     }
+  },
+  "shared_text": {
+    "dashboard": "Dashboard",
+    "wallets": "Wallets",
+    "resume": "Resume",
+    "settings": "Settings",
+    "logout": "Log Out",
+    "next": "Next",
+    "try": "Try Now",
+    "delete": "Delete",
+    "restore": "Restore",
+    "view": "View",
+    "back": "Go back to previous page",
+    "mobile_back": "Back",
+    "category": "Category",
+    "amount": "Balance"
   },
   "wallet": {
     "active": "Active Wallet",

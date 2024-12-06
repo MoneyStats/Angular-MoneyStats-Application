@@ -36,8 +36,8 @@ export class SupportComponent implements OnInit, OnDestroy {
     ScreenService.hideFooter();
   }
 
-  screenWidth() {
-    return ScreenService.screenWidth;
+  isMobile() {
+    return ScreenService.isMobileDevice();
   }
 
   contactSupport() {

@@ -18,16 +18,16 @@ import {
   ModalConstant,
   OperationsType,
 } from 'src/assets/core/data/constant/constant';
-import { ChartJSOptions } from 'src/assets/core/data/constant/apex.chart';
-import { ChartJSService } from 'src/assets/core/utils/chartjs.service';
+import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { SharedService } from 'src/assets/core/services/config/shared.service';
+import { ChartService } from 'src/assets/core/utils/chart.service';
 
 @Component({
-    selector: 'app-investments-history',
-    templateUrl: './investments-history.component.html',
-    styleUrls: ['./investments-history.component.scss'],
-    standalone: false
+  selector: 'app-investments-history',
+  templateUrl: './investments-history.component.html',
+  styleUrls: ['./investments-history.component.scss'],
+  standalone: false,
 })
 export class InvestmentsHistoryComponent implements OnInit, OnChanges {
   amount: string = '******';
@@ -47,7 +47,7 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
   operations: Operation[] = [];
   operationSelect?: Operation;
 
-  public lineChartJS?: ChartJSOptions = new ChartJSOptions();
+  public chartHistory?: Partial<ApexOptions>;
 
   constructor(
     public cryptoService: CryptoService,
@@ -96,7 +96,10 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
 
   renderChart() {
     setTimeout(() => {
-      this.lineChartJS = ChartJSService.renderChartLine(this.totalMap);
+      this.chartHistory = ChartService.renderChartWallet(
+        'History',
+        this.totalMap.get('History')
+      );
     }, 500);
   }
 

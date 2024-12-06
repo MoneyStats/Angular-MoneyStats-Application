@@ -6,10 +6,10 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-    selector: 'app-wallet-history',
-    templateUrl: './wallet-history.component.html',
-    styleUrls: ['./wallet-history.component.scss'],
-    standalone: false
+  selector: 'app-wallet-history',
+  templateUrl: './wallet-history.component.html',
+  styleUrls: ['./wallet-history.component.scss'],
+  standalone: false,
 })
 export class WalletHistoryComponent implements OnInit {
   environment = environment;
@@ -24,8 +24,8 @@ export class WalletHistoryComponent implements OnInit {
     private shared: SharedService
   ) {}
 
-  screenWidth() {
-    return ScreenService.screenWidth;
+  isMobile() {
+    return ScreenService.isMobileDevice();
   }
 
   ngOnInit(): void {

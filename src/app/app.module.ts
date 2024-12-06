@@ -24,7 +24,6 @@ import { SharedModule } from './shared/components/shared/shared.module';
 import { InterceptorsModule } from './interceptors/interceptors.module';
 import { CoreModule } from './shared/components/core/core.module';
 import { CryptoComponentsModule } from './shared/components/crypto/crypto-components.module';
-import { BaseChartDirective } from 'ng2-charts';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,7 +35,6 @@ import { BaseChartDirective } from 'ng2-charts';
     BrowserAnimationsModule,
     IonicModule.forRoot(),
     NgApexchartsModule,
-    BaseChartDirective,
     FormsModule,
     TranslateModule.forRoot({
       loader: {

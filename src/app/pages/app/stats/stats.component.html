@@ -1,6 +1,6 @@
 <section class="section-width mx-auto">
   <app-header-mobile
-    *ngIf="screenWidth()! <= 780"
+    *ngIf="isMobile()"
     title="{{ 'stats.title' | translate }}"
     backBtn="{{ 'stats.mobile_back' | translate }}"
   >
@@ -22,6 +22,7 @@
       </li>
       <li class="nav-item">
         <a
+          (click)="goToData()"
           class="nav-link"
           data-bs-toggle="tab"
           href="#tab_category"
@@ -92,7 +93,7 @@
     <div *ngIf="resumeData.statsWalletDays" class="transactions row">
       <div class="col-md-6 mt-2">
         <!-- item -->
-        <a routerLink="/transaction" class="item">
+        <a routerLink="/transaction" class="item zoom">
           <div class="detail">
             <div class="col-auto" style="padding-right: 20px">
               <div
@@ -139,7 +140,7 @@
       </div>
       <div class="col-md-6 mt-2">
         <!-- item -->
-        <a routerLink="/transaction" class="item">
+        <a routerLink="/transaction" class="item zoom">
           <div class="detail">
             <div class="col-auto" style="padding-right: 20px">
               <div
@@ -215,6 +216,7 @@
             [coinSymbol]="coinSymbol!"
             [dashboard]="resumeData"
             [hidden]="hidden"
+            [change]="change"
           ></app-category>
         </div>
       </div>

@@ -1,6 +1,6 @@
 <section class="section-width mx-auto">
   <app-header-mobile
-    *ngIf="screenWidth()! <= 780"
+    *ngIf="isMobile()"
     [title]="wallet!.name"
     [backBtn]="'wallet.details.mobile_back' | translate"
     rightBtn="{{ 'wallet.details.mobile_edit' | translate }}"
@@ -101,7 +101,7 @@
 
         <!-- Coin Chart -->
         <div class="section mb-2">
-          <div class="card coin-chart">
+          <div class="card coin-chart ms-1">
             <div class="card-body pt-1">
               <!-- tabs -->
               <ul class="nav nav-tabs lined" role="tablist">
@@ -167,6 +167,7 @@
                     [colors]="chart1Y.colors!"
                     [legend]="chart1Y.legend!"
                     [labels]="chart1Y.labels!"
+                    [tooltip]="chart1Y.tooltip!"
                     type="area"
                   ></apx-chart>
                 </div>
@@ -190,6 +191,7 @@
                     [colors]="chart3Y.colors!"
                     [legend]="chart3Y.legend!"
                     [labels]="chart3Y.labels!"
+                    [tooltip]="chart3Y.tooltip!"
                     type="area"
                   ></apx-chart>
                 </div>
@@ -213,6 +215,7 @@
                     [colors]="chartAll.colors!"
                     [legend]="chartAll.legend!"
                     [labels]="chartAll.labels!"
+                    [tooltip]="chartAll.tooltip!"
                     type="area"
                   ></apx-chart>
                 </div>

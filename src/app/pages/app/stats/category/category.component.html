@@ -182,9 +182,9 @@
         </div>
 
         <div class="card border_round">
-          <div class="card-body mx-auto" style="min-height: 400px">
+          <div class="card-body" style="min-height: 400px">
             <div
-              *ngIf="!lineChartJS"
+              *ngIf="!chartCategory"
               class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
             >
               <div></div>
@@ -192,32 +192,20 @@
               <div></div>
               <div></div>
             </div>
-            <canvas
-              baseChart
-              height="{{
-                mapWalletCategory.get(KEY_INVESTMENTS).data &&
-                mapWalletCategory.get(KEY_CAPITAL).data
-                  ? 400
-                  : 500
-              }}"
-              [type]="'line'"
-              [data]="lineChartJS!.lineChartData"
-              [options]="lineChartJS!.lineChartOptions"
-              [legend]="lineChartJS!.lineChartLegend"
-            >
-            </canvas>
-            <!--<apx-chart
-          *ngIf="chartCategory"
-          [series]="chartCategory.series!"
-          [chart]="chartCategory.chart!"
-          [title]="chartCategory.title!"
-          [colors]="chartCategory.colors!"
-          [legend]="chartCategory.legend!"
-          [stroke]="chartCategory.stroke!"
-          [labels]="chartCategory.labels!"
-          type="area"
-        ></apx-chart>
-        <div id="chart-line"></div>-->
+            <apx-chart
+              *ngIf="chartCategory"
+              [series]="chartCategory.series!"
+              [chart]="chartCategory.chart!"
+              [title]="chartCategory.title!"
+              [colors]="chartCategory.colors!"
+              [legend]="chartCategory.legend!"
+              [labels]="chartCategory.labels!"
+              [grid]="chartCategory.grid!"
+              [dataLabels]="chartCategory.dataLabels!"
+              [tooltip]="chartCategory.tooltip!"
+              type="area"
+            ></apx-chart>
+            <div id="chart-line"></div>
           </div>
         </div>
       </div>

@@ -29,7 +29,6 @@ import { OperationsComponent } from './operations/operations.component';
 import { TradingResumeComponent } from './crypto-resume/trading-resume/trading-resume.component';
 import { MarketDataComponent } from './market-data/market-data.component';
 import { AppComponentsModule } from 'src/app/shared/components/app/app-components.module';
-import { BaseChartDirective } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -55,7 +54,6 @@ import { BaseChartDirective } from 'ng2-charts';
     CoreModule,
     CryptoComponentsModule,
     NgApexchartsModule,
-    BaseChartDirective,
     AppComponentsModule,
     SharedModule,
     IonicModule.forRoot(),
