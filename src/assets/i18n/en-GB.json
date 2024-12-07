@@ -142,7 +142,155 @@
       "status": "Status",
       "success": "Success",
       "date": "Date"
+    },
+    "history_title": "Transaction History"
+  },
+  "wallets_page": {
+    "title": "Wallet Management",
+    "mobile_add": "New",
+    "add": "Create a New Wallet",
+    "open": "View Wallet",
+    "active": "Active Wallets",
+    "deleted": "Deleted Wallets",
+    "empty_body_text": "You haven't created any wallets yet. Add a new wallet to get started."
+  },
+  "wallets_details_page": {
+    "title": " Details",
+    "mobile_edit": "Edit",
+    "mobile_delete": "Delete",
+    "status": "Status",
+    "all_time_high": "All-time High on ",
+    "total_performance": "Total Performance",
+    "high_price": "Yearly High on ",
+    "low_price": "Yearly Low on ",
+    "category": "Category",
+    "type": "Wallet Type",
+    "date_last_stats": "Last Stats Update",
+    "edit": "Edit Wallet",
+    "delete": "Delete Wallet",
+    "restore": "Restore Wallet",
+    "info": {
+      "title": "Information",
+      "sub_title": "You can add any relevant information (e.g., IBAN for a bank account).",
+      "key": "Info Title",
+      "value": "Info Value"
+    },
+    "modal": {
+      "delete_title": "Confirm Deletion",
+      "delete_text": "Are you sure you want to delete this wallet? It will be deactivated but can be restored at any time.",
+      "permanent_title": "Permanent Deletion",
+      "permanent_text": "Are you sure you want to permanently delete this wallet? This action cannot be undone.",
+      "restore_title": "Restore Wallet",
+      "restore_text": "Do you want to restore this wallet?",
+      "confirm": "Confirm"
+    },
+    "transaction": {
+      "title": "Last Stats",
+      "more": "View All"
     }
+  },
+  "support_page": {
+    "title": "Contact Support",
+    "subtitle": "We’re here to help. Send us an email for assistance.",
+    "formTitle": "Get in Touch",
+    "formSubTitle": "Fill out the form below to send us a message.",
+    "name": "Your Name",
+    "namePlace": "Enter your full name",
+    "email": "Email",
+    "emailPlace": "Enter your email address",
+    "message": "Message",
+    "messagePlace": "Type your message here",
+    "send": "Send Message"
+  },
+  "add_stats_page": {
+    "title": "Balance Management",
+    "data_present": "Select a different date",
+    "balance": "Current balance: ",
+    "new_bal": "Enter new balance",
+    "card_title": "Add New Stats",
+    "card_subtitle": "Requires all wallets to have unique dates compared to previously added Stats.",
+    "continue": "Proceed",
+    "logo": "Logo",
+    "wallet_name": "Wallet Name",
+    "new_stats": "New Stats",
+    "current_balance": "Current Balance",
+    "date_last_stats": "Last Stats Update"
+  },
+  "resume_page": {
+    "title": "History",
+    "sub_title": "Detailed transactions and performance",
+    "total": "Total Balance",
+    "since": "Since",
+    "tab_stats": "Stats History",
+    "tab_category": "Category History",
+    "tab_history": "Complete History",
+    "empty_body_text": "Add some data to view the history.",
+    "wallet": "Current Wallet",
+    "graph1": "Wallet Performance",
+    "graph2": "Wallet Distribution",
+    "graph3": "Performance Trends",
+    "table": "Annual Stats List",
+    "table_date": "Date",
+    "table_trend": "Trend",
+    "investments": "Investments",
+    "capital": "Capital",
+    "others": "Others",
+    "debits": "Debts",
+    "saving": "Savings",
+    "deleted": "Deleted",
+    "graph_history": "Historical Performance Chart"
+  },
+  "settings_page": {
+    "title": "Settings",
+    "theme_title": "Theme",
+    "theme_dark": "Dark Mode",
+    "account_title": "Account Settings",
+    "account_username": "Change Username",
+    "account_user_label": "Username",
+    "account_user_placeholder": "Enter your username",
+    "account_email": "Update Email",
+    "account_email_label": "Email",
+    "account_email_placeholder": "Enter your email address",
+    "wallet_edit": "Edit Wallet",
+    "live_wallet_title": "Live Wallet",
+    "live_wallet_description": "Enable Live Wallet with Crypto",
+    "languages_title": "Languages",
+    "languages_en": "English",
+    "languages_it": "Italian",
+    "languages_change": "Change Language",
+    "security_title": "Security",
+    "security_password": "Change Password",
+    "security_old_label": "Old Password",
+    "security_old_placeholder": "Enter your current password",
+    "security_new_label": "New Password",
+    "security_new_placeholder": "Enter your new password",
+    "security_repete_label": "Confirm New Password",
+    "security_repete_placeholder": "Re-enter your new password",
+    "security_warning": "The passwords do not match. Please ensure the 'Password' and 'Confirm password' fields are identical.",
+    "info_title": "Info",
+    "info_support": "Support",
+    "info_howItWorks": "How It Works",
+    "info_version": "MoneyStats Version",
+    "info_version_open": "Open",
+    "info_service": "MoneyStats Service",
+    "develop": "Development Info & Contact",
+    "admin_title": "Admin Features",
+    "admin_cache": "Clear Cache",
+    "admin_marketData": "Import Market Data"
+  },
+  "requirements_page": {
+    "header_title": "Crypto Verification",
+    "title": "Crypto: Almost There!",
+    "sub_title": "Before accessing the new Crypto feature in MoneyStats, we need to verify that you meet some requirements. If you don't meet these, you won't be able to access the dashboard.",
+    "req1_title": "Create a Wallet",
+    "req1_subTitle": "You need to have created a wallet.",
+    "req2_title": "Create a Crypto Wallet",
+    "req2_subTitle": "You need to have created a crypto wallet.",
+    "req3_title": "Add an Asset",
+    "req3_subTitle": "You need to have at least one crypto asset (e.g., BTC, ETH).",
+    "req4_title": "Select a Crypto Currency",
+    "req4_subTitle": "Choose a crypto currency, such as USD, EUR, GBP, etc.",
+    "next": "Go to Dashboard"
   },
   "shared_text": {
     "dashboard": "Dashboard",
@@ -155,20 +303,17 @@
     "delete": "Delete",
     "restore": "Restore",
     "view": "View",
-    "back": "Go back to previous page",
+    "back_page": "Go back to previous page",
     "mobile_back": "Back",
     "category": "Category",
-    "amount": "Balance"
+    "amount": "Balance",
+    "save": "Save",
+    "add": "Add",
+    "edit": "Edit",
+    "back": "Back",
+    "performance": "Performance"
   },
   "wallet": {
-    "active": "Active Wallet",
-    "deleted": "Deleted Wallet",
-    "title": "Wallet",
-    "mobile_back": "Back",
-    "mobile_add": "Add",
-    "back": "Go back to previous page",
-    "add": "Add new Wallet",
-    "open": "Open Wallet",
     "modal": {
       "title": "Add Wallet",
       "cryptoTitle": "Add Crypto Wallet",
@@ -207,134 +352,6 @@
         "cancel": "Cancel"
       },
       "save": "Save"
-    },
-    "nodata": {
-      "header": "Wallet",
-      "body": "Insert new data to get wallet.",
-      "footer": "MoneyStats"
-    },
-    "details": {
-      "title": " Details",
-      "back": "Go back to previous page",
-      "mobile_back": "Back",
-      "mobile_edit": "Edit",
-      "mobile_delete": "Delete",
-      "status": "Status",
-      "allTimeHigh": "All Time High on ",
-      "totalPerformance": "Total Performance",
-      "highPrice": "High Price on ",
-      "lowPrice": "Low Price on ",
-      "type": "Wallet Type",
-      "category": "Category",
-      "dateLastStats": "Date Last Stats",
-      "edit": "Edit Wallet",
-      "delete": "Delete Wallet",
-      "restore": "Restore Wallet",
-      "info": {
-        "title": "Info",
-        "subTitle": "You can add any info you need (ex IBAN for Bank account)",
-        "addNew": "Add New",
-        "edit": "Edit Info",
-        "key": "Info Title",
-        "value": "Info Value",
-        "save": "Save",
-        "editBtn": "Edit"
-      },
-      "modal": {
-        "delete": {
-          "title": "Delete Confirmation",
-          "text": "Are you sure you want to delete the current wallet? It would be logically deleted, always avaiable to restore it."
-        },
-        "permanent": {
-          "title": "Permanent Delete",
-          "text": "Are you sure you want to delete the current wallet? It would be permanent deleted."
-        },
-        "restore": {
-          "title": "Restore Confirmation",
-          "text": "Do you want to restore the current wallet?"
-        },
-        "back": "Back",
-        "confirm": "Confirm",
-        "restoreBtn": "Restore"
-      },
-      "transaction": {
-        "title": "Last Stats",
-        "mobile_back": "Back",
-        "view": "View All",
-        "more": "Load more",
-        "history": {
-          "title": "Transaction History",
-          "mobile_back": "Back",
-          "back": "Go back to previous page"
-        }
-      }
-    }
-  },
-  "settings": {
-    "title": "Settings",
-    "back": "Go back to previous page",
-    "mobile_back": "Back",
-    "theme": {
-      "title": "Theme",
-      "dark": "Dark Mode"
-    },
-    "account": {
-      "title": "Account Settings",
-      "sync": "Sync Account",
-      "descriptionSync": "Sync your profile picture with an existing social account.",
-      "open": "Open",
-      "username": "Change Username",
-      "user_label": "Username",
-      "user_placeholder": "Digit your new username",
-      "email": "Update E-Mail",
-      "email_label": "E-Mail",
-      "email_placeholder": "Digit your new email address",
-      "save": "Save"
-    },
-    "security": {
-      "title": "Security",
-      "password": "Change password",
-      "old_label": "Old Password",
-      "old_placeholder": "Digit your current password",
-      "new_label": "New Password",
-      "new_placeholder": "Digit your new password",
-      "repete_label": "Repete Password",
-      "repete_placeholder": "Digit your new password again",
-      "warning": "The passwords entered do not match. Please make sure to enter the same password in both the 'Password' and 'Confirm Password' fields."
-    },
-    "app": {
-      "title": "App Settings",
-      "wallet": {
-        "title": "Edit Wallet",
-        "open": "Open"
-      },
-      "liveWallet": {
-        "title": "Live Wallet",
-        "description": "Activate Live Wallet on Crypto"
-      },
-      "languages": {
-        "title": "Languages",
-        "open": "Edit",
-        "en": "English",
-        "it": "Italian",
-        "change": "Change Languages"
-      }
-    },
-    "info": {
-      "title": "Info",
-      "logout": "Log Out",
-      "support": "Support",
-      "howItWorks": "How it works",
-      "version": "MoneyStats Version",
-      "version_open": "Open",
-      "service": "MoneyStats Service",
-      "auto_update": "Auto Update"
-    },
-    "develop": "Info Develop & Contact",
-    "admin": {
-      "title": "Admin Features",
-      "cache": "Clean cache",
-      "marketData": "Import Marketdata"
     }
   },
   "stats": {
@@ -420,25 +437,6 @@
       "title": "Info Registration",
       "text": "To register for the MoneyStats application, you require an Invitation Code. If you don't have the code, you can request it from <a href='https://giovannilamarmora.github.io/#contact' target='_blank'>Giovanni</a> in the Contact section. In the meantime, you can explore the application using the following credentials:<br>&bull; Username: moneystats<br>&bull; Password: moneystats <br>This account provides you with a preview of the app's interface. Please note that you won't be able to modify or add new data.",
       "close": "Close"
-    },
-    "socialList": {
-      "title": "Connect Social Account",
-      "close": "Close",
-      "select": "Please Select an account to Sync",
-      "connect": "Connected",
-      "github": "Github"
-    },
-    "socialDetails": {
-      "user": "User ID",
-      "details": "Account Details",
-      "connect": "Connect",
-      "disconnect": "Disconnect",
-      "githubId": "Github ID",
-      "created": "Created On",
-      "updated": "Updated On",
-      "followers": "Followers",
-      "following": "Following",
-      "url": "URL"
     },
     "category": {
       "title": "Category Available",

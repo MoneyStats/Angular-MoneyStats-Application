@@ -27,24 +27,26 @@
             class="text-center p-2"
           >
             <h3 *ngIf="!wallet?.deletedDate">
-              {{ "wallet.details.modal.delete.title" | translate }}
+              {{ "wallets_details_page.modal.delete_title" | translate }}
             </h3>
             <h3 *ngIf="wallet?.deletedDate">
-              {{ "wallet.details.modal.permanent.title" | translate }}
+              {{ "wallets_details_page.modal.permanent_title" | translate }}
             </h3>
             <p *ngIf="!wallet?.deletedDate">
-              {{ "wallet.details.modal.delete.text" | translate }}
+              {{ "wallets_details_page.modal.delete_text" | translate }}
             </p>
             <p *ngIf="wallet?.deletedDate">
-              {{ "wallet.details.modal.permanent.text" | translate }}
+              {{ "wallets_details_page.modal.permanent_text" | translate }}
             </p>
           </div>
           <div
             *ngIf="modalId === modalConstant.RESTOREWALLET"
             class="text-center p-2"
           >
-            <h3>{{ "wallet.details.modal.restore.title" | translate }}</h3>
-            <p>{{ "wallet.details.modal.restore.text" | translate }}</p>
+            <h3>
+              {{ "wallets_details_page.modal.restore_title" | translate }}
+            </h3>
+            <p>{{ "wallets_details_page.modal.restore_text" | translate }}</p>
           </div>
           <div class="row">
             <div class="col-6">
@@ -52,7 +54,7 @@
                 href="#"
                 class="btn btn-primary btn-lg btn-block"
                 data-bs-dismiss="modal"
-                >{{ "wallet.details.modal.back" | translate }}</a
+                >{{ "shared_text.back" | translate }}</a
               >
             </div>
             <div *ngIf="modalId != modalConstant.RESTOREWALLET" class="col-6">
@@ -61,7 +63,7 @@
                 href="#"
                 class="btn btn-danger btn-lg btn-block"
                 data-bs-dismiss="modal"
-                >{{ "wallet.details.modal.confirm" | translate }}</a
+                >{{ "wallets_details_page.modal.confirm" | translate }}</a
               >
             </div>
             <div *ngIf="modalId === modalConstant.RESTOREWALLET" class="col-6">
@@ -70,7 +72,7 @@
                 href="#"
                 class="btn btn-primary btn-lg btn-block"
                 data-bs-dismiss="modal"
-                >{{ "wallet.details.modal.restoreBtn" | translate }}</a
+                >{{ "shared_text.restore" | translate }}</a
               >
             </div>
           </div>

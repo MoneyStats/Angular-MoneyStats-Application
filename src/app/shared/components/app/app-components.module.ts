@@ -20,8 +20,6 @@ import { LanguagesComponent } from './modal/languages/languages.component';
 import { OpenBugComponent } from './modal/open-bug/open-bug.component';
 import { ProfileSettingsComponent } from './modal/profile-settings/profile-settings.component';
 import { ReportBugComponent } from './modal/report-bug/report-bug.component';
-import { SocialListComponent } from './modal/social/social-list/social-list.component';
-import { SocialDetailsComponent } from './modal/social/social-details/social-details.component';
 import { UpdateComponent } from './modal/update/update.component';
 import { VersionComponent } from './modal/version-and-change/version/version.component';
 import { ChangelogComponent } from './modal/version-and-change/changelog/changelog.component';
@@ -42,8 +40,6 @@ import { WalletHistoryCardComponent } from './wallet/wallet-history/wallet-histo
     OpenBugComponent,
     ProfileSettingsComponent,
     ReportBugComponent,
-    SocialListComponent,
-    SocialDetailsComponent,
     UpdateComponent,
     VersionComponent,
     ChangelogComponent,
@@ -63,8 +59,6 @@ import { WalletHistoryCardComponent } from './wallet/wallet-history/wallet-histo
     OpenBugComponent,
     ProfileSettingsComponent,
     ReportBugComponent,
-    SocialListComponent,
-    SocialDetailsComponent,
     UpdateComponent,
     VersionComponent,
     ChangelogComponent,

@@ -142,7 +142,155 @@
       "status": "Stato",
       "success": "Completato",
       "date": "Data"
+    },
+    "history_title": "Storico Transazioni"
+  },
+  "wallets_page": {
+    "title": "Gestione Portafogli",
+    "mobile_add": "Nuovo",
+    "add": "Crea un Nuovo Portafoglio",
+    "open": "Visualizza Portafoglio",
+    "active": "Portafogli Attivi",
+    "deleted": "Portafogli Eliminati",
+    "empty_body_text": "Non hai ancora creato alcun portafoglio. Aggiungi un nuovo portafoglio per iniziare."
+  },
+  "wallets_details_page": {
+    "title": " Dettagli",
+    "mobile_edit": "Modifica",
+    "mobile_delete": "Elimina",
+    "status": "Stato",
+    "all_time_high": "Massimo storico raggiunto il ",
+    "total_performance": "Performance complessive",
+    "high_price": "Massimo annuale registrato il ",
+    "low_price": "Minimo annuale registrato il ",
+    "category": "Categoria",
+    "type": "Tipo di Portafoglio",
+    "date_last_stats": "Ultimo aggiornamento Stats",
+    "edit": "Modifica Portafoglio",
+    "delete": "Elimina Portafoglio",
+    "restore": "Ripristina Portafoglio",
+    "info": {
+      "title": "Informazioni",
+      "sub_title": "Puoi aggiungere qualsiasi informazione utile, ad esempio l'IBAN per un conto bancario.",
+      "key": "Titolo",
+      "value": "Valore"
+    },
+    "modal": {
+      "delete_title": "Conferma Eliminazione",
+      "delete_text": "Sei sicuro di voler eliminare il portafoglio? Sarà disattivato ma potrà essere ripristinato in qualsiasi momento.",
+      "permanent_title": "Eliminazione Permanente",
+      "permanent_text": "Sei certo di voler eliminare definitivamente il portafoglio? Questa azione non può essere annullata.",
+      "restore_title": "Ripristina Portafoglio",
+      "restore_text": "Vuoi ripristinare il portafoglio?",
+      "confirm": "Conferma"
+    },
+    "transaction": {
+      "title": "Ultimo Stats",
+      "more": "Mostra tutto"
     }
+  },
+  "support_page": {
+    "title": "Contatta il Supporto",
+    "sub_title": "Siamo qui per aiutarti. Scrivici un'email per ricevere supporto.",
+    "form_title": "Mettiti in Contatto",
+    "form_sub_title": "Compila il modulo qui sotto per inviarci un messaggio.",
+    "name": "Il tuo Nome",
+    "name_place": "Inserisci il tuo nome completo",
+    "email": "Email",
+    "email_place": "Inserisci il tuo indirizzo email",
+    "message": "Messaggio",
+    "message_place": "Scrivi qui il tuo messaggio",
+    "send": "Invia Messaggio"
+  },
+  "add_stats_page": {
+    "title": "Gestione Saldo",
+    "data_present": "Seleziona una data differente",
+    "balance": "Saldo attuale: ",
+    "new_bal": "Inserisci il nuovo saldo",
+    "card_title": "Aggiungi Nuovo Stats",
+    "card_subtitle": "Richiede che tutti i portafogli abbiano date uniche rispetto agli Stats precedenti.",
+    "continue": "Prosegui",
+    "logo": "Logo",
+    "wallet_name": "Nome Portafoglio",
+    "new_stats": "Nuovo Stats",
+    "current_balance": "Saldo Attuale",
+    "date_last_stats": "Ultimo Aggiornamento Stats"
+  },
+  "resume_page": {
+    "title": "Storico",
+    "sub_title": "Transazioni e performance in dettaglio",
+    "total": "Saldo complessivo",
+    "since": "Dal",
+    "tab_stats": "Storico Stats",
+    "tab_category": "Storico per Categoria",
+    "tab_history": "Storico Completo",
+    "empty_body_text": "Aggiungi dei dati per visualizzare lo storico.",
+    "wallet": "Portafoglio Attuale",
+    "graph1": "Performance dei Portafogli",
+    "graph2": "Distribuzione dei Portafogli",
+    "graph3": "Trend delle Performance",
+    "table": "Elenco degli Stats annuali",
+    "table_date": "Data",
+    "table_trend": "Andamento",
+    "investments": "Investimenti",
+    "capital": "Capitale",
+    "others": "Altro",
+    "debits": "Debiti",
+    "saving": "Risparmi",
+    "deleted": "Cancellato",
+    "graph_history": "Grafico delle Performance Storiche"
+  },
+  "settings_page": {
+    "title": "Impostazioni",
+    "theme_title": "Tema",
+    "theme_dark": "Modalità Scura",
+    "account_title": "Impostazioni Account",
+    "account_username": "Modifica Username",
+    "account_user_label": "Username",
+    "account_user_placeholder": "Inserisci il tuo username",
+    "account_email": "Aggiorna Email",
+    "account_email_label": "Email",
+    "account_email_placeholder": "Inserisci il tuo indirizzo email",
+    "wallet_edit": "Modifica Portafoglio",
+    "live_wallet_title": "Portafoglio Live",
+    "live_wallet_description": "Abilita il Portafoglio Live con Crypto",
+    "languages_title": "Lingue",
+    "languages_en": "Inglese",
+    "languages_it": "Italiano",
+    "languages_change": "Cambia Lingua",
+    "security_title": "Sicurezza",
+    "security_password": "Modifica Password",
+    "security_old_label": "Vecchia Password",
+    "security_old_placeholder": "Inserisci la tua password attuale",
+    "security_new_label": "Nuova Password",
+    "security_new_placeholder": "Inserisci la tua nuova password",
+    "security_repete_label": "Conferma la Nuova Password",
+    "security_repete_placeholder": "Reinserisci la tua nuova password",
+    "security_warning": "Le password inserite non corrispondono. Assicurati che i campi 'Password' e 'Conferma password' siano identici.",
+    "info_title": "Info",
+    "info_support": "Supporto",
+    "info_howItWorks": "Come Funziona",
+    "info_version": "Versione di MoneyStats",
+    "info_version_open": "Apri",
+    "info_service": "Servizio MoneyStats",
+    "develop": "Info Sviluppo & Contatti",
+    "admin_title": "Funzionalità Admin",
+    "admin_cache": "Pulisci Cache",
+    "admin_marketData": "Importa Dati di Mercato"
+  },
+  "requirements_page": {
+    "header_title": "Verifica Crypto",
+    "title": "Crypto: Sei quasi pronto!",
+    "sub_title": "Per accedere alla nuova funzionalità Crypto di MoneyStats, dobbiamo assicurarci che tu soddisfi alcuni requisiti. Se non li rispetti, non potrai accedere alla dashboard.",
+    "req1_title": "Crea un Wallet",
+    "req1_subTitle": "Devi aver creato un wallet.",
+    "req2_title": "Crea un Crypto Wallet",
+    "req2_subTitle": "Devi aver creato un wallet crypto.",
+    "req3_title": "Aggiungi un Asset",
+    "req3_subTitle": "Devi avere almeno un Crypto Asset (es. BTC, ETH).",
+    "req4_title": "Seleziona una Crypto Currency",
+    "req4_subTitle": "Scegli una valuta crypto, come USD, EUR, GBP, ecc.",
+    "next": "Accedi alla Dashboard"
   },
   "shared_text": {
     "dashboard": "Dashboard",
@@ -155,20 +303,18 @@
     "delete": "Cancella",
     "restore": "Ripristina",
     "view": "Visualizza",
-    "back": "Torna alla pagina precedente",
+    "back_page": "Torna alla pagina precedente",
     "mobile_back": "Indietro",
     "category": "Categoria",
-    "amount": "Saldo"
+    "amount": "Saldo",
+    "save": "Salva",
+    "add": "Aggiungi",
+    "edit": "Modifica",
+    "back": "Indietro",
+    "performance": "Performance",
+    "open": "Apri"
   },
   "wallet": {
-    "active": "Portafogli Attivi",
-    "deleted": "Portafogli Cancellati",
-    "title": "Portafoglio",
-    "mobile_back": "Indietro",
-    "mobile_add": "Aggiungi",
-    "back": "Torna alla pagina precedente",
-    "add": "Aggiungi nuovo Portafoglio",
-    "open": "Apri Portafoglio",
     "modal": {
       "title": "Aggiungi Portafoglio",
       "cryptoTitle": "Aggiungi Portafoglio Crypto",
@@ -207,199 +353,7 @@
         "cancel": "Cancella"
       },
       "save": "Salva"
-    },
-    "nodata": {
-      "header": "Portafoglio",
-      "body": "Inserisci dei dati per avere i portafogli.",
-      "footer": "MoneyStats"
-    },
-    "details": {
-      "title": " Dettagli",
-      "back": "Torna alla pagina precedente",
-      "mobile_back": "Indietro",
-      "mobile_edit": "Modifica",
-      "mobile_delete": "Cancella",
-      "status": "Stato",
-      "allTimeHigh": "Massimo Storico il ",
-      "totalPerformance": "Performance Totali",
-      "highPrice": "Massimo annuale il ",
-      "lowPrice": "Minimo annuale il ",
-      "category": "Categoria",
-      "type": "Tipo di wallet",
-      "dateLastStats": "Data Ultimo Stats",
-      "edit": "Modifica Portafoglio",
-      "delete": "Cancella Portafoglio",
-      "restore": "Ripristina Portafoglio",
-      "info": {
-        "title": "Info",
-        "subTitle": "Puoi aggiungere ogni info di cui hai bisogno (es IBAN per una Banca)",
-        "addNew": "Aggiungi",
-        "edit": "Modifica",
-        "key": "Titolo Info",
-        "value": "Valore Info",
-        "save": "Salva",
-        "editBtn": "Modifica"
-      },
-      "modal": {
-        "delete": {
-          "title": "Conferma Cancellazione",
-          "text": "Sei sicuro di voler cancellare il portafoglio? Verrà cancellato logicamente, sempre disponibile per essere ripristinato."
-        },
-        "permanent": {
-          "title": "Cancellazione Permanente",
-          "text": "Sicuro di voler cancellare il portafoglio? Questa azione è irreversibile."
-        },
-        "restore": {
-          "title": "Ripristina",
-          "text": "Vuoi ripritinare il wallet?"
-        },
-        "back": "Indietro",
-        "confirm": "Conferma",
-        "restoreBtn": "Ripristina"
-      },
-      "transaction": {
-        "title": "Ultimo Stats",
-        "mobile_back": "Indietro",
-        "view": "Vedi",
-        "more": "Vedi Tutto",
-        "history": {
-          "title": "Storico Transazioni",
-          "mobile_back": "Indietro",
-          "back": "Torna alla pagina precedente"
-        }
-      }
     }
-  },
-  "settings": {
-    "title": "Impostazioni",
-    "back": "Torna alla pagina precedente",
-    "mobile_back": "Indietro",
-    "theme": {
-      "title": "Tema",
-      "dark": "Dark Mode"
-    },
-    "account": {
-      "title": "Impostazioni Account",
-      "sync": "Sincronizza Account",
-      "descriptionSync": "Sincronizza il tuo profilo con un Account Social",
-      "open": "Apri",
-      "username": "Cambia Username",
-      "user_label": "Username",
-      "user_placeholder": "Digita username",
-      "email": "Aggiorna E-Mail",
-      "email_label": "E-Mail",
-      "email_placeholder": "Digita email address",
-      "save": "Salva"
-    },
-    "security": {
-      "title": "Sicurezza",
-      "password": "Cambia Password",
-      "old_label": "Vecchia Password",
-      "old_placeholder": "Digita la tua password corrente",
-      "new_label": "Nuova Password",
-      "new_placeholder": "Digita la tua nuova password",
-      "repete_label": "Ripeti Password",
-      "repete_placeholder": "Digita la tua nuova password di nuovo",
-      "warning": "Le password inserite non corrispondono. Per favore, assicurati di inserire la stessa password nei campi 'Password' e 'Conferma password'."
-    },
-    "app": {
-      "title": "Impostazioni",
-      "wallet": {
-        "title": "Modifica Portafoglio",
-        "open": "Apri"
-      },
-      "liveWallet": {
-        "title": "Live Wallet",
-        "description": "Attiva Live Wallet con Crypto"
-      },
-      "languages": {
-        "title": "Lingue",
-        "open": "Modifica",
-        "en": "Inglese",
-        "it": "Italiano",
-        "change": "Cambia lingua"
-      }
-    },
-    "info": {
-      "title": "Info",
-      "logout": "Log Out",
-      "support": "Supporto",
-      "howItWorks": "Come funziona?",
-      "version": "Versione MoneyStats",
-      "version_open": "Apri",
-      "service": "MoneyStats Service",
-      "auto_update": "Aggiornamento Automatico"
-    },
-    "develop": "Info Sviluppi & Contatti",
-    "admin": {
-      "title": "Admin Features",
-      "cache": "Pulizia cache",
-      "marketData": "Importa Marketdata"
-    }
-  },
-  "stats": {
-    "title": "Storico",
-    "subTitle": "Dettagli delle transazioni e performance",
-    "back": "Torna alla pagina precedente",
-    "mobile_back": "Indietro",
-    "total": "Saldo Totale",
-    "since": "Da",
-    "performance": "Performance",
-    "tab_stats": "Storico Stats",
-    "tab_category": "Storico per Categoria",
-    "tab_history": "Storico",
-    "nodata": {
-      "header": "Storico",
-      "body": "Inserisci dei dati per avere lo storico.",
-      "footer": "MoneyStats"
-    },
-    "data": {
-      "wallet": "Portafoglio Corrente",
-      "graph1": "Performance portafogli",
-      "graph2": "Proporsioni portafogli",
-      "graph3": "Performance dei portafogli",
-      "table": "Lista degli Stats dell'anno",
-      "table_date": "Data",
-      "table_balance": "Saldo",
-      "table_trend": "Trend",
-      "table_performance": "Performance",
-      "table_value": "Saldo del Trend",
-      "investments": "Investimenti",
-      "capital": "Capitali",
-      "others": "Altro",
-      "debits": "Debiti",
-      "saving": "Risparmi",
-      "history": "Storico",
-      "deleted": "Cancellato",
-      "graphHistory": "Grafico delle performance"
-    }
-  },
-  "insertStats": {
-    "title": "Pagamenti",
-    "back": "Torna alla pagina precedente",
-    "mobile_back": "Indietro",
-    "dataPresent": "Seleziona una data diversa",
-    "balance": " saldo: ",
-    "newBal": "Inserisci nuovo Saldo",
-    "card_title": "Aggiungi Stats",
-    "card_subtitle": "Richiede tutti i wallet compilati con date diverse da Stats precedentemente inseriti.",
-    "continue": "Continua",
-    "save": "Salva"
-  },
-  "support": {
-    "title": "Contatta Supporto",
-    "mobile_back": "Indietro",
-    "back": "Torna alla pagina precedente",
-    "subtitle": "Contattaci inviandoci un'email",
-    "formTitle": "Contattaci",
-    "formSubTitle": "Completa il form per contattarci",
-    "name": "Il tuo Nome",
-    "namePlace": "Inserisci il tuo nome",
-    "email": "Email",
-    "emailPlace": "Inserisci la tua email",
-    "message": "Messaggio",
-    "messagePlace": "Inserisci il tuo messaggio",
-    "send": "Invia"
   },
   "modal": {
     "backup": {
@@ -420,25 +374,6 @@
       "title": "Info Registrazione",
       "text": "Per registrarti all'applicazione MoneyStats, hai bisogno di un Codice di Invito. Se non possiedi il codice, puoi richiederlo a <a href='https://giovannilamarmora.github.io/#contact' target='_blank'>Giovanni</a> nella sezione Contatti. Nel frattempo, puoi esplorare l'applicazione utilizzando le seguenti credenziali:<br>• Nome utente: moneystats<br>• Password: moneystats<br>Questo account ti fornisce un'anteprima dell'interfaccia dell'applicazione. Si prega di notare che non sarai in grado di modificare o aggiungere nuovi dati.",
       "close": "Chiudi"
-    },
-    "socialList": {
-      "title": "Connetti Account Social",
-      "close": "Chiudi",
-      "select": "Seleziona un Account da sincronizzare",
-      "connect": "Connesso",
-      "github": "Github"
-    },
-    "socialDetails": {
-      "user": "User ID",
-      "details": "Dettagli Account",
-      "connect": "Connetti",
-      "disconnect": "Disconnetti",
-      "githubId": "Github ID",
-      "created": "Creato il",
-      "updated": "Aggiornato il",
-      "followers": "Seguaci",
-      "following": "Seguiti",
-      "url": "URL"
     },
     "category": {
       "title": "Categorie disponibili",
@@ -535,28 +470,6 @@
       "tab2": "Storico Crypto",
       "tab3": "Portafogli",
       "tab4": "Market Data"
-    },
-    "requirements": {
-      "headerTitle": "Verifica Crypto",
-      "title": "Crypto: Ci sei quasi",
-      "subTitle": "Prima di accedere alla dashboard crypto, la nuova funzionalità di MoneyStats, abbiamo bisogno di verificare che tu rispecchi alcuni requisiti, altrimenti non ti sarà possibile accedere.",
-      "req1": {
-        "title": "Avere un Wallet",
-        "subTitle": "Avere creato un wallet"
-      },
-      "req2": {
-        "title": "Avere un Crypto Wallet",
-        "subTitle": "Avere creato un crypto wallet"
-      },
-      "req3": {
-        "title": "Avere un Asset",
-        "subTitle": "Avere un Crypto Asset tipo BTC, ETH"
-      },
-      "req4": {
-        "title": "Avere una Crypto Currency",
-        "subTitle": "Seleziona una Crypto Currency tipo USD, EUR, GBP..."
-      },
-      "next": "Vai alla Dashboard"
     },
     "dashboard": {
       "title": "Crypto Dashboard",

@@ -29,49 +29,6 @@
                 }}</small>
               </p>
             </div>
-            <!--<div
-              *ngIf="isAddStatsSelected && !isResumeAddAssets"
-              class="card-title"
-            >
-              <div class="row">
-                <div class="col-md-6">
-                  <h2 class="modal-title d-inline" style="vertical-align: -4px">
-                    {{
-                      "crypto.cryptoModal.operations.stats.title" | translate
-                    }}
-                  </h2>
-                  <p>
-                    <small>{{
-                      "crypto.cryptoModal.operations.stats.subTitle" | translate
-                    }}</small>
-                  </p>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group boxed float-end ms-1 me-1 date-form">
-                    <div class="input-wrapper">
-                      <input
-                        name="date"
-                        [(ngModel)]="dateStats"
-                        #date1="ngModel"
-                        type="date"
-                        class="form-control"
-                        id="text4b"
-                        required
-                        (change)="dateSelect()"
-                        [disabled]="currentIndex > 0"
-                      />
-                      <div
-                        *ngIf="dateValidation"
-                        class="alert alert-danger mb-1"
-                        role="alert"
-                      >
-                        {{ "insertStats.dataPresent" | translate }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>-->
             <div *ngIf="isOperationSelected" class="card-title">
               <div class="row">
                 <div class="col-md-12">
@@ -96,19 +53,6 @@
                 </div>
               </div>
             </div>
-            <!--<div *ngIf="isResumeAddAssets" class="card-title">
-              <h2 class="modal-title d-inline" style="vertical-align: -4px">
-                {{
-                  "crypto.cryptoModal.operations.stats.resumeTitle" | translate
-                }}
-              </h2>
-              <p>
-                <small>{{
-                  "crypto.cryptoModal.operations.stats.resumeSubTitle"
-                    | translate
-                }}</small>
-              </p>
-            </div>-->
             <!-- Bottoni Desktop -->
             <div
               *ngIf="!isAddStatsSelected && !isOperationSelected"

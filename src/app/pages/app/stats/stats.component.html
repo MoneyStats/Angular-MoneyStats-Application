@@ -1,8 +1,7 @@
 <section class="section-width mx-auto">
   <app-header-mobile
     *ngIf="isMobile()"
-    title="{{ 'stats.title' | translate }}"
-    backBtn="{{ 'stats.mobile_back' | translate }}"
+    title="{{ 'resume_page.title' | translate }}"
   >
   </app-header-mobile>
 
@@ -17,7 +16,7 @@
           href="#tab_stats"
           role="tab"
         >
-          {{ "stats.tab_stats" | translate }}
+          {{ "resume_page.tab_stats" | translate }}
         </a>
       </li>
       <li class="nav-item">
@@ -28,7 +27,7 @@
           href="#tab_category"
           role="tab"
         >
-          {{ "stats.tab_category" | translate }}
+          {{ "resume_page.tab_category" | translate }}
         </a>
       </li>
       <li class="nav-item">
@@ -39,7 +38,7 @@
           role="tab"
           (click)="getHistoryData()"
         >
-          {{ "stats.tab_history" | translate }}
+          {{ "resume_page.tab_history" | translate }}
         </a>
       </li>
     </ul>
@@ -51,15 +50,14 @@
     <div class="row">
       <app-title-desktop
         class="col-md-6"
-        [title]="'stats.title' | translate"
-        [back]="'stats.back' | translate"
+        [title]="'resume_page.title' | translate"
       ></app-title-desktop>
       <div class="hidden_desktop mt-4 ms-2">
         <p class="text-start fs-2 title-page">
-          {{ "stats.title" | translate }}
+          {{ "resume_page.title" | translate }}
         </p>
         <p class="card-subtitle text-start fs-6">
-          <small>{{ "stats.subTitle" | translate }}</small>
+          <small>{{ "resume_page.subTitle" | translate }}</small>
         </p>
       </div>
       <div class="addWallet col-md-6">
@@ -85,9 +83,8 @@
 
     <app-content-box
       *ngIf="!wallets || !wallets.length"
-      [header]="'stats.nodata.header' | translate"
-      [body]="'stats.nodata.body' | translate"
-      [footer]="'stats.nodata.footer' | translate"
+      [header]="'resume_page.title' | translate"
+      [body]="'resume_page.empty_body_text' | translate"
     ></app-content-box>
 
     <div *ngIf="resumeData.statsWalletDays" class="transactions row">
@@ -103,9 +100,9 @@
               </div>
             </div>
             <div>
-              <strong>{{ "stats.total" | translate }}</strong>
+              <strong>{{ "resume_page.total" | translate }}</strong>
               <p class="sincetot">
-                {{ "stats.since" | translate }}
+                {{ "resume_page.since" | translate }}
                 {{ resumeData.performanceLastDate | date : "dd MMM y" }}
               </p>
             </div>
@@ -150,9 +147,9 @@
               </div>
             </div>
             <div>
-              <strong>{{ "stats.performance" | translate }}</strong>
+              <strong>{{ "shared_text.performance" | translate }}</strong>
               <p class="sincetot">
-                {{ "stats.since" | translate }}
+                {{ "resume_page.since" | translate }}
                 {{ resumeData.performanceSince | date : "dd MMM y" }}
               </p>
             </div>

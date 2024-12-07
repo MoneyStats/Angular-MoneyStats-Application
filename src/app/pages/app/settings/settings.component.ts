@@ -89,10 +89,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
     return ScreenService.isMobileDevice();
   }
 
-  disconnect(user: User) {
-    this.user = user;
-  }
-
   openAccountSettings(profileConst: string) {
     this.profileConst = profileConst;
   }

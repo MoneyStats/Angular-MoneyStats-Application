@@ -21,31 +21,6 @@ export class UserService {
     private authService: AuthService
   ) {}
 
-  syncGithubUser(user: string) {
-    this.swalService.syncGithubUser(user);
-    this.updateGithubData();
-  }
-
-  updateGithubUser() {
-    this.user.settings.github = this.swalService.githubAccount;
-  }
-
-  updateGithubData() {
-    this.updateGithubUser();
-    if (this.user.settings.github === undefined) {
-      setTimeout(() => {
-        this.updateGithubData();
-      }, 100 * 10);
-    } else {
-      this.user!.profilePhoto = this.user.settings.github.avatar_url!;
-      this.user.settings.githubUser = JSON.stringify(this.user.settings.github);
-      this.authService.updateUserData(this.user).subscribe((res) => {
-        this.user = res.data;
-        this.user.settings.github = JSON.parse(this.user.settings.githubUser!);
-      });
-    }
-  }
-
   public setUserGlobally(user: User): void {
     if (user.authToken) {
       localStorage.setItem(

@@ -1,16 +1,14 @@
 <section class="section-width mx-auto">
   <app-header-mobile
     *ngIf="isMobile()"
-    [title]="'wallet.details.transaction.history.title' | translate"
-    [backBtn]="'wallet.details.transaction.history.mobile_back' | translate"
+    [title]="'transactions_page.history_title' | translate"
   >
   </app-header-mobile>
 
   <!-- App Capsule -->
   <div id="appCapsule">
     <app-title-desktop
-      [title]="'wallet.details.transaction.history.title' | translate"
-      [back]="'wallet.details.transaction.history.back' | translate"
+      [title]="'transactions_page.history_title' | translate"
     ></app-title-desktop>
 
     <!-- History -->
@@ -28,7 +26,7 @@
       *ngFor="let year of uniqueYears?.slice()?.reverse()"
     >
       <div class="section-title">
-        {{ "wallet.details.transaction.history.title" | translate }} {{ year }}
+        {{ "transactions_page.history_title" | translate }} {{ year }}
       </div>
       <div class="card">
         <div

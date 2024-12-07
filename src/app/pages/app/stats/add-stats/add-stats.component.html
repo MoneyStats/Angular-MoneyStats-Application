@@ -1,8 +1,7 @@
 <section class="section-width mx-auto">
   <app-header-mobile
     *ngIf="isMobile()"
-    title="{{ 'insertStats.title' | translate }}"
-    backBtn="{{ 'insertStats.mobile_back' | translate }}"
+    title="{{ 'add_stats_page.title' | translate }}"
   >
   </app-header-mobile>
   <div id="appCapsule">
@@ -10,8 +9,7 @@
       <div class="row">
         <app-title-desktop
           class="col-md-6"
-          [title]="'insertStats.title' | translate"
-          [back]="'insertStats.back' | translate"
+          [title]="'add_stats_page.title' | translate"
         ></app-title-desktop>
 
         <div class="editWallet col-md-6">
@@ -23,7 +21,7 @@
             [disabled]="f.invalid || validate()"
             (click)="confirm()"
           >
-            {{ "insertStats.continue" | translate }}
+            {{ "add_stats_page.continue" | translate }}
           </button>
           <button
             style="width: 150px"
@@ -33,7 +31,7 @@
             [disabled]="f.invalid"
             (click)="save()"
           >
-            {{ "insertStats.save" | translate }}
+            {{ "add_stats_page.save" | translate }}
           </button>
           <div
             class="form-group boxed float-end ms-1 me-1"
@@ -55,7 +53,7 @@
                 class="alert alert-danger mb-1"
                 role="alert"
               >
-                {{ "insertStats.dataPresent" | translate }}
+                {{ "add_stats_page.data_present" | translate }}
               </div>
             </div>
           </div>
@@ -64,10 +62,10 @@
       <div class="section mt-2 mx-auto">
         <div class="hidden_desktop mt-4">
           <p class="text-start fs-2 title-page">
-            {{ "insertStats.card_title" | translate }}
+            {{ "add_stats_page.card_title" | translate }}
           </p>
           <p class="card-subtitle text-start mb-1 fs-6">
-            <small>{{ "insertStats.card_subtitle" | translate }}</small>
+            <small>{{ "add_stats_page.card_subtitle" | translate }}</small>
           </p>
         </div>
         <div class="card mb-2">
@@ -75,24 +73,30 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Logo</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">New Stats</th>
-                  <th scope="col" class="text-end hidden_mobile">
-                    Current Balance
+                  <th scope="col">
+                    {{ "add_stats_page.logo" | translate }}
+                  </th>
+                  <th scope="col">
+                    {{ "add_stats_page.wallet_name" | translate }}
+                  </th>
+                  <th scope="col">
+                    {{ "add_stats_page.new_stats" | translate }}
                   </th>
                   <th scope="col" class="text-end hidden_mobile">
-                    Performance
+                    {{ "add_stats_page.current_balance" | translate }}
                   </th>
                   <th scope="col" class="text-end hidden_mobile">
-                    Date last Stats
+                    {{ "shared_text.performance" | translate }}
+                  </th>
+                  <th scope="col" class="text-end hidden_mobile">
+                    {{ "add_stats_page.date_last_stats" | translate }}
                   </th>
                   <th
                     *ngIf="!saveValidation"
                     scope="col"
                     class="text-end hidden_mobile"
                   >
-                    New Performance
+                    {{ "shared_text.performance" | translate }}
                   </th>
                 </tr>
               </thead>
@@ -118,7 +122,9 @@
                           min="0"
                           class="form-control"
                           id="newStatsBalance"
-                          placeholder="{{ 'insertStats.newBal' | translate }}"
+                          placeholder="{{
+                            'add_stats_page.new_bal' | translate
+                          }}"
                           required
                         />
                       </div>
@@ -205,10 +211,10 @@
           <div class="card-body">
             <div class="hidden_mobile m-3">
               <p class="text-center fs-1">
-                {{ "insertStats.card_title" | translate }}
+                {{ "add_stats_page.card_title" | translate }}
               </p>
               <p class="card-subtitle text-center mb-1">
-                {{ "insertStats.card_subtitle" | translate }}
+                {{ "add_stats_page.card_subtitle" | translate }}
               </p>
             </div>
             <div class="transactions row m-4">
@@ -234,7 +240,7 @@
                               class="form-control"
                               id="text4b"
                               placeholder="{{
-                                'insertStats.newBal' | translate
+                                'add_stats_page.new_bal' | translate
                               }}"
                               required
                             />
@@ -249,7 +255,7 @@
                           </div>
                           <div class="input-info">
                             {{ wallet.name }}
-                            {{ "insertStats.balance" | translate }}
+                            {{ "add_stats_page.balance" | translate }}
                             {{ wallet.balance }}
                             {{ coinSymbol }}
                           </div>
@@ -333,7 +339,7 @@
               class="alert alert-danger mb-1"
               role="alert"
             >
-              {{ "insertStats.dataPresent" | translate }}
+              {{ "add_stats_page.data_present" | translate }}
             </div>
           </div>
         </div>
@@ -346,7 +352,7 @@
               *ngIf="!saveValidation && walletsToSave && walletsToSave.length"
               (click)="confirm()"
             >
-              {{ "insertStats.continue" | translate }}
+              {{ "add_stats_page.continue" | translate }}
             </button>
           </div>
           <div class="form-group basic">
@@ -357,7 +363,7 @@
               [disabled]="f.invalid"
               (click)="save()"
             >
-              {{ "insertStats.save" | translate }}
+              {{ "add_stats_page.save" | translate }}
             </button>
           </div>
         </div>

@@ -13,16 +13,16 @@
           *ngIf="profileConst === profileConstant.USERNAME"
           class="modal-title"
         >
-          {{ "settings.account.username" | translate }}
+          {{ "settings_page.account_username" | translate }}
         </h5>
         <h5 *ngIf="profileConst === profileConstant.EMAIL" class="modal-title">
-          {{ "settings.account.email" | translate }}
+          {{ "settings_page.account_email" | translate }}
         </h5>
         <h5
           *ngIf="profileConst === profileConstant.PASSWORD"
           class="modal-title"
         >
-          {{ "settings.security.password" | translate }}
+          {{ "settings_page.security_password" | translate }}
         </h5>
       </div>
       <div class="modal-body">
@@ -34,7 +34,7 @@
             >
               <div class="input-wrapper">
                 <label class="label" for="username">{{
-                  "settings.account.user_label" | translate
+                  "settings_page.account_user_label" | translate
                 }}</label>
                 <input
                   name="username1"
@@ -47,7 +47,7 @@
                   class="form-control"
                   id="username"
                   placeholder="{{
-                    'settings.account.user_placeholder' | translate
+                    'settings_page.account_user_placeholder' | translate
                   }}"
                 />
                 <i class="clear-input">
@@ -62,7 +62,7 @@
             >
               <div class="input-wrapper">
                 <label class="label" for="email">{{
-                  "settings.account.email_label" | translate
+                  "settings_page.account_email_label" | translate
                 }}</label>
                 <input
                   name="email1"
@@ -75,7 +75,7 @@
                   class="form-control"
                   id="email"
                   placeholder="{{
-                    'settings.account.email_placeholder' | translate
+                    'settings_page.account_email_placeholder' | translate
                   }}"
                 />
                 <i class="clear-input">
@@ -90,7 +90,7 @@
             >
               <div class="input-wrapper">
                 <label class="label" for="oldPassword">{{
-                  "settings.security.old_label" | translate
+                  "settings_page.security_old_label" | translate
                 }}</label>
                 <input
                   name="oldPassword1"
@@ -103,7 +103,7 @@
                   class="form-control"
                   id="oldPassword"
                   placeholder="{{
-                    'settings.security.old_placeholder' | translate
+                    'settings_page.security_old_placeholder' | translate
                   }}"
                 />
                 <i class="clear-input">
@@ -118,7 +118,7 @@
             >
               <div class="input-wrapper">
                 <label class="label" for="newPassword">{{
-                  "settings.security.new_label" | translate
+                  "settings_page.security_new_label" | translate
                 }}</label>
                 <input
                   name="newPassword1"
@@ -131,7 +131,7 @@
                   class="form-control"
                   id="newPassword"
                   placeholder="{{
-                    'settings.security.new_placeholder' | translate
+                    'settings_page.security_new_placeholder' | translate
                   }}"
                 />
                 <i class="clear-input">
@@ -139,7 +139,7 @@
                 </i>
               </div>
               <div *ngIf="warning" class="alert alert-danger mb-1" role="alert">
-                {{ "settings.security.warning" | translate }}
+                {{ "settings_page.security_warning" | translate }}
               </div>
             </div>
 
@@ -149,7 +149,7 @@
             >
               <div class="input-wrapper">
                 <label class="label" for="repetePassword">{{
-                  "settings.security.repete_label" | translate
+                  "settings_page.security_repete_label" | translate
                 }}</label>
                 <input
                   name="repetePassword1"
@@ -162,7 +162,7 @@
                   class="form-control"
                   id="repetePassword"
                   placeholder="{{
-                    'settings.security.repete_placeholder' | translate
+                    'settings_page.security_repete_placeholder' | translate
                   }}"
                 />
                 <i class="clear-input">
@@ -178,7 +178,7 @@
                 type="button"
                 class="btn btn-primary btn-block btn-lg"
               >
-                {{ "settings.account.save" | translate }}
+                {{ "shared_text.save" | translate }}
               </button>
             </div>
           </form>

@@ -1,5 +1,5 @@
 <div class="mt-2 sec1">
-  <div class="section-title">{{ "stats.data.wallet" | translate }}</div>
+  <div class="section-title">{{ "resume_page.wallet" | translate }}</div>
   <div class="transactions row">
     <div class="col-xl-3 col-sm-6" *ngFor="let wallet of dashboard.wallets">
       <div class="card border_round card-stats mb-4 mb-xl-0">
@@ -46,11 +46,11 @@
                 *ngIf="wallet.deletedDate"
                 class="badge badge-danger"
                 style="width: 70px"
-                >{{ "stats.data.deleted" | translate }}</span
+                >{{ "resume_page.deleted" | translate }}</span
               ></span
             >
             <span class="text-nowrap sincetot"
-              >{{ "stats.since" | translate }}
+              >{{ "resume_page.since" | translate }}
               {{ wallet.dateLastStats | date : "dd MMM y" }}</span
             >
           </p>
@@ -64,7 +64,7 @@
   <div class="section mt-4 col-xl-6">
     <div class="section-heading">
       <h2 class="title" id="year">
-        {{ "stats.data.graph1" | translate }}
+        {{ "resume_page.graph1" | translate }}
       </h2>
     </div>
     <app-content-box
@@ -106,7 +106,7 @@
   <!-- Graph -->
   <div class="section mt-4 col-xl-6">
     <div class="section-heading">
-      <h2 class="title" id="year">{{ "stats.data.graph2" | translate }}</h2>
+      <h2 class="title" id="year">{{ "resume_page.graph2" | translate }}</h2>
     </div>
     <app-content-box
       *ngIf="!dashboard.statsWalletDays || !dashboard.statsWalletDays.length"
@@ -140,7 +140,7 @@
 
   <!-- App Capsule -->
   <div class="section mt-2 col-xl-12">
-    <div class="section-title">{{ "stats.data.table" | translate }}</div>
+    <div class="section-title">{{ "resume_page.table" | translate }}</div>
     <app-content-box
       *ngIf="!dashboard.statsWalletDays || !dashboard.statsWalletDays.length"
       [header]="'dashboard.graph.nodata.header' | translate"
@@ -152,7 +152,7 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">{{ "stats.data.table_date" | translate }}</th>
+              <th scope="col">{{ "resume_page.table_date" | translate }}</th>
               <th
                 scope="col"
                 class="text-center"
@@ -162,10 +162,10 @@
                 {{ wallet.name }}
               </th>
               <th scope="col" class="text-end">
-                {{ "stats.data.table_balance" | translate }}
+                {{ "shared_text.amount" | translate }}
               </th>
               <th scope="col" class="text-end">
-                {{ "stats.data.table_trend" | translate }}
+                {{ "resume_page.table_trend" | translate }}
               </th>
             </tr>
           </thead>
@@ -217,7 +217,7 @@
   <div class="section mt-4 col-xl-12">
     <div class="section-heading">
       <h2 class="title" id="year">
-        {{ "stats.data.graph3" | translate }}
+        {{ "resume_page.graph3" | translate }}
       </h2>
     </div>
     <app-content-box
