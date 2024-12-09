@@ -8,7 +8,7 @@
   <div id="appCapsule">
     <div class="title-section">
       <h2 class="title hidden_mobile">
-        {{ "crypto.dashboard.title" | translate }}
+        {{ "crypto_dashboard_page.title" | translate }}
       </h2>
     </div>
     <div class="row mx-auto">
@@ -33,7 +33,7 @@
               </div>
               <div class="clickable" (click)="hiddenShowAmount()">
                 <p class="card-title">
-                  {{ "crypto.dashboard.cardRes.title" | translate }}
+                  {{ "crypto_dashboard_page.card_resume.title" | translate }}
                   <ion-icon
                     *ngIf="!hidden"
                     name="eye-outline"
@@ -71,7 +71,9 @@
               </p>
               <p style="margin-top: -15px" class="card-text load-text">
                 <small
-                  >{{ "crypto.dashboard.cardRes.lastUpdate" | translate }}
+                  >{{
+                    "crypto_dashboard_page.card_resume.lastUpdate" | translate
+                  }}
                   {{
                     cryptoDashboard.lastUpdate | date : "d MMM y HH:mm"
                   }}</small
@@ -99,7 +101,9 @@
                     style="vertical-align: -1px"
                     (click)="vibrate()"
                     (click)="getWalletsCryptoData()"
-                    >{{ "crypto.dashboard.cardRes.opt1" | translate }}</a
+                    >{{
+                      "crypto_dashboard_page.card_resume.opt1" | translate
+                    }}</a
                   >
                 </div>
                 <div
@@ -121,7 +125,7 @@
                       name="albums-outline"
                     ></ion-icon>
                     <a style="vertical-align: -1px; color: #958d9e">{{
-                      "crypto.dashboard.cardRes.opt2" | translate
+                      "crypto_dashboard_page.card_resume.opt2" | translate
                     }}</a>
                   </div>
                 </div>
@@ -146,7 +150,9 @@
                     <a
                       style="vertical-align: -1px; color: #958d9e"
                       (click)="getWalletsData()"
-                      >{{ "crypto.dashboard.cardRes.opt3" | translate }}</a
+                      >{{
+                        "crypto_dashboard_page.card_resume.opt3" | translate
+                      }}</a
                     >
                   </div>
                 </div>
@@ -168,7 +174,7 @@
                   <ion-icon name="duplicate"></ion-icon>
                 </div>
                 <strong class="title_text">{{
-                  "crypto.dashboard.mobileBtn.opt1" | translate
+                  "crypto_dashboard_page.mobileBtn.opt1" | translate
                 }}</strong>
               </div>
             </a>
@@ -185,7 +191,7 @@
                   <ion-icon name="swap-horizontal"></ion-icon>
                 </div>
                 <strong class="title_text">{{
-                  "crypto.dashboard.mobileBtn.opt2" | translate
+                  "crypto_dashboard_page.mobileBtn.opt2" | translate
                 }}</strong>
               </div>
             </a>
@@ -197,7 +203,7 @@
                   <ion-icon name="bar-chart"></ion-icon>
                 </div>
                 <strong>{{
-                  "crypto.dashboard.mobileBtn.opt3" | translate
+                  "crypto_dashboard_page.mobileBtn.opt3" | translate
                 }}</strong>
               </div>
             </a>
@@ -209,7 +215,7 @@
                   <ion-icon name="settings" style="color: aliceblue"></ion-icon>
                 </div>
                 <strong>{{
-                  "crypto.dashboard.mobileBtn.opt4" | translate
+                  "crypto_dashboard_page.mobileBtn.opt4" | translate
                 }}</strong>
               </div>
             </a>
@@ -234,7 +240,9 @@
         <div class="row mt-1">
           <div class="col-6">
             <app-stats-card
-              [title]="'crypto.dashboard.performanceCard.holding' | translate"
+              [title]="
+                'crypto_dashboard_page.performance_card.holding' | translate
+              "
               value="<h5 class='card-text fs-3 m-0'>{{
                 (hidden
                   ? amount
@@ -251,7 +259,7 @@
           <div class="col-6">
             <app-stats-card
               title="{{
-                'crypto.dashboard.performanceCard.trading' | translate
+                'crypto_dashboard_page.performance_card.trading' | translate
               }}"
               value="<h5 class='card-text fs-3 m-0'>
                 {{ hidden ? amount : cryptoDashboard.trading.balance }}
@@ -266,7 +274,7 @@
           <div class="col-6">
             <app-stats-card
               title="{{
-                'crypto.dashboard.performanceCard.lastUpdate' | translate
+                'crypto_dashboard_page.performance_card.lastUpdate' | translate
               }}
                 {{ cryptoDashboard.holdingLong.lastUpdate | date : 'd MMM y' }}"
               value="{{
@@ -309,7 +317,7 @@
           <div class="col-6">
             <app-stats-card
               title="{{
-                'crypto.dashboard.performanceCard.lastUpdate' | translate
+                'crypto_dashboard_page.performance_card.lastUpdate' | translate
               }}
                 {{ cryptoDashboard.trading.lastUpdate | date : 'd MMM y' }}"
               value="{{
@@ -355,7 +363,7 @@
       <div class="section col-12 col-md-3 section-performance mx-auto">
         <div class="section-heading">
           <p>
-            {{ "crypto.dashboard.performanceCard.title" | translate }}
+            {{ "crypto_dashboard_page.performance_card.title" | translate }}
           </p>
         </div>
         <div class="card loading-hidden" style="margin-top: -30px">
@@ -375,10 +383,10 @@
       <div class="section mt-5 col-xl-6">
         <div class="section-heading">
           <h2 class="title ms-2">
-            {{ "crypto.dashboard.assetsCard.title" | translate }}
+            {{ "crypto_dashboard_page.asset_card_title" | translate }}
           </h2>
           <a routerLink="/crypto/asset" class="link">{{
-            "crypto.dashboard.assetsCard.view" | translate
+            "shared_text.view" | translate
           }}</a>
         </div>
         <div class="transactions">
@@ -401,7 +409,7 @@
         <div class="section mt-4">
           <div class="section-heading">
             <h2 class="title">
-              {{ "crypto.dashboard.assetsCard.assetGraph" | translate }}
+              {{ "crypto_dashboard_page.asset_graph" | translate }}
             </h2>
             <div
               class="form-group boxed"
@@ -458,12 +466,12 @@
     <div class="section mt-3 col-12">
       <div class="section-heading">
         <h2 class="title ms-2">
-          {{ "crypto.dashboard.marketData.title" | translate }}
+          {{ "crypto_dashboard_page.market_data_title" | translate }}
         </h2>
         <a
           [routerLink]="['/crypto/market-data', cryptoDashboard.currency]"
           class="link me-2"
-          >{{ "crypto.dashboard.marketData.view" | translate }}</a
+          >{{ "shared_text.view" | translate }}</a
         >
       </div>
       <div class="transactions marketData">

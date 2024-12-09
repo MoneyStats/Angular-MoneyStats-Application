@@ -1,6 +1,6 @@
 <div class="mx-auto section-width">
   <app-crypto-header
-    title="{{ 'crypto.asset.title' | translate }}"
+    title="{{ 'crypto_asset_page.title' | translate }}"
   ></app-crypto-header>
 
   <!-- App Capsule -->
@@ -10,52 +10,6 @@
         <div #tradingViewDetails></div>
         <div class="details_mobile"></div>
       </div>
-      <!-- Nome e Performance Vecchi
-      <div hidden class="title-section col-md-6 col-sm-12">
-        <h3 class="title">
-          <img
-            src="{{ asset.icon }}"
-            alt="avatar"
-            class="imaged d-inline w30 rounded me-1"
-          />{{ asset.name }} ({{ asset.symbol }})
-        </h3>
-        <div class="hidden_desktop">
-          <div class="row" style="margin-top: -10px">
-            <div class="col-6">
-              <h5 class="card-text fs-3">
-                {{ hidden ? amount : asset.value }}
-                {{ cryptoDashboard.currency }}
-              </h5>
-              <p style="margin-top: -15px">
-                {{ hidden ? amount : asset.balance }} {{ asset.symbol }}
-              </p>
-            </div>
-            <div class="col-6 text-end">
-              <span
-                style="margin-right: 40px; margin-top: 30px"
-                class="badge {{
-                  asset.performance == 0
-                    ? 'badge-warning'
-                    : asset.performance! > 0
-                    ? 'badge-success'
-                    : 'badge-danger'
-                }}"
-              >
-                <ion-icon
-                  name="{{
-                    asset.performance == 0
-                      ? 'arrow-down-outline'
-                      : asset.performance! > 0
-                      ? 'arrow-up-outline'
-                      : 'arrow-down-outline'
-                  }}"
-                ></ion-icon>
-                {{ asset.performance }}%
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>-->
       <div class="text-center hidden_desktop datas">
         <h5 class="card-text fs-3 d-inline">
           <span
@@ -161,7 +115,7 @@
                   href="#overview"
                   role="tab"
                 >
-                  {{ "crypto.asset.tab1" | translate }}
+                  {{ "crypto_asset_page.tab1" | translate }}
                 </a>
               </li>
               <li class="nav-item">
@@ -171,7 +125,7 @@
                   href="#card"
                   role="tab"
                 >
-                  {{ "crypto.asset.tab2" | translate }}
+                  {{ "crypto_asset_page.tab2" | translate }}
                 </a>
               </li>
               <li hidden class="nav-item">
@@ -181,7 +135,7 @@
                   href="#settings"
                   role="tab"
                 >
-                  {{ "crypto.asset.tab3" | translate }}
+                  {{ "crypto_asset_page.tab3" | translate }}
                 </a>
               </li>
             </ul>

@@ -61,6 +61,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
   thisYear: number = new Date().getFullYear();
 
   totalBalance: number = 0;
+  percentageWallet: number = 100;
 
   theme: string = '';
 
@@ -88,8 +89,8 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     ScreenService.setupHeader();
     ScreenService.hideFooter();
-    if (!Utils.isNullOrEmpty(this.shared.getCryptoDashboardData()))
-      this.totalBalance = this.shared.getCryptoDashboardData().balance;
+    if (!Utils.isNullOrEmpty(this.shared.getDashboard()))
+      this.totalBalance = this.shared.getDashboard().balance;
     this.routeSubscribe = this.route.params.subscribe((w: any) => {
       this.walletId = w.id;
       this.walletName = w.wallet;
@@ -102,6 +103,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
           LOG.info(res.message!, 'WalletDetailsComponent');
           this.wallet = res.data;
           this.renderDetailsPage();
+          this.percentageWallet = this.percentageWalletInTotal();
         });
     });
   }
@@ -193,7 +195,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
   }
 
   percentageWalletInTotal(): number {
-    if (this.wallet != undefined)
+    if (this.wallet != undefined && this.totalBalance != 0)
       return (this.wallet!.balance * 100) / this.totalBalance;
     return 0;
   }

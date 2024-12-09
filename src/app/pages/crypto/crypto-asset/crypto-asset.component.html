@@ -1,6 +1,6 @@
 <div class="mx-auto section-width">
   <app-crypto-header
-    title="{{ 'crypto.asset.title' | translate }}"
+    title="{{ 'crypto_asset_page.title' | translate }}"
   ></app-crypto-header>
 
   <!-- App Capsule -->
@@ -27,9 +27,9 @@
                 </div>
               </div>
               <div>
-                <strong>{{ "stats.total" | translate }}</strong>
+                <strong>{{ "resume_page.total" | translate }}</strong>
                 <p class="sincetot">
-                  {{ "stats.since" | translate }}
+                  {{ "resume_page.since" | translate }}
                   {{ cryptoDashboard.lastUpdate | date : "dd MMM y" }}
                 </p>
               </div>
@@ -55,9 +55,9 @@
                 </div>
               </div>
               <div>
-                <strong>{{ "stats.performance" | translate }}</strong>
+                <strong>{{ "shared_text.performance" | translate }}</strong>
                 <p class="sincetot">
-                  {{ "stats.since" | translate }}
+                  {{ "resume_page.since" | translate }}
                   {{
                     cryptoDashboard.holdingLong.lastUpdate | date : "dd MMM y"
                   }}
@@ -104,71 +104,12 @@
           <!-- * item -->
         </div>
       </div>
-      <!--<div class="card">
-        <div class="card-body">
-          <div class="row">
-            <div
-              class="col-md-3 text-center"
-              style="margin-top: -5px; margin-bottom: -25px"
-            >
-              <p class="card-title">
-                {{ "crypto.dashboard.cardRes.title" | translate }}
-              </p>
-              <h5 class="card-text fs-3">
-                {{ cryptoDashboard.balance }} {{ cryptoDashboard.currency }}
-              </h5>
-              <p style="margin-top: -15px">
-                {{ cryptoDashboard.btcBalance }} BTC
-              </p>
-            </div>
-            <div class="col-md-3 text-center">
-              <p class="title">
-                {{ "crypto.dashboard.performanceCard.holding" | translate }}
-              </p>
-              <h5 class="card-text fs-3">
-                {{ cryptoDashboard.holdingLong.balance }}
-                {{ cryptoDashboard.currency }}
-                <span style="vertical-align: 3px" class="badge badge-success">
-                  <ion-icon name="arrow-up-outline"></ion-icon>
-                  {{ cryptoDashboard.holdingLong.performance }}%
-                </span>
-              </h5>
-            </div>
-            <div class="col-md-3 text-center">
-              <p class="title">
-                {{ "crypto.dashboard.performanceCard.trading" | translate }}
-              </p>
-              <h5 class="card-text fs-3">
-                {{ cryptoDashboard.trading.balance }}
-                {{ cryptoDashboard.currency }}
-                <span style="vertical-align: 3px" class="badge badge-success">
-                  <ion-icon name="arrow-up-outline"></ion-icon>
-                  {{ cryptoDashboard.trading.performance }}%
-                </span>
-              </h5>
-            </div>
-            <div class="col-md-3 text-center">
-              <p class="title">
-                {{ "crypto.dashboard.performanceCard.performance" | translate }}
-              </p>
-              <h5 class="card-text fs-3">
-                {{ cryptoDashboard.performance.balance }}
-                {{ cryptoDashboard.currency }}
-                <span style="vertical-align: 3px" class="badge badge-success">
-                  <ion-icon name="arrow-up-outline"></ion-icon>
-                  {{ cryptoDashboard.performance.performance }}%
-                </span>
-              </h5>
-            </div>
-          </div>
-        </div>
-      </div>-->
     </div>
     <div class="row margin-bottom-size">
       <div class="col-md-7">
         <div class="title-section hidden_desktop">
           <p class="card-title">
-            {{ "crypto.dashboard.cardRes.title" | translate }}
+            {{ "crypto_dashboard_page.card_resume.title" | translate }}
           </p>
           <h5 class="card-text fs-3">
             {{ hidden ? amount : cryptoDashboard.balance }}
@@ -180,7 +121,7 @@
         </div>
         <div class="section mt-2">
           <div class="section-title hidden_mobile">
-            {{ "crypto.asset.assetGraph" | translate }}
+            {{ "crypto_asset_page.assetGraph" | translate }}
           </div>
           <div class="card border_round">
             <div class="card-body pt-1">
@@ -318,7 +259,7 @@
         <div class="section mt-2 mb-2">
           <div class="section-heading">
             <div class="section-title">
-              {{ "crypto.asset.assetList" | translate }}
+              {{ "crypto_asset_page.assetList" | translate }}
             </div>
             <a
               *ngIf="!showZeroBalance"
@@ -329,7 +270,7 @@
                 name="eye-outline"
                 style="width: 20px; height: 20px; vertical-align: -5px"
               ></ion-icon>
-              {{ "crypto.asset.show" | translate }}</a
+              {{ "crypto_asset_page.show" | translate }}</a
             >
             <a
               *ngIf="showZeroBalance"
@@ -340,7 +281,7 @@
                 name="eye-off-outline"
                 style="width: 20px; height: 20px; vertical-align: -5px"
               ></ion-icon>
-              {{ "crypto.asset.hidden" | translate }}</a
+              {{ "crypto_asset_page.hidden" | translate }}</a
             >
           </div>
           <div class="transactions">

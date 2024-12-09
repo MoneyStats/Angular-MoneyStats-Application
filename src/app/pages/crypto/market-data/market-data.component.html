@@ -1,6 +1,6 @@
 <div class="mx-auto section-width">
   <app-crypto-header
-    title="{{ 'crypto.marketData.title' | translate }}"
+    title="{{ 'market_data_page.title' | translate }}"
     (emitOperationClick)="emitOperationClick($event)"
   ></app-crypto-header>
   <div id="appCapsule">
@@ -8,16 +8,16 @@
       <div class="row">
         <div class="col-12 col-md-8">
           <div class="title-section" style="margin-bottom: 0px">
-            <h2 class="title">{{ "crypto.marketData.title" | translate }}</h2>
+            <h2 class="title">{{ "market_data_page.title" | translate }}</h2>
             <p style="margin-top: -10px">
               <small
-                >{{ "crypto.marketData.currency" | translate }}
+                >{{ "market_data_page.currency" | translate }}
                 {{ cryptoCurrency }}</small
               >
             </p>
             <p style="margin-top: -25px">
               <small
-                >{{ "crypto.marketData.updated" | translate }}
+                >{{ "market_data_page.updated" | translate }}
                 {{ updateDate | date : "d MMM y, HH:mm" }}</small
               >
             </p>
@@ -33,7 +33,7 @@
                 spellcheck="false"
                 type="text"
                 (keyup)="onKeySearch($event)"
-                placeholder="{{ 'crypto.marketData.search' | translate }}"
+                placeholder="{{ 'market_data_page.search' | translate }}"
               />
               <i class="clear-input">
                 <ion-icon name="close-circle"></ion-icon>

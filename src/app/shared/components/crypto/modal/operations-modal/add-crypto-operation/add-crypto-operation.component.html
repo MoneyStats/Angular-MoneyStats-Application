@@ -5,8 +5,7 @@
       <div class="form-group boxed">
         <div class="input-wrapper">
           <label class="label" for="select4b">{{
-            "crypto.cryptoModal.operations.operation.selectOperation"
-              | translate
+            "modal_component.operations.operation.selectOperation" | translate
           }}</label>
           <select
             class="form-control custom-select"
@@ -20,7 +19,7 @@
           >
             <option [value]="operationSelect" selected disabled>
               {{
-                "crypto.cryptoModal.operations.operation.selectOperation"
+                "modal_component.operations.operation.selectOperation"
                   | translate
               }}
             </option>
@@ -35,8 +34,7 @@
         </div>
         <div class="input-info">
           {{
-            "crypto.cryptoModal.operations.operation.selectDescription"
-              | translate
+            "modal_component.operations.operation.selectDescription" | translate
           }}
         </div>
       </div>
@@ -49,9 +47,7 @@
             (click)="isOperationSel = true"
             class="btn btn-primary me-1"
           >
-            {{
-              "crypto.cryptoModal.operations.operation.selectType" | translate
-            }}
+            {{ "modal_component.operations.operation.selectType" | translate }}
           </button>
         </div>
       </div>
@@ -66,7 +62,7 @@
               class="btn btn-primary btn-block btn-lg"
             >
               {{
-                "crypto.cryptoModal.operations.operation.selectType" | translate
+                "modal_component.operations.operation.selectType" | translate
               }}
             </button>
           </div>
@@ -78,7 +74,7 @@
       <div *ngIf="isOperationSel" class="form-group boxed">
         <div class="input-wrapper">
           <label class="label" for="select4b">{{
-            "crypto.cryptoModal.operations.operation.selectWallet" | translate
+            "modal_component.operations.operation.selectWallet" | translate
           }}</label>
           <select
             class="form-control custom-select"
@@ -91,8 +87,7 @@
             <!--<option value="{{ wallets[0] }}">Select Wallet</option>-->
             <option [value]="walletSelect" selected disabled>
               {{
-                "crypto.cryptoModal.operations.operation.selectWallet"
-                  | translate
+                "modal_component.operations.operation.selectWallet" | translate
               }}
             </option>
             <option
@@ -106,8 +101,7 @@
         </div>
         <div class="input-info">
           {{
-            "crypto.cryptoModal.operations.operation.selectWalletDesc"
-              | translate
+            "modal_component.operations.operation.selectWalletDesc" | translate
           }}
         </div>
       </div>
@@ -122,7 +116,7 @@
             data-bs-toggle="modal"
           >
             {{
-              "crypto.cryptoModal.operations.operation.selectWallet" | translate
+              "modal_component.operations.operation.selectWallet" | translate
             }}
           </button>
         </div>
@@ -139,8 +133,7 @@
               data-bs-toggle="modal"
             >
               {{
-                "crypto.cryptoModal.operations.operation.selectWallet"
-                  | translate
+                "modal_component.operations.operation.selectWallet" | translate
               }}
             </button>
           </div>

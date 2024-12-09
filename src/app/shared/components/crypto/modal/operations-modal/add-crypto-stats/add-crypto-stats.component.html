@@ -3,11 +3,11 @@
     <div class="row">
       <div class="col-md-6">
         <h2 class="modal-title d-inline" style="vertical-align: -4px">
-          {{ "crypto.cryptoModal.operations.stats.title" | translate }}
+          {{ "modal_component.operations.add_stats.title" | translate }}
         </h2>
         <p>
           <small>{{
-            "crypto.cryptoModal.operations.stats.subTitle" | translate
+            "modal_component.operations.add_stats.sub_title" | translate
           }}</small>
         </p>
       </div>
@@ -38,11 +38,11 @@
   </div>
   <div *ngIf="isResumeAddAssets" class="card-title">
     <h2 class="modal-title d-inline" style="vertical-align: -4px">
-      {{ "crypto.cryptoModal.operations.stats.resumeTitle" | translate }}
+      {{ "modal_component.operations.add_stats.resumeTitle" | translate }}
     </h2>
     <p>
       <small>{{
-        "crypto.cryptoModal.operations.stats.resumeSubTitle" | translate
+        "modal_component.operations.add_stats.resumeSubTitle" | translate
       }}</small>
     </p>
   </div>
@@ -104,7 +104,7 @@
               ></span
             >
             <span class="text-nowrap sincetot"
-              >{{ "stats.since" | translate }}
+              >{{ "resume_page.since" | translate }}
               {{
                 asset.history![asset.history!.length - 1].date
                   | date : "dd MMM y"
@@ -305,7 +305,7 @@
       type="button"
       class="btn btn-primary me-1"
     >
-      {{ "crypto.cryptoModal.operations.stats.next" | translate }}
+      {{ "modal_component.operations.add_stats.next" | translate }}
     </button>
     <button
       *ngIf="isResumeAddAssets"
@@ -314,7 +314,7 @@
       (click)="save()"
       data-bs-dismiss="modal"
     >
-      {{ "crypto.cryptoModal.operations.stats.save" | translate }}
+      {{ "modal_component.operations.add_stats.save" | translate }}
     </button>
   </div>
   <!-- End Bottoni Add Stats Desktop
@@ -331,7 +331,7 @@
         type="button"
         class="btn btn-primary btn-block btn-lg"
       >
-        {{ "crypto.cryptoModal.operations.stats.next" | translate }}
+        {{ "modal_component.operations.add_stats.next" | translate }}
       </button>
       <button
         *ngIf="isResumeAddAssets"
@@ -340,7 +340,7 @@
         (click)="save()"
         data-bs-dismiss="modal"
       >
-        {{ "crypto.cryptoModal.operations.stats.save" | translate }}
+        {{ "modal_component.operations.add_stats.save" | translate }}
       </button>
     </div>
   </div>

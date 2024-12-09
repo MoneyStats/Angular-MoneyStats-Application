@@ -107,10 +107,10 @@ export class AddWalletComponent implements OnInit, OnChanges, OnDestroy {
 
   importimage() {
     this.swalService.addImageSwal(
-      this.translate.instant('wallet.modal.imageModal.title'),
-      this.translate.instant('wallet.modal.imageModal.subTitle'),
-      this.translate.instant('wallet.modal.imageModal.continue'),
-      this.translate.instant('wallet.modal.imageModal.cancel')
+      this.translate.instant('modal_component.add_wallet.imageModal.title'),
+      this.translate.instant('modal_component.add_wallet.imageModal.subTitle'),
+      this.translate.instant('modal_component.add_wallet.imageModal.continue'),
+      this.translate.instant('modal_component.add_wallet.imageModal.cancel')
     );
     this.updateImageData();
   }

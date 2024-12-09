@@ -1,14 +1,14 @@
 <div class="row">
   <app-content-box
     *ngIf="!tableBalance || !tableBalance.length"
-    [header]="'resume_page.history' | translate"
+    [header]="'resume_page.title' | translate"
     [body]="'dashboard_page.graph.empty_body_text' | translate"
   ></app-content-box>
   <!-- App Capsule -->
   <section *ngIf="tableBalance && tableBalance.length">
     <div class="row">
       <div class="section mt-2 col-xl-4 col-md-5">
-        <div class="section-title">{{ "resume_page.history" | translate }}</div>
+        <div class="section-title">{{ "resume_page.title" | translate }}</div>
         <div class="card">
           <div class="table-responsive">
             <table class="table">

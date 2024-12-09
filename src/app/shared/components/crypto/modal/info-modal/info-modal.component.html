@@ -15,10 +15,10 @@
           </div>
           <div *ngIf="isOperation" class="text-center">
             <h3>
-              {{ "crypto.cryptoModal.info.operation.title" | translate }}
+              {{ "modal_component.info.operation_title" | translate }}
             </h3>
             <p>
-              {{ "crypto.cryptoModal.info.operation.details" | translate }}
+              {{ "modal_component.info.operation_details" | translate }}
             </p>
           </div>
           <div
@@ -26,11 +26,11 @@
             class="text-center"
           >
             <h3>
-              {{ "crypto.cryptoModal.info.newInvestment.title" | translate }}
+              {{ "modal_component.info.investment_title" | translate }}
             </h3>
             <p
               [innerHTML]="
-                'crypto.cryptoModal.info.newInvestment.details' | translate
+                'modal_component.info.investment_details' | translate
               "
             ></p>
           </div>
@@ -39,12 +39,10 @@
             class="text-center"
           >
             <h3>
-              {{ "crypto.cryptoModal.info.holding.title" | translate }}
+              {{ "modal_component.info.holding_title" | translate }}
             </h3>
             <p
-              [innerHTML]="
-                'crypto.cryptoModal.info.holding.details' | translate
-              "
+              [innerHTML]="'modal_component.info.holding_details' | translate"
             ></p>
           </div>
           <div
@@ -52,12 +50,10 @@
             class="text-center"
           >
             <h3>
-              {{ "crypto.cryptoModal.info.trading.title" | translate }}
+              {{ "modal_component.info.trading_title" | translate }}
             </h3>
             <p
-              [innerHTML]="
-                'crypto.cryptoModal.info.trading.details' | translate
-              "
+              [innerHTML]="'modal_component.info.trading_details' | translate"
             ></p>
           </div>
           <div
@@ -65,11 +61,11 @@
             class="text-center"
           >
             <h3>
-              {{ "crypto.cryptoModal.info.closeOperation.title" | translate }}
+              {{ "modal_component.info.close_operation_title" | translate }}
             </h3>
             <p
               [innerHTML]="
-                'crypto.cryptoModal.info.closeOperation.details' | translate
+                'modal_component.info.close_operation_details' | translate
               "
             ></p>
           </div>
@@ -78,12 +74,10 @@
             class="text-center"
           >
             <h3>
-              {{ "crypto.cryptoModal.info.transfer.title" | translate }}
+              {{ "modal_component.info.transfer_title" | translate }}
             </h3>
             <p
-              [innerHTML]="
-                'crypto.cryptoModal.info.transfer.details' | translate
-              "
+              [innerHTML]="'modal_component.info.transfer_details' | translate"
             ></p>
           </div>
           <a
@@ -91,20 +85,20 @@
             class="btn btn-primary btn-lg btn-block"
             data-bs-toggle="modal"
             attr.data-bs-target="#{{ modalConstant.ADDOPERATIONS }}"
-            >{{ "crypto.cryptoModal.info.close" | translate }}</a
+            >{{ "modal_component.info.close" | translate }}</a
           >
           <a
             *ngIf="isClosingOperation && !isOperation"
             class="btn btn-primary btn-lg btn-block"
             data-bs-toggle="modal"
             attr.data-bs-target="#{{ modalConstant.CLOSEOPERATION }}"
-            >{{ "crypto.cryptoModal.info.close" | translate }}</a
+            >{{ "modal_component.info.close" | translate }}</a
           >
           <a
             *ngIf="!isOperation && !isClosingOperation"
             class="btn btn-primary btn-lg btn-block"
             data-bs-toggle="modal"
-            >{{ "crypto.cryptoModal.info.close" | translate }}</a
+            >{{ "modal_component.info.close" | translate }}</a
           >
         </div>
       </div>

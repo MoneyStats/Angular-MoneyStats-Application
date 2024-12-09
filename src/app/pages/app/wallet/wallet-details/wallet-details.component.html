@@ -295,9 +295,7 @@
             <div class="card-body">
               <div class="row mb-05 fontsize-sub">
                 <div class="col text-success">
-                  <strong
-                    >{{ percentageWalletInTotal() | number : "1.0-2" }}%
-                  </strong>
+                  <strong>{{ percentageWallet | number : "1.0-2" }}% </strong>
                 </div>
                 <div class="col text-secondary text-end">
                   <strong
@@ -310,12 +308,8 @@
                 <div
                   class="progress-bar bg-success"
                   role="progressbar"
-                  attr.style="width: {{
-                    percentageWalletInTotal() | number : '1.0-2'
-                  }}%"
-                  attr.aria-valuenow="{{
-                    percentageWalletInTotal() | number : '1.0-2'
-                  }}"
+                  attr.style="width: {{ percentageWallet | number : '1.0-2' }}%"
+                  attr.aria-valuenow="{{ percentageWallet | number : '1.0-2' }}"
                   aria-valuemin="0"
                   aria-valuemax="100"
                 ></div>
@@ -323,10 +317,10 @@
                   class="progress-bar bg-secondary"
                   role="progressbar"
                   attr.style="width: {{
-                    100 - percentageWalletInTotal() | number : '1.0-2'
+                    100 - percentageWallet | number : '1.0-2'
                   }}%"
                   attr.aria-valuenow="{{
-                    100 - percentageWalletInTotal() | number : '1.0-2'
+                    100 - percentageWallet | number : '1.0-2'
                   }}"
                   aria-valuemin="0"
                   aria-valuemax="100"
@@ -522,7 +516,7 @@
         <div class="section">
           <div class="section-heading">
             <h2 class="title">
-              {{ "crypto.asset.assetList" | translate }}
+              {{ "crypto_asset_page.assetList" | translate }}
             </h2>
             <a
               *ngIf="!showZeroBalance"
@@ -533,7 +527,7 @@
                 name="eye-outline"
                 style="width: 20px; height: 20px; vertical-align: -5px"
               ></ion-icon>
-              {{ "crypto.asset.show" | translate }}</a
+              {{ "crypto_asset_page.show" | translate }}</a
             >
             <a
               *ngIf="showZeroBalance"
@@ -544,7 +538,7 @@
                 name="eye-off-outline"
                 style="width: 20px; height: 20px; vertical-align: -5px"
               ></ion-icon>
-              {{ "crypto.asset.hidden" | translate }}</a
+              {{ "crypto_asset_page.hidden" | translate }}</a
             >
           </div>
           <div class="transactions">

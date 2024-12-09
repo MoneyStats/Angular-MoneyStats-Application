@@ -15,14 +15,15 @@ import {
 } from 'src/assets/core/data/constant/constant';
 import { CryptoService } from 'src/assets/core/services/api/crypto.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
+import { Utils } from 'src/assets/core/services/config/utils.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-    selector: 'app-add-asset-modal',
-    templateUrl: './add-asset-modal.component.html',
-    styleUrls: ['./add-asset-modal.component.scss'],
-    standalone: false
+  selector: 'app-add-asset-modal',
+  templateUrl: './add-asset-modal.component.html',
+  styleUrls: ['./add-asset-modal.component.scss'],
+  standalone: false,
 })
 export class AddAssetModalComponent implements OnInit, OnDestroy {
   getMarketDataSubscribe: Subscription = new Subscription();
@@ -67,7 +68,8 @@ export class AddAssetModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.wallets = this.wallets.filter((w) => w.category == 'Crypto');
+    if (!Utils.isNullOrEmpty(this.wallets))
+      this.wallets = this.wallets.filter((w) => w.category == 'Crypto');
   }
 
   selectWallet() {

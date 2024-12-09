@@ -47,7 +47,7 @@
             <strong>{{ operation?.wallet?.name }}</strong>
             <div class="text-small text-secondary">
               {{ operation?.asset?.name }}
-              {{ "crypto.asset.details.overview.price" | translate }}
+              {{ "crypto_asset_page.details.price" | translate }}
               {{
                 operation.type != operationTypeConstant.TRADING
                   ? operation?.exitPrice
@@ -76,11 +76,11 @@
             </div>
 
             <div class="text-small">
-              {{ "crypto.asset.details.overview.invest" | translate }}
+              {{ "crypto_asset_page.details.invest" | translate }}
               <strong
                 >{{ operation?.entryPriceValue }} {{ cryptoCurrency }}</strong
               >
-              {{ "crypto.asset.details.overview.on" | translate }}
+              {{ "crypto_asset_page.details.on" | translate }}
               {{ operation?.entryDate | date : "d MMM yy" }}
             </div>
           </div>
@@ -91,7 +91,7 @@
   </ul>
   <div class="card-body pt-0" *ngIf="!isFullList">
     <a (click)="goToOperations()" class="btn btn-block btn-outline-secondary">{{
-      "crypto.asset.details.overview.more" | translate
+      "crypto_asset_page.details.more" | translate
     }}</a>
   </div>
 </div>

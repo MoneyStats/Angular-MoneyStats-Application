@@ -23,11 +23,11 @@
     <div class="menu hidden_mobile">
       <div class="dropdown d-inline">
         <a href="#" class="d-inline me-2 title-page" data-bs-toggle="dropdown">
-          {{ "crypto.header.tabOpt" | translate }}
+          {{ "core_header_footer.crypto_tabOpt" | translate }}
         </a>
         <div class="dropdown-menu dropdown-menu-end">
           <h6 class="dropdown-header">
-            {{ "dashboard.sidebar.dropdown.options" | translate }}
+            {{ "core_header_footer.dropdown_menu.options" | translate }}
           </h6>
           <a
             [routerLink]="[
@@ -35,14 +35,14 @@
               userService.user.settings.cryptoCurrency
             ]"
             class="dropdown-item"
-            >{{ "crypto.header.tab5" | translate }}</a
+            >{{ "core_header_footer.crypto_tab5" | translate }}</a
           >
           <a routerLink="/crypto/asset" class="dropdown-item">{{
-            "crypto.header.tab2" | translate
+            "core_header_footer.crypto_tab2" | translate
           }}</a>
           <div class="dropdown-divider"></div>
           <a routerLink="/wallet" class="dropdown-item">{{
-            "crypto.header.tab1" | translate
+            "core_header_footer.crypto_tab1" | translate
           }}</a>
         </div>
       </div>
@@ -54,10 +54,10 @@
         aria-disabled="true"
         class="d-inline me-2 title-page clickable effect-underline"
       >
-        {{ "crypto.header.tab3" | translate }}
+        {{ "core_header_footer.crypto_tab3" | translate }}
       </a>
       <a routerLink="/crypto/resume" class="d-inline me-2 title-page">{{
-        "crypto.header.tab4" | translate
+        "core_header_footer.crypto_tab4" | translate
       }}</a>
     </div>
     <div class="dropdown">
@@ -71,10 +71,10 @@
       </a>
       <div class="dropdown-menu dropdown-menu-end">
         <h6 class="dropdown-header">
-          {{ "dashboard.sidebar.dropdown.options" | translate }}
+          {{ "core_header_footer.dropdown_menu.options" | translate }}
         </h6>
         <a class="dropdown-item" routerLink="/settings">
-          {{ "dashboard.sidebar.dropdown.settings" | translate }}</a
+          {{ "settings_page.title" | translate }}</a
         >
         <a
           class="dropdown-item"
@@ -82,11 +82,11 @@
           data-bs-toggle="modal"
           attr.data-bs-target="#{{ modalConstant.VERSION }}"
         >
-          {{ "dashboard.sidebar.dropdown.version" | translate }}</a
+          {{ "core_header_footer.dropdown_menu.version" | translate }}</a
         >
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" (click)="logout()">{{
-          "dashboard.sidebar.dropdown.logout" | translate
+          "shared_text.logout" | translate
         }}</a>
       </div>
     </div>

@@ -1,7 +1,7 @@
 <div class="row">
   <div class="section mt-2 col-xl-8 col-md-7">
     <div class="section-title">
-      {{ "crypto.resume.investments.price.title" | translate }}
+      {{ "crypto_resume_page.investments.title" | translate }}
     </div>
     <div class="card">
       <div class="table-responsive">
@@ -9,28 +9,28 @@
           <thead>
             <tr>
               <th scope="col">
-                {{ "crypto.resume.investments.price.table.tab1" | translate }}
+                {{ "crypto_resume_page.investments.table_tab1" | translate }}
               </th>
               <th scope="col" class="text-end">
-                {{ "crypto.resume.investments.price.table.tab2" | translate }}
+                {{ "crypto_resume_page.investments.table_tab2" | translate }}
               </th>
               <th scope="col" class="text-end">
-                {{ "crypto.resume.investments.price.table.tab3" | translate }}
+                {{ "crypto_resume_page.investments.table_tab3" | translate }}
               </th>
               <th scope="col" class="text-end">
-                {{ "crypto.resume.investments.price.table.tab4" | translate }}
+                {{ "crypto_resume_page.investments.table_tab4" | translate }}
               </th>
               <th scope="col" class="text-end">
-                {{ "crypto.resume.investments.price.table.tab5" | translate }}
+                {{ "crypto_resume_page.investments.table_tab5" | translate }}
               </th>
               <th scope="col" class="text-end">
-                {{ "crypto.resume.investments.price.table.tab6" | translate }}
+                {{ "crypto_resume_page.investments.table_tab6" | translate }}
               </th>
               <th scope="col" class="text-end">
-                {{ "crypto.resume.investments.price.table.tab7" | translate }}
+                {{ "crypto_resume_page.investments.table_tab7" | translate }}
               </th>
               <th scope="col" class="text-end">
-                {{ "crypto.resume.investments.price.table.tab8" | translate }}
+                {{ "crypto_resume_page.investments.table_tab8" | translate }}
               </th>
             </tr>
           </thead>
@@ -108,7 +108,7 @@
   </div>
   <div class="section mt-2 col-xl-4 col-md-5">
     <div class="section-title">
-      {{ "stats.data.history" | translate }}
+      {{ "resume_page.title" | translate }}
     </div>
     <div class="card">
       <div class="table-responsive">
@@ -116,16 +116,16 @@
           <thead>
             <tr>
               <th scope="col">
-                {{ "stats.data.table_date" | translate }}
+                {{ "resume_page.table_date" | translate }}
               </th>
               <th scope="col">
-                {{ "stats.data.table_balance" | translate }}
+                {{ "shared_text.amount" | translate }}
               </th>
               <th scope="col" class="text-end">
-                {{ "stats.data.table_performance" | translate }}
+                {{ "shared_text.performance" | translate }}
               </th>
               <th scope="col" class="text-end">
-                {{ "stats.data.table_value" | translate }}
+                {{ "resume_page.table_trend" | translate }}
               </th>
             </tr>
           </thead>
@@ -183,7 +183,7 @@
   <div hidden class="section mt-4 col-xl-8 col-md-7">
     <div class="section-heading">
       <h2 class="title" id="year">
-        {{ "stats.data.graphHistory" | translate }}
+        {{ "resume_page.data.graphHistory" | translate }}
       </h2>
     </div>
     <div *ngIf="cryptoResume" class="card border_round">
@@ -216,10 +216,10 @@
     <div class="section cards-op mt-4">
       <div class="section-heading">
         <h2 class="title">
-          {{ "crypto.asset.details.overview.operations" | translate }}
+          {{ "crypto_asset_page.details.operations" | translate }}
         </h2>
         <a (click)="goToOperations()" class="link clickable">{{
-          "crypto.asset.details.overview.view" | translate
+          "crypto_asset_page.details.view" | translate
         }}</a>
       </div>
       <app-operations-list

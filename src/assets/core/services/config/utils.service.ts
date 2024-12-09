@@ -82,4 +82,26 @@ export class Utils {
       year: 'numeric',
     }).format(date);
   }
+
+  public static getBrowserVersion(userAgent: any): string {
+    let browserVersion = 'Unknown';
+
+    // Chrome
+    if (userAgent.includes('Chrome') && !userAgent.includes('Edge')) {
+      const chromeVersion = userAgent.match(/Chrome\/([0-9.]+)/);
+      if (chromeVersion) browserVersion = chromeVersion[1];
+    }
+    // Firefox
+    else if (userAgent.includes('Firefox')) {
+      const firefoxVersion = userAgent.match(/Firefox\/([0-9.]+)/);
+      if (firefoxVersion) browserVersion = firefoxVersion[1];
+    }
+    // Safari
+    else if (userAgent.includes('Safari') && !userAgent.includes('Chrome')) {
+      const safariVersion = userAgent.match(/Version\/([0-9.]+)/);
+      if (safariVersion) browserVersion = safariVersion[1];
+    }
+
+    return browserVersion;
+  }
 }

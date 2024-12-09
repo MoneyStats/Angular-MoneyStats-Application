@@ -12,10 +12,10 @@ import { SharedService } from 'src/assets/core/services/config/shared.service';
 import { WalletService } from 'src/assets/core/services/api/wallet.service';
 
 @Component({
-    selector: 'app-requirements',
-    templateUrl: './requirements.component.html',
-    styleUrls: ['./requirements.component.scss'],
-    standalone: false
+  selector: 'app-requirements',
+  templateUrl: './requirements.component.html',
+  styleUrls: ['./requirements.component.scss'],
+  standalone: false,
 })
 export class RequirementsComponent implements OnInit, OnDestroy {
   walletsSubscribe: Subscription = new Subscription();
@@ -55,11 +55,26 @@ export class RequirementsComponent implements OnInit, OnDestroy {
     let user = this.authService.user;
     let requirements: Array<string> =
       user.settings.completeRequirement?.split(';')!;
-    if (requirements.includes(Status.ASSET)) this.isAssetCreated = true;
-    if (requirements.includes(Status.CRYPTO_WALLET))
+    if (
+      !Utils.isNullOrEmpty(requirements) &&
+      requirements.includes(Status.ASSET)
+    )
+      this.isAssetCreated = true;
+    if (
+      !Utils.isNullOrEmpty(requirements) &&
+      requirements.includes(Status.CRYPTO_WALLET)
+    )
       this.isCryptoWalletCreated = true;
-    if (requirements.includes(Status.WALLET)) this.isWalletCreated = true;
-    if (requirements.includes(Status.CURRENCY)) this.isCurrencyAdded = true;
+    if (
+      !Utils.isNullOrEmpty(requirements) &&
+      requirements.includes(Status.WALLET)
+    )
+      this.isWalletCreated = true;
+    if (
+      !Utils.isNullOrEmpty(requirements) &&
+      requirements.includes(Status.CURRENCY)
+    )
+      this.isCurrencyAdded = true;
 
     this.getWallets().then((wal) => {
       this.wallets = wal;

@@ -1,6 +1,6 @@
 <div class="mx-auto section-width">
   <app-crypto-header
-    [title]="'crypto.operationExchange.history' | translate"
+    [title]="'operation_exchange_page.history' | translate"
     [isMenuActive]="false"
   ></app-crypto-header>
   <!-- App Capsule -->
@@ -9,12 +9,12 @@
     <div class="section mt-4" *ngFor="let year of uniqueYears?.slice()">
       <div class="section-heading">
         <h2 class="title">
-          {{ "crypto.asset.details.overview.operations" | translate }} for
+          {{ "crypto_asset_page.details.operations" | translate }} for
           {{ year }}
         </h2>
 
         <a hidden href="#" class="link">{{
-          "crypto.asset.details.overview.view" | translate
+          "crypto_asset_page.details.view" | translate
         }}</a>
       </div>
       <app-operations-list

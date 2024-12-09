@@ -11,9 +11,9 @@
           </div>
         </div>
         <div>
-          <strong>{{ "stats.total" | translate }}</strong>
+          <strong>{{ "resume_page.total" | translate }}</strong>
           <p class="sincetot">
-            {{ "stats.since" | translate }}
+            {{ "resume_page.since" | translate }}
             {{ resumeData.lastUpdate | date : "dd MMM y" }}
           </p>
         </div>
@@ -38,9 +38,9 @@
           </div>
         </div>
         <div>
-          <strong>{{ "stats.performance" | translate }}</strong>
+          <strong>{{ "shared_text.performance" | translate }}</strong>
           <p class="sincetot">
-            {{ "stats.since" | translate }}
+            {{ "resume_page.since" | translate }}
             {{ resumeData.holdingLong.lastUpdate | date : "dd MMM y" }}
           </p>
         </div>
@@ -84,7 +84,9 @@
   </div>
 
   <div class="mt-2 sec1">
-    <div class="section-title">{{ "crypto.resume.assetList" | translate }}</div>
+    <div class="section-title">
+      {{ "crypto_resume_page.assetList" | translate }}
+    </div>
     <div class="transactions row">
       <div
         class="col-xl-3 col-sm-6 mobile-size"
@@ -190,11 +192,11 @@
                   *ngIf="asset.deletedDate"
                   class="badge badge-danger"
                   style="width: 70px"
-                  >{{ "stats.data.deleted" | translate }}</span
+                  >{{ "resume_page.data.deleted" | translate }}</span
                 ></span
               >
               <span class="text-nowrap sincetot"
-                >{{ "stats.since" | translate }}
+                >{{ "resume_page.since" | translate }}
                 {{
                   asset.history != undefined
                     ? (asset.history![asset.history!.length - 1].date
@@ -210,7 +212,7 @@
   </div>
   <div class="section col-xl-12">
     <div class="section-title">
-      {{ "crypto.resume.graphAsset" | translate }}
+      {{ "crypto_resume_page.graphAsset" | translate }}
     </div>
     <div class="card inner-round border_round">
       <div
@@ -241,7 +243,7 @@
   <!-- App Capsule -->
   <div class="section mt-2 mb-4 col-xl-12">
     <div class="section-title">
-      {{ "crypto.resume.tableAsset" | translate }}
+      {{ "crypto_resume_page.tableAsset" | translate }}
     </div>
     <div *ngIf="resumeData.assets" class="card">
       <div class="table-responsive">
@@ -249,7 +251,7 @@
           <thead>
             <tr>
               <th scope="col">
-                {{ "stats.data.table_date" | translate }}
+                {{ "resume_page.table_date" | translate }}
               </th>
               <th
                 scope="col"
@@ -260,10 +262,10 @@
                 {{ asset.name }}
               </th>
               <th scope="col" class="text-end">
-                {{ "stats.data.table_balance" | translate }}
+                {{ "shared_text.amount" | translate }}
               </th>
               <th scope="col" class="text-end">
-                {{ "stats.data.table_trend" | translate }}
+                {{ "resume_page.table_trend" | translate }}
               </th>
             </tr>
           </thead>
@@ -318,7 +320,7 @@
           class="mx-auto text-center alert alert-danger mb-1"
           role="alert"
         >
-          {{ "crypto.resume.warning" | translate }}
+          {{ "crypto_resume_page.warning" | translate }}
         </div>
       </div>
     </div>
