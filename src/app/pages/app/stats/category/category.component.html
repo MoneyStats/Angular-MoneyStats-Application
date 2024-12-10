@@ -1,9 +1,8 @@
 <div class="row">
   <app-content-box
     *ngIf="!dashboard.statsWalletDays || !dashboard.statsWalletDays"
-    [header]="'dashboard.graph.nodata.header' | translate"
-    [body]="'dashboard.graph.nodata.body' | translate"
-    [footer]="'dashboard.graph.nodata.footer' | translate"
+    [header]="'resume_page.title' | translate"
+    [body]="'resume_page.empty_body_text' | translate"
   ></app-content-box>
   <!-- App Capsule -->
   <section *ngIf="dashboard.statsWalletDays">

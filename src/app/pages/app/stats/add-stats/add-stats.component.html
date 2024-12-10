@@ -13,9 +13,9 @@
         ></app-title-desktop>
 
         <div class="editWallet col-md-6">
+          @if (!saveValidation && walletsToSave && walletsToSave.length) {
           <button
             style="width: 150px"
-            *ngIf="!saveValidation && walletsToSave && walletsToSave.length"
             type="button"
             class="btn btn-primary ms-1 me-1 mb-1 float-end"
             [disabled]="f.invalid || validate()"
@@ -23,16 +23,17 @@
           >
             {{ "add_stats_page.continue" | translate }}
           </button>
+          } @if (saveValidation && walletsToSave && walletsToSave.length) {
           <button
             style="width: 150px"
-            *ngIf="saveValidation && walletsToSave && walletsToSave.length"
             type="button"
             class="btn btn-primary ms-1 me-1 mb-1 float-end"
             [disabled]="f.invalid"
             (click)="save()"
           >
-            {{ "add_stats_page.save" | translate }}
+            {{ "shared_text.save" | translate }}
           </button>
+          } @if (walletsToSave && walletsToSave.length) {
           <div
             class="form-group boxed float-end ms-1 me-1"
             style="max-width: 200px; margin-top: -10px"
@@ -57,6 +58,7 @@
               </div>
             </div>
           </div>
+          }
         </div>
       </div>
       <div class="section mt-2 mx-auto">
@@ -68,6 +70,7 @@
             <small>{{ "add_stats_page.card_subtitle" | translate }}</small>
           </p>
         </div>
+        @if (walletsToSave && walletsToSave.length) {
         <div class="card mb-2">
           <div class="table-responsive">
             <table class="table">
@@ -197,11 +200,11 @@
             </table>
           </div>
         </div>
+        }
         <app-content-box
           *ngIf="!walletsToSave || !walletsToSave.length"
-          [header]="'dashboard.wallet_splide.nodata.header' | translate"
-          [body]="'dashboard.wallet_splide.nodata.body' | translate"
-          [footer]="'dashboard.wallet_splide.nodata.footer' | translate"
+          [header]="'add_stats_page.title' | translate"
+          [body]="'wallets_page.empty_body_text' | translate"
         ></app-content-box>
         <div
           hidden
@@ -363,7 +366,7 @@
               [disabled]="f.invalid"
               (click)="save()"
             >
-              {{ "add_stats_page.save" | translate }}
+              {{ "shared_text.save" | translate }}
             </button>
           </div>
         </div>

@@ -57,9 +57,10 @@
           {{ "resume_page.title" | translate }}
         </p>
         <p class="card-subtitle text-start fs-6">
-          <small>{{ "resume_page.subTitle" | translate }}</small>
+          <small>{{ "resume_page.sub_title" | translate }}</small>
         </p>
       </div>
+      @if (resumeFullYears && resumeFullYears.length) {
       <div class="addWallet col-md-6">
         <div class="form-group boxed">
           <div class="input-wrapper" style="max-width: 150px; margin-left: 80%">
@@ -79,6 +80,7 @@
           </div>
         </div>
       </div>
+      }
     </div>
 
     <app-content-box

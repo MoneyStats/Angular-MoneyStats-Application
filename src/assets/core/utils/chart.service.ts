@@ -121,6 +121,15 @@ export class ChartService {
     let index = 0;
     totalMap.forEach((value: any, key: string) => {
       let historyBalance: Array<number> = [];
+      if (value.length === 1) {
+        let oldStats: any = new Stats();
+        let oldDate: any =
+          parseInt(value[value.length - 1].date.split('-')[0]) - 1;
+        oldStats.balance = 0;
+
+        oldStats.date = oldDate.toString();
+        value.splice(0, 0, oldStats);
+      }
 
       value.forEach((v: any) => {
         historyBalance.push(v.balance);

@@ -414,7 +414,7 @@
       },
       "editWallet": {
         "title": "Modifica Portafoglio",
-        "cryptoTitle": "Modifica Portafoglio Crypto",
+        "crypto_title": "Modifica Portafoglio Crypto",
         "default": "Mantieni l'immagine attuale"
       },
       "name": "Nome",
@@ -694,6 +694,11 @@
       "message": "L'email inserita non è stata trovata. Per favore, verifica e riprova."
     },
     "ERR_VALID_MSS_001": {
+      "status": "Errore",
+      "exception": "Immagine non valida",
+      "message": "L'immagine fornita è troppo grande. Per favore, utilizza un'immagine di dimensioni inferiori."
+    },
+    "ERR_IMG_MSS_002": {
       "status": "Errore",
       "exception": "Immagine non valida",
       "message": "L'immagine fornita è troppo grande. Per favore, utilizza un'immagine di dimensioni inferiori."

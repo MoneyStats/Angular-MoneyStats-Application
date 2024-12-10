@@ -20,10 +20,10 @@ import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
-    selector: 'app-stats',
-    templateUrl: './stats.component.html',
-    styleUrls: ['./stats.component.scss'],
-    standalone: false
+  selector: 'app-stats',
+  templateUrl: './stats.component.html',
+  styleUrls: ['./stats.component.scss'],
+  standalone: false,
 })
 export class StatsComponent implements OnInit, OnDestroy {
   resumeSubscribe: Subscription = new Subscription();
@@ -58,7 +58,7 @@ export class StatsComponent implements OnInit, OnDestroy {
   }
 
   isMobile() {
-    return ScreenService.isMobileDevice()
+    return ScreenService.isMobileDevice();
   }
 
   ngOnInit(): void {
@@ -114,9 +114,10 @@ export class StatsComponent implements OnInit, OnDestroy {
   updateData(year: string) {
     this.resumeData = this.resume.get(year)!;
     this.dashboardData = Utils.copyObject(this.resumeData);
-    this.resumeData.statsWalletDays = this.resumeData.statsWalletDays.filter(
-      (date) => new Date(date).getFullYear().toString() === year
-    );
+    if (this.resumeData.statsWalletDays)
+      this.resumeData.statsWalletDays = this.resumeData.statsWalletDays.filter(
+        (date) => new Date(date).getFullYear().toString() === year
+      );
     this.wallets = this.resumeData.wallets;
     this.isWalletBalanceHidden();
   }

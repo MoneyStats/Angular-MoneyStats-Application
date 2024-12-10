@@ -3,12 +3,9 @@
   <div class="left">
     <a
       *ngIf="counter != 1"
-      class="headerButton goBack"
-      data-bs-target="#carouselExampleFade"
-      data-bs-slide="prev"
+      class="headerButton goBack clickable"
       (click)="prev()"
     >
-      <!--<ion-icon name="chevron-back-outline"></ion-icon>-->
       <ion-icon name="arrow-back-outline"></ion-icon>
     </a>
   </div>
@@ -25,183 +22,101 @@
     data-interval="false"
     data-bs-ride="true"
   >
+    <!-- Carousel Indicators -->
     <div class="carousel-indicators">
       <button
+        *ngFor="let index of [1, 2, 3, 4]"
         type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide-to="0"
-        class="active"
-        aria-current="true"
-        aria-label="Slide 1"
-      ></button>
-      <button
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide-to="1"
-        aria-label="Slide 2"
-      ></button>
-      <button
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide-to="2"
-        aria-label="Slide 3"
-      ></button>
-      <button
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide-to="3"
-        aria-label="Slide 4"
+        [id]="'counter_' + index"
+        [class.active]="counter === index"
+        (click)="setCounter(index)"
+        [attr.aria-current]="counter === index ? 'true' : null"
+        [attr.aria-label]="'Slide ' + index"
+        [attr.data-bs-target]="'#carouselExampleCaptions'"
+        [attr.data-bs-slide-to]="index"
       ></button>
     </div>
-    <div *ngIf="!isCrypto" class="carousel-inner mx-auto">
-      <div class="carousel-item active">
-        <div class="img mx-auto">
-          <img
-            src="{{
-              environment.baseUrlDashboard
-            }}assets/images/logos/favicon_trasparent.png"
-            class="d-block w-100"
-            alt="..."
-          />
-        </div>
-        <div class="section mt-2 text-center">
-          <h1>{{ "onboarding_page.tab1.app_title" | translate }}</h1>
-          <p [innerHTML]="'onboarding_page.tab1.app_text' | translate"></p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <div class="img mx-auto">
-          <img
-            src="{{ environment.baseUrlDashboard }}assets/images/sample/why.png"
-            class="d-block w-100"
-            alt="..."
-          />
-        </div>
-        <div class="section mt-2 text-center">
-          <h1>{{ "onboarding_page.tab2.app_title" | translate }}</h1>
-          <p [innerHTML]="'onboarding_page.tab2.app_text' | translate"></p>
+    <div class="carousel-inner mx-auto">
+      <!-- Per non-crypto -->
+      <div *ngIf="!isCrypto">
+        <div
+          *ngFor="let index of [1, 2, 3, 4]"
+          [id]="'data_' + index"
+          class="carousel-item fade-in"
+          [class.active]="counter === index"
+        >
+          <div class="img mx-auto">
+            <img [src]="getImageUrl(index)" class="d-block w-100" alt="..." />
+          </div>
+          <div class="section mt-2 text-center">
+            <h1>
+              {{ "onboarding_page.tab" + index + ".app_title" | translate }}
+            </h1>
+            <p
+              [innerHTML]="
+                'onboarding_page.tab' + index + '.app_text' | translate
+              "
+            ></p>
+          </div>
         </div>
       </div>
-      <div class="carousel-item">
-        <div class="img mx-auto">
-          <img
-            src="{{
-              environment.baseUrlDashboard
-            }}assets/images/sample/add-wallet.png"
-            class="d-block w-100"
-            alt="..."
-          />
-        </div>
-        <div class="section mt-2 text-center">
-          <h1>{{ "onboarding_page.tab3.app_title" | translate }}</h1>
-          <p [innerHTML]="'onboarding_page.tab3.app_text' | translate"></p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <div class="img mx-auto">
-          <img
-            src="{{
-              environment.baseUrlDashboard
-            }}assets/images/sample/checked.png.png"
-            class="d-block w-100"
-            alt="..."
-          />
-        </div>
-        <div class="section mt-2 text-center">
-          <h1>{{ "onboarding_page.tab4.app_title" | translate }}</h1>
-          <p [innerHTML]="'onboarding_page.tab4.app_text' | translate"></p>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="isCrypto" class="carousel-inner mx-auto">
-      <div class="carousel-item active">
-        <div class="img mx-auto">
-          <img
-            src="{{
-              environment.baseUrlDashboard
-            }}assets/images/crypto/Bitcoin-icon.png"
-            class="d-block w-100"
-            alt="..."
-          />
-        </div>
-        <div class="section mt-2 text-center">
-          <h1>{{ "onboarding_page.tab1.crypto_title" | translate }}</h1>
-          <p [innerHTML]="'onboarding_page.tab1.crypto_text' | translate"></p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <div class="img mx-auto">
-          <img
-            src="{{ environment.baseUrlDashboard }}assets/images/sample/why.png"
-            class="d-block w-100"
-            alt="..."
-          />
-        </div>
-        <div class="section mt-2 text-center">
-          <h1>{{ "onboarding_page.tab2.crypto_title" | translate }}</h1>
-          <p [innerHTML]="'onboarding_page.tab2.crypto_text' | translate"></p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <div class="img mx-auto">
-          <img
-            src="{{
-              environment.baseUrlDashboard
-            }}assets/images/sample/add-wallet.png"
-            class="d-block w-100"
-            alt="..."
-          />
-        </div>
-        <div class="section mt-2 text-center">
-          <h1>{{ "onboarding_page.tab3.crypto_title" | translate }}</h1>
-          <p [innerHTML]="'onboarding_page.tab3.crypto_text' | translate"></p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <div class="img mx-auto">
-          <img
-            src="{{
-              environment.baseUrlDashboard
-            }}assets/images/sample/checked.png.png"
-            class="d-block w-100"
-            alt="..."
-          />
-        </div>
-        <div class="section mt-2 text-center">
-          <h1>{{ "onboarding_page.tab4.crypto_title" | translate }}</h1>
-          <p [innerHTML]="'onboarding_page.tab4.crypto_text' | translate"></p>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="form-button-group transparent section-width mx-auto">
-    <button
-      *ngIf="counter != 4"
-      class="btn btn-primary btn-block btn-lg"
-      type="button"
-      data-bs-target="#carouselExampleFade"
-      data-bs-slide="next"
-      (click)="next()"
-    >
-      {{ "shared_text.next" | translate }}
-    </button>
-    <button
-      *ngIf="counter === 4 && !isCrypto"
-      class="btn btn-primary btn-block btn-lg"
-      type="button"
-      routerLink=""
-    >
-      {{ "shared_text.try" | translate }}
-    </button>
-    <button
-      *ngIf="counter === 4 && isCrypto"
-      class="btn btn-primary btn-block btn-lg"
-      type="button"
-      routerLink="/crypto/requirements"
-    >
-      {{ "shared_text.try" | translate }}
-    </button>
+      <!-- Per crypto -->
+      <div *ngIf="isCrypto">
+        <div
+          *ngFor="let index of [1, 2, 3, 4]"
+          [id]="'crypto_data_' + index"
+          class="carousel-item fade-in"
+          [class.active]="counter === index"
+        >
+          <div class="img mx-auto">
+            <img
+              [src]="getCryptoImageUrl(index)"
+              class="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div class="section mt-2 text-center">
+            <h1>
+              {{ "onboarding_page.tab" + index + ".crypto_title" | translate }}
+            </h1>
+            <p
+              [innerHTML]="
+                'onboarding_page.tab' + index + '.crypto_text' | translate
+              "
+            ></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pulsanti -->
+    <div class="form-button-group transparent section-width mx-auto">
+      <button
+        *ngIf="counter != 4"
+        class="btn btn-primary btn-block btn-lg"
+        type="button"
+        (click)="next()"
+      >
+        {{ "shared_text.next" | translate }}
+      </button>
+      <button
+        *ngIf="counter === 4 && !isCrypto"
+        class="btn btn-primary btn-block btn-lg"
+        type="button"
+        routerLink=""
+      >
+        {{ "shared_text.try" | translate }}
+      </button>
+      <button
+        *ngIf="counter === 4 && isCrypto"
+        class="btn btn-primary btn-block btn-lg"
+        type="button"
+        routerLink="/crypto/requirements"
+      >
+        {{ "shared_text.try" | translate }}
+      </button>
+    </div>
   </div>
+  <!-- * App Capsule -->
 </div>
-<!-- * App Capsule -->

@@ -28,7 +28,11 @@ export class TransactionDetailsComponent implements OnInit {
     ScreenService.hideFooter();
     this.wallet = this.shared.getWallet();
 
-    if (this.wallet?.history.find((w) => w.id == undefined)) {
+    if (
+      this.wallet &&
+      this.wallet.history &&
+      this.wallet?.history.find((w) => w.id == undefined)
+    ) {
       let index = this.wallet.history.indexOf(
         this.wallet?.history.find((w) => w.id == undefined)!
       );

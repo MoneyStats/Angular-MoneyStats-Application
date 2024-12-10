@@ -62,7 +62,9 @@ export class AddStatsComponent implements OnInit, OnDestroy {
       ((wallet.newBalance - wallet.balance) / wallet.balance) *
       100
     ).toFixed(2);
-    return Number.parseFloat(res);
+    const result = Number.parseFloat(res);
+    if (result > 1000) return '+1000';
+    return result;
   }
 
   ngOnInit(): void {

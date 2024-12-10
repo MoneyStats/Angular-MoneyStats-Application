@@ -1,6 +1,10 @@
 import { Subscription } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  Router,
+  RouterStateSnapshot,
+} from '@angular/router';
 import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { StorageConstant } from 'src/assets/core/data/constant/constant';
 import { UserService } from 'src/assets/core/services/api/user.service';
@@ -13,7 +17,7 @@ import { LOG } from 'src/assets/core/utils/log.service';
 @Injectable({
   providedIn: 'root',
 })
-export class RouteGuardService  {
+export class RouteGuardService {
   environment = environment;
   isUserLoggedSubscribe: Subscription = new Subscription();
   resp: Response | undefined;
@@ -45,8 +49,24 @@ export class RouteGuardService  {
   checkUpdates() {
     LOG.info('Looking for updates...', 'RouteGuardService');
     this.updates.versionUpdates.subscribe((event) => {
-      this.updates.activateUpdate().then(() => document.location.reload());
+      if (event.type === 'VERSION_READY') {
+        LOG.info(
+          'New version available, preparing to update...',
+          'AppComponent'
+        );
+        this.doAppUpdate();
+      }
     });
+  }
+
+  private async doAppUpdate() {
+    try {
+      await this.updates.activateUpdate();
+      LOG.info('Update activated. Reloading the page...', 'RouteGuardService');
+      window.location.reload();
+    } catch (error) {
+      LOG.info('Error activating update', 'RouteGuardService');
+    }
   }
 
   validateAccessToken(user: any, authToken: any) {

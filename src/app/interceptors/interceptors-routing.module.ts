@@ -9,6 +9,10 @@ const routes: Routes = [
     component: OnboardingComponent,
   },
   {
+    path: 'on-boarding/crypto',
+    component: OnboardingComponent,
+  },
+  {
     path: 'error',
     component: ErrorHandleComponent,
   },

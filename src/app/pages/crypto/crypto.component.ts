@@ -11,11 +11,11 @@ import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
 
 @Component({
-    selector: 'app-crypto',
-    templateUrl: './crypto.component.html',
-    styleUrls: ['./crypto.component.scss'],
-    animations: [fadeSlider],
-    standalone: false
+  selector: 'app-crypto',
+  templateUrl: './crypto.component.html',
+  styleUrls: ['./crypto.component.scss'],
+  animations: [fadeSlider],
+  standalone: false,
 })
 export class CryptoComponent implements OnInit, OnDestroy {
   cryptoDashboardSub: Subscription = new Subscription();
@@ -80,7 +80,7 @@ export class CryptoComponent implements OnInit, OnDestroy {
   onBoard() {
     if (!this.appService.isOnboardingCrypto) {
       this.appService.isOnboardingCrypto = true;
-      this.router.navigate(['on-boarding']);
+      this.router.navigate(['on-boarding/crypto']);
     } else this.router.navigate(['crypto/requirements']);
   }
 

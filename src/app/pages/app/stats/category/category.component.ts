@@ -72,7 +72,11 @@ export class CategoryComponent implements OnChanges {
       });
       if (UserService.getUserData().settings.liveWallets === 'ACTIVE')
         if (
-          !moreThanOneInAMonth.includes(new Date().toString()) &&
+          !moreThanOneInAMonth.find(
+            (d) =>
+              new Date(d).toLocaleDateString() ==
+              new Date().toLocaleDateString()
+          ) &&
           moreThanOneInAMonth.filter(
             (d) => new Date(d).getFullYear() === new Date().getFullYear()
           ).length > 0

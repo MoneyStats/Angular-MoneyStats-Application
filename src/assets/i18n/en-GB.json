@@ -414,7 +414,7 @@
       },
       "editWallet": {
         "title": "Edit Wallet",
-        "cryptoTitle": "Edit Crypto Wallet",
+        "crypto_title": "Edit Crypto Wallet",
         "default": "Keep the current image"
       },
       "name": "Name",
@@ -453,7 +453,7 @@
       "close": "Cancel",
       "copied": "Value copied to clipboard"
     },
-    "infoApp": {
+    "info_app": {
       "title": "Registration Info",
       "text": "To register for the MoneyStats app, you need an invitation code. If you don't have one, you can request it from <a href='https://giovannilamarmora.github.io/#contact' target='_blank'>Giovanni</a> in the Contacts section. In the meantime, you can explore the app using the following credentials:<br>• Username: moneystats<br>• Password: moneystats<br>This account provides a preview of the app interface. Please note, you will not be able to modify or add new data.",
       "close": "Close"
@@ -463,7 +463,7 @@
       "close": "Close",
       "list": "List of all categories"
     },
-    "reportBug": {
+    "report_bug": {
       "title": "Report Bug",
       "subTitle": "Tell us more about the issue",
       "titleBug": "Bug Description",
@@ -694,6 +694,11 @@
       "message": "The email entered was not found. Please check and try again."
     },
     "ERR_VALID_MSS_001": {
+      "status": "Error",
+      "exception": "Invalid Image",
+      "message": "The image provided is too large. Please use a smaller image."
+    },
+    "ERR_IMG_MSS_002": {
       "status": "Error",
       "exception": "Invalid Image",
       "message": "The image provided is too large. Please use a smaller image."
