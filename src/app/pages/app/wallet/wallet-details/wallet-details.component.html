@@ -542,16 +542,22 @@
             >
           </div>
           <div class="transactions">
+            @if (isAssetListEmptyOrZero) {
+            <div class="alert alert-warning m-2 text-center" role="alert">
+              <div>
+                {{ "crypto_asset_page.empty_assets_data" | translate }}
+              </div>
+            </div>
+            }
             <div *ngFor="let asset of wallet?.assets; let i = index">
+              @if (!showZeroBalance ? asset.balance > 0 : asset.balance >= 0) {
               <app-transaction-card
                 [hiddenAmount]="hidden"
-                *ngIf="
-                  !showZeroBalance ? asset.balance > 0 : asset.balance >= 0
-                "
                 [assets]="asset"
                 [currency]="user.settings.cryptoCurrency"
               >
               </app-transaction-card>
+              }
             </div>
           </div>
         </div>

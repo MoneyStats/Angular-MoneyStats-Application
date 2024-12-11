@@ -12,6 +12,7 @@
           <h2 class="title">{{ "crypto_resume_page.title" | translate }}</h2>
         </div>
       </div>
+      @if (resumeAssets && resumeAssets.length) {
       <div class="addWallet col-md-6">
         <div class="form-group boxed">
           <div class="input-wrapper" style="max-width: 150px; margin-left: 80%">
@@ -31,8 +32,15 @@
           </div>
         </div>
       </div>
+      }
     </div>
   </div>
+  @if (!resumeAssets || !resumeAssets.length) {
+  <app-content-box
+    [header]="'crypto_resume_page.title' | translate"
+    [body]="'resume_page.empty_body_text' | translate"
+  ></app-content-box>
+  } @if (resumeAssets && resumeAssets.length) {
   <div class="card transparent">
     <div class="card-body">
       <ul class="nav nav-tabs capsuled" role="tablist">
@@ -116,6 +124,7 @@
       </div>
     </div>
   </div>
+  }
 </div>
 
 <app-operations-modal

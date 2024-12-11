@@ -73,7 +73,14 @@ export class DataComponent implements OnInit, OnChanges {
     this.chartBar = undefined;
     this.chartPie = undefined;
     setTimeout(() => {
-      this.chartOptions = ChartService.appRenderWalletPerformance(dashboard);
+      Utils.mapLiveWalletsDataForChart(
+        dashboard.statsWalletDays,
+        dashboard.wallets
+      );
+      //this.chartOptions = ChartService.appRenderWalletPerformance(dashboard);
+      ChartService.appRenderWalletPerformance(dashboard).then(
+        (chart) => (this.chartOptions = chart)
+      );
       this.chartPie = ChartService.appRenderChartPie(dashboard.wallets);
       const dates: string[] = Utils.copyObject(this.effectiveDates).map(
         (d: string) => {

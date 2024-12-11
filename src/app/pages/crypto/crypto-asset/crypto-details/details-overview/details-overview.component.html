@@ -178,35 +178,23 @@
             <strong
               ><span
                 class="badge {{
-                  ((asset.value! - asset.invested!) / asset.invested!) * 100! ==
-                  0
+                  calculatePerformance(asset) == 0
                     ? 'badge-warning'
-                    : ((asset.value! - asset.invested!) / asset.invested!) *
-                        100! >
-                      0
+                    : calculatePerformance(asset) > 0
                     ? 'badge-success'
                     : 'badge-danger'
                 }}"
               >
                 <ion-icon
                   name="{{
-                    ((asset.value! - asset.invested!) / asset.invested!) *
-                      100! ==
-                    0
+                    calculatePerformance(asset) == 0
                       ? 'arrow-down-outline'
-                      : ((asset.value! - asset.invested!) / asset.invested!) *
-                          100! >
-                        0
+                      : calculatePerformance(asset) > 0
                       ? 'arrow-up-outline'
                       : 'arrow-down-outline'
                   }}"
                 ></ion-icon>
-                {{
-                  (
-                    ((asset.value! - asset.invested!) / asset.invested!) *
-                    100!
-                  ).toFixed(2)
-                }}%
+                {{ calculatePerformance(asset).toFixed(2) }}%
               </span></strong
             >
           </li>
@@ -305,6 +293,13 @@
           {{ "crypto_asset_page.hidden" | translate }}</a
         >
       </div>
+      @if (isAssetListEmptyOrZero) {
+      <div class="alert alert-warning m-2 text-center" role="alert">
+        <div>
+          {{ "crypto_asset_page.details.empty_wallets_data" | translate }}
+        </div>
+      </div>
+      } @if (!isAssetListEmptyOrZero) {
       <div class="accordion border_round" id="accordionExample2">
         <div class="accordion-item" *ngFor="let wallet of walletsAsset">
           <h2
@@ -455,7 +450,8 @@
                           ).toFixed(2)
                     }}
                     {{ cryptoDashboard.currency }}
-                    <span
+                    <!-- OLD PERFORMANCE
+                     <span
                       class="badge {{
                         ((wallet.assets[0].value! -
                           wallet.assets[0].invested!) /
@@ -498,6 +494,31 @@
                                 wallet.assets[0].invested!) *
                               100!
                             ).toFixed(2)
+                      }}%
+                    </span>
+                  -->
+                    <span
+                      class="badge {{
+                        calculatePerformance(wallet.assets[0]) == 0
+                          ? 'badge-warning'
+                          : calculatePerformance(wallet.assets[0]) > 0
+                          ? 'badge-success'
+                          : 'badge-danger'
+                      }}"
+                    >
+                      <ion-icon
+                        name="{{
+                          calculatePerformance(wallet.assets[0]) == 0
+                            ? 'arrow-down-outline'
+                            : calculatePerformance(wallet.assets[0]) > 0
+                            ? 'arrow-up-outline'
+                            : 'arrow-down-outline'
+                        }}"
+                      ></ion-icon>
+                      {{
+                        hidden
+                          ? amount
+                          : calculatePerformance(wallet.assets[0]).toFixed(2)
                       }}%
                     </span></strong
                   >
@@ -599,6 +620,7 @@
           </div>
         </div>
       </div>
+      }
     </div>
   </div>
   <div

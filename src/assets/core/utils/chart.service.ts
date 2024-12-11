@@ -11,38 +11,11 @@ import { ScreenService } from './screen.service';
   providedIn: 'root',
 })
 export class ChartService {
-  private static BACKGROUND: Array<string> = [
-    'rgba(98, 54, 255, 0.3)',
-    'rgba(209, 25, 208, 0.3)',
-    'rgba(187, 157, 247, 0.3)',
-    'rgba(222, 52, 84, 0.3)',
-    'rgba(64, 115, 6, 0.3)',
-    'rgba(156, 65, 60, 0.3)',
-    'rgba(242, 237, 10, 0.3)',
-    'rgba(250, 92, 66, 0.3)',
-    'rgba(87, 203, 84, 0.3)',
-    'rgba(80, 2, 149, 0.3)',
-    'rgba(247, 238, 220, 0.3)',
-  ];
-  private static colorsList: string[] = [
-    '#6236FF',
-    '#d119d0',
-    '#bb9df7',
-    '#de3454',
-    '#407306',
-    '#9c413c',
-    '#f2ed0a',
-    '#fa5c42',
-    '#57cb54',
-    '#500295',
-    '#f7eedc',
-  ];
   environment = environment;
-  constructor(private imageColorPicker: ImageColorPickerService) {}
 
-  public static appRenderWalletPerformance(
+  public static async appRenderWalletPerformance(
     dashboard: Dashboard
-  ): Partial<ApexOptions> {
+  ): Promise<Partial<ApexOptions>> {
     let series: Array<any> = [];
     let oldStats: any = new Stats();
     let oldDate: any;
@@ -57,8 +30,19 @@ export class ChartService {
         ) - 1;
       dashboard.statsWalletDays.splice(0, 0, oldDate.toString());
     }
+
+    // Array per raccogliere tutte le promesse di colori
+    const colorPromises: Promise<string>[] = [];
+
     dashboard.wallets.forEach((wallet, indexWallet) => {
-      colors.push(ImageColorPickerService.getColor(wallet.img!, indexWallet));
+      const colorPromise = ImageColorPickerService.getColors();
+      //ImageColorPickerService.getColorFromImage(
+      //  wallet.img,
+      //  ImageColorPickerService.getDefaultColor(indexWallet),
+      //  false
+      //);
+      //colorPromises.push(colorPromise);
+
       let oldBalance =
         wallet.differenceLastStats != 0
           ? wallet.balance - wallet.differenceLastStats
@@ -95,6 +79,10 @@ export class ChartService {
       }
       historyBalance = [];
     });
+
+    // Attendi la risoluzione di tutte le promesse di colori
+    colors = await Promise.all(colorPromises);
+
     let finalStatsDays: string[] = [];
     dashboard.statsWalletDays.forEach(
       (d) =>
@@ -176,8 +164,10 @@ export class ChartService {
     }
     stats.forEach((s) => {
       historyBalance.push(s.balance);
-
-      historyDates.push(s.date.toString());
+      historyDates.push(
+        Utils.formatDateIntl(new Date(s.date).toLocaleDateString())
+      );
+      //historyDates.push(s.date.toString());
     });
     let serie = {
       name: name,
@@ -531,7 +521,7 @@ export class ChartService {
       tooltip: {
         theme: 'dark',
       },
-      colors: colors.length != 0 ? colors : this.colorsList,
+      colors: colors.length != 0 ? colors : ImageColorPickerService.getColors(),
       labels: finalStatsDays,
       legend: {
         show: true,

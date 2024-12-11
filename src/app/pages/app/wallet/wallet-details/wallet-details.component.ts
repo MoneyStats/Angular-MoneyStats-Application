@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { ActivatedRoute } from '@angular/router';
-import { Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { ChartService } from 'src/assets/core/utils/chart.service';
 import { WalletService } from 'src/assets/core/services/api/wallet.service';
@@ -150,10 +150,12 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
 
   graphAll() {
     if (!this.chartAll && this.wallet?.history) {
+      let walletGraph = Utils.copyObject(this.wallet);
+      walletGraph = Utils.mapLiveWalletForChart(walletGraph);
       setTimeout(() => {
         this.chartAll = ChartService.renderChartWallet(
-          this.wallet?.name!,
-          this.wallet?.history!
+          walletGraph.name,
+          walletGraph.history
         );
       }, 500);
     }
@@ -161,14 +163,16 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
 
   graph1Y() {
     if (!this.chart1Y && this.wallet?.history) {
-      let lastYear = this.wallet?.history.filter(
-        (h) =>
-          h.date.toString().split('-')[0] ===
+      let walletGraph = Utils.copyObject(this.wallet);
+      walletGraph = Utils.mapLiveWalletForChart(walletGraph);
+      let lastYear = walletGraph.history.filter(
+        (h: Stats) =>
+          new Date(h.date).getFullYear().toString() ===
           new Date().getFullYear().toString()
       );
       setTimeout(() => {
         this.chart1Y = ChartService.renderChartWallet(
-          this.wallet?.name!,
+          walletGraph.name,
           lastYear!
         );
       }, 500);
@@ -177,17 +181,19 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
 
   graph3Y() {
     if (!this.chart3Y && this.wallet?.history) {
+      let walletGraph = Utils.copyObject(this.wallet);
+      walletGraph = Utils.mapLiveWalletForChart(walletGraph);
       let last3 = [
         new Date().getFullYear().toString(),
         (new Date().getFullYear() - 1).toString(),
         (new Date().getFullYear() - 2).toString(),
       ];
-      let last3Year = this.wallet?.history.filter((h) =>
-        last3.includes(h.date.toString().split('-')[0])
+      let last3Year = walletGraph.history.filter((h: Stats) =>
+        last3.includes(new Date(h.date).getFullYear().toString())
       );
       setTimeout(() => {
         this.chart3Y = ChartService.renderChartWallet(
-          this.wallet?.name!,
+          walletGraph.name,
           last3Year!
         );
       }, 500);
@@ -304,5 +310,12 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
         this.editBtn = false;
         this.editShow = false;
       });
+  }
+
+  get isAssetListEmptyOrZero(): boolean {
+    return !this.showZeroBalance
+      ? !this.wallet?.assets?.length ||
+          this.wallet.assets.every((asset) => asset.balance === 0)
+      : false;
   }
 }

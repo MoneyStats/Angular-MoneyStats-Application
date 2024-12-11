@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
+import { UserService } from '../api/user.service';
+import { Stats, Wallet } from '../../data/class/dashboard.class';
 
 @Injectable({
   providedIn: 'root',
@@ -103,5 +105,56 @@ export class Utils {
     }
 
     return browserVersion;
+  }
+
+  public static mapLiveWalletsDataForChart(dates: string[], wallets: Wallet[]) {
+    if (UserService.getUserData().settings.liveWallets === 'ACTIVE')
+      if (
+        !dates.find(
+          (d) =>
+            new Date(d).toLocaleDateString() == new Date().toLocaleDateString()
+        ) &&
+        dates.filter(
+          (d) => new Date(d).getFullYear() === new Date().getFullYear()
+        ).length > 0
+      ) {
+        let date = new Date();
+        dates.push(date.toString());
+        wallets.map((w) => {
+          if (!Utils.isNullOrEmpty(w.balance)) {
+            let stats = new Stats();
+            stats.balance = w.balance;
+            stats.date = date;
+            if (!Utils.isNullOrEmpty(w.history) && !w.history.includes(stats))
+              w.history.push(stats);
+          }
+          return w;
+        });
+      }
+  }
+
+  public static mapLiveWalletForChart(wallet: Wallet) {
+    if (UserService.getUserData().settings.liveWallets === 'ACTIVE')
+      if (
+        !wallet.history.find(
+          (h) =>
+            new Date(h.date).toLocaleDateString() ==
+            new Date().toLocaleDateString()
+        )
+      ) {
+        let date = new Date();
+        if (!Utils.isNullOrEmpty(wallet.balance)) {
+          let stats = new Stats();
+          stats.balance = wallet.balance;
+          stats.date = date;
+          if (
+            !Utils.isNullOrEmpty(wallet.history) &&
+            !wallet.history.includes(stats)
+          )
+            wallet.history.push(stats);
+        }
+        return wallet;
+      }
+    return wallet;
   }
 }

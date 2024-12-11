@@ -6,6 +6,20 @@ import { environment } from 'src/environments/environment';
 })
 export class ImageColorPickerService {
   environment = environment;
+  private static BACKGROUND: Array<string> = [
+    'rgba(98, 54, 255, 0.3)',
+    'rgba(209, 25, 208, 0.3)',
+    'rgba(187, 157, 247, 0.3)',
+    'rgba(222, 52, 84, 0.3)',
+    'rgba(64, 115, 6, 0.3)',
+    'rgba(156, 65, 60, 0.3)',
+    'rgba(242, 237, 10, 0.3)',
+    'rgba(250, 92, 66, 0.3)',
+    'rgba(87, 203, 84, 0.3)',
+    'rgba(80, 2, 149, 0.3)',
+    'rgba(247, 238, 220, 0.3)',
+  ];
+
   private static colors: string[] = [
     '#6236FF',
     '#3c3c3d',
@@ -20,6 +34,14 @@ export class ImageColorPickerService {
     '#500295',
     '#f7eedc',
   ];
+
+  public static getColors() {
+    return this.colors;
+  }
+
+  public static getDefaultColor(index: number) {
+    return this.colors[index];
+  }
 
   public static getColor(img: string, index: number): string {
     if (img && !img.includes('data:image'))
@@ -52,7 +74,8 @@ export class ImageColorPickerService {
 
   public static async getColorFromImage(
     img: string,
-    defaultValue: string
+    defaultValue: string,
+    brightCheck: boolean = true
   ): Promise<string> {
     // Funzione per calcolare la luminosità
     const isColorTooBright = (r: number, g: number, b: number): boolean => {
@@ -82,7 +105,7 @@ export class ImageColorPickerService {
             let [r, g, b, a] = data;
 
             // Controllo luminosità
-            if (isColorTooBright(r, g, b)) {
+            if (isColorTooBright(r, g, b) && brightCheck) {
               console.log('Colore troppo chiaro, cercando un altro punto...');
               // Leggi da un altro punto (angolo superiore sinistro)
               const dataFallback = ctx?.getImageData(10, 10, 1, 1)?.data ?? [];
@@ -92,7 +115,7 @@ export class ImageColorPickerService {
             }
 
             // Verifica se è ancora troppo chiaro
-            if (isColorTooBright(r, g, b)) {
+            if (isColorTooBright(r, g, b) && brightCheck) {
               console.log(
                 'Colore fallback troppo chiaro, impostando un colore scuro predefinito.'
               );

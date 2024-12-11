@@ -173,7 +173,7 @@
               >
                 <div class="inner-round">
                   <div
-                    *ngIf="!chart1Y"
+                    *ngIf="!chart1Y || isGraphEmptyOrZero"
                     class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
                   >
                     <div></div>
@@ -182,7 +182,7 @@
                     <div></div>
                   </div>
                   <apx-chart
-                    *ngIf="chart1Y"
+                    *ngIf="chart1Y && !isGraphEmptyOrZero"
                     [series]="chart1Y.series!"
                     [chart]="chart1Y.chart!"
                     [title]="chart1Y.title!"
@@ -199,7 +199,7 @@
               <div class="tab-pane fade" id="tab-3y" role="tabpanel">
                 <div class="inner-round">
                   <div
-                    *ngIf="!chart3Y"
+                    *ngIf="!chart3Y || isGraphEmptyOrZero"
                     class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
                   >
                     <div></div>
@@ -208,7 +208,7 @@
                     <div></div>
                   </div>
                   <apx-chart
-                    *ngIf="chart3Y"
+                    *ngIf="chart3Y && !isGraphEmptyOrZero"
                     [series]="chart3Y.series!"
                     [chart]="chart3Y.chart!"
                     [title]="chart3Y.title!"
@@ -225,7 +225,7 @@
               <div class="tab-pane fade" id="tab-all" role="tabpanel">
                 <div class="inner-round">
                   <div
-                    *ngIf="!chartOptions"
+                    *ngIf="!chartOptions || isGraphEmptyOrZero"
                     class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
                   >
                     <div></div>
@@ -234,7 +234,7 @@
                     <div></div>
                   </div>
                   <apx-chart
-                    *ngIf="chartOptions"
+                    *ngIf="chartOptions && !isGraphEmptyOrZero"
                     [series]="chartOptions.series!"
                     [chart]="chartOptions.chart!"
                     [title]="chartOptions.title!"
@@ -285,6 +285,13 @@
             >
           </div>
           <div class="transactions">
+            @if (isAssetListEmptyOrZero) {
+            <div class="alert alert-warning m-2 text-center" role="alert">
+              <div>
+                {{ "crypto_asset_page.empty_assets_data" | translate }}
+              </div>
+            </div>
+            }
             <div *ngFor="let asset of assets; let i = index">
               <app-transaction-card
                 [hiddenAmount]="hidden"

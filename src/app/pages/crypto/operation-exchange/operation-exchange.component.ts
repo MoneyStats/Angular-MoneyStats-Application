@@ -21,10 +21,10 @@ import { Utils } from 'src/assets/core/services/config/utils.service';
 import { SharedService } from 'src/assets/core/services/config/shared.service';
 
 @Component({
-    selector: 'app-operation-exchange',
-    templateUrl: './operation-exchange.component.html',
-    styleUrls: ['./operation-exchange.component.scss'],
-    standalone: false
+  selector: 'app-operation-exchange',
+  templateUrl: './operation-exchange.component.html',
+  styleUrls: ['./operation-exchange.component.scss'],
+  standalone: false,
 })
 export class OperationExchangeComponent implements OnInit, OnDestroy {
   saveWalletSubscribe: Subscription = new Subscription();
@@ -452,7 +452,12 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
         return form.invalid || !this.disableOnEdit();
       case OperationsType.HOLDING:
       case OperationsType.TRADING:
-        return form.invalid || !this.validateSelect() || !this.disableOnEdit();
+        return (
+          form.invalid ||
+          !this.validateSelect() ||
+          !this.disableOnEdit() ||
+          this.assetToSell.balance == 0
+        );
       case OperationsType.TRANSFER:
         return (
           form.invalid ||

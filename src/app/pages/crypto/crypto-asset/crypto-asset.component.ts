@@ -206,4 +206,17 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
       this.hidden = isHidden;
     }
   }
+
+  get isAssetListEmptyOrZero(): boolean {
+    return !this.showZeroBalance
+      ? !this.assets?.length ||
+          this.assets.every((asset) => asset.balance === 0)
+      : false;
+  }
+
+  get isGraphEmptyOrZero(): boolean {
+    return (
+      !this.assets?.length || this.assets.every((asset) => asset.balance === 0)
+    );
+  }
 }

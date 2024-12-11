@@ -76,7 +76,6 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges): void {
     ScreenService.hideFooter();
     this.getAsset();
-    console.log(this.walletsAsset);
   }
 
   ngOnInit(): void {
@@ -210,7 +209,8 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   percentageAssetInTotal(): number {
-    return (this.asset.value! * 100) / this.cryptoDashboard.balance;
+    const res = (this.asset.value! * 100) / this.cryptoDashboard.balance;
+    return !Utils.isNullOrEmpty(res) ? res : 0;
   }
 
   filterWallets(): Wallet[] {
@@ -329,5 +329,17 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
       wallet.assets[0].history == undefined ||
       wallet.assets[0].history.length == 0
     );
+  }
+
+  calculatePerformance(asset: Asset) {
+    const res = ((asset.value! - asset.invested!) / asset.invested!) * 100;
+    return !Utils.isNullOrEmpty(res) ? res : 0;
+  }
+
+  get isAssetListEmptyOrZero(): boolean {
+    return !this.showZeroBalance
+      ? !this.walletsAsset?.length ||
+          this.walletsAsset.every((asset) => asset.balance === 0)
+      : false;
   }
 }

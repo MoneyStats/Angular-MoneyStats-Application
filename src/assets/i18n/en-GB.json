@@ -322,6 +322,7 @@
   "crypto_asset_page": {
     "title": "Crypto Assets",
     "assetList": "Asset List",
+    "empty_assets_data": "There are no available assets, or the existing assets have a balance of 0. To view the full list, click on 'Show with zero balance' or ensure the assets have a balance greater than 0.",
     "assetGraph": "Asset Chart",
     "tab1": "Overview",
     "tab2": "TradingView Data",
@@ -348,7 +349,8 @@
       "on": "on",
       "more": "View All",
       "info-trading": "No stats available for Trading Wallets",
-      "warning-empty-wallets": "Add new stats to retrieve data"
+      "warning-empty-wallets": "Add new stats to retrieve data",
+      "empty_wallets_data": "There are no wallets available, or the existing wallets have a balance of 0. To view the full list, click on 'Show with zero balance' or ensure that the wallets' balance is greater than 0."
     }
   },
   "market_data_page": {
@@ -577,7 +579,8 @@
     "select": "Select the wallet to receive the asset",
     "fees": "Fees",
     "editFees": "Edit Fees in",
-    "updateFees": "Update Fees"
+    "updateFees": "Update Fees",
+    "empty_wallets": "There are no wallets available. Add a new wallet to proceed with the transfer."
   },
   "shared_text": {
     "dashboard": "Dashboard",

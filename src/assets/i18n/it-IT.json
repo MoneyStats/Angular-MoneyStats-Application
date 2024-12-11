@@ -322,6 +322,7 @@
   "crypto_asset_page": {
     "title": "Asset Crypto",
     "assetList": "Lista Asset",
+    "empty_assets_data": "Non ci sono asset disponibili oppure gli asset presenti hanno un saldo pari a 0. Per visualizzare la lista completa, clicca su 'Mostra con saldo zero' o assicurati che il saldo degli asset sia superiore a 0.",
     "assetGraph": "Grafico Asset",
     "tab1": "Panoramica",
     "tab2": "Dati TradingView",
@@ -348,7 +349,8 @@
       "on": "il",
       "more": "Mostra tutto",
       "info-trading": "Nessuna statistica disponibile per Trading Wallet",
-      "warning-empty-wallets": "Aggiungi nuove statistiche per ottenere i dati"
+      "warning-empty-wallets": "Aggiungi nuove statistiche per ottenere i dati",
+      "empty_wallets_data": "Non ci sono portafogli disponibili oppure i portafogli presenti hanno un saldo pari a 0. Per visualizzare la lista completa, clicca su 'Mostra con saldo zero' o assicurati che il saldo dei portafogli sia superiore a 0."
     }
   },
   "market_data_page": {
@@ -577,7 +579,8 @@
     "select": "Seleziona il portafoglio dove ricevere l'asset",
     "fees": "Commissioni",
     "editFees": "Modifica le commissioni in",
-    "updateFees": "Aggiorna le commissioni"
+    "updateFees": "Aggiorna le commissioni",
+    "empty_wallets": "Non ci sono portafogli disponibili. Aggiungi un nuovo portafoglio per procedere con il trasferimento."
   },
   "shared_text": {
     "dashboard": "Dashboard",

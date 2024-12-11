@@ -2,7 +2,11 @@ import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
+import {
+  Dashboard,
+  Stats,
+  Wallet,
+} from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import {
@@ -133,11 +137,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   renderChart(dashboard: Dashboard) {
-    let dashboardRender = Utils.copyObject(dashboard);
+    let dashboardRender: Dashboard = Utils.copyObject(dashboard);
     setTimeout(() => {
       if (this.dashboard.wallets) {
-        this.chartOptions =
-          ChartService.appRenderWalletPerformance(dashboardRender);
+        Utils.mapLiveWalletsDataForChart(
+          dashboardRender.statsWalletDays,
+          dashboardRender.wallets
+        );
+        // this.chartOptions = ChartService.appRenderWalletPerformance(dashboardRender);
+        ChartService.appRenderWalletPerformance(dashboardRender).then(
+          (chart) => (this.chartOptions = chart)
+        );
       }
     }, 500);
   }
