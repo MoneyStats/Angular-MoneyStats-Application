@@ -56,7 +56,9 @@
     "crypto_tab2": "Assets",
     "crypto_tab3": "Operations",
     "crypto_tab4": "Resume",
-    "crypto_tab5": "Market Data"
+    "crypto_tab5": "Market Data",
+    "datatables_pagination": "Show _MENU_ rows",
+    "datatables_result": "Showing _START_ to _END_ of _TOTAL_ rows"
   },
   "auth": {
     "login": {

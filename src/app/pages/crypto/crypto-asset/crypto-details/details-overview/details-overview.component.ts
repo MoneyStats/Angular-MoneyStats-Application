@@ -339,7 +339,11 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
   get isAssetListEmptyOrZero(): boolean {
     return !this.showZeroBalance
       ? !this.walletsAsset?.length ||
-          this.walletsAsset.every((asset) => asset.balance === 0)
+          this.walletsAsset.every(
+            (wallet) =>
+              wallet.balance === 0 ||
+              wallet.assets.every((a) => a.balance === 0)
+          )
       : false;
   }
 }

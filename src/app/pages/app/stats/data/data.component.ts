@@ -1,14 +1,18 @@
 import {
+  AfterViewInit,
   Component,
   Input,
   OnChanges,
-  OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Dashboard, Stats } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
+import { DataTables } from 'src/assets/core/utils/datatables.service';
+
+declare var $: any; // Dichiara jQuery come variabile globale
 
 @Component({
   selector: 'app-data',
@@ -16,7 +20,7 @@ import { ChartService } from 'src/assets/core/utils/chart.service';
   styleUrls: ['./data.component.scss'],
   standalone: false,
 })
-export class DataComponent implements OnInit, OnChanges {
+export class DataComponent implements OnChanges {
   public chartOptions?: Partial<ApexOptions>;
   public chartPie?: Partial<ApexOptions>;
   public chartBar?: Partial<ApexOptions>;
@@ -32,13 +36,57 @@ export class DataComponent implements OnInit, OnChanges {
 
   effectiveDates: string[] = [];
 
-  constructor() {}
+  private tableId = 'resume_table';
+  private dataTableInstance: any;
+
+  constructor(private translate: TranslateService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.renderTable();
+    if (changes['dashboard']) {
+      this.renderTable();
+      this.reinitializeDataTable();
+    } else if (changes['change']) this.renderChart();
   }
 
-  ngOnInit(): void {}
+  private initializeDataTable(): void {
+    // Inizializza la DataTable solo se non è già inizializzata
+    if (!$.fn.DataTable.isDataTable('#' + this.tableId)) {
+      setTimeout(() => {
+        this.dataTableInstance = $('#' + this.tableId).DataTable({
+          pageLength: 15, // Numero di righe di default
+          paging: true,
+          searching: false,
+          ordering: false,
+          info: true,
+          order: [], // Non specifica nessun ordinamento iniziale
+          language: {
+            search: '',
+            lengthMenu: this.translate.instant('resume_page.table'),
+            info: this.translate.instant(
+              'core_header_footer.datatables_result'
+            ),
+          },
+          //dom: 'rtip', // Mostra solo: table (r), pagination (t), info (i), paging (p)
+        });
+        DataTables.setDatatablesStyle(
+          this.tableId,
+          this.translate.instant('market_data_page.search')
+        );
+      }, 100);
+    }
+  }
+
+  private reinitializeDataTable(): void {
+    // Distruggi la DataTable se esiste già
+    if (this.dataTableInstance) {
+      this.dataTableInstance.clear(); // Pulire i dati
+      this.dataTableInstance.destroy(); // Distruggere l'istanza
+      this.dataTableInstance = null;
+    }
+
+    // Reinizializza la DataTable con i nuovi dati
+    this.initializeDataTable();
+  }
 
   renderTable() {
     const dashboard: Dashboard = Utils.copyObject(this.dashboard);

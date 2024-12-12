@@ -35,3 +35,8 @@
 line {
   stroke: red !important;
 }
+
+#resume_table td,
+#resume_table th {
+  line-height: 22.5px; /* Centra il testo verticalmente per contenuto a singola riga */
+}
