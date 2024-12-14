@@ -1,6 +1,7 @@
 <div class="mx-auto section-width">
   <app-crypto-header
     title="{{ 'crypto_asset_page.title' | translate }}"
+    (emitOperationClick)="getWalletsCryptoData()"
   ></app-crypto-header>
 
   <!-- App Capsule -->
@@ -262,7 +263,7 @@
               {{ "crypto_asset_page.assetList" | translate }}
             </div>
             <a
-              *ngIf="!showZeroBalance"
+              *ngIf="!showZeroBalance && isAssetHasZero"
               (click)="zeroBalanceSwitch()"
               class="link clickable"
             >
@@ -312,7 +313,7 @@
 
 <app-operations-modal
   [modalId]="modalConstant.ADDOPERATIONS"
-  [wallets]="cryptoDashboard.wallets"
+  [wallets]="cryptoWallet!"
   [assets]="cryptoDashboard.assets"
   [currency]="cryptoDashboard.currency"
   [statsAssetsDays]="cryptoDashboard.statsAssetsDays"

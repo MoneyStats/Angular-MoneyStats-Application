@@ -12,6 +12,7 @@
         </p>
       </div>
       <div class="col-md-6">
+        @if (!isGraphEmptyOrZero) {
         <div class="form-group boxed float-end ms-1 me-1 date-form">
           <div class="input-wrapper">
             <input
@@ -29,10 +30,13 @@
               class="alert alert-danger mb-1"
               role="alert"
             >
-              {{ "insertStats.dataPresent" | translate }}
+              {{
+                "modal_component.operations.add_stats.data_select" | translate
+              }}
             </div>
           </div>
         </div>
+        }
       </div>
     </div>
   </div>
@@ -48,6 +52,13 @@
   </div>
   <div *ngIf="isAddStatsSelected" class="transactions row">
     <hr />
+    @if (isGraphEmptyOrZero) {
+    <div class="alert alert-danger text-center" role="alert">
+      <div>
+        {{ "modal_component.operations.add_stats.empty_data_body" | translate }}
+      </div>
+    </div>
+    }
     <div *ngFor="let asset of assets; let i = index">
       <div *ngIf="i == currentIndex && !isResumeAddAssets && asset.balance > 0">
         <div class="card-body" style="margin-top: -30px; margin-bottom: -20px">
@@ -61,8 +72,8 @@
               >
               <div class="input-info">
                 <small>
+                  {{ "shared_text.amount" | translate }}
                   {{ asset.name }}
-                  {{ "insertStats.balance" | translate }}
                   {{ asset.balance }}
                   {{ asset.symbol }}</small
                 >
@@ -134,7 +145,10 @@
                       type="number"
                       class="form-control"
                       id="text4b"
-                      placeholder="{{ 'insertStats.newBal' | translate }}"
+                      placeholder="{{
+                        'modal_component.operations.add_stats.new_balance'
+                          | translate
+                      }}"
                     />
                     <i class="clear-input">
                       <ion-icon
@@ -146,8 +160,8 @@
                     </i>
                   </div>
                   <div class="input-info">
+                    {{ "shared_text.amount" | translate }}
                     {{ asset.name }}
-                    {{ "insertStats.balance" | translate }}
                     {{ filterAsset(wallet, asset.name!).value }}
                     {{ currency }}
                   </div>
@@ -188,8 +202,8 @@
           </h5>
           <div class="input-info ms-2">
             <small>
+              {{ "shared_text.amount" | translate }}
               {{ asset.name }}
-              {{ "insertStats.balance" | translate }}
               {{ asset.balance }}
               {{ asset.symbol }}</small
             >

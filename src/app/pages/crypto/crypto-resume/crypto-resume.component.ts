@@ -1,4 +1,12 @@
-import { Component, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import {
   Asset,
@@ -17,12 +25,13 @@ import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
-    selector: 'app-crypto-resume',
-    templateUrl: './crypto-resume.component.html',
-    styleUrls: ['./crypto-resume.component.scss'],
-    standalone: false
+  selector: 'app-crypto-resume',
+  templateUrl: './crypto-resume.component.html',
+  styleUrls: ['./crypto-resume.component.scss'],
+  standalone: false,
 })
-export class CryptoResumeComponent implements OnInit, OnDestroy {
+export class CryptoResumeComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('history') history!: ElementRef;
   getResumeSub: Subscription = new Subscription();
   getCryptoWalletSubscribe: Subscription = new Subscription();
   cryptoAssetSubscribe: Subscription = new Subscription();
@@ -51,6 +60,13 @@ export class CryptoResumeComponent implements OnInit, OnDestroy {
     private cryptoService: CryptoService,
     private shared: SharedService
   ) {}
+
+  ngAfterViewInit(): void {
+    if (this.isAssetsWithNoHistory) {
+      this.getAssets();
+      this.getWalletsCryptoData();
+    }
+  }
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -197,5 +213,18 @@ export class CryptoResumeComponent implements OnInit, OnDestroy {
     this.cryptoAssetSubscribe.unsubscribe();
     this.cryptoHistorySubscribe.unsubscribe();
     this.getDashboardSubscribe.unsubscribe();
+  }
+
+  get isAssetsWithNoHistory(): boolean {
+    return (
+      !this.resumeData.statsAssetsDays ||
+      !this.resumeData.statsAssetsDays.length
+    );
+    //return (
+    //  !this.resumeAssets?.length ||
+    //  this.resumeAssets.every(
+    //    (asset) => !asset.history || !asset.history.length
+    //  )
+    //);
   }
 }

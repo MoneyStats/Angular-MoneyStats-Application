@@ -4,6 +4,10 @@ import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
+import {
+  ModalConstant,
+  OperationsType,
+} from 'src/assets/core/data/constant/constant';
 
 @Component({
   selector: 'app-category',
@@ -40,6 +44,14 @@ export class CategoryComponent implements OnChanges {
   public chartCategory?: Partial<ApexOptions>;
   @Input('change') change: string = '';
   constructor() {}
+
+  public get modalConstant(): typeof ModalConstant {
+    return ModalConstant;
+  }
+
+  public get operationTypeConstant(): typeof OperationsType {
+    return OperationsType;
+  }
 
   ngOnChanges(): void {
     if (this.dashboard.statsWalletDays) {

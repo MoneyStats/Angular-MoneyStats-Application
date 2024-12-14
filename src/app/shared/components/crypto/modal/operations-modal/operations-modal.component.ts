@@ -7,19 +7,15 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { Router } from '@angular/router';
 import { Asset } from 'src/assets/core/data/class/crypto.class';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
-import { ErrorService } from 'src/assets/core/interceptors/error.service';
-import { CryptoService } from 'src/assets/core/services/api/crypto.service';
-import { StatsService } from 'src/assets/core/services/api/stats.service';
 
 @Component({
-    selector: 'app-operations-modal',
-    templateUrl: './operations-modal.component.html',
-    styleUrls: ['./operations-modal.component.scss'],
-    standalone: false
+  selector: 'app-operations-modal',
+  templateUrl: './operations-modal.component.html',
+  styleUrls: ['./operations-modal.component.scss'],
+  standalone: false,
 })
 export class OperationsModalComponent implements OnInit {
   @Input('modalId') modalId: string = '';
@@ -49,7 +45,9 @@ export class OperationsModalComponent implements OnInit {
     return ModalConstant;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('OperationsModalComponent', this.assets);
+  }
 
   /**
    * ADD STATS METHODS

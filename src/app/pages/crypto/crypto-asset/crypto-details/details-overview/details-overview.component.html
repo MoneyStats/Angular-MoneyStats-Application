@@ -271,7 +271,7 @@
           {{ "crypto_asset_page.details.wallets" | translate }}{{ asset.name }}
         </div>
         <a
-          *ngIf="!showZeroBalance"
+          *ngIf="!showZeroBalance && isWalletHasZero"
           (click)="zeroBalanceSwitch()"
           class="link clickable"
         >

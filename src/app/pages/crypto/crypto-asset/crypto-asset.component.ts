@@ -16,6 +16,7 @@ import {
 import { Subscription } from 'rxjs';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { SharedService } from 'src/assets/core/services/config/shared.service';
+import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 
 @Component({
   selector: 'app-crypto-asset',
@@ -25,6 +26,7 @@ import { SharedService } from 'src/assets/core/services/config/shared.service';
 })
 export class CryptoAssetComponent implements OnInit, OnDestroy {
   cryptoAssetSubscribe: Subscription = new Subscription();
+  getCryptoWalletSubscribe: Subscription = new Subscription();
 
   amount: string = '******';
   hidden: boolean = false;
@@ -37,6 +39,8 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
   showZeroBalance: boolean = false;
   thisYear: number = new Date().getFullYear();
 
+  cryptoWallet?: Wallet[];
+
   constructor(
     private cryptoService: CryptoService,
     private shared: SharedService
@@ -48,6 +52,7 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.cryptoAssetSubscribe.unsubscribe();
+    this.getCryptoWalletSubscribe.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -70,6 +75,21 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
         this.graph1Y();
       });
     this.isWalletBalanceHidden();
+  }
+
+  getWalletsCryptoData() {
+    if (Utils.isNullOrEmpty(this.cryptoWallet))
+      this.getCryptoWalletSubscribe = this.cryptoService
+        .getWalletsCryptoData()
+        .subscribe((data) => {
+          this.cryptoService.cache.cacheWalletsCryptoData(data);
+          LOG.info(data.message!, 'CryptoDashboardComponent');
+          const wallets = data.data;
+          this.cryptoWallet = !Utils.isNullOrEmpty(wallets)
+            ? wallets.filter((w: any) => w.category == 'Crypto')
+            : [];
+          this.shared.setCryptoWallets(this.cryptoWallet!);
+        });
   }
 
   graphAll() {
@@ -211,6 +231,13 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
     return !this.showZeroBalance
       ? !this.assets?.length ||
           this.assets.every((asset) => asset.balance === 0)
+      : false;
+  }
+
+  get isAssetHasZero(): boolean {
+    return !this.showZeroBalance
+      ? !this.assets?.length ||
+          this.assets.filter((asset) => asset.balance === 0).length > 0
       : false;
   }
 

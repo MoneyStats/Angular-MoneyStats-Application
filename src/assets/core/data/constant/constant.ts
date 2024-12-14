@@ -65,6 +65,7 @@ export enum OperationsType {
   TRADING = 'Trading',
   TRANSFER = 'Transfer',
   CLOSEOPERATION = 'Close-Position',
+  CATEGORY = 'Category',
 }
 
 export enum MarketDataCategory {

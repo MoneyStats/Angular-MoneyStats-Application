@@ -11,7 +11,7 @@ import {
   Asset,
   CryptoDashboard,
 } from 'src/assets/core/data/class/crypto.class';
-import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import {
   ModalConstant,
   StorageConstant,
@@ -23,16 +23,15 @@ import { environment } from 'src/environments/environment';
 import { Subscription } from 'rxjs';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { SharedService } from 'src/assets/core/services/config/shared.service';
-import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
 import { WalletService } from 'src/assets/core/services/api/wallet.service';
 
 declare const TradingView: any;
 
 @Component({
-    selector: 'app-crypto-dashboard',
-    templateUrl: './crypto-dashboard.component.html',
-    styleUrls: ['./crypto-dashboard.component.scss'],
-    standalone: false
+  selector: 'app-crypto-dashboard',
+  templateUrl: './crypto-dashboard.component.html',
+  styleUrls: ['./crypto-dashboard.component.scss'],
+  standalone: false,
 })
 export class CryptoDashboardComponent implements OnInit, OnDestroy {
   getDashboardSubscribe: Subscription = new Subscription();

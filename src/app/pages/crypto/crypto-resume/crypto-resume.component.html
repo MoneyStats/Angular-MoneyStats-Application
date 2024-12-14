@@ -12,7 +12,7 @@
           <h2 class="title">{{ "crypto_resume_page.title" | translate }}</h2>
         </div>
       </div>
-      @if (resumeAssets && resumeAssets.length) {
+      @if (resumeData.balance != 0 && !isAssetsWithNoHistory) {
       <div class="addWallet col-md-6">
         <div class="form-group boxed">
           <div class="input-wrapper" style="max-width: 150px; margin-left: 80%">
@@ -35,19 +35,20 @@
       }
     </div>
   </div>
-  @if (!resumeAssets || !resumeAssets.length) {
+  @if (resumeData.balance == 0) {
   <app-content-box
     [header]="'crypto_resume_page.title' | translate"
     [body]="'resume_page.empty_body_text' | translate"
   ></app-content-box>
-  } @if (resumeAssets && resumeAssets.length) {
+  } @if (resumeData.balance != 0) {
   <div class="card transparent">
     <div class="card-body">
       <ul class="nav nav-tabs capsuled" role="tablist">
         <!-- Se Cambi *ngIf="assets" devi cambiare anche altra -->
-        <li *ngIf="resumeAssets" class="nav-item">
+        @if (!isAssetsWithNoHistory) {
+        <li class="nav-item">
           <a
-            class="nav-link active"
+            class="nav-link {{ isAssetsWithNoHistory ? '' : 'active' }}"
             data-bs-toggle="tab"
             href="#overview"
             role="tab"
@@ -56,6 +57,7 @@
             {{ "crypto_resume_page.resume_tab1" | translate }}
           </a>
         </li>
+        }
         <li *ngIf="isOperationPresent() > 0" class="nav-item">
           <a class="nav-link" data-bs-toggle="tab" href="#card" role="tab">
             {{ "crypto_resume_page.resume_tab2" | translate }}
@@ -66,20 +68,24 @@
             (click)="getAssets()"
             (click)="getWalletsCryptoData()"
             (click)="getCryptoHistoryData()"
-            class="nav-link {{ resumeAssets ? '' : 'active' }}"
+            class="nav-link {{ !isAssetsWithNoHistory ? '' : 'active' }}"
             data-bs-toggle="tab"
             href="#resume"
             role="tab"
+            #history
           >
             {{ "crypto_resume_page.resume_tab3" | translate }}
           </a>
         </li>
       </ul>
       <div class="tab-content mt-1 margin-bottom-size">
-        <div class="tab-pane fade show active" id="overview" role="tabpanel">
+        <div
+          class="tab-pane fade {{ isAssetsWithNoHistory ? '' : 'show active' }}"
+          id="overview"
+          role="tabpanel"
+        >
           <app-resume-assets
             [hidden]="hidden"
-            *ngIf="resumeAssets && resumeAssets.length"
             [resumeData]="resumeData"
             [isPast]="isPast"
           ></app-resume-assets>
@@ -108,7 +114,9 @@
           ></app-trading-resume>
         </div>
         <div
-          class="tab-pane fade {{ resumeAssets ? '' : 'show active' }}"
+          class="tab-pane fade {{
+            !isAssetsWithNoHistory ? '' : 'show active'
+          }}"
           id="resume"
           role="tabpanel"
         >

@@ -13,16 +13,15 @@ import { Subscription } from 'rxjs';
 import { Asset } from 'src/assets/core/data/class/crypto.class';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ErrorService } from 'src/assets/core/interceptors/error.service';
-import { CryptoService } from 'src/assets/core/services/api/crypto.service';
 import { StatsService } from 'src/assets/core/services/api/stats.service';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 
 @Component({
-    selector: 'app-add-crypto-stats',
-    templateUrl: './add-crypto-stats.component.html',
-    styleUrls: ['./add-crypto-stats.component.scss'],
-    standalone: false
+  selector: 'app-add-crypto-stats',
+  templateUrl: './add-crypto-stats.component.html',
+  styleUrls: ['./add-crypto-stats.component.scss'],
+  standalone: false,
 })
 export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
   // Subscribe
@@ -45,7 +44,6 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
   dateStats: string = '';
 
   constructor(
-    private cryptoService: CryptoService,
     private errorService: ErrorService,
     private router: Router,
     private statsService: StatsService
@@ -65,7 +63,7 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
         (wallet) => wallet.type && wallet.type == 'Holding'
       );
     let assetList: Array<string> = [];
-    if (!Utils.isNullOrEmpty(this.wallets))
+    if (!Utils.isNullOrEmpty(this.wallets)) {
       this.wallets.forEach((w) => {
         if (w.assets)
           w.assets.forEach((a) => {
@@ -74,7 +72,8 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
             }
           });
       });
-    this.assets = this.assets.filter((a) => assetList.includes(a.symbol!));
+      this.assets = this.assets.filter((a) => assetList.includes(a.symbol!));
+    }
   }
 
   filterWallets(wallets: Wallet[], assetName: string): Wallet[] {
@@ -282,5 +281,12 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnDestroy(): void {
     this.addStats.unsubscribe();
+  }
+
+  get isGraphEmptyOrZero(): boolean {
+    console.log(this.assets);
+    return (
+      !this.assets?.length || this.assets.every((asset) => asset.balance === 0)
+    );
   }
 }

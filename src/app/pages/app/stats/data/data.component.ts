@@ -1,10 +1,5 @@
-import {
-  AfterViewInit,
-  Component,
-  Input,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Dashboard, Stats } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
@@ -53,7 +48,8 @@ export class DataComponent implements OnChanges {
     if (!$.fn.DataTable.isDataTable('#' + this.tableId)) {
       setTimeout(() => {
         this.dataTableInstance = $('#' + this.tableId).DataTable({
-          pageLength: 15, // Numero di righe di default
+          pageLength: 12, // Numero di righe di default
+          responsive: true,
           paging: true,
           searching: false,
           ordering: false,
@@ -79,9 +75,104 @@ export class DataComponent implements OnChanges {
   private reinitializeDataTable(): void {
     // Distruggi la DataTable se esiste già
     if (this.dataTableInstance) {
-      this.dataTableInstance.clear(); // Pulire i dati
-      this.dataTableInstance.destroy(); // Distruggere l'istanza
+      this.dataTableInstance.destroy();
+      $('#' + this.tableId).empty();
       this.dataTableInstance = null;
+
+      const table = document.getElementById(this.tableId);
+      const datePipe = new DatePipe('en-US'); // Crea un'istanza di DatePipe per formattare la data
+
+      // Crea l'head della tabella dinamicamente
+      const head = this.dashboard.wallets
+        .map((w) => {
+          return `<th scope="col" class="text-center">
+                <img src="${w.img}" style="border-radius: 50%; width: 25px; height: 25px; align-items: center; justify-content: center; margin-right: 5px; margin-left: -10px;" alt="" />
+                ${w.name}
+              </th>`;
+        })
+        .join(''); // Unisci tutte le celle <th> in una stringa
+
+      // Crea il corpo della tabella dinamicamente
+      const body = this.tableBalance
+        .map((balances, index) => {
+          const balanceCells = balances
+            .map((balance: any, y: number) => {
+              const balanceClass =
+                balances.index !== y
+                  ? balance.percentage === 0
+                    ? 'text-warning'
+                    : balance.percentage > 0
+                    ? 'text-success'
+                    : 'text-danger'
+                  : '';
+              const balanceTextClass =
+                balances.index === y
+                  ? balance.balance === 0
+                    ? 'text-warning'
+                    : balance.balance > 0
+                    ? 'text-success'
+                    : 'text-danger'
+                  : '';
+
+              // Gestione della classe per l'ultimo elemento
+              const isLastElement = y === balances.length - 1;
+              const lastElementClass = isLastElement ? balanceTextClass : ''; // Aggiungi classe speciale per l'ultimo elemento
+
+              // Aggiungi il trend solo se balances.index non è uguale a y
+              const trendHtml =
+                balances.index !== y
+                  ? `<span>(${
+                      balance.percentage >= 1000 ? '+1000' : balance.percentage
+                    }%)</span>`
+                  : '';
+
+              return `<td style="line-height: 23px; width: 100px" class="${balanceClass} ${lastElementClass} ${
+                balances.index - 1 === y || balances.index === y
+                  ? 'text-end'
+                  : 'text-center'
+              }">
+                ${this.coinSymbol} ${
+                this.hidden ? this.amount : balance.balance
+              }
+                ${trendHtml} <!-- Aggiungi il trend dinamicamente -->
+              </td>`;
+            })
+            .join(''); // Unisci tutte le celle <td> in una stringa
+
+          // Formattazione della data con la pipe Date
+          const formattedDate = datePipe.transform(
+            balances[balances.length - 2].date,
+            'dd MMM yyyy'
+          );
+
+          return `<tr>
+                <th style="line-height: 23px;" scope="row">${formattedDate}</th>
+                ${balanceCells}
+              </tr>`;
+        })
+        .join(''); // Unisci tutte le righe <tr> in una stringa
+
+      // Crea l'HTML completo per la tabella
+      const data = `<thead>
+                    <tr>
+                      <th scope="col">${this.translate.instant(
+                        'resume_page.table_date'
+                      )}</th>
+                      ${head}
+                      <th scope="col" class="text-end">${this.translate.instant(
+                        'shared_text.amount'
+                      )}</th>
+                      <th scope="col" class="text-end">${this.translate.instant(
+                        'resume_page.table_trend'
+                      )}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${body}
+                  </tbody>`;
+
+      // Aggiungi l'HTML della tabella all'elemento
+      if (table) table.innerHTML = data;
     }
 
     // Reinizializza la DataTable con i nuovi dati
@@ -93,18 +184,21 @@ export class DataComponent implements OnChanges {
     this.tableBalance = [];
     this.balances = [];
     if (dashboard.statsWalletDays) {
-      let moreThanOneInAMonth: Array<string> = [];
-      dashboard.statsWalletDays.forEach((date, index) => {
-        let yearMonth: string = date.split('-')[0] + '-' + date.split('-')[1];
-
-        let find = moreThanOneInAMonth.find((d) => d.includes(yearMonth));
-        if (find && moreThanOneInAMonth.includes(find)) {
-          moreThanOneInAMonth.pop();
-          moreThanOneInAMonth.push(date);
-        } else {
-          moreThanOneInAMonth.push(date);
-        }
-      });
+      //let moreThanOneInAMonth: Array<string> = [];
+      //dashboard.statsWalletDays.forEach((date, index) => {
+      //  let yearMonth: string = date.split('-')[0] + '-' + date.split('-')[1];
+      //
+      //  let find = moreThanOneInAMonth.find((d) => d.includes(yearMonth));
+      //  if (find && moreThanOneInAMonth.includes(find)) {
+      //    moreThanOneInAMonth.pop();
+      //    moreThanOneInAMonth.push(date);
+      //  } else {
+      //    moreThanOneInAMonth.push(date);
+      //  }
+      //});
+      let moreThanOneInAMonth: Array<string> = Utils.copyObject(
+        dashboard.statsWalletDays
+      );
       moreThanOneInAMonth.forEach((date, index) => {
         this.tableBalance.push(this.tableColumsCreateRefactor(date, index));
       });

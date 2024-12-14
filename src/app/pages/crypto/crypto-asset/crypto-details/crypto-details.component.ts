@@ -16,17 +16,20 @@ import {
 import { CryptoService } from 'src/assets/core/services/api/crypto.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
-import { StorageConstant } from 'src/assets/core/data/constant/constant';
+import {
+  ModalConstant,
+  StorageConstant,
+} from 'src/assets/core/data/constant/constant';
 import { Subscription } from 'rxjs';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { SharedService } from 'src/assets/core/services/config/shared.service';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 
 @Component({
-    selector: 'app-crypto-details',
-    templateUrl: './crypto-details.component.html',
-    styleUrls: ['./crypto-details.component.scss'],
-    standalone: false
+  selector: 'app-crypto-details',
+  templateUrl: './crypto-details.component.html',
+  styleUrls: ['./crypto-details.component.scss'],
+  standalone: false,
 })
 export class CryptoDetailsComponent
   implements OnInit, AfterViewInit, OnDestroy
@@ -52,6 +55,10 @@ export class CryptoDetailsComponent
     private _renderer2: Renderer2,
     private shared: SharedService
   ) {}
+
+  public get modalConstant(): typeof ModalConstant {
+    return ModalConstant;
+  }
 
   ngOnDestroy(): void {
     this.routeSubscribe.unsubscribe();
@@ -171,5 +178,21 @@ export class CryptoDetailsComponent
           this.shared.setCryptoAssets(data.data);
         });
     else this.cryptoAssets = this.shared.getCryptoAssets();
+  }
+
+  getAssets() {
+    const dashboard = this.shared.getCryptoDashboardData();
+    this.cryptoDashboard = !Utils.isNullOrEmpty(dashboard)
+      ? dashboard
+      : new CryptoDashboard();
+    this.cryptoAssetSubscribe = this.cryptoService
+      .getCryptoAssetsData()
+      .subscribe((data) => {
+        this.cryptoService.cache.cacheAssetsData(data);
+        LOG.info(data.message!, 'CryptoAssetComponent');
+        this.cryptoAssets = data.data;
+        this.cryptoDashboard.assets = this.shared.setCryptoAssets(data.data);
+      });
+    this.isWalletBalanceHidden();
   }
 }

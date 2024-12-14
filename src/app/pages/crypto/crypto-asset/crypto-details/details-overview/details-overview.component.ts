@@ -346,4 +346,11 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
           )
       : false;
   }
+
+  get isWalletHasZero(): boolean {
+    return !this.showZeroBalance
+      ? !this.cryptoWallets?.length ||
+          this.cryptoWallets.filter((wallet) => wallet.balance === 0).length > 0
+      : false;
+  }
 }

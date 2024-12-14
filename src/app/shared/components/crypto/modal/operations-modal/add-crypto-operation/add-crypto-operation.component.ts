@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Asset } from 'src/assets/core/data/class/crypto.class';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
@@ -9,12 +15,12 @@ import {
 import { Utils } from 'src/assets/core/services/config/utils.service';
 
 @Component({
-    selector: 'app-add-crypto-operation',
-    templateUrl: './add-crypto-operation.component.html',
-    styleUrls: ['./add-crypto-operation.component.scss'],
-    standalone: false
+  selector: 'app-add-crypto-operation',
+  templateUrl: './add-crypto-operation.component.html',
+  styleUrls: ['./add-crypto-operation.component.scss'],
+  standalone: false,
 })
-export class AddCryptoOperationComponent implements OnInit {
+export class AddCryptoOperationComponent {
   @Input('wallets') wallets: Wallet[] = [];
   @Input('assets') assets: Asset[] = [];
   @Input('fiat') fiat?: string;
@@ -31,8 +37,6 @@ export class AddCryptoOperationComponent implements OnInit {
   filterWallets: Wallet[] = [];
 
   constructor(private router: Router) {}
-
-  ngOnInit(): void {}
 
   isWalletPresent() {
     return this.walletSelect != undefined;

@@ -13,6 +13,15 @@
       >
         <div class="section-title">
           {{ "resume_page.investments" | translate }}
+          <a
+            data-bs-toggle="modal"
+            attr.data-bs-target="#{{ modalConstant.INFO }}"
+            class="headerButton goBack clickable"
+            style="vertical-align: text-top; color: #fff"
+          >
+            <!--<ion-icon name="chevron-back-outline"></ion-icon>-->
+            <ion-icon name="alert-circle-outline"></ion-icon>
+          </a>
         </div>
         <div class="card">
           <div class="table-responsive">
@@ -93,7 +102,18 @@
         class="section mt-2 col-xl-3 col-md-6"
         *ngIf="mapWalletCategory.get(KEY_CAPITAL).data"
       >
-        <div class="section-title">{{ "resume_page.capital" | translate }}</div>
+        <div class="section-title">
+          {{ "resume_page.capital" | translate }}
+          <a
+            data-bs-toggle="modal"
+            attr.data-bs-target="#{{ modalConstant.INFO }}"
+            class="headerButton goBack clickable"
+            style="vertical-align: text-top; color: #fff"
+          >
+            <!--<ion-icon name="chevron-back-outline"></ion-icon>-->
+            <ion-icon name="alert-circle-outline"></ion-icon>
+          </a>
+        </div>
         <div class="card">
           <div class="table-responsive">
             <table class="table">
@@ -220,7 +240,18 @@
         class="section mt-2 col-xl-4 col-md-6"
         *ngIf="mapWalletCategory.get(KEY_SAVING).data"
       >
-        <div class="section-title">{{ "resume_page.saving" | translate }}</div>
+        <div class="section-title">
+          {{ "resume_page.saving" | translate }}
+          <a
+            data-bs-toggle="modal"
+            attr.data-bs-target="#{{ modalConstant.INFO }}"
+            class="headerButton goBack clickable"
+            style="vertical-align: text-top; color: #fff"
+          >
+            <!--<ion-icon name="chevron-back-outline"></ion-icon>-->
+            <ion-icon name="alert-circle-outline"></ion-icon>
+          </a>
+        </div>
         <div class="card">
           <div class="table-responsive">
             <table class="table">
@@ -300,7 +331,18 @@
         class="section mt-2 col-xl-4 col-md-6"
         *ngIf="mapWalletCategory.get(KEY_DEBITS).data"
       >
-        <div class="section-title">{{ "resume_page.debits" | translate }}</div>
+        <div class="section-title">
+          {{ "resume_page.debits" | translate }}
+          <a
+            data-bs-toggle="modal"
+            attr.data-bs-target="#{{ modalConstant.INFO }}"
+            class="headerButton goBack clickable"
+            style="vertical-align: text-top; color: #fff"
+          >
+            <!--<ion-icon name="chevron-back-outline"></ion-icon>-->
+            <ion-icon name="alert-circle-outline"></ion-icon>
+          </a>
+        </div>
         <div class="card">
           <div class="table-responsive">
             <table class="table">
@@ -380,7 +422,18 @@
         class="section mt-2 col-xl-4 col-md-6"
         *ngIf="mapWalletCategory.get(KEY_OTHER).data"
       >
-        <div class="section-title">{{ "resume_page.others" | translate }}</div>
+        <div class="section-title">
+          {{ "resume_page.others" | translate }}
+          <a
+            data-bs-toggle="modal"
+            attr.data-bs-target="#{{ modalConstant.INFO }}"
+            class="headerButton goBack clickable"
+            style="vertical-align: text-top; color: #fff"
+          >
+            <!--<ion-icon name="chevron-back-outline"></ion-icon>-->
+            <ion-icon name="alert-circle-outline"></ion-icon>
+          </a>
+        </div>
         <div class="card">
           <div class="table-responsive">
             <table class="table">
@@ -458,3 +511,8 @@
     </div>
   </section>
 </div>
+
+<app-info-modal
+  [operationType]="operationTypeConstant.CATEGORY"
+  [modalId]="modalConstant.INFO"
+></app-info-modal>

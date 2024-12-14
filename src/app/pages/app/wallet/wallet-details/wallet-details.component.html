@@ -519,7 +519,7 @@
               {{ "crypto_asset_page.assetList" | translate }}
             </h2>
             <a
-              *ngIf="!showZeroBalance"
+              *ngIf="!showZeroBalance && isAssetHasZero"
               (click)="zeroBalanceSwitch()"
               class="link clickable"
             >

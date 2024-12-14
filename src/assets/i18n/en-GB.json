@@ -501,9 +501,12 @@
         "title": "Add Stats",
         "sub_title": "Add new stats for the current asset across all your wallets",
         "resumeTitle": "Stats Summary",
+        "data_select": "Select a different Date",
         "resumeSubTitle": "Stats summary. Save to confirm the operation",
+        "new_balance": "Add a new Balance",
         "next": "Next Asset",
-        "save": "Save Stats"
+        "save": "Save Stats",
+        "empty_data_body": "No assets are available, or the existing assets have a balance of 0. To view the full list, a balance greater than 0 is required."
       },
       "operation": {
         "title": "Add Operation",
@@ -560,6 +563,8 @@
       "close_operation_details": "<p>You are about to close the current operation. In this section, you can confirm or modify the essential details before finalizing the operation.</p><h5>Operation Details:</h5><ul><li><strong>Exit Price:</strong> This is the price at which you intend to sell the asset. Ensure it aligns with your expectations and the current market conditions.</li><li><strong>Quantity:</strong> This is the amount of the asset you intend to sell. Ensure it matches the amount you actually hold.</li></ul><p>If you believe there are discrepancies in the above data or wish to make changes, click <button>Edit</button> to update the operation details.</p><p>Once you are satisfied with the information entered, you can proceed with closing the operation. Remember to act cautiously and make informed decisions.</p>",
       "transfer_title": "Crypto Transfer",
       "transfer_details": "In this section, you can easily transfer your assets from one wallet to another. Choose the <strong>destination wallet</strong>, select the desired <strong>crypto asset</strong>, and set the amount you wish to transfer. You can also define any <strong>fees</strong> to ensure a quick and secure transaction. Make sure to carefully verify all the details before confirming the transfer.",
+      "app_category_title": "Transaction Categories",
+      "app_category_details": "Transactions are grouped based on the latest available monthly stats, providing an aggregated view by category.",
       "close": "Close"
     }
   },

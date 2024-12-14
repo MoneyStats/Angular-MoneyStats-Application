@@ -502,8 +502,11 @@
         "sub_title": "Aggiungi nuove statistiche per l'asset corrente in tutti i tuoi portafogli",
         "resumeTitle": "Riepilogo Statistiche",
         "resumeSubTitle": "Riepilogo delle statistiche. Salva per confermare l'operazione",
+        "new_balance": "Inserisci il nuovo Saldo",
+        "data_select": "Seleziona una data differente",
         "next": "Prossimo Asset",
-        "save": "Salva Statistiche"
+        "save": "Salva Statistiche",
+        "empty_data_body": "Non ci sono asset disponibili oppure gli asset presenti hanno un saldo pari a 0. Per visualizzare la lista completa, bisogna avere un saldo maggiore di 0."
       },
       "operation": {
         "title": "Aggiungi Operazione",
@@ -560,6 +563,8 @@
       "close_operation_details": "<p>Stai per chiudere l'operazione corrente. In questa sezione puoi confermare o modificare i dettagli principali prima di finalizzare l'operazione.</p><h5>Dettagli dell'Operazione:</h5><ul><li><strong>Prezzo di Uscita:</strong> Indica il prezzo al quale desideri vendere l'asset. Assicurati che sia in linea con le tue aspettative e le condizioni attuali del mercato.</li><li><strong>Quantità:</strong> Questa è la quantità dell'asset che intendi vendere. Verifica che corrisponda alla quantità effettivamente posseduta.</li></ul><p>Se desideri modificare i dati sopra indicati, fai clic su <button>Modifica</button> per aggiornare i dettagli dell'operazione.</p><p>Una volta soddisfatto delle informazioni inserite, puoi procedere con la chiusura dell'operazione. Ricorda di agire con cautela e di prendere decisioni consapevoli.</p>",
       "transfer_title": "Trasferimento Crypto",
       "transfer_details": "In questa sezione puoi trasferire facilmente i tuoi asset da un wallet a un altro. Scegli il <strong>wallet di destinazione</strong>, seleziona l'<strong>asset crypto</strong> desiderato e imposta la quantità da trasferire. Puoi anche definire eventuali <strong>commissioni</strong> per garantire una transazione rapida e sicura. Verifica attentamente tutti i dettagli prima di confermare il trasferimento.",
+      "app_category_title": "Categorie delle transazioni",
+      "app_category_details": "Le transazioni sono raggruppate in base all'ultima statistica mensile disponibile, fornendo una visione aggregata per categoria.",
       "close": "Chiudi"
     }
   },

@@ -318,4 +318,11 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
           this.wallet.assets.every((asset) => asset.balance === 0)
       : false;
   }
+
+  get isAssetHasZero(): boolean {
+    return !this.showZeroBalance
+      ? !this.wallet?.assets?.length ||
+          this.wallet.assets.filter((asset) => asset.balance === 0).length > 0
+      : false;
+  }
 }

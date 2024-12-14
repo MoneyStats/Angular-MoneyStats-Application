@@ -1,6 +1,7 @@
 <div class="mx-auto section-width">
   <app-crypto-header
     title="{{ 'crypto_asset_page.title' | translate }}"
+    (emitOperationClick)="getWalletsCryptoData()"
   ></app-crypto-header>
 
   <!-- App Capsule -->
@@ -169,3 +170,12 @@
     </div>
   </div>
 </div>
+
+<app-operations-modal
+  [modalId]="modalConstant.ADDOPERATIONS"
+  [wallets]="cryptoWallets"
+  [assets]="cryptoDashboard.assets"
+  [currency]="cryptoDashboard.currency"
+  [statsAssetsDays]="cryptoDashboard.statsAssetsDays"
+  (emitAddStats)="getAssets()"
+></app-operations-modal>
