@@ -100,7 +100,8 @@ export class CategoryComponent implements OnChanges {
               let stats = new Stats();
               stats.balance = w.balance;
               stats.date = date;
-              if (!w.history.includes(stats)) w.history.push(stats);
+              if (w.history && !w.history.includes(stats))
+                w.history.push(stats);
             }
             return w;
           });

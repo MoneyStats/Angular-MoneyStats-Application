@@ -81,6 +81,7 @@ export class TradingResumeComponent implements OnInit, OnChanges {
     let totalInvested: number = 0;
     let operations: Operation[] = [];
     let wallets = Utils.copyObject(this.wallets);
+    let assets = this.cryptoService.getAssetList(this.wallets);
     if (wallets)
       wallets.forEach((wallet: any) => {
         if (wallet.assets && wallet.assets.length > 0)
@@ -97,9 +98,7 @@ export class TradingResumeComponent implements OnInit, OnChanges {
                 operation.wallet = wallet;
                 if (operation.type != OperationsType.NEWINVESTMENT)
                   operation.assetSell = Utils.copyObject(
-                    this.cryptoAssets.find(
-                      (a) => a.symbol == operation.entryCoin
-                    )
+                    assets.find((a) => a.symbol == operation.entryCoin)
                   );
                 operations.push(operation);
               });

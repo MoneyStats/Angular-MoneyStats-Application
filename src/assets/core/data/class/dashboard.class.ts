@@ -22,6 +22,7 @@ export class Dashboard implements DashboardInterface {
   statsWalletDays: string[] = [];
   categories: Category[] = categories;
   wallets: Wallet[] = [];
+  hasMoreRecords?: boolean;
 }
 
 export class Wallet extends GenericModel implements WalletInterface {

@@ -1,5 +1,6 @@
 import {
   Component,
+  CSP_NONCE,
   EventEmitter,
   Input,
   OnChanges,
@@ -13,6 +14,7 @@ import { Subscription } from 'rxjs';
 import { Asset } from 'src/assets/core/data/class/crypto.class';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ErrorService } from 'src/assets/core/interceptors/error.service';
+import { CryptoService } from 'src/assets/core/services/api/crypto.service';
 import { StatsService } from 'src/assets/core/services/api/stats.service';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { LOG } from 'src/assets/core/utils/log.service';
@@ -28,7 +30,8 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
   addStats: Subscription = new Subscription();
   @Input('assets') assets: Asset[] = [];
   @Input('currency') currency: string = '';
-  @Input('wallets') wallets: Wallet[] = [];
+  @Input('allWallets') allWallets: Wallet[] = [];
+
   // Boolean per bottoni e titoli Add Stats
   @Input('isAddStatsSelected') isAddStatsSelected: boolean = false;
   @Input('isResumeAddAssets') isResumeAddAssets: boolean = false;
@@ -43,16 +46,21 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
   dateValidation: boolean = false;
   dateStats: string = '';
 
+  wallets: Wallet[] = [];
+
   constructor(
     private errorService: ErrorService,
     private router: Router,
-    private statsService: StatsService
+    private statsService: StatsService,
+    private cryptoService: CryptoService
   ) {}
 
   ngOnInit(): void {
+    this.wallets = Utils.copyObject(this.allWallets);
     this.deleteTradingWallet();
   }
   ngOnChanges(changes: SimpleChanges): void {
+    this.wallets = Utils.copyObject(this.allWallets);
     this.deleteTradingWallet();
   }
 
@@ -72,6 +80,7 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
             }
           });
       });
+      this.assets = this.cryptoService.getAssetList(this.wallets);
       this.assets = this.assets.filter((a) => assetList.includes(a.symbol!));
     }
   }
@@ -130,30 +139,127 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   confirm() {
-    let statsWalletDays = this.statsAssetsDays;
+    const statsWalletDays = this.statsAssetsDays;
+    //const assetsList = this.cryptoService.getAssetList(this.allWallets);
 
     this.wallets.forEach((wallet) => {
-      // Check Wallet Date if is before the current date to prevert the update of the data
-      if (wallet.assets)
-        wallet.assets.forEach((asset) => {
-          // Non setto i dati se l'asset ha balance uguale a 0
-          if (asset.balance > 0) {
-            let stats: Stats = new Stats();
-            this.setDataForNewStats(asset, statsWalletDays, stats);
-            asset.newValue = parseFloat('');
-          }
-        });
+      // Verifico se il wallet contiene assets
+      wallet.assets?.forEach((asset) => {
+        // Eseguo l'operazione solo se il balance dell'asset è maggiore di 0
+        if (asset.balance > 0) {
+          // Trovo l'asset corrispondente nella lista assets e ne recupero la history
+          //const matchedAsset = assetsList.find(
+          //  (a) => a.identifier === asset.identifier
+          //);
+          //if (matchedAsset?.history) {
+          //  // Aggiungo la history trovata all'asset corrente
+          //  asset.history = [...(asset.history || []), ...matchedAsset.history];
+          //}
+          // Creo un nuovo oggetto Stats e imposto i dati per il nuovo stat
+          const stats = new Stats();
+          this.setDataForNewStats(asset, statsWalletDays, stats);
+
+          // Resetto il valore di newValue per l'asset
+          asset.newValue = 0; // Imposto 0 invece di una stringa vuota
+        }
+      });
     });
-    //if (this.cryptoService.cryptoDashboard.statsAssetsDays) {
-    //  this.cryptoService.cryptoDashboard.statsAssetsDays.push(this.dateStats);
-    //} else
-    //  this.cryptoService.cryptoDashboard.statsAssetsDays = [this.dateStats];
-    //
-    //this.cryptoService.cryptoDashboard.statsAssetsDays.sort();
+
+    // Imposto il flag di validazione come true
     this.saveValidation = true;
   }
 
   setDataForNewStats(asset: Asset, statsWalletDays: string[], stats: Stats) {
+    // Preparo la lista delle date da analizzare e aggiungo la data corrente
+    const days = [...(statsWalletDays || []), this.dateStats].sort();
+    const indexDate = days.indexOf(this.dateStats);
+
+    if (indexDate === -1) {
+      this.errorService.handleWalletStatsError();
+      this.router.navigate(['error']);
+      return;
+    }
+
+    // Trovo gli stats immediatamente precedenti e successivi
+    const beforeThisStats = (() => {
+      const previousDate = days[indexDate - 1];
+      if (previousDate) {
+        const stats = asset.history?.find(
+          (w) => w.date?.toString() === previousDate
+        );
+        if (stats) return stats;
+      }
+      const defaultStats = new Stats();
+      defaultStats.balance = 0.001;
+      return defaultStats;
+    })();
+
+    const afterThisStats = (() => {
+      const nextDate = days[indexDate + 1];
+      if (nextDate) {
+        return asset.history?.find((w) => w.date?.toString() === nextDate);
+      }
+      return undefined;
+    })();
+
+    if (!afterThisStats && asset.history?.some((w) => w.date === undefined)) {
+      this.errorService.handleWalletStatsError();
+      this.router.navigate(['error']);
+      return;
+    }
+
+    // Calcolo le percentuali e i trend per gli stats successivi
+    if (afterThisStats) {
+      const newValue = asset.newValue || 0.001;
+      const percentageAfter = (
+        ((afterThisStats.balance - newValue) / newValue) *
+        100
+      ).toFixed(2);
+      afterThisStats.percentage = Math.min(parseFloat(percentageAfter), 1000);
+      afterThisStats.trend = parseFloat(
+        (afterThisStats.balance - newValue).toFixed(2)
+      );
+    }
+
+    // Calcolo le percentuali e i trend per gli stats correnti
+    const percentageThis =
+      beforeThisStats.balance !== 0
+        ? (
+            ((asset.newValue! - beforeThisStats.balance) /
+              beforeThisStats.balance) *
+            100
+          ).toFixed(2)
+        : '0';
+
+    stats.balance = asset.newValue || 0;
+    stats.date = new Date(this.dateStats);
+    stats.percentage = Math.min(parseFloat(percentageThis), 1000);
+    stats.trend =
+      days.length > 1
+        ? parseFloat(
+            (
+              stats.balance -
+              (beforeThisStats.balance !== 0.001 ? beforeThisStats.balance : 0)
+            ).toFixed(2)
+          )
+        : 0;
+
+    // Aggiorno l'history dell'asset
+    if (!afterThisStats) {
+      if (!beforeThisStats.date) {
+        stats.percentage = 0;
+      }
+      asset.lastUpdate = stats.date;
+      asset.value = stats.balance;
+      asset.history = [stats];
+    } else if (indexDate === days.length - 2) {
+      asset.history = [afterThisStats, stats];
+    } else {
+      asset.history = [afterThisStats, stats];
+    }
+  }
+
+  setDataForNewStatsOld(asset: Asset, statsWalletDays: string[], stats: Stats) {
     /* trovo gli indici corrispondenti da analizzare inserendo la data corrente
      * all'interno della lista di date e trovo l'indice della mia data
      */
@@ -284,7 +390,6 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   get isGraphEmptyOrZero(): boolean {
-    console.log(this.assets);
     return (
       !this.assets?.length || this.assets.every((asset) => asset.balance === 0)
     );

@@ -6,21 +6,23 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { Operation } from 'src/assets/core/data/class/crypto.class';
+import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import {
   ModalConstant,
   OperationsType,
 } from 'src/assets/core/data/constant/constant';
 
 @Component({
-    selector: 'app-operation-details',
-    templateUrl: './operation-details.component.html',
-    styleUrls: ['./operation-details.component.scss'],
-    standalone: false
+  selector: 'app-operation-details',
+  templateUrl: './operation-details.component.html',
+  styleUrls: ['./operation-details.component.scss'],
+  standalone: false,
 })
 export class OperationDetailsComponent implements OnInit, OnChanges {
   @Input('operation') operation?: Operation = new Operation();
   @Input('modalId') modalId: string = '';
   @Input('currency') currency: string = '';
+  @Input('walletsAsset') walletsAsset: Wallet[] = [];
 
   trend: number = 0;
   percentage: number = 0;

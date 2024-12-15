@@ -72,7 +72,7 @@
               />
 
               <label for="{{ wallet.id }}">
-                <div class="card">
+                <div class="card" style="min-width: 120px">
                   <div class="card-body">
                     <p>
                       {{ wallet.name }} <br />
@@ -87,8 +87,8 @@
                     />
                     <small
                       ><p>
-                        {{ "operation_exchange_page.balance" | translate
-                        }}{{ wallet.balance }}
+                        {{ "operation_exchange_page.balance" | translate }}
+                        {{ wallet.balance }} {{ cryptoCurrency }}
                       </p></small
                     >
                   </div>

@@ -30,6 +30,7 @@
           {{ "resume_page.tab_category" | translate }}
         </a>
       </li>
+      @if (resumeData.hasMoreRecords) {
       <li class="nav-item">
         <a
           class="nav-link"
@@ -41,6 +42,7 @@
           {{ "resume_page.tab_history" | translate }}
         </a>
       </li>
+      }
     </ul>
   </div>
   <!-- * Extra Header -->

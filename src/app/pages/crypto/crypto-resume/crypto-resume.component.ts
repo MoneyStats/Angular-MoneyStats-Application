@@ -1,5 +1,7 @@
 import {
+  AfterViewChecked,
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   OnDestroy,
@@ -30,7 +32,9 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
   styleUrls: ['./crypto-resume.component.scss'],
   standalone: false,
 })
-export class CryptoResumeComponent implements OnInit, OnDestroy, AfterViewInit {
+export class CryptoResumeComponent
+  implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked
+{
   @ViewChild('history') history!: ElementRef;
   getResumeSub: Subscription = new Subscription();
   getCryptoWalletSubscribe: Subscription = new Subscription();
@@ -58,8 +62,14 @@ export class CryptoResumeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     private cryptoService: CryptoService,
-    private shared: SharedService
+    private shared: SharedService,
+    private cdr: ChangeDetectorRef
   ) {}
+
+  ngAfterViewChecked() {
+    // Forza Angular a verificare i cambiamenti
+    this.cdr.detectChanges();
+  }
 
   ngAfterViewInit(): void {
     if (this.isAssetsWithNoHistory) {

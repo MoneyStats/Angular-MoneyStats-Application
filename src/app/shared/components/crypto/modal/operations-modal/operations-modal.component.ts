@@ -1,12 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Asset } from 'src/assets/core/data/class/crypto.class';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
@@ -17,7 +9,7 @@ import { ModalConstant } from 'src/assets/core/data/constant/constant';
   styleUrls: ['./operations-modal.component.scss'],
   standalone: false,
 })
-export class OperationsModalComponent implements OnInit {
+export class OperationsModalComponent {
   @Input('modalId') modalId: string = '';
   @Input('wallets') wallets: Wallet[] = [];
   @Input('assets') assets: Asset[] = [];
@@ -43,10 +35,6 @@ export class OperationsModalComponent implements OnInit {
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
-  }
-
-  ngOnInit(): void {
-    console.log('OperationsModalComponent', this.assets);
   }
 
   /**

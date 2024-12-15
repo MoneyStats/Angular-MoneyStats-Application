@@ -14,18 +14,20 @@ import { TranslateService } from '@ngx-translate/core';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
 import { SharedService } from 'src/assets/core/services/config/shared.service';
+import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 
 @Component({
-    selector: 'app-close-operation',
-    templateUrl: './close-operation.component.html',
-    styleUrls: ['./close-operation.component.scss'],
-    standalone: false
+  selector: 'app-close-operation',
+  templateUrl: './close-operation.component.html',
+  styleUrls: ['./close-operation.component.scss'],
+  standalone: false,
 })
 export class CloseOperationComponent implements OnDestroy {
   closeSubscribe: Subscription = new Subscription();
 
   @Input('modalId') modalId: string = '';
   @Input('operation') operation?: Operation = new Operation();
+  @Input('walletsAsset') walletsAsset: Wallet[] = [];
   operationToClose: Operation = new Operation();
   cryptoCurrency: string = '';
 
@@ -116,8 +118,8 @@ export class CloseOperationComponent implements OnDestroy {
 
   closeOperation() {
     this.operationToClose!.status = 'CLOSED';
-    let dashboard = Utils.copyObject(this.shared.getCryptoDashboardData());
-    let wallet = dashboard.wallets.find(
+    const wallets = Utils.copyObject(this.walletsAsset);
+    let wallet = wallets.find(
       (w: any) =>
         w.assets != undefined &&
         w.assets.find(

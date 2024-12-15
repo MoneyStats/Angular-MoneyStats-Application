@@ -19,6 +19,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { v4 as uuidv4 } from 'uuid';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { SharedService } from 'src/assets/core/services/config/shared.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
 
 @Component({
   selector: 'app-operation-exchange',
@@ -68,6 +69,8 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   /* Refactor */
   assetToSell: Asset = new Asset();
 
+  cryptoCurrency: string = '';
+
   constructor(
     private cryptoService: CryptoService,
     private shared: SharedService,
@@ -100,6 +103,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.cryptoCurrency = UserService.getUserData().settings.cryptoCurrency!;
     this.getOperationExchange();
   }
 
@@ -326,10 +330,14 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
         operation.trend = 0;
 
         // Chiud eventuali operazioni di trading se sono presenti e Aperte
-        if (assetBuying.operations.filter((o: any) => o.status === 'OPEN')) {
+        if (
+          assetBuying.operations.filter((o: any) => o.status === 'OPEN')
+            .length > 0
+        ) {
           let open = assetBuying.operations.filter(
             (o: Operation) => o.status === 'OPEN'
           )[0];
+
           open.status = 'CLOSED';
           open.exitDate = new Date();
           open.exitPrice = assetBuying.current_price;
@@ -392,6 +400,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
 
       this.saveWallet(walletToSave);
     } else {
+      operation.exitCoin = operation.entryCoin;
       transferedAsset.operations = [operation];
 
       let walletSell = Utils.copyObject(this.wallet);
