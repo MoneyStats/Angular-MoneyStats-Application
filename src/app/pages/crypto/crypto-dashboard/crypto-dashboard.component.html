@@ -184,6 +184,7 @@
               data-bs-toggle="modal"
               attr.data-bs-target="#{{ modalConstant.ADDOPERATIONS }}"
               class="inline-block quick-action clickable"
+              (click)="emitOperationClick(true)"
             >
               <div class="user-card">
                 <div class="icon-wrapper bg-success">
