@@ -1,9 +1,11 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+import { version } from 'os';
 const baseUrlApp: string = '../../';
 //const host: string = 'http://pc-giovanni:8080/moneystats-service';
-const host: string = 'http://pc-giovanni:8080';
+const host: string =
+  process.env['MONEYSTATS_SERVICE_URL'] || 'http://pc-giovanni:8080';
 const subDomain = '';
 //const subDomain = 'moneystats/';
 
@@ -16,7 +18,7 @@ export const environment = {
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: '3.0.0 Alpha',
+  version: require('../../package.json').version + ' Alpha',
   hostService: host + subDomain,
   //version: require(baseUrlApp + subDomain + 'package.json').version,
 
@@ -91,7 +93,7 @@ export const environment = {
    * @Image_Upload
    */
   uploadImageUrl: host + '/v1/attachment/upload',
-  imageSizeMax: 2000000,
+  imageSizeMax: Number(process.env['IMAGE_SIZE']) || 2000000,
 
   /**
    * @MarketData
@@ -116,8 +118,8 @@ export const environment = {
   getCryptoHistoryDataUrl: host + '/v1/crypto/history',
 
   // Cache
-  cacheEnable: false,
-  cacheTimeout: 180000,
+  cacheEnable: process.env['CACHE_ENABLE'] || false,
+  cacheTimeout: Number(process.env['CACHE_TIMEOUT']) || 180000,
 
   forgotPassword: true,
 };

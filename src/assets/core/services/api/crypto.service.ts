@@ -211,7 +211,8 @@ export class CryptoService {
 
   getAssetList(wallets: Wallet[]): Asset[] {
     const allAssets: Array<Asset> = [];
-    wallets.forEach((wallet) => {
+    const wall: Wallet[] = Utils.copyObject(wallets);
+    wall.forEach((wallet) => {
       if (!Utils.isNullOrEmpty(wallet.assets))
         wallet.assets.forEach((asset) => {
           if (allAssets.find((a) => a.name == asset.name)) {

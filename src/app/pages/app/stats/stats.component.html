@@ -70,6 +70,7 @@
               class="form-control custom-select"
               id="select4b"
               (change)="onChange($event)"
+              [disabled]="resumeFullYears.length == 1"
             >
               <option
                 [selected]="currentYear.toString() === year"

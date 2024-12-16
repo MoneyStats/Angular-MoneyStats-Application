@@ -11,11 +11,7 @@ import {
   ModalConstant,
   OperationsType,
 } from 'src/assets/core/data/constant/constant';
-import {
-  Asset,
-  CryptoDashboard,
-  Operation,
-} from 'src/assets/core/data/class/crypto.class';
+import { Asset, Operation } from 'src/assets/core/data/class/crypto.class';
 import { v4 as uuidv4 } from 'uuid';
 import { CryptoService } from 'src/assets/core/services/api/crypto.service';
 import { Router } from '@angular/router';
@@ -23,10 +19,10 @@ import { Utils } from 'src/assets/core/services/config/utils.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
 
 @Component({
-    selector: 'app-operations-list',
-    templateUrl: './operations-list.component.html',
-    styleUrls: ['./operations-list.component.scss'],
-    standalone: false
+  selector: 'app-operations-list',
+  templateUrl: './operations-list.component.html',
+  styleUrls: ['./operations-list.component.scss'],
+  standalone: false,
 })
 export class OperationsListComponent implements OnInit, OnChanges {
   @Input('walletsAsset') walletsAsset: Wallet[] = [];

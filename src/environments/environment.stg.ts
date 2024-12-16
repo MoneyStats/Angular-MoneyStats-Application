@@ -12,21 +12,28 @@ export const environment = {
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: '2.1.2 (Beta)',
+  version: '3.0.0 (Beta)',
   hostService: host + subDomain,
 
   // Mock Data
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
   getDashboardDataUrlMock: baseUrlApp + 'assets/core/mock/dashboard.mock.json',
-  getWalletDataUrl: baseUrlApp + 'assets/core/mock/wallets.mock.json',
+  mockedGetWalletsDataUrl: baseUrlApp + 'assets/core/mock/wallets.mock.json',
+  mockedGetWalletsCryptoDataUrl:
+    baseUrlApp + 'assets/core/mock/wallets.crypto.mock.json',
+  mockedGetWalletByIdDataUrl:
+    baseUrlApp + 'assets/core/mock/walletById.mock.json',
   getResumeDataUrlMock: baseUrlApp + 'assets/core/mock/stats.mock.json',
+  getHistoryDataUrlMock: baseUrlApp + 'assets/core/mock/history.mock.json',
   getTemplate: baseUrlApp + 'assets/template/template.json',
   getCryptoDashboardMock: baseUrlApp + 'assets/core/mock/crypto.dash.mock.json',
   getCryptoPriceMock: baseUrlApp + 'assets/core/mock/crypto.price.mock.json',
   getCryptoResumeMock: baseUrlApp + 'assets/core/mock/crypto.stats.mock.json',
   getCryptoAssetsMock: baseUrlApp + 'assets/core/mock/crypto.assets.mock.json',
-  getCryptoDetailsMock:
+  getCryptoAssetsDetailsMock:
     baseUrlApp + 'assets/core/mock/crypto.details.mock.json',
+  getCryptoHistoryDataUrlMock:
+    baseUrlApp + 'assets/core/mock/history.crypto.mock.json',
 
   /*
    * Authentication Datas
@@ -43,35 +50,65 @@ export const environment = {
   refreshTokenUrl: host + '/v1/oAuth/token/refresh',
   refreshTime: 900000,
 
-  /*
-   * App
-   */
-  addUpdateWalletDataUrl: host + '/v1/wallet/insert-update',
-  uploadImage: host + '/v1/upload/attachment',
-  imageSizeMax: 1000000,
-  listWalletDataurl: host + '/v1/wallet/list',
-  getDashboardDataUrl: host + '/v1/app/dashboard',
-  getResumeDataUrl: host + '/v1/app/resume',
-  addStatsDataUrl: host + '/v1/app/add/stats',
-  openGithubIssues: host + '/v1/app/report/bug',
-  contactSupport: host + '/v1/app/contact',
   updateUserDataUrl: host + '/v1/auth/update/user',
-  backupDataUrl: host + '/v1/app/backup',
-  restoreDataUrl: host + '/v1/app/restore',
-  forgotPassword: true,
-
-  /*
-   * Crypto Section
-   */
   cleanCacheUrl: host + '/v1/crypto/cache/clean',
-  marketDataUrl: host + '/v1/crypto/marketData/import',
-  addCryptoAssetDataUrl: host + '/v1/crypto/asset/addOrUpdate',
-  addCryptoAssetsDataUrl: host + '/v1/crypto/asset/list/addOrUpdate',
-  getCryptoAssetDataUrl: host + '/v1/crypto/asset/getAll',
-  getCryptoDetailsDataUrl: host + '/v1/crypto/asset/get',
+
+  /**
+   * @App
+   */
+  getDashboardDataUrl: host + '/v1/app/dashboard',
+  getResumeDataUrl: host + '/v1/app/resume/:year',
+  getHistoryDataUrl: host + '/v1/app/history',
+
+  /**
+   * @Settings
+   */
+  openGithubIssues: host + '/v1/settings/report/bug',
+  backupDataUrl: host + '/v1/settings/backup',
+  restoreDataUrl: host + '/v1/settings/restore',
+  contactSupport: host + '/v1/settings/contact',
+  /**
+   * @Stats
+   */
+  postStatsDataUrl: host + '/v1/stats',
+
+  /**
+   * @Wallets
+   */
+  getWalletsDataUrl: host + '/v1/wallets',
+  getWalletByIdUrl: host + '/v1/wallets/:id',
+  postWalletsDataUrl: host + '/v1/wallets',
+  updateWalletsDataUrl: host + '/v1/wallets',
+  deleteWalletsDataUrl: host + '/v1/wallets/:id',
+  getWalletsCryptoDataUrl: host + '/v1/wallets/crypto',
+
+  /**
+   * @Image_Upload
+   */
+  uploadImageUrl: host + '/v1/attachment/upload',
+  imageSizeMax: 1000000,
+
+  /**
+   * @MarketData
+   */
+  getMarketDataUrl: host + '/v1/market-data/:currency',
+  importMarketDataUrl: host + '/v1/market-data/import',
+
+  /**
+   * @Crypto_Assets
+   */
+  getCryptoAssetsDataUrl: host + '/v1/crypto/assets',
+  getCryptoAssetsDetailsDataUrl: host + '/v1/crypto/assets/:identifier',
+  postCryptoAssetDataUrl: host + '/v1/crypto/assets',
+  putCryptoAssetDataUrl: host + '/v1/crypto/assets',
+  postCryptoAssetsDataUrl: host + '/v1/crypto/assets/list',
+
+  /**
+   * @Crypto_Section
+   */
   getCryptoDashboardDataUrl: host + '/v1/crypto/dashboard',
-  getCryptoResumeDataUrl: host + '/v1/crypto/resume',
-  getMarketDataUrl: host + '/v1/market-data/get',
+  getCryptoResumeDataUrl: host + '/v1/crypto/resume/:year',
+  getCryptoHistoryDataUrl: host + '/v1/crypto/history',
 
   // Cache
   cacheEnable: true,

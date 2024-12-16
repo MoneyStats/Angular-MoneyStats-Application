@@ -228,10 +228,14 @@
           "crypto_asset_page.details.view" | translate
         }}</a>
       </div>
-      <app-operations-list
+      <!--<app-operations-list
         [modalID]="modalConstant.CRYPTOHISTORY"
         [walletsAsset]="cryptoWallets"
         [cryptoAssets]="cryptoAssets"
+      ></app-operations-list>-->
+      <app-operations-list
+        [modalID]="modalConstant.CRYPTOHISTORY"
+        [walletsAsset]="cryptoWallets"
       ></app-operations-list>
     </div>
     <!-- History -->

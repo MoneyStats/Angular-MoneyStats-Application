@@ -156,9 +156,7 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
                 operation.wallet = wallet;
                 if (operation.type != OperationsType.NEWINVESTMENT)
                   operation.assetSell = Utils.copyObject(
-                    this.cryptoAssets.find(
-                      (a) => a.symbol == operation.entryCoin
-                    )
+                    assets.find((a: Asset) => a.symbol == operation.entryCoin)
                   );
                 this.operations.push(operation);
               });

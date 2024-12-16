@@ -4,17 +4,16 @@ import {
   ModalConstant,
   OperationsType,
 } from 'src/assets/core/data/constant/constant';
-import { CryptoService } from 'src/assets/core/services/api/crypto.service';
-import { SwalService } from 'src/assets/core/utils/swal.service';
-import { Router } from '@angular/router';
-import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { Subscription } from 'rxjs';
-import { LOG } from 'src/assets/core/utils/log.service';
-import { TranslateService } from '@ngx-translate/core';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
-import { SharedService } from 'src/assets/core/services/config/shared.service';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { LOG } from 'src/assets/core/utils/log.service';
+import { SwalService } from 'src/assets/core/utils/swal.service';
+import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
+import { CryptoService } from 'src/assets/core/services/api/crypto.service';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-close-operation',
@@ -39,8 +38,7 @@ export class CloseOperationComponent implements OnDestroy {
   constructor(
     private cryptoService: CryptoService,
     private router: Router,
-    private translate: TranslateService,
-    private shared: SharedService
+    private translate: TranslateService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -88,6 +86,7 @@ export class CloseOperationComponent implements OnDestroy {
       (currentPrice - this.operation?.entryPriceValue!).toFixed(2)
     );
     this.operationToClose = operation;
+    console.log(this.operationToClose);
   }
 
   refreshData() {
@@ -119,6 +118,7 @@ export class CloseOperationComponent implements OnDestroy {
   closeOperation() {
     this.operationToClose!.status = 'CLOSED';
     const wallets = Utils.copyObject(this.walletsAsset);
+    console.log(wallets);
     let wallet = wallets.find(
       (w: any) =>
         w.assets != undefined &&
@@ -128,6 +128,7 @@ export class CloseOperationComponent implements OnDestroy {
             a.operations.find((o: any) => o.id == this.operation?.id)
         )
     );
+    console.log(wallet);
     //let wallet = this.operation?.wallet;
     let asset1 = wallet?.assets.find(
       (a: any) => a.symbol == this.operationToClose?.exitCoin
@@ -149,12 +150,13 @@ export class CloseOperationComponent implements OnDestroy {
     asset1!.balance -= this.operationToClose?.entryQuantity!;
     asset1!.invested -= this.operationToClose?.entryPriceValue!;
     asset1!.updateDate = new Date();
-
+    console.log(asset2, asset1, this.operationToClose?.exitQuantity!);
     asset2!.balance += this.operationToClose?.exitQuantity!;
     asset2!.invested += this.operationToClose?.entryPriceValue!;
     asset2!.updateDate = new Date();
 
     wallet!.assets = [asset1!, asset2!];
+    console.log(wallet);
 
     this.closeSubscribe = this.cryptoService
       .updateCryptoAsset(wallet!)

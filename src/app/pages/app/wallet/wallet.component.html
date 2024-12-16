@@ -58,13 +58,22 @@
       <!-- waiting tab -->
       <div class="tab-pane fade show active" id="active" role="tabpanel">
         <div class="row">
-          <app-wallet-card
+          <!--<app-wallet-card
             *ngFor="let wallet of walletActive(wallets)"
             [style]="
               'background-image: url(' +
               wallet!.img +
               ') !important; box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.85)'
             "
+            class="col-xl-2 col-md-3 mt-3 col-sm-4 col-6"
+            [coinSymbol]="coinSymbol"
+            [wallet]="wallet"
+            [btn]="'wallets_page.open' | translate"
+            [hiddenAmount]="hidden"
+          >
+          </app-wallet-card>-->
+          <app-wallet-card
+            *ngFor="let wallet of walletActive(wallets)"
             class="col-xl-2 col-md-3 mt-3 col-sm-4 col-6"
             [coinSymbol]="coinSymbol"
             [wallet]="wallet"
@@ -79,13 +88,21 @@
       <!-- deleted tab -->
       <div class="tab-pane fade" id="deleted" role="tabpanel">
         <div class="row">
-          <app-wallet-card
+          <!--<app-wallet-card
             *ngFor="let wallet of walletDeleted(wallets)"
             [style]="
               'background-image: url(' +
               wallet!.img +
               ') !important; box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.85)'
             "
+            class="col-xl-2 col-md-3 mt-3 col-sm-4 col-6"
+            [wallet]="wallet"
+            [btn]="'wallets_page.open' | translate"
+            [hiddenAmount]="hidden"
+          >
+          </app-wallet-card>-->
+          <app-wallet-card
+            *ngFor="let wallet of walletDeleted(wallets)"
             class="col-xl-2 col-md-3 mt-3 col-sm-4 col-6"
             [wallet]="wallet"
             [btn]="'wallets_page.open' | translate"

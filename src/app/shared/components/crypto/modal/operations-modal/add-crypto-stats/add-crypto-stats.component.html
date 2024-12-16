@@ -320,7 +320,7 @@
   <!-- Bottoni Add Stats Desktop -->
   <div *ngIf="isAddStatsSelected" class="addWallet text-end hidden_mobile">
     <button
-      *ngIf="currentIndex != assets.length"
+      *ngIf="isGraphEmptyOrZero || currentIndex != assets.length"
       (click)="changeAsset()"
       [disabled]="f.invalid && !validateDate()"
       type="button"
@@ -346,7 +346,7 @@
   <div class="hidden_desktop">
     <div *ngIf="isAddStatsSelected" class="form-group basic">
       <button
-        *ngIf="currentIndex != assets.length"
+        *ngIf="isGraphEmptyOrZero || currentIndex != assets.length"
         (click)="changeAsset()"
         [disabled]="f.invalid && !validateDate()"
         type="button"

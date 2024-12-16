@@ -246,6 +246,17 @@ export class ResumeAssetsComponent implements OnChanges {
       } else {
         if (index === this.resumeData.assets.length - 1) {
           this.filterDateHistory.push(history.date.toString());
+          let old = a.history?.find(
+            (h) =>
+              this.filterDateHistory[this.filterDateHistory.length - 1] === date
+          );
+          if (old) {
+            const res = (
+              ((history.balance - old.balance) / old.balance) *
+              100
+            ).toFixed(2);
+            history.percentage = Number.parseFloat(res);
+          }
         }
       }
       array.push(history);
@@ -293,6 +304,7 @@ export class ResumeAssetsComponent implements OnChanges {
     pastPercentage: number
   ) {
     if (isPast) return pastPercentage;
+    console.log(balance, oldBalance, pastPercentage);
     const res = (((balance - oldBalance) / oldBalance) * 100).toFixed(2);
     return Number.parseFloat(res);
   }

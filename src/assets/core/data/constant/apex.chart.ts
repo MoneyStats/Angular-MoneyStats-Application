@@ -3,6 +3,8 @@ import {
   ApexChart,
   ApexXAxis,
   ApexTitleSubtitle,
+  ApexPlotOptions,
+  ApexStroke,
 } from 'ng-apexcharts';
 
 //import { ChartConfiguration, ChartOptions } from 'chart.js';

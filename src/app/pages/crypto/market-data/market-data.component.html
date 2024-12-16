@@ -11,16 +11,21 @@
             <h2 class="title">{{ "market_data_page.title" | translate }}</h2>
             <p style="margin-top: -10px">
               <small
-                >{{ "market_data_page.currency" | translate }}
+                >{{ "market_data_page.updated" | translate }}
+                {{ updateDate | date : "d MMM y, HH:mm" }}</small
+              >
+              |
+              <small>
+                {{ "market_data_page.currency" | translate }}
                 {{ cryptoCurrency }}</small
               >
             </p>
-            <p style="margin-top: -25px">
+            <!--<p style="margin-top: -25px">
               <small
                 >{{ "market_data_page.updated" | translate }}
                 {{ updateDate | date : "d MMM y, HH:mm" }}</small
               >
-            </p>
+            </p>-->
           </div>
         </div>
         <div hidden class="col-12 col-md-4">

@@ -18,7 +18,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "outputPath": "dist/angular-moneystats",
             "index": "src/index.html",
@@ -26,6 +26,9 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "customWebpackConfig": {
+              "path": "src/custom-webpack.config.ts"
+            },
             "assets": [
               "src/favicon.ico",
               "src/assets",
@@ -129,7 +132,7 @@
             "disableHostCheck": true,
             "host": "0.0.0.0"
           },
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/custom-webpack:dev-server",
           "configurations": {
             "production": {
               "buildTarget": "angular-moneystats:build:production"

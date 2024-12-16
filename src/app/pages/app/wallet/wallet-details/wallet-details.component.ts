@@ -131,7 +131,11 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
         '284bff'
       ).then((color) => {
         let backgroud = document.getElementById('gradientSection');
-        backgroud!.style.background = color;
+        let graphCard = document.getElementById('graph-card');
+        if (!ScreenService.isMobileDevice()) {
+          backgroud!.style.background = color;
+          graphCard?.classList.add('ms-1');
+        }
       });
     }
 
