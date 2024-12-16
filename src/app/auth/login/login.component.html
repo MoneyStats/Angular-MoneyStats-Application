@@ -86,7 +86,7 @@
             >{{ "modal_component.info_app.title" | translate }}</a
           >
         </div>
-        <div *ngIf="environment.forgotPassword">
+        <div class="text-end" *ngIf="environment.forgotPassword">
           <a routerLink="/auth/forgot" class="text-muted">{{
             "auth.login.forgot" | translate
           }}</a>

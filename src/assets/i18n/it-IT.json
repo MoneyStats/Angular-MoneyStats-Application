@@ -458,7 +458,7 @@
       "copied": "Valore copiato negli appunti"
     },
     "info_app": {
-      "title": "Informazioni sulla Registrazione",
+      "title": "Info Registrazione",
       "text": "Per registrarti all'applicazione MoneyStats, hai bisogno di un codice di invito. Se non lo possiedi, puoi richiederlo a <a href='https://giovannilamarmora.github.io/#contact' target='_blank'>Giovanni</a> nella sezione Contatti. Nel frattempo, puoi esplorare l'app usando le seguenti credenziali:<br>• Nome utente: moneystats<br>• Password: moneystats<br>Questo account ti fornisce un'anteprima dell'interfaccia dell'app. Tieni presente che non potrai modificare o aggiungere nuovi dati.",
       "close": "Chiudi"
     },
