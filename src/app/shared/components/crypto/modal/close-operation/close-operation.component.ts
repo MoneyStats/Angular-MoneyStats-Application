@@ -86,7 +86,6 @@ export class CloseOperationComponent implements OnDestroy {
       (currentPrice - this.operation?.entryPriceValue!).toFixed(2)
     );
     this.operationToClose = operation;
-    console.log(this.operationToClose);
   }
 
   refreshData() {
@@ -118,7 +117,6 @@ export class CloseOperationComponent implements OnDestroy {
   closeOperation() {
     this.operationToClose!.status = 'CLOSED';
     const wallets = Utils.copyObject(this.walletsAsset);
-    console.log(wallets);
     let wallet = wallets.find(
       (w: any) =>
         w.assets != undefined &&
@@ -128,7 +126,6 @@ export class CloseOperationComponent implements OnDestroy {
             a.operations.find((o: any) => o.id == this.operation?.id)
         )
     );
-    console.log(wallet);
     //let wallet = this.operation?.wallet;
     let asset1 = wallet?.assets.find(
       (a: any) => a.symbol == this.operationToClose?.exitCoin
@@ -150,13 +147,11 @@ export class CloseOperationComponent implements OnDestroy {
     asset1!.balance -= this.operationToClose?.entryQuantity!;
     asset1!.invested -= this.operationToClose?.entryPriceValue!;
     asset1!.updateDate = new Date();
-    console.log(asset2, asset1, this.operationToClose?.exitQuantity!);
     asset2!.balance += this.operationToClose?.exitQuantity!;
     asset2!.invested += this.operationToClose?.entryPriceValue!;
     asset2!.updateDate = new Date();
 
     wallet!.assets = [asset1!, asset2!];
-    console.log(wallet);
 
     this.closeSubscribe = this.cryptoService
       .updateCryptoAsset(wallet!)

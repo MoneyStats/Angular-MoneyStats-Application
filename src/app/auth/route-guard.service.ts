@@ -11,7 +11,6 @@ import { UserService } from 'src/assets/core/services/api/user.service';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { environment } from 'src/environments/environment';
 import { SwUpdate } from '@angular/service-worker';
-import { ToastService } from 'src/assets/core/utils/toast.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 
 @Injectable({

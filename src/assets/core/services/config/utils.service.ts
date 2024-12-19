@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { deepCopy } from '@angular-devkit/core/src/utils/object';
 import { UserService } from '../api/user.service';
 import { Stats, Wallet } from '../../data/class/dashboard.class';
+import { LOG } from '../../utils/log.service';
 
 @Injectable({
   providedIn: 'root',
@@ -67,7 +68,15 @@ export class Utils {
   }
 
   public static setInSession(name: string, value: any) {
-    sessionStorage.setItem(name, JSON.stringify(value));
+    try {
+      sessionStorage.setItem(name, JSON.stringify(value));
+    } catch (e: any) {
+      LOG.info(
+        'Error on saving in session, message: ' + e.message,
+        'UtilsService'
+      );
+      return;
+    }
   }
 
   public static removeFromSession(name: string) {

@@ -304,7 +304,6 @@ export class ResumeAssetsComponent implements OnChanges {
     pastPercentage: number
   ) {
     if (isPast) return pastPercentage;
-    console.log(balance, oldBalance, pastPercentage);
     const res = (((balance - oldBalance) / oldBalance) * 100).toFixed(2);
     return Number.parseFloat(res);
   }
