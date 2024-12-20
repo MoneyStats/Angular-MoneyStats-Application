@@ -65,7 +65,8 @@ export class CloseOperationComponent implements OnDestroy {
     ) {
       return;
     }
-    this.cryptoCurrency = UserService.getUserData().settings.cryptoCurrency!;
+    this.cryptoCurrency =
+      UserService.getUserData().attributes.money_stats_settings.cryptoCurrency!;
     let currentPrice =
       this.operation?.entryQuantity! * this.operation?.asset?.current_price!;
     this.currentPrice = parseFloat(currentPrice.toFixed(2));

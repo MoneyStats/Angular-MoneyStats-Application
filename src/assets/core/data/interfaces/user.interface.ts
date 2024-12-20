@@ -4,17 +4,15 @@ export interface UserInterface {
   email: string;
   username: string;
   password: string;
-  role: string;
+  roles: string;
   profilePhoto: string;
-}
-
-export interface GithubInterface {
-  id?: number;
-  username?: string;
-  avatar_url?: string;
-  updated_at?: Date;
-  created_at?: Date;
-  followers?: number;
-  following?: number;
-  html_url?: string;
+  phoneNumber: string;
+  birthDate: Date;
+  gender: string;
+  occupation: string;
+  education: string;
+  nationality: string;
+  ssn: string;
+  tokenReset: string;
+  attributes: any;
 }

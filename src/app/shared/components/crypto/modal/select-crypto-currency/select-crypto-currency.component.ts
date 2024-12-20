@@ -13,10 +13,10 @@ import { LOG } from 'src/assets/core/utils/log.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-    selector: 'app-select-crypto-currency',
-    templateUrl: './select-crypto-currency.component.html',
-    styleUrls: ['./select-crypto-currency.component.scss'],
-    standalone: false
+  selector: 'app-select-crypto-currency',
+  templateUrl: './select-crypto-currency.component.html',
+  styleUrls: ['./select-crypto-currency.component.scss'],
+  standalone: false,
 })
 export class SelectCryptoCurrencyComponent {
   environment = environment;
@@ -30,7 +30,7 @@ export class SelectCryptoCurrencyComponent {
 
   selectCurrency() {
     let user = this.userService.user;
-    user.settings.cryptoCurrency = this.currency;
+    user.attributes.money_stats_settings.cryptoCurrency = this.currency;
     this.emitAddCurrency.emit(user);
     this.currency = '';
   }

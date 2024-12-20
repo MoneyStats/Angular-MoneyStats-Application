@@ -32,7 +32,8 @@ export class AddAssetModalComponent implements OnInit, OnDestroy {
   environment = environment;
   @Input('modalId') modalId: string = '';
   @Input('cryptoCurrency') cryptoCurrency: string = '';
-  coinSymbol: string = UserService.getUserData().settings.currencySymbol;
+  coinSymbol: string =
+    UserService.getUserData().attributes.money_stats_settings.currencySymbol;
   @Output('emitAddAsset') emitAddAsset = new EventEmitter<Wallet>();
 
   asset?: Asset;

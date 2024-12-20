@@ -1,4 +1,4 @@
-import { GithubInterface, UserInterface } from '../interfaces/user.interface';
+import { UserInterface } from '../interfaces/user.interface';
 
 import { environment } from 'src/environments/environment';
 import { AppConfigConst } from '../constant/constant';
@@ -8,13 +8,21 @@ export class User implements UserInterface {
   email: string = 'email@email.com';
   username: string = 'username';
   password: string = '';
-  role: string = 'USER';
+  roles: string = 'USER';
   imgName?: string;
   profilePhoto: string =
     environment.baseUrlHeader + AppConfigConst.DEFAULT_USER_IMG;
+  phoneNumber: string = '';
+  birthDate: Date = new Date();
+  gender: string = '';
+  occupation: string = '';
+  education: string = '';
+  nationality: string = '';
+  ssn: string = '';
+  tokenReset: string = '';
+  attributes: any;
   authToken: any;
   mockedUser?: boolean;
-  settings: UserSettings = new UserSettings();
 }
 
 export class UserSettings {
@@ -22,8 +30,6 @@ export class UserSettings {
   currencySymbol: string = '$';
   cryptoCurrency?: string;
   cryptoCurrencySymbol?: string;
-  github: Github = new Github();
-  githubUser?: string;
   completeRequirement?: string;
   liveWallets?: string;
 }
@@ -38,18 +44,6 @@ export enum Status {
   CRYPTO_WALLET = 'CRYPTO_WALLET',
   ASSET = 'ASSET',
   NOT_COMPLETED = 'NOT_COMPLETED',
-}
-
-export class Github implements GithubInterface {
-  id?: number;
-  login?: string;
-  username?: string;
-  avatar_url?: string;
-  updated_at?: Date;
-  created_at?: Date;
-  followers?: number;
-  following?: number;
-  html_url?: string;
 }
 
 export class GithubIssues {

@@ -117,7 +117,10 @@ export class Utils {
   }
 
   public static mapLiveWalletsDataForChart(dates: string[], wallets: Wallet[]) {
-    if (UserService.getUserData().settings.liveWallets === 'ACTIVE')
+    if (
+      UserService.getUserData().attributes.money_stats_settings.liveWallets ===
+      'ACTIVE'
+    )
       if (
         !dates.find(
           (d) =>
@@ -143,7 +146,10 @@ export class Utils {
   }
 
   public static mapLiveWalletForChart(wallet: Wallet) {
-    if (UserService.getUserData().settings.liveWallets === 'ACTIVE')
+    if (
+      UserService.getUserData().attributes.money_stats_settings.liveWallets ===
+      'ACTIVE'
+    )
       if (
         !wallet.history.find(
           (h) =>

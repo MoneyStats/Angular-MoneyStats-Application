@@ -33,19 +33,10 @@ export class UserService {
       );
     }
 
-    if (user.settings.githubUser) {
-      user.settings.github = JSON.parse(user.settings.githubUser);
-    }
-    if (user.settings.githubUser) {
-      user.settings.github = JSON.parse(user.settings.githubUser);
-      localStorage.setItem(
-        StorageConstant.GITHUBACCOUNT,
-        JSON.stringify(user.settings.githubUser)
-      );
-    }
-    this.setValue(user.settings.currency);
-    user.settings.cryptoCurrencySymbol = this.cryptoCurrency;
-    user.settings.currencySymbol = this.currency;
+    this.setValue(user.attributes.money_stats_settings.currency);
+    user.attributes.money_stats_settings.cryptoCurrencySymbol =
+      this.cryptoCurrency;
+    user.attributes.money_stats_settings.currencySymbol = this.currency;
     localStorage.setItem(StorageConstant.USERACCOUNT, JSON.stringify(user));
     this.user = user;
     const u = Object.getPrototypeOf(this).constructor;
@@ -68,7 +59,8 @@ export class UserService {
         this.currency = CoinSymbol.USD;
         break;
     }
-    this.cryptoCurrency = this.user.settings.cryptoCurrency!;
+    this.cryptoCurrency =
+      this.user.attributes.money_stats_settings.cryptoCurrency!;
   }
 
   public static getUserData(): User {

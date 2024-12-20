@@ -39,7 +39,8 @@ export class OperationsListComponent implements OnInit, OnChanges {
 
   @Output('operationSelect') operationSelect: any;
 
-  cryptoCurrency?: string = UserService.getUserData().settings.cryptoCurrency;
+  cryptoCurrency?: string =
+    UserService.getUserData().attributes.money_stats_settings.cryptoCurrency;
 
   operations: Operation[] = [];
   constructor(private cryptoService: CryptoService, private router: Router) {}
