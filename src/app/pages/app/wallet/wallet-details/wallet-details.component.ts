@@ -141,7 +141,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
 
     this.renderImage();
     this.shared.setWallet(this.wallet!);
-    this.coinSymbol = UserService.getUserData().settings.currencySymbol;
+    this.coinSymbol = UserService.getUserData().attributes.money_stats_settings.currencySymbol;
     this.isWalletBalanceHidden();
   }
 

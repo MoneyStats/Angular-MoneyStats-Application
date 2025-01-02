@@ -79,9 +79,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
     if (this.user?.name === 'DEFAULT_NAME') {
       this.user = UserService.getUserData();
     }
-    if (this.user?.settings.liveWallets != undefined) {
+    if (this.user?.attributes.money_stats_settings.liveWallets != undefined) {
       this.isLiveWallet =
-        this.user.settings.liveWallets == Status.ACTIVE ? true : false;
+        this.user.attributes.money_stats_settings.liveWallets == Status.ACTIVE ? true : false;
     }
   }
 
@@ -121,7 +121,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
       this.appService.uploadImage(file).subscribe((data) => {
         this.user!.imgName = undefined;
         this.authService.updateUserData(this.user!).subscribe((res) => {
-          this.userService.setUserGlobally(res.data);
+          this.userService.setUserGlobally_old(res.data);
           SwalService.toastMessage(SwalIcon.SUCCESS, res.message!);
         });
       });
@@ -154,17 +154,17 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   liveWallet() {
     this.cacheService.clearCache();
-    if (this.user?.settings.liveWallets == undefined)
-      this.user!.settings.liveWallets = Status.NOT_ACTIVE;
+    if (this.user?.attributes.money_stats_settings.liveWallets == undefined)
+      this.user!.attributes.money_stats_settings.liveWallets = Status.NOT_ACTIVE;
     else
-      this.user!.settings.liveWallets =
-        this.user?.settings.liveWallets &&
-        this.user?.settings.liveWallets == Status.ACTIVE
+      this.user!.attributes.money_stats_settings.liveWallets =
+        this.user?.attributes.money_stats_settings.liveWallets &&
+        this.user?.attributes.money_stats_settings.liveWallets == Status.ACTIVE
           ? Status.NOT_ACTIVE
           : Status.ACTIVE;
     this.updateUser(
       this.translate.instant('response.live') +
-        (this.user?.settings.liveWallets == 'ACTIVE' ? 'Active' : 'Not Active')
+        (this.user?.attributes.money_stats_settings.liveWallets == 'ACTIVE' ? 'Active' : 'Not Active')
     );
     this.isLiveWallet == true ? false : true;
   }
@@ -174,7 +174,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
       .updateUserData(this.user!)
       .subscribe((res) => {
         LOG.info(res.message!, 'SettingsComponent');
-        this.userService.setUserGlobally(res.data);
+        this.userService.setUserGlobally_old(res.data);
         SwalService.toastMessage(SwalIcon.SUCCESS, message);
       });
   }

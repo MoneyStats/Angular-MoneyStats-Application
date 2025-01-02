@@ -2,6 +2,28 @@ import { UserInterface } from '../interfaces/user.interface';
 
 import { environment } from 'src/environments/environment';
 import { AppConfigConst } from '../constant/constant';
+
+export class AccessSphereResponse {
+  token?: Token;
+  strapiToken?: StrapiToken;
+  user?: User
+}
+
+export class Token {
+  id_token?: string;
+  access_token?: string;
+  refresh_token?: string;
+  expires_at?: number;
+  expires?: number;
+  token_type?: string;
+}
+
+export class StrapiToken {
+  access_token?: string;
+  refresh_token?: string;
+  expires_at?: number;
+}
+
 export class User implements UserInterface {
   name: string = 'DEFAULT_NAME';
   surname: string = 'DEFAULT_SURNAME';
@@ -29,7 +51,6 @@ export class UserSettings {
   currency: string = 'USD';
   currencySymbol: string = '$';
   cryptoCurrency?: string;
-  cryptoCurrencySymbol?: string;
   completeRequirement?: string;
   liveWallets?: string;
 }

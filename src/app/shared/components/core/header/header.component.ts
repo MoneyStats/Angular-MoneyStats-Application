@@ -25,6 +25,7 @@ export class HeaderComponent implements OnInit, OnChanges {
   @Input('user') user?: User;
   @Input('dashboard') dashboard?: Dashboard;
   environment = environment;
+  currency: string = '';
 
   isShadowActive: boolean = false;
   constructor(
@@ -64,6 +65,7 @@ export class HeaderComponent implements OnInit, OnChanges {
   updateData(): void {
     if (!this.dashboard) this.dashboard = this.shared.getDashboard();
     this.user = UserService.getUserData();
+    this.currency = this.user.attributes.money_stats_settings.currencySymbol;
   }
 
   availableSoon() {

@@ -16,6 +16,6 @@ export class WalletHistoryCardComponent implements OnInit {
   @Input('hidden') hidden: boolean = false;
 
   ngOnInit(): void {
-    this.coinSymbol = UserService.getUserData().settings.currencySymbol;
+    this.coinSymbol = UserService.getUserData().attributes.money_stats_settings.currencySymbol;
   }
 }

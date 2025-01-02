@@ -61,7 +61,7 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
 
   thisYear: number = new Date().getFullYear();
 
-  cryptoCurrency?: string = UserService.getUserData().settings.cryptoCurrency;
+  cryptoCurrency?: string = UserService.getUserData().attributes.money_stats_settings.cryptoCurrency;
 
   constructor(public cryptoService: CryptoService, private router: Router) {}
 

@@ -11,7 +11,10 @@
     </div>
   </a>-->
   <a
-    [routerLink]="['/crypto/market-data', user?.settings?.cryptoCurrency]"
+    [routerLink]="[
+      '/crypto/market-data',
+      user?.attributes.money_stats_settings.cryptoCurrency
+    ]"
     class="item"
     (click)="vibrate()"
   >

@@ -36,7 +36,7 @@ export class AuthService {
     );
   }
 
-  login(username: string, password: string): Observable<ResponseModel> {
+  login_old(username: string, password: string): Observable<ResponseModel> {
     this.cache.clearCache();
     const url = environment.loginDataUrl + '?username=' + username;
     if (username === MockUser.USERNAME && password === MockUser.PASSWORD) {
@@ -48,6 +48,36 @@ export class AuthService {
         Authorization: 'Basic ' + btoa(username + ':' + password),
       });
       return this.http.post<ResponseModel>(url, {}, { headers: headers });
+    }
+  }
+
+  login(username: string, password: string): Observable<ResponseModel> {
+    this.cache.clearCache();
+    const url = environment.tokenDataUrl + '?client_id='+environment.clientID+'&grant_type=password&include_user_data=true';
+    if (username === MockUser.USERNAME && password === MockUser.PASSWORD) {
+      return this.http.get<ResponseModel>(environment.getUserUrl);
+    } else {
+      //password = btoa(password);
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Basic ' + btoa(username + ':' + password),
+      });
+      return this.http.post<ResponseModel>(url, {}, { headers: headers });
+    }
+  }
+
+  authorize(authToken: string): Observable<ResponseModel> {
+    if (this.user?.mockedUser) {
+      return this.http.get<ResponseModel>(environment.authorizeUrlMock);
+    } else {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: authToken!,
+      });
+      const url = environment.authorizeUrl + '?client_id='+environment.clientID+'&access_type=online&redirect_uri=http%3A%2F%2Flocalhost%3A5501%2Findex.html&scope=openid&response_type=code';
+      return this.http.get<ResponseModel>(url, {
+        headers: headers,
+      });
     }
   }
 

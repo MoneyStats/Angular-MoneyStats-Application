@@ -30,10 +30,7 @@
             {{ "core_header_footer.dropdown_menu.options" | translate }}
           </h6>
           <a
-            [routerLink]="[
-              '/crypto/market-data',
-              userService.user.settings.cryptoCurrency
-            ]"
+            [routerLink]="['/crypto/market-data', cryptoCurrency]"
             class="dropdown-item"
             >{{ "core_header_footer.crypto_tab5" | translate }}</a
           >

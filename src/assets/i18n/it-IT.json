@@ -678,7 +678,7 @@
     }
   },
   "exception": {
-    "ERR_AUTH_MSS_002": {
+    "ERR_OAUTH_401": {
       "status": "Non autorizzato",
       "exception": "Credenziali errate",
       "message": "Il nome utente o la password inseriti sono errati. Per favore, riprova."

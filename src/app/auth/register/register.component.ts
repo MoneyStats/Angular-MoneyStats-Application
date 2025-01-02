@@ -78,8 +78,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     user.password = this.password;
     user.surname = this.surname;
     user.username = this.username;
-    user.settings.currency = this.currency;
-    user.settings.liveWallets = Status.NOT_ACTIVE;
+    user.attributes.money_stats_settings.currency = this.currency;
+    user.attributes.money_stats_settings.liveWallets = Status.NOT_ACTIVE;
 
     this.registerSubscribe = this.authService
       .register(user, this.invitationCode)

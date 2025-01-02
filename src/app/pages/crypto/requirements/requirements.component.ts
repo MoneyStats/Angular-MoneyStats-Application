@@ -61,7 +61,7 @@ export class RequirementsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     let user = UserService.getUserData();
     let requirements: Array<string> =
-      user.settings.completeRequirement?.split(';')!;
+      user.attributes.money_stats_settings.completeRequirement?.split(';')!;
     if (
       !Utils.isNullOrEmpty(requirements) &&
       requirements.includes(Status.ASSET)
@@ -91,9 +91,9 @@ export class RequirementsComponent implements OnInit, OnDestroy {
           (w: Wallet) => w.category == this.CRYPTO
         );
       }
-      if (user.settings.cryptoCurrency) {
+      if (user.attributes.money_stats_settings.cryptoCurrency) {
         this.isCurrencyAdded = true;
-        this.currency = user.settings.cryptoCurrency;
+        this.currency = user.attributes.money_stats_settings.cryptoCurrency;
       }
     });
     this.getMarketData();
@@ -165,32 +165,32 @@ export class RequirementsComponent implements OnInit, OnDestroy {
     }
 
     if (this.isWalletCreated)
-      user.settings.completeRequirement = user.settings.completeRequirement
-        ? user.settings.completeRequirement.concat(Status.WALLET).concat(';')
+      user.attributes.money_stats_settings.completeRequirement = user.attributes.money_stats_settings.completeRequirement
+        ? user.attributes.money_stats_settings.completeRequirement.concat(Status.WALLET).concat(';')
         : Status.WALLET.concat(';');
 
     if (this.isCryptoWalletCreated)
-      user.settings.completeRequirement = user.settings.completeRequirement
-        ? user.settings.completeRequirement
+      user.attributes.money_stats_settings.completeRequirement = user.attributes.money_stats_settings.completeRequirement
+        ? user.attributes.money_stats_settings.completeRequirement
             .concat(Status.CRYPTO_WALLET)
             .concat(';')
         : Status.CRYPTO_WALLET.concat(';');
 
     if (this.isAssetCreated)
-      user.settings.completeRequirement = user.settings.completeRequirement
-        ? user.settings.completeRequirement.concat(Status.ASSET).concat(';')
+      user.attributes.money_stats_settings.completeRequirement = user.attributes.money_stats_settings.completeRequirement
+        ? user.attributes.money_stats_settings.completeRequirement.concat(Status.ASSET).concat(';')
         : Status.ASSET.concat(';');
 
     this.updateUser(user);
   }
 
   selectCurrency(user: User) {
-    user.settings.completeRequirement = user.settings.completeRequirement
-      ? user.settings.completeRequirement.concat(Status.CURRENCY).concat(';')
+    user.attributes.money_stats_settings.completeRequirement = user.attributes.money_stats_settings.completeRequirement
+      ? user.attributes.money_stats_settings.completeRequirement.concat(Status.CURRENCY).concat(';')
       : Status.CURRENCY.concat(';');
     this.updateUser(user);
     this.isCurrencyAdded = true;
-    this.currency = user.settings.currency;
+    this.currency = user.attributes.money_stats_settings.currency;
   }
 
   updateUser(user: User) {
@@ -200,12 +200,12 @@ export class RequirementsComponent implements OnInit, OnDestroy {
       this.isCurrencyAdded &&
       this.isWalletCreated
     )
-      user.settings.completeRequirement = Status.COMPLETED;
+     user.attributes.money_stats_settings.completeRequirement = Status.COMPLETED;
     this.updateUserSub = this.authService
       .updateUserData(user)
       .subscribe((data) => {
         LOG.info(data.message!, 'RequirementsComponent');
-        this.userService.setUserGlobally(data.data);
+        this.userService.setUserGlobally_old(data.data);
         //this.authService.user = data.data;
         //this.authService.setUserGlobally();
       });
@@ -235,7 +235,7 @@ export class RequirementsComponent implements OnInit, OnDestroy {
   getMarketData() {
     let user = UserService.getUserData();
     this.marketDataSubscribe = this.cryptoService
-      .getCryptoPriceData(user.settings.cryptoCurrency!)
+      .getCryptoPriceData(user.attributes.money_stats_settings.cryptoCurrency!)
       .subscribe((data) => {
         this.marketData = data.data;
         LOG.info(data.message!, 'RequirementsComponent');

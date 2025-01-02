@@ -76,7 +76,7 @@ export class AddStatsComponent implements OnInit, OnDestroy {
           (w) => !w.deletedDate
         );
       }
-      this.coinSymbol = UserService.getUserData().settings.currencySymbol;
+      this.coinSymbol = UserService.getUserData().attributes.money_stats_settings.currencySymbol;
       this.getTodayAsString();
     });
   }

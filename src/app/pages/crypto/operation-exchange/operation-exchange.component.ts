@@ -103,7 +103,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.cryptoCurrency = UserService.getUserData().settings.cryptoCurrency!;
+    this.cryptoCurrency = UserService.getUserData().attributes.money_stats_settings.cryptoCurrency!;
     this.getOperationExchange();
   }
 

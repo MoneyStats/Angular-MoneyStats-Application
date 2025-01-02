@@ -13,7 +13,7 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 export class TransactionDetailsComponent implements OnInit {
   @Input('wallet') wallet?: Wallet;
   @Input('class') class?: string;
-  coinSymbol: string = UserService.getUserData().settings.currencySymbol;
+  coinSymbol: string = UserService.getUserData().attributes.money_stats_settings.currencySymbol;
   constructor(
     public screenService: ScreenService,
     private shared: SharedService

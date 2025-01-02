@@ -82,7 +82,7 @@ export class CategoryComponent implements OnChanges {
           moreThanOneInAMonth.push(date);
         }
       });
-      if (UserService.getUserData().settings.liveWallets === 'ACTIVE')
+      if (UserService.getUserData().attributes.money_stats_settings.liveWallets === 'ACTIVE')
         if (
           !moreThanOneInAMonth.find(
             (d) =>

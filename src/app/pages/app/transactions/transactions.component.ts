@@ -19,7 +19,7 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   environment = environment;
   dashboardSubscribe: Subscription = new Subscription();
   dashboard?: Dashboard;
-  currency: string = UserService.getUserData().settings.currencySymbol;
+  currency: string = UserService.getUserData().attributes.money_stats_settings.currencySymbol;
 
   constructor(
     private shared: SharedService,

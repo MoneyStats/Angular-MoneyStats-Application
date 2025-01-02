@@ -2,16 +2,14 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
-  OnInit,
   Output,
-  SimpleChanges,
 } from '@angular/core';
 import { Location } from '@angular/common';
-import { NavigationEnd, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { Utils } from 'src/assets/core/services/config/utils.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
 
 @Component({
   selector: 'app-crypto-header',
@@ -29,6 +27,8 @@ export class CryptoHeaderComponent {
   @Input('isInfoActive') isInfoActive: boolean = false;
 
   @Output('emitInfo') emitInfo = new EventEmitter<string>();
+
+  cryptoCurrency: string = UserService.getUserData().attributes.money_stats_settings.cryptoCurrency;;
 
   constructor(
     private location: Location,

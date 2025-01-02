@@ -127,7 +127,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.lastStatsBalanceDifference =
           this.dashboard.lastStatsBalanceDifference +
           ' ' +
-          this.user.settings.currencySymbol;
+          this.user.attributes.money_stats_settings.currencySymbol;
         this.renderChart(this.dashboard);
       });
 

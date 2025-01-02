@@ -24,7 +24,7 @@ export class WalletComponent implements OnInit, OnDestroy {
   amount: string = '******';
   hidden: boolean = false;
 
-  coinSymbol: string = UserService.getUserData().settings.currencySymbol;
+  coinSymbol: string = UserService.getUserData().attributes.money_stats_settings.currencySymbol;
 
   walletsActive: Wallet[] = [];
   walletsDeleted: Wallet[] = [];

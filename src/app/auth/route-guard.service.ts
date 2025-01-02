@@ -74,15 +74,14 @@ export class RouteGuardService {
       let expirationDate = new Date(authToken.expirationTime - 900000);
       if (now < expirationDate) {
         user.authToken = authToken;
-        this.userService.setUserGlobally(user);
+        this.userService.setUserGlobally_old(user);
         return true;
       }
     }
-    this.authService.refreshToken(authToken.accessToken).subscribe({
+    this.authService.authorize(authToken.accessToken).subscribe({
       next: (resp) => {
-        user.authToken = resp.data;
-        this.userService.setUserGlobally(user);
-        return true;
+        if(resp.status == 200) return true;
+        return false;
       },
       error: (error) => {
         this.router.navigate(['auth/login']);

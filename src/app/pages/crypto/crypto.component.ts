@@ -52,7 +52,7 @@ export class CryptoComponent implements OnInit, OnDestroy {
     if (this.user.name === 'DEFAULT_NAME') {
       this.user = AuthService.getUserFromStorage();
     }
-    if (!this.user.settings.completeRequirement?.match(Status.COMPLETED)) {
+    if (!this.user.attributes.money_stats_settings.completeRequirement?.match(Status.COMPLETED)) {
       this.onBoard();
     }
     /*this.cryptoDashboardSub = this.cryptoService

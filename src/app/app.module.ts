@@ -18,12 +18,12 @@ import { HttpErrorInterceptor } from 'src/assets/core/interceptors/error.intecep
 import { FormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { LoaderInterceptor } from 'src/assets/core/interceptors/loader.interceptor';
-import { JwtInterceptor } from './auth/jwt.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/components/shared/shared.module';
 import { InterceptorsModule } from './interceptors/interceptors.module';
 import { CoreModule } from './shared/components/core/core.module';
 import { CryptoComponentsModule } from './shared/components/crypto/crypto-components.module';
+import { ResponseInterceptor } from 'src/assets/core/interceptors/responses.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -66,7 +66,11 @@ import { CryptoComponentsModule } from './shared/components/crypto/crypto-compon
       useClass: LoaderInterceptor,
       multi: true,
     },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ResponseInterceptor,
+      multi: true,
+    },
     provideHttpClient(withInterceptorsFromDi()),
   ],
 })

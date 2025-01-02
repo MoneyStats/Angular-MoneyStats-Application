@@ -28,7 +28,7 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 export class StatsComponent implements OnInit, OnDestroy {
   resumeSubscribe: Subscription = new Subscription();
   historySubscribe: Subscription = new Subscription();
-  coinSymbol: string = UserService.getUserData().settings.currencySymbol;
+  coinSymbol: string = UserService.getUserData().attributes.money_stats_settings.currencySymbol;
 
   wallets: Wallet[] = [];
   resumeData: Dashboard = new Dashboard();

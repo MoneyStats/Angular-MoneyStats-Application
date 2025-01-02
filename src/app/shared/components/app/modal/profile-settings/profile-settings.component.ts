@@ -75,7 +75,7 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
       .updateUserData(this.user!)
       .subscribe((res) => {
         LOG.info(res.message!, 'ProfileSettingsComponent');
-        this.userService.setUserGlobally(res.data);
+        this.userService.setUserGlobally_old(res.data);
         //this.authService.user! = res.data;
         //this.authService.setUserGlobally();
         //this.authService.setValue();
