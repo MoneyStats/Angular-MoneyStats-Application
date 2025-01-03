@@ -55,9 +55,6 @@ export class HeaderComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     if (this.user?.name === 'DEFAULT_NAME') {
-      this.user = this.userService.user;
-    }
-    if (this.user?.name === 'DEFAULT_NAME') {
       this.user = UserService.getUserData();
     }
   }

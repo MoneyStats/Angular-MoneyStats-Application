@@ -6,7 +6,7 @@ import { AppConfigConst } from '../constant/constant';
 export class AccessSphereResponse {
   token?: Token;
   strapiToken?: StrapiToken;
-  user?: User
+  user?: User;
 }
 
 export class Token {
@@ -30,7 +30,7 @@ export class User implements UserInterface {
   email: string = 'email@email.com';
   username: string = 'username';
   password: string = '';
-  roles: string = 'USER';
+  roles: string[] = ['USER'];
   imgName?: string;
   profilePhoto: string =
     environment.baseUrlHeader + AppConfigConst.DEFAULT_USER_IMG;

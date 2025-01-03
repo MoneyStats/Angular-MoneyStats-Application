@@ -202,7 +202,7 @@
       </ul>
 
       <!-- Admin Features -->
-      <div *ngIf="user?.roles == userRole.ADMIN">
+      <div *ngIf="user?.roles?.includes(userRole.ADMIN)">
         <div class="listview-title mt-1">
           {{ "settings_page.admin_title" | translate }}
         </div>

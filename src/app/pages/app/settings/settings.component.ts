@@ -81,7 +81,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }
     if (this.user?.attributes.money_stats_settings.liveWallets != undefined) {
       this.isLiveWallet =
-        this.user.attributes.money_stats_settings.liveWallets == Status.ACTIVE ? true : false;
+        this.user.attributes.money_stats_settings.liveWallets == Status.ACTIVE
+          ? true
+          : false;
     }
   }
 
@@ -155,7 +157,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
   liveWallet() {
     this.cacheService.clearCache();
     if (this.user?.attributes.money_stats_settings.liveWallets == undefined)
-      this.user!.attributes.money_stats_settings.liveWallets = Status.NOT_ACTIVE;
+      this.user!.attributes.money_stats_settings.liveWallets =
+        Status.NOT_ACTIVE;
     else
       this.user!.attributes.money_stats_settings.liveWallets =
         this.user?.attributes.money_stats_settings.liveWallets &&
@@ -164,7 +167,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
           : Status.ACTIVE;
     this.updateUser(
       this.translate.instant('response.live') +
-        (this.user?.attributes.money_stats_settings.liveWallets == 'ACTIVE' ? 'Active' : 'Not Active')
+        (this.user?.attributes.money_stats_settings.liveWallets == 'ACTIVE'
+          ? 'Active'
+          : 'Not Active')
     );
     this.isLiveWallet == true ? false : true;
   }

@@ -4,7 +4,7 @@ export interface UserInterface {
   email: string;
   username: string;
   password: string;
-  roles: string;
+  roles: string[];
   profilePhoto: string;
   phoneNumber: string;
   birthDate: Date;

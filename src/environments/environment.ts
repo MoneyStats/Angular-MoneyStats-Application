@@ -50,21 +50,17 @@ export const environment = {
    */
   tokenDataUrl: access_host + '/v1/oAuth/2.0/token',
   authorizeUrl: access_host + '/v1/oAuth/2.0/authorize',
+  updateUserDataUrl: access_host + '/v1/users/update',
+  logoutUrl: access_host + '/v1/oAuth/2.0/logout',
+  forgotPasswordUrl: access_host + '/v1/users/change/password/request',
+  resetPasswordUrl: access_host + '/v1/users/change/password',
   clientID: 'MONEYSTATS-TEST-01',
-
   registerDataUrl: service_host + '/v1/auth/sign-up',
-  loginDataUrl: service_host + '/v1/auth/login',
-  forgotPasswordUrl: service_host + '/v1/auth/forgot-password',
-  resetPasswordUrl: service_host + '/v1/auth/reset-password',
 
   /*
    * Token
    */
-  userInfoDataUrl: service_host + '/v1/oAuth/userInfo',
-  refreshTokenUrl: service_host + '/v1/oAuth/token/refresh',
-  refreshTime: 900000,
 
-  updateUserDataUrl: service_host + '/v1/auth/update/user',
   cleanCacheUrl: service_host + '/v1/crypto/cache/clean',
 
   /**

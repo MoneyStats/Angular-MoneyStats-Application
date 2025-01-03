@@ -8,6 +8,9 @@ import { MockUser, User } from '../../data/class/user.class';
 import { StorageConstant } from '../../data/constant/constant';
 import { SwalService } from '../../utils/swal.service';
 import { CacheService } from '../config/cache/cache.service';
+import { deprecate } from 'util';
+import { Utils } from '../config/utils.service';
+import { LOG } from '../../utils/log.service';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +28,28 @@ export class AuthService {
 
   logout() {
     this.cache.clearCache();
+    if (!this.user?.mockedUser) {
+      const token = localStorage.getItem(StorageConstant.ACCESSTOKEN);
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization:
+          token && token.includes('Bearer') ? token : 'Bearer ' + token,
+      });
+      const url = environment.logoutUrl + '?client_id=' + environment.clientID;
+      this.http
+        .post<ResponseModel>(
+          url,
+          {},
+          {
+            headers: headers,
+          }
+        )
+        .subscribe((data) => {
+          LOG.info(data.message!, 'AuthService');
+        });
+    }
     localStorage.removeItem(StorageConstant.ACCESSTOKEN);
+    localStorage.removeItem(StorageConstant.USERACCOUNT);
     this.router.navigate(['auth/login']);
   }
 
@@ -36,24 +60,13 @@ export class AuthService {
     );
   }
 
-  login_old(username: string, password: string): Observable<ResponseModel> {
-    this.cache.clearCache();
-    const url = environment.loginDataUrl + '?username=' + username;
-    if (username === MockUser.USERNAME && password === MockUser.PASSWORD) {
-      return this.http.get<ResponseModel>(environment.getUserUrl);
-    } else {
-      //password = btoa(password);
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: 'Basic ' + btoa(username + ':' + password),
-      });
-      return this.http.post<ResponseModel>(url, {}, { headers: headers });
-    }
-  }
-
   login(username: string, password: string): Observable<ResponseModel> {
     this.cache.clearCache();
-    const url = environment.tokenDataUrl + '?client_id='+environment.clientID+'&grant_type=password&include_user_data=true';
+    const url =
+      environment.tokenDataUrl +
+      '?client_id=' +
+      environment.clientID +
+      '&grant_type=password&include_user_data=true';
     if (username === MockUser.USERNAME && password === MockUser.PASSWORD) {
       return this.http.get<ResponseModel>(environment.getUserUrl);
     } else {
@@ -72,9 +85,15 @@ export class AuthService {
     } else {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: authToken!,
+        Authorization: authToken!.includes('Bearer')
+          ? authToken
+          : 'Bearer ' + authToken,
       });
-      const url = environment.authorizeUrl + '?client_id='+environment.clientID+'&access_type=online&redirect_uri=http%3A%2F%2Flocalhost%3A5501%2Findex.html&scope=openid&response_type=code';
+      const url =
+        environment.authorizeUrl +
+        '?client_id=' +
+        environment.clientID +
+        '&access_type=online&redirect_uri=http%3A%2F%2Flocalhost%3A5501%2Findex.html&scope=openid&response_type=code';
       return this.http.get<ResponseModel>(url, {
         headers: headers,
       });
@@ -82,49 +101,26 @@ export class AuthService {
   }
 
   forgotPassword(email: string): Observable<ResponseModel> {
-    const url = environment.forgotPasswordUrl + '?email=' + email;
-    return this.http.post<ResponseModel>(url, {});
+    const url = environment.forgotPasswordUrl + '?emailSend=true';
+    const body = {
+      templateId: 'MONEYSTATS_RESET_PASSWORD',
+      email: email,
+      params: {
+        'PARAM.FRONT_END_URL': location.origin,
+      },
+    };
+    return this.http.post<ResponseModel>(url, body);
   }
 
   resetPassword(password: string, token: string): Observable<ResponseModel> {
     password = btoa(password);
-    const url =
-      environment.resetPasswordUrl +
-      '?password=' +
-      password +
-      '&token=' +
-      token;
-    return this.http.post<ResponseModel>(url, {});
-  }
+    const url = environment.resetPasswordUrl;
 
-  checkLogin(authToken: string): Observable<ResponseModel> {
-    if (this.user?.mockedUser) {
-      return this.http.get<ResponseModel>(environment.getUserUrl);
-    } else {
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: authToken!,
-      });
-      return this.http.get<ResponseModel>(environment.userInfoDataUrl, {
-        headers: headers,
-      });
-    }
-  }
-
-  refreshToken(authToken: string): Observable<ResponseModel> {
-    if (this.user?.mockedUser) {
-      return this.http.get<ResponseModel>(environment.getUserUrl);
-    } else {
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-      });
-      const token = {
-        accessToken: authToken,
-      };
-      return this.http.post<ResponseModel>(environment.refreshTokenUrl, token, {
-        headers: headers,
-      });
-    }
+    const body = {
+      token: token,
+      password: password,
+    };
+    return this.http.post<ResponseModel>(url, body);
   }
 
   updateUserData(user: User): Observable<ResponseModel> {
@@ -140,13 +136,9 @@ export class AuthService {
         'Content-Type': 'application/json',
         Authorization: authToken!,
       });
-      return this.http.post<ResponseModel>(
-        environment.updateUserDataUrl,
-        user,
-        {
-          headers: headers,
-        }
-      );
+      return this.http.put<ResponseModel>(environment.updateUserDataUrl, user, {
+        headers: headers,
+      });
     }
   }
 

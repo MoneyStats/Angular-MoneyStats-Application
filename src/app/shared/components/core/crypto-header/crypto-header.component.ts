@@ -1,11 +1,6 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Location } from '@angular/common';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { Utils } from 'src/assets/core/services/config/utils.service';
@@ -28,7 +23,8 @@ export class CryptoHeaderComponent {
 
   @Output('emitInfo') emitInfo = new EventEmitter<string>();
 
-  cryptoCurrency: string = UserService.getUserData().attributes.money_stats_settings.cryptoCurrency;;
+  cryptoCurrency: string =
+    UserService.getUserData().attributes.money_stats_settings.cryptoCurrency;
 
   constructor(
     private location: Location,

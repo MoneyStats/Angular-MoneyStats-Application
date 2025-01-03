@@ -12,10 +12,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { RegEx } from 'src/assets/core/data/constant/constant';
 
 @Component({
-    selector: 'app-register',
-    templateUrl: './register.component.html',
-    styleUrls: ['./register.component.scss'],
-    standalone: false
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss'],
+  standalone: false,
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   registerSubscribe: Subscription = new Subscription();
@@ -78,8 +78,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
     user.password = this.password;
     user.surname = this.surname;
     user.username = this.username;
-    user.attributes.money_stats_settings.currency = this.currency;
-    user.attributes.money_stats_settings.liveWallets = Status.NOT_ACTIVE;
+    const attributes = {
+      money_stats_settings: {
+        currency: this.currency,
+        liveWallets: Status.NOT_ACTIVE,
+      },
+    };
+    user.attributes = attributes;
 
     this.registerSubscribe = this.authService
       .register(user, this.invitationCode)

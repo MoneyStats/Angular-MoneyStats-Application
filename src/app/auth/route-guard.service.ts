@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { Injectable } from '@angular/core';
+import { ComponentFactoryResolver, Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   Router,
@@ -69,18 +69,18 @@ export class RouteGuardService {
   }
 
   validateAccessToken(user: any, authToken: any) {
-    if (!Utils.isNullOrEmpty(authToken.accessToken)) {
+    console.log(user, authToken);
+    if (!Utils.isNullOrEmpty(authToken.access_token)) {
       let now = new Date();
       let expirationDate = new Date(authToken.expirationTime - 900000);
       if (now < expirationDate) {
         user.authToken = authToken;
-        this.userService.setUserGlobally_old(user);
         return true;
       }
     }
-    this.authService.authorize(authToken.accessToken).subscribe({
+    this.authService.authorize(authToken.access_token).subscribe({
       next: (resp) => {
-        if(resp.status == 200) return true;
+        if (resp.status == 200) return true;
         return false;
       },
       error: (error) => {
