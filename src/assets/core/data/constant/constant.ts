@@ -74,8 +74,8 @@ export enum MarketDataCategory {
 }
 
 export enum UserRole {
-  USER = 'USER',
-  ADMIN = 'ADMIN',
+  USER = 'MONEY_STATS_USER',
+  ADMIN = 'MONEY_STATS_ADMIN',
 }
 
 export var Operations = ['New Investment', 'Holding', 'Trading', 'Transfer'];

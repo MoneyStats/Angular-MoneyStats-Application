@@ -74,9 +74,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.user = UserService.getUserData();
     ThemeService.switchDarkMode();
     if (this.user?.name === 'DEFAULT_NAME') {
-      this.user = this.authService.user;
-    }
-    if (this.user?.name === 'DEFAULT_NAME') {
       this.user = UserService.getUserData();
     }
     if (this.user?.attributes.money_stats_settings.liveWallets != undefined) {

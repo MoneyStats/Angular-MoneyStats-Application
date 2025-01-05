@@ -127,6 +127,13 @@ export class CryptoResumeComponent
       this.isPast = true;
     } else this.isPast = false;
     this.resumeData = this.resume.get(year)!;
+    if (
+      this.resumeData.yearsWalletStats.length > 0 &&
+      Utils.isNullOrEmpty(this.resumeData.statsAssetsDays)
+    ) {
+      this.getResume(this.resumeData.yearsWalletStats[0]);
+      return;
+    }
     this.resumeAssets = this.resumeData.assets;
   }
 

@@ -100,6 +100,31 @@ export class AuthService {
     }
   }
 
+  refreshToken(): Observable<ResponseModel> {
+    if (this.user?.mockedUser) {
+      return this.http.get<ResponseModel>(environment.getUserUrl);
+    } else {
+      const token: any = localStorage.getItem(StorageConstant.AUTHTOKEN);
+      const access_token = token.access_token;
+      const refresh_token = token.refresh_token;
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: access_token!.includes('Bearer')
+          ? access_token
+          : 'Bearer ' + access_token,
+      });
+      const url =
+        environment.tokenDataUrl +
+        '?client_id=' +
+        environment.clientID +
+        '&grant_type=refresh_token&include_user_data=true&refresh_token=' +
+        refresh_token;
+      return this.http.get<ResponseModel>(url, {
+        headers: headers,
+      });
+    }
+  }
+
   forgotPassword(email: string): Observable<ResponseModel> {
     const url = environment.forgotPasswordUrl + '?emailSend=true';
     const body = {

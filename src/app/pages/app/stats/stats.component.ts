@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import {
@@ -28,7 +21,8 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 export class StatsComponent implements OnInit, OnDestroy {
   resumeSubscribe: Subscription = new Subscription();
   historySubscribe: Subscription = new Subscription();
-  coinSymbol: string = UserService.getUserData().attributes.money_stats_settings.currencySymbol;
+  coinSymbol: string =
+    UserService.getUserData().attributes.money_stats_settings.currencySymbol;
 
   wallets: Wallet[] = [];
   resumeData: Dashboard = new Dashboard();
@@ -118,6 +112,14 @@ export class StatsComponent implements OnInit, OnDestroy {
       this.resumeData.statsWalletDays = this.resumeData.statsWalletDays.filter(
         (date) => new Date(date).getFullYear().toString() === year
       );
+    if (
+      this.resumeData.hasMoreRecords &&
+      Utils.isNullOrEmpty(this.resumeData.statsWalletDays)
+    ) {
+      this.getResumeData(this.resumeData.yearsWalletStats[0]);
+      return;
+    }
+
     this.wallets = this.resumeData.wallets;
     this.isWalletBalanceHidden();
   }

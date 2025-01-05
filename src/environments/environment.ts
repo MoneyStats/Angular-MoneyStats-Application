@@ -45,8 +45,8 @@ export const environment = {
   getCryptoHistoryDataUrlMock:
     baseUrlApp + 'assets/core/mock/history.crypto.mock.json',
 
-  /*
-   * Authentication Datas
+  /**
+   * @Authentication_Datas
    */
   tokenDataUrl: access_host + '/v1/oAuth/2.0/token',
   authorizeUrl: access_host + '/v1/oAuth/2.0/authorize',
@@ -56,12 +56,6 @@ export const environment = {
   resetPasswordUrl: access_host + '/v1/users/change/password',
   clientID: 'MONEYSTATS-TEST-01',
   registerDataUrl: service_host + '/v1/auth/sign-up',
-
-  /*
-   * Token
-   */
-
-  cleanCacheUrl: service_host + '/v1/crypto/cache/clean',
 
   /**
    * @App
@@ -77,6 +71,7 @@ export const environment = {
   backupDataUrl: service_host + '/v1/settings/backup',
   restoreDataUrl: service_host + '/v1/settings/restore',
   contactSupport: service_host + '/v1/settings/contact',
+  cleanCacheUrl: service_host + '/v1/settings/cache/clean',
   /**
    * @Stats
    */

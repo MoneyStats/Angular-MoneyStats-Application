@@ -42,38 +42,18 @@ export class OpenBugComponent implements OnDestroy {
     githubIssues.labels = ['bug'];
 
     // Composizione del corpo del messaggio con informazioni dettagliate
-    const deviceInfo = `
-      <h5><strong>Device Information:</strong></h5>
-      <table class="table table-bordered">
-        <tbody>
-          <tr>
-            <th>Operating System</th>
-            <td>${window.navigator.platform}</td>
-          </tr>
-          <tr>
-            <th>Browser</th>
-            <td>${window.navigator.userAgent}</td>
-          </tr>
-          <tr>
-            <th>Browser Version</th>
-            <td>${Utils.getBrowserVersion(window.navigator.userAgent)}</td>
-          </tr>
-          <tr>
-            <th>Screen Resolution</th>
-            <td>${window.screen.width}x${window.screen.height}</td>
-          </tr>
-        </tbody>
-      </table>
-      <br><hr><br>
-    `;
+    const deviceInfo = `<h5><strong>Device Information:</strong></h5><table class="table table-bordered"><tbody><tr><th>Operating System</th><td>${
+      window.navigator.platform
+    }</td></tr><tr><th>Browser</th><td>${
+      window.navigator.userAgent
+    }</td></tr><tr><th>Browser Version</th><td>${Utils.getBrowserVersion(
+      window.navigator.userAgent
+    )}</td></tr><tr><th>Screen Resolution</th><td>${window.screen.width}x${
+      window.screen.height
+    }</td></tr></tbody></table><br><hr><br>`;
 
     // Dettagli del bug
-    githubIssues.body = `
-      <p><strong>Description:</strong></p>
-      <p>${this.description}</p>
-      <br>
-      ${deviceInfo}
-    `;
+    githubIssues.body = `<p><strong>Description:</strong></p><p>${this.description}</p><br>${deviceInfo}`;
 
     this.appService.openIssues(githubIssues).subscribe((res) => {
       LOG.info(res.message!, 'SettingsComponent');

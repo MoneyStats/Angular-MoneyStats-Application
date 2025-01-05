@@ -69,10 +69,9 @@ export class RouteGuardService {
   }
 
   validateAccessToken(user: any, authToken: any) {
-    console.log(user, authToken);
     if (!Utils.isNullOrEmpty(authToken.access_token)) {
       let now = new Date();
-      let expirationDate = new Date(authToken.expirationTime - 900000);
+      let expirationDate = new Date(authToken.expires_at - 900000);
       if (now < expirationDate) {
         user.authToken = authToken;
         return true;
@@ -84,8 +83,18 @@ export class RouteGuardService {
         return false;
       },
       error: (error) => {
-        this.router.navigate(['auth/login']);
-        return false;
+        return this.authService.refreshToken().subscribe({
+          next: (resp) => {
+            LOG.info(resp.message!, 'RouteGuardService');
+            this.userService.setUserGlobally(resp.data);
+            if (resp.status == 200) return true;
+            return false;
+          },
+          error: (error) => {
+            this.router.navigate(['auth/login']);
+            return false;
+          },
+        });
       },
     });
     return false;
