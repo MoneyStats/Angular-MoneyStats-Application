@@ -2,6 +2,7 @@ import {
   Component,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   SimpleChanges,
 } from '@angular/core';
@@ -16,12 +17,11 @@ declare var $: any; // Dichiara jQuery come variabile globale
   styleUrls: ['./market-data-table.component.scss'],
   standalone: false,
 })
-export class MarketDataTableComponent implements OnInit, OnChanges {
+export class MarketDataTableComponent implements OnInit, OnChanges, OnDestroy {
   @Input('filterMarketData') filterMarketData: Array<any> = [];
   @Input('limit') limit: number = 0;
   @Input('tableSize') tableSize: number = 15;
-
-  private tableId = 'market_data_table';
+  @Input('tableId') tableId: string = 'market_data_table';
   private dataTableInstance: any;
 
   constructor(private translate: TranslateService) {}
@@ -29,10 +29,12 @@ export class MarketDataTableComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.ngOnInit();
     if (
-      changes['filterMarketData'] &&
-      !changes['filterMarketData'].firstChange
+      (changes['filterMarketData'] &&
+        !changes['filterMarketData'].firstChange) ||
+      this.filterMarketData.length != 0
     ) {
       this.reinitializeDataTable();
+      return;
     }
   }
 
@@ -89,5 +91,13 @@ export class MarketDataTableComponent implements OnInit, OnChanges {
 
     // Reinizializza la DataTable con i nuovi dati
     this.initializeDataTable();
+  }
+
+  ngOnDestroy(): void {
+    if (this.dataTableInstance) {
+      this.dataTableInstance.clear(); // Pulire i dati
+      this.dataTableInstance.destroy(); // Distruggere l'istanza
+      this.dataTableInstance = null;
+    }
   }
 }

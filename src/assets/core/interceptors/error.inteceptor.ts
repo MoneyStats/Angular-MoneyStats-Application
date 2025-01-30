@@ -45,15 +45,22 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             this.isErrorCodeIncluded(errorCode!) ||
             error.status == HttpStatusCode.GatewayTimeout
           ) {
-            this.userService.logout();
-            return throwError(() => new Error(errorMsg));
+            if (error.url && !error.url.includes('/logout')) {
+              this.userService.logout();
+              return throwError(() => new Error(errorMsg));
+            }
           } else {
             this.router.navigate(['error']);
             return throwError(() => new Error(errorMsg));
           }
         }
-        this.userService.logout();
-        return throwError(() => new Error(errorMsg));
+        if (error.url && !error.url.includes('/logout')) {
+          this.userService.logout();
+          return throwError(() => new Error(errorMsg));
+        } else {
+          this.router.navigate(['error']);
+          return throwError(() => new Error(errorMsg));
+        }
       })
     );
   }

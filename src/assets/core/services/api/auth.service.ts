@@ -66,7 +66,8 @@ export class AuthService {
       environment.tokenDataUrl +
       '?client_id=' +
       environment.clientID +
-      '&grant_type=password&include_user_data=true';
+      '&grant_type=password&include_user_data=true&redirect_uri=' +
+      environment.redirectUri;
     if (username === MockUser.USERNAME && password === MockUser.PASSWORD) {
       return this.http.get<ResponseModel>(environment.getUserUrl);
     } else {

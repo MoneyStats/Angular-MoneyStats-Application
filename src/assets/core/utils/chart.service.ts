@@ -201,12 +201,15 @@ export class ChartService {
     return chartExample1;
   }
 
-  public static appRenderChartPie(wallets: Wallet[]): Partial<ApexOptions> {
+  public static appRenderChartPie(walletsAssets: any[]): Partial<ApexOptions> {
     let series: Array<any> = [];
     let walletName: Array<string> = [];
-    wallets.forEach((wallet) => {
-      walletName.push(wallet.name);
-      series.push(wallet.balance);
+    let isWallets = false;
+    let isAssets = false;
+    walletsAssets.forEach((walletAsset) => {
+      walletName.push(walletAsset.name);
+      series.push(walletAsset.value ?? walletAsset.balance);
+      walletAsset.value ? (isAssets = true) : (isWallets = true);
       //let historyBalance: Array<number> = [];
       /*wallet.history.forEach((h) => {
         historyBalance.push(h.balance);
@@ -221,7 +224,7 @@ export class ChartService {
       series: series,
       chart: {
         width: '100%',
-        height: 345,
+        height: isAssets ? 410 : 345,
         type: 'pie',
       },
       responsive: [

@@ -1,5 +1,11 @@
 import { DatePipe } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  SimpleChanges,
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Dashboard, Stats } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
@@ -15,7 +21,7 @@ declare var $: any; // Dichiara jQuery come variabile globale
   styleUrls: ['./data.component.scss'],
   standalone: false,
 })
-export class DataComponent implements OnChanges {
+export class DataComponent implements OnChanges, OnDestroy {
   public chartOptions?: Partial<ApexOptions>;
   public chartPie?: Partial<ApexOptions>;
   public chartBar?: Partial<ApexOptions>;
@@ -35,6 +41,14 @@ export class DataComponent implements OnChanges {
   private dataTableInstance: any;
 
   constructor(private translate: TranslateService) {}
+
+  ngOnDestroy(): void {
+    if (this.dataTableInstance) {
+      this.dataTableInstance.clear(); // Pulire i dati
+      this.dataTableInstance.destroy(); // Distruggere l'istanza
+      this.dataTableInstance = null;
+    }
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['dashboard']) {

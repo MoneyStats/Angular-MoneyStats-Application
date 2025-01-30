@@ -186,13 +186,14 @@
   </div>
   }
   <!-- Graph -->
-  <div hidden class="section mt-4 col-xl-8 col-md-7">
+  @if (tableBalance && tableBalance.length > 1) {
+  <div class="section mt-4 col-12 col-md-8">
     <div class="section-heading">
       <h2 class="title" id="year">
-        {{ "resume_page.data.graphHistory" | translate }}
+        {{ "resume_page.graph_history" | translate }}
       </h2>
     </div>
-    <div *ngIf="cryptoResume" class="card border_round">
+    <div class="card border_round">
       <div class="card-body" style="min-height: 380px">
         <div
           *ngIf="!chartHistory"
@@ -211,12 +212,47 @@
           [colors]="chartHistory.colors!"
           [legend]="chartHistory.legend!"
           [labels]="chartHistory.labels!"
+          [grid]="chartHistory.grid!"
+          [dataLabels]="chartHistory.dataLabels!"
+          [tooltip]="chartHistory.tooltip!"
           type="area"
         ></apx-chart>
       </div>
     </div>
   </div>
   <!-- * Graph -->
+  } @if (cryptoAssets) {
+  <!-- Graph -->
+  <div class="section mt-4 col-12 col-md-4">
+    <div class="section-heading">
+      <h2 class="title" id="year">
+        {{ "crypto_resume_page.chart_pie_title" | translate }}
+      </h2>
+    </div>
+    <div class="card border_round">
+      <div class="card-body" style="min-height: 200px">
+        <div
+          *ngIf="!chartPie"
+          class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
+        >
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <apx-chart
+          *ngIf="chartPie"
+          [series]="chartPie.series!"
+          [chart]="chartPie.chart!"
+          [labels]="chartPie.labels!"
+          type="pie"
+        ></apx-chart>
+        <!--<div id="chart-line"></div>-->
+      </div>
+    </div>
+  </div>
+  <!-- * Graph -->
+  }
   <div class="section mb-3 col-md-12" *ngIf="isOperationPresent">
     <!-- History -->
     <div class="section cards-op mt-4">

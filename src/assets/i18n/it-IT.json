@@ -402,7 +402,8 @@
     "trading_table_tab9": "Totale finale",
     "trading_table_tab10": "Variazione",
     "trading_table_tab11": "Totale Variazione",
-    "trading_table_tab12": "Saldo Finale"
+    "trading_table_tab12": "Saldo Finale",
+    "chart_pie_title": "Distribuzione Assets"
   },
   "modal_component": {
     "add_wallet": {
@@ -712,6 +713,11 @@
       "status": "Errore",
       "exception": "Immagine non valida",
       "message": "L'immagine fornita è troppo grande. Per favore, utilizza un'immagine di dimensioni inferiori."
+    },
+    "ERR_UNK_MSS_001": {
+      "status": "Errore",
+      "exception": "Server Offline",
+      "message": "Il server sembra offline. Riprova più tardi oppure apri un ticket di supporto"
     }
   },
   "copyright": "Copyright © MoneyStats 2024. All Rights Reserved."

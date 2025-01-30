@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CryptoDashboard } from 'src/assets/core/data/class/crypto.class';
 import { Stats } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
+import { UserService } from 'src/assets/core/services/api/user.service';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
 import { DataTables } from 'src/assets/core/utils/datatables.service';
@@ -21,6 +22,7 @@ export class ResumeAssetsComponent implements OnChanges {
   amount: string = '******';
   @Input('hidden') hidden: boolean = false;
   public chartOptions?: Partial<ApexOptions>;
+  public chartBar?: Partial<ApexOptions>;
   @Input('resumeData') resumeData: CryptoDashboard = new CryptoDashboard();
   //resume: Map<string, CryptoDashboard> = new Map<string, CryptoDashboard>();
   @Input('isPast') isPast: boolean = false;
@@ -203,6 +205,17 @@ export class ResumeAssetsComponent implements OnChanges {
             ScreenService.isMobileDevice(),
             [350, this.isPast]
           );
+        const dates: string[] = Utils.copyObject(
+          this.resumeData.statsAssetsDays
+        ).map((d: string) => {
+          let dataLabels = new Date(d).toLocaleDateString();
+          return Utils.formatDateIntl(dataLabels);
+        });
+        this.chartBar = ChartService.appRenderChartBar(
+          dates,
+          this.resumeData.currency,
+          this.balances
+        );
       }
     }, 100);
     this.renderTable();

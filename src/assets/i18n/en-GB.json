@@ -402,7 +402,8 @@
     "trading_table_tab9": "Final Total",
     "trading_table_tab10": "Change",
     "trading_table_tab11": "Total Change",
-    "trading_table_tab12": "Final Balance"
+    "trading_table_tab12": "Final Balance",
+    "chart_pie_title": "Assets Distribution"
   },
   "modal_component": {
     "add_wallet": {
@@ -712,6 +713,11 @@
       "status": "Error",
       "exception": "Invalid Image",
       "message": "The image provided is too large. Please use a smaller image."
+    },
+    "ERR_UNK_MSS_001": {
+      "status": "Error",
+      "exception": "Server offline.",
+      "message": "The Server seams to be offline. Please try again later or open a bug."
     }
   },
   "copyright": "Copyright © MoneyStats 2024. All Rights Reserved."

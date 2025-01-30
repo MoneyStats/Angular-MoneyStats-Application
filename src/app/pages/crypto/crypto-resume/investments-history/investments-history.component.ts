@@ -48,6 +48,7 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
   operationSelect?: Operation;
 
   public chartHistory?: Partial<ApexOptions>;
+  public chartPie?: Partial<ApexOptions>;
 
   constructor(
     public cryptoService: CryptoService,
@@ -95,12 +96,16 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
   }
 
   renderChart() {
+    //setTimeout(() => {
+    //  this.chartHistory = ChartService.renderChartWallet(
+    //    'History',
+    //    this.totalMap.get('History')
+    //  );
+    //}, 500);
+    this.chartPie = ChartService.appRenderChartPie(this.cryptoAssets);
     setTimeout(() => {
-      this.chartHistory = ChartService.renderChartWallet(
-        'History',
-        this.totalMap.get('History')
-      );
-    }, 500);
+      this.chartHistory = ChartService.renderChartLineCategory(this.totalMap);
+    }, 200);
   }
 
   /**

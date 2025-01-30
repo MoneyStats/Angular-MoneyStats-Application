@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CryptoDashboard } from 'src/assets/core/data/class/crypto.class';
@@ -18,12 +11,12 @@ import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
 @Component({
-    selector: 'app-market-data',
-    templateUrl: './market-data.component.html',
-    styleUrls: ['./market-data.component.scss'],
-    standalone: false
+  selector: 'app-market-data',
+  templateUrl: './market-data.component.html',
+  styleUrls: ['./market-data.component.scss'],
+  standalone: false,
 })
-export class MarketDataComponent implements OnInit, OnDestroy, OnChanges {
+export class MarketDataComponent implements OnInit, OnDestroy {
   getDashboardSubscribe: Subscription = new Subscription();
   marketDataSubscribe: Subscription = new Subscription();
   getCryptoWalletSubscribe: Subscription = new Subscription();
@@ -44,9 +37,6 @@ export class MarketDataComponent implements OnInit, OnDestroy, OnChanges {
     private route: ActivatedRoute,
     private shared: SharedService
   ) {}
-  ngOnChanges(changes: SimpleChanges): void {
-    throw new Error('Method not implemented.');
-  }
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;

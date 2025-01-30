@@ -17,6 +17,7 @@ export class Error {
 
 export enum ErrorCodeLogout {
   UnknowError = 'ERR_UNK_MSS_001',
+  InternalServerError = 'INT_ERR_MSS_001',
   Authentication = 'ERR_AUTH_MSS_008',
 }
 

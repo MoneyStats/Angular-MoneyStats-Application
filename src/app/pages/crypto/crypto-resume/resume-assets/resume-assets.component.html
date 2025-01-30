@@ -329,4 +329,42 @@
       </div>
     </div>
   </div>
+  <!-- Graph -->
+  @if (resumeData.assets) {
+  <div class="section col-xl-12">
+    <div class="section-heading">
+      <h2 class="title" id="year">
+        {{ "resume_page.graph3" | translate }}
+      </h2>
+    </div>
+    <div class="card border_round">
+      <div class="card-body" style="min-height: 400px">
+        <div
+          *ngIf="!chartBar"
+          class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
+        >
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <apx-chart
+          *ngIf="chartBar"
+          [series]="chartBar.series!"
+          [chart]="chartBar.chart!"
+          [title]="chartBar.title!"
+          [colors]="chartBar.colors!"
+          [legend]="chartBar.legend!"
+          [labels]="chartBar.labels!"
+          [plotOptions]="chartBar.plotOptions!"
+          [grid]="chartBar.grid!"
+          [tooltip]="chartBar.tooltip!"
+          type="bar"
+        ></apx-chart>
+        <!--<div id="chart-line"></div>-->
+      </div>
+    </div>
+  </div>
+  <!-- * Graph -->
+  }
 </div>
