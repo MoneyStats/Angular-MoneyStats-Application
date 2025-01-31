@@ -159,6 +159,22 @@ export class ResumeAssetsComponent implements OnChanges {
       setTimeout(() => {
         this.dataTableInstance = $('#' + this.tableId).DataTable({
           pageLength: 12, // Numero di righe di default
+          layout: {
+            bottom: {
+              buttons: [
+                'csv',
+                'excel',
+                {
+                  extend: 'pdfHtml5',
+                  text: 'PDF',
+                  customize: function (doc: any) {
+                    DataTables.customizeExportPDF(doc);
+                  },
+                },
+              ],
+              //buttons: ["csv", "excel", "pdf", "print"],
+            },
+          },
           paging: true,
           responsive: true,
           searching: false,
@@ -184,9 +200,15 @@ export class ResumeAssetsComponent implements OnChanges {
   }
 
   getDatas() {
-    this.resumeData.holdingLong.trend =
-      this.resumeData.holdingLong.balance /
-      (1 + this.resumeData.holdingLong.performance / 100);
+    const holdingBalance = this.resumeData.holdingLong
+      ? this.resumeData.holdingLong.balance
+      : 0;
+    const holdingPerformance = this.resumeData.holdingLong
+      ? this.resumeData.holdingLong.performance
+      : 0;
+    if (this.resumeData.holdingLong)
+      this.resumeData.holdingLong.trend =
+        holdingBalance / (1 + holdingPerformance / 100);
     setTimeout(() => {
       if (this.resumeData.assets) {
         this.resumeDataFilterOnDate = Utils.copyObject(this.resumeData);

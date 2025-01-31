@@ -212,61 +212,63 @@ export class CryptoService {
   getAssetList(wallets: Wallet[]): Asset[] {
     const allAssets: Array<Asset> = [];
     const wall: Wallet[] = Utils.copyObject(wallets);
-    wall.forEach((wallet) => {
-      if (!Utils.isNullOrEmpty(wallet.assets))
-        wallet.assets.forEach((asset) => {
-          if (allAssets.find((a) => a.name == asset.name)) {
-            const index = allAssets.indexOf(
-              allAssets.find((a) => a.name == asset.name)!
-            );
-            if (!Utils.isNullOrEmpty(allAssets[index].balance))
-              allAssets[index].balance! += asset.balance!;
-            allAssets[index].value! += asset.value!;
-            allAssets[index].performance! =
-              (allAssets[index].performance! + asset.performance!) / 2;
-
-            allAssets[index].trend! = allAssets[index].trend! + asset.trend!;
-
-            asset.history?.forEach((history) => {
-              let hist = new Stats();
-              if (!Utils.isNullOrEmpty(allAssets[index].history))
-                hist = allAssets[index].history!.find(
-                  (h) => h.date == history.date
-                )!;
-              if (!Utils.isNullOrEmpty(hist)) {
-                if (!Utils.isNullOrEmpty(hist.balance)) {
-                  hist.balance += history.balance;
-                }
-                if (!Utils.isNullOrEmpty(hist.trend)) {
-                  hist.trend += history.trend;
-                }
-                if (!Utils.isNullOrEmpty(hist.percentage)) {
-                  hist.percentage = (hist.percentage + history.percentage) / 2;
-                }
-              }
-              //allAssets[index].history!.find(
-              //  (h) => h.date == history.date
-              //)!.balance += history.balance;
-              //allAssets[index].history!.find(
-              //  (h) => h.date == history.date
-              //)!.trend += history.trend;
-              //allAssets[index].history!.find(
-              //  (h) => h.date == history.date
-              //)!.percentage = (hist.percentage + history.percentage) / 2;
-            });
-
-            if (!Utils.isNullOrEmpty(asset.operations))
-              asset.operations.forEach((o) => {
-                if (!Utils.isNullOrEmpty(allAssets[index].operations))
-                  allAssets[index].operations.push(o);
-              });
-            if (!Utils.isNullOrEmpty(allAssets[index].operations))
-              allAssets[index].operations.sort((o) =>
-                o.exitDate != undefined ? o.exitDate : o.entryDate
+    if (wall)
+      wall.forEach((wallet) => {
+        if (!Utils.isNullOrEmpty(wallet.assets))
+          wallet.assets.forEach((asset) => {
+            if (allAssets.find((a) => a.name == asset.name)) {
+              const index = allAssets.indexOf(
+                allAssets.find((a) => a.name == asset.name)!
               );
-          } else allAssets.push(asset);
-        });
-    });
+              if (!Utils.isNullOrEmpty(allAssets[index].balance))
+                allAssets[index].balance! += asset.balance!;
+              allAssets[index].value! += asset.value!;
+              allAssets[index].performance! =
+                (allAssets[index].performance! + asset.performance!) / 2;
+
+              allAssets[index].trend! = allAssets[index].trend! + asset.trend!;
+
+              asset.history?.forEach((history) => {
+                let hist = new Stats();
+                if (!Utils.isNullOrEmpty(allAssets[index].history))
+                  hist = allAssets[index].history!.find(
+                    (h) => h.date == history.date
+                  )!;
+                if (!Utils.isNullOrEmpty(hist)) {
+                  if (!Utils.isNullOrEmpty(hist.balance)) {
+                    hist.balance += history.balance;
+                  }
+                  if (!Utils.isNullOrEmpty(hist.trend)) {
+                    hist.trend += history.trend;
+                  }
+                  if (!Utils.isNullOrEmpty(hist.percentage)) {
+                    hist.percentage =
+                      (hist.percentage + history.percentage) / 2;
+                  }
+                }
+                //allAssets[index].history!.find(
+                //  (h) => h.date == history.date
+                //)!.balance += history.balance;
+                //allAssets[index].history!.find(
+                //  (h) => h.date == history.date
+                //)!.trend += history.trend;
+                //allAssets[index].history!.find(
+                //  (h) => h.date == history.date
+                //)!.percentage = (hist.percentage + history.percentage) / 2;
+              });
+
+              if (!Utils.isNullOrEmpty(asset.operations))
+                asset.operations.forEach((o) => {
+                  if (!Utils.isNullOrEmpty(allAssets[index].operations))
+                    allAssets[index].operations.push(o);
+                });
+              if (!Utils.isNullOrEmpty(allAssets[index].operations))
+                allAssets[index].operations.sort((o) =>
+                  o.exitDate != undefined ? o.exitDate : o.entryDate
+                );
+            } else allAssets.push(asset);
+          });
+      });
     return allAssets;
   }
 }

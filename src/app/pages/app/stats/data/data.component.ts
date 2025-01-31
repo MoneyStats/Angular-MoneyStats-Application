@@ -65,6 +65,23 @@ export class DataComponent implements OnChanges, OnDestroy {
           pageLength: 12, // Numero di righe di default
           responsive: true,
           paging: true,
+          layout: {
+            bottom: {
+              buttons: [
+                'csv',
+                'excel',
+                {
+                  extend: 'pdfHtml5',
+                  text: 'PDF',
+                  //orientation: 'landscape',
+                  customize: function (doc: any) {
+                    DataTables.customizeExportPDF(doc);
+                  },
+                },
+              ],
+              //buttons: ["csv", "excel", "pdf", "print"],
+            },
+          },
           searching: false,
           ordering: false,
           info: true,

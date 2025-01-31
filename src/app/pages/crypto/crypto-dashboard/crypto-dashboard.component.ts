@@ -24,6 +24,7 @@ import { Subscription } from 'rxjs';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { SharedService } from 'src/assets/core/services/config/shared.service';
 import { WalletService } from 'src/assets/core/services/api/wallet.service';
+import { TranslateService } from '@ngx-translate/core';
 
 declare const TradingView: any;
 
@@ -64,7 +65,8 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
     private walletService: WalletService,
     private _renderer2: Renderer2,
     private cryptoService: CryptoService,
-    private shared: SharedService
+    private shared: SharedService,
+    private translate: TranslateService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -379,5 +381,11 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
     this.marketDataSubscribe.unsubscribe();
     this.getCryptoWalletSubscribe.unsubscribe();
     this.walletsSubscribe.unsubscribe();
+  }
+
+  getCopyright() {
+    return this.translate
+      .instant('copyright')
+      .replace('#YEAR#', new Date().getFullYear());
   }
 }

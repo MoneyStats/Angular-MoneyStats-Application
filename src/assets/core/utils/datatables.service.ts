@@ -128,6 +128,19 @@ export class DataTables {
       });
     };
 
+    const exportButtons = document.querySelectorAll(
+      '.dt-buttons button'
+    ) as NodeListOf<HTMLElement>;
+
+    // Applica la classe Neverland a ciascun bottone
+    exportButtons.forEach((button) => {
+      button.style.width = '100px';
+      button.style.marginBottom = '10px';
+      button.classList.add('btn'); // Aggiunge la classe 'btn-primary btn-block btn-lg'
+      button.classList.add('btn-primary'); // Aggiunge la classe 'btn-primary btn-block btn-lg'
+      button.classList.add('btn-block'); // Aggiunge la classe 'btn-primary btn-block btn-lg'
+    });
+
     // Applica gli stili alla paginazione subito dopo il caricamento della pagina
     applyPaginationStyles();
 
@@ -137,5 +150,40 @@ export class DataTables {
         applyPaginationStyles();
       });
     }
+  }
+
+  public static customizeExportPDF(doc: any) {
+    let columnCount = $('#' + $('.dataTable').attr('id'))
+      .DataTable()
+      .columns()
+      .count();
+
+    // Imposta landscape solo se ci sono più di 10 colonne
+    if (columnCount > 8) {
+      doc.pageOrientation = 'landscape';
+    } else {
+      doc.pageOrientation = 'portrait';
+    }
+
+    if (columnCount > 15) {
+      // Ridimensiona automaticamente il testo per adattare i dati
+      doc.defaultStyle.fontSize = 7;
+
+      // Adatta le colonne alla pagina
+      let columnWidths =
+        columnCount > 10 ? Array(columnCount).fill('auto') : 'auto';
+      doc.content[1].table.widths = columnWidths;
+
+      // Aggiunge margini per evitare tagli
+      doc.pageMargins = [10, 10, 10, 10];
+
+      // Imposta header più visibile
+      doc.styles.tableHeader = {
+        fontSize: 9,
+        bold: true,
+        //fillColor: '#eeeeee',
+      };
+    }
+    //buttons: ["csv", "excel", "pdf", "print"],
   }
 }

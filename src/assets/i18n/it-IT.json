@@ -720,5 +720,5 @@
       "message": "Il server sembra offline. Riprova più tardi oppure apri un ticket di supporto"
     }
   },
-  "copyright": "Copyright © MoneyStats 2024. All Rights Reserved."
+  "copyright": "Copyright © MoneyStats #YEAR#. All Rights Reserved."
 }

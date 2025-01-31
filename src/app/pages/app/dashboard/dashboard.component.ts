@@ -200,4 +200,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.hidden = isHidden;
     }
   }
+
+  getCopyright() {
+    return this.translate
+      .instant('copyright')
+      .replace('#YEAR#', new Date().getFullYear());
+  }
 }

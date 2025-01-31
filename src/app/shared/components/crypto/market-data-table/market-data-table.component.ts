@@ -44,12 +44,22 @@ export class MarketDataTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private initializeDataTable(): void {
+    const layout =
+      this.tableId === 'market_data_table_full'
+        ? {
+            bottom: {
+              buttons: ['csv', 'excel', 'pdf'],
+              //buttons: ["csv", "excel", "pdf", "print"],
+            },
+          }
+        : {};
     // Inizializza la DataTable solo se non è già inizializzata
     if (!$.fn.DataTable.isDataTable('#' + this.tableId)) {
       setTimeout(() => {
         this.dataTableInstance = $('#' + this.tableId).DataTable({
           pageLength: this.tableSize, // Numero di righe di default
           lengthMenu: [10, 15, 25, 50, 100], // Opzioni della select
+          layout: layout,
           paging: true,
           searching: true,
           ordering: true,
