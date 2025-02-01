@@ -33,14 +33,16 @@ export enum SelectAssetConstant {
   TRANSFER = 'newTransferOperation',
 }
 
-export enum StorageConstant {
-  GITHUBACCOUNT = 'github_account',
-  ACCESSTOKEN = 'access_token',
-  AUTHTOKEN = 'auth_token',
-  USERACCOUNT = 'user_account',
-  HIDDENAMOUNT = 'hidden_amount',
-  AUTOUPDATE = 'auto_update',
-}
+import { environment } from 'src/environments/environment';
+
+export const StorageConstant = {
+  GITHUBACCOUNT: environment.clientID + '_github_account',
+  ACCESSTOKEN: environment.clientID + '_access_token', // Funzione per valore dinamico
+  AUTHTOKEN: environment.clientID + '_auth_token',
+  USERACCOUNT: environment.clientID + '_user_account',
+  HIDDENAMOUNT: 'hidden_amount',
+  AUTOUPDATE: 'auto_update',
+};
 
 export enum ProfileSettings {
   USERNAME = 'usernameSettings',

@@ -94,7 +94,9 @@ export class AuthService {
         environment.authorizeUrl +
         '?client_id=' +
         environment.clientID +
-        '&access_type=online&redirect_uri=http%3A%2F%2Flocalhost%3A5501%2Findex.html&scope=openid&response_type=code';
+        '&access_type=online&redirect_uri=' +
+        environment.redirectUri +
+        '&scope=openid&response_type=code';
       return this.http.get<ResponseModel>(url, {
         headers: headers,
       });
@@ -105,24 +107,31 @@ export class AuthService {
     if (this.user?.mockedUser) {
       return this.http.get<ResponseModel>(environment.getUserUrl);
     } else {
-      const token: any = localStorage.getItem(StorageConstant.AUTHTOKEN);
-      const access_token = token.access_token;
-      const refresh_token = token.refresh_token;
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: access_token!.includes('Bearer')
-          ? access_token
-          : 'Bearer ' + access_token,
-      });
-      const url =
-        environment.tokenDataUrl +
-        '?client_id=' +
-        environment.clientID +
-        '&grant_type=refresh_token&include_user_data=true&refresh_token=' +
-        refresh_token;
-      return this.http.get<ResponseModel>(url, {
-        headers: headers,
-      });
+      const tokenString: any = localStorage.getItem(StorageConstant.AUTHTOKEN);
+      const token: any = tokenString ? JSON.parse(tokenString) : null;
+      if (!Utils.isNullOrEmpty(token)) {
+        const access_token = token.access_token;
+        const refresh_token = token.refresh_token;
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: access_token!.includes('Bearer')
+            ? access_token
+            : 'Bearer ' + access_token,
+        });
+        const url =
+          environment.tokenDataUrl +
+          '?client_id=' +
+          environment.clientID +
+          '&grant_type=refresh_token&include_user_data=true&refresh_token=' +
+          refresh_token;
+        return this.http.post<ResponseModel>(
+          url,
+          {},
+          {
+            headers: headers,
+          }
+        );
+      } else throw Error('Access Token not valid');
     }
   }
 

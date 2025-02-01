@@ -72,81 +72,100 @@ export class DataTables {
         '.dt-paging-button'
       ) as NodeListOf<HTMLElement>;
 
-      paginationButtons.forEach((button) => {
-        button.style.borderRadius = '12px';
-        button.style.padding = '8px 12px';
-        button.style.fontSize = '14px';
+      if (paginationButtons)
+        paginationButtons.forEach((button) => {
+          button.style.borderRadius = '12px';
+          button.style.padding = '8px 12px';
+          button.style.fontSize = '14px';
 
-        // Cambia il colore per i bottoni attivi
-        if (button.classList.contains('current')) {
-          button.style.backgroundColor = defaultColor;
-          button.style.color = '#ffffff';
-        }
-
-        // Gestisci il comportamento di hover
-        button.addEventListener('mouseover', () => {
-          if (
-            !button.classList.contains('disabled') &&
-            !button.classList.contains('current')
-          ) {
-            button.style.background = darkerDefault; // Colore di sfondo durante l'hover
-            button.style.color = hoverTextColor; // Colore del testo durante l'hover
-          }
-        });
-
-        button.addEventListener('mouseout', () => {
-          if (
-            !button.classList.contains('disabled') &&
-            !button.classList.contains('current')
-          ) {
-            button.style.backgroundColor = ''; // Rimuovi il colore di sfondo quando il mouse esce
-            button.style.color = ''; // Rimuovi il colore del testo quando il mouse esce
-          }
-        });
-
-        // Cambia il colore al focus
-        button.addEventListener('focus', () => {
-          if (
-            !button.classList.contains('disabled') &&
-            !button.classList.contains('current')
-          ) {
-            button.style.backgroundColor = darkerDefault;
+          // Cambia il colore per i bottoni attivi
+          if (button.classList.contains('current')) {
+            button.style.backgroundColor = defaultColor;
             button.style.color = '#ffffff';
           }
-        });
 
-        // Ripristina il colore al termine del focus
-        button.addEventListener('blur', () => {
-          if (
-            !button.classList.contains('disabled') &&
-            !button.classList.contains('current')
-          ) {
-            button.style.backgroundColor = '';
-            button.style.color = '';
-          }
+          // Gestisci il comportamento di hover
+          button.addEventListener('mouseover', () => {
+            if (
+              !button.classList.contains('disabled') &&
+              !button.classList.contains('current')
+            ) {
+              button.style.background = darkerDefault; // Colore di sfondo durante l'hover
+              button.style.color = hoverTextColor; // Colore del testo durante l'hover
+            }
+          });
+
+          button.addEventListener('mouseout', () => {
+            if (
+              !button.classList.contains('disabled') &&
+              !button.classList.contains('current')
+            ) {
+              button.style.backgroundColor = ''; // Rimuovi il colore di sfondo quando il mouse esce
+              button.style.color = ''; // Rimuovi il colore del testo quando il mouse esce
+            }
+          });
+
+          // Cambia il colore al focus
+          button.addEventListener('focus', () => {
+            if (
+              !button.classList.contains('disabled') &&
+              !button.classList.contains('current')
+            ) {
+              button.style.backgroundColor = darkerDefault;
+              button.style.color = '#ffffff';
+            }
+          });
+
+          // Ripristina il colore al termine del focus
+          button.addEventListener('blur', () => {
+            if (
+              !button.classList.contains('disabled') &&
+              !button.classList.contains('current')
+            ) {
+              button.style.backgroundColor = '';
+              button.style.color = '';
+            }
+          });
         });
-      });
+    };
+    const applyExportButtonsStyles = () => {
+      const exportButtons = document.querySelectorAll(
+        '.dt-buttons button'
+      ) as NodeListOf<HTMLElement>;
+
+      if (exportButtons)
+        // Applica la classe Neverland a ciascun bottone
+        exportButtons.forEach((button) => {
+          button.style.width = '100px';
+          button.style.marginBottom = '10px';
+          button.classList.add('btn'); // Aggiunge la classe 'btn-primary btn-block btn-lg'
+          button.classList.add('btn-primary'); // Aggiunge la classe 'btn-primary btn-block btn-lg'
+          //button.classList.add('btn-block'); // Aggiunge la classe 'btn-primary btn-block btn-lg'
+        });
     };
 
-    const exportButtons = document.querySelectorAll(
-      '.dt-buttons button'
-    ) as NodeListOf<HTMLElement>;
-
-    // Applica la classe Neverland a ciascun bottone
-    exportButtons.forEach((button) => {
-      button.style.width = '100px';
-      button.style.marginBottom = '10px';
-      button.classList.add('btn'); // Aggiunge la classe 'btn-primary btn-block btn-lg'
-      button.classList.add('btn-primary'); // Aggiunge la classe 'btn-primary btn-block btn-lg'
-      button.classList.add('btn-block'); // Aggiunge la classe 'btn-primary btn-block btn-lg'
-    });
-
     // Applica gli stili alla paginazione subito dopo il caricamento della pagina
+    applyExportButtonsStyles();
     applyPaginationStyles();
+
+    const observePaginationChanges = () => {
+      const paginationContainer = document.querySelector('.dt-paging');
+      if (!paginationContainer) return;
+
+      const observer = new MutationObserver(() => {
+        applyPaginationStyles();
+      });
+
+      observer.observe(paginationContainer, { childList: true, subtree: true });
+    };
+
+    // Avvia il MutationObserver dopo l'inizializzazione della tabella
+    observePaginationChanges();
 
     // Se usi DataTables, ascolta l'evento 'draw' per applicare gli stili quando la tabella viene ridisegnata (ad esempio, dopo un cambio pagina)
     if (typeof $ !== 'undefined' && $.fn.dataTable) {
       $(`#${tableId}`).on('draw.dt', () => {
+        applyExportButtonsStyles();
         applyPaginationStyles();
       });
     }

@@ -20,6 +20,8 @@ export class RouteGuardService {
   environment = environment;
   isUserLoggedSubscribe: Subscription = new Subscription();
   resp: Response | undefined;
+
+  private refreshInProgress = false;
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -80,25 +82,52 @@ export class RouteGuardService {
     this.authService.authorize(authToken.access_token).subscribe({
       next: (resp) => {
         if (resp.status == 200) return true;
+        else if (resp.status == 401) return this.tryRefreshToken();
         return false;
       },
       error: (error) => {
-        return this.authService.refreshToken().subscribe({
-          next: (resp) => {
-            LOG.info(resp.message!, 'RouteGuardService');
-            this.userService.setUserGlobally(resp.data);
-            if (resp.status == 200) return true;
-            return false;
-          },
-          error: (error) => {
-            this.router.navigate(['auth/login']);
-            return false;
-          },
-        });
+        this.tryRefreshToken();
       },
     });
     return false;
   }
+
+  tryRefreshToken() {
+    this.refreshInProgress = true; // Aggiungi questa riga
+    return this.authService.refreshToken().subscribe({
+      next: (resp) => {
+        LOG.info(resp.message!, 'RouteGuardService');
+        this.userService.setUserGlobally(resp.data);
+        if (resp.status == 200) {
+          this.refreshInProgress = false; // Reset the flag on success
+          return true;
+        }
+        return false;
+      },
+      error: (error) => {
+        this.router.navigate(['auth/login']);
+        this.refreshInProgress = false; // Reset the flag on error
+        return false;
+      },
+    });
+  }
+
+  //tryRefreshToken() {
+  //  return this.authService.refreshToken().subscribe({
+  //    next: (resp) => {
+  //      console.log('REFRESH', resp);
+  //      LOG.info(resp.message!, 'RouteGuardService');
+  //      this.userService.setUserGlobally(resp.data);
+  //      if (resp.status == 200) return true;
+  //      return false;
+  //    },
+  //    error: (error) => {
+  //      console.log('REFRESH', error);
+  //      this.router.navigate(['auth/login']);
+  //      return false;
+  //    },
+  //  });
+  //}
 
   unsubscribe() {
     this.isUserLoggedSubscribe.unsubscribe();
