@@ -25,26 +25,31 @@ const routes: Routes = [
       {
         path: 'requirements',
         component: RequirementsComponent,
+        canActivate: [RouteGuardService],
         data: { animation: fadeSlider },
       },
       {
         path: 'asset',
         component: CryptoAssetComponent,
+        canActivate: [RouteGuardService],
         data: { animation: fadeSlider },
       },
       {
         path: 'asset/details/:identifier',
         component: CryptoDetailsComponent,
+        canActivate: [RouteGuardService],
         //data: { animation: fadeSlider },
       },
       {
         path: 'resume',
         component: CryptoResumeComponent,
+        canActivate: [RouteGuardService],
         data: { animation: fadeSlider },
       },
       {
         path: 'operation/:operationType/:wallet/:fiat',
         component: OperationExchangeComponent,
+        canActivate: [RouteGuardService],
         data: { animation: fadeSlider },
       },
       {

@@ -141,7 +141,8 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
 
     this.renderImage();
     this.shared.setWallet(this.wallet!);
-    this.coinSymbol = UserService.getUserData().attributes.money_stats_settings.currencySymbol;
+    this.coinSymbol =
+      UserService.getUserData().attributes.money_stats_settings.currencySymbol;
     this.isWalletBalanceHidden();
   }
 
@@ -174,6 +175,8 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
           new Date(h.date).getFullYear().toString() ===
           new Date().getFullYear().toString()
       );
+      // TODO: Fix This
+      console.log(walletGraph, lastYear, Utils.isNullOrEmpty(lastYear));
       setTimeout(() => {
         this.chart1Y = ChartService.renderChartWallet(
           walletGraph.name,

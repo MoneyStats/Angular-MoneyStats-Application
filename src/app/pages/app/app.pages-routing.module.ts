@@ -39,12 +39,14 @@ const routes: Routes = [
       {
         path: 'wallet',
         component: WalletComponent,
+        canActivate: [RouteGuardService],
         data: { animation: fadeSlider },
         //data: { animation: fader },
       },
       {
         path: 'wallet/details/:id/:wallet',
         component: WalletDetailsComponent,
+        canActivate: [RouteGuardService],
         data: { animation: fadeSlider },
         //data: { animation: slideUp },
       },
@@ -63,12 +65,14 @@ const routes: Routes = [
       {
         path: 'stats',
         component: StatsComponent,
+        canActivate: [RouteGuardService],
         data: { animation: fadeSlider },
         //data: { animation: fader },
       },
       {
         path: 'stats/insert',
         component: AddStatsComponent,
+        canActivate: [RouteGuardService],
         data: { animation: fadeSlider },
         //data: { animation: fader },
       },

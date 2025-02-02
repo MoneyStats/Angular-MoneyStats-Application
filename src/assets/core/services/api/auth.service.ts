@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { concatMap, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ResponseModel } from '../../data/class/generic.class';
 import { MockUser, User } from '../../data/class/user.class';
@@ -171,9 +171,21 @@ export class AuthService {
         'Content-Type': 'application/json',
         Authorization: authToken!,
       });
-      return this.http.put<ResponseModel>(environment.updateUserDataUrl, user, {
-        headers: headers,
-      });
+
+      const userInfoCacheUrl = environment.cleanCacheUrl + '?isUserInfo=true';
+      // Esegue la PATCH, poi la PUT in sequenza
+      return this.http
+        .patch<ResponseModel>(userInfoCacheUrl, null, { headers })
+        .pipe(
+          concatMap(() =>
+            this.http.put<ResponseModel>(environment.updateUserDataUrl, user, {
+              headers,
+            })
+          )
+        );
+      //return this.http.put<ResponseModel>(environment.updateUserDataUrl, user, {
+      //  headers: headers,
+      //});
     }
   }
 

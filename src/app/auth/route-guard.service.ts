@@ -72,10 +72,17 @@ export class RouteGuardService {
 
   validateAccessToken(user: any, authToken: any) {
     if (!Utils.isNullOrEmpty(authToken.access_token)) {
-      let now = new Date();
-      let expirationDate = new Date(authToken.expires_at - 900000);
+      const now = new Date();
+      const expiration = authToken.expires_at - authToken.expires / 3;
+      const expirationDate = new Date(expiration);
+      // TODO: Vedere se funziona il calcolo, credo che dopo che scade continua a chiamare l'authorize, da testare
       if (now < expirationDate) {
-        user.authToken = authToken;
+        LOG.info(
+          'Token is valid, expire at ' +
+            expirationDate.toLocaleTimeString() +
+            ' skipping authorize',
+          'RouteGuardService'
+        );
         return true;
       }
     }
