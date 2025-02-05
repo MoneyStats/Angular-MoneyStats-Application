@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { ComponentFactoryResolver, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   Router,
@@ -7,11 +7,11 @@ import {
 } from '@angular/router';
 import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { StorageConstant } from 'src/assets/core/data/constant/constant';
-import { UserService } from 'src/assets/core/services/api/user.service';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { environment } from 'src/environments/environment';
 import { SwUpdate } from '@angular/service-worker';
 import { LOG } from 'src/assets/core/utils/log.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,9 +19,7 @@ import { LOG } from 'src/assets/core/utils/log.service';
 export class RouteGuardService {
   environment = environment;
   isUserLoggedSubscribe: Subscription = new Subscription();
-  resp: Response | undefined;
 
-  private refreshInProgress = false;
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -72,51 +70,62 @@ export class RouteGuardService {
 
   validateAccessToken(user: any, authToken: any) {
     if (!Utils.isNullOrEmpty(authToken.access_token)) {
-      const now = new Date();
-      const expiration = authToken.expires_at - authToken.expires / 3;
-      const expirationDate = new Date(expiration);
-      // TODO: Vedere se funziona il calcolo, credo che dopo che scade continua a chiamare l'authorize, da testare
-      if (now < expirationDate) {
+      const now = Date.now(); // Tempo attuale in millisecondi
+
+      // Se non è già stato calcolato, calcoliamo la soglia di rinnovo UNA SOLA VOLTA
+      if (!authToken.expirationThreshold)
+        this.calculateExpirationThreshold(now, authToken);
+
+      if (now < authToken.expirationThreshold) {
         LOG.info(
-          'Token is valid, expire at ' +
-            expirationDate.toLocaleTimeString() +
-            ' skipping authorize',
+          'Token is valid, Next Validation: ' +
+            new Date(authToken.expirationThreshold).toLocaleTimeString() +
+            ' Expires At: ' +
+            new Date(authToken.expires_at).toLocaleTimeString() +
+            ', skipping authorize',
           'RouteGuardService'
         );
         return true;
       }
+
+      this.authService.authorize(authToken.access_token).subscribe({
+        next: (resp) => {
+          if (resp.status === 200) {
+            this.calculateExpirationThreshold(now, authToken);
+            return true;
+          }
+          if (resp.status === 401) return this.tryRefreshToken();
+          return false;
+        },
+        error: (error) => {
+          //this.tryRefreshToken();
+        },
+      });
     }
-    this.authService.authorize(authToken.access_token).subscribe({
-      next: (resp) => {
-        if (resp.status == 200) return true;
-        else if (resp.status == 401) return this.tryRefreshToken();
-        return false;
-      },
-      error: (error) => {
-        this.tryRefreshToken();
-      },
-    });
     return false;
   }
 
   tryRefreshToken() {
-    this.refreshInProgress = true; // Aggiungi questa riga
     return this.authService.refreshToken().subscribe({
       next: (resp) => {
         LOG.info(resp.message!, 'RouteGuardService');
         this.userService.setUserGlobally(resp.data);
         if (resp.status == 200) {
-          this.refreshInProgress = false; // Reset the flag on success
           return true;
         }
         return false;
       },
       error: (error) => {
         this.router.navigate(['auth/login']);
-        this.refreshInProgress = false; // Reset the flag on error
         return false;
       },
     });
+  }
+
+  calculateExpirationThreshold(now: any, authToken: any) {
+    const expirationTime = authToken.expires_at - now;
+    authToken.expirationThreshold = now + expirationTime / 3;
+    localStorage.setItem(StorageConstant.AUTHTOKEN, JSON.stringify(authToken));
   }
 
   //tryRefreshToken() {

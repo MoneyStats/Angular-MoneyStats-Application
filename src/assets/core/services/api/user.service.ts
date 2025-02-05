@@ -33,7 +33,10 @@ export class UserService {
         JSON.stringify(user.authToken)
       );
     }
-    this.setValue(user.attributes.money_stats_settings.currency, user.attributes.money_stats_settings.cryptoCurrency);
+    this.setValue(
+      user.attributes.money_stats_settings.currency,
+      user.attributes.money_stats_settings.cryptoCurrency
+    );
     user.attributes.money_stats_settings.cryptoCurrencySymbol =
       this.cryptoCurrency;
     user.attributes.money_stats_settings.currencySymbol = this.currency;
@@ -51,13 +54,13 @@ export class UserService {
         StorageConstant.ACCESSTOKEN,
         token?.token_type + ' ' + token?.access_token
       );
-      localStorage.setItem(
-        StorageConstant.AUTHTOKEN,
-        JSON.stringify(token)
-      );
+      localStorage.setItem(StorageConstant.AUTHTOKEN, JSON.stringify(token));
     }
     const user = access_sphere_response.user!;
-    this.setValue(user.attributes.money_stats_settings.currency, user.attributes.money_stats_settings.cryptoCurrency);
+    this.setValue(
+      user.attributes.money_stats_settings.currency,
+      user.attributes.money_stats_settings.cryptoCurrency
+    );
     user.attributes.money_stats_settings.currencySymbol = this.currency;
     localStorage.setItem(StorageConstant.USERACCOUNT, JSON.stringify(user));
     this.user = user;
@@ -81,9 +84,7 @@ export class UserService {
         this.currency = CoinSymbol.USD;
         break;
     }
-    if (cryptoCurrency)
-      this.cryptoCurrency =
-        cryptoCurrency;
+    if (cryptoCurrency) this.cryptoCurrency = cryptoCurrency;
   }
 
   public static getUserData(): User {

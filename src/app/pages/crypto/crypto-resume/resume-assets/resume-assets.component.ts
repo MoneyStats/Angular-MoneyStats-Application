@@ -39,7 +39,7 @@ export class ResumeAssetsComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.getDatas();
-    if (changes['resumeData']) {
+    if (changes['resumeData'] && !Utils.isNullOrEmpty(this.resumeData.assets)) {
       this.reinitializeDataTable();
     }
   }
