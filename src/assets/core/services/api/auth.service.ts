@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {
@@ -21,6 +21,7 @@ import { SwalService } from '../../utils/swal.service';
 import { CacheService } from '../config/cache/cache.service';
 import { Utils } from '../config/utils.service';
 import { LOG } from '../../utils/log.service';
+import { WebService } from '../config/web.service';
 
 @Injectable({
   providedIn: 'root',
@@ -61,8 +62,7 @@ export class AuthService {
           LOG.info(data.message!, 'AuthService');
         });
     }
-    localStorage.removeItem(StorageConstant.ACCESSTOKEN);
-    localStorage.removeItem(StorageConstant.USERACCOUNT);
+    WebService.logoutStorage();
     this.router.navigate(['auth/login']);
   }
 
@@ -93,7 +93,46 @@ export class AuthService {
     }
   }
 
-  authorize(authToken: string): Observable<ResponseModel> {
+  token(code: string): Observable<ResponseModel> {
+    this.cache.clearCache();
+    const url =
+      environment.tokenDataUrl +
+      '?client_id=' +
+      environment.clientID +
+      //'&scope=openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email' +
+      '&scope=openid profile email' +
+      '&grant_type=authorization_code&include_user_data=true&redirect_uri=' +
+      environment.redirectUri +
+      '/auth/login' +
+      '&code=' +
+      code;
+    //password = btoa(password);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    const body = {};
+    return this.http.post<ResponseModel>(url, body, {
+      headers: headers,
+    });
+  }
+
+  authorize(): Observable<HttpResponse<any>> {
+    const url =
+      environment.authorizeUrl +
+      '?client_id=' +
+      environment.clientID +
+      '&access_type=online&redirect_uri=' +
+      encodeURIComponent(environment.redirectUri + '/auth/login') +
+      //'&scope=openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email' +
+      '&scope=openid profile email' +
+      '&type=google' +
+      '&response_type=code';
+    return this.http.get<any>(url, {
+      observe: 'response', // 🔥 Include gli header nella risposta
+    });
+  }
+
+  authorizeCheck(authToken: string): Observable<ResponseModel> {
     if (this.user?.mockedUser) {
       return this.http.get<ResponseModel>(environment.authorizeUrlMock);
     } else {
@@ -117,35 +156,6 @@ export class AuthService {
   }
 
   refreshToken(): Observable<ResponseModel> {
-    if (this.user?.mockedUser) {
-      return this.http.get<ResponseModel>(environment.getUserUrl);
-    } else {
-      const tokenString: any = localStorage.getItem(StorageConstant.AUTHTOKEN);
-      const token: any = tokenString ? JSON.parse(tokenString) : null;
-      if (!Utils.isNullOrEmpty(token)) {
-        const access_token = token.access_token;
-        const refresh_token = token.refresh_token;
-        const headers = new HttpHeaders({
-          'Content-Type': 'application/json',
-          Authorization: access_token!.includes('Bearer')
-            ? access_token
-            : 'Bearer ' + access_token,
-        });
-        const url =
-          environment.tokenDataUrl +
-          '?client_id=' +
-          environment.clientID +
-          '&grant_type=refresh_token&include_user_data=true&refresh_token=' +
-          refresh_token;
-        const body = {};
-        return this.http.post<ResponseModel>(url, body, {
-          headers: headers,
-        });
-      } else throw Error('Access Token not valid');
-    }
-  }
-
-  refreshTokenOLD(): Observable<ResponseModel> {
     if (this.user?.mockedUser) {
       return this.http.get<ResponseModel>(environment.getUserUrl);
     } else {
@@ -177,14 +187,11 @@ export class AuthService {
           environment.clientID +
           '&grant_type=refresh_token&include_user_data=true&refresh_token=' +
           refresh_token;
+        const body = {};
         return this.http
-          .post<ResponseModel>(
-            url,
-            {},
-            {
-              headers: headers,
-            }
-          )
+          .post<ResponseModel>(url, body, {
+            headers: headers,
+          })
           .pipe(
             tap((resp) => {
               this.refreshTokenSubject.next(resp.data.access_token);

@@ -77,18 +77,6 @@ export class ErrorService {
     this.exception.error = errorModel;
   }
 
-  buildErrorMessage(errorMap: any, exception: any, errorCode: string) {
-    switch (errorCode) {
-      case ErrorCode.Duplicate_Key:
-        return errorMap.message.replace(
-          ErrorMessageMetadata.KEY,
-          exception.error.message.split("'")[1]
-        );
-      default:
-        return errorMap.message;
-    }
-  }
-
   mapTranslateError() {
     let exceptionMap: Record<string, any> =
       this.translateService.instant('exception');
@@ -99,11 +87,7 @@ export class ErrorService {
       // Puoi accedere alla traduzione direttamente usando la chiave
       const error = exceptionMap[errorCode];
       // Assegna il messaggio tradotto all'oggetto UtilsException
-      this.exception.error!.message = this.buildErrorMessage(
-        error,
-        this.exception,
-        errorCode
-      );
+      this.exception.error!.message = error.message;
       this.exception.error!.status = error.status;
       this.exception.error!.exception = error.exception;
     }

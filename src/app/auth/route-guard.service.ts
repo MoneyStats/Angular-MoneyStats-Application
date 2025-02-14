@@ -37,6 +37,7 @@ export class RouteGuardService {
       localStorage.getItem(StorageConstant.AUTHTOKEN)!
     );
     let user = JSON.parse(localStorage.getItem(StorageConstant.USERACCOUNT)!);
+    if (user.mockedUser) return true;
     if (authToken != null && user != null) {
       this.validateAccessToken(user, authToken);
       return true;
@@ -88,19 +89,16 @@ export class RouteGuardService {
         return true;
       }
 
-      this.authService.authorize(authToken.access_token).subscribe({
-        next: (resp) => {
+      this.authService
+        .authorizeCheck(authToken.access_token)
+        .subscribe((resp) => {
           if (resp.status === 200) {
             this.calculateExpirationThreshold(now, authToken);
             return true;
           }
-          if (resp.status === 401) return this.tryRefreshToken();
+          //if (resp.status === 401) return this.tryRefreshToken();
           return false;
-        },
-        error: (error) => {
-          //this.tryRefreshToken();
-        },
-      });
+        });
     }
     return false;
   }
@@ -116,7 +114,7 @@ export class RouteGuardService {
         return false;
       },
       error: (error) => {
-        this.router.navigate(['auth/login']);
+        this.authService.logout();
         return false;
       },
     });

@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
-import { ErrorCodeLogout } from '../data/class/error';
+import { ErrorCode, ErrorCodeLogout } from '../data/class/error';
 import { AuthService } from '../services/api/auth.service';
 import { ErrorService } from './error.service';
 import { UserService } from '../services/api/user.service';
@@ -46,8 +46,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
           // Try Refresh if error is AUTH_TOKEN_NOT_VALID
           if (
-            this.errorService.exception.error?.exception ===
-              'AUTH_TOKEN_NOT_VALID' ||
+            errorCode === ErrorCode.Authentication ||
             (error.url && error.url.includes('/authorize'))
           )
             return this.tryRefreshToken(request, next);
@@ -88,15 +87,35 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         if (resp.status === 200) {
           LOG.info(resp.message!, 'ErrorInterceptor');
           this.userService.setUserGlobally(resp.data);
-          // Aggiorna il token nei request headers e riprova la richiesta originale
+
+          // Aggiorna il token e riprova la richiesta originale
           const clonedRequest = request.clone({
             setHeaders: {
               Authorization: `Bearer ${resp.data.token.access_token}`,
             },
           });
-          return next.handle(clonedRequest);
+
+          return next.handle(clonedRequest).pipe(
+            catchError((error) => {
+              // Se la richiesta fallisce dopo il refresh, fai logout
+              LOG.info(
+                'Request failed after token refresh',
+                'ErrorInterceptor'
+              );
+              this.authService.logout();
+              return throwError(
+                () => new Error('Session expired, logging out')
+              );
+            })
+          );
         }
         // Se la refresh fallisce, esegui il logout
+        this.authService.logout();
+        return throwError(() => new Error('Session expired, logging out'));
+      }),
+      catchError((error) => {
+        // Gestisce errori della richiesta di refresh token
+        LOG.info('Refresh token request failed', 'ErrorInterceptor');
         this.authService.logout();
         return throwError(() => new Error('Session expired, logging out'));
       })

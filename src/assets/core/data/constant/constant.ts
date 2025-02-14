@@ -50,11 +50,11 @@ export enum ProfileSettings {
   PASSWORD = 'passwordSettings',
 }
 
-export enum LanguagesSettings {
-  ATTR_LANGUAGE = 'lang',
-  ENGLISH = 'en-GB',
-  ITALIAN = 'it-IT',
-}
+export const LanguagesSettings = {
+  ATTR_LANGUAGE: environment.clientID + '_lang',
+  ENGLISH: 'en-GB',
+  ITALIAN: 'it-IT',
+};
 
 export enum AppConfigConst {
   DEFAULT_WALLET_IMG = 'assets/images/sample/wallet.png',
@@ -78,6 +78,15 @@ export enum MarketDataCategory {
 export enum UserRole {
   USER = 'MONEY_STATS_USER',
   ADMIN = 'MONEY_STATS_ADMIN',
+}
+
+export enum Tracing {
+  SPAN_ID = 'Span-ID',
+  TRACE_ID = 'Trace-ID',
+  PARENT_ID = 'Parent-ID',
+  SESSION_ID = 'Session-ID',
+  REDIRECT_URI = 'redirect-uri',
+  REGISTRATION_TOKEN = 'Registration-Token',
 }
 
 export var Operations = ['New Investment', 'Holding', 'Trading', 'Transfer'];

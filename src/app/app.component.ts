@@ -4,18 +4,19 @@ import { TranslateService } from '@ngx-translate/core';
 import { LanguagesSettings } from 'src/assets/core/data/constant/constant';
 import { ThemeService } from 'src/assets/core/utils/theme.service';
 import { fader, slideUp } from './shared/animations/route-animations';
+import { Utils } from 'src/assets/core/services/config/utils.service';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    animations: [
-        // <-- add your animations here
-        fader,
-        slideUp,
-        // transformer,
-    ],
-    standalone: false
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  animations: [
+    // <-- add your animations here
+    fader,
+    slideUp,
+    // transformer,
+  ],
+  standalone: false,
 })
 export class AppComponent implements OnInit {
   public showHeader: boolean = true;
@@ -37,11 +38,13 @@ export class AppComponent implements OnInit {
     if (languages == 'en' || languages == 'it') {
       languages = LanguagesSettings.ENGLISH;
     }
-    this.translate.setDefaultLang(languages);
-    localStorage.setItem(LanguagesSettings.ATTR_LANGUAGE, languages);
+    if (!Utils.isNullOrEmpty(languages)) {
+      this.translate.setDefaultLang(languages!);
+      localStorage.setItem(LanguagesSettings.ATTR_LANGUAGE, languages!);
+    }
   }
 
-  changeLanguages(lan: string): LanguagesSettings {
+  changeLanguages(lan: string) {
     if (lan == LanguagesSettings.ENGLISH) {
       return LanguagesSettings.ENGLISH;
     } else if (lan == LanguagesSettings.ITALIAN) {

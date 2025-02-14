@@ -3,29 +3,30 @@
   "message": "Login Successfully! Welcome back moneystats!",
   "correlationId": "93b2a30d-732b-43c3-8cf5-d42e53131787",
   "data": {
-    "id": 1,
-    "creationDate": "2023-01-17T19:33:14",
-    "updateDate": "2023-01-17T19:33:14",
-    "name": "Mock",
-    "surname": "User",
-    "email": "email@email.com",
-    "username": "moneystats",
-    "role": "MOCK",
-    "profilePhoto": "https://moneystats.github.io/assets/images/sample/avatar.png",
-    "currency": "EUR",
-    "mockedUser": true,
-    "authToken": {
-      "expirationTime": 3600000,
-      "accessToken": "mockAccessToken"
-    },
-    "settings": {
+    "user": {
       "id": 1,
-      "creationDate": "2023-11-12T17:07:17",
-      "updateDate": "2023-11-12T17:07:17",
+      "creationDate": "2023-01-17T19:33:14",
+      "updateDate": "2023-01-17T19:33:14",
+      "name": "Mock",
+      "surname": "User",
+      "email": "email@email.com",
+      "username": "moneystats",
+      "role": "MOCK",
+      "profilePhoto": "https://moneystats.github.io/assets/images/sample/avatar.png",
       "currency": "EUR",
-      "cryptoCurrency": "USD",
-      "completeRequirement": "COMPLETED",
-      "liveWallets": "ACTIVE"
+      "mockedUser": true,
+      "authToken": {
+        "expirationTime": 3600000,
+        "accessToken": "mockAccessToken"
+      },
+      "attributes": {
+        "money_stats_settings": {
+          "currency": "EUR",
+          "cryptoCurrency": "USD",
+          "completeRequirement": "COMPLETED",
+          "liveWallets": "ACTIVE"
+        }
+      }
     }
   }
 }

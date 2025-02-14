@@ -70,7 +70,8 @@
       "passPlaceholder": "La tua Password",
       "register": "Registrati",
       "forgot": "Password Dimenticata?",
-      "login": "Accedi"
+      "login": "Accedi",
+      "google": "Accedi con Google"
     },
     "register": {
       "title": "Registrazione",
@@ -94,6 +95,7 @@
       "terms": "Io accetto",
       "terms2": "termini e condizioni",
       "register": "Registrati",
+      "google": "Registrati con Google",
       "warning": {
         "password": "<p><strong>Attenzione:</strong> La tua password deve rispettare i seguenti criteri:<ul><li>Deve essere lunga da 8 a 10 caratteri.</li><li>Deve contenere almeno una lettera maiuscola e una minuscola.</li><li>Deve includere almeno un numero e un carattere speciale tra i seguenti: @$!%*?&.,</li></ul>Per garantire la sicurezza del tuo account, assicurati che la tua password rispetti questi criteri. Una password forte è essenziale per proteggere i tuoi dati personali e la tua privacy online.</p>",
         "invalidEmail": "L'indirizzo email inserito non è valido. Per favore, inserisci un indirizzo email valido."
@@ -684,11 +686,6 @@
       "exception": "Credenziali errate",
       "message": "Il nome utente o la password inseriti sono errati. Per favore, riprova."
     },
-    "ERR_AUTH_MSS_003": {
-      "status": "Errore",
-      "exception": "Chiave duplicata",
-      "message": "L'email o lo username è già stato registrato. Per favore, utilizza una nuova chiave."
-    },
     "ERR_AUTH_MSS_004": {
       "status": "Errore interno",
       "exception": "Errore sconosciuto",
@@ -703,6 +700,11 @@
       "status": "Errore",
       "exception": "Email non valida",
       "message": "L'email inserita non è stata trovata. Per favore, verifica e riprova."
+    },
+    "ERR_AUTH_MSS_403": {
+      "status": "Errore",
+      "exception": "Accesso Negato",
+      "message": "Non puoi accedere alla pagina."
     },
     "ERR_VALID_MSS_001": {
       "status": "Errore",
