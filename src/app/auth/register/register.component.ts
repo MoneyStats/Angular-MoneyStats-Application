@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-import { RegEx } from 'src/assets/core/data/constant/constant';
+import { ModalConstant, RegEx } from 'src/assets/core/data/constant/constant';
 
 @Component({
   selector: 'app-register',
@@ -19,6 +19,7 @@ import { RegEx } from 'src/assets/core/data/constant/constant';
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   registerSubscribe: Subscription = new Subscription();
+  checkRegistrationCodeSubscribe: Subscription = new Subscription();
 
   name: string = '';
   surname: string = '';
@@ -41,8 +42,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private translate: TranslateService
   ) {}
 
+  public get modalConstant(): typeof ModalConstant {
+    return ModalConstant;
+  }
+
   ngOnDestroy(): void {
     this.registerSubscribe.unsubscribe();
+    this.checkRegistrationCodeSubscribe.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -86,17 +92,23 @@ export class RegisterComponent implements OnInit, OnDestroy {
     };
     user.attributes = attributes;
 
-    this.registerSubscribe = this.authService
-      .register(user, this.invitationCode)
-      .subscribe((data) => {
-        LOG.info(data.message!, 'RegisterComponent');
-        SwalService.toastMessage(
-          SwalIcon.SUCCESS,
-          this.translate
-            .instant('response.register')
-            .replace('$USER$', user.username)
-        );
-        this.router.navigate(['auth/login']);
+    this.checkRegistrationCodeSubscribe = this.authService
+      .checkRegistrationToken(this.invitationCode)
+      .subscribe((res) => {
+        LOG.info(res.message!, 'RegisterComponent');
+        const registration_code = res.data.registration_token;
+        this.registerSubscribe = this.authService
+          .register(user, registration_code)
+          .subscribe((data) => {
+            LOG.info(data.message!, 'RegisterComponent');
+            SwalService.toastMessage(
+              SwalIcon.SUCCESS,
+              this.translate
+                .instant('response.register')
+                .replace('$USER$', user.username)
+            );
+            this.router.navigate(['auth/login']);
+          });
       });
   }
 

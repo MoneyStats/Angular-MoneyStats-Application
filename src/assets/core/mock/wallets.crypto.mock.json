@@ -1,7 +1,7 @@
 {
   "status": 200,
   "message": "Found 6 Wallets",
-  "correlationId": "8dacd409-2bdc-45be-a0af-01c1ccc0a5c1",
+  "spanId": "8dacd409-2bdc-45be-a0af-01c1ccc0a5c1",
   "data": [
     {
       "id": 1,
@@ -20,6 +20,50 @@
       "differenceLastStats": 2499.5,
       "dateLastStats": "2023-02-22",
       "category": "Investments",
+      "assets": {
+        "identifier": "bitcoin",
+        "name": "Bitcoin",
+        "symbol": "BTC",
+        "rank": 1,
+        "value": 10000,
+        "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/800px-Bitcoin.svg.png",
+        "balance": 0.5,
+        "invested": 1000,
+        "performance": 10,
+        "trend": 100,
+        "operations": [
+          {
+            "id": 448,
+            "creationDate": "2025-01-05T13:38:16",
+            "updateDate": "2025-01-05T13:38:16",
+            "type": "Trading",
+            "status": "CLOSED",
+            "entryDate": "2023-09-27T18:12:59.691",
+            "entryCoin": "USDT",
+            "entryPrice": "25411.45",
+            "entryPriceValue": 500.0,
+            "entryQuantity": 0.01967617,
+            "exitDate": "2023-11-14T18:54:53.177",
+            "exitCoin": "BTC",
+            "exitPrice": "36300",
+            "exitPriceValue": 711.41,
+            "exitQuantity": 711.38799112,
+            "performance": 30.0,
+            "trend": 214.24
+          }
+        ],
+        "history": [
+          {
+            "id": 1,
+            "creationDate": "2023-02-21T15:19:14",
+            "updateDate": "2023-02-21T15:19:14",
+            "date": "2023-01-01",
+            "balance": 10.0,
+            "percentage": 999900.0,
+            "trend": 10.0
+          }
+        ]
+      },
       "history": [
         {
           "id": 1,

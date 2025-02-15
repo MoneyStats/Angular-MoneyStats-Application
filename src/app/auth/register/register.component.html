@@ -244,6 +244,8 @@
           <button
             class="gsi-material-button mx-auto"
             style="position: relative"
+            data-bs-toggle="modal"
+            attr.data-bs-target="#{{ modalConstant.REGISTRATIONTOKEN }}"
           >
             <div class="gsi-material-button-state"></div>
             <div class="gsi-material-button-content-wrapper">
@@ -306,3 +308,7 @@
   </div>
 </div>
 <!-- * App Capsule -->
+
+<app-registration-token
+  [modalId]="modalConstant.REGISTRATIONTOKEN"
+></app-registration-token>

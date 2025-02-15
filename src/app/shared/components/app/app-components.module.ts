@@ -25,6 +25,7 @@ import { VersionComponent } from './modal/version-and-change/version/version.com
 import { ChangelogComponent } from './modal/version-and-change/changelog/changelog.component';
 import { WalletCardComponent } from './wallet/wallet-card/wallet-card.component';
 import { WalletHistoryCardComponent } from './wallet/wallet-history/wallet-history.component';
+import { RegistrationTokenComponent } from './modal/registration-token/registration-token.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { WalletHistoryCardComponent } from './wallet/wallet-history/wallet-histo
     ChangelogComponent,
     WalletCardComponent,
     WalletHistoryCardComponent,
+    RegistrationTokenComponent,
   ],
   exports: [
     ContentBoxComponent,
@@ -64,6 +66,7 @@ import { WalletHistoryCardComponent } from './wallet/wallet-history/wallet-histo
     ChangelogComponent,
     WalletCardComponent,
     WalletHistoryCardComponent,
+    RegistrationTokenComponent,
   ],
   imports: [
     RouterModule,

@@ -77,6 +77,7 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
   getResume() {
     this.tableBalance = [];
     this.balances = [];
+    this.totalList = [];
     if (!Utils.isNullOrEmpty(this.cryptoHistory)) {
       this.cryptoHistory = this.shared.getCryptoHistoryData();
     }
@@ -96,12 +97,6 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
   }
 
   renderChart() {
-    //setTimeout(() => {
-    //  this.chartHistory = ChartService.renderChartWallet(
-    //    'History',
-    //    this.totalMap.get('History')
-    //  );
-    //}, 500);
     this.chartPie = ChartService.appRenderChartPie(this.cryptoAssets);
     setTimeout(() => {
       this.chartHistory = ChartService.renderChartLineCategory(this.totalMap);

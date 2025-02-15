@@ -56,7 +56,9 @@ export const environment = {
   resetPasswordUrl: access_host + '/v1/users/change/password',
   clientID: 'MONEYSTATS-TEST-01',
   redirectUri: 'http://localhost:4200',
-  registerDataUrl: service_host + '/v1/auth/sign-up',
+  //registerDataUrl: service_host + '/v1/auth/sign-up',
+  registerDataUrl: access_host + '/v1/users/register',
+  checkTokenDataUrl: service_host + '/v1/auth/code',
 
   /**
    * @App

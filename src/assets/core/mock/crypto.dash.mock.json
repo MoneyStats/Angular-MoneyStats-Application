@@ -1,7 +1,7 @@
 {
   "status": 200,
   "message": "Data for Dashboard!",
-  "correlationId": "5b95f29a-8866-4971-8227-bc15129066b2",
+  "spanId": "5b95f29a-8866-4971-8227-bc15129066b2",
   "data": {
     "balance": 10000,
     "currency": "USD",
@@ -43,6 +43,47 @@
         "trend": 100,
         "history": [
           {
+            "creationDate": "2023-02-21T15:19:14",
+            "updateDate": "2023-02-21T15:19:14",
+            "date": "2023-01-01",
+            "balance": 10.0,
+            "percentage": 999900.0,
+            "trend": 10.0
+          }
+        ]
+      },
+      {
+        "identifier": "ethereum",
+        "name": "Ethereum",
+        "symbol": "ETH",
+        "value": 13585,
+        "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Ethereum_logo_2014.svg/628px-Ethereum_logo_2014.svg.png",
+        "balance": 2.2659379,
+        "invested": 1000,
+        "performance": 10.34,
+        "history": [
+          {
+            "id": 1,
+            "creationDate": "2023-02-21T15:19:14",
+            "updateDate": "2023-02-21T15:19:14",
+            "date": "2023-01-01",
+            "balance": 10.0,
+            "percentage": 999900.0,
+            "trend": 10.0
+          }
+        ]
+      },
+      {
+        "identifier": "crypto.com",
+        "name": "Crypto.com",
+        "symbol": "CRO",
+        "value": 13585,
+        "icon": "https://altcoinsbox.com/wp-content/uploads/2023/01/crypto.com-logo.png",
+        "balance": 2340.2659379,
+        "performance": 10.34,
+        "history": [
+          {
+            "id": 1,
             "creationDate": "2023-02-21T15:19:14",
             "updateDate": "2023-02-21T15:19:14",
             "date": "2023-01-01",

@@ -88,7 +88,7 @@
       "passPlaceholder": "La tua password",
       "passwordAgain": "Conferma Password",
       "passAgainPlaceholder": "Digita nuovamente la password",
-      "invitationCode": "Invitation Code",
+      "invitationCode": "Codice d'invito",
       "invitationCodePlaceholder": "Digita il codice invito",
       "currency": "Moneta",
       "selectCurrency": "Seleziona Moneta",
@@ -520,6 +520,10 @@
         "selectWallet": "Seleziona Portafoglio",
         "selectWalletDesc": "Scegli il portafoglio per effettuare l'investimento."
       }
+    },
+    "registration_token": {
+      "title": "Registrati con Google",
+      "sub_title": "Per registrarti con Google abbiamo bisogno del codice d'invito a MoneyStats e che accetti i termini e condizioni."
     },
     "operation_details": {
       "identifier": "ID Operazione",

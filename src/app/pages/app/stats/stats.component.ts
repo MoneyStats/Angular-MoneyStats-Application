@@ -71,6 +71,12 @@ export class StatsComponent implements OnInit, OnDestroy {
         LOG.info(res.message!, 'StatsComponent');
         this.resume = new Map<string, Dashboard>(Object.entries(res.data));
 
+        if (UserService.getUserData().mockedUser) {
+          const keys = Array.from(this.resume.keys());
+          const firstKey = keys.length > 0 ? keys[0] : undefined;
+          year = Number.parseInt(firstKey!);
+        }
+
         this.resumeFullYears = [];
         // Ottieni l'array di anni senza duplicati e in ordine decrescente
         const uniqueYears = Array.from(

@@ -1,7 +1,7 @@
 {
   "status": 200,
   "message": "Data for Resume!",
-  "correlationId": "13eb2dbb-db06-44fb-98b6-e2e6b3a8dc74",
+  "spanId": "13eb2dbb-db06-44fb-98b6-e2e6b3a8dc74",
   "data": {
     "2023": {
       "balance": 10000,

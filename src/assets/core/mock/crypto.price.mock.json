@@ -1,7 +1,7 @@
 {
   "status": 200,
   "message": "Data for Dashboard!",
-  "correlationId": "5b95f29a-8866-4971-8227-bc15129066b2",
+  "spanId": "5b95f29a-8866-4971-8227-bc15129066b2",
   "data": [
     {
       "identifier": "bitcoin",

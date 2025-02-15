@@ -37,7 +37,7 @@ export class RouteGuardService {
       localStorage.getItem(StorageConstant.AUTHTOKEN)!
     );
     let user = JSON.parse(localStorage.getItem(StorageConstant.USERACCOUNT)!);
-    if (user.mockedUser) return true;
+    if (!Utils.isNullOrEmpty(user) && user.mockedUser) return true;
     if (authToken != null && user != null) {
       this.validateAccessToken(user, authToken);
       return true;

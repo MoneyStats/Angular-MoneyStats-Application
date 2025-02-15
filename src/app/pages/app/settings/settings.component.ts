@@ -120,7 +120,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
       this.appService.uploadImage(file).subscribe((data) => {
         this.user!.imgName = undefined;
         this.authService.updateUserData(this.user!).subscribe((res) => {
-          this.userService.setUserGlobally_old(res.data);
+          this.userService.setUserGlobally(res.data);
           SwalService.toastMessage(SwalIcon.SUCCESS, res.message!);
         });
       });
@@ -176,7 +176,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
       .updateUserData(this.user!)
       .subscribe((res) => {
         LOG.info(res.message!, 'SettingsComponent');
-        this.userService.setUserGlobally_old(res.data);
+        this.userService.setUserGlobally(res.data);
         SwalService.toastMessage(SwalIcon.SUCCESS, message);
       });
   }

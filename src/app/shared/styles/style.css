@@ -1129,6 +1129,8 @@ blockquote.blockquote .blockquote-footer {
 
 .imaged.w48 {
   width: 48px !important;
+  height: 48px !important;
+  object-fit: cover;
 }
 
 .imaged.w64 {

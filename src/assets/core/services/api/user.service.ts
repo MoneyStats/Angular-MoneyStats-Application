@@ -22,6 +22,9 @@ export class UserService {
     private authService: AuthService
   ) {}
 
+  /**
+   * @deprecated
+   */
   public setUserGlobally_old(user: User): void {
     if (user.authToken) {
       localStorage.setItem(

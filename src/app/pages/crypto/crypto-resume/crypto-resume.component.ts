@@ -21,6 +21,7 @@ import {
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
 import { CryptoService } from 'src/assets/core/services/api/crypto.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
 import { SharedService } from 'src/assets/core/services/config/shared.service';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { LOG } from 'src/assets/core/utils/log.service';
@@ -96,6 +97,12 @@ export class CryptoResumeComponent
         this.resume = new Map<string, CryptoDashboard>(
           Object.entries(res.data)
         );
+
+        if (UserService.getUserData().mockedUser) {
+          const keys = Array.from(this.resume.keys());
+          const firstKey = keys.length > 0 ? keys[0] : undefined;
+          year = Number.parseInt(firstKey!);
+        }
 
         this.resumeFullYears = [];
         // Ottieni l'array di anni senza duplicati e in ordine decrescente

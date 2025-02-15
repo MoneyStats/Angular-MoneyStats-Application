@@ -165,28 +165,38 @@ export class RequirementsComponent implements OnInit, OnDestroy {
     }
 
     if (this.isWalletCreated)
-      user.attributes.money_stats_settings.completeRequirement = user.attributes.money_stats_settings.completeRequirement
-        ? user.attributes.money_stats_settings.completeRequirement.concat(Status.WALLET).concat(';')
+      user.attributes.money_stats_settings.completeRequirement = user.attributes
+        .money_stats_settings.completeRequirement
+        ? user.attributes.money_stats_settings.completeRequirement
+            .concat(Status.WALLET)
+            .concat(';')
         : Status.WALLET.concat(';');
 
     if (this.isCryptoWalletCreated)
-      user.attributes.money_stats_settings.completeRequirement = user.attributes.money_stats_settings.completeRequirement
+      user.attributes.money_stats_settings.completeRequirement = user.attributes
+        .money_stats_settings.completeRequirement
         ? user.attributes.money_stats_settings.completeRequirement
             .concat(Status.CRYPTO_WALLET)
             .concat(';')
         : Status.CRYPTO_WALLET.concat(';');
 
     if (this.isAssetCreated)
-      user.attributes.money_stats_settings.completeRequirement = user.attributes.money_stats_settings.completeRequirement
-        ? user.attributes.money_stats_settings.completeRequirement.concat(Status.ASSET).concat(';')
+      user.attributes.money_stats_settings.completeRequirement = user.attributes
+        .money_stats_settings.completeRequirement
+        ? user.attributes.money_stats_settings.completeRequirement
+            .concat(Status.ASSET)
+            .concat(';')
         : Status.ASSET.concat(';');
 
     this.updateUser(user);
   }
 
   selectCurrency(user: User) {
-    user.attributes.money_stats_settings.completeRequirement = user.attributes.money_stats_settings.completeRequirement
-      ? user.attributes.money_stats_settings.completeRequirement.concat(Status.CURRENCY).concat(';')
+    user.attributes.money_stats_settings.completeRequirement = user.attributes
+      .money_stats_settings.completeRequirement
+      ? user.attributes.money_stats_settings.completeRequirement
+          .concat(Status.CURRENCY)
+          .concat(';')
       : Status.CURRENCY.concat(';');
     this.updateUser(user);
     this.isCurrencyAdded = true;
@@ -200,12 +210,13 @@ export class RequirementsComponent implements OnInit, OnDestroy {
       this.isCurrencyAdded &&
       this.isWalletCreated
     )
-     user.attributes.money_stats_settings.completeRequirement = Status.COMPLETED;
+      user.attributes.money_stats_settings.completeRequirement =
+        Status.COMPLETED;
     this.updateUserSub = this.authService
       .updateUserData(user)
       .subscribe((data) => {
         LOG.info(data.message!, 'RequirementsComponent');
-        this.userService.setUserGlobally_old(data.data);
+        this.userService.setUserGlobally(data.data);
         //this.authService.user = data.data;
         //this.authService.setUserGlobally();
       });

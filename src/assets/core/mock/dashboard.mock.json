@@ -1,93 +1,21 @@
 {
   "status": 200,
   "message": "Data for Dashboard!",
-  "correlationId": "5b95f29a-8866-4971-8227-bc15129066b2",
+  "spanId": "5b95f29a-8866-4971-8227-bc15129066b2",
   "data": {
-    "balance": 28201.5,
-    "performance": 135.47,
-    "performanceValue": 16225.0,
+    "balance": 30000,
+    "performance": 20,
+    "performanceValue": 2000,
     "performanceSince": "2023-01-01",
     "performanceLastDate": "2023-02-22",
-    "lastStatsPerformance": 23.41,
-    "lastStatsBalanceDifference": 5349.5,
+    "lastStatsPerformance": 200,
+    "lastStatsBalanceDifference": 1500,
     "statsWalletDays": [
       "2023-01-01",
       "2023-02-01",
       "2023-02-10",
       "2023-02-21",
       "2023-02-22"
-    ],
-    "categories": [
-      {
-        "id": 1,
-        "creationDate": "2023-02-21T14:43:45.804053",
-        "updateDate": "2023-02-21T14:43:45.804053",
-        "name": "Cash",
-        "img": "cash-outline"
-      },
-      {
-        "id": 2,
-        "creationDate": "2023-02-21T14:43:45.805052",
-        "updateDate": "2023-02-21T14:43:45.805052",
-        "name": "Credit Card",
-        "img": "card-outline"
-      },
-      {
-        "id": 3,
-        "creationDate": "2023-02-21T14:43:45.805052",
-        "updateDate": "2023-02-21T14:43:45.805052",
-        "name": "Debit Card",
-        "img": "card-outline"
-      },
-      {
-        "id": 4,
-        "creationDate": "2023-02-21T14:43:45.806052",
-        "updateDate": "2023-02-21T14:43:45.806052",
-        "name": "Recurrence",
-        "img": "alarm-outline"
-      },
-      {
-        "id": 5,
-        "creationDate": "2023-02-21T14:43:45.806052",
-        "updateDate": "2023-02-21T14:43:45.806052",
-        "name": "Bank Account",
-        "img": "wallet-outline"
-      },
-      {
-        "id": 6,
-        "creationDate": "2023-02-21T14:43:45.806052",
-        "updateDate": "2023-02-21T14:43:45.806052",
-        "name": "Save",
-        "img": "lock-closed-outline"
-      },
-      {
-        "id": 7,
-        "creationDate": "2023-02-21T14:43:45.806052",
-        "updateDate": "2023-02-21T14:43:45.806052",
-        "name": "Coupon",
-        "img": "ticket-outline"
-      },
-      {
-        "id": 8,
-        "creationDate": "2023-02-21T14:43:45.806052",
-        "updateDate": "2023-02-21T14:43:45.806052",
-        "name": "Check",
-        "img": "id-card-outline"
-      },
-      {
-        "id": 9,
-        "creationDate": "2023-02-21T14:43:45.807051",
-        "updateDate": "2023-02-21T14:43:45.807051",
-        "name": "Investments",
-        "img": "bar-chart-outline"
-      },
-      {
-        "id": 10,
-        "creationDate": "2023-02-21T14:43:45.807051",
-        "updateDate": "2023-02-21T14:43:45.807051",
-        "name": "Others",
-        "img": "cube-outline"
-      }
     ],
     "wallets": [
       {

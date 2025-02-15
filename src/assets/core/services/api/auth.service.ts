@@ -66,10 +66,23 @@ export class AuthService {
     this.router.navigate(['auth/login']);
   }
 
-  register(user: User, invitationCode: string): Observable<ResponseModel> {
-    return this.http.post<ResponseModel>(
-      environment.registerDataUrl + '?invitationCode=' + invitationCode,
-      user
+  register(user: User, registratonCode: string): Observable<ResponseModel> {
+    const url =
+      environment.registerDataUrl +
+      '?client_id=' +
+      environment.clientID +
+      '&registration_token=' +
+      registratonCode;
+    return this.http.post<ResponseModel>(url, user);
+  }
+
+  checkRegistrationToken(invitationCode: string): Observable<ResponseModel> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    return this.http.get<ResponseModel>(
+      environment.checkTokenDataUrl + '?invitationCode=' + invitationCode,
+      { headers: headers }
     );
   }
 
@@ -116,8 +129,8 @@ export class AuthService {
     });
   }
 
-  authorize(): Observable<HttpResponse<any>> {
-    const url =
+  authorize(registration_token?: string): Observable<HttpResponse<any>> {
+    let url =
       environment.authorizeUrl +
       '?client_id=' +
       environment.clientID +
@@ -127,6 +140,8 @@ export class AuthService {
       '&scope=openid profile email' +
       '&type=google' +
       '&response_type=code';
+    if (registration_token)
+      url = url + '&registration_token=' + registration_token;
     return this.http.get<any>(url, {
       observe: 'response', // 🔥 Include gli header nella risposta
     });
@@ -255,9 +270,6 @@ export class AuthService {
             })
           )
         );
-      //return this.http.put<ResponseModel>(environment.updateUserDataUrl, user, {
-      //  headers: headers,
-      //});
     }
   }
 

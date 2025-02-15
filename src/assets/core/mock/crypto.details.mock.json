@@ -1,7 +1,7 @@
 {
   "status": 200,
   "message": "Data for Assets!",
-  "correlationId": "13eb2dbb-db06-44fb-98b6-e2e6b3a8dc74",
+  "spanId": "13eb2dbb-db06-44fb-98b6-e2e6b3a8dc74",
   "data": {
     "identifier": "bitcoin",
     "name": "Bitcoin",
@@ -13,6 +13,27 @@
     "invested": 1000,
     "performance": 10,
     "trend": 100,
+    "operations": [
+      {
+        "id": 448,
+        "creationDate": "2025-01-05T13:38:16",
+        "updateDate": "2025-01-05T13:38:16",
+        "type": "Trading",
+        "status": "CLOSED",
+        "entryDate": "2023-09-27T18:12:59.691",
+        "entryCoin": "USDT",
+        "entryPrice": "25411.45",
+        "entryPriceValue": 500.0,
+        "entryQuantity": 0.01967617,
+        "exitDate": "2023-11-14T18:54:53.177",
+        "exitCoin": "BTC",
+        "exitPrice": "36300",
+        "exitPriceValue": 711.41,
+        "exitQuantity": 711.38799112,
+        "performance": 30.0,
+        "trend": 214.24
+      }
+    ],
     "history": [
       {
         "id": 1,

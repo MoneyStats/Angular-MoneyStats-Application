@@ -521,6 +521,10 @@
         "selectWalletDesc": "Choose the wallet to make the investment."
       }
     },
+    "registration_token": {
+      "title": "Sign up with Google",
+      "sub_title": "To sign up with Google, we need the invitation code for MoneyStats and for you to accept the terms and conditions."
+    },
     "operation_details": {
       "identifier": "Operation ID",
       "title": "Operation Details",

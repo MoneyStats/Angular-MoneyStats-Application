@@ -13,10 +13,10 @@ import { LOG } from 'src/assets/core/utils/log.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 
 @Component({
-    selector: 'app-profile-settings',
-    templateUrl: './profile-settings.component.html',
-    styleUrls: ['./profile-settings.component.scss'],
-    standalone: false
+  selector: 'app-profile-settings',
+  templateUrl: './profile-settings.component.html',
+  styleUrls: ['./profile-settings.component.scss'],
+  standalone: false,
 })
 export class ProfileSettingsComponent implements OnInit, OnDestroy {
   updateUserSubscribe: Subscription = new Subscription();
@@ -75,7 +75,7 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
       .updateUserData(this.user!)
       .subscribe((res) => {
         LOG.info(res.message!, 'ProfileSettingsComponent');
-        this.userService.setUserGlobally_old(res.data);
+        this.userService.setUserGlobally(res.data);
         //this.authService.user! = res.data;
         //this.authService.setUserGlobally();
         //this.authService.setValue();

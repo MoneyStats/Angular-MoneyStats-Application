@@ -23,6 +23,7 @@ export enum ModalConstant {
   CRYPTOTRADINGRESUME = 'modalCryptoTradingResume',
   CRYPTOOPERATION = 'modalCryptoOperation',
   CLOSEOPERATION = 'closeOperationModal',
+  REGISTRATIONTOKEN = 'registrationTokenModal',
 }
 
 export enum SelectAssetConstant {
@@ -40,6 +41,7 @@ export const StorageConstant = {
   ACCESSTOKEN: environment.clientID + '_access_token', // Funzione per valore dinamico
   AUTHTOKEN: environment.clientID + '_auth_token',
   USERACCOUNT: environment.clientID + '_user_account',
+  USER_ATTRIBUTES: environment.clientID + '_user_attributes',
   HIDDENAMOUNT: 'hidden_amount',
   AUTOUPDATE: 'auto_update',
 };
