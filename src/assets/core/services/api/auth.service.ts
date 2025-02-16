@@ -16,7 +16,10 @@ import {
 import { environment } from 'src/environments/environment';
 import { ResponseModel } from '../../data/class/generic.class';
 import { MockUser, User } from '../../data/class/user.class';
-import { StorageConstant } from '../../data/constant/constant';
+import {
+  LanguagesSettings,
+  StorageConstant,
+} from '../../data/constant/constant';
 import { SwalService } from '../../utils/swal.service';
 import { CacheService } from '../config/cache/cache.service';
 import { Utils } from '../config/utils.service';
@@ -50,14 +53,11 @@ export class AuthService {
           token && token.includes('Bearer') ? token : 'Bearer ' + token,
       });
       const url = environment.logoutUrl + '?client_id=' + environment.clientID;
+      const body = {};
       this.http
-        .post<ResponseModel>(
-          url,
-          {},
-          {
-            headers: headers,
-          }
-        )
+        .post<ResponseModel>(url, body, {
+          headers: headers,
+        })
         .subscribe((data) => {
           LOG.info(data.message!, 'AuthService');
         });
@@ -222,8 +222,10 @@ export class AuthService {
     }
   }
 
-  forgotPassword(email: string): Observable<ResponseModel> {
-    const url = environment.forgotPasswordUrl + '?emailSend=true';
+  forgotPassword(email: string, inputBody?: any): Observable<ResponseModel> {
+    const locale = localStorage.getItem(LanguagesSettings.ATTR_LANGUAGE);
+    const url =
+      environment.forgotPasswordUrl + '?emailSend=true&locale=' + locale;
     const body = {
       templateId: 'MONEYSTATS_RESET_PASSWORD',
       email: email,
@@ -231,7 +233,8 @@ export class AuthService {
         'PARAM.FRONT_END_URL': location.origin,
       },
     };
-    return this.http.post<ResponseModel>(url, body);
+    const finalBody = Utils.isNullOrEmpty(inputBody) ? body : inputBody;
+    return this.http.post<ResponseModel>(url, finalBody);
   }
 
   resetPassword(password: string, token: string): Observable<ResponseModel> {

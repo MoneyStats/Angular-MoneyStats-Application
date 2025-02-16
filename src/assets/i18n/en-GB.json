@@ -113,7 +113,9 @@
       "passPlace": "Insert your new password",
       "pass2": "Confirm Password",
       "passPlace2": "Insert your password again",
-      "reset": "Reset Password"
+      "reset": "Reset Password",
+      "token": "Reset Code",
+      "token_place": "Insert the Reset Code"
     }
   },
   "dashboard_page": {
@@ -276,6 +278,7 @@
     "security_new_placeholder": "Enter your new password",
     "security_repete_label": "Confirm New Password",
     "security_repete_placeholder": "Re-enter your new password",
+    "security_email_not_match_warning":"The email do not match. Please ensure the 'Email' match with your account.",
     "security_warning": "The passwords do not match. Please ensure the 'Password' and 'Confirm password' fields are identical.",
     "info_title": "Info",
     "info_support": "Support",

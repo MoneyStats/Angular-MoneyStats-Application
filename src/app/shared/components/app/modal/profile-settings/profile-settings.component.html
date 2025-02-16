@@ -57,7 +57,10 @@
             </div>
 
             <div
-              *ngIf="profileConst === profileConstant.EMAIL"
+              *ngIf="
+                profileConst === profileConstant.EMAIL ||
+                (forgotPasswordCheck && !resetPasswordCheck)
+              "
               class="form-group boxed"
             >
               <div class="input-wrapper">
@@ -78,14 +81,23 @@
                     'settings_page.account_email_placeholder' | translate
                   }}"
                 />
-                <i class="clear-input">
-                  <ion-icon name="close-circle"></ion-icon>
-                </i>
+                <div
+                  *ngIf="emailMatchWarning"
+                  class="alert alert-danger mb-1"
+                  role="alert"
+                >
+                  {{
+                    "settings_page.security_email_not_match_warning" | translate
+                  }}
+                </div>
               </div>
             </div>
 
             <div
-              *ngIf="profileConst === profileConstant.PASSWORD"
+              *ngIf="
+                profileConst === profileConstant.PASSWORD &&
+                !forgotPasswordCheck
+              "
               class="form-group boxed"
             >
               <div class="input-wrapper">
@@ -99,23 +111,56 @@
                   [(ngModel)]="oldPassword"
                   #oldPassword1="ngModel"
                   required
-                  type="password"
+                  [type]="isPasswordShow ? 'text' : 'password'"
                   class="form-control"
                   id="oldPassword"
                   placeholder="{{
                     'settings_page.security_old_placeholder' | translate
                   }}"
                 />
-                <i class="clear-input">
-                  <ion-icon name="close-circle"></ion-icon>
-                </i>
+                <div class="clickable" (click)="hideShowPassword()">
+                  <ion-icon
+                    *ngIf="!isPasswordShow"
+                    name="eye"
+                    class="showPass"
+                  ></ion-icon>
+                  <ion-icon
+                    *ngIf="isPasswordShow"
+                    name="eye-off"
+                    class="showPass"
+                  ></ion-icon>
+                </div>
               </div>
             </div>
 
             <div
-              *ngIf="profileConst === profileConstant.PASSWORD"
+              *ngIf="
+                profileConst === profileConstant.PASSWORD && resetPasswordCheck
+              "
               class="form-group boxed"
             >
+              <div class="input-wrapper">
+                <label class="label" for="resetCode">{{
+                  "auth.reset.token" | translate
+                }}</label>
+                <input
+                  name="resetCode"
+                  class="form-control"
+                  rows="5"
+                  [(ngModel)]="resetCode"
+                  #resetCode1="ngModel"
+                  required
+                  type="text"
+                  class="form-control"
+                  id="resetCode"
+                  placeholder="{{ 'auth.reset.token_place' | translate }}"
+                />
+              </div>
+            </div>
+
+            @if (profileConst === profileConstant.PASSWORD &&
+            (!forgotPasswordCheck || resetPasswordCheck)) {
+            <div class="form-group boxed">
               <div class="input-wrapper">
                 <label class="label" for="newPassword">{{
                   "settings_page.security_new_label" | translate
@@ -127,26 +172,40 @@
                   [(ngModel)]="newPassword"
                   #newPassword1="ngModel"
                   required
-                  type="password"
+                  [type]="isPasswordShow ? 'text' : 'password'"
                   class="form-control"
                   id="newPassword"
                   placeholder="{{
                     'settings_page.security_new_placeholder' | translate
                   }}"
                 />
-                <i class="clear-input">
-                  <ion-icon name="close-circle"></ion-icon>
-                </i>
+                <div class="clickable" (click)="hideShowPassword()">
+                  <ion-icon
+                    *ngIf="!isPasswordShow"
+                    name="eye"
+                    class="showPass"
+                  ></ion-icon>
+                  <ion-icon
+                    *ngIf="isPasswordShow"
+                    name="eye-off"
+                    class="showPass"
+                  ></ion-icon>
+                </div>
               </div>
               <div *ngIf="warning" class="alert alert-danger mb-1" role="alert">
                 {{ "settings_page.security_warning" | translate }}
               </div>
+              @if (!validateRegexPassword()) {
+              <div
+                class="alert alert-danger mb-1"
+                role="alert"
+                [innerHTML]="'auth.register.warning.password' | translate"
+              ></div>
+              }
             </div>
-
-            <div
-              *ngIf="profileConst === profileConstant.PASSWORD"
-              class="form-group boxed"
-            >
+            } @if (profileConst === profileConstant.PASSWORD &&
+            (!forgotPasswordCheck || resetPasswordCheck)) {
+            <div class="form-group boxed">
               <div class="input-wrapper">
                 <label class="label" for="repetePassword">{{
                   "settings_page.security_repete_label" | translate
@@ -158,28 +217,88 @@
                   [(ngModel)]="repetePassword"
                   #repetePassword1="ngModel"
                   required
-                  type="password"
+                  [type]="isPasswordShow ? 'text' : 'password'"
                   class="form-control"
                   id="repetePassword"
                   placeholder="{{
                     'settings_page.security_repete_placeholder' | translate
                   }}"
                 />
-                <i class="clear-input">
-                  <ion-icon name="close-circle"></ion-icon>
-                </i>
+                <div class="clickable" (click)="hideShowPassword()">
+                  <ion-icon
+                    *ngIf="!isPasswordShow"
+                    name="eye"
+                    class="showPass"
+                  ></ion-icon>
+                  <ion-icon
+                    *ngIf="isPasswordShow"
+                    name="eye-off"
+                    class="showPass"
+                  ></ion-icon>
+                </div>
               </div>
             </div>
-            <div class="form-group basic">
-              <button
-                [disabled]="f.invalid"
-                (click)="updateUser()"
-                id="saveAccount"
-                type="button"
-                class="btn btn-primary btn-block btn-lg"
+            }
+            <div class="form-group basic row">
+              @if (profileConst === profileConstant.PASSWORD) {
+              <div class="col-6">
+                @if (!forgotPasswordCheck) {
+                <button
+                  (click)="forgotPasswordCheck = true"
+                  type="button"
+                  class="btn btn-primary btn-block btn-lg"
+                >
+                  {{ "auth.login.forgot" | translate }}</button
+                >} @if (forgotPasswordCheck && !resetPasswordCheck) {
+                <button
+                  (click)="forgotPasswordCheck = false"
+                  type="button"
+                  class="btn btn-primary btn-block btn-lg"
+                >
+                  {{ "shared_text.back" | translate }}
+                </button>
+                }
+              </div>
+              }
+              <div
+                class="{{
+                  profileConst === profileConstant.PASSWORD &&
+                  !resetPasswordCheck
+                    ? 'col-6'
+                    : 'col-12'
+                }}"
               >
-                {{ "shared_text.save" | translate }}
-              </button>
+                @if (!forgotPasswordCheck) {
+                <button
+                  [disabled]="f.invalid"
+                  (click)="updateUser()"
+                  id="saveAccount"
+                  type="button"
+                  class="btn btn-primary btn-block btn-lg"
+                >
+                  {{ "shared_text.save" | translate }}
+                </button>
+                } @if (forgotPasswordCheck && !resetPasswordCheck) {
+                <button
+                  [disabled]="f.invalid || !validateRegexEmail()"
+                  type="submit"
+                  (click)="forgotPassword()"
+                  class="btn btn-primary btn-block btn-lg"
+                >
+                  {{ "auth.forgot.forgot" | translate }}
+                </button>
+                } @if (resetPasswordCheck) {
+                <button
+                  [disabled]="f.invalid || !validateRegexPassword()"
+                  type="submit"
+                  (click)="resetPassword()"
+                  class="btn btn-primary btn-block btn-lg"
+                  data-bs-dismiss="modal"
+                >
+                  {{ "auth.reset.reset" | translate }}
+                </button>
+                }
+              </div>
             </div>
           </form>
         </div>

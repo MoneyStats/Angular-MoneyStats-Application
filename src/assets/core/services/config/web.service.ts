@@ -80,6 +80,10 @@ export class WebService {
 
   public static logoutStorage() {
     const language = localStorage.getItem(LanguagesSettings.ATTR_LANGUAGE);
+    LOG.info(
+      'Cleaning localStorage and getting language: ' + language,
+      'AuthComponent'
+    );
     localStorage.clear();
     if (!Utils.isNullOrEmpty(language))
       localStorage.setItem(LanguagesSettings.ATTR_LANGUAGE, language!);

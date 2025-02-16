@@ -113,7 +113,9 @@
       "passPlace": "Inserisci la nuova password",
       "pass2": "Conferma Password",
       "passPlace2": "Digita nuovamente la Password",
-      "reset": "Reset Password"
+      "reset": "Reset Password",
+      "token": "Codice di reset",
+      "token_place": "Inserisci il Codice di reset"
     }
   },
   "dashboard_page": {
@@ -276,6 +278,7 @@
     "security_new_placeholder": "Inserisci la tua nuova password",
     "security_repete_label": "Conferma la Nuova Password",
     "security_repete_placeholder": "Reinserisci la tua nuova password",
+    "security_email_not_match_warning": "L'email inserita non corrisponde. Assicurati che il campo 'Email' combaci con quella del tuo account.",
     "security_warning": "Le password inserite non corrispondono. Assicurati che i campi 'Password' e 'Conferma password' siano identici.",
     "info_title": "Info",
     "info_support": "Supporto",

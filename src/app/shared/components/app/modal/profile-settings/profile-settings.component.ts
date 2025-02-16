@@ -1,10 +1,14 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { User } from 'src/assets/core/data/class/user.class';
+import {
+  AccessSphereResponse,
+  User,
+} from 'src/assets/core/data/class/user.class';
 import {
   ModalConstant,
   ProfileSettings,
+  RegEx,
 } from 'src/assets/core/data/constant/constant';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { AuthService } from 'src/assets/core/services/api/auth.service';
@@ -20,6 +24,8 @@ import { SwalService } from 'src/assets/core/utils/swal.service';
 })
 export class ProfileSettingsComponent implements OnInit, OnDestroy {
   updateUserSubscribe: Subscription = new Subscription();
+  forgotSubscribe: Subscription = new Subscription();
+  resetSubscribe: Subscription = new Subscription();
 
   @Input('modalId') modalId: string = '';
   @Input('profileConst') profileConst: string = '';
@@ -30,6 +36,14 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
   newPassword: string = '';
   repetePassword: string = '';
   warning: boolean = false;
+
+  isPasswordShow: boolean = false;
+
+  forgotPasswordCheck: boolean = false;
+  resetPasswordCheck: boolean = false;
+  emailMatchWarning: boolean = false;
+  resetCode: string = '';
+  private EMPTY: string = '';
 
   constructor(
     private authService: AuthService,
@@ -49,6 +63,8 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.updateUserSubscribe.unsubscribe();
+    this.forgotSubscribe.unsubscribe();
+    this.resetSubscribe.unsubscribe();
   }
 
   updateUser() {
@@ -75,10 +91,9 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
       .updateUserData(this.user!)
       .subscribe((res) => {
         LOG.info(res.message!, 'ProfileSettingsComponent');
-        this.userService.setUserGlobally(res.data);
-        //this.authService.user! = res.data;
-        //this.authService.setUserGlobally();
-        //this.authService.setValue();
+        const response: AccessSphereResponse = new AccessSphereResponse();
+        response.user = res.data;
+        this.userService.setUserGlobally(response);
         SwalService.toastMessage(
           SwalIcon.SUCCESS,
           this.translate.instant('response.user')
@@ -93,11 +108,66 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       a?.classList.remove('show');
       a?.click();
-      this.email = '';
-      this.username = '';
-      this.oldPassword = '';
-      this.newPassword = '';
-      this.repetePassword = '';
+      this.resetInputDatas();
     }, 100);
+  }
+
+  forgotPassword() {
+    const currentEmail = UserService.getUserData().email;
+    if (this.email != currentEmail) {
+      this.emailMatchWarning = true;
+      return;
+    } else this.emailMatchWarning = false;
+    const body = {
+      templateId: 'MONEYSTATS_CODE_RESET_PASSWORD',
+      email: this.email,
+    };
+    const user = this.authService.forgotPassword(this.email, body);
+    this.forgotSubscribe = user.subscribe((data) => {
+      LOG.info(data.message!, 'ProfileSettingsComponent');
+      SwalService.toastMessage(SwalIcon.SUCCESS, data.message!);
+      this.resetPasswordCheck = true;
+    });
+  }
+
+  validateRegexEmail() {
+    const regex: RegExp = new RegExp(RegEx.EMAIL);
+    // Se l' email è vuota non mostro l'errore
+    return this.email != this.EMPTY ? regex.test(this.email) : true;
+  }
+
+  validateRegexPassword() {
+    const regex: RegExp = new RegExp(RegEx.PASSWORD_FULL);
+    // Se la password è vuota non mostro l'errore
+    return this.newPassword != this.EMPTY ? regex.test(this.newPassword) : true;
+  }
+
+  hideShowPassword() {
+    this.isPasswordShow
+      ? (this.isPasswordShow = false)
+      : (this.isPasswordShow = true);
+  }
+
+  resetPassword() {
+    const user = this.authService.resetPassword(
+      this.newPassword,
+      this.resetCode
+    );
+    this.resetSubscribe = user.subscribe((data) => {
+      LOG.info(data.message!, 'ProfileSettingsComponent');
+      SwalService.toastMessage(SwalIcon.SUCCESS, data.message!);
+      this.resetInputDatas();
+    });
+  }
+
+  resetInputDatas() {
+    this.email = this.EMPTY;
+    this.username = this.EMPTY;
+    this.oldPassword = this.EMPTY;
+    this.newPassword = this.EMPTY;
+    this.repetePassword = this.EMPTY;
+    this.resetCode = this.EMPTY;
+    this.forgotPasswordCheck = false;
+    this.resetPasswordCheck = false;
   }
 }
