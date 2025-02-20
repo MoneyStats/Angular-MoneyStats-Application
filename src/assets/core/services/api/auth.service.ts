@@ -129,6 +129,31 @@ export class AuthService {
     });
   }
 
+  exchangeToken(client_id: string): Observable<ResponseModel> {
+    const url = environment.exchangeTokenDataUrl;
+    const tokenString: any = localStorage.getItem(StorageConstant.AUTHTOKEN);
+    const token: any = tokenString ? JSON.parse(tokenString) : null;
+    const access_token = token.access_token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: access_token!.includes('Bearer')
+        ? access_token
+        : 'Bearer ' + access_token,
+    });
+    const body = {
+      grant_type: 'urn:ietf:params:oauth:grant-type:token-exchange',
+      subject_token: access_token!.includes('Bearer')
+        ? access_token.replace('Bearer ', '')
+        : access_token,
+      requested_token_type: 'urn:ietf:params:oauth:token-type:access_token',
+      client_id: client_id,
+      scope: 'openid',
+    };
+    return this.http.post<ResponseModel>(url, body, {
+      headers: headers,
+    });
+  }
+
   authorize(registration_token?: string): Observable<HttpResponse<any>> {
     let url =
       environment.authorizeUrl +

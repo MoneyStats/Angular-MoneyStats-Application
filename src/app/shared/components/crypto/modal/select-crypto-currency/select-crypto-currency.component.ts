@@ -1,15 +1,6 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { User } from 'src/assets/core/data/class/user.class';
-import { AuthService } from 'src/assets/core/services/api/auth.service';
-import { LOG } from 'src/assets/core/utils/log.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -26,10 +17,10 @@ export class SelectCryptoCurrencyComponent {
 
   currencies: string[] = ['EUR', 'USD', 'GBP'];
 
-  constructor(private userService: AuthService) {}
+  constructor() {}
 
   selectCurrency() {
-    let user = this.userService.user;
+    let user = UserService.getUserData();
     user.attributes.money_stats_settings.cryptoCurrency = this.currency;
     this.emitAddCurrency.emit(user);
     this.currency = '';

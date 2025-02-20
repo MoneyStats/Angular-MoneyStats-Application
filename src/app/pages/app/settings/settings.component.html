@@ -75,7 +75,7 @@
             href="#"
             data-bs-toggle="modal"
             attr.data-bs-target="#{{ modalConstant.PROFILESETTINGS }}"
-            class="item zoom"
+            class="item zoom clickable"
             (click)="profileConst = profileSettings.USERNAME"
           >
             <div class="in">
@@ -88,7 +88,7 @@
             href="#"
             data-bs-toggle="modal"
             attr.data-bs-target="#{{ modalConstant.PROFILESETTINGS }}"
-            class="item zoom"
+            class="item zoom clickable"
             (click)="profileConst = profileSettings.EMAIL"
           >
             <div class="in">
@@ -103,7 +103,7 @@
       </div>
       <ul class="listview border_round image-listview text inset">
         <li>
-          <a href="#" routerLink="/wallet" class="item zoom">
+          <a href="#" routerLink="/wallet" class="item zoom clickable">
             <div class="in">
               <div>{{ "settings_page.wallet_edit" | translate }}</div>
             </div>
@@ -117,7 +117,7 @@
             href="#"
             data-bs-toggle="modal"
             attr.data-bs-target="#{{ modalConstant.LANGUAGES }}"
-            class="item zoom"
+            class="item zoom clickable"
           >
             <div class="in">
               <div>{{ "settings_page.languages_title" | translate }}</div>
@@ -130,7 +130,7 @@
 
         <li>
           <a
-            class="item zoom"
+            class="item zoom clickable"
             data-bs-toggle="modal"
             attr.data-bs-target="#{{ modalConstant.BACKUPDATA }}"
           >
@@ -169,7 +169,7 @@
       </div>
       <ul class="listview border_round image-listview text inset mb-2">
         <li>
-          <a class="item zoom" routerLink="/support">
+          <a class="item zoom clickable" routerLink="/support">
             <div class="in">
               <div>{{ "settings_page.info_support" | translate }}</div>
             </div>
@@ -178,7 +178,7 @@
 
         <li>
           <a
-            class="item zoom"
+            class="item zoom clickable"
             data-bs-toggle="modal"
             attr.data-bs-target="#{{ modalConstant.OPENBUG }}"
           >
@@ -191,7 +191,7 @@
         <li>
           <a
             href="{{ environment.hostService }}"
-            class="item zoom"
+            class="item zoom clickable"
             target="_blank"
           >
             <div class="in">
@@ -205,13 +205,14 @@
       </ul>
 
       <!-- Admin Features -->
-      <div *ngIf="user?.roles?.includes(userRole.ADMIN)">
+      @if (user?.roles?.includes(userRole.ADMIN)) {
+      <div>
         <div class="listview-title mt-1">
           {{ "settings_page.admin_title" | translate }}
         </div>
         <ul class="listview border_round image-listview text inset mb-2">
           <li>
-            <a class="item zoom" (click)="cleanCache()">
+            <a class="item zoom clickable" (click)="cleanCache()">
               <div class="in">
                 <div>{{ "settings_page.admin_cache" | translate }}</div>
               </div>
@@ -219,21 +220,27 @@
           </li>
 
           <li>
-            <a class="item zoom" (click)="importMarketData()">
+            <a class="item zoom clickable" (click)="importMarketData()">
               <div class="in">
                 <div>{{ "settings_page.admin_marketData" | translate }}</div>
               </div>
             </a>
           </li>
+          @if (user?.roles?.includes(userRole.TAX_CALCULATOR)) {
           <li>
-            <a class="item zoom">
+            <a (click)="exchangeTokenAndRedirect()" class="item zoom clickable">
               <div class="in">
-                <div>Tax Calculator</div>
+                <div>Crypto Tax Calculator</div>
               </div>
+              <span class="text-primary">{{
+                "settings_page.info_version_open" | translate
+              }}</span>
             </a>
           </li>
+          }
         </ul>
       </div>
+      }
 
       <!-- Security Section -->
       <div class="listview-title mt-1">
@@ -245,7 +252,7 @@
             href="#"
             data-bs-toggle="modal"
             attr.data-bs-target="#{{ modalConstant.PROFILESETTINGS }}"
-            class="item zoom"
+            class="item zoom clickable"
             (click)="profileConst = profileSettings.PASSWORD"
           >
             <div class="in">
@@ -255,7 +262,7 @@
         </li>
 
         <li>
-          <a (click)="logout()" class="item zoom">
+          <a (click)="logout()" class="item zoom clickable">
             <div class="in">
               <div>{{ "shared_text.logout" | translate }}</div>
             </div>
@@ -268,7 +275,7 @@
       </div>
       <ul class="listview border_round image-listview text inset mb-2">
         <li>
-          <a class="item zoom" routerLink="/on-boarding">
+          <a class="item zoom clickable" routerLink="/on-boarding">
             <div class="in">
               <div>{{ "settings_page.info_howItWorks" | translate }}</div>
             </div>
@@ -277,7 +284,7 @@
 
         <li>
           <a
-            class="item zoom"
+            class="item zoom clickable"
             data-bs-toggle="modal"
             attr.data-bs-target="#{{ modalConstant.UPDATEAPP }}"
           >
@@ -290,7 +297,7 @@
         <li>
           <a
             href="#"
-            class="item zoom"
+            class="item zoom clickable"
             data-bs-toggle="modal"
             attr.data-bs-target="#{{ modalConstant.VERSION }}"
           >

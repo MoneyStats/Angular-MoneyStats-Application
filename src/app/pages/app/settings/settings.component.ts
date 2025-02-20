@@ -2,11 +2,16 @@ import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { fader } from 'src/app/shared/animations/route-animations';
-import { Status, User } from 'src/assets/core/data/class/user.class';
+import {
+  AccessSphereResponse,
+  Status,
+  User,
+} from 'src/assets/core/data/class/user.class';
 import {
   ModalConstant,
   ProfileSettings,
   StorageConstant,
+  Tracing,
   UserRole,
 } from 'src/assets/core/data/constant/constant';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
@@ -32,6 +37,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   marketDataSubscribe: Subscription = new Subscription();
   cacheSubscribe: Subscription = new Subscription();
   updateUserSubscribe: Subscription = new Subscription();
+  exchangeTokenSubscribe: Subscription = new Subscription();
 
   environment = environment;
   @Output('profileConst') profileConst: string = '';
@@ -53,6 +59,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.marketDataSubscribe.unsubscribe();
     this.cacheSubscribe.unsubscribe();
     this.updateUserSubscribe.unsubscribe();
+    this.exchangeTokenSubscribe.unsubscribe();
   }
 
   public get modalConstant(): typeof ModalConstant {
@@ -176,8 +183,27 @@ export class SettingsComponent implements OnInit, OnDestroy {
       .updateUserData(this.user!)
       .subscribe((res) => {
         LOG.info(res.message!, 'SettingsComponent');
-        this.userService.setUserGlobally(res.data);
+        let accessSphereResponse: AccessSphereResponse =
+          new AccessSphereResponse();
+        accessSphereResponse.user = res.data;
+        this.userService.setUserGlobally(accessSphereResponse);
         SwalService.toastMessage(SwalIcon.SUCCESS, message);
+      });
+  }
+
+  exchangeTokenAndRedirect() {
+    const client_id = environment.taxCalculatorClientID;
+    this.exchangeTokenSubscribe = this.authService
+      .exchangeToken(client_id)
+      .subscribe((data) => {
+        LOG.info(data.message!, 'SettingsComponent');
+        const SESSION_ID = localStorage.getItem(Tracing.SESSION_ID);
+        const redirectUri = environment.taxCalculatorUrl
+          .concat('?access-token=')
+          .concat(data.data.token.access_token)
+          .concat('&session-id=')
+          .concat(SESSION_ID!);
+        window.location.href = redirectUri;
       });
   }
 }

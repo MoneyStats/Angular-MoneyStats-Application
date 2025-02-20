@@ -41,3 +41,7 @@
   );
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
 }
+
+.panelbox .modal-dialog .modal-content {
+  height: calc(var(--vh, 1vh) * 98); /* 98% dell'altezza del viewport */
+}

@@ -39,6 +39,8 @@ import { environment } from 'src/environments/environment';
 export const StorageConstant = {
   GITHUBACCOUNT: environment.clientID + '_github_account',
   ACCESSTOKEN: environment.clientID + '_access_token', // Funzione per valore dinamico
+  TAX_CALCULATOR_ACCESS_TOKEN:
+    environment.taxCalculatorClientID + '_access-token', // Funzione per valore dinamico
   AUTHTOKEN: environment.clientID + '_auth_token',
   USERACCOUNT: environment.clientID + '_user_account',
   USER_ATTRIBUTES: environment.clientID + '_user_attributes',
@@ -80,6 +82,7 @@ export enum MarketDataCategory {
 export enum UserRole {
   USER = 'MONEY_STATS_USER',
   ADMIN = 'MONEY_STATS_ADMIN',
+  TAX_CALCULATOR = 'TAX_CALCULATOR_ADMIN',
 }
 
 export enum Tracing {

@@ -32,6 +32,7 @@ export class CloseOperationComponent implements OnDestroy {
 
   currentPrice: number = 0;
   isEditActive: boolean = false;
+  closingDate: string = this.formatDate(new Date());
 
   fees: number = 0;
 
@@ -57,6 +58,10 @@ export class CloseOperationComponent implements OnDestroy {
     if (this.operation) this.getData();
   }
 
+  formatDate(date: Date): string {
+    return date.toISOString().split('T')[0]; // Converte la data in formato 'YYYY-MM-DD'
+  }
+
   getData() {
     if (
       !this.operation ||
@@ -72,7 +77,7 @@ export class CloseOperationComponent implements OnDestroy {
     this.currentPrice = parseFloat(currentPrice.toFixed(2));
     let operation = Utils.copyObject(this.operation);
     //let operation = this.operation;
-    operation!.exitDate = new Date();
+    operation!.exitDate = new Date(this.closingDate);
     operation!.exitPrice = operation?.asset?.current_price;
     operation!.exitPriceValue = parseFloat(currentPrice.toFixed(2));
     operation!.exitQuantity = parseFloat(currentPrice.toFixed(8));
@@ -113,6 +118,14 @@ export class CloseOperationComponent implements OnDestroy {
     this.operationToClose.exitPriceValue = parseFloat(
       this.operationToClose.exitQuantity?.toFixed(2)!
     );
+  }
+
+  validateClosingDate() {
+    const closingDate = new Date(this.closingDate);
+    const entryDate = new Date(this.operationToClose.entryDate!);
+    if (entryDate >= closingDate) return true;
+    this.operationToClose.exitDate = closingDate;
+    return false;
   }
 
   closeOperation() {

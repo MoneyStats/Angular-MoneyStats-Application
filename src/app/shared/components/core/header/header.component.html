@@ -112,7 +112,7 @@
         </div>
         <ul class="listview flush transparent no-line image-listview">
           <li>
-            <a routerLink="" data-bs-dismiss="modal" class="item zoom">
+            <a routerLink="" data-bs-dismiss="modal" class="item zoom-no-box">
               <div class="icon-box bg-primary">
                 <ion-icon name="pie-chart"></ion-icon>
               </div>
@@ -126,7 +126,7 @@
               href="#"
               routerLink="wallet"
               data-bs-dismiss="modal"
-              class="item zoom"
+              class="item zoom-no-box"
             >
               <div class="icon-box bg-primary">
                 <ion-icon name="card"></ion-icon>
@@ -141,7 +141,7 @@
               href="#"
               routerLink="stats"
               data-bs-dismiss="modal"
-              class="item zoom"
+              class="item zoom-no-box"
             >
               <div class="icon-box bg-primary">
                 <ion-icon name="bar-chart"></ion-icon>
@@ -156,13 +156,61 @@
 
         <!-- others -->
         <div class="listview-title mt-1">
+          Crypto
+          {{ "core_header_footer.sidebar_menu.group1_title" | translate }}
+        </div>
+        <ul class="listview flush transparent no-line image-listview">
+          <li>
+            <a
+              href="#"
+              class="item zoom-no-box"
+              data-bs-dismiss="modal"
+              routerLink="crypto/dashboard"
+            >
+              <div class="icon-box bg-primary">
+                <ion-icon name="logo-bitcoin"></ion-icon>
+              </div>
+              <div class="in">
+                Crypto
+                <!--<span class="badge badge-success">New</span>-->
+              </div>
+            </a>
+          </li>
+          @if (user?.roles?.includes(userRole.TAX_CALCULATOR)) {
+          <li>
+            <a
+              (click)="exchangeTokenAndRedirect()"
+              class="item zoom-no-box clickable"
+              data-bs-dismiss="modal"
+            >
+              <div class="icon-box bg-primary">
+                <img
+                  src="{{
+                    environment.baseUrlHeader
+                  }}assets/images/crypto/tax-calculator-icon.png"
+                  alt=""
+                  srcset=""
+                  style="filter: invert(100%); max-width: 20px"
+                />
+                <!--<ion-icon name="logo-bitcoin"></ion-icon>-->
+              </div>
+              <div class="in">
+                Tax Calculator <span class="badge badge-success">New</span>
+              </div>
+            </a>
+          </li>
+          }
+        </ul>
+
+        <!-- others -->
+        <div class="listview-title mt-1">
           {{ "core_header_footer.sidebar_menu.group2_title" | translate }}
         </div>
         <ul class="listview flush transparent no-line image-listview">
           <li>
             <a
               href="#"
-              class="item zoom"
+              class="item zoom-no-box"
               data-bs-dismiss="modal"
               routerLink="settings"
             >
@@ -177,22 +225,7 @@
           <li>
             <a
               href="#"
-              class="item zoom"
-              data-bs-dismiss="modal"
-              routerLink="crypto/dashboard"
-            >
-              <div class="icon-box bg-primary">
-                <ion-icon name="logo-bitcoin"></ion-icon>
-              </div>
-              <div class="in">
-                Crypto <span class="badge badge-success">New</span>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              class="item zoom"
+              class="item zoom-no-box"
               data-bs-dismiss="modal"
               routerLink="support"
             >
@@ -204,13 +237,13 @@
               </div>
             </a>
           </li>
-          <li>
+          <li style="margin-bottom: -10px">
             <a
               href="#"
               data-bs-dismiss="modal"
               (click)="logout()"
               id="logout"
-              class="item zoom"
+              class="item zoom-no-box"
             >
               <div class="icon-box bg-primary">
                 <ion-icon name="log-out"></ion-icon>

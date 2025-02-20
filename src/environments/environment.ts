@@ -1,7 +1,6 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-import { version } from 'os';
 const baseUrlApp: string = '../../';
 //const host: string = 'http://pc-giovanni:8080/moneystats-service';
 const service_host: string =
@@ -24,7 +23,9 @@ export const environment = {
   hostService: service_host + subDomain,
   //version: require(baseUrlApp + subDomain + 'package.json').version,
 
-  // Mock Data
+  /**
+   * @Mock_Data
+   */
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
   authorizeUrlMock: baseUrlApp + 'assets/core/mock/authorize.mock.json',
   getDashboardDataUrlMock: baseUrlApp + 'assets/core/mock/dashboard.mock.json',
@@ -49,6 +50,11 @@ export const environment = {
    * @Authentication_Datas
    */
   tokenDataUrl: access_host + '/v1/oAuth/2.0/token',
+  exchangeTokenDataUrl: access_host + '/v1/oAuth/2.0/token/exchange',
+  //taxCalculatorClientID: 'TAX-CALCULATOR-01',
+  //taxCalculatorUrl: 'https://tax-calculator.giovannilamarmora.com',
+  taxCalculatorClientID: 'TAX-CALCULATOR-TEST-01',
+  taxCalculatorUrl: 'http://localhost:8085',
   authorizeUrl: access_host + '/v1/oAuth/2.0/authorize',
   updateUserDataUrl: access_host + '/v1/users/update',
   logoutUrl: access_host + '/v1/oAuth/2.0/logout',

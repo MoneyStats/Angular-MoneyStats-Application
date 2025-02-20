@@ -77,6 +77,14 @@ export class RouteGuardService {
       if (!authToken.expirationThreshold)
         this.calculateExpirationThreshold(now, authToken);
 
+      const expirationTime = authToken.expires_at - now;
+      const shouldRefresh = expirationTime < 5 * 60 * 1000; // Refresh se mancano meno di 2 minuti
+
+      // Se il tempo rimanente è inferiore alla soglia, eseguiamo il refresh
+      if (shouldRefresh) {
+        return this.tryRefreshToken();
+      }
+
       if (now < authToken.expirationThreshold) {
         LOG.info(
           'Token is valid, Next Validation: ' +
@@ -122,8 +130,14 @@ export class RouteGuardService {
 
   calculateExpirationThreshold(now: any, authToken: any) {
     const expirationTime = authToken.expires_at - now;
-    authToken.expirationThreshold = now + expirationTime / 3;
-    localStorage.setItem(StorageConstant.AUTHTOKEN, JSON.stringify(authToken));
+    let updatedAuthToken = JSON.parse(
+      localStorage.getItem(StorageConstant.AUTHTOKEN)!
+    );
+    updatedAuthToken.expirationThreshold = now + expirationTime / 3;
+    localStorage.setItem(
+      StorageConstant.AUTHTOKEN,
+      JSON.stringify(updatedAuthToken)
+    );
   }
 
   //tryRefreshToken() {

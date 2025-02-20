@@ -61,7 +61,8 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
 
   thisYear: number = new Date().getFullYear();
 
-  cryptoCurrency?: string = UserService.getUserData().attributes.money_stats_settings.cryptoCurrency;
+  cryptoCurrency?: string =
+    UserService.getUserData().attributes.money_stats_settings.cryptoCurrency;
 
   constructor(public cryptoService: CryptoService, private router: Router) {}
 
@@ -144,7 +145,7 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
       dashboard.assets = [Utils.copyObject(this.asset)];
       // Get All Date serve a prendere tutte le date per i grafici
       dashboard.statsAssetsDays = this.getAllDate(dashboard.assets);
-      if (dashboard.assets[0]) {
+      if (!Utils.isNullOrEmpty(dashboard.assets[0].identifier)) {
         dashboard.assets[0].history = dashboard.assets[0].history?.filter(
           (h) =>
             h.date.toString().split('-')[0] ===

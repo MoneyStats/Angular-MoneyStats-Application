@@ -81,6 +81,7 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
           });
       });
       this.assets = this.cryptoService.getAssetList(this.wallets);
+      this.assets = this.assets.filter((a) => a.balance > 0);
       this.assets = this.assets.filter((a) => assetList.includes(a.symbol!));
     }
   }
@@ -168,8 +169,75 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
     // Imposto il flag di validazione come true
     this.saveValidation = true;
   }
-
   setDataForNewStats(asset: Asset, statsWalletDays: string[], stats: Stats) {
+    const days = [...(statsWalletDays || []), this.dateStats].sort();
+    const indexDate = days.indexOf(this.dateStats);
+
+    if (indexDate === -1) {
+      this.errorService.handleWalletStatsError();
+      this.router.navigate(['error']);
+      return;
+    }
+
+    const findStatsByDate = (date: string | undefined) =>
+      date
+        ? asset.history?.find((w) => w.date?.toString() === date)
+        : undefined;
+
+    const beforeThisStats = findStatsByDate(days[indexDate - 1]) || new Stats();
+    beforeThisStats.balance ||= 0.001;
+
+    const afterThisStats = findStatsByDate(days[indexDate + 1]);
+
+    if (!afterThisStats && asset.history?.some((w) => w.date === undefined)) {
+      this.errorService.handleWalletStatsError();
+      this.router.navigate(['error']);
+      return;
+    }
+
+    const calculatePercentage = (newValue: number, oldValue: number) =>
+      oldValue !== 0
+        ? parseFloat((((newValue - oldValue) / newValue) * 100).toFixed(2))
+        : 0;
+
+    const calculateTrend = (newValue: number, oldValue: number) =>
+      parseFloat((newValue - oldValue).toFixed(2));
+
+    const newValue = asset.newValue || 0.001;
+
+    if (afterThisStats) {
+      afterThisStats.percentage = Math.min(
+        calculatePercentage(afterThisStats.balance, newValue),
+        1000
+      );
+      afterThisStats.trend = calculateTrend(afterThisStats.balance, newValue);
+    }
+
+    stats.balance = newValue;
+    stats.date = new Date(this.dateStats);
+    stats.percentage = Math.min(
+      calculatePercentage(newValue, beforeThisStats.balance),
+      1000
+    );
+    stats.trend =
+      days.length > 1
+        ? calculateTrend(
+            newValue,
+            beforeThisStats.balance !== 0.001 ? beforeThisStats.balance : 0
+          )
+        : 0;
+
+    if (!afterThisStats) {
+      if (!beforeThisStats.date) stats.percentage = 0;
+      asset.lastUpdate = stats.date;
+      asset.value = stats.balance;
+      asset.history = [stats];
+    } else {
+      asset.history = [afterThisStats, stats];
+    }
+  }
+
+  setDataForNewStatsOld(asset: Asset, statsWalletDays: string[], stats: Stats) {
     // Preparo la lista delle date da analizzare e aggiungo la data corrente
     const days = [...(statsWalletDays || []), this.dateStats].sort();
     const indexDate = days.indexOf(this.dateStats);
@@ -259,7 +327,11 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  setDataForNewStatsOld(asset: Asset, statsWalletDays: string[], stats: Stats) {
+  setDataForNewStatsOldOld(
+    asset: Asset,
+    statsWalletDays: string[],
+    stats: Stats
+  ) {
     /* trovo gli indici corrispondenti da analizzare inserendo la data corrente
      * all'interno della lista di date e trovo l'indice della mia data
      */

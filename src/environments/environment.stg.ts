@@ -1,5 +1,10 @@
 const baseUrlApp: string = '../../';
-const host: string = 'https://stg.moneystats.service.giovannilamarmora.com';
+const service_host: string =
+  process.env['MONEYSTATS_SERVICE_URL'] ||
+  'https://stg.moneystats.service.giovannilamarmora.com';
+const access_host: string =
+  process.env['ACCESS_SPHERE_SERVICE_URL'] ||
+  'https://access.sphere.service.stg.giovannilamarmora.com';
 //const subDomain = 'stg-moneystats/';
 const subDomain = '';
 
@@ -12,11 +17,14 @@ export const environment = {
   baseUrlSettings: '../../../../../' + subDomain,
   baseUrlDashboard: '../../../' + subDomain,
   baseUrlVersion: '../../../../../../' + subDomain,
-  version: '3.0.0 (Beta)',
-  hostService: host + subDomain,
+  version: require('../../package.json').version + ' Beta',
+  hostService: service_host + subDomain,
 
-  // Mock Data
+  /**
+   * @Mock_Data
+   */
   getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
+  authorizeUrlMock: baseUrlApp + 'assets/core/mock/authorize.mock.json',
   getDashboardDataUrlMock: baseUrlApp + 'assets/core/mock/dashboard.mock.json',
   mockedGetWalletsDataUrl: baseUrlApp + 'assets/core/mock/wallets.mock.json',
   mockedGetWalletsCryptoDataUrl:
@@ -35,82 +43,84 @@ export const environment = {
   getCryptoHistoryDataUrlMock:
     baseUrlApp + 'assets/core/mock/history.crypto.mock.json',
 
-  /*
-   * Authentication Datas
+  /**
+   * @Authentication_Datas
    */
-  registerDataUrl: host + '/v1/auth/sign-up',
-  loginDataUrl: host + '/v1/auth/login',
-  forgotPasswordUrl: host + '/v1/auth/forgot-password',
-  resetPasswordUrl: host + '/v1/auth/reset-password',
-
-  /*
-   * Token
-   */
-  userInfoDataUrl: host + '/v1/oAuth/userInfo',
-  refreshTokenUrl: host + '/v1/oAuth/token/refresh',
-  refreshTime: 900000,
-
-  updateUserDataUrl: host + '/v1/auth/update/user',
-  cleanCacheUrl: host + '/v1/crypto/cache/clean',
+  tokenDataUrl: access_host + '/v1/oAuth/2.0/token',
+  exchangeTokenDataUrl: access_host + '/v1/oAuth/2.0/token/exchange',
+  taxCalculatorClientID: 'TAX-CALCULATOR-TEST-01',
+  taxCalculatorUrl: 'https://tax-calculator.giovannilamarmora.com',
+  authorizeUrl: access_host + '/v1/oAuth/2.0/authorize',
+  updateUserDataUrl: access_host + '/v1/users/update',
+  logoutUrl: access_host + '/v1/oAuth/2.0/logout',
+  forgotPasswordUrl: access_host + '/v1/users/change/password/request',
+  resetPasswordUrl: access_host + '/v1/users/change/password',
+  clientID: 'MONEYSTATS-TEST-01',
+  redirectUri: 'https://stg.moneystats.app.giovannilamarmora.com',
+  registerDataUrl: access_host + '/v1/users/register',
+  checkTokenDataUrl: service_host + '/v1/auth/code',
 
   /**
    * @App
    */
-  getDashboardDataUrl: host + '/v1/app/dashboard',
-  getResumeDataUrl: host + '/v1/app/resume/:year',
-  getHistoryDataUrl: host + '/v1/app/history',
+  getDashboardDataUrl: service_host + '/v1/app/dashboard',
+  getResumeDataUrl: service_host + '/v1/app/resume/:year',
+  getHistoryDataUrl: service_host + '/v1/app/history',
 
   /**
    * @Settings
    */
-  openGithubIssues: host + '/v1/settings/report/bug',
-  backupDataUrl: host + '/v1/settings/backup',
-  restoreDataUrl: host + '/v1/settings/restore',
-  contactSupport: host + '/v1/settings/contact',
+  openGithubIssues: service_host + '/v1/settings/report/bug',
+  backupDataUrl: service_host + '/v1/settings/backup',
+  restoreDataUrl: service_host + '/v1/settings/restore',
+  contactSupport: service_host + '/v1/settings/contact',
+  cleanCacheUrl: service_host + '/v1/settings/cache/clean',
   /**
    * @Stats
    */
-  postStatsDataUrl: host + '/v1/stats',
+  postStatsDataUrl: service_host + '/v1/stats',
 
   /**
    * @Wallets
    */
-  getWalletsDataUrl: host + '/v1/wallets',
-  getWalletByIdUrl: host + '/v1/wallets/:id',
-  postWalletsDataUrl: host + '/v1/wallets',
-  updateWalletsDataUrl: host + '/v1/wallets',
-  deleteWalletsDataUrl: host + '/v1/wallets/:id',
-  getWalletsCryptoDataUrl: host + '/v1/wallets/crypto',
+  getWalletsDataUrl: service_host + '/v1/wallets',
+  getWalletByIdUrl: service_host + '/v1/wallets/:id',
+  postWalletsDataUrl: service_host + '/v1/wallets',
+  updateWalletsDataUrl: service_host + '/v1/wallets',
+  deleteWalletsDataUrl: service_host + '/v1/wallets/:id',
+  getWalletsCryptoDataUrl: service_host + '/v1/wallets/crypto',
 
   /**
    * @Image_Upload
    */
-  uploadImageUrl: host + '/v1/attachment/upload',
-  imageSizeMax: 1000000,
+  uploadImageUrl: service_host + '/v1/attachment/upload',
+  imageSizeMax: Number(process.env['IMAGE_SIZE']) || 1000000,
 
   /**
    * @MarketData
    */
-  getMarketDataUrl: host + '/v1/market-data/:currency',
-  importMarketDataUrl: host + '/v1/market-data/import',
-
-  /**
-   * @Crypto_Assets
-   */
-  getCryptoAssetsDataUrl: host + '/v1/crypto/assets',
-  getCryptoAssetsDetailsDataUrl: host + '/v1/crypto/assets/:identifier',
-  postCryptoAssetDataUrl: host + '/v1/crypto/assets',
-  putCryptoAssetDataUrl: host + '/v1/crypto/assets',
-  postCryptoAssetsDataUrl: host + '/v1/crypto/assets/list',
+  getMarketDataUrl: service_host + '/v1/market-data/:currency',
+  importMarketDataUrl: service_host + '/v1/market-data/import',
 
   /**
    * @Crypto_Section
    */
-  getCryptoDashboardDataUrl: host + '/v1/crypto/dashboard',
-  getCryptoResumeDataUrl: host + '/v1/crypto/resume/:year',
-  getCryptoHistoryDataUrl: host + '/v1/crypto/history',
+  getCryptoDashboardDataUrl: service_host + '/v1/crypto/dashboard',
+  getCryptoResumeDataUrl: service_host + '/v1/crypto/resume/:year',
+  getCryptoHistoryDataUrl: service_host + '/v1/crypto/history',
+
+  /**
+   * @Crypto_Assets
+   */
+  getCryptoAssetsDataUrl: service_host + '/v1/crypto/assets',
+  getCryptoAssetsDetailsDataUrl: service_host + '/v1/crypto/assets/:identifier',
+  postCryptoAssetDataUrl: service_host + '/v1/crypto/assets',
+  putCryptoAssetDataUrl: service_host + '/v1/crypto/assets',
+  postCryptoAssetsDataUrl: service_host + '/v1/crypto/assets/list',
 
   // Cache
-  cacheEnable: true,
-  cacheTimeout: 180000,
+  cacheEnable: process.env['CACHE_ENABLE'] || false,
+  cacheTimeout: Number(process.env['CACHE_TIMEOUT']) || 180000,
+
+  forgotPassword: true,
 };

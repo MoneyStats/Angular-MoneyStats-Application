@@ -153,6 +153,34 @@
                       <div class="dot bg-danger"></div>
                       <div *ngIf="isEditActive" class="content">
                         <div class="row">
+                          <div class="col-12">
+                            <div
+                              class="form-group boxed float-end ms-1 me-1 date-form"
+                            >
+                              <div class="input-wrapper">
+                                <input
+                                  name="date"
+                                  [(ngModel)]="closingDate"
+                                  #date1="ngModel"
+                                  type="date"
+                                  class="form-control"
+                                  id="text4b"
+                                  value="{{ closingDate }}"
+                                  required
+                                />
+                                <div
+                                  *ngIf="validateClosingDate()"
+                                  class="alert alert-danger mb-1"
+                                  role="alert"
+                                >
+                                  {{
+                                    "modal_component.operations.add_stats.data_select"
+                                      | translate
+                                  }}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                           <div class="col-12 col-md-6">
                             <div class="form-group basic">
                               <div class="input-wrapper">
@@ -357,7 +385,7 @@
                   >{{ "modal_component.close_operation.edit" | translate }}</a
                 >
                 <button
-                  [disabled]="f.invalid"
+                  [disabled]="f.invalid || validateClosingDate()"
                   *ngIf="isEditActive"
                   (click)="isEditActive = false"
                   class="btn btn-lg btn-primary btn-block goBack"

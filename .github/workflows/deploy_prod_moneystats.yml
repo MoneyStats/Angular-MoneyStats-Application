@@ -7,7 +7,7 @@ on:
     branches: [master]
 
 env:
-  NODE_VERSION: "16.13.2"
+  NODE_VERSION: "22.0.0"
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   DOCKER_REPOSITORY: ${{ secrets.DOCKER_REPOSITORY }}
@@ -27,7 +27,7 @@ jobs:
           persist-credentials: false
 
       - name: 🔧 Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.0.2
         with:
           node-version: "${{ env.NODE_VERSION }}"
 
@@ -94,12 +94,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: ✅ Get current package version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
+
+      - name: ✏️ Create .env file
+        run: |
+          echo "BASE_URL=${{ vars.BASE_URL }}" > .env
+          echo "EMAIL_SENDER_URL=${{ vars.EMAIL_SENDER_URL }}" >> .env
+          echo "PORTFOLIO_DATA_URL=${{ vars.PORTFOLIO_DATA_URL }}" >> .env
+          echo "CACHE_ENABLE=${{ vars.CACHE_ENABLE }}" >> .env
+
       - name: 📂 Build
         run: |
           npm install -g @angular/cli
           npm install --force
           ng build --configuration=production --output-hashing=none --base-href "https://${{ secrets.DESTINATION_REPOSITORY }}"
-          
+
       - name: 🚀 Pushes to github pages
         uses: cpina/github-action-push-to-another-repository@main
         env:
@@ -107,6 +118,7 @@ jobs:
           url: https://moneystats.github.io
           API_TOKEN_GITHUB: ${{ env.API_TOKEN }}
         with:
+          commit-message: Portfolio V${{ steps.package-version.outputs.current-version }}
           source-directory: "dist/angular-moneystats"
           destination-github-username: "${{ env.ORGANIZATION_USERNAME }}"
           destination-repository-name: "${{ env.DESTINATION_REPOSITORY }}"

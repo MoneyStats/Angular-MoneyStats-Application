@@ -285,6 +285,20 @@ body.modal-open {
 }
 
 /* Card Base Style */
+.zoom-no-box {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(1); /* dimensione originale */
+}
+
+/* Hover Effect: Ingrandisce con ombra */
+.zoom-no-box:hover {
+  transform: scale(0.98); /* ingrandisce del 10% */
+}
+
+.zoom-no-box:focus {
+  transform: scale(0.97); /* ingrandisce del 10% */
+}
+
 .zoom {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* ombra iniziale leggera */
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),

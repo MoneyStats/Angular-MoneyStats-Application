@@ -2,7 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
-import { Status, User } from 'src/assets/core/data/class/user.class';
+import {
+  AccessSphereResponse,
+  Status,
+  User,
+} from 'src/assets/core/data/class/user.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { LOG } from 'src/assets/core/utils/log.service';
@@ -216,9 +220,10 @@ export class RequirementsComponent implements OnInit, OnDestroy {
       .updateUserData(user)
       .subscribe((data) => {
         LOG.info(data.message!, 'RequirementsComponent');
-        this.userService.setUserGlobally(data.data);
-        //this.authService.user = data.data;
-        //this.authService.setUserGlobally();
+        let accessSphereResponse: AccessSphereResponse =
+          new AccessSphereResponse();
+        accessSphereResponse.user = data.data;
+        this.userService.setUserGlobally(accessSphereResponse);
       });
   }
 
