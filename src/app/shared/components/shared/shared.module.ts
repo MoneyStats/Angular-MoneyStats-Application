@@ -11,14 +11,21 @@ import { AddWalletComponent } from './modal/add-wallet/add-wallet.component';
 import { TransactionCardComponent } from './card/transaction-card/transaction-card.component';
 import { RouterModule } from '@angular/router';
 import { LoadingCardComponent } from './loading-card/loading-card.component';
+import { InfoModalComponent } from './modal/info-modal/info-modal.component';
 
 @NgModule({
   declarations: [
     TransactionCardComponent,
     AddWalletComponent,
     LoadingCardComponent,
+    InfoModalComponent,
   ],
-  exports: [TransactionCardComponent, AddWalletComponent, LoadingCardComponent],
+  exports: [
+    TransactionCardComponent,
+    AddWalletComponent,
+    LoadingCardComponent,
+    InfoModalComponent,
+  ],
   imports: [
     RouterModule,
     CommonModule,

@@ -35,7 +35,9 @@
       <i class="icon ion-ios-more"></i>
     </a>
     <div class="dropdown-menu dropdown-menu-end">
-      <h6 class="dropdown-header">{{ "headerMobile.options" | translate }}</h6>
+      <h6 class="dropdown-header">
+        {{ "core_header_footer.dropdown_menu.options" | translate }}
+      </h6>
       <a
         class="dropdown-item"
         href="#"
@@ -48,7 +50,7 @@
         href="#"
         data-bs-toggle="modal"
         attr.data-bs-target="#{{ modalConstant.DELETEWALLET }}"
-        >{{ "headerMobile.delete" | translate }}</a
+        >{{ "shared_text.delete" | translate }}</a
       >
       <div *ngIf="restore" class="dropdown-divider"></div>
       <a
@@ -57,7 +59,7 @@
         href="#"
         data-bs-toggle="modal"
         attr.data-bs-target="#{{ modalConstant.RESTOREWALLET }}"
-        >{{ "headerMobile.restore" | translate }}</a
+        >{{ "shared_text.restore" | translate }}</a
       >
     </div>
   </div>

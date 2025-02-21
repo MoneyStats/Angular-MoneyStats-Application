@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { StorageConstant } from 'src/assets/core/data/constant/constant';
-import { WalletService } from 'src/assets/core/services/api/wallet.service';
+import { SharedService } from 'src/assets/core/services/config/shared.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { environment } from 'src/environments/environment';
 
@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
   selector: 'app-wallet-history',
   templateUrl: './wallet-history.component.html',
   styleUrls: ['./wallet-history.component.scss'],
+  standalone: false,
 })
 export class WalletHistoryComponent implements OnInit {
   environment = environment;
@@ -20,15 +21,15 @@ export class WalletHistoryComponent implements OnInit {
   hidden: boolean = false;
   constructor(
     public screenService: ScreenService,
-    private walletService: WalletService
+    private shared: SharedService
   ) {}
 
-  screenWidth() {
-    return ScreenService.screenWidth;
+  isMobile() {
+    return ScreenService.isMobileDevice();
   }
 
   ngOnInit(): void {
-    this.wallet = this.walletService.walletHistory;
+    this.wallet = this.shared.getWallet();
 
     if (this.wallet?.history.find((w) => w.id == undefined)) {
       let index = this.wallet.history.indexOf(

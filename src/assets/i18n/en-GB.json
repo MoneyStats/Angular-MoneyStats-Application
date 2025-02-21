@@ -14,43 +14,51 @@
     "user": "User Updated",
     "close": "Operation Closed"
   },
-  "onboard": {
-    "crypto": {
-      "tab1": {
-        "title": "Welcome to Crypto",
-        "text": "This is the first login through the section. <br /> To continue the onboarding process, press Next."
-      },
-      "tab2": {
-        "title": "How it works?",
-        "text": "Create o import a cryptocurrency wallet, add your asset by filling the form with all the coin details."
-      },
-      "tab3": {
-        "title": "Operations",
-        "text": "Open Holding o trading position by using the operation section to manage your crypto wallet."
-      },
-      "tab4": {
-        "title": "Thanks for your time",
-        "text": "Press Try It to get into the Dashboard."
-      }
-    },
+  "onboarding_page": {
     "tab1": {
-      "title": "Welcome to MoneyStats",
-      "text": "This is the first login thru the app. <br /> To continue the on-board process press Next."
+      "app_title": "Welcome to MoneyStats",
+      "app_text": "This is your first login to the app. <br /> To begin your setup process, press *Next*.",
+      "crypto_title": "Welcome to Crypto",
+      "crypto_text": "This is your first time in the app. <br /> To continue with the onboarding, press 'Next'."
     },
     "tab2": {
-      "title": "Why use it?",
-      "text": "The difference between MoneyStats and other money management apps is that you don't need to keep track of your expenses. Checking once a week or once a month is recommended to achieve the best performance."
+      "app_title": "Why choose MoneyStats?",
+      "app_text": "What sets MoneyStats apart from other money management apps is that you don’t need to track every daily expense. <br /> Simply input *Stats* once a week or, preferably, once a month to get the most out of the features.",
+      "crypto_title": "How does it work?",
+      "crypto_text": "Create or import your crypto wallet, add your assets by completing the form, and get details, stats, and much more."
     },
     "tab3": {
-      "title": "How it works?",
-      "text": "Almost all the application is touchable. <br /> After you get into the Dashboard to start having some data you should add a new Wallet. <br /> The process would be completed once you start adding new Stats, Graphic and Tables with details will be showed."
+      "app_title": "How does it work?",
+      "app_text": "Almost all features of the app are interactive. <br /> After entering the Dashboard, start by creating a new Wallet. <br /> Once you’ve added new *Stats*, you can view graphs and tables with all the details.",
+      "crypto_title": "Transactions",
+      "crypto_text": "Manage holding or trading operations in the transactions section."
     },
     "tab4": {
-      "title": "Thanks for your time",
-      "text": "Let's having fun, press Try It to get into the Dashboard."
+      "app_title": "Thanks for your time!",
+      "app_text": "It’s time to get started! Press *Try Now* to access the Dashboard and discover all the features.",
+      "crypto_title": "Thanks for your time",
+      "crypto_text": "Press 'Try Now' to access the dashboard."
+    }
+  },
+  "core_header_footer": {
+    "dropdown_menu": {
+      "options": "Menu Options",
+      "version": "Version"
     },
-    "next": "Next",
-    "try": "Try It"
+    "sidebar_menu": {
+      "balance": "Balance",
+      "group1_title": "Menu",
+      "group2_title": "Others",
+      "support": "Support"
+    },
+    "crypto_tabOpt": "More Options",
+    "crypto_tab1": "Wallets",
+    "crypto_tab2": "Assets",
+    "crypto_tab3": "Operations",
+    "crypto_tab4": "Resume",
+    "crypto_tab5": "Market Data",
+    "datatables_pagination": "Show _MENU_ rows",
+    "datatables_result": "Showing _START_ to _END_ of _TOTAL_ rows"
   },
   "auth": {
     "login": {
@@ -62,7 +70,8 @@
       "passPlaceholder": "Your password",
       "register": "Register Now",
       "forgot": "Forgot Password?",
-      "login": "Login"
+      "login": "Login",
+      "google": "Sign in with Google"
     },
     "register": {
       "title": "Register Now",
@@ -86,6 +95,7 @@
       "terms": "I agree",
       "terms2": "terms and conditions",
       "register": "Register",
+      "google": "Sign up with Google",
       "warning": {
         "password": "<p><strong>Warning:</strong> Your password must meet the following criteria:<ul><li>Must be 8 to 10 characters long.</li><li>Must contain at least one uppercase and one lowercase letter.</li><li>Must include at least one number and one special character from the following: @$!%*?&.,</li></ul>To ensure the security of your account, make sure your password meets these criteria. A strong password is essential to protect your personal data and online privacy.</p>",
         "invalidEmail": "The email address entered is not valid. Please enter a valid email address."
@@ -103,781 +113,621 @@
       "passPlace": "Insert your new password",
       "pass2": "Confirm Password",
       "passPlace2": "Insert your password again",
-      "reset": "Reset Password"
+      "reset": "Reset Password",
+      "token": "Reset Code",
+      "token_place": "Insert the Reset Code"
     }
   },
-  "headerMobile": {
-    "options": "Menu Options",
-    "delete": "Delete",
-    "restore": "Restore"
-  },
-  "dashboard": {
-    "sidebar": {
-      "dropdown": {
-        "options": "Menu Options",
-        "version": "Version",
-        "settings": "Settings",
-        "logout": "Log Out"
-      },
-      "overviewTitle": "Balance",
-      "menuTitle": "Menu",
-      "menu": {
-        "title1": "Dashboard",
-        "title2": "My Wallet",
-        "title3": "Resume Data"
-      },
-      "subMenuTitle": "Others",
-      "subMenu": {
-        "title1": "Settings",
-        "title2": "Support",
-        "title3": "Log out"
-      }
-    },
-    "footer": {
-      "title1": "Dashboard",
-      "title2": "Resume",
-      "title3": "Wallets",
-      "title4": "Settings"
-    },
-    "dashboardCard": {
+  "dashboard_page": {
+    "dashboard_card": {
       "title": "Total Balance",
-      "footer": {
+      "icons": {
         "title1": "Add Wallet",
-        "title2": "Category",
-        "title3": "Wallet",
-        "title4": "Resume Data"
+        "title2": "Category"
       },
-      "stats": {
+      "stats_card": {
         "title1": "Performance Since ",
-        "title2": "Day of the Last Stats",
-        "title3": "Last Stats Performance",
-        "title4": "Last Stats Difference"
-      }
-    },
-    "transaction": {
-      "title": "Transactions",
-      "view": "View All",
-      "nodata": {
-        "header": "Transaction",
-        "body": "Add new data to view the transaction history.",
-        "footer": "MoneyStats"
+        "title2": "Day of Last Analysis",
+        "title3": "Performance of Last Analysis",
+        "title4": "Difference from Last Analysis"
       }
     },
     "graph": {
-      "title": "Performance from &FROM& to &TO&",
-      "titleFirst": "Performance of &FROM&",
-      "view": "View All",
-      "nodata": {
-        "header": "Graph",
-        "body": "Insert new data to get graph.",
-        "footer": "MoneyStats"
-      }
+      "title": "Graph from &FROM& to &TO&",
+      "titleFirst": "Graph of &FROM&",
+      "graph": "Graph",
+      "empty_body_text": "Please enter data to generate the graph."
     },
     "wallet_splide": {
-      "title": "Wallet",
-      "view": "View All",
+      "title": "Wallets",
       "btn": "Open Wallet",
-      "nodata": {
-        "header": "Wallet",
-        "body": "Add new data to view the wallet.",
-        "footer": "MoneyStats"
-      }
+      "empty_body_text": "Please enter data to view your wallets."
     }
   },
-  "transaction": {
+  "transactions_page": {
     "title": "Transactions",
-    "subTitle": "Wallets last performance",
+    "sub_title": "Wallets last performance",
+    "empty_body_text": "Please enter data to view your transactions list.",
     "difference": "Difference",
-    "back": "Go back to previous page",
-    "mobile_back": "Back",
     "details": {
       "title": "Transaction Details",
-      "back": "Go back to previous page",
       "status": "Status",
       "success": "Success",
-      "category": "Category",
-      "lastStats": "Difference",
-      "date": "Date",
-      "amount": "Balance"
+      "date": "Date"
+    },
+    "history_title": "Transaction History"
+  },
+  "wallets_page": {
+    "title": "Wallet Management",
+    "mobile_add": "New",
+    "add": "Create a New Wallet",
+    "open": "View Wallet",
+    "active": "Active Wallets",
+    "deleted": "Deleted Wallets",
+    "empty_body_text": "You haven't created any wallets yet. Add a new wallet to get started."
+  },
+  "wallets_details_page": {
+    "title": " Details",
+    "mobile_edit": "Edit",
+    "mobile_delete": "Delete",
+    "status": "Status",
+    "all_time_high": "All-time High on ",
+    "total_performance": "Total Performance",
+    "high_price": "Yearly High on ",
+    "low_price": "Yearly Low on ",
+    "category": "Category",
+    "type": "Wallet Type",
+    "date_last_stats": "Last Stats Update",
+    "edit": "Edit Wallet",
+    "delete": "Delete Wallet",
+    "restore": "Restore Wallet",
+    "info": {
+      "title": "Information",
+      "sub_title": "You can add any relevant information (e.g., IBAN for a bank account).",
+      "key": "Info Title",
+      "value": "Info Value"
+    },
+    "modal": {
+      "delete_title": "Confirm Deletion",
+      "delete_text": "Are you sure you want to delete this wallet? It will be deactivated but can be restored at any time.",
+      "permanent_title": "Permanent Deletion",
+      "permanent_text": "Are you sure you want to permanently delete this wallet? This action cannot be undone.",
+      "restore_title": "Restore Wallet",
+      "restore_text": "Do you want to restore this wallet?",
+      "confirm": "Confirm"
+    },
+    "transaction": {
+      "title": "Last Stats",
+      "more": "View All"
     }
   },
-  "wallet": {
-    "active": "Active Wallet",
-    "deleted": "Deleted Wallet",
-    "title": "Wallet",
-    "mobile_back": "Back",
-    "mobile_add": "Add",
-    "back": "Go back to previous page",
-    "add": "Add new Wallet",
-    "open": "Open Wallet",
-    "modal": {
+  "support_page": {
+    "title": "Contact Support",
+    "subtitle": "We’re here to help. Send us an email for assistance.",
+    "formTitle": "Get in Touch",
+    "formSubTitle": "Fill out the form below to send us a message.",
+    "name": "Your Name",
+    "namePlace": "Enter your full name",
+    "email": "Email",
+    "emailPlace": "Enter your email address",
+    "message": "Message",
+    "messagePlace": "Type your message here",
+    "send": "Send Message"
+  },
+  "add_stats_page": {
+    "title": "Balance Management",
+    "data_present": "Select a different date",
+    "balance": "Current balance: ",
+    "new_bal": "Enter new balance",
+    "card_title": "Add New Stats",
+    "card_subtitle": "Requires all wallets to have unique dates compared to previously added Stats.",
+    "continue": "Proceed",
+    "logo": "Logo",
+    "wallet_name": "Wallet Name",
+    "new_stats": "New Stats",
+    "current_balance": "Current Balance",
+    "date_last_stats": "Last Stats Update"
+  },
+  "resume_page": {
+    "title": "History",
+    "sub_title": "Detailed transactions and performance",
+    "total": "Total Balance",
+    "since": "Since",
+    "tab_stats": "Stats History",
+    "tab_category": "Category History",
+    "tab_history": "Complete History",
+    "empty_body_text": "Add some data to view the history.",
+    "wallet": "Current Wallet",
+    "graph1": "Wallet Performance",
+    "graph2": "Wallet Distribution",
+    "graph3": "Performance Trends",
+    "table": "Annual Stats List",
+    "table_date": "Date",
+    "table_trend": "Trend",
+    "investments": "Investments",
+    "capital": "Capital",
+    "others": "Others",
+    "debits": "Debts",
+    "saving": "Savings",
+    "deleted": "Deleted",
+    "graph_history": "Historical Performance Chart"
+  },
+  "settings_page": {
+    "title": "Settings",
+    "theme_title": "Theme",
+    "theme_dark": "Dark Mode",
+    "account_title": "Account Settings",
+    "account_username": "Change Username",
+    "account_user_label": "Username",
+    "account_user_placeholder": "Enter your username",
+    "account_email": "Update Email",
+    "account_email_label": "Email",
+    "account_email_placeholder": "Enter your email address",
+    "wallet_edit": "Edit Wallet",
+    "live_wallet_title": "Live Wallet",
+    "live_wallet_description": "Enable Live Wallet with Crypto",
+    "languages_title": "Languages",
+    "languages_en": "English",
+    "languages_it": "Italian",
+    "languages_change": "Change Language",
+    "security_title": "Security",
+    "security_password": "Change Password",
+    "security_old_label": "Old Password",
+    "security_old_placeholder": "Enter your current password",
+    "security_new_label": "New Password",
+    "security_new_placeholder": "Enter your new password",
+    "security_repete_label": "Confirm New Password",
+    "security_repete_placeholder": "Re-enter your new password",
+    "security_email_not_match_warning":"The email do not match. Please ensure the 'Email' match with your account.",
+    "security_warning": "The passwords do not match. Please ensure the 'Password' and 'Confirm password' fields are identical.",
+    "info_title": "Info",
+    "info_support": "Support",
+    "info_howItWorks": "How It Works",
+    "info_version": "MoneyStats Version",
+    "info_version_open": "Open",
+    "info_service": "MoneyStats Service",
+    "develop": "Development Info & Contact",
+    "admin_title": "Admin Features",
+    "admin_cache": "Clear Cache",
+    "admin_marketData": "Import Market Data"
+  },
+  "requirements_page": {
+    "header_title": "Crypto Verification",
+    "title": "Crypto: Almost There!",
+    "sub_title": "Before accessing the new Crypto feature in MoneyStats, we need to verify that you meet some requirements. If you don't meet these, you won't be able to access the dashboard.",
+    "req1_title": "Create a Wallet",
+    "req1_subTitle": "You need to have created a wallet.",
+    "req2_title": "Create a Crypto Wallet",
+    "req2_subTitle": "You need to have created a crypto wallet.",
+    "req3_title": "Add an Asset",
+    "req3_subTitle": "You need to have at least one crypto asset (e.g., BTC, ETH).",
+    "req4_title": "Select a Crypto Currency",
+    "req4_subTitle": "Choose a crypto currency, such as USD, EUR, GBP, etc.",
+    "next": "Go to Dashboard"
+  },
+  "crypto_dashboard_page": {
+    "title": "Crypto Dashboard",
+    "card_resume": {
+      "title": "Total Balance",
+      "lastUpdate": "Last Market Update",
+      "opt1": "Add Asset",
+      "opt2": "View Assets",
+      "opt3": "Create Crypto Wallet"
+    },
+    "performance_card": {
+      "title": "Bitcoin Daily Change",
+      "view": "View",
+      "holding": "Holdings Performance",
+      "trading": "Trading Performance",
+      "performance": "Total Performance",
+      "lastUpdate": "Last Update"
+    },
+    "asset_card_title": "My Assets",
+    "asset_graph": "Cryptocurrency Chart",
+    "market_data_title": "Market Data"
+  },
+  "crypto_asset_page": {
+    "title": "Crypto Assets",
+    "assetList": "Asset List",
+    "empty_assets_data": "There are no available assets, or the existing assets have a balance of 0. To view the full list, click on 'Show with zero balance' or ensure the assets have a balance greater than 0.",
+    "assetGraph": "Asset Chart",
+    "tab1": "Overview",
+    "tab2": "TradingView Data",
+    "tab3": "Advanced Chart",
+    "show": "Show Zero Balance",
+    "hidden": "Hide Zero Balance",
+    "details": {
+      "rank": "Rank",
+      "identifier": "Identifier",
+      "balance": "Balance",
+      "value": "Total Balance in ",
+      "invested": "Invested Amount",
+      "editInvested": "Edit Invested Amount",
+      "editBalance": "Edit Balance",
+      "save": "Save",
+      "cancel": "Cancel",
+      "performance": "Performance Since Start",
+      "trend": "Trend Since Start",
+      "wallets": "Wallets Holding ",
+      "operations": "Transactions",
+      "view": "View",
+      "price": "Price",
+      "invest": "Invested",
+      "on": "on",
+      "more": "View All",
+      "info-trading": "No stats available for Trading Wallets",
+      "warning-empty-wallets": "Add new stats to retrieve data",
+      "empty_wallets_data": "There are no wallets available, or the existing wallets have a balance of 0. To view the full list, click on 'Show with zero balance' or ensure that the wallets' balance is greater than 0."
+    }
+  },
+  "market_data_page": {
+    "title": "Market Data",
+    "currency": "Currency:",
+    "updated": "Updated at:",
+    "search": "Search for a coin",
+    "table": {
+      "tab1": "Rank",
+      "tab2": "Coin",
+      "tab3": "Price",
+      "tab4": "Performance 24h",
+      "tab5": "High 24h",
+      "tab6": "Low 24h",
+      "tab7": "Mkt Cap"
+    }
+  },
+  "crypto_resume_page": {
+    "title": "Crypto Summary",
+    "resume_tab1": "Holding",
+    "resume_tab2": "Trading",
+    "resume_tab3": "Investments",
+    "assetList": "Assets Owned",
+    "graphAsset": "Overall Performance",
+    "tableAsset": "Annual Performance History",
+    "warning": "Add new crypto stats to view data",
+    "investments": {
+      "title": "Average Purchase Price of the Currency",
+      "table_tab1": "Asset",
+      "table_tab2": "Quantity",
+      "table_tab3": "Invested",
+      "table_tab4": "Average per Asset",
+      "table_tab5": "Market Data Balance",
+      "table_tab6": "Current Balance",
+      "table_tab7": "Change +/-",
+      "table_tab8": "Performance"
+    },
+    "trading_table_title": "Trading Performance - Initial Balance",
+    "trading_table_tab1": "Entry Date",
+    "trading_table_tab2": "Exchange",
+    "trading_table_tab3": "Quantity Bought",
+    "trading_table_tab4": "Purchase Price",
+    "trading_table_tab5": "Initial Total",
+    "trading_table_tab6": "Exit Date",
+    "trading_table_tab7": "Quantity Sold",
+    "trading_table_tab8": "Sale Price",
+    "trading_table_tab9": "Final Total",
+    "trading_table_tab10": "Change",
+    "trading_table_tab11": "Total Change",
+    "trading_table_tab12": "Final Balance",
+    "chart_pie_title": "Assets Distribution"
+  },
+  "modal_component": {
+    "add_wallet": {
       "title": "Add Wallet",
-      "cryptoTitle": "Add Crypto Wallet",
-      "selectWallet": "Select Wallet",
+      "crypto_title": "Add Crypto Wallet",
+      "select_wallet": "Select Wallet",
       "crypto": {
-        "title": "Wallet: Choose Options",
-        "subTitle": "You wanna add a new Wallet or import an existing wallet?",
-        "subTitle2": "Choose a Wallet to import",
+        "title": "Wallet: Choose an Option",
+        "subTitle": "Would you like to add a new wallet or import an existing one?",
+        "subTitle2": "Select a Wallet",
         "new": "New Wallet",
         "import": "Import Wallet"
       },
       "editWallet": {
         "title": "Edit Wallet",
-        "cryptoTitle": "Edit Crypto Wallet",
-        "default": "Keep same wallet image"
+        "crypto_title": "Edit Crypto Wallet",
+        "default": "Keep the current image"
       },
       "name": "Name",
-      "sub_name": "Enter Wallet Name",
+      "sub_name": "Enter wallet name",
       "category": "Category",
       "categoryText": "Choose a category",
-      "categoryTextEdit": "Leave to keep same category",
+      "categoryTextEdit": "Leave empty to retain the current category",
       "balance": "Balance",
-      "balanceText": "Enter Balance",
+      "balanceText": "Enter balance",
       "type": "Wallet Type",
-      "typeText": "Choose your wallet type",
+      "typeText": "Select wallet type",
       "img": "Add Image",
       "imgContent": "Upload Image",
-      "imgFromURL": "Add Image from URL",
-      "sizeToBig": "Image Size is to big, max size is ",
+      "imgFromURL": "Add image from URL",
+      "sizeToBig": "Image too large, the maximum size is ",
       "image": "Image",
-      "default": "Use default wallet image",
+      "default": "Use default image",
       "imageModal": {
         "title": "Add Image",
-        "subTitle": "Insert image URL and press continue",
+        "subTitle": "Enter an image URL and click continue",
         "continue": "Continue",
         "cancel": "Cancel"
-      },
-      "save": "Save"
-    },
-    "nodata": {
-      "header": "Wallet",
-      "body": "Insert new data to get wallet.",
-      "footer": "MoneyStats"
-    },
-    "details": {
-      "title": " Details",
-      "back": "Go back to previous page",
-      "mobile_back": "Back",
-      "mobile_edit": "Edit",
-      "mobile_delete": "Delete",
-      "status": "Status",
-      "allTimeHigh": "All Time High on ",
-      "totalPerformance": "Total Performance",
-      "highPrice": "High Price on ",
-      "lowPrice": "Low Price on ",
-      "type": "Wallet Type",
-      "category": "Category",
-      "dateLastStats": "Date Last Stats",
-      "edit": "Edit Wallet",
-      "delete": "Delete Wallet",
-      "restore": "Restore Wallet",
-      "info": {
-        "title": "Info",
-        "subTitle": "You can add any info you need (ex IBAN for Bank account)",
-        "addNew": "Add New",
-        "edit": "Edit Info",
-        "key": "Info Title",
-        "value": "Info Value",
-        "save": "Save",
-        "editBtn": "Edit"
-      },
-      "modal": {
-        "delete": {
-          "title": "Delete Confirmation",
-          "text": "Are you sure you want to delete the current wallet? It would be logically deleted, always avaiable to restore it."
-        },
-        "permanent": {
-          "title": "Permanent Delete",
-          "text": "Are you sure you want to delete the current wallet? It would be permanent deleted."
-        },
-        "restore": {
-          "title": "Restore Confirmation",
-          "text": "Do you want to restore the current wallet?"
-        },
-        "back": "Back",
-        "confirm": "Confirm",
-        "restoreBtn": "Restore"
-      },
-      "transaction": {
-        "title": "Last Stats",
-        "mobile_back": "Back",
-        "view": "View All",
-        "more": "Load more",
-        "history": {
-          "title": "Transaction History",
-          "mobile_back": "Back",
-          "back": "Go back to previous page"
-        }
-      }
-    }
-  },
-  "settings": {
-    "title": "Settings",
-    "back": "Go back to previous page",
-    "mobile_back": "Back",
-    "theme": {
-      "title": "Theme",
-      "dark": "Dark Mode"
-    },
-    "account": {
-      "title": "Account Settings",
-      "sync": "Sync Account",
-      "descriptionSync": "Sync your profile picture with an existing social account.",
-      "open": "Open",
-      "username": "Change Username",
-      "user_label": "Username",
-      "user_placeholder": "Digit your new username",
-      "email": "Update E-Mail",
-      "email_label": "E-Mail",
-      "email_placeholder": "Digit your new email address",
-      "save": "Save"
-    },
-    "security": {
-      "title": "Security",
-      "password": "Change password",
-      "old_label": "Old Password",
-      "old_placeholder": "Digit your current password",
-      "new_label": "New Password",
-      "new_placeholder": "Digit your new password",
-      "repete_label": "Repete Password",
-      "repete_placeholder": "Digit your new password again",
-      "warning": "The passwords entered do not match. Please make sure to enter the same password in both the 'Password' and 'Confirm Password' fields."
-    },
-    "app": {
-      "title": "App Settings",
-      "wallet": {
-        "title": "Edit Wallet",
-        "open": "Open"
-      },
-      "liveWallet": {
-        "title": "Live Wallet",
-        "description": "Activate Live Wallet on Crypto"
-      },
-      "languages": {
-        "title": "Languages",
-        "open": "Edit",
-        "en": "English",
-        "it": "Italian",
-        "change": "Change Languages"
       }
     },
-    "info": {
-      "title": "Info",
-      "logout": "Log Out",
-      "support": "Support",
-      "howItWorks": "How it works",
-      "version": "MoneyStats Version",
-      "version_open": "Open",
-      "service": "MoneyStats Service",
-      "auto_update": "Auto Update"
-    },
-    "develop": "Info Develop & Contact",
-    "admin": {
-      "title": "Admin Features",
-      "cache": "Clean cache",
-      "marketData": "Import Marketdata"
-    }
-  },
-  "stats": {
-    "title": "Resume Data",
-    "subTitle": "Details of all transaction and performance",
-    "back": "Go back to previous page",
-    "mobile_back": "Back",
-    "total": "Total Balance",
-    "since": "Since",
-    "performance": "Performance",
-    "tab_stats": "Stats Resume",
-    "tab_category": "Category Resume",
-    "tab_history": "History",
-    "nodata": {
-      "header": "Resume",
-      "body": "Insert new data to get resume.",
-      "footer": "MoneyStats"
-    },
-    "data": {
-      "wallet": "Current Wallet",
-      "graph1": "Wallet performance",
-      "graph2": "Wallet quantity",
-      "graph3": "Wallet bar performance",
-      "table": "List Stats of the Year",
-      "table_date": "Date",
-      "table_balance": "Balance",
-      "table_trend": "Trend",
-      "table_performance": "Performance",
-      "table_value": "Value Trend",
-      "investments": "Investments",
-      "capital": "Capital",
-      "others": "Others",
-      "debits": "Debits",
-      "saving": "Saving",
-      "history": "History",
-      "deleted": "Deleted",
-      "graphHistory": "History Performance"
-    }
-  },
-  "insertStats": {
-    "title": "Payments",
-    "back": "Go back to previous page",
-    "mobile_back": "Back",
-    "dataPresent": "Select different Data",
-    "card_title": "Add Stats",
-    "balance": " balance: ",
-    "newBal": "Insert new balance",
-    "card_subtitle": "Needs to be done for all wallets, Could not save stats for existing data",
-    "continue": "Continue",
-    "save": "Save"
-  },
-  "support": {
-    "title": "Contact Support",
-    "mobile_back": "Back",
-    "back": "Go back to previous page",
-    "subtitle": "Contact us by sending and email",
-    "formTitle": "Get in Touch",
-    "formSubTitle": "Fill in the form to contact us.",
-    "name": "Your name",
-    "namePlace": "Insert your name",
-    "email": "Email",
-    "emailPlace": "Insert your email",
-    "message": "Message",
-    "messagePlace": "Insert your message",
-    "send": "Send"
-  },
-  "modal": {
     "backup": {
       "title": "Backup and Restore",
-      "text": "Used to backup and restore your wallets!",
+      "text": "Use this option to backup or restore your data!",
       "backup": "Backup Data",
       "restore": "Restore Data"
     },
     "update": {
-      "avaiable": "Update avaiable, go to settings and update it!",
-      "title": "Check for Update",
-      "text": "Press update to get it, or cancel to go back.",
+      "available": "Update Available, go to the imports section to update the app!",
+      "title": "Update App",
+      "text": "Tap update to proceed, or cancel to go back",
       "update": "Update",
       "close": "Cancel",
-      "copied": "Value Copied to Clipboard"
+      "copied": "Value copied to clipboard"
     },
-    "infoApp": {
-      "title": "Info Registration",
-      "text": "To register for the MoneyStats application, you require an Invitation Code. If you don't have the code, you can request it from <a href='https://giovannilamarmora.github.io/#contact' target='_blank'>Giovanni</a> in the Contact section. In the meantime, you can explore the application using the following credentials:<br>&bull; Username: moneystats<br>&bull; Password: moneystats <br>This account provides you with a preview of the app's interface. Please note that you won't be able to modify or add new data.",
+    "info_app": {
+      "title": "Registration Info",
+      "text": "To register for the MoneyStats app, you need an invitation code. If you don't have one, you can request it from <a href='https://giovannilamarmora.github.io/#contact' target='_blank'>Giovanni</a> in the Contacts section. In the meantime, you can explore the app using the following credentials:<br>• Username: moneystats<br>• Password: moneystats<br>This account provides a preview of the app interface. Please note, you will not be able to modify or add new data.",
       "close": "Close"
     },
-    "socialList": {
-      "title": "Connect Social Account",
-      "close": "Close",
-      "select": "Please Select an account to Sync",
-      "connect": "Connected",
-      "github": "Github"
-    },
-    "socialDetails": {
-      "user": "User ID",
-      "details": "Account Details",
-      "connect": "Connect",
-      "disconnect": "Disconnect",
-      "githubId": "Github ID",
-      "created": "Created On",
-      "updated": "Updated On",
-      "followers": "Followers",
-      "following": "Following",
-      "url": "URL"
-    },
     "category": {
-      "title": "Category Available",
+      "title": "Available Categories",
       "close": "Close",
       "list": "List of all categories"
     },
-    "reportBug": {
-      "title": "Report a Bug",
+    "report_bug": {
+      "title": "Report Bug",
+      "subTitle": "Tell us more about the issue",
       "titleBug": "Bug Description",
-      "titleBugSub": "Write a short title about the bug",
-      "subTitle": "Tell us more about the problem",
-      "text": "Write what you were doing before the error.",
+      "titleBugSub": "Write a short title for the bug",
+      "text": "Please tell us what you were doing when the error appeared.",
       "send": "Report"
     },
-    "version": {
-      "title": "MoneyStats Version",
-      "close": "Close",
-      "moneystats": "MoneyStats",
-      "changelog": {
-        "title": "Changelog",
-        "data": [
-          {
-            "modalId": "v1",
-            "version_date": "2023-01-01",
-            "version_title": "MoneyStats V1.0.0",
-            "version": "V1.0.0",
-            "changelog": "&#183; Initial release"
-          },
-          {
-            "modalId": "v101",
-            "version_date": "2023-06-01",
-            "version_title": "MoneyStats V1.0.1",
-            "version": "V1.0.1",
-            "changelog": "&#183; Service Migration on Oracle Cloud. <br /> &#183; Bug Fixed."
-          },
-          {
-            "modalId": "v2",
-            "version_date": "2024-02-12",
-            "version_title": "MoneyStats V2.0.0",
-            "version": "V2.0.0",
-            "changelog": "&#183; Added new Crypto Section <br> &#183; Updated Add and Edit Wallets"
-          },
-          {
-            "modalId": "v2010",
-            "version_date": "2024-02-22",
-            "version_title": "MoneyStats V2.0.10",
-            "version": "V2.0.10",
-            "changelog": "&#183; Improved loading performance through caching. <br> &#183; Enhanced account functionality, auto-refresh token, now the session lasts more than an hour. <br> &#183; Fixed an issue on Edit Wallet that set all wallets as Crypto. <br> &#183; Fixed Wallet details tradingview data."
-          },
-          {
-            "modalId": "v2011",
-            "version_date": "2024-03-04",
-            "version_title": "MoneyStats V2.0.11",
-            "version": "V2.0.11",
-            "changelog": "&#183; Fixed error on Add Stats with 0 balance. <br> &#183; Fixed Error Handler."
-          },
-          {
-            "modalId": "v2012",
-            "version_date": "2024-04-02",
-            "version_title": "MoneyStats V2.0.12",
-            "version": "V2.0.12",
-            "changelog": "&#183; Fixed error Add Crypto Stats if wallet does not have asset."
-          },
-          {
-            "modalId": "v212",
-            "version_date": "2024-05-07",
-            "version_title": "MoneyStats V2.1.2",
-            "version": "V2.1.2",
-            "changelog": "&#183; Fixed cache issue on live wallets. <br> &#183; Improved performance. <br> &#183; Enhanced security. <br> &#183; Fixed Crypto resume section when data is missing. <br> &#183; Added validation rules for email and password, and improved the authentication screen."
-          }
-        ]
-      }
-    }
-  },
-  "github": {
-    "title": "Get data from Github for ",
-    "connect": "Connect",
-    "confirm": "Confirm"
-  },
-  "error": {
-    "title": ""
-  },
-  "crypto": {
-    "header": {
-      "tabOpt": "More Options",
-      "tab1": "Wallets",
-      "tab2": "Assets",
-      "tab3": "Operations",
-      "tab4": "Resume",
-      "tab5": "Market Data"
-    },
-    "footer": {
-      "tab1": "Operations",
-      "tab2": "Crypto Resume",
-      "tab3": "Wallets",
-      "tab4": "Market Data"
-    },
-    "requirements": {
-      "headerTitle": "Crypto Requirements",
-      "title": "Crypto: You are almost there",
-      "subTitle": "Before accessing the crypto dashboard, the new feature of MoneyStats, ensure all the requirements are met; otherwise, you cannot proceed.",
-      "req1": {
-        "title": "Having a Wallet",
-        "subTitle": "Having a wallet or create one"
-      },
-      "req2": {
-        "title": "Having a Crypto Wallet",
-        "subTitle": "Having a crypto wallet or create one"
-      },
-      "req3": {
-        "title": "Having an Asset",
-        "subTitle": "Having a Crypto Asset like BTC, ETH"
-      },
-      "req4": {
-        "title": "Having an Crypto Currency",
-        "subTitle": "Set the Crypto Currency for the transaction like USD, EUR, GBP..."
-      },
-      "next": "Go to Dashboard"
-    },
-    "dashboard": {
-      "title": "Crypto Dashboard",
-      "cardRes": {
-        "title": "Total Balance",
-        "lastUpdate": "Last Market update",
-        "opt1": "Add Asset",
-        "opt2": "View Assets",
-        "opt3": "Add Crypto Wallet"
-      },
-      "mobileBtn": {
-        "opt1": "Add Crypto Wallet",
-        "opt2": "Operations",
-        "opt3": "Crypto Resume",
-        "opt4": "Settings"
-      },
-      "performanceCard": {
-        "title": "Bitcoin Daily Change",
-        "view": "View All",
-        "holding": "Holding Long Term",
-        "trading": "Trading Performance",
-        "performance": "Performance",
-        "lastUpdate": "Last updated"
-      },
-      "assetsCard": {
-        "title": "My Assets",
-        "view": "View All",
-        "assetGraph": "Cryptocurrency Graph"
-      },
-      "marketData": {
-        "title": "Market Data",
-        "view": "View All"
-      }
-    },
     "asset": {
-      "title": "Crypto Assets",
-      "assetList": "Asset List",
-      "assetGraph": "Asset Graph",
-      "tab1": "Overview",
-      "tab2": "TradingView Datas",
-      "tab3": "Advanced Graph",
-      "show": "Show Zero Balance",
-      "hidden": "Hidden Zero Balance",
-      "details": {
-        "overview": {
-          "rank": "Rank",
-          "identifier": "Identifier",
-          "balance": "Balance",
-          "value": "Total Balance in ",
-          "invested": "Money Invested",
-          "editInvested": "Edit Invested",
-          "editBalance": "Edit Balance",
-          "save": "Save",
-          "cancel": "Cancel",
-          "performance": "Performance since beginning",
-          "trend": "Trend since beginning",
-          "wallets": "Wallet with ",
-          "operations": "Operations",
-          "view": "View All",
-          "price": "Price",
-          "invest": "Invested",
-          "on": "on",
-          "more": "Load more",
-          "info-trading": "No Stats avaiable for Trading Wallets",
-          "warning-empty-wallets": "Add a new Stats to get Datas"
-        }
-      }
+      "title": "Import an Asset",
+      "selectWalletTitle": "Select Wallet",
+      "selectWalletSubTitle": "Choose a Wallet to add an Asset to",
+      "selectedWallet": "Selected Wallet",
+      "currentBalance": "Current Balance: ",
+      "searchAsset": "Search for an Asset",
+      "selectAsset": "Select an Asset",
+      "selectedAsset": "Selected Asset",
+      "add": "Add Asset",
+      "warning": "The selected Asset already exists",
+      "balance": "Balance",
+      "balancePla": "Enter your balance in ",
+      "invested": "Invested",
+      "investedPla": "Enter the amount invested in ",
+      "edit_title": "Edit Asset",
+      "currency_title": "Select Cryptocurrency",
+      "currency_subtitle": "Complete the form by selecting a Cryptocurrency"
     },
-    "resume": {
-      "title": "Crypto Resume",
-      "tab": {
-        "tab1": "Holding",
-        "tab2": "Trading",
-        "tab3": "Investments"
+    "operations": {
+      "title": "Add Operation",
+      "sub_title": "Select the action you wish to perform",
+      "add_stats": {
+        "title": "Add Stats",
+        "sub_title": "Add new stats for the current asset across all your wallets",
+        "resumeTitle": "Stats Summary",
+        "data_select": "Select a different Date",
+        "resumeSubTitle": "Stats summary. Save to confirm the operation",
+        "new_balance": "Add a new Balance",
+        "next": "Next Asset",
+        "save": "Save Stats",
+        "empty_data_body": "No assets are available, or the existing assets have a balance of 0. To view the full list, a balance greater than 0 is required."
       },
-      "assetList": "Current Asset",
-      "graphAsset": "Performance",
-      "tableAsset": "Resume performance of the year",
-      "warning": "Add a new Stats to get the table data",
-      "investments": {
-        "price": {
-          "title": "Price Average Purchase Currency",
-          "table": {
-            "tab1": "Asset",
-            "tab2": "Quantity",
-            "tab3": "Invested",
-            "tab4": "Asset Mid Balance",
-            "tab5": "MarketData Balance",
-            "tab6": "Actual Balance",
-            "tab7": "Trend +/-",
-            "tab8": "Performance"
-          }
-        }
-      },
-      "trading": {
-        "table": {
-          "title": "Trading Performance, Initial Balance",
-          "tab1": "Ingress Date",
-          "tab2": "Coins Exchange",
-          "tab3": "Quantity",
-          "tab4": "Price",
-          "tab5": "Total",
-          "tab6": "Exit Date",
-          "tab7": "Quantity",
-          "tab8": "Price",
-          "tab9": "Total",
-          "tab10": "Trend",
-          "tab11": "Total Trend",
-          "tab12": "Balance"
-        }
+      "operation": {
+        "title": "Add Operation",
+        "subTitle": "Add a new operation: invest fiat currency, open a new Holding or Trading position.",
+        "selectOperation": "Select Operation",
+        "selectDescription": "Choose the operation you want to perform.",
+        "selectType": "Confirm",
+        "selectWallet": "Select Wallet",
+        "selectWalletDesc": "Choose the wallet to make the investment."
       }
     },
-    "marketData": {
-      "title": "Market Data",
-      "currency": "Currency:",
-      "updated": "Updated at:",
-      "search": "Search for a coin",
-      "table": {
-        "tab1": "Rank",
-        "tab2": "Coin",
-        "tab3": "Price",
-        "tab4": "Performance 24h",
-        "tab5": "High 24h",
-        "tab6": "Low 24h",
-        "tab7": "Mkt Cap"
-      }
+    "registration_token": {
+      "title": "Sign up with Google",
+      "sub_title": "To sign up with Google, we need the invitation code for MoneyStats and for you to accept the terms and conditions."
     },
-    "operationExchange": {
-      "history": "Operation History",
-      "balance": "Balance : ",
-      "type": "Operation Type",
-      "from": "From",
-      "to": "To",
-      "commition": "Commition Rate : <strong> Included</strong>",
-      "last": "Date :",
-      "warningBalance": "The current value exceed the maximum amount",
-      "exchange": "Exchange",
-      "warning": "Missing asset in the current wallet, add an Asset and New Balance on it to proceed!",
-      "price": "Edit buy Price of",
-      "newPrice": "Enter a new price",
-      "date": "Edit buy Date",
-      "save": "Save",
-      "select": "Select the wallet to receive the asset",
-      "fees": "Fees",
-      "editFees": "Edit Fees in",
-      "updateFees": "Update Fees"
-    },
-    "operationDetails": {
-      "identifier": "Operation identifier",
-      "title": "Details",
+    "operation_details": {
+      "identifier": "Operation ID",
+      "title": "Operation Details",
       "close": "Close",
-      "status": "Status",
+      "status": "Operation Status",
       "type": "Operation Type",
       "currency": "Currency",
-      "entry": "Execution date",
-      "entryPrice": "Execution price",
-      "value": "Executed value",
-      "quantity": "Quantity executed",
-      "exit": "Selling execution date",
-      "exitPrice": "Selling execution price",
+      "entry": "Entry Date",
+      "entryPrice": "Entry Price",
+      "value": "Operation Value",
+      "quantity": "Quantity Traded",
+      "exit": "Exit Date",
+      "exitPrice": "Exit Price",
       "fees": "Fees"
     },
-    "closeOperation": {
+    "close_operation": {
       "title": "Close Operation",
-      "subTitle": "You are about to close the current trading operation. Check and confirm the exit price and quantity. If there's any discrepancy or if you wish to make changes, click <strong>'Edit'</strong>. Once you're satisfied, proceed with the closure.",
-      "open": "Position Open on Coins",
-      "closeP": "Position Close on Coins",
+      "subTitle": "You are about to close the current trading operation. Verify and confirm the exit price and quantity. If you notice discrepancies or wish to make changes, click <strong>'Edit'</strong>. Once confirmed, proceed with closing.",
+      "open": "Position opened on",
+      "closeP": "Position closed at",
       "pair": "Trading Pair",
       "quantity": "Quantity",
-      "value": "Executed Value",
-      "price": "Execution Price",
-      "fees": "Fees",
-      "sellPrice": "Execution Price",
+      "value": "Executed",
+      "fees": "Commission",
+      "price": "Purchase price of",
+      "sellPrice": "Selling price of",
       "edit": "Edit",
       "save": "Save",
-      "selling": "Selling Price",
-      "amount": "Amount",
+      "selling": "Selling price",
+      "amount": "Balance",
       "close": "Exchange"
     },
-    "cryptoModal": {
-      "addAsset": {
-        "title": "Import an Asset",
-        "selectWalletTitle": "Select Wallet",
-        "selectWalletSubTitle": "Select a Wallet to add a new asset",
-        "selectedWallet": "Wallet Selected",
-        "currentBalance": "The current balance is ",
-        "searchAsset": "Filter an Asset",
-        "selectAsset": "Select Asset",
-        "selectedAsset": "Asset Selected",
-        "add": "Add Asset",
-        "warning": "The asset selected alredy exist",
-        "balance": "Balance",
-        "balancePla": "Type your current balance in ",
-        "invested": "Invested",
-        "investedPla": "Type the amount of money you invested in "
-      },
-      "editAsset": {
-        "title": "Edit Asset "
-      },
-      "selectCurrency": {
-        "title": "Select Crypto Currency",
-        "subtitle": "Fill the form by selecting a Crypto currency",
-        "save": "Save"
-      },
-      "operations": {
-        "title": "Add Operations",
-        "subTitle": "Select what do you want to do",
-        "stats": {
-          "title": "Add Stats",
-          "subTitle": "Add new stats for the current asset in all your wallets",
-          "resumeTitle": "Resume Stats",
-          "resumeSubTitle": "Resume all stats, save to confirm",
-          "next": "Next Asset",
-          "save": "Save Stats"
+    "info": {
+      "operation_title": "Add Operation",
+      "operation_details": "Adding an operation allows you to invest FIAT currency into Crypto by selecting the 'New Investment' option. You can also open a Holding operation, which involves transferring between Stable Coin and Crypto (or vice versa), or initiate a Trading operation, which lets you open and close transactions between Stable Coin and Crypto, with relevant statistics.",
+      "investment_title": "New Investment",
+      "investment_details": "In this section, you can add a new investment from your personal wallet (there is no need to specify the wallet) into your <strong>Crypto Wallet</strong>. A new operation will be registered, and the current asset will be updated or added.",
+      "holding_title": "Holding",
+      "holding_details": "In this section, you can perform a Holding operation.<br>Select the <strong>Asset</strong> you want to use for the investment from your wallet and the <strong>Asset</strong> you want to purchase.<br>The system will automatically calculate the percentage of invested money transferred to the new account.<br>You can always modify the balance and invested amount in the 'Asset Details' page within the wallet list.",
+      "trading_title": "Trading",
+      "trading_details": "<p>The Trading section of MoneyStats allows you to execute trading operations directly from your wallet. You can exchange <strong>Stablecoins</strong> and <strong>Cryptocurrency</strong> via an intuitive and secure interface. Transactions are monitored in real-time, and for better management, open operations can be viewed and closed in the <strong>Resume</strong> section of the app.</p>",
+      "close_operation_title": "Close Operation",
+      "close_operation_details": "<p>You are about to close the current operation. In this section, you can confirm or modify the essential details before finalizing the operation.</p><h5>Operation Details:</h5><ul><li><strong>Exit Price:</strong> This is the price at which you intend to sell the asset. Ensure it aligns with your expectations and the current market conditions.</li><li><strong>Quantity:</strong> This is the amount of the asset you intend to sell. Ensure it matches the amount you actually hold.</li></ul><p>If you believe there are discrepancies in the above data or wish to make changes, click <button>Edit</button> to update the operation details.</p><p>Once you are satisfied with the information entered, you can proceed with closing the operation. Remember to act cautiously and make informed decisions.</p>",
+      "transfer_title": "Crypto Transfer",
+      "transfer_details": "In this section, you can easily transfer your assets from one wallet to another. Choose the <strong>destination wallet</strong>, select the desired <strong>crypto asset</strong>, and set the amount you wish to transfer. You can also define any <strong>fees</strong> to ensure a quick and secure transaction. Make sure to carefully verify all the details before confirming the transfer.",
+      "app_category_title": "Transaction Categories",
+      "app_category_details": "Transactions are grouped based on the latest available monthly stats, providing an aggregated view by category.",
+      "close": "Close"
+    }
+  },
+  "operation_exchange_page": {
+    "history": "Operation History",
+    "balance": "Balance:",
+    "type": "Operation Type",
+    "from": "From",
+    "to": "To",
+    "commition": "Commission: <strong>Included</strong>",
+    "last": "Date:",
+    "warningBalance": "The entered balance exceeds the maximum available amount",
+    "exchange": "Exchange",
+    "warning": "Asset not found in the current wallet. Add a new asset and deposit balance from a new investment to proceed.",
+    "price": "Modify the purchase price of",
+    "newPrice": "Enter a new balance",
+    "date": "Modify the purchase date",
+    "save": "Save",
+    "select": "Select the wallet to receive the asset",
+    "fees": "Fees",
+    "editFees": "Edit Fees in",
+    "updateFees": "Update Fees",
+    "empty_wallets": "There are no wallets available. Add a new wallet to proceed with the transfer."
+  },
+  "shared_text": {
+    "dashboard": "Dashboard",
+    "wallets": "Wallets",
+    "resume": "Resume",
+    "settings": "Settings",
+    "logout": "Log Out",
+    "next": "Next",
+    "try": "Try Now",
+    "delete": "Delete",
+    "restore": "Restore",
+    "view": "View",
+    "back_page": "Go back to previous page",
+    "mobile_back": "Back",
+    "category": "Category",
+    "amount": "Balance",
+    "save": "Save",
+    "add": "Add",
+    "edit": "Edit",
+    "back": "Back",
+    "performance": "Performance",
+    "open": "Open"
+  },
+  "version": {
+    "title": "MoneyStats Version",
+    "close": "Close",
+    "moneystats": "MoneyStats",
+    "changelog": {
+      "title": "Changelog",
+      "data": [
+        {
+          "modalId": "v1",
+          "version_date": "2023-01-01",
+          "version_title": "MoneyStats V1.0.0",
+          "version": "V1.0.0",
+          "changelog": "&#183; Initial release."
         },
-        "operation": {
-          "title": "Add Operation",
-          "subTitle": "Add a new operation, invest some FIAT money, open a new Holding position or open a new Trading position.",
-          "selectOperation": "Select Operation",
-          "selectDescription": "Select the type of operation you want to do",
-          "selectType": "Select Type",
-          "selectWallet": "Select Wallet",
-          "selectWalletDesc": "Select the wallet to make the investment"
+        {
+          "modalId": "v101",
+          "version_date": "2023-06-01",
+          "version_title": "MoneyStats V1.0.1",
+          "version": "V1.0.1",
+          "changelog": "&#183; Migration of services to Oracle Cloud.<br>&#183; Bug fixes."
+        },
+        {
+          "modalId": "v2",
+          "version_date": "2024-02-12",
+          "version_title": "MoneyStats V2.0.0",
+          "version": "V2.0.0",
+          "changelog": "&#183; Added Crypto section.<br>&#183; Updated the add and edit wallet sections."
+        },
+        {
+          "modalId": "v2010",
+          "version_date": "2024-02-22",
+          "version_title": "MoneyStats V2.0.10",
+          "version": "V2.0.10",
+          "changelog": "&#183; Improved loading performance using cache.<br>&#183; Enhanced account management with token auto-refresh, extending session duration beyond one hour.<br>&#183; Fixed an issue in the edit wallet feature that set all wallets as Crypto.<br>&#183; Resolved issues with TradingView data in wallet details."
+        },
+        {
+          "modalId": "v2011",
+          "version_date": "2024-03-04",
+          "version_title": "MoneyStats V2.0.11",
+          "version": "V2.0.11",
+          "changelog": "&#183; Fixed an error in Add Stats with balance set to 0.<br>&#183; Improved error handling."
+        },
+        {
+          "modalId": "v2012",
+          "version_date": "2024-04-02",
+          "version_title": "MoneyStats V2.0.12",
+          "version": "V2.0.12",
+          "changelog": "&#183; Fixed an error in Add Crypto Stats when the wallet contains no assets."
+        },
+        {
+          "modalId": "v212",
+          "version_date": "2024-05-07",
+          "version_title": "MoneyStats V2.1.2",
+          "version": "V2.1.2",
+          "changelog": "&#183; Fixed a cache error with live wallets.<br>&#183; Improved overall performance.<br>&#183; Enhanced security measures.<br>&#183; Resolved an issue in the Crypto Resume section when data was missing.<br>&#183; Added validation rules for email and password and improved the authentication screen."
+        },
+        {
+          "modalId": "v300",
+          "version_date": "2024-12-09",
+          "version_title": "MoneyStats V3.0.0",
+          "version": "V3.0.0",
+          "changelog": "&#183; Updated the Backend server to the latest available version, improving stability and security.<br>&#183; Upgraded the Frontend server to the most recent version for an optimized user experience.<br>&#183; Unified the charting system with a single library, improving data retrieval and visualization.<br>&#183; Implemented a new cache management system to increase efficiency and loading speed.<br>&#183; Optimized overall performance, reducing response times and enhancing responsiveness.<br>&#183; Each page is now independent and no longer depends on the main dashboard, offering greater modularity.<br>&#183; New login system via Access-Sphere, with advanced security measures to protect access to the app.<br>&#183; Added integration with Google Cloud for smoother and more scalable operations.<br>&#183; Improved translations and text for a clearer and more localized user experience.<br>&#183; New animations and effects to make the user interface more dynamic and interactive."
         }
-      },
-      "info": {
-        "operation": {
-          "title": "Add Operation",
-          "details": "Add a new operation, means that you can invest some FIAT money to Crypto by selecting New Investment, open a new Holding position by moving Crypto or Stablecoin or open a new Trading position, that means you can open and close position on those Crypto."
-        },
-        "newInvestment": {
-          "title": "New Investment",
-          "details": "In this section you can add a new investment, from your Personal Wallet into the selected <strong>Crypto Wallet</strong>, it will add a new operation and update or add the current Asset."
-        },
-        "holding": {
-          "title": "Holding",
-          "details": "In this section you can perform an Holding operation.<br>Choose the <strong>Asset</strong> you want to use for the investment from your wallet and the <strong>Asset</strong> you want to buy.<br>It will also calculate automatically the percentage of money invested moved to the new account.<br>You can always edit the Asset balance and invested into the Details page of the Asset, into the wallet list."
-        },
-        "trading": {
-          "title": "Trading",
-          "details": "<p>The Trading section of MoneyStats allows you to execute trading operations directly from your wallet. You can swap between <strong>Stablecoin</strong> and <strong>Cryptocurrency</strong>, using an intuitive and secure interface. Transactions are monitored in real-time, and for enhanced management, open operations can be reviewed and closed in the <strong>Resume</strong> section of the application.</p>"
-        },
-        "closeOperation": {
-          "title": "Close Operation",
-          "details": "<p>You are about to proceed with the closure of the current operation. This section allows you to confirm or modify the essential details of the operation before finalizing it.</p><h5>Operation Details:</h5><ul><li><strong>Exit Price:</strong> This represents the price at which you intend to sell the asset. Ensure it reflects your expectations and the current market conditions.</li><li><strong>Quantity:</strong> This is the quantity of the asset you intend to sell. Ensure it matches the actual quantity held.</li></ul><p>If you believe there are discrepancies in the above data or wish to make changes, click <button>Edit</button> to update the operation details.</p><p>Once you are satisfied with the entered information, you can proceed with the closure of the operation. Remember to trade cautiously and make informed decisions.</p>"
-        },
-        "transfer": {
-          "title": "Crypto Transfer",
-          "details": "<p>In this section, you can easily transfer your assets from one wallet to another. Choose your <strong>destination wallet</strong>, select the desired <strong>crypto asset</strong>, and set the quantity you wish to move. You also have the option to define any applicable <strong>fees</strong> to ensure a timely and secure transaction. Be sure to carefully review all details before confirming the transfer.</p>"
-        },
-        "close": "Close"
-      }
+      ]
     }
   },
   "exception": {
-    "ERR_AUTH_MSS_002": {
+    "ERR_OAUTH_401": {
       "status": "Unauthorized",
-      "exception": "Wrong Credentials",
-      "message": "Wrong Credential for username or password. Try again!"
-    },
-    "ERR_AUTH_MSS_003": {
-      "status": "Bad Request",
-      "exception": "Duplicate Key",
-      "message": "The current key $KEY$ already been registered, use different one."
+      "exception": "Invalid Credentials",
+      "message": "The username or password entered is incorrect. Please try again."
     },
     "ERR_AUTH_MSS_004": {
-      "status": "Internal Server Error",
+      "status": "Internal Error",
       "exception": "Unknown Error",
-      "message": "An Unknown error happen during the process, please try again."
+      "message": "An unknown error occurred during the process. Please try again."
     },
     "ERR_AUTH_MSS_005": {
-      "status": "Bad Request",
+      "status": "Error",
       "exception": "Invalid Invitation Code",
-      "message": "The provide invitation code is wrong, try a different one."
+      "message": "The invitation code provided is incorrect or invalid. Please try again."
     },
     "ERR_AUTH_MSS_006": {
-      "status": "Bad Request",
+      "status": "Error",
       "exception": "Invalid Email",
-      "message": "The provide email does not exist, try a different one."
+      "message": "The email entered was not found. Please check and try again."
+    },
+    "ERR_AUTH_MSS_403": {
+      "status": "Error",
+      "exception": "Access Denied",
+      "message": "You cannot access to the current page."
+    },
+    "ERR_VALID_MSS_001": {
+      "status": "Error",
+      "exception": "Invalid Image",
+      "message": "The image provided is too large. Please use a smaller image."
+    },
+    "ERR_IMG_MSS_002": {
+      "status": "Error",
+      "exception": "Invalid Image",
+      "message": "The image provided is too large. Please use a smaller image."
+    },
+    "ERR_UNK_MSS_001": {
+      "status": "Error",
+      "exception": "Server offline.",
+      "message": "The Server seams to be offline. Please try again later or open a bug."
     }
   },
-  "copyright": "Copyright © MoneyStats 2024. All Rights Reserved."
+  "copyright": "Copyright © MoneyStats #YEAR#. All Rights Reserved."
 }

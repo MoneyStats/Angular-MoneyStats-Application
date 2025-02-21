@@ -1,0 +1,151 @@
+{
+  "status": 200,
+  "message": "Found UniCredit Wallet",
+  "spanId": "c086a8e2-750b-4fd0-94d3-a7509024d169",
+  "data": {
+    "id": 490,
+    "creationDate": "2025-02-15T15:10:52",
+    "updateDate": "2025-02-20T16:10:07",
+    "name": "UniCredit",
+    "balance": 700.0,
+    "img": "data:image/png;base64,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",
+    "allTimeHigh": 700.0,
+    "allTimeHighDate": "2024-12-01",
+    "highPrice": 700.0,
+    "highPriceDate": "2025-02-01",
+    "lowPrice": 650.0,
+    "lowPriceDate": "2025-01-01",
+    "performanceLastStats": 7.69,
+    "differenceLastStats": 50.0,
+    "dateLastStats": "2025-02-01",
+    "category": "Bank Account",
+    "history": [
+      {
+        "id": 53173,
+        "creationDate": "2025-02-15T15:14:15",
+        "updateDate": "2025-02-15T15:14:15",
+        "date": "2024-01-01",
+        "balance": 200.0,
+        "percentage": 0.0,
+        "trend": 200.0
+      },
+      {
+        "id": 53180,
+        "creationDate": "2025-02-15T15:16:38",
+        "updateDate": "2025-02-15T15:16:38",
+        "date": "2024-02-01",
+        "balance": 200.0,
+        "percentage": 0.0,
+        "trend": 0.0
+      },
+      {
+        "id": 53187,
+        "creationDate": "2025-02-20T15:25:55",
+        "updateDate": "2025-02-20T15:25:55",
+        "date": "2024-03-01",
+        "balance": 250.0,
+        "percentage": 25.0,
+        "trend": 50.0
+      },
+      {
+        "id": 53194,
+        "creationDate": "2025-02-20T15:26:44",
+        "updateDate": "2025-02-20T15:26:44",
+        "date": "2024-04-01",
+        "balance": 300.0,
+        "percentage": 20.0,
+        "trend": 50.0
+      },
+      {
+        "id": 53201,
+        "creationDate": "2025-02-20T15:27:20",
+        "updateDate": "2025-02-20T15:27:20",
+        "date": "2024-05-01",
+        "balance": 400.0,
+        "percentage": 33.33,
+        "trend": 100.0
+      },
+      {
+        "id": 53208,
+        "creationDate": "2025-02-20T15:27:46",
+        "updateDate": "2025-02-20T15:27:46",
+        "date": "2024-06-01",
+        "balance": 450.0,
+        "percentage": 12.5,
+        "trend": 50.0
+      },
+      {
+        "id": 53215,
+        "creationDate": "2025-02-20T16:06:00",
+        "updateDate": "2025-02-20T16:06:00",
+        "date": "2024-07-01",
+        "balance": 500.0,
+        "percentage": 11.11,
+        "trend": 50.0
+      },
+      {
+        "id": 53222,
+        "creationDate": "2025-02-20T16:06:23",
+        "updateDate": "2025-02-20T16:06:23",
+        "date": "2024-08-01",
+        "balance": 500.0,
+        "percentage": 0.0,
+        "trend": 0.0
+      },
+      {
+        "id": 53229,
+        "creationDate": "2025-02-20T16:06:48",
+        "updateDate": "2025-02-20T16:06:48",
+        "date": "2024-09-01",
+        "balance": 500.0,
+        "percentage": 0.0,
+        "trend": 0.0
+      },
+      {
+        "id": 53236,
+        "creationDate": "2025-02-20T16:07:37",
+        "updateDate": "2025-02-20T16:07:37",
+        "date": "2024-10-01",
+        "balance": 550.0,
+        "percentage": 10.0,
+        "trend": 50.0
+      },
+      {
+        "id": 53243,
+        "creationDate": "2025-02-20T16:08:11",
+        "updateDate": "2025-02-20T16:08:11",
+        "date": "2024-11-01",
+        "balance": 600.0,
+        "percentage": 9.09,
+        "trend": 50.0
+      },
+      {
+        "id": 53249,
+        "creationDate": "2025-02-20T16:08:38",
+        "updateDate": "2025-02-20T16:08:38",
+        "date": "2024-12-01",
+        "balance": 700.0,
+        "percentage": 16.67,
+        "trend": 100.0
+      },
+      {
+        "id": 53255,
+        "creationDate": "2025-02-20T16:09:18",
+        "updateDate": "2025-02-20T16:09:18",
+        "date": "2025-01-01",
+        "balance": 650.0,
+        "percentage": -7.14,
+        "trend": -50.0
+      },
+      {
+        "id": 53261,
+        "creationDate": "2025-02-20T16:10:07",
+        "updateDate": "2025-02-20T16:10:07",
+        "date": "2025-02-01",
+        "balance": 700.0,
+        "percentage": 7.69,
+        "trend": 50.0
+      }
+    ]
+  }
+}

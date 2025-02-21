@@ -7,9 +7,10 @@ import { WalletService } from 'src/assets/core/services/api/wallet.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 
 @Component({
-  selector: 'app-delete-wallet',
-  templateUrl: './delete-wallet.component.html',
-  styleUrls: ['./delete-wallet.component.scss'],
+    selector: 'app-delete-wallet',
+    templateUrl: './delete-wallet.component.html',
+    styleUrls: ['./delete-wallet.component.scss'],
+    standalone: false
 })
 export class DeleteWalletComponent implements OnDestroy {
   deleteWalletSub: Subscription = new Subscription();
@@ -31,7 +32,7 @@ export class DeleteWalletComponent implements OnDestroy {
     if (!wallet.deletedDate) {
       wallet.deletedDate = new Date();
       this.deleteWalletSub = this.walletService
-        .addUpdateWalletData(wallet)
+        .addOrUpdateWalletsData(wallet)
         .subscribe((data) => {
           this.wallet = data.data;
           wallet = data.data;
@@ -44,7 +45,7 @@ export class DeleteWalletComponent implements OnDestroy {
 
   restoreWallet(wallet: Wallet) {
     wallet.deletedDate = undefined;
-    this.walletService.addUpdateWalletData(wallet).subscribe((data) => {
+    this.walletService.addOrUpdateWalletsData(wallet).subscribe((data) => {
       LOG.info(data.message!, 'DeleteWalletComponent');
       this.wallet = data.data;
       wallet = data.data;

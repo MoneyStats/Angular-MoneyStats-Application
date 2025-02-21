@@ -1,4 +1,4 @@
-<div [style]="style" class="bill-box gradientSection">
+<div [style]="style" class="bill-box gradientSection zoomx2">
   <div class="img-wrapper">
     <img [src]="wallet?.img" alt="img" class="image-block imaged w48" />
   </div>
@@ -17,7 +17,7 @@
     *ngIf="btn"
     href="#"
     [routerLink]="['/wallet/details', wallet?.id, wallet?.name]"
-    class="btn btn-primary btn-block btn-sm"
+    class="btn btn-primary btn-block btn-sm text-auto"
     >{{ btn }}</a
   >
 </div>

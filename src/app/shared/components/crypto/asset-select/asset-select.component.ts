@@ -14,9 +14,10 @@ import { Utils } from 'src/assets/core/services/config/utils.service';
 declare var jQuery: any;
 
 @Component({
-  selector: 'app-asset-select',
-  templateUrl: './asset-select.component.html',
-  styleUrls: ['./asset-select.component.scss'],
+    selector: 'app-asset-select',
+    templateUrl: './asset-select.component.html',
+    styleUrls: ['./asset-select.component.scss'],
+    standalone: false
 })
 export class AssetSelectComponent implements OnInit, OnChanges {
   @Input('wrapperID') wrapperID: string = '';

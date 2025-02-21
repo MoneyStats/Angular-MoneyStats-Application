@@ -1,26 +1,28 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { CryptoDashboard } from 'src/assets/core/data/class/crypto.class';
 import { Stats } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
+import { UserService } from 'src/assets/core/services/api/user.service';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
+import { DataTables } from 'src/assets/core/utils/datatables.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
+
+declare var $: any; // Dichiara jQuery come variabile globale
 
 @Component({
   selector: 'app-resume-assets',
   templateUrl: './resume-assets.component.html',
   styleUrls: ['./resume-assets.component.scss'],
+  standalone: false,
 })
-export class ResumeAssetsComponent implements OnInit, OnChanges {
+export class ResumeAssetsComponent implements OnChanges {
   amount: string = '******';
   @Input('hidden') hidden: boolean = false;
   public chartOptions?: Partial<ApexOptions>;
+  public chartBar?: Partial<ApexOptions>;
   @Input('resumeData') resumeData: CryptoDashboard = new CryptoDashboard();
   //resume: Map<string, CryptoDashboard> = new Map<string, CryptoDashboard>();
   @Input('isPast') isPast: boolean = false;
@@ -30,34 +32,214 @@ export class ResumeAssetsComponent implements OnInit, OnChanges {
   resumeDataFilterOnDate: CryptoDashboard = new CryptoDashboard();
 
   tableBalance: Array<any> = [];
-  constructor() {}
+  private tableId = 'crypto_resume_table';
+  private dataTableInstance: any;
+
+  @Input('change') change: string = '';
+
+  constructor(private translate: TranslateService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.getDatas();
+    if (changes['resumeData'] && !Utils.isNullOrEmpty(this.resumeData.assets)) {
+      this.reinitializeDataTable();
+    } else if (changes['change']) this.getDatas();
   }
 
-  ngOnInit(): void {}
+  private reinitializeDataTable(): void {
+    // Distruggi la DataTable se esiste già
+    if (this.dataTableInstance) {
+      this.dataTableInstance.destroy();
+      $('#' + this.tableId).empty();
+      this.dataTableInstance = null;
+
+      const table = document.getElementById(this.tableId);
+      const datePipe = new DatePipe('en-US'); // Crea un'istanza di DatePipe per formattare la data
+
+      // Crea l'head della tabella dinamicamente
+      const head = this.resumeData.assets
+        .map((a) => {
+          return `<th scope="col" class="text-center">
+                  <img src="${a.icon}" style="border-radius: 50%; width: 25px; height: 25px; align-items: center; justify-content: center; margin-right: 5px; margin-left: -10px;" alt="" />
+                  ${a.name}
+                </th>`;
+        })
+        .join(''); // Unisci tutte le celle <th> in una stringa
+
+      // Crea il corpo della tabella dinamicamente
+      const body = this.tableBalance
+        .slice()
+        .reverse()
+        .map((balances, index) => {
+          const balanceCells = balances
+            .map((balance: any, y: number) => {
+              const balanceClass =
+                balances.index !== y
+                  ? balance.percentage === 0
+                    ? 'text-warning'
+                    : balance.percentage > 0
+                    ? 'text-success'
+                    : 'text-danger'
+                  : '';
+              const balanceTextClass =
+                balances.index === y
+                  ? balance.balance === 0
+                    ? 'text-warning'
+                    : balance.balance > 0
+                    ? 'text-success'
+                    : 'text-danger'
+                  : '';
+
+              // Gestione della classe per l'ultimo elemento
+              const isLastElement = y === balances.length - 1;
+              const lastElementClass = isLastElement ? balanceTextClass : ''; // Aggiungi classe speciale per l'ultimo elemento
+
+              // Aggiungi il trend solo se balances.index non è uguale a y
+              const trendHtml =
+                balances.index !== y
+                  ? `<span>(${
+                      balance.percentage >= 1000 ? '+1000' : balance.percentage
+                    }%)</span>`
+                  : '';
+
+              return `<td style="line-height: 23px;" class="${balanceClass} ${lastElementClass} ${
+                balances.index - 1 === y || balances.index === y
+                  ? 'text-end'
+                  : 'text-center'
+              }">
+                  ${this.resumeData.currency} ${
+                this.hidden ? this.amount : balance.balance
+              }
+                  ${trendHtml} <!-- Aggiungi il trend dinamicamente -->
+                </td>`;
+            })
+            .join(''); // Unisci tutte le celle <td> in una stringa
+
+          // Formattazione della data con la pipe Date
+          const formattedDate = datePipe.transform(
+            balances[balances.length - 2].date,
+            'dd MMM yyyy'
+          );
+
+          return `<tr>
+                  <th style="line-height: 23px; width: 100px" scope="row">${formattedDate}</th>
+                  ${balanceCells}
+                </tr>`;
+        })
+        .join(''); // Unisci tutte le righe <tr> in una stringa
+
+      // Crea l'HTML completo per la tabella
+      const data = `<thead>
+                      <tr>
+                        <th scope="col">${this.translate.instant(
+                          'resume_page.table_date'
+                        )}</th>
+                        ${head}
+                        <th scope="col" class="text-end">${this.translate.instant(
+                          'shared_text.amount'
+                        )}</th>
+                        <th scope="col" class="text-end">${this.translate.instant(
+                          'resume_page.table_trend'
+                        )}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${body}
+                    </tbody>`;
+
+      // Aggiungi l'HTML della tabella all'elemento
+      if (table) table.innerHTML = data;
+    }
+
+    // Reinizializza la DataTable con i nuovi dati
+    this.initializeDataTable();
+  }
+
+  private initializeDataTable(): void {
+    // Inizializza la DataTable solo se non è già inizializzata
+    if (!$.fn.DataTable.isDataTable('#' + this.tableId)) {
+      setTimeout(() => {
+        this.dataTableInstance = $('#' + this.tableId).DataTable({
+          pageLength: 12, // Numero di righe di default
+          layout: {
+            bottom: {
+              buttons: [
+                'csv',
+                'excel',
+                {
+                  extend: 'pdfHtml5',
+                  text: 'PDF',
+                  customize: function (doc: any) {
+                    DataTables.customizeExportPDF(doc);
+                  },
+                },
+              ],
+              //buttons: ["csv", "excel", "pdf", "print"],
+            },
+          },
+          paging: true,
+          responsive: true,
+          searching: false,
+          ordering: false,
+          info: true,
+          order: [], // Non specifica nessun ordinamento iniziale
+          language: {
+            search: '',
+            lengthMenu: this.translate.instant('crypto_resume_page.tableAsset'),
+            info: this.translate.instant(
+              'core_header_footer.datatables_result'
+            ),
+            emptyTable: this.translate.instant('crypto_resume_page.warning'),
+          },
+          //dom: 'rtip', // Mostra solo: table (r), pagination (t), info (i), paging (p)
+        });
+        DataTables.setDatatablesStyle(
+          this.tableId,
+          this.translate.instant('market_data_page.search')
+        );
+      }, 100);
+    }
+  }
 
   getDatas() {
-    this.resumeData.holdingLong.trend =
-      this.resumeData.holdingLong.balance /
-      (1 + this.resumeData.holdingLong.performance / 100);
+    const holdingBalance = this.resumeData.holdingLong
+      ? this.resumeData.holdingLong.balance
+      : 0;
+    const holdingPerformance = this.resumeData.holdingLong
+      ? this.resumeData.holdingLong.performance
+      : 0;
+    if (this.resumeData.holdingLong)
+      this.resumeData.holdingLong.trend =
+        holdingBalance / (1 + holdingPerformance / 100);
     setTimeout(() => {
       if (this.resumeData.assets) {
         this.resumeDataFilterOnDate = Utils.copyObject(this.resumeData);
         if (!this.isPast)
           this.resumeDataFilterOnDate.assets =
             this.resumeDataFilterOnDate.assets.filter((a) => a.balance != 0);
-        if (ScreenService.screenWidth! <= 780) {
-          this.chartOptions = ChartService.renderCryptoDatas(this.resumeData, [
-            200,
-            this.isPast,
-          ]);
+        if (ScreenService.isMobileDevice()) {
+          this.chartOptions = ChartService.renderCryptoDatas(
+            this.resumeData,
+            ScreenService.isMobileDevice(),
+            [200, this.isPast]
+          );
         } else
-          this.chartOptions = ChartService.renderCryptoDatas(this.resumeData, [
-            350,
-            this.isPast,
-          ]);
+          this.chartOptions = ChartService.renderCryptoDatas(
+            this.resumeData,
+            ScreenService.isMobileDevice(),
+            [350, this.isPast]
+          );
+        const dates: string[] = Utils.copyObject(
+          this.resumeData.statsAssetsDays
+        ).map((d: string) => {
+          let dataLabels = new Date(d).toLocaleDateString();
+          return Utils.formatDateIntl(dataLabels);
+        });
+        this.chartBar = ChartService.appRenderChartBar(
+          dates,
+          this.resumeData.currency,
+          this.balances
+        );
       }
     }, 100);
     this.renderTable();
@@ -101,6 +283,17 @@ export class ResumeAssetsComponent implements OnInit, OnChanges {
       } else {
         if (index === this.resumeData.assets.length - 1) {
           this.filterDateHistory.push(history.date.toString());
+          let old = a.history?.find(
+            (h) =>
+              this.filterDateHistory[this.filterDateHistory.length - 1] === date
+          );
+          if (old) {
+            const res = (
+              ((history.balance - old.balance) / old.balance) *
+              100
+            ).toFixed(2);
+            history.percentage = Number.parseFloat(res);
+          }
         }
       }
       array.push(history);
@@ -139,5 +332,16 @@ export class ResumeAssetsComponent implements OnInit, OnChanges {
     this.balances.push(total.balance);
     array.index = array.length - 1;
     return array;
+  }
+
+  calculatePercentage(
+    balance: number,
+    oldBalance: number,
+    isPast: boolean,
+    pastPercentage: number
+  ) {
+    if (isPast) return pastPercentage;
+    const res = (((balance - oldBalance) / oldBalance) * 100).toFixed(2);
+    return Number.parseFloat(res);
   }
 }

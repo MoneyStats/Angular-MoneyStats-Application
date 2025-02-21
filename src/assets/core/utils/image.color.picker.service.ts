@@ -6,6 +6,20 @@ import { environment } from 'src/environments/environment';
 })
 export class ImageColorPickerService {
   environment = environment;
+  private static BACKGROUND: Array<string> = [
+    'rgba(98, 54, 255, 0.3)',
+    'rgba(209, 25, 208, 0.3)',
+    'rgba(187, 157, 247, 0.3)',
+    'rgba(222, 52, 84, 0.3)',
+    'rgba(64, 115, 6, 0.3)',
+    'rgba(156, 65, 60, 0.3)',
+    'rgba(242, 237, 10, 0.3)',
+    'rgba(250, 92, 66, 0.3)',
+    'rgba(87, 203, 84, 0.3)',
+    'rgba(80, 2, 149, 0.3)',
+    'rgba(247, 238, 220, 0.3)',
+  ];
+
   private static colors: string[] = [
     '#6236FF',
     '#3c3c3d',
@@ -20,6 +34,14 @@ export class ImageColorPickerService {
     '#500295',
     '#f7eedc',
   ];
+
+  public static getColors() {
+    return this.colors;
+  }
+
+  public static getDefaultColor(index: number) {
+    return this.colors[index];
+  }
 
   public static getColor(img: string, index: number): string {
     if (img && !img.includes('data:image'))
@@ -48,6 +70,83 @@ export class ImageColorPickerService {
       console.error('Error processing image data, getting random color:', e);
       return this.getRandomColor();
     }
+  }
+
+  public static async getColorFromImage(
+    img: string,
+    defaultValue: string,
+    brightCheck: boolean = true
+  ): Promise<string> {
+    // Funzione per calcolare la luminosità
+    const isColorTooBright = (r: number, g: number, b: number): boolean => {
+      const brightness = (r * 299 + g * 587 + b * 114) / 1000; // Calcola la luminosità
+      return brightness > 200; // Colore "troppo chiaro" se luminosità > 200
+    };
+
+    let canvas = <HTMLCanvasElement>document.createElement('canvas');
+    let ctx = canvas.getContext('2d');
+    let image = new Image();
+    image.crossOrigin = 'anonymous'; // Evita problemi di CORS
+    image.src = img;
+
+    return new Promise((resolve) => {
+      image.onload = () => {
+        try {
+          canvas.width = image.width;
+          canvas.height = image.height;
+          ctx?.drawImage(image, 0, 0);
+
+          // Lettura iniziale al centro
+          const centerX = Math.floor(image.width / 2);
+          const centerY = Math.floor(image.height / 2);
+          const data = ctx?.getImageData(centerX, centerY, 1, 1)?.data ?? [];
+
+          if (data.length === 4) {
+            let [r, g, b, a] = data;
+
+            // Controllo luminosità
+            if (isColorTooBright(r, g, b) && brightCheck) {
+              console.log('Colore troppo chiaro, cercando un altro punto...');
+              // Leggi da un altro punto (angolo superiore sinistro)
+              const dataFallback = ctx?.getImageData(10, 10, 1, 1)?.data ?? [];
+              if (dataFallback.length === 4) {
+                [r, g, b, a] = dataFallback;
+              }
+            }
+
+            // Verifica se è ancora troppo chiaro
+            if (isColorTooBright(r, g, b) && brightCheck) {
+              console.log(
+                'Colore fallback troppo chiaro, impostando un colore scuro predefinito.'
+              );
+              resolve('#333333'); // Colore scuro leggibile
+            } else {
+              const pixelColor = `rgba(${r}, ${g}, ${b}, ${a})`;
+              const hexColor = this.rgbaToHex(pixelColor);
+
+              const finalColor =
+                hexColor !== '#000000'
+                  ? hexColor
+                  : (defaultValue.includes('#')
+                      ? defaultValue
+                      : '#' + defaultValue) || this.getRandomColor();
+              resolve(finalColor);
+            }
+          } else {
+            console.warn('Dati immagine non validi, usando un colore casuale.');
+            resolve(this.getRandomColor());
+          }
+        } catch (e: any) {
+          console.error('Errore durante l’elaborazione dell’immagine:', e);
+          resolve(defaultValue ?? this.getRandomColor());
+        }
+      };
+
+      image.onerror = () => {
+        console.error('Errore durante il caricamento dell’immagine:', img);
+        resolve(defaultValue ?? this.getRandomColor());
+      };
+    });
   }
 
   public static rgbaToHex(color: string): string {

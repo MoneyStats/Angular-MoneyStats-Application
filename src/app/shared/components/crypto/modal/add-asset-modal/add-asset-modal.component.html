@@ -10,10 +10,10 @@
     <div class="modal-content modal-round mx-auto">
       <div class="modal-header">
         <h5 *ngIf="!asset?.id" class="modal-title">
-          {{ "crypto.cryptoModal.addAsset.title" | translate }}
+          {{ "modal_component.asset.title" | translate }}
         </h5>
         <h5 *ngIf="asset?.id" class="modal-title">
-          {{ "crypto.cryptoModal.editAsset.title" | translate }}
+          {{ "modal_component.asset.edit_title" | translate }}
         </h5>
       </div>
       <div class="modal-body">
@@ -23,15 +23,11 @@
               <div class="col-md-6">
                 <div class="card-title">
                   <h2 class="modal-title d-inline" style="vertical-align: -4px">
-                    {{
-                      "crypto.cryptoModal.addAsset.selectWalletTitle"
-                        | translate
-                    }}
+                    {{ "modal_component.asset.selectWalletTitle" | translate }}
                   </h2>
                   <p>
                     <small>{{
-                      "crypto.cryptoModal.addAsset.selectWalletSubTitle"
-                        | translate
+                      "modal_component.asset.selectWalletSubTitle" | translate
                     }}</small>
                   </p>
                 </div>
@@ -51,8 +47,7 @@
                     >
                       <option [value]="modelWallet" selected disabled>
                         {{
-                          "crypto.cryptoModal.addAsset.selectWalletTitle"
-                            | translate
+                          "modal_component.asset.selectWalletTitle" | translate
                         }}
                       </option>
                       <option
@@ -85,8 +80,7 @@
                     <p>
                       <small
                         >{{
-                          "crypto.cryptoModal.addAsset.currentBalance"
-                            | translate
+                          "modal_component.asset.currentBalance" | translate
                         }}
                         {{ coinSymbol }}
                         {{ wallet?.balance }}</small
@@ -95,7 +89,7 @@
                   </div>
                   <div class="col-4">
                     <span class="mt-2 badge badge-info float-end">{{
-                      "crypto.cryptoModal.addAsset.selectedWallet" | translate
+                      "modal_component.asset.selectedWallet" | translate
                     }}</span>
                   </div>
                 </div>
@@ -121,7 +115,7 @@
                   </div>
                   <div class="col-4">
                     <span class="mt-2 badge badge-info float-end">{{
-                      "crypto.cryptoModal.addAsset.selectedAsset" | translate
+                      "modal_component.asset.selectedAsset" | translate
                     }}</span>
                   </div>
                 </div>
@@ -139,7 +133,7 @@
                     class="mx-auto alert alert-danger mb-1 mt-2"
                     role="alert"
                   >
-                    {{ "crypto.cryptoModal.addAsset.warning" | translate }}
+                    {{ "modal_component.asset.warning" | translate }}
                   </div>
                 </div>
               </div>
@@ -152,9 +146,7 @@
                       style="margin-left: 5px"
                       class="label"
                       for="balance"
-                      >{{
-                        "crypto.cryptoModal.addAsset.balance" | translate
-                      }}</label
+                      >{{ "modal_component.asset.balance" | translate }}</label
                     >
                     <input
                       type="text"
@@ -164,13 +156,12 @@
                       class="form-control"
                       id="balance"
                       placeholder="{{
-                        'crypto.cryptoModal.addAsset.balancePla' | translate
+                        'modal_component.asset.balancePla' | translate
                       }}{{ asset?.symbol }}"
                     />
                     <p style="margin-left: 5px">
                       <small
-                        >{{
-                          "crypto.cryptoModal.addAsset.balancePla" | translate
+                        >{{ "modal_component.asset.balancePla" | translate
                         }}{{ asset?.symbol }}</small
                       >
                     </p>
@@ -181,10 +172,9 @@
                 <div class="form-group boxed">
                   <div class="input-wrapper">
                     <label class="label" style="margin-left: 5px" for="invested"
-                      >{{
-                        "crypto.cryptoModal.addAsset.invested" | translate
-                      }}
-                      ({{ cryptoCurrency }})</label
+                      >{{ "modal_component.asset.invested" | translate }} ({{
+                        cryptoCurrency
+                      }})</label
                     >
                     <input
                       type="text"
@@ -195,13 +185,12 @@
                       class="form-control"
                       id="invested"
                       placeholder="{{
-                        'crypto.cryptoModal.addAsset.investedPla' | translate
+                        'modal_component.asset.investedPla' | translate
                       }}{{ cryptoCurrency }}"
                     />
                     <p style="margin-left: 5px">
                       <small
-                        >{{
-                          "crypto.cryptoModal.addAsset.investedPla" | translate
+                        >{{ "modal_component.asset.investedPla" | translate
                         }}{{ cryptoCurrency }}</small
                       >
                     </p>
@@ -221,9 +210,7 @@
                 class="btn btn-primary me-1 mb-1"
                 (click)="selectWallet()"
               >
-                {{
-                  "crypto.cryptoModal.addAsset.selectWalletTitle" | translate
-                }}
+                {{ "modal_component.asset.selectWalletTitle" | translate }}
               </button>
             </div>
 
@@ -237,7 +224,7 @@
                 class="btn btn-primary me-1 mb-1"
                 (click)="selectAsset()"
               >
-                {{ "crypto.cryptoModal.addAsset.selectAsset" | translate }}
+                {{ "modal_component.asset.selectAsset" | translate }}
               </button>
             </div>
 
@@ -252,7 +239,7 @@
                 data-bs-dismiss="modal"
                 (click)="saveAsset()"
               >
-                {{ "crypto.cryptoModal.addAsset.add" | translate }}
+                {{ "modal_component.asset.add" | translate }}
               </button>
             </div>
 
@@ -267,9 +254,7 @@
                 class="btn btn-primary btn-block btn-lg"
                 (click)="selectWallet()"
               >
-                {{
-                  "crypto.cryptoModal.addAsset.selectWalletTitle" | translate
-                }}
+                {{ "modal_component.asset.selectWalletTitle" | translate }}
               </button>
             </div>
 
@@ -283,7 +268,7 @@
                 class="btn btn-primary btn-block btn-lg"
                 (click)="selectAsset()"
               >
-                {{ "crypto.cryptoModal.addAsset.selectAsset" | translate }}
+                {{ "modal_component.asset.selectAsset" | translate }}
               </button>
             </div>
 
@@ -298,7 +283,7 @@
                 data-bs-dismiss="modal"
                 (click)="saveAsset()"
               >
-                {{ "crypto.cryptoModal.addAsset.add" | translate }}
+                {{ "modal_component.asset.add" | translate }}
               </button>
             </div>
           </div>

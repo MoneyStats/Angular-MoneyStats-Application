@@ -17,14 +17,15 @@ export class Error {
 
 export enum ErrorCodeLogout {
   UnknowError = 'ERR_UNK_MSS_001',
-  Authentication = 'ERR_AUTH_MSS_004',
+  InternalServerError = 'INT_ERR_MSS_001',
+  Authentication = 'ERR_AUTH_MSS_401',
 }
 
 export enum ErrorCode {
   UnknowError = 'ERR_UNK_MSS_001',
-  Duplicate_Key = 'ERR_AUTH_MSS_003',
-  Authentication = 'ERR_AUTH_MSS_004',
   Invitation_Code = 'ERR_AUTH_MSS_005',
+  Authentication = 'ERR_AUTH_MSS_401',
+  Forbidden = 'ERR_AUTH_MSS_403',
 }
 
 export enum ErrorMessageMetadata {

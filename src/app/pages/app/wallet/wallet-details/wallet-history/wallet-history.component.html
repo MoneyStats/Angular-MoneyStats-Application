@@ -1,41 +1,23 @@
 <section class="section-width mx-auto">
   <app-header-mobile
-    *ngIf="screenWidth()! <= 780"
-    [title]="'wallet.details.transaction.history.title' | translate"
-    [backBtn]="'wallet.details.transaction.history.mobile_back' | translate"
+    *ngIf="isMobile()"
+    [title]="'transactions_page.history_title' | translate"
   >
   </app-header-mobile>
 
   <!-- App Capsule -->
   <div id="appCapsule">
     <app-title-desktop
-      [title]="'wallet.details.transaction.history.title' | translate"
-      [back]="'wallet.details.transaction.history.back' | translate"
+      [title]="'transactions_page.history_title' | translate"
     ></app-title-desktop>
 
-    <!-- History
-    <div class="section mt-3 mb-3">
-      <div *ngIf="screenService?.screenWidth! <= 780" class="section-title">
-        {{ "wallet.details.transaction.history.title" | translate }}
-      </div>
-      <div class="card">
-        <div
-          *ngFor="
-            let stats of wallet?.history?.slice()?.reverse();
-            let i = index
-          "
-        >
-          <app-wallet-history-card [stats]="stats"></app-wallet-history-card>
-        </div>
-      </div>
-    </div>-->
     <!-- History -->
     <div class="hidden_desktop mt-4 ms-2">
       <p class="text-start fs-2 title-page">
-        {{ "transaction.title" | translate }}
+        {{ "transactions_page.title" | translate }}
       </p>
       <p class="card-subtitle text-start mb-1 fs-6">
-        <small>{{ "transaction.subTitle" | translate }}</small>
+        <small>{{ "transactions_page.sub_title" | translate }}</small>
       </p>
     </div>
     <!-- History -->
@@ -44,7 +26,7 @@
       *ngFor="let year of uniqueYears?.slice()?.reverse()"
     >
       <div class="section-title">
-        {{ "wallet.details.transaction.history.title" | translate }} {{ year }}
+        {{ "transactions_page.history_title" | translate }} {{ year }}
       </div>
       <div class="card">
         <div

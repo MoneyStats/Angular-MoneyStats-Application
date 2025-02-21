@@ -7,6 +7,7 @@ import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { AppService } from 'src/assets/core/services/api/app.service';
 import { AuthService } from 'src/assets/core/services/api/auth.service';
+import { Utils } from 'src/assets/core/services/config/utils.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
 
@@ -14,6 +15,7 @@ import { SwalService } from 'src/assets/core/utils/swal.service';
   selector: 'app-report-bug',
   templateUrl: './report-bug.component.html',
   styleUrls: ['./report-bug.component.scss'],
+  standalone: false,
 })
 export class ReportBugComponent implements OnDestroy {
   bugSubscribe: Subscription = new Subscription();
@@ -44,6 +46,7 @@ export class ReportBugComponent implements OnDestroy {
       this.exception?.error?.exception;
     githubIssues.assignees = ['giovannilamarmora'];
     githubIssues.labels = ['bug'];
+
     this.appService.getTemplate().subscribe((t) => {
       let template = t.template
         .replace('$DATETIME$', this.exception!.dateTime!.toString())
@@ -62,14 +65,16 @@ export class ReportBugComponent implements OnDestroy {
           '$DESCRIPTION$',
           this.description +
             (this.exception?.error?.stackTrace
-              ? '<hr> <h1>Stacktrace:</h1> <br>' +
-                this.exception.error.stackTrace
+              ? '<hr> <h1>Stacktrace:</h1> <pre>' +
+                this.exception.error.stackTrace +
+                '</pre>'
               : '') +
-            '<br><hr>' +
-            'Device Datas: <br>' +
-            window.navigator.userAgent
+            '<hr>' +
+            '<h2>Device Information:</h2>' +
+            this.getDeviceInfo()
         );
       githubIssues.body = template;
+
       this.appService.openIssues(githubIssues).subscribe((res) => {
         LOG.info(res.message!, 'SettingsComponent');
         SwalService.toastMessage(
@@ -78,5 +83,30 @@ export class ReportBugComponent implements OnDestroy {
         );
       });
     });
+  }
+
+  private getDeviceInfo(): string {
+    const os = this.getOperatingSystem();
+    const browser = Utils.getBrowserVersion(window.navigator.userAgent);
+    const screenResolution = `${window.screen.width}x${window.screen.height}`;
+    const deviceInfo = `
+      <table style="width:100%">
+        <tr><th>Operating System</th><td>${os}</td></tr>
+        <tr><th>Browser</th><td>${browser}</td></tr>
+        <tr><th>Screen Resolution</th><td>${screenResolution}</td></tr>
+      </table>
+    `;
+    return deviceInfo;
+  }
+
+  private getOperatingSystem(): string {
+    const userAgent = window.navigator.userAgent;
+    if (userAgent.includes('Windows NT')) return 'Windows';
+    if (userAgent.includes('Mac OS X')) return 'macOS';
+    if (userAgent.includes('Linux')) return 'Linux';
+    if (userAgent.includes('Android')) return 'Android';
+    if (userAgent.includes('iPhone') || userAgent.includes('iPad'))
+      return 'iOS';
+    return 'Unknown';
   }
 }

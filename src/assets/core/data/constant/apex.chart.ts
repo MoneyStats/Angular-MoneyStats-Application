@@ -3,9 +3,11 @@ import {
   ApexChart,
   ApexXAxis,
   ApexTitleSubtitle,
+  ApexPlotOptions,
+  ApexStroke,
 } from 'ng-apexcharts';
 
-import { ChartConfiguration, ChartOptions } from 'chart.js';
+//import { ChartConfiguration, ChartOptions } from 'chart.js';
 
 export type ApexOptions = {
   series: ApexAxisChartSeries;
@@ -29,8 +31,8 @@ export type ApexOptions = {
   theme: ApexTheme;
 };
 
-export class ChartJSOptions {
-  lineChartData?: ChartConfiguration<'line'>['data'];
-  lineChartOptions?: ChartOptions;
-  lineChartLegend?: boolean;
-}
+//export class ChartJSOptions {
+//  lineChartData?: ChartConfiguration<'line'>['data'];
+//  lineChartOptions?: ChartOptions;
+//  lineChartLegend?: boolean;
+//}

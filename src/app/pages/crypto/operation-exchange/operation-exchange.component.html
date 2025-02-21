@@ -27,7 +27,7 @@
             <h2 class="title">{{ wallet.name }}</h2>
             <small
               ><p>
-                {{ "crypto.operationExchange.balance" | translate }}
+                {{ "operation_exchange_page.balance" | translate }}
                 {{ wallet.balance }} {{ fiat }}
               </p></small
             >
@@ -38,7 +38,7 @@
         <div class="title-section">
           <h2 class="title">{{ operationType }}</h2>
           <small
-            ><p>{{ "crypto.operationExchange.type" | translate }}</p></small
+            ><p>{{ "operation_exchange_page.type" | translate }}</p></small
           >
         </div>
       </div>
@@ -49,9 +49,16 @@
       <div *ngIf="operationType == operations.TRANSFER">
         <div class="title-section text-center mb-3">
           <h2 class="title" style="margin-top: 0px !important">
-            {{ "crypto.operationExchange.select" | translate }}
+            {{ "operation_exchange_page.select" | translate }}
           </h2>
         </div>
+        @if (!wallets || !wallets.length) {
+        <div class="alert alert-danger m-2 text-center" role="alert">
+          <div>
+            {{ "operation_exchange_page.empty_wallets" | translate }}
+          </div>
+        </div>
+        }
         <div class="container parent">
           <div class="row">
             <div class="col text-center" *ngFor="let wallet of wallets">
@@ -65,7 +72,7 @@
               />
 
               <label for="{{ wallet.id }}">
-                <div class="card">
+                <div class="card" style="min-width: 120px">
                   <div class="card-body">
                     <p>
                       {{ wallet.name }} <br />
@@ -80,8 +87,8 @@
                     />
                     <small
                       ><p>
-                        {{ "crypto.operationExchange.balance" | translate
-                        }}{{ wallet.balance }}
+                        {{ "operation_exchange_page.balance" | translate }}
+                        {{ wallet.balance }} {{ cryptoCurrency }}
                       </p></small
                     >
                   </div>
@@ -105,7 +112,7 @@
               <div class="form-group basic p-0">
                 <div class="exchange-heading">
                   <label class="group-label" for="fromAmount">{{
-                    "crypto.operationExchange.from" | translate
+                    "operation_exchange_page.from" | translate
                   }}</label>
                   <div class="exchange-wallet-info">
                     <div
@@ -113,7 +120,7 @@
                       (click)="isEditFees = true"
                       class="clickable"
                     >
-                      {{ "crypto.operationExchange.fees" | translate }}:
+                      {{ "operation_exchange_page.fees" | translate }}:
                       <strong>
                         {{ fees }}
                         {{ assetInWallet.symbol }}</strong
@@ -125,7 +132,7 @@
                           <div class="input-wrapper">
                             <label class="label" for="price"
                               >{{
-                                "crypto.operationExchange.editFees" | translate
+                                "operation_exchange_page.editFees" | translate
                               }}
                               {{ marketDataSelected.symbol }}</label
                             >
@@ -139,8 +146,7 @@
                               value="{{ fees }}"
                               required
                               placeholder="{{
-                                'crypto.operationExchange.updateFees'
-                                  | translate
+                                'operation_exchange_page.updateFees' | translate
                               }}"
                             />
                             <i class="clear-input">
@@ -157,7 +163,7 @@
                           class="btn btn-primary rounded me-1"
                           (click)="makeNewBalance()"
                         >
-                          {{ "crypto.operationExchange.save" | translate }}
+                          {{ "operation_exchange_page.save" | translate }}
                         </button>
                       </div>
                     </div>
@@ -198,7 +204,7 @@
           class="alert alert-danger mb-1"
           role="alert"
         >
-          {{ "crypto.operationExchange.warning" | translate }}
+          {{ "operation_exchange_page.warning" | translate }}
         </div>
 
         <div
@@ -210,7 +216,7 @@
               <div class="form-group basic p-0">
                 <div class="exchange-heading">
                   <label class="group-label" for="toAmount">{{
-                    "crypto.operationExchange.from" | translate
+                    "operation_exchange_page.from" | translate
                   }}</label>
                   <div class="exchange-wallet-info">
                     <div
@@ -218,7 +224,7 @@
                       (click)="isEditFees = true"
                       class="clickable"
                     >
-                      {{ "crypto.operationExchange.fees" | translate }}:
+                      {{ "operation_exchange_page.fees" | translate }}:
                       <strong>
                         {{ fees }}
                         <!--{{ holdingAssetToSell.symbol }}-->
@@ -231,7 +237,7 @@
                           <div class="input-wrapper">
                             <label class="label" for="price"
                               >{{
-                                "crypto.operationExchange.editFees" | translate
+                                "operation_exchange_page.editFees" | translate
                               }}
                               <!--{{ holdingAssetToSell.symbol }}-->
                               {{ assetToSell.symbol }}</label
@@ -246,8 +252,7 @@
                               value="{{ fees }}"
                               required
                               placeholder="{{
-                                'crypto.operationExchange.updateFees'
-                                  | translate
+                                'operation_exchange_page.updateFees' | translate
                               }}"
                             />
                             <i class="clear-input">
@@ -264,7 +269,7 @@
                           class="btn btn-primary rounded me-1"
                           (click)="makeNewBalance()"
                         >
-                          {{ "crypto.operationExchange.save" | translate }}
+                          {{ "operation_exchange_page.save" | translate }}
                         </button>
                       </div>
                     </div>
@@ -273,7 +278,7 @@
                     style="position: absolute; bottom: 9px; right: 13px"
                     class="exchange-wallet-info"
                   >
-                    {{ "crypto.operationExchange.balance" | translate }}
+                    {{ "operation_exchange_page.balance" | translate }}
                     <!--<strong>
                       {{
                         holdingAssetToSell.balance
@@ -350,7 +355,7 @@
             class="alert alert-danger mb-1"
             role="alert"
           >
-            {{ "crypto.operationExchange.warningBalance" | translate }}
+            {{ "operation_exchange_page.warningBalance" | translate }}
           </div>
         </div>
 
@@ -360,7 +365,7 @@
               <div class="form-group basic p-0">
                 <div class="exchange-heading">
                   <label class="group-label" for="toAmount">{{
-                    "crypto.operationExchange.from" | translate
+                    "operation_exchange_page.from" | translate
                   }}</label>
                   <div class="exchange-wallet-info">
                     <div
@@ -368,7 +373,7 @@
                       (click)="isEditFees = true"
                       class="clickable"
                     >
-                      {{ "crypto.operationExchange.fees" | translate }}:
+                      {{ "operation_exchange_page.fees" | translate }}:
                       <strong>
                         {{ fees }}
                         <!--{{ tradingAssetToSell.symbol }}-->
@@ -381,7 +386,7 @@
                           <div class="input-wrapper">
                             <label class="label" for="price"
                               >{{
-                                "crypto.operationExchange.editFees" | translate
+                                "operation_exchange_page.editFees" | translate
                               }}
                               <!--{{ tradingAssetToSell.symbol }}-->
                               {{ assetToSell.symbol }}</label
@@ -396,8 +401,7 @@
                               value="{{ fees }}"
                               required
                               placeholder="{{
-                                'crypto.operationExchange.updateFees'
-                                  | translate
+                                'operation_exchange_page.updateFees' | translate
                               }}"
                             />
                             <i class="clear-input">
@@ -414,7 +418,7 @@
                           class="btn btn-primary rounded me-1"
                           (click)="makeNewBalance()"
                         >
-                          {{ "crypto.operationExchange.save" | translate }}
+                          {{ "operation_exchange_page.save" | translate }}
                         </button>
                       </div>
                     </div>
@@ -423,7 +427,7 @@
                     style="position: absolute; bottom: 9px; right: 13px"
                     class="exchange-wallet-info"
                   >
-                    {{ "crypto.operationExchange.balance" | translate }}
+                    {{ "operation_exchange_page.balance" | translate }}
                     <!--<strong>
                       {{
                         tradingAssetToSell.balance
@@ -502,7 +506,7 @@
             class="alert alert-danger mb-1"
             role="alert"
           >
-            {{ "crypto.operationExchange.warningBalance" | translate }}
+            {{ "operation_exchange_page.warningBalance" | translate }}
           </div>
         </div>
 
@@ -524,7 +528,7 @@
               <div class="form-group basic p-0">
                 <div class="exchange-heading">
                   <label class="group-label" for="toAmount">{{
-                    "crypto.operationExchange.to" | translate
+                    "operation_exchange_page.to" | translate
                   }}</label>
                   <div class="exchange-wallet-info">
                     <div
@@ -532,7 +536,7 @@
                       (click)="isEditFees = true"
                       class="clickable"
                     >
-                      {{ "crypto.operationExchange.fees" | translate }}:
+                      {{ "operation_exchange_page.fees" | translate }}:
                       <!--<strong>
                         {{ fees }}
                         {{ transferAssetToSell.symbol }}</strong
@@ -548,7 +552,7 @@
                           <div class="input-wrapper">
                             <label class="label" for="price"
                               >{{
-                                "crypto.operationExchange.editFees" | translate
+                                "operation_exchange_page.editFees" | translate
                               }}
                               {{ marketDataSelected.symbol }}</label
                             >
@@ -562,8 +566,7 @@
                               value="{{ fees }}"
                               required
                               placeholder="{{
-                                'crypto.operationExchange.updateFees'
-                                  | translate
+                                'operation_exchange_page.updateFees' | translate
                               }}"
                             />
                             <i class="clear-input">
@@ -580,7 +583,7 @@
                           class="btn btn-primary rounded me-1"
                           (click)="isEditFees = false"
                         >
-                          {{ "crypto.operationExchange.save" | translate }}
+                          {{ "operation_exchange_page.save" | translate }}
                         </button>
                       </div>
                     </div>
@@ -632,7 +635,7 @@
           class="alert alert-danger mb-1"
           role="alert"
         >
-          {{ "crypto.operationExchange.warning" | translate }}
+          {{ "operation_exchange_page.warning" | translate }}
         </div>
         <!-- END Selezione Assets Per Transfer -->
 
@@ -643,10 +646,10 @@
               <div class="form-group basic p-0">
                 <div class="exchange-heading">
                   <label class="group-label" for="toAmount">{{
-                    "crypto.operationExchange.to" | translate
+                    "operation_exchange_page.to" | translate
                   }}</label>
                   <div class="exchange-wallet-info">
-                    {{ "crypto.operationExchange.balance" | translate }}
+                    {{ "operation_exchange_page.balance" | translate }}
                     <strong>
                       {{ assetInWallet.balance ? assetInWallet.balance : 0 }}
                       {{ assetInWallet.symbol }}</strong
@@ -713,7 +716,7 @@
                       <div class="form-group basic">
                         <div class="input-wrapper">
                           <label class="label" for="price"
-                            >{{ "crypto.operationExchange.price" | translate }}
+                            >{{ "operation_exchange_page.price" | translate }}
                             {{ marketDataSelected.symbol }}</label
                           >
                           <input
@@ -726,7 +729,7 @@
                             value="{{ marketDataSelected.current_price }}"
                             required
                             placeholder="{{
-                              'crypto.operationExchange.newPrice' | translate
+                              'operation_exchange_page.newPrice' | translate
                             }}"
                           />
                           <i class="clear-input">
@@ -743,7 +746,7 @@
                         class="btn btn-primary rounded me-1"
                         (click)="editBalance()"
                       >
-                        {{ "crypto.operationExchange.save" | translate }}
+                        {{ "operation_exchange_page.save" | translate }}
                       </button>
                     </div>
                   </div>
@@ -759,7 +762,7 @@
                   (click)="isEditDate = true"
                   class="clickable"
                 >
-                  {{ "crypto.operationExchange.last" | translate }}
+                  {{ "operation_exchange_page.last" | translate }}
                   <b>{{
                     operationDate ? (operationDate | date : "d MMM y") : "NEVER"
                   }}</b>
@@ -770,7 +773,7 @@
                       <div class="form-group basic">
                         <div class="input-wrapper">
                           <label class="label" for="date"
-                            >{{ "crypto.operationExchange.date" | translate }}
+                            >{{ "operation_exchange_page.date" | translate }}
                           </label>
                           <input
                             type="date"
@@ -793,7 +796,7 @@
                         class="btn btn-primary rounded me-1"
                         (click)="isEditDate = false"
                       >
-                        {{ "crypto.operationExchange.save" | translate }}
+                        {{ "operation_exchange_page.save" | translate }}
                       </button>
                     </div>
                   </div>
@@ -813,66 +816,9 @@
           class="btn btn-primary btn-block btn-lg"
           (click)="exchangeInvestments()"
         >
-          {{ "crypto.operationExchange.exchange" | translate }}
+          {{ "operation_exchange_page.exchange" | translate }}
         </button>
       </div>
-      <!--<div
-        class="form-button-group transparent"
-        *ngIf="operationType == operations.NEWINVESTMENT"
-      >
-        <button
-          [disabled]="f.invalid || !disableOnEdit()"
-          type="button"
-          class="btn btn-primary btn-block btn-lg"
-          (click)="exchangeNewInvestment()"
-        >
-          {{ "crypto.operationExchange.exchange" | translate }}
-        </button>
-      </div>
-      <div
-        class="form-button-group transparent"
-        *ngIf="operationType == operations.HOLDING"
-      >
-        <button
-          [disabled]="f.invalid || !validateSelect() || !disableOnEdit()"
-          type="button"
-          class="btn btn-primary btn-block btn-lg"
-          (click)="exchangeHoldingInvestment()"
-        >
-          {{ "crypto.operationExchange.exchange" | translate }}
-        </button>
-      </div>
-      <div
-        class="form-button-group transparent"
-        *ngIf="operationType == operations.TRADING"
-      >
-        <button
-          [disabled]="f.invalid || !validateSelect() || !disableOnEdit()"
-          type="button"
-          class="btn btn-primary btn-block btn-lg"
-          (click)="exchangeTradingInvestment()"
-        >
-          {{ "crypto.operationExchange.exchange" | translate }}
-        </button>
-      </div>
-      <div
-        class="form-button-group transparent"
-        *ngIf="operationType == operations.TRANSFER"
-      >
-        <button
-          [disabled]="
-            f.invalid ||
-            !validateSelect() ||
-            !disableOnEdit() ||
-            !isWalletSelected
-          "
-          type="button"
-          class="btn btn-primary btn-block btn-lg"
-          (click)="exchangeTransferInvestment()"
-        >
-          {{ "crypto.operationExchange.exchange" | translate }}
-        </button>
-      </div>-->
       <!-- End Bottoni Mobile -->
     </form>
   </div>

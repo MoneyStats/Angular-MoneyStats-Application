@@ -1,0 +1,151 @@
+{
+  "status": 200,
+  "message": "Found N26 Wallet",
+  "spanId": "65d9a2a6-600b-4a6b-808f-04ab774dc9ee",
+  "data": {
+    "id": 492,
+    "creationDate": "2025-02-15T15:11:46",
+    "updateDate": "2025-02-20T16:10:07",
+    "name": "N26",
+    "balance": 550.0,
+    "img": "data:image/jpeg;base64,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",
+    "allTimeHigh": 550.0,
+    "allTimeHighDate": "2025-02-01",
+    "highPrice": 550.0,
+    "highPriceDate": "2025-02-01",
+    "lowPrice": 500.0,
+    "lowPriceDate": "2025-01-01",
+    "performanceLastStats": 10.0,
+    "differenceLastStats": 50.0,
+    "dateLastStats": "2025-02-01",
+    "category": "Bank Account",
+    "history": [
+      {
+        "id": 53175,
+        "creationDate": "2025-02-15T15:14:15",
+        "updateDate": "2025-02-15T15:14:15",
+        "date": "2024-01-01",
+        "balance": 20.0,
+        "percentage": 0.0,
+        "trend": 20.0
+      },
+      {
+        "id": 53182,
+        "creationDate": "2025-02-15T15:16:39",
+        "updateDate": "2025-02-15T15:16:39",
+        "date": "2024-02-01",
+        "balance": 50.0,
+        "percentage": 150.0,
+        "trend": 30.0
+      },
+      {
+        "id": 53189,
+        "creationDate": "2025-02-20T15:25:55",
+        "updateDate": "2025-02-20T15:25:55",
+        "date": "2024-03-01",
+        "balance": 100.0,
+        "percentage": 100.0,
+        "trend": 50.0
+      },
+      {
+        "id": 53196,
+        "creationDate": "2025-02-20T15:26:44",
+        "updateDate": "2025-02-20T15:26:44",
+        "date": "2024-04-01",
+        "balance": 100.0,
+        "percentage": 0.0,
+        "trend": 0.0
+      },
+      {
+        "id": 53203,
+        "creationDate": "2025-02-20T15:27:20",
+        "updateDate": "2025-02-20T15:27:20",
+        "date": "2024-05-01",
+        "balance": 200.0,
+        "percentage": 100.0,
+        "trend": 100.0
+      },
+      {
+        "id": 53210,
+        "creationDate": "2025-02-20T15:27:47",
+        "updateDate": "2025-02-20T15:27:47",
+        "date": "2024-06-01",
+        "balance": 200.0,
+        "percentage": 0.0,
+        "trend": 0.0
+      },
+      {
+        "id": 53217,
+        "creationDate": "2025-02-20T16:06:00",
+        "updateDate": "2025-02-20T16:06:00",
+        "date": "2024-07-01",
+        "balance": 250.0,
+        "percentage": 25.0,
+        "trend": 50.0
+      },
+      {
+        "id": 53224,
+        "creationDate": "2025-02-20T16:06:23",
+        "updateDate": "2025-02-20T16:06:23",
+        "date": "2024-08-01",
+        "balance": 300.0,
+        "percentage": 20.0,
+        "trend": 50.0
+      },
+      {
+        "id": 53231,
+        "creationDate": "2025-02-20T16:06:48",
+        "updateDate": "2025-02-20T16:06:48",
+        "date": "2024-09-01",
+        "balance": 350.0,
+        "percentage": 16.67,
+        "trend": 50.0
+      },
+      {
+        "id": 53238,
+        "creationDate": "2025-02-20T16:07:37",
+        "updateDate": "2025-02-20T16:07:37",
+        "date": "2024-10-01",
+        "balance": 400.0,
+        "percentage": 14.29,
+        "trend": 50.0
+      },
+      {
+        "id": 53245,
+        "creationDate": "2025-02-20T16:08:11",
+        "updateDate": "2025-02-20T16:08:11",
+        "date": "2024-11-01",
+        "balance": 500.0,
+        "percentage": 25.0,
+        "trend": 100.0
+      },
+      {
+        "id": 53251,
+        "creationDate": "2025-02-20T16:08:38",
+        "updateDate": "2025-02-20T16:08:38",
+        "date": "2024-12-01",
+        "balance": 400.0,
+        "percentage": -20.0,
+        "trend": -100.0
+      },
+      {
+        "id": 53257,
+        "creationDate": "2025-02-20T16:09:18",
+        "updateDate": "2025-02-20T16:09:18",
+        "date": "2025-01-01",
+        "balance": 500.0,
+        "percentage": 25.0,
+        "trend": 100.0
+      },
+      {
+        "id": 53263,
+        "creationDate": "2025-02-20T16:10:07",
+        "updateDate": "2025-02-20T16:10:07",
+        "date": "2025-02-01",
+        "balance": 550.0,
+        "percentage": 10.0,
+        "trend": 50.0
+      }
+    ]
+  }
+}

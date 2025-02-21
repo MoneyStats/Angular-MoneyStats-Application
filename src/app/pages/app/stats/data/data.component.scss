@@ -30,3 +30,13 @@
   margin-right: 5px;
   margin-left: -10px;
 }
+
+.apexcharts-gridline,
+line {
+  stroke: red !important;
+}
+
+#resume_table td,
+#resume_table th {
+  line-height: 22.5px !important; /* Centra il testo verticalmente per contenuto a singola riga */
+}

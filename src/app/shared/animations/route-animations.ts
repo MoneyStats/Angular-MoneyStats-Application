@@ -3,10 +3,7 @@ import {
   transition,
   style,
   query,
-  group,
-  animateChild,
   animate,
-  keyframes,
   stagger,
 } from '@angular/animations';
 

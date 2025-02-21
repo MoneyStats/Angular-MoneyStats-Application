@@ -10,31 +10,35 @@
     <div class="modal-content modal-round mx-auto">
       <div *ngIf="!isCrypto" class="modal-header">
         <h5 *ngIf="!wallet.id" class="modal-title">
-          {{ "wallet.modal.title" | translate }}
+          {{ "modal_component.add_wallet.title" | translate }}
         </h5>
         <h5 *ngIf="wallet.id" class="modal-title">
-          {{ "wallet.modal.editWallet.title" | translate }}
+          {{ "modal_component.add_wallet.editWallet.title" | translate }}
         </h5>
       </div>
       <div *ngIf="isCrypto" class="modal-header">
         <h5 *ngIf="!wallet.id" class="modal-title">
-          {{ "wallet.modal.cryptoTitle" | translate }}
+          {{ "modal_component.add_wallet.crypto_title" | translate }}
         </h5>
         <h5 *ngIf="wallet.id" class="modal-title">
-          {{ "wallet.modal.editWallet.cryptoTitle" | translate }}
+          {{ "modal_component.add_wallet.editWallet.crypto_title" | translate }}
         </h5>
       </div>
       <div class="modal-body">
         <form #fo="ngForm" type="submit" enctype="multipart/form-data">
           <div *ngIf="!isNewWallet && isCrypto" class="action-sheet-content">
             <h2 class="modal-title d-inline" style="vertical-align: -4px">
-              {{ "wallet.modal.crypto.title" | translate }}
+              {{ "modal_component.add_wallet.crypto.title" | translate }}
             </h2>
             <p *ngIf="!isImportWallet">
-              <small>{{ "wallet.modal.crypto.subTitle" | translate }}</small>
+              <small>{{
+                "modal_component.add_wallet.crypto.subTitle" | translate
+              }}</small>
             </p>
             <p *ngIf="isImportWallet">
-              <small>{{ "wallet.modal.crypto.subTitle2" | translate }}</small>
+              <small>{{
+                "modal_component.add_wallet.crypto.subTitle2" | translate
+              }}</small>
             </p>
 
             <div
@@ -46,21 +50,21 @@
                 type="button"
                 class="btn btn-primary me-1 mb-1"
               >
-                {{ "wallet.modal.crypto.new" | translate }}
+                {{ "modal_component.add_wallet.crypto.new" | translate }}
               </button>
               <button
                 (click)="isImportWallet = true"
                 type="button"
                 class="btn btn-primary me-1 mb-1"
               >
-                {{ "wallet.modal.crypto.import" | translate }}
+                {{ "modal_component.add_wallet.crypto.import" | translate }}
               </button>
             </div>
             <div *ngIf="isImportWallet">
               <div class="form-group boxed">
                 <div class="input-wrapper">
                   <label class="label" for="walletName">{{
-                    "wallet.modal.selectWallet" | translate
+                    "modal_component.add_wallet.select_wallet" | translate
                   }}</label>
                   <select
                     id="walletName"
@@ -72,7 +76,9 @@
                     class="form-control custom-select"
                   >
                     <option [value]="walletName" selected disabled>
-                      {{ "wallet.modal.selectWallet" | translate }}
+                      {{
+                        "modal_component.add_wallet.select_wallet" | translate
+                      }}
                     </option>
                     <option
                       [selected]="walletName === wallet.name"
@@ -91,7 +97,7 @@
                   type="button"
                   class="btn btn-primary me-1 mb-1"
                 >
-                  {{ "wallet.modal.crypto.import" | translate }}
+                  {{ "modal_component.add_wallet.crypto.import" | translate }}
                 </button>
               </div>
               <div class="form-group basic hidden_desktop">
@@ -100,7 +106,7 @@
                   type="button"
                   class="btn btn-primary btn-block btn-lg"
                 >
-                  {{ "wallet.modal.crypto.import" | translate }}
+                  {{ "modal_component.add_wallet.crypto.import" | translate }}
                 </button>
               </div>
             </div>
@@ -113,7 +119,7 @@
                       type="button"
                       class="btn btn-primary btn-block btn-lg"
                     >
-                      {{ "wallet.modal.crypto.new" | translate }}
+                      {{ "modal_component.add_wallet.crypto.new" | translate }}
                     </button>
                   </div>
                 </div>
@@ -124,7 +130,9 @@
                       type="button"
                       class="btn btn-primary btn-block btn-lg"
                     >
-                      {{ "wallet.modal.crypto.import" | translate }}
+                      {{
+                        "modal_component.add_wallet.crypto.import" | translate
+                      }}
                     </button>
                   </div>
                 </div>
@@ -163,7 +171,7 @@
                 class="mx-auto alert alert-danger mb-1 mt-2"
                 role="alert"
               >
-                {{ "wallet.modal.sizeToBig" | translate
+                {{ "modal_component.add_wallet.sizeToBig" | translate
                 }}{{ environment.imageSizeMax / 1000 }}kb
               </div>
             </div>
@@ -172,7 +180,7 @@
                 <div class="form-group boxed">
                   <div class="input-wrapper">
                     <label class="label" for="text11">{{
-                      "wallet.modal.name" | translate
+                      "modal_component.add_wallet.name" | translate
                     }}</label>
                     <input
                       name="name"
@@ -184,7 +192,9 @@
                       type="text"
                       class="form-control"
                       id="text11"
-                      placeholder="{{ 'wallet.modal.sub_name' | translate }}"
+                      placeholder="{{
+                        'modal_component.add_wallet.sub_name' | translate
+                      }}"
                       value="{{ wallet.name }}"
                     />
                     <i class="clear-input">
@@ -197,7 +207,7 @@
                 <div class="form-group boxed">
                   <div class="input-wrapper">
                     <label class="label" for="category">{{
-                      "wallet.modal.category" | translate
+                      "modal_component.add_wallet.category" | translate
                     }}</label>
                     <select
                       *ngIf="!isCrypto"
@@ -215,7 +225,9 @@
                         selected
                         disabled
                       >
-                        {{ "wallet.modal.categoryText" | translate }}
+                        {{
+                          "modal_component.add_wallet.categoryText" | translate
+                        }}
                       </option>
                       <!--<option
                         *ngIf="wallet.id"
@@ -223,14 +235,21 @@
                         selected
                         disabled
                       >
-                        {{ "wallet.modal.categoryTextEdit" | translate }}
-                      </option>-->
+                        {{ "modal_component.add_wallet.categoryTextEdit" | translate }}
+                      </option>
                       <option
                         *ngFor="
                           let category of categoriesInput != undefined
                             ? categoriesInput
                             : categories
                         "
+                        [selected]="category.name === wallet.category"
+                        value="{{ category.name }}"
+                      >
+                        {{ category.name }}
+                      </option>-->
+                      <option
+                        *ngFor="let category of categories"
                         [selected]="category.name === wallet.category"
                         value="{{ category.name }}"
                       >
@@ -263,7 +282,7 @@
                 <div class="form-group boxed">
                   <div class="input-wrapper">
                     <label class="label" for="text11">{{
-                      "wallet.modal.balance" | translate
+                      "modal_component.add_wallet.balance" | translate
                     }}</label>
                     <input
                       name="balance"
@@ -275,7 +294,9 @@
                       type="text"
                       class="form-control"
                       id="balance"
-                      placeholder="{{ 'wallet.modal.balanceText' | translate }}"
+                      placeholder="{{
+                        'modal_component.add_wallet.balanceText' | translate
+                      }}"
                       value="{{ wallet.balance }}"
                     />
                     <i class="clear-input">
@@ -288,7 +309,7 @@
                 <div class="form-group boxed">
                   <div class="input-wrapper">
                     <label class="label" for="type">{{
-                      "wallet.modal.type" | translate
+                      "modal_component.add_wallet.type" | translate
                     }}</label>
                     <select
                       class="form-control custom-select"
@@ -305,7 +326,7 @@
                         [value]="undefined"
                         disabled
                       >
-                        {{ "wallet.modal.typeText" | translate }}
+                        {{ "modal_component.add_wallet.typeText" | translate }}
                       </option>
                       <!--<option
                         *ngIf="wallet.id"
@@ -313,7 +334,7 @@
                         selected
                         disabled
                       >
-                        {{ "wallet.modal.categoryTextEdit" | translate }}
+                        {{ "modal_component.add_wallet.categoryTextEdit" | translate }}
                       </option>-->
                       <option
                         *ngFor="let type of cryptoTypes"
@@ -334,7 +355,7 @@
             >
               <div class="input-wrapper">
                 <label class="label" for="text11">{{
-                  "wallet.modal.img" | translate
+                  "modal_component.add_wallet.img" | translate
                 }}</label>
                 <div class="custom-file-upload mt-1" id="fileUpload1">
                   <input
@@ -350,13 +371,15 @@
                     <span>
                       <strong>
                         <ion-icon name="arrow-up-circle-outline"></ion-icon>
-                        <i>{{ "wallet.modal.imgContent" | translate }}</i>
+                        <i>{{
+                          "modal_component.add_wallet.imgContent" | translate
+                        }}</i>
                       </strong>
                     </span>
                   </label>
                 </div>
                 <span class="float-end clickable" (click)="importimage()">{{
-                  "wallet.modal.imgFromURL" | translate
+                  "modal_component.add_wallet.imgFromURL" | translate
                 }}</span>
                 <i class="clear-input">
                   <ion-icon name="close-circle"></ion-icon>
@@ -367,7 +390,7 @@
                 class="alert alert-danger mb-1 mt-3"
                 role="alert"
               >
-                {{ "wallet.modal.sizeToBig" | translate }}
+                {{ "modal_component.add_wallet.sizeToBig" | translate }}
                 {{ environment.imageSizeMax / 1000 }}kb
               </div>
             </div>
@@ -375,7 +398,7 @@
             <!--<div *ngIf="walletImg != ''" class="form-group basic">
               <div class="input-wrapper">
                 <label class="label" for="text11">{{
-                  "wallet.modal.image" | translate
+                  "modal_component.add_wallet.image" | translate
                 }}</label>
                 <p>
                   <img
@@ -400,7 +423,7 @@
                 *ngIf="!wallet.id"
                 class="form-check-label"
                 for="defaultImg"
-                >{{ "wallet.modal.default" | translate }}</label
+                >{{ "modal_component.add_wallet.default" | translate }}</label
               >
               <!-- TODO: Cancella se non serve -->
               <label
@@ -408,7 +431,9 @@
                 *ngIf="wallet.id"
                 class="form-check-label"
                 for="defaultImg"
-                >{{ "wallet.modal.editWallet.default" | translate }}</label
+                >{{
+                  "modal_component.add_wallet.editWallet.default" | translate
+                }}</label
               >
               <!-- END: Cancella se non serve -->
             </div>
@@ -420,7 +445,7 @@
                 class="btn btn-primary btn-block btn-lg"
                 data-bs-dismiss="modal"
               >
-                {{ "wallet.modal.save" | translate }}
+                {{ "shared_text.save" | translate }}
               </button>
             </div>
           </form>

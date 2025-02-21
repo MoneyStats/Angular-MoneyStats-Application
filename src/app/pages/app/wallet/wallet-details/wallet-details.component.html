@@ -1,9 +1,9 @@
 <section class="section-width mx-auto">
   <app-header-mobile
-    *ngIf="screenWidth()! <= 780"
+    *ngIf="isMobile()"
     [title]="wallet!.name"
-    [backBtn]="'wallet.details.mobile_back' | translate"
-    rightBtn="{{ 'wallet.details.mobile_edit' | translate }}"
+    [backBtn]="'shared_text.mobile_back' | translate"
+    rightBtn="{{ 'wallets_details_page.mobile_edit' | translate }}"
     [dataBsTarget]="modalConstant.EDITWALLET"
     [restore]="wallet?.deletedDate ? true : false"
   >
@@ -14,8 +14,7 @@
     <div class="row">
       <app-title-desktop
         class="col-md-6"
-        [title]="wallet?.name + ('wallet.details.title' | translate)"
-        [back]="'wallet.details.back' | translate"
+        [title]="wallet?.name + ('wallets_details_page.title' | translate)"
       ></app-title-desktop>
       <div class="editWallet text-end col-md-6">
         <button
@@ -24,7 +23,7 @@
           data-bs-toggle="modal"
           attr.data-bs-target="#{{ modalConstant.EDITWALLET }}"
         >
-          {{ "wallet.details.edit" | translate }}
+          {{ "wallets_details_page.edit" | translate }}
         </button>
         <button
           *ngIf="!wallet?.deletedDate"
@@ -33,7 +32,7 @@
           data-bs-toggle="modal"
           attr.data-bs-target="#{{ modalConstant.DELETEWALLET }}"
         >
-          {{ "wallet.details.delete" | translate }}
+          {{ "wallets_details_page.delete" | translate }}
         </button>
         <button
           *ngIf="wallet?.deletedDate"
@@ -42,7 +41,7 @@
           data-bs-toggle="modal"
           attr.data-bs-target="#{{ modalConstant.RESTOREWALLET }}"
         >
-          {{ "wallet.details.restore" | translate }}
+          {{ "wallets_details_page.restore" | translate }}
         </button>
       </div>
     </div>
@@ -68,6 +67,7 @@
                 </h1>
                 <h4 class="caption">
                   <span
+                    *ngIf="wallet"
                     class="iconbox {{
                       wallet!.differenceLastStats == 0
                         ? 'text-warning'
@@ -100,7 +100,7 @@
 
         <!-- Coin Chart -->
         <div class="section mb-2">
-          <div class="card coin-chart">
+          <div id="graph-card" class="card coin-chart">
             <div class="card-body pt-1">
               <!-- tabs -->
               <ul class="nav nav-tabs lined" role="tablist">
@@ -165,8 +165,8 @@
                     [title]="chart1Y.title!"
                     [colors]="chart1Y.colors!"
                     [legend]="chart1Y.legend!"
-                    [stroke]="chart1Y.stroke!"
                     [labels]="chart1Y.labels!"
+                    [tooltip]="chart1Y.tooltip!"
                     type="area"
                   ></apx-chart>
                 </div>
@@ -189,8 +189,8 @@
                     [title]="chart3Y.title!"
                     [colors]="chart3Y.colors!"
                     [legend]="chart3Y.legend!"
-                    [stroke]="chart3Y.stroke!"
                     [labels]="chart3Y.labels!"
+                    [tooltip]="chart3Y.tooltip!"
                     type="area"
                   ></apx-chart>
                 </div>
@@ -213,8 +213,8 @@
                     [title]="chartAll.title!"
                     [colors]="chartAll.colors!"
                     [legend]="chartAll.legend!"
-                    [stroke]="chartAll.stroke!"
                     [labels]="chartAll.labels!"
+                    [tooltip]="chartAll.tooltip!"
                     type="area"
                   ></apx-chart>
                 </div>
@@ -232,7 +232,7 @@
             <ul class="listview no-line transparent flush simple-listview">
               <li>
                 <div class="text-muted">
-                  {{ "wallet.details.status" | translate }}
+                  {{ "wallets_details_page.status" | translate }}
                 </div>
                 <strong
                   class="{{
@@ -243,7 +243,7 @@
               </li>
               <li>
                 <div class="text-muted">
-                  {{ "wallet.details.allTimeHigh" | translate }}
+                  {{ "wallets_details_page.all_time_high" | translate }}
                   {{ wallet?.allTimeHighDate | date : "d MMM y" }}
                 </div>
                 <strong
@@ -253,7 +253,7 @@
               </li>
               <li>
                 <div class="text-muted">
-                  {{ "wallet.details.highPrice" | translate }}
+                  {{ "wallets_details_page.high_price" | translate }}
                   {{ wallet?.highPriceDate | date : "d MMM y" }}
                 </div>
                 <strong
@@ -263,7 +263,7 @@
               </li>
               <li>
                 <div class="text-muted">
-                  {{ "wallet.details.lowPrice" | translate }}
+                  {{ "wallets_details_page.low_price" | translate }}
                   {{ wallet?.lowPriceDate | date : "d MMM y" }}
                 </div>
                 <strong
@@ -273,19 +273,19 @@
               </li>
               <li>
                 <div class="text-muted">
-                  {{ "wallet.details.category" | translate }}
+                  {{ "wallets_details_page.category" | translate }}
                 </div>
                 <strong>{{ wallet?.category }}</strong>
               </li>
               <li *ngIf="wallet?.type">
                 <div class="text-muted">
-                  {{ "wallet.details.type" | translate }}
+                  {{ "wallets_details_page.type" | translate }}
                 </div>
                 <strong>{{ wallet?.type }}</strong>
               </li>
               <li>
                 <div class="text-muted">
-                  {{ "wallet.details.dateLastStats" | translate }}
+                  {{ "wallets_details_page.date_last_stats" | translate }}
                 </div>
                 <strong>{{ wallet?.dateLastStats | date : "d MMM y" }}</strong>
               </li>
@@ -295,14 +295,12 @@
             <div class="card-body">
               <div class="row mb-05 fontsize-sub">
                 <div class="col text-success">
-                  <strong
-                    >{{ percentageWalletInTotal() | number : "1.0-2" }}%
-                  </strong>
+                  <strong>{{ percentageWallet | number : "1.0-2" }}% </strong>
                 </div>
                 <div class="col text-secondary text-end">
                   <strong
                     >{{ coinSymbol }}
-                    {{ hidden ? amount : walletService.totalBalance }}</strong
+                    {{ hidden ? amount : totalBalance }}</strong
                   >
                 </div>
               </div>
@@ -310,12 +308,8 @@
                 <div
                   class="progress-bar bg-success"
                   role="progressbar"
-                  attr.style="width: {{
-                    percentageWalletInTotal() | number : '1.0-2'
-                  }}%"
-                  attr.aria-valuenow="{{
-                    percentageWalletInTotal() | number : '1.0-2'
-                  }}"
+                  attr.style="width: {{ percentageWallet | number : '1.0-2' }}%"
+                  attr.aria-valuenow="{{ percentageWallet | number : '1.0-2' }}"
                   aria-valuemin="0"
                   aria-valuemax="100"
                 ></div>
@@ -323,10 +317,10 @@
                   class="progress-bar bg-secondary"
                   role="progressbar"
                   attr.style="width: {{
-                    100 - percentageWalletInTotal() | number : '1.0-2'
+                    100 - percentageWallet | number : '1.0-2'
                   }}%"
                   attr.aria-valuenow="{{
-                    100 - percentageWalletInTotal() | number : '1.0-2'
+                    100 - percentageWallet | number : '1.0-2'
                   }}"
                   aria-valuemin="0"
                   aria-valuemax="100"
@@ -342,7 +336,7 @@
         <div class="section mt-2 mb-4">
           <div class="section-heading">
             <h2 class="title">
-              {{ "wallet.details.info.title" | translate }}
+              {{ "wallets_details_page.info.title" | translate }}
             </h2>
             <a
               *ngIf="
@@ -352,7 +346,7 @@
                 editShow == true ? (editShow = false) : (editShow = true)
               "
               class="link clickable"
-              >{{ "wallet.details.info.edit" | translate }}</a
+              >{{ "shared_text.edit" | translate }}</a
             >
           </div>
           <div class="card">
@@ -365,7 +359,7 @@
                 "
               >
                 <div class="text-muted">
-                  {{ "wallet.details.info.subTitle" | translate }}
+                  {{ "wallets_details_page.info.sub_title" | translate }}
                 </div>
               </li>
               <li *ngFor="let key of infoKeys">
@@ -407,7 +401,7 @@
                             class="form-control"
                             id="text4"
                             placeholder="{{
-                              'wallet.details.info.key' | translate
+                              'wallets_details_page.info.key' | translate
                             }}"
                           />
                           <i class="clear-input">
@@ -428,7 +422,7 @@
                             class="form-control"
                             id="text4"
                             placeholder="{{
-                              'wallet.details.info.value' | translate
+                              'wallets_details_page.info.value' | translate
                             }}"
                           />
                           <i class="clear-input">
@@ -491,26 +485,6 @@
                           </button>
                         </div>
                       </div>
-                      <!--<button
-                        *ngIf="!editBtn"
-                        (click)="addInfo()"
-                        [disabled]="f.invalid"
-                        type="button"
-                        style="max-width: 90px; vertical-align: -20px"
-                        class="btn btn-primary rounded me-1 mx-auto"
-                      >
-                        {{ "wallet.details.info.save" | translate }}
-                      </button>
-                      <button
-                        *ngIf="editBtn"
-                        (click)="saveEdit()"
-                        [disabled]="f.invalid"
-                        type="button"
-                        style="max-width: 90px; vertical-align: -20px"
-                        class="btn btn-primary rounded me-1 mx-auto"
-                      >
-                        {{ "wallet.details.info.editBtn" | translate }}
-                      </button>-->
                     </div>
                   </div>
                 </form>
@@ -523,7 +497,7 @@
                       style="vertical-align: -1px"
                     ></ion-icon>
                     <span style="margin-left: 2px">{{
-                      "wallet.details.info.addNew" | translate
+                      "shared_text.add" | translate
                     }}</span></a
                   >
                 </div>
@@ -542,10 +516,10 @@
         <div class="section">
           <div class="section-heading">
             <h2 class="title">
-              {{ "crypto.asset.assetList" | translate }}
+              {{ "crypto_asset_page.assetList" | translate }}
             </h2>
             <a
-              *ngIf="!showZeroBalance"
+              *ngIf="!showZeroBalance && isAssetHasZero"
               (click)="zeroBalanceSwitch()"
               class="link clickable"
             >
@@ -553,7 +527,7 @@
                 name="eye-outline"
                 style="width: 20px; height: 20px; vertical-align: -5px"
               ></ion-icon>
-              {{ "crypto.asset.show" | translate }}</a
+              {{ "crypto_asset_page.show" | translate }}</a
             >
             <a
               *ngIf="showZeroBalance"
@@ -564,20 +538,26 @@
                 name="eye-off-outline"
                 style="width: 20px; height: 20px; vertical-align: -5px"
               ></ion-icon>
-              {{ "crypto.asset.hidden" | translate }}</a
+              {{ "crypto_asset_page.hidden" | translate }}</a
             >
           </div>
           <div class="transactions">
+            @if (isAssetListEmptyOrZero) {
+            <div class="alert alert-warning m-2 text-center" role="alert">
+              <div>
+                {{ "crypto_asset_page.empty_assets_data" | translate }}
+              </div>
+            </div>
+            }
             <div *ngFor="let asset of wallet?.assets; let i = index">
+              @if (!showZeroBalance ? asset.balance > 0 : asset.balance >= 0) {
               <app-transaction-card
                 [hiddenAmount]="hidden"
-                *ngIf="
-                  !showZeroBalance ? asset.balance > 0 : asset.balance >= 0
-                "
                 [assets]="asset"
-                [currency]="user.settings.cryptoCurrency"
+                [currency]="user.attributes.money_stats_settings.cryptoCurrency"
               >
               </app-transaction-card>
+              }
             </div>
           </div>
         </div>
@@ -585,13 +565,18 @@
 
       <div class="col-md-6 mt-2 mb-4">
         <!-- History -->
-        <div *ngIf="wallet!.history && wallet!.history.length" class="section">
+        <div
+          *ngIf="
+            wallet != undefined && wallet!.history && wallet!.history.length
+          "
+          class="section"
+        >
           <div class="section-heading">
             <h2 class="title">
-              {{ "wallet.details.transaction.title" | translate }}
+              {{ "wallets_details_page.transaction.title" | translate }}
             </h2>
             <a href="#" routerLink="history" class="link">{{
-              "wallet.details.transaction.view" | translate
+              "shared_text.view" | translate
             }}</a>
           </div>
           <div class="card">
@@ -611,7 +596,7 @@
               <a
                 routerLink="history"
                 class="btn btn-block btn-outline-secondary"
-                >{{ "wallet.details.transaction.more" | translate }}</a
+                >{{ "wallets_details_page.transaction.more" | translate }}</a
               >
             </div>
           </div>
@@ -634,6 +619,7 @@
 </section>
 
 <app-add-wallet
+  *ngIf="wallet != undefined"
   (emitAddWallet)="editWallet($event)"
   [wallet]="wallet!"
   [modalId]="modalConstant.EDITWALLET"

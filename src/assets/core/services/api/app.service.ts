@@ -7,7 +7,7 @@ import { GithubIssues, User } from '../../data/class/user.class';
 import { StorageConstant } from '../../data/constant/constant';
 import { SwalService } from '../../utils/swal.service';
 import { Wallet } from '../../data/class/dashboard.class';
-import { CacheService } from '../config/cache.service';
+import { CacheService } from '../config/cache/cache.service';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -87,9 +87,13 @@ export class AppService {
       let response: ResponseModel = new ResponseModel();
       return of(response);
     } else {
-      return this.http.patch<ResponseModel>(environment.marketDataUrl, null, {
-        headers: headers,
-      });
+      return this.http.patch<ResponseModel>(
+        environment.importMarketDataUrl,
+        null,
+        {
+          headers: headers,
+        }
+      );
     }
   }
 
@@ -114,11 +118,16 @@ export class AppService {
       const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
       const headers = new HttpHeaders({
         Authorization: authToken!,
-        'Content-Type': 'multipart/form-data',
       });
       const formData: FormData = new FormData();
       formData.append('file', file, file.name);
-      return this.http.post<ResponseModel>(environment.uploadImage, formData);
+      return this.http.post<ResponseModel>(
+        environment.uploadImageUrl,
+        formData,
+        {
+          headers: headers,
+        }
+      );
     }
   }
 

@@ -1,0 +1,121 @@
+<!-- Alert Iconed Action Sheet -->
+<div
+  class="modal fade action-sheet"
+  id="{{ modalId }}"
+  tabindex="-1"
+  role="dialog"
+  data-bs-focus="false"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal-round mx-auto">
+      <div class="modal-body">
+        <div class="action-sheet-content">
+          <div class="iconbox text-warning">
+            <ion-icon name="alert-circle"></ion-icon>
+          </div>
+          <div *ngIf="isOperation" class="text-center">
+            <h3>
+              {{ "modal_component.info.operation_title" | translate }}
+            </h3>
+            <p>
+              {{ "modal_component.info.operation_details" | translate }}
+            </p>
+          </div>
+          <div
+            *ngIf="operationType == operationTypeConstant.NEWINVESTMENT"
+            class="text-center"
+          >
+            <h3>
+              {{ "modal_component.info.investment_title" | translate }}
+            </h3>
+            <p
+              [innerHTML]="
+                'modal_component.info.investment_details' | translate
+              "
+            ></p>
+          </div>
+          <div
+            *ngIf="operationType == operationTypeConstant.HOLDING"
+            class="text-center"
+          >
+            <h3>
+              {{ "modal_component.info.holding_title" | translate }}
+            </h3>
+            <p
+              [innerHTML]="'modal_component.info.holding_details' | translate"
+            ></p>
+          </div>
+          <div
+            *ngIf="operationType == operationTypeConstant.TRADING"
+            class="text-center"
+          >
+            <h3>
+              {{ "modal_component.info.trading_title" | translate }}
+            </h3>
+            <p
+              [innerHTML]="'modal_component.info.trading_details' | translate"
+            ></p>
+          </div>
+          <div
+            *ngIf="operationType == operationTypeConstant.CLOSEOPERATION"
+            class="text-center"
+          >
+            <h3>
+              {{ "modal_component.info.close_operation_title" | translate }}
+            </h3>
+            <p
+              [innerHTML]="
+                'modal_component.info.close_operation_details' | translate
+              "
+            ></p>
+          </div>
+          <div
+            *ngIf="operationType == operationTypeConstant.TRANSFER"
+            class="text-center"
+          >
+            <h3>
+              {{ "modal_component.info.transfer_title" | translate }}
+            </h3>
+            <p
+              [innerHTML]="'modal_component.info.transfer_details' | translate"
+            ></p>
+          </div>
+          <div
+            *ngIf="operationType == operationTypeConstant.CATEGORY"
+            class="text-center"
+          >
+            <h3>
+              {{ "modal_component.info.app_category_title" | translate }}
+            </h3>
+            <p
+              [innerHTML]="
+                'modal_component.info.app_category_details' | translate
+              "
+            ></p>
+          </div>
+          <a
+            *ngIf="isOperation && !isClosingOperation"
+            class="btn btn-primary btn-lg btn-block"
+            data-bs-toggle="modal"
+            attr.data-bs-target="#{{ modalConstant.ADDOPERATIONS }}"
+            >{{ "modal_component.info.close" | translate }}</a
+          >
+          <a
+            *ngIf="isClosingOperation && !isOperation"
+            class="btn btn-primary btn-lg btn-block"
+            data-bs-toggle="modal"
+            attr.data-bs-target="#{{ modalConstant.CLOSEOPERATION }}"
+            >{{ "modal_component.info.close" | translate }}</a
+          >
+          <a
+            *ngIf="!isOperation && !isClosingOperation"
+            class="btn btn-primary btn-lg btn-block"
+            data-bs-toggle="modal"
+            >{{ "modal_component.info.close" | translate }}</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- * Alert Iconed Action Sheet -->

@@ -6,7 +6,7 @@
         <app-dashboard-wallet
           (changeAmountStatus)="changeAmountStatus($event)"
           [dashboard]="dashboard"
-          [value]="user.settings.currencySymbol"
+          [value]="user.attributes.money_stats_settings.currencySymbol"
           [user]="user"
         >
         </app-dashboard-wallet>
@@ -19,8 +19,8 @@
           <div class="col-6">
             <app-stats-card
               [title]="
-                ('dashboard.dashboardCard.stats.title1' | translate) +
-                performanceSince
+                ('dashboard_page.dashboard_card.stats_card.title1'
+                  | translate) + performanceSince
               "
               [value]="performance"
               [class]="
@@ -35,7 +35,9 @@
           </div>
           <div class="col-6">
             <app-stats-card
-              [title]="'dashboard.dashboardCard.stats.title2' | translate"
+              [title]="
+                'dashboard_page.dashboard_card.stats_card.title2' | translate
+              "
               [value]="performanceLastDate"
               [class]="'date'"
             >
@@ -45,7 +47,9 @@
         <div class="row mt-2">
           <div class="col-6">
             <app-stats-card
-              [title]="'dashboard.dashboardCard.stats.title3' | translate"
+              [title]="
+                'dashboard_page.dashboard_card.stats_card.title3' | translate
+              "
               [value]="lastStatsPerformance"
               [class]="
                 dashboard.lastStatsPerformance === 0
@@ -59,7 +63,9 @@
           </div>
           <div class="col-6">
             <app-stats-card
-              [title]="'dashboard.dashboardCard.stats.title3' | translate"
+              [title]="
+                'dashboard_page.dashboard_card.stats_card.title3' | translate
+              "
               [value]="hidden ? amount : lastStatsBalanceDifference"
               [class]="
                 dashboard.lastStatsBalanceDifference === 0
@@ -80,18 +86,21 @@
       <!-- Transactions -->
       <div class="section mt-4 col-xl-6">
         <div class="section-heading">
-          <h2 class="title">{{ "dashboard.transaction.title" | translate }}</h2>
+          <h2 class="title">
+            {{ "transactions_page.title" | translate }}
+          </h2>
           <a href="#" routerLink="/transaction" class="link">{{
-            "dashboard.transaction.view" | translate
+            "shared_text.view" | translate
           }}</a>
         </div>
         <div class="transactions">
-          <app-loading-card *ngFor="let item of [1, 2, 3]"></app-loading-card>
+          <div *ngIf="!dashboard.wallets || !dashboard.wallets.length">
+            <app-loading-card *ngFor="let item of [1, 2, 3]"></app-loading-card>
+          </div>
           <app-content-box
             *ngIf="!dashboard.wallets || !dashboard.wallets.length"
-            [header]="'dashboard.transaction.nodata.header' | translate"
-            [body]="'dashboard.transaction.nodata.body' | translate"
-            [footer]="'dashboard.transaction.nodata.footer' | translate"
+            [header]="'transactions_page.title' | translate"
+            [body]="'transactions_page.empty_body_text' | translate"
           ></app-content-box>
           <div *ngFor="let wallet of dashboard.wallets; let i = index">
             <app-transaction-card
@@ -105,7 +114,9 @@
                   : 'text-danger'
               "
               [differenceLastStats]="
-                wallet.differenceLastStats + ' ' + user.settings.currencySymbol
+                wallet.differenceLastStats +
+                ' ' +
+                user.attributes.money_stats_settings.currencySymbol
               "
               [wallet]="wallet"
             >
@@ -122,17 +133,15 @@
             {{ graphTitle }}
           </h2>
           <a routerLink="stats" class="link">{{
-            "dashboard.graph.view" | translate
+            "shared_text.view" | translate
           }}</a>
         </div>
-        <app-loading-card *ngFor="let item of [1, 2]"></app-loading-card>
         <app-content-box
           *ngIf="
             !dashboard.statsWalletDays || !dashboard.statsWalletDays.length
           "
-          [header]="'dashboard.graph.nodata.header' | translate"
-          [body]="'dashboard.graph.nodata.body' | translate"
-          [footer]="'dashboard.graph.nodata.footer' | translate"
+          [header]="'dashboard_page.graph.graph' | translate"
+          [body]="'dashboard_page.graph.empty_body_text' | translate"
         ></app-content-box>
         <div
           *ngIf="dashboard.statsWalletDays && dashboard.statsWalletDays.length"
@@ -156,8 +165,11 @@
               [title]="chartOptions.title!"
               [colors]="chartOptions.colors!"
               [legend]="chartOptions.legend!"
-              [stroke]="chartOptions.stroke!"
               [labels]="chartOptions.labels!"
+              [grid]="chartOptions.grid!"
+              [dataLabels]="chartOptions.dataLabels!"
+              [tooltip]="chartOptions.tooltip!"
+              [stroke]="chartOptions.stroke!"
               type="area"
             ></apx-chart>
           </div>
@@ -171,18 +183,19 @@
     <!-- Wallet -->
     <div class="section full mt-4">
       <div class="section-heading padding">
-        <h2 class="title">{{ "dashboard.wallet_splide.title" | translate }}</h2>
+        <h2 class="title">
+          {{ "dashboard_page.wallet_splide.title" | translate }}
+        </h2>
         <a href="#" routerLink="wallet" class="link">{{
-          "dashboard.wallet_splide.view" | translate
+          "shared_text.view" | translate
         }}</a>
       </div>
       <div>
         <app-loading-card></app-loading-card>
         <app-content-box
           *ngIf="!dashboard.wallets || !dashboard.wallets.length"
-          [header]="'dashboard.wallet_splide.nodata.header' | translate"
-          [body]="'dashboard.wallet_splide.nodata.body' | translate"
-          [footer]="'dashboard.wallet_splide.nodata.footer' | translate"
+          [header]="'dashboard_page.wallet_splide.title' | translate"
+          [body]="'dashboard_page.wallet_splide.empty_body_text' | translate"
         ></app-content-box>
         <div id="slider" class="slider">
           <app-wallet-card
@@ -192,31 +205,13 @@
               wallet!.img +
               ') !important; box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7)'
             "
-            [coinSymbol]="user.settings.currencySymbol"
+            [coinSymbol]="user.attributes.money_stats_settings.currencySymbol"
             [wallet]="wallet"
-            [btn]="'wallet.open' | translate"
+            [btn]="'dashboard_page.wallet_splide.btn' | translate"
             [hiddenAmount]="hidden!"
           ></app-wallet-card>
         </div>
       </div>
-
-      <!-- carousel multiple
-      <div class="carousel-multiple splide">
-        <div class="splide__track">
-
-
-          <ul *ngIf="false" class="splide__list">
-            <app-splide-slide
-              class="splide__slide"
-              *ngFor="let wallet of walletFilter(dashboard.wallets)"
-              [wallet]="wallet"
-              [btn]="'Open'"
-            >
-            </app-splide-slide>
-          </ul>
-        </div>
-      </div>-->
-      <!-- * carousel multiple -->
     </div>
     <!-- * Wallet -->
     <div align="center">
@@ -235,7 +230,7 @@
   <!-- app footer -->
   <div *ngIf="dashboard.wallets && dashboard.wallets.length" class="appFooter">
     <div class="footer-title">
-      {{ "copyright" | translate }}
+      {{ getCopyright() }}
     </div>
   </div>
   <!-- * app footer -->
@@ -251,10 +246,14 @@
   <!-- * app footer -->
 </div>
 
-<app-add-wallet
+<!--<app-add-wallet
   (emitAddWallet)="addWallet($event)"
   [modalId]="modalConstant.ADDWALLET"
   [categoriesInput]="dashboard.categories"
+></app-add-wallet>-->
+<app-add-wallet
+  (emitAddWallet)="addWallet($event)"
+  [modalId]="modalConstant.ADDWALLET"
 ></app-add-wallet>
 <app-category-modal
   [modalId]="modalConstant.CATEGORY"

@@ -9,9 +9,10 @@ import { ToastService } from 'src/assets/core/utils/toast.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-dashboard-wallet',
-  templateUrl: './dashboard-wallet.component.html',
-  styleUrls: ['./dashboard-wallet.component.scss'],
+    selector: 'app-dashboard-wallet',
+    templateUrl: './dashboard-wallet.component.html',
+    styleUrls: ['./dashboard-wallet.component.scss'],
+    standalone: false
 })
 export class DashboardWalletComponent implements OnInit {
   environment = environment;

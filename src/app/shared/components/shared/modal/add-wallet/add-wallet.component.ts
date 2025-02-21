@@ -10,12 +10,15 @@ import {
 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { Category, Wallet } from 'src/assets/core/data/class/dashboard.class';
+import {
+  categories,
+  Category,
+  Wallet,
+} from 'src/assets/core/data/class/dashboard.class';
 import {
   AppConfigConst,
   ModalConstant,
 } from 'src/assets/core/data/constant/constant';
-import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
 import { WalletService } from 'src/assets/core/services/api/wallet.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
@@ -23,25 +26,24 @@ import { environment } from 'src/environments/environment';
 import { AppService } from 'src/assets/core/services/api/app.service';
 
 @Component({
-  selector: 'app-add-wallet',
-  templateUrl: './add-wallet.component.html',
-  styleUrls: ['./add-wallet.component.scss'],
+    selector: 'app-add-wallet',
+    templateUrl: './add-wallet.component.html',
+    styleUrls: ['./add-wallet.component.scss'],
+    standalone: false
 })
 export class AddWalletComponent implements OnInit, OnChanges, OnDestroy {
+  @Output('emitAddWallet') emitAddWallet = new EventEmitter<Wallet>();
   addWalletSub: Subscription = new Subscription();
   updateuserSub: Subscription = new Subscription();
-
   environment = environment;
+  categories: Category[] = categories;
+  cryptoTypes: string[] = ['Holding', 'Trading'];
+  categorySelect: string = 'Select Category';
+
   @Input('modalId') modalId: string = '';
-  @Output('emitAddWallet') emitAddWallet = new EventEmitter<Wallet>();
-  @Input('categoriesInput') categoriesInput?: Category[];
+  //  @Input('categoriesInput') categoriesInput?: Category[];
   @Input('wallet') wallet: Wallet = new Wallet();
   @Input('isCrypto') isCrypto: boolean = false;
-
-  cryptoTypes: string[] = ['Holding', 'Trading'];
-  categories: Category[] = [];
-
-  categorySelect: string = 'Select Category';
 
   defaultImg: boolean = false;
   checkbox: boolean = true;
@@ -55,7 +57,6 @@ export class AddWalletComponent implements OnInit, OnChanges, OnDestroy {
   notCryptoWallets: Wallet[] = [];
 
   constructor(
-    private dashboardService: DashboardService,
     private swalService: SwalService,
     private translate: TranslateService,
     private walletService: WalletService,
@@ -79,10 +80,6 @@ export class AddWalletComponent implements OnInit, OnChanges, OnDestroy {
       this.isNewWallet = true;
       this.isCrypto = true;
     }
-    this.categories = this.dashboardService.dashboard.categories;
-    if (this.wallets && this.wallets.length == 0) {
-      this.wallets = this.dashboardService.dashboard.wallets;
-    }
     this.filterWallet();
   }
 
@@ -103,17 +100,17 @@ export class AddWalletComponent implements OnInit, OnChanges, OnDestroy {
   filterWallet() {
     if (this.wallets) {
       this.notCryptoWallets = this.wallets.filter(
-        (w) => w.category != 'Crypto'
+        (w) => w.category != 'Crypto' && w.deletedDate == null
       );
     }
   }
 
   importimage() {
     this.swalService.addImageSwal(
-      this.translate.instant('wallet.modal.imageModal.title'),
-      this.translate.instant('wallet.modal.imageModal.subTitle'),
-      this.translate.instant('wallet.modal.imageModal.continue'),
-      this.translate.instant('wallet.modal.imageModal.cancel')
+      this.translate.instant('modal_component.add_wallet.imageModal.title'),
+      this.translate.instant('modal_component.add_wallet.imageModal.subTitle'),
+      this.translate.instant('modal_component.add_wallet.imageModal.continue'),
+      this.translate.instant('modal_component.add_wallet.imageModal.cancel')
     );
     this.updateImageData();
   }
@@ -162,7 +159,7 @@ export class AddWalletComponent implements OnInit, OnChanges, OnDestroy {
         .subscribe((data) => {
           LOG.info(data.message!, 'AddWalletComponent');
           this.addWalletSub = this.walletService
-            .addUpdateWalletData(walletToSave)
+            .addOrUpdateWalletsData(walletToSave)
             .subscribe((data) => {
               LOG.info(data.message!, 'AddWalletComponent');
               this.wallet.img = data.data.img;
@@ -172,7 +169,7 @@ export class AddWalletComponent implements OnInit, OnChanges, OnDestroy {
         });
     } else {
       this.addWalletSub = this.walletService
-        .addUpdateWalletData(walletToSave)
+        .addOrUpdateWalletsData(walletToSave)
         .subscribe((data) => {
           LOG.info(data.message!, 'AddWalletComponent');
           // Save Wallet

@@ -4,7 +4,7 @@
     class="section col-xl-12"
   >
     <div class="section-title">
-      {{ "crypto.resume.graphAsset" | translate }}
+      {{ "crypto_resume_page.graphAsset" | translate }}
     </div>
     <div class="card inner-round border_round">
       <div
@@ -23,8 +23,10 @@
         [title]="trading.title!"
         [colors]="trading.colors!"
         [legend]="trading.legend!"
-        [stroke]="trading.stroke!"
         [labels]="trading.labels!"
+        [tooltip]="trading.tooltip!"
+        [dataLabels]="trading.dataLabels!"
+        [grid]="trading.grid!"
         type="area"
         class="border_round"
       ></apx-chart>
@@ -36,7 +38,8 @@
     class="section mt-2 mb-4 col-xl-12"
   >
     <div class="section-title">
-      {{ "crypto.resume.trading.table.title" | translate }} {{ invested }}
+      {{ "crypto_resume_page.trading_table_title" | translate }}
+      {{ invested.toFixed(2) }}
       {{ cryptoDashboard.currency }}
     </div>
     <div class="card">
@@ -45,40 +48,40 @@
           <thead>
             <tr>
               <th scope="col">
-                {{ "crypto.resume.trading.table.tab1" | translate }}
+                {{ "crypto_resume_page.trading_table_tab1" | translate }}
               </th>
               <th scope="col" class="text-center">
-                {{ "crypto.resume.trading.table.tab2" | translate }}
+                {{ "crypto_resume_page.trading_table_tab2" | translate }}
               </th>
               <th scope="col" class="text-center">
-                {{ "crypto.resume.trading.table.tab3" | translate }}
+                {{ "crypto_resume_page.trading_table_tab3" | translate }}
               </th>
               <th scope="col" class="text-center">
-                {{ "crypto.resume.trading.table.tab4" | translate }}
+                {{ "crypto_resume_page.trading_table_tab4" | translate }}
               </th>
               <th scope="col" class="text-center">
-                {{ "crypto.resume.trading.table.tab5" | translate }}
+                {{ "crypto_resume_page.trading_table_tab5" | translate }}
               </th>
               <th scope="col" class="text-center">
-                {{ "crypto.resume.trading.table.tab6" | translate }}
+                {{ "crypto_resume_page.trading_table_tab6" | translate }}
               </th>
               <th scope="col" class="text-center">
-                {{ "crypto.resume.trading.table.tab7" | translate }}
+                {{ "crypto_resume_page.trading_table_tab7" | translate }}
               </th>
               <th scope="col" class="text-center">
-                {{ "crypto.resume.trading.table.tab8" | translate }}
+                {{ "crypto_resume_page.trading_table_tab8" | translate }}
               </th>
               <th scope="col" class="text-center">
-                {{ "crypto.resume.trading.table.tab9" | translate }}
+                {{ "crypto_resume_page.trading_table_tab9" | translate }}
               </th>
               <th scope="col" class="text-center">
-                {{ "crypto.resume.trading.table.tab10" | translate }}
+                {{ "crypto_resume_page.trading_table_tab10" | translate }}
               </th>
               <th scope="col" class="text-center">
-                {{ "crypto.resume.trading.table.tab11" | translate }}
+                {{ "crypto_resume_page.trading_table_tab11" | translate }}
               </th>
               <th scope="col" class="text-end">
-                {{ "crypto.resume.trading.table.tab12" | translate }}
+                {{ "crypto_resume_page.trading_table_tab12" | translate }}
               </th>
             </tr>
           </thead>
@@ -162,7 +165,7 @@
           class="mx-auto text-center alert alert-danger mb-1"
           role="alert"
         >
-          {{ "crypto.resume.warning" | translate }}
+          {{ "crypto_resume_page.warning" | translate }}
         </div>
       </div>
     </div>
@@ -172,15 +175,14 @@
     <div class="section cards-op mt-2">
       <div class="section-heading">
         <h2 class="title">
-          {{ "crypto.asset.details.overview.operations" | translate }}
+          {{ "crypto_asset_page.details.operations" | translate }}
         </h2>
         <a (click)="goToOperations()" class="link clickable">{{
-          "crypto.asset.details.overview.view" | translate
+          "crypto_asset_page.details.view" | translate
         }}</a>
       </div>
       <app-operations-list
         [modalID]="modalConstant.CRYPTOTRADINGRESUME"
-        [cryptoDashboard]="cryptoDashboard"
         [walletsAsset]="walletsFilter"
         [isAssetOperations]="true"
       ></app-operations-list>

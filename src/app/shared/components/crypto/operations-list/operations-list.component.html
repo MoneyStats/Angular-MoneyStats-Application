@@ -11,7 +11,8 @@
     <!-- item -->
     <li *ngIf="filterByPage(i)">
       <a
-        class="item"
+        class="item zoom"
+        style="border-radius: 20px !important"
         (click)="selectOperation(operation)"
         data-bs-toggle="modal"
         attr.data-bs-target="#{{ modalID }}"
@@ -47,9 +48,13 @@
             <strong>{{ operation?.wallet?.name }}</strong>
             <div class="text-small text-secondary">
               {{ operation?.asset?.name }}
-              {{ "crypto.asset.details.overview.price" | translate }}
-              {{ operation?.exitPrice }}
-              {{ cryptoDashboard.currency }}
+              {{ "crypto_asset_page.details.price" | translate }}
+              {{
+                operation.type != operationTypeConstant.TRADING
+                  ? operation?.exitPrice
+                  : operation.entryPrice
+              }}
+              {{ cryptoCurrency }}
             </div>
             <div class="text-small text-secondary">
               <strong>{{ operation?.type }}</strong> #{{ operation?.id }}
@@ -72,12 +77,11 @@
             </div>
 
             <div class="text-small">
-              {{ "crypto.asset.details.overview.invest" | translate }}
+              {{ "crypto_asset_page.details.invest" | translate }}
               <strong
-                >{{ operation?.entryPriceValue }}
-                {{ cryptoDashboard.currency }}</strong
+                >{{ operation?.entryPriceValue }} {{ cryptoCurrency }}</strong
               >
-              {{ "crypto.asset.details.overview.on" | translate }}
+              {{ "crypto_asset_page.details.on" | translate }}
               {{ operation?.entryDate | date : "d MMM yy" }}
             </div>
           </div>
@@ -88,12 +92,13 @@
   </ul>
   <div class="card-body pt-0" *ngIf="!isFullList">
     <a (click)="goToOperations()" class="btn btn-block btn-outline-secondary">{{
-      "crypto.asset.details.overview.more" | translate
+      "crypto_asset_page.details.more" | translate
     }}</a>
   </div>
 </div>
 <app-operation-details
   [modalId]="modalID"
   [operation]="operationSelect"
-  [currency]="cryptoDashboard.currency"
+  [currency]="cryptoCurrency!"
+  [walletsAsset]="walletsAsset"
 ></app-operation-details>

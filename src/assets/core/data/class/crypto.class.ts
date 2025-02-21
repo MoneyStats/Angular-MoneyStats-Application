@@ -7,6 +7,7 @@ export class CryptoDashboard {
   btcBalance: number = 0;
   lastUpdate: Date = new Date();
   statsAssetsDays: string[] = [];
+  yearsWalletStats: number[] = [];
   holdingLong: TradingStatus = new TradingStatus();
   trading: TradingStatus = new TradingStatus();
   //performance: TradingStatus = new TradingStatus();

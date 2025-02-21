@@ -7,17 +7,20 @@
   <!--<a routerLink="/crypto/resume" class="item" (click)="vibrate()">
     <div class="col">
       <ion-icon name="bar-chart"></ion-icon>
-      <strong>{{ "crypto.footer.tab2" | translate }}</strong>
+      <strong>{{ "core_header_footer.crypto_tab2" | translate }}</strong>
     </div>
   </a>-->
   <a
-    [routerLink]="['/crypto/market-data', user?.settings?.cryptoCurrency]"
+    [routerLink]="[
+      '/crypto/market-data',
+      user?.attributes.money_stats_settings.cryptoCurrency
+    ]"
     class="item"
     (click)="vibrate()"
   >
     <div class="col">
       <ion-icon name="trending-up"></ion-icon>
-      <strong>{{ "crypto.footer.tab4" | translate }}</strong>
+      <strong>{{ "core_header_footer.crypto_tab5" | translate }}</strong>
     </div>
   </a>
   <a routerLink="" class="item" (click)="vibrate()">
@@ -37,7 +40,7 @@
   <a routerLink="/wallet" class="item" (click)="vibrate()">
     <div class="col">
       <ion-icon name="wallet"></ion-icon>
-      <strong>{{ "crypto.footer.tab3" | translate }}</strong>
+      <strong>{{ "core_header_footer.crypto_tab1" | translate }}</strong>
     </div>
   </a>
   <a
@@ -48,7 +51,7 @@
   >
     <div class="col">
       <ion-icon name="swap-horizontal"></ion-icon>
-      <strong>{{ "crypto.footer.tab1" | translate }}</strong>
+      <strong>{{ "core_header_footer.crypto_tab3" | translate }}</strong>
     </div>
   </a>
 </div>

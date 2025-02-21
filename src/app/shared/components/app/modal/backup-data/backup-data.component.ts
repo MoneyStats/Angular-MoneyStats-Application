@@ -9,9 +9,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-backup-data',
-  templateUrl: './backup-data.component.html',
-  styleUrls: ['./backup-data.component.scss'],
+    selector: 'app-backup-data',
+    templateUrl: './backup-data.component.html',
+    styleUrls: ['./backup-data.component.scss'],
+    standalone: false
 })
 export class BackupDataComponent implements OnDestroy {
   backupSubscribe: Subscription = new Subscription();

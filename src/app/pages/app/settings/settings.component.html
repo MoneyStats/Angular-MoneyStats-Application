@@ -1,16 +1,14 @@
 <app-header [user]="user" *ngIf="screenService.isCrypto"></app-header>
 <section class="section-width mx-auto">
   <app-header-mobile
-    *ngIf="screenWidth()! <= 780"
-    [title]="'settings.title' | translate"
-    [backBtn]="'settings.mobile_back' | translate"
+    *ngIf="isMobile()"
+    [title]="'settings_page.title' | translate"
   >
   </app-header-mobile>
   <!-- App Capsule -->
   <div id="appCapsule">
     <app-title-desktop
-      [title]="'settings.title' | translate"
-      [back]="'settings.back' | translate"
+      [title]="'settings_page.title' | translate"
     ></app-title-desktop>
     <div class="settings mx-auto">
       <div class="section mt-3 text-center">
@@ -39,19 +37,22 @@
           class="mx-auto alert alert-danger mb-1 mt-2"
           role="alert"
         >
-          {{ "wallet.modal.sizeToBig" | translate
+          {{ "modal_component.add_wallet.sizeToBig" | translate
           }}{{ environment.imageSizeMax / 1000 }}kb
         </div>
       </div>
 
-      <div class="listview-title mt-1">
-        {{ "settings.theme.title" | translate }}
+      <div hidden class="listview-title mt-1">
+        {{ "settings_page.theme_title" | translate }}
       </div>
-      <ul class="listview border_round image-listview text inset no-line">
+      <ul
+        hidden
+        class="listview border_round image-listview text inset no-line"
+      >
         <li>
           <div class="item">
             <div class="in">
-              <div>{{ "settings.theme.dark" | translate }}</div>
+              <div>{{ "settings_page.theme_dark" | translate }}</div>
               <div class="form-check form-switch ms-2">
                 <input
                   class="form-check-input dark-mode-switch"
@@ -66,39 +67,19 @@
       </ul>
 
       <div class="listview-title mt-1">
-        {{ "settings.account.title" | translate }}
+        {{ "settings_page.account_title" | translate }}
       </div>
       <ul class="listview border_round image-listview text inset">
         <li>
           <a
             href="#"
             data-bs-toggle="modal"
-            attr.data-bs-target="#{{ modalConstant.ACCOUNTLIST }}"
-            class="item"
-          >
-            <div class="in">
-              <div>
-                {{ "settings.account.sync" | translate }}
-                <div class="text-muted">
-                  {{ "settings.account.descriptionSync" | translate }}
-                </div>
-              </div>
-              <span class="text-primary">{{
-                "settings.account.open" | translate
-              }}</span>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a
-            href="#"
-            data-bs-toggle="modal"
             attr.data-bs-target="#{{ modalConstant.PROFILESETTINGS }}"
-            class="item"
+            class="item zoom clickable"
             (click)="profileConst = profileSettings.USERNAME"
           >
             <div class="in">
-              <div>{{ "settings.account.username" | translate }}</div>
+              <div>{{ "settings_page.account_username" | translate }}</div>
             </div>
           </a>
         </li>
@@ -107,27 +88,27 @@
             href="#"
             data-bs-toggle="modal"
             attr.data-bs-target="#{{ modalConstant.PROFILESETTINGS }}"
-            class="item"
+            class="item zoom clickable"
             (click)="profileConst = profileSettings.EMAIL"
           >
             <div class="in">
-              <div>{{ "settings.account.email" | translate }}</div>
+              <div>{{ "settings_page.account_email" | translate }}</div>
             </div>
           </a>
         </li>
       </ul>
 
       <div class="listview-title mt-1">
-        {{ "settings.app.title" | translate }}
+        {{ "settings_page.title" | translate }}
       </div>
       <ul class="listview border_round image-listview text inset">
         <li>
-          <a href="#" routerLink="/wallet" class="item">
+          <a href="#" routerLink="/wallet" class="item zoom clickable">
             <div class="in">
-              <div>{{ "settings.app.wallet.title" | translate }}</div>
+              <div>{{ "settings_page.wallet_edit" | translate }}</div>
             </div>
             <span class="text-primary">{{
-              "settings.app.wallet.open" | translate
+              "shared_text.open" | translate
             }}</span>
           </a>
         </li>
@@ -136,12 +117,12 @@
             href="#"
             data-bs-toggle="modal"
             attr.data-bs-target="#{{ modalConstant.LANGUAGES }}"
-            class="item"
+            class="item zoom clickable"
           >
             <div class="in">
-              <div>{{ "settings.app.languages.title" | translate }}</div>
+              <div>{{ "settings_page.languages_title" | translate }}</div>
               <span class="text-primary">{{
-                "settings.app.languages.open" | translate
+                "shared_text.edit" | translate
               }}</span>
             </div>
           </a>
@@ -149,12 +130,12 @@
 
         <li>
           <a
-            class="item"
+            class="item zoom clickable"
             data-bs-toggle="modal"
             attr.data-bs-target="#{{ modalConstant.BACKUPDATA }}"
           >
             <div class="in">
-              <div>{{ "modal.backup.title" | translate }}</div>
+              <div>{{ "modal_component.backup.title" | translate }}</div>
             </div>
           </a>
         </li>
@@ -162,9 +143,9 @@
           <div class="item">
             <div class="in">
               <div>
-                {{ "settings.app.liveWallet.title" | translate }}
+                {{ "settings_page.live_wallet_title" | translate }}
                 <div class="text-muted">
-                  {{ "settings.app.liveWallet.description" | translate }}
+                  {{ "settings_page.live_wallet_description" | translate }}
                 </div>
               </div>
               <div class="form-check form-switch ms-2">
@@ -184,68 +165,86 @@
 
       <!-- Info Develop & Contact -->
       <div class="listview-title mt-1">
-        {{ "settings.develop" | translate }}
+        {{ "settings_page.develop" | translate }}
       </div>
       <ul class="listview border_round image-listview text inset mb-2">
         <li>
-          <a class="item" routerLink="/support">
+          <a class="item zoom clickable" routerLink="/support">
             <div class="in">
-              <div>{{ "settings.info.support" | translate }}</div>
+              <div>{{ "settings_page.info_support" | translate }}</div>
             </div>
           </a>
         </li>
 
         <li>
           <a
-            class="item"
+            class="item zoom clickable"
             data-bs-toggle="modal"
             attr.data-bs-target="#{{ modalConstant.OPENBUG }}"
           >
             <div class="in">
-              <div>{{ "modal.reportBug.title" | translate }}</div>
+              <div>{{ "modal_component.report_bug.title" | translate }}</div>
             </div>
           </a>
         </li>
 
         <li>
-          <a href="{{ environment.hostService }}" class="item" target="_blank">
+          <a
+            href="{{ environment.hostService }}"
+            class="item zoom clickable"
+            target="_blank"
+          >
             <div class="in">
-              <div>{{ "settings.info.service" | translate }}</div>
+              <div>{{ "settings_page.info_service" | translate }}</div>
             </div>
             <span class="text-primary">{{
-              "settings.info.version_open" | translate
+              "settings_page.info_version_open" | translate
             }}</span>
           </a>
         </li>
       </ul>
 
       <!-- Admin Features -->
-      <div *ngIf="user?.role == userRole.ADMIN">
+      @if (user?.roles?.includes(userRole.ADMIN)) {
+      <div>
         <div class="listview-title mt-1">
-          {{ "settings.admin.title" | translate }}
+          {{ "settings_page.admin_title" | translate }}
         </div>
         <ul class="listview border_round image-listview text inset mb-2">
           <li>
-            <a class="item" (click)="cleanCache()">
+            <a class="item zoom clickable" (click)="cleanCache()">
               <div class="in">
-                <div>{{ "settings.admin.cache" | translate }}</div>
+                <div>{{ "settings_page.admin_cache" | translate }}</div>
               </div>
             </a>
           </li>
 
           <li>
-            <a class="item" (click)="importMarketData()">
+            <a class="item zoom clickable" (click)="importMarketData()">
               <div class="in">
-                <div>{{ "settings.admin.marketData" | translate }}</div>
+                <div>{{ "settings_page.admin_marketData" | translate }}</div>
               </div>
             </a>
           </li>
+          @if (user?.roles?.includes(userRole.TAX_CALCULATOR)) {
+          <li>
+            <a (click)="exchangeTokenAndRedirect()" class="item zoom clickable">
+              <div class="in">
+                <div>Crypto Tax Calculator</div>
+              </div>
+              <span class="text-primary">{{
+                "settings_page.info_version_open" | translate
+              }}</span>
+            </a>
+          </li>
+          }
         </ul>
       </div>
+      }
 
       <!-- Security Section -->
       <div class="listview-title mt-1">
-        {{ "settings.security.title" | translate }}
+        {{ "settings_page.security_title" | translate }}
       </div>
       <ul class="listview border_round image-listview text mb-2 inset">
         <li>
@@ -253,78 +252,60 @@
             href="#"
             data-bs-toggle="modal"
             attr.data-bs-target="#{{ modalConstant.PROFILESETTINGS }}"
-            class="item"
+            class="item zoom clickable"
             (click)="profileConst = profileSettings.PASSWORD"
           >
             <div class="in">
-              <div>{{ "settings.security.password" | translate }}</div>
+              <div>{{ "settings_page.security_password" | translate }}</div>
             </div>
           </a>
         </li>
 
         <li>
-          <a (click)="logout()" class="item">
+          <a (click)="logout()" class="item zoom clickable">
             <div class="in">
-              <div>{{ "settings.info.logout" | translate }}</div>
+              <div>{{ "shared_text.logout" | translate }}</div>
             </div>
           </a>
         </li>
       </ul>
 
       <div class="listview-title mt-1">
-        {{ "settings.info.title" | translate }}
+        {{ "settings_page.info_title" | translate }}
       </div>
       <ul class="listview border_round image-listview text inset mb-2">
         <li>
-          <a class="item" routerLink="/on-boarding">
+          <a class="item zoom clickable" routerLink="/on-boarding">
             <div class="in">
-              <div>{{ "settings.info.howItWorks" | translate }}</div>
+              <div>{{ "settings_page.info_howItWorks" | translate }}</div>
             </div>
           </a>
         </li>
 
         <li>
           <a
-            class="item"
+            class="item zoom clickable"
             data-bs-toggle="modal"
             attr.data-bs-target="#{{ modalConstant.UPDATEAPP }}"
           >
             <div class="in">
-              <div>{{ "modal.update.title" | translate }}</div>
+              <div>{{ "modal_component.update.title" | translate }}</div>
             </div>
           </a>
-        </li>
-
-        <li>
-          <div class="item">
-            <div class="in">
-              <div>{{ "settings.info.auto_update" | translate }}</div>
-              <div class="form-check form-switch ms-2">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  id="auto_update"
-                  [checked]="!isAutoUpdate"
-                  (change)="autoUpdate()"
-                />
-                <label class="form-check-label" for="auto_update"></label>
-              </div>
-            </div>
-          </div>
         </li>
 
         <li>
           <a
             href="#"
-            class="item"
+            class="item zoom clickable"
             data-bs-toggle="modal"
             attr.data-bs-target="#{{ modalConstant.VERSION }}"
           >
             <div class="in">
-              <div>{{ "settings.info.version" | translate }}</div>
+              <div>{{ "settings_page.info_version" | translate }}</div>
             </div>
             <span class="text-primary">{{
-              "settings.info.version_open" | translate
+              "settings_page.info_version_open" | translate
             }}</span>
           </a>
         </li>
@@ -346,11 +327,6 @@
   <!-- * App Capsule -->
 </section>
 
-<app-social-list
-  (emitDisconnectSocial)="disconnect($event)"
-  [modalId]="modalConstant.ACCOUNTLIST"
-  [user]="user"
-></app-social-list>
 <app-profile-settings
   [modalId]="modalConstant.PROFILESETTINGS"
   [profileConst]="profileConst"

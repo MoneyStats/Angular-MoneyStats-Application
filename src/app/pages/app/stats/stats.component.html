@@ -1,8 +1,7 @@
 <section class="section-width mx-auto">
   <app-header-mobile
-    *ngIf="screenWidth()! <= 780"
-    title="{{ 'stats.title' | translate }}"
-    backBtn="{{ 'stats.mobile_back' | translate }}"
+    *ngIf="isMobile()"
+    title="{{ 'resume_page.title' | translate }}"
   >
   </app-header-mobile>
 
@@ -11,29 +10,39 @@
     <ul class="nav nav-tabs lined" role="tablist">
       <li class="nav-item">
         <a
+          (click)="goToData()"
           class="nav-link active"
           data-bs-toggle="tab"
           href="#tab_stats"
           role="tab"
         >
-          {{ "stats.tab_stats" | translate }}
+          {{ "resume_page.tab_stats" | translate }}
         </a>
       </li>
       <li class="nav-item">
         <a
+          (click)="goToData()"
           class="nav-link"
           data-bs-toggle="tab"
           href="#tab_category"
           role="tab"
         >
-          {{ "stats.tab_category" | translate }}
+          {{ "resume_page.tab_category" | translate }}
         </a>
       </li>
+      @if (resumeData.hasMoreRecords) {
       <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="tab" href="#tab_history" role="tab">
-          {{ "stats.tab_history" | translate }}
+        <a
+          class="nav-link"
+          data-bs-toggle="tab"
+          href="#tab_history"
+          role="tab"
+          (click)="getHistoryData()"
+        >
+          {{ "resume_page.tab_history" | translate }}
         </a>
       </li>
+      }
     </ul>
   </div>
   <!-- * Extra Header -->
@@ -43,17 +52,17 @@
     <div class="row">
       <app-title-desktop
         class="col-md-6"
-        [title]="'stats.title' | translate"
-        [back]="'stats.back' | translate"
+        [title]="'resume_page.title' | translate"
       ></app-title-desktop>
       <div class="hidden_desktop mt-4 ms-2">
         <p class="text-start fs-2 title-page">
-          {{ "stats.title" | translate }}
+          {{ "resume_page.title" | translate }}
         </p>
         <p class="card-subtitle text-start fs-6">
-          <small>{{ "stats.subTitle" | translate }}</small>
+          <small>{{ "resume_page.sub_title" | translate }}</small>
         </p>
       </div>
+      @if (resumeFullYears && resumeFullYears.length) {
       <div class="addWallet col-md-6">
         <div class="form-group boxed">
           <div class="input-wrapper" style="max-width: 150px; margin-left: 80%">
@@ -61,10 +70,12 @@
               class="form-control custom-select"
               id="select4b"
               (change)="onChange($event)"
+              [disabled]="resumeFullYears.length == 1"
             >
               <option
-                *ngFor="let year of years.slice().reverse()"
-                value="{{ year }}"
+                [selected]="currentYear.toString() === year"
+                *ngFor="let year of resumeFullYears.slice().reverse()"
+                [value]="year"
               >
                 {{ year }}
               </option>
@@ -72,19 +83,19 @@
           </div>
         </div>
       </div>
+      }
     </div>
 
     <app-content-box
       *ngIf="!wallets || !wallets.length"
-      [header]="'stats.nodata.header' | translate"
-      [body]="'stats.nodata.body' | translate"
-      [footer]="'stats.nodata.footer' | translate"
+      [header]="'resume_page.title' | translate"
+      [body]="'resume_page.empty_body_text' | translate"
     ></app-content-box>
 
     <div *ngIf="resumeData.statsWalletDays" class="transactions row">
       <div class="col-md-6 mt-2">
         <!-- item -->
-        <a routerLink="/transaction" class="item">
+        <a routerLink="/transaction" class="item zoom">
           <div class="detail">
             <div class="col-auto" style="padding-right: 20px">
               <div
@@ -94,9 +105,9 @@
               </div>
             </div>
             <div>
-              <strong>{{ "stats.total" | translate }}</strong>
+              <strong>{{ "resume_page.total" | translate }}</strong>
               <p class="sincetot">
-                {{ "stats.since" | translate }}
+                {{ "resume_page.since" | translate }}
                 {{ resumeData.performanceLastDate | date : "dd MMM y" }}
               </p>
             </div>
@@ -131,7 +142,7 @@
       </div>
       <div class="col-md-6 mt-2">
         <!-- item -->
-        <a routerLink="/transaction" class="item">
+        <a routerLink="/transaction" class="item zoom">
           <div class="detail">
             <div class="col-auto" style="padding-right: 20px">
               <div
@@ -141,9 +152,9 @@
               </div>
             </div>
             <div>
-              <strong>{{ "stats.performance" | translate }}</strong>
+              <strong>{{ "shared_text.performance" | translate }}</strong>
               <p class="sincetot">
-                {{ "stats.since" | translate }}
+                {{ "resume_page.since" | translate }}
                 {{ resumeData.performanceSince | date : "dd MMM y" }}
               </p>
             </div>
@@ -190,9 +201,10 @@
         <div class="row">
           <app-data
             *ngIf="wallets && wallets.length"
-            [dashboard]="resumeData"
+            [dashboard]="dashboardData"
             [coinSymbol]="coinSymbol!"
             [hidden]="hidden"
+            [change]="change"
           ></app-data>
         </div>
       </div>
@@ -206,6 +218,7 @@
             [coinSymbol]="coinSymbol!"
             [dashboard]="resumeData"
             [hidden]="hidden"
+            [change]="change"
           ></app-category>
         </div>
       </div>
@@ -217,7 +230,7 @@
           <app-history
             *ngIf="wallets && wallets.length"
             [coinSymbol]="coinSymbol!"
-            [resume]="resume"
+            [resume]="historyData"
             [hidden]="hidden"
           ></app-history>
         </div>

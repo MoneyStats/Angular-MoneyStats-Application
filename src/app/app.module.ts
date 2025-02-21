@@ -7,34 +7,34 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import {
   HttpClient,
-  HttpClientModule,
   HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptorsFromDi,
 } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { DatePipe } from '@angular/common';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { HttpErrorInterceptor } from 'src/assets/core/interceptors/error.inteceptor';
 import { FormsModule } from '@angular/forms';
-import { NgChartsModule } from 'ng2-charts';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { LoaderInterceptor } from 'src/assets/core/interceptors/loader.interceptor';
-import { JwtInterceptor } from './auth/jwt.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/components/shared/shared.module';
 import { InterceptorsModule } from './interceptors/interceptors.module';
 import { CoreModule } from './shared/components/core/core.module';
 import { CryptoComponentsModule } from './shared/components/crypto/crypto-components.module';
+import { ResponseInterceptor } from 'src/assets/core/interceptors/responses.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
+  exports: [],
+  bootstrap: [AppComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(),
-    HttpClientModule,
     NgApexchartsModule,
-    NgChartsModule,
     FormsModule,
     TranslateModule.forRoot({
       loader: {
@@ -54,7 +54,6 @@ import { CryptoComponentsModule } from './shared/components/crypto/crypto-compon
     CoreModule,
     CryptoComponentsModule,
   ],
-  exports: [],
   providers: [
     DatePipe,
     {
@@ -67,10 +66,13 @@ import { CryptoComponentsModule } from './shared/components/crypto/crypto-compon
       useClass: LoaderInterceptor,
       multi: true,
     },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ResponseInterceptor,
+      multi: true,
+    },
+    provideHttpClient(withInterceptorsFromDi()),
   ],
-  bootstrap: [AppComponent],
-  //schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}
 // required for AOT compilation

@@ -1,26 +1,25 @@
 <section class="section-width mx-auto">
   <app-header-mobile
-    *ngIf="screenWidth()! <= 780"
-    [title]="'transaction.title' | translate"
-    [backBtn]="'transaction.mobile_back' | translate"
+    *ngIf="isMobile()"
+    [title]="'transactions_page.title' | translate"
+    [backBtn]="'shared_text.mobile_back' | translate"
   >
   </app-header-mobile>
 
   <!-- App Capsule -->
   <div id="appCapsule" class="mx_">
     <app-title-desktop
-      [title]="'transaction.title' | translate"
-      [back]="'transaction.back' | translate"
+      [title]="'transactions_page.title' | translate"
     ></app-title-desktop>
 
     <!-- Transactions -->
     <div class="section mt-2 mb-2">
       <div class="hidden_desktop mt-4">
         <p class="text-start fs-2 title-page">
-          {{ "transaction.title" | translate }}
+          {{ "transactions_page.title" | translate }}
         </p>
         <p class="card-subtitle text-start mb-1 fs-6">
-          <small>{{ "transaction.subTitle" | translate }}</small>
+          <small>{{ "transactions_page.sub_title" | translate }}</small>
         </p>
       </div>
       <div class="section-title mt-2">
@@ -29,9 +28,8 @@
       <div class="transactions">
         <app-content-box
           *ngIf="!dashboard?.wallets || !dashboard?.wallets?.length"
-          [header]="'dashboard.transaction.nodata.header' | translate"
-          [body]="'dashboard.transaction.nodata.body' | translate"
-          [footer]="'dashboard.transaction.nodata.footer' | translate"
+          [header]="'transactions_page.title' | translate"
+          [body]="'transactions_page.empty_body_text' | translate"
         ></app-content-box>
         <div *ngFor="let wallet of dashboard?.wallets; let i = index">
           <app-transaction-card

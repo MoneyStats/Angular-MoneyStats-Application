@@ -47,3 +47,8 @@
 .inner-round {
   min-height: 350px;
 }
+
+#crypto_resume_table td,
+#crypto_resume_table th {
+  line-height: 22.5px !important; /* Centra il testo verticalmente per contenuto a singola riga */
+}

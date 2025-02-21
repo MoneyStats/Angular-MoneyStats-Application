@@ -1,29 +1,30 @@
 <div class="row">
   <app-content-box
     *ngIf="!tableBalance || !tableBalance.length"
-    [header]="'dashboard.graph.nodata.header' | translate"
-    [body]="'dashboard.graph.nodata.body' | translate"
-    [footer]="'dashboard.graph.nodata.footer' | translate"
+    [header]="'resume_page.title' | translate"
+    [body]="'dashboard_page.graph.empty_body_text' | translate"
   ></app-content-box>
   <!-- App Capsule -->
   <section *ngIf="tableBalance && tableBalance.length">
     <div class="row">
       <div class="section mt-2 col-xl-4 col-md-5">
-        <div class="section-title">{{ "stats.data.history" | translate }}</div>
+        <div class="section-title">{{ "resume_page.title" | translate }}</div>
         <div class="card">
           <div class="table-responsive">
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">{{ "stats.data.table_date" | translate }}</th>
                   <th scope="col">
-                    {{ "stats.data.table_balance" | translate }}
+                    {{ "resume_page.table_date" | translate }}
+                  </th>
+                  <th scope="col">
+                    {{ "shared_text.amount" | translate }}
                   </th>
                   <th scope="col" class="text-end">
-                    {{ "stats.data.table_performance" | translate }}
+                    {{ "shared_text.performance" | translate }}
                   </th>
                   <th scope="col" class="text-end">
-                    {{ "stats.data.table_value" | translate }}
+                    {{ "resume_page.table_trend" | translate }}
                   </th>
                 </tr>
               </thead>
@@ -85,19 +86,13 @@
       <div class="section mt-4 col-xl-8 col-md-7">
         <div class="section-heading">
           <h2 class="title" id="year">
-            {{ "stats.data.graphHistory" | translate }}
+            {{ "resume_page.graph_history" | translate }}
           </h2>
         </div>
-        <app-content-box
-          *ngIf="!resume"
-          [header]="'dashboard.graph.nodata.header' | translate"
-          [body]="'dashboard.graph.nodata.body' | translate"
-          [footer]="'dashboard.graph.nodata.footer' | translate"
-        ></app-content-box>
         <div *ngIf="resume" class="card border_round">
           <div class="card-body" style="min-height: 380px">
             <div
-              *ngIf="!lineChartJS"
+              *ngIf="!chartOptions"
               class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
             >
               <div></div>
@@ -105,27 +100,20 @@
               <div></div>
               <div></div>
             </div>
-            <canvas
-              baseChart
-              height="400"
-              [type]="'line'"
-              [data]="lineChartJS!.lineChartData"
-              [options]="lineChartJS!.lineChartOptions"
-              [legend]="lineChartJS!.lineChartLegend"
-            >
-            </canvas>
-            <!--<apx-chart
-          *ngIf="chartOptions"
-          [series]="chartOptions.series!"
-          [chart]="chartOptions.chart!"
-          [title]="chartOptions.title!"
-          [colors]="chartOptions.colors!"
-          [legend]="chartOptions.legend!"
-          [stroke]="chartOptions.stroke!"
-          [labels]="chartOptions.labels!"
-          type="area"
-        ></apx-chart>
-        <div id="chart-line"></div>-->
+            <apx-chart
+              *ngIf="chartOptions"
+              [series]="chartOptions.series!"
+              [chart]="chartOptions.chart!"
+              [title]="chartOptions.title!"
+              [colors]="chartOptions.colors!"
+              [legend]="chartOptions.legend!"
+              [labels]="chartOptions.labels!"
+              [grid]="chartOptions.grid!"
+              [dataLabels]="chartOptions.dataLabels!"
+              [tooltip]="chartOptions.tooltip!"
+              type="area"
+            ></apx-chart>
+            <div id="chart-line"></div>
           </div>
         </div>
       </div>

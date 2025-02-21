@@ -18,17 +18,21 @@ import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { v4 as uuidv4 } from 'uuid';
 import { Utils } from 'src/assets/core/services/config/utils.service';
+import { SharedService } from 'src/assets/core/services/config/shared.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
 
 @Component({
   selector: 'app-operation-exchange',
   templateUrl: './operation-exchange.component.html',
   styleUrls: ['./operation-exchange.component.scss'],
+  standalone: false,
 })
 export class OperationExchangeComponent implements OnInit, OnDestroy {
   saveWalletSubscribe: Subscription = new Subscription();
   routeSubscribe: Subscription = new Subscription();
   saveWalletsSubscribe: Subscription = new Subscription();
   getPriceSubscribe: Subscription = new Subscription();
+  getCryptoWalletSubscribe: Subscription = new Subscription();
 
   fiat: string = '';
   operationType: string = '';
@@ -60,13 +64,16 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   isEditFees: boolean = false;
   fees: number = 0;
 
-  operationDate: Date = new Date();
+  operationDate: string = Utils.formatDate(new Date());
 
   /* Refactor */
   assetToSell: Asset = new Asset();
 
+  cryptoCurrency: string = '';
+
   constructor(
     private cryptoService: CryptoService,
+    private shared: SharedService,
     private route: ActivatedRoute,
     private router: Router,
     private cdref: ChangeDetectorRef,
@@ -80,6 +87,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     this.saveWalletsSubscribe.unsubscribe();
     this.routeSubscribe.unsubscribe();
     this.getPriceSubscribe.unsubscribe();
+    this.getCryptoWalletSubscribe.unsubscribe();
   }
 
   public get modalConstant(): typeof ModalConstant {
@@ -95,6 +103,8 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.cryptoCurrency =
+      UserService.getUserData().attributes.money_stats_settings.cryptoCurrency!;
     this.getOperationExchange();
   }
 
@@ -103,24 +113,41 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   }
 
   getOperationExchange() {
-    this.operationDate = new Date();
     this.routeSubscribe = this.route.params.subscribe((a: any) => {
       this.operationType = a.operationType;
       this.walletSelect = a.wallet;
       this.fiat = a.fiat;
-      let wallets = Utils.copyObject(
-        this.cryptoService.cryptoDashboard.wallets.slice()
-      );
-      this.filterWalletsTransfer(wallets);
-      this.wallet = wallets.find((w: any) => w.name == this.walletSelect)!;
-      this.getCryptoPrices(a.fiat);
-      if (this.operationType == this.operations.TRADING) {
-        let marketData = Utils.copyObject(this.wallet.assets);
-        this.stablecoin = marketData.filter(
-          (md: any) => md.category == MarketDataCategory.STABLECOIN
-        );
-      }
+      let wallets = Utils.isNullOrEmpty(this.shared.getCryptoWallets())
+        ? null
+        : Utils.copyObject(this.shared.getCryptoWallets().slice());
+
+      if (Utils.isNullOrEmpty(wallets)) {
+        this.getWalletsCryptoData(a.fiat);
+      } else this.resumeData(wallets, a.fiat);
     });
+  }
+
+  getWalletsCryptoData(currency: string) {
+    this.getCryptoWalletSubscribe = this.cryptoService
+      .getWalletsCryptoData()
+      .subscribe((data) => {
+        this.cryptoService.cache.cacheWalletsCryptoData(data);
+        LOG.info(data.message!, 'CryptoDashboardComponent');
+        const wallets = data.data;
+        this.resumeData(wallets, currency);
+      });
+  }
+
+  resumeData(wallets: any, currency: string) {
+    this.filterWalletsTransfer(wallets);
+    this.wallet = wallets.find((w: any) => w.name == this.walletSelect)!;
+    this.getCryptoPrices(currency);
+    if (this.operationType == this.operations.TRADING) {
+      let marketData = Utils.copyObject(this.wallet.assets);
+      this.stablecoin = marketData.filter(
+        (md: any) => md.category == MarketDataCategory.STABLECOIN
+      );
+    }
   }
 
   filterWalletsTransfer(wallets: Wallet[]) {
@@ -303,10 +330,14 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
         operation.trend = 0;
 
         // Chiud eventuali operazioni di trading se sono presenti e Aperte
-        if (assetBuying.operations.filter((o: any) => o.status === 'OPEN')) {
+        if (
+          assetBuying.operations.filter((o: any) => o.status === 'OPEN')
+            .length > 0
+        ) {
           let open = assetBuying.operations.filter(
             (o: Operation) => o.status === 'OPEN'
           )[0];
+
           open.status = 'CLOSED';
           open.exitDate = new Date();
           open.exitPrice = assetBuying.current_price;
@@ -369,6 +400,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
 
       this.saveWallet(walletToSave);
     } else {
+      operation.exitCoin = operation.entryCoin;
       transferedAsset.operations = [operation];
 
       let walletSell = Utils.copyObject(this.wallet);
@@ -383,7 +415,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
 
   saveWallet(walletToSave: Wallet) {
     this.saveWalletSubscribe = this.cryptoService
-      .addOrUpdateCryptoAsset(walletToSave)
+      .updateCryptoAsset(walletToSave)
       .subscribe((data) => {
         LOG.info(data.message!, 'OperationExchangeComponent');
         let message =
@@ -429,7 +461,12 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
         return form.invalid || !this.disableOnEdit();
       case OperationsType.HOLDING:
       case OperationsType.TRADING:
-        return form.invalid || !this.validateSelect() || !this.disableOnEdit();
+        return (
+          form.invalid ||
+          !this.validateSelect() ||
+          !this.disableOnEdit() ||
+          this.assetToSell.balance == 0
+        );
       case OperationsType.TRANSFER:
         return (
           form.invalid ||

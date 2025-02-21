@@ -2,7 +2,11 @@ import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Dashboard, Wallet } from 'src/assets/core/data/class/dashboard.class';
+import {
+  Dashboard,
+  Stats,
+  Wallet,
+} from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import {
@@ -10,7 +14,6 @@ import {
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
 import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
-import { WalletService } from 'src/assets/core/services/api/wallet.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
@@ -19,11 +22,13 @@ import { environment } from 'src/environments/environment';
 import { Subscription } from 'rxjs';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
+import { SharedService } from 'src/assets/core/services/config/shared.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
+  standalone: false,
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   dashboardSubscribe: Subscription = new Subscription();
@@ -50,9 +55,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     private dashboardService: DashboardService,
     private datePipe: DatePipe,
-    private walletService: WalletService,
     private translate: TranslateService,
-    private router: Router
+    private router: Router,
+    private shared: SharedService
   ) {}
 
   ngOnDestroy(): void {
@@ -70,8 +75,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         this.dashboardService.cache.cacheDashboardData(data);
         LOG.info(data.message!, 'DashboardComponent');
+        this.shared.setDashboard(data.data);
         if (!data.data.balance) {
-          this.dashboard.categories = data.data.categories;
+          //this.dashboard.categories = data.data.categories;
           this.dashboard.wallets = data.data.wallets;
 
           if (!this.dashboardService.isOnboarding) {
@@ -87,7 +93,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
           }
           this.dashboard = data.data;
         }
-        this.dashboardService.dashboard = data.data;
         if (this.dashboard.wallets && this.dashboard.wallets.length) {
           this.scrollX();
         } else {
@@ -112,20 +117,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.graphTitle =
           this.performanceSince != this.performanceLastDate
             ? this.translate
-                .instant('dashboard.graph.title')
+                .instant('dashboard_page.graph.title')
                 .replace('&FROM&', this.performanceSince)
                 .replace('&TO&', this.performanceLastDate)
             : this.translate
-                .instant('dashboard.graph.titleFirst')
+                .instant('dashboard_page.graph.titleFirst')
                 .replace('&FROM&', this.performanceSince);
         this.lastStatsPerformance = this.dashboard.lastStatsPerformance + ' %';
         this.lastStatsBalanceDifference =
           this.dashboard.lastStatsBalanceDifference +
           ' ' +
-          this.user.settings.currencySymbol;
-        this.walletService.totalBalance = this.dashboard.balance;
+          this.user.attributes.money_stats_settings.currencySymbol;
         this.renderChart(this.dashboard);
-        this.walletDetails(data.data.wallets);
       });
 
     this.isWalletBalanceHidden();
@@ -134,11 +137,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   renderChart(dashboard: Dashboard) {
-    let dashboardRender = Utils.copyObject(dashboard);
+    let dashboardRender: Dashboard = Utils.copyObject(dashboard);
     setTimeout(() => {
       if (this.dashboard.wallets) {
-        this.chartOptions =
-          ChartService.appRenderWalletPerformance(dashboardRender);
+        Utils.mapLiveWalletsDataForChart(
+          dashboardRender.statsWalletDays,
+          dashboardRender.wallets
+        );
+        // this.chartOptions = ChartService.appRenderWalletPerformance(dashboardRender);
+        ChartService.appRenderWalletPerformance(dashboardRender).then(
+          (chart) => (this.chartOptions = chart)
+        );
       }
     }, 500);
   }
@@ -178,9 +187,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       scrollContainer.scrollLeft += evt.deltaY * 2;
     });
   }
-  walletDetails(res: Wallet[]) {
-    this.walletService.walletDetails = res;
-  }
 
   changeAmountStatus(hidden: boolean) {
     this.hidden = hidden;
@@ -193,5 +199,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (isHidden != null) {
       this.hidden = isHidden;
     }
+  }
+
+  getCopyright() {
+    return this.translate
+      .instant('copyright')
+      .replace('#YEAR#', new Date().getFullYear());
   }
 }

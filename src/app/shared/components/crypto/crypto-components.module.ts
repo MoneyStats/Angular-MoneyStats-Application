@@ -13,12 +13,12 @@ import { OperationsModalComponent } from './modal/operations-modal/operations-mo
 import { SelectCryptoCurrencyComponent } from './modal/select-crypto-currency/select-crypto-currency.component';
 import { AddCryptoStatsComponent } from './modal/operations-modal/add-crypto-stats/add-crypto-stats.component';
 import { AddCryptoOperationComponent } from './modal/operations-modal/add-crypto-operation/add-crypto-operation.component';
-import { InfoModalComponent } from './modal/info-modal/info-modal.component';
 import { AssetSelectComponent } from './asset-select/asset-select.component';
 import { OperationDetailsComponent } from './modal/operation-details/operation-details.component';
 import { OperationsListComponent } from './operations-list/operations-list.component';
 import { CloseOperationComponent } from './modal/close-operation/close-operation.component';
 import { MarketDataTableComponent } from './market-data-table/market-data-table.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,6 @@ import { MarketDataTableComponent } from './market-data-table/market-data-table.
     SelectCryptoCurrencyComponent,
     AddCryptoStatsComponent,
     AddCryptoOperationComponent,
-    InfoModalComponent,
     AssetSelectComponent,
     OperationDetailsComponent,
     OperationsListComponent,
@@ -39,7 +38,6 @@ import { MarketDataTableComponent } from './market-data-table/market-data-table.
     OperationsModalComponent,
     SelectCryptoCurrencyComponent,
     AssetSelectComponent,
-    InfoModalComponent,
     OperationDetailsComponent,
     OperationsListComponent,
     CloseOperationComponent,
@@ -50,6 +48,7 @@ import { MarketDataTableComponent } from './market-data-table/market-data-table.
     CommonModule,
     IonicModule.forRoot(),
     FormsModule,
+    SharedModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,

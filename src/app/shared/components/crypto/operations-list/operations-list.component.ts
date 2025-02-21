@@ -3,6 +3,7 @@ import {
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 import { Wallet } from 'src/assets/core/data/class/dashboard.class';
@@ -10,24 +11,22 @@ import {
   ModalConstant,
   OperationsType,
 } from 'src/assets/core/data/constant/constant';
-import {
-  CryptoDashboard,
-  Operation,
-} from 'src/assets/core/data/class/crypto.class';
+import { Asset, Operation } from 'src/assets/core/data/class/crypto.class';
 import { v4 as uuidv4 } from 'uuid';
 import { CryptoService } from 'src/assets/core/services/api/crypto.service';
 import { Router } from '@angular/router';
 import { Utils } from 'src/assets/core/services/config/utils.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
 
 @Component({
   selector: 'app-operations-list',
   templateUrl: './operations-list.component.html',
   styleUrls: ['./operations-list.component.scss'],
+  standalone: false,
 })
 export class OperationsListComponent implements OnInit, OnChanges {
   @Input('walletsAsset') walletsAsset: Wallet[] = [];
-  @Input('cryptoDashboard') cryptoDashboard: CryptoDashboard =
-    new CryptoDashboard();
+  @Input('cryptoAssets') cryptoAssets: Asset[] = [];
   @Input('isAssetOperations') isAssetOperations: boolean = false;
 
   // Input full list
@@ -38,7 +37,10 @@ export class OperationsListComponent implements OnInit, OnChanges {
   @Input('isFullList') isFullList: boolean = false;
   @Input('modalID') modalID: string = uuidv4();
 
-  operationSelect: any;
+  @Output('operationSelect') operationSelect: any;
+
+  cryptoCurrency?: string =
+    UserService.getUserData().attributes.money_stats_settings.cryptoCurrency;
 
   operations: Operation[] = [];
   constructor(private cryptoService: CryptoService, private router: Router) {}
@@ -58,6 +60,9 @@ export class OperationsListComponent implements OnInit, OnChanges {
   }
 
   getOperations() {
+    let assets = Utils.isNullOrEmpty(this.cryptoAssets)
+      ? this.cryptoService.getAssetList(this.walletsAsset)
+      : this.cryptoAssets;
     let operations: Operation[] = [];
     let wallets = Utils.copyObject(this.walletsAsset);
     wallets.forEach((wallet: any) => {
@@ -67,12 +72,11 @@ export class OperationsListComponent implements OnInit, OnChanges {
             asset.operations.forEach((operation: any) => {
               operation.asset = asset;
               operation.wallet = wallet;
-              if (operation.type != OperationsType.NEWINVESTMENT)
+              if (operation.type != OperationsType.NEWINVESTMENT) {
                 operation.assetSell = Utils.copyObject(
-                  this.cryptoService.cryptoDashboard.assets.find(
-                    (a) => a.symbol == operation.entryCoin
-                  )
+                  assets.find((a) => a.symbol == operation.entryCoin)
                 );
+              }
               operations.push(operation);
             });
         });
@@ -98,7 +102,7 @@ export class OperationsListComponent implements OnInit, OnChanges {
     let uuid = uuidv4();
     this.cryptoService.operationsMap.set(uuid, this.getOperations());
     this.router.navigate([
-      '/crypto/operations/' + this.cryptoDashboard.currency + '/' + uuid,
+      '/crypto/operations/' + this.cryptoCurrency + '/' + uuid,
     ]);
   }
 

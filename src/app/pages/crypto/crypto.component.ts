@@ -15,6 +15,7 @@ import { UserService } from 'src/assets/core/services/api/user.service';
   templateUrl: './crypto.component.html',
   styleUrls: ['./crypto.component.scss'],
   animations: [fadeSlider],
+  standalone: false,
 })
 export class CryptoComponent implements OnInit, OnDestroy {
   cryptoDashboardSub: Subscription = new Subscription();
@@ -51,7 +52,7 @@ export class CryptoComponent implements OnInit, OnDestroy {
     if (this.user.name === 'DEFAULT_NAME') {
       this.user = AuthService.getUserFromStorage();
     }
-    if (!this.user.settings.completeRequirement?.match(Status.COMPLETED)) {
+    if (!this.user.attributes.money_stats_settings.completeRequirement?.match(Status.COMPLETED)) {
       this.onBoard();
     }
     /*this.cryptoDashboardSub = this.cryptoService
@@ -79,7 +80,7 @@ export class CryptoComponent implements OnInit, OnDestroy {
   onBoard() {
     if (!this.appService.isOnboardingCrypto) {
       this.appService.isOnboardingCrypto = true;
-      this.router.navigate(['on-boarding']);
+      this.router.navigate(['on-boarding/crypto']);
     } else this.router.navigate(['crypto/requirements']);
   }
 

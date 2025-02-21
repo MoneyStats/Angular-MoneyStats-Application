@@ -8,9 +8,9 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">{{ "modal.version.title" | translate }}</h5>
+        <h5 class="modal-title">{{ "version.title" | translate }}</h5>
         <a href="javascript:;" data-bs-dismiss="modal">{{
-          "modal.version.close" | translate
+          "version.close" | translate
         }}</a>
       </div>
       <div class="modal-body">
@@ -18,13 +18,15 @@
           <div class="captionCenter">
             <div class="card" style="max-width: 400px">
               <img
-                src="{{environment.baseUrlVersion}}assets/images/logos/logo_transparent.png"
+                src="{{
+                  environment.baseUrlVersion
+                }}assets/images/logos/logo_transparent.png"
                 class="responsive"
                 alt="logo_transparent"
               />
               <hr />
               <p class="text-center">
-                {{ "modal.version.moneystats" | translate }}
+                {{ "version.moneystats" | translate }}
                 {{ environment.version }}
               </p>
               <button
@@ -33,7 +35,7 @@
                 attr.data-bs-target="#{{ modalConstant.CHANGELOG }}"
                 class="btn btn-text-primary rounded shadowed me-1 mb-1"
               >
-                {{ "modal.version.changelog.title" | translate }}
+                {{ "version.changelog.title" | translate }}
               </button>
             </div>
           </div>

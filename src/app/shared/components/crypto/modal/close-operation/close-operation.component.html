@@ -16,7 +16,7 @@
             </div>
             <div class="text-center">
               <h3>
-                {{ "crypto.closeOperation.title" | translate }}
+                {{ "modal_component.close_operation.title" | translate }}
                 <ion-icon
                   name="alert-circle"
                   style="width: 20px; height: 20px; vertical-align: -2px"
@@ -24,13 +24,17 @@
                   attr.data-bs-target="#{{ modalConstant.INFO }}"
                 ></ion-icon>
               </h3>
-              <p [innerHTML]="'crypto.closeOperation.subTitle' | translate"></p>
+              <p
+                [innerHTML]="
+                  'modal_component.close_operation.subTitle' | translate
+                "
+              ></p>
               <hr />
               <div class="splash-page mb-5">
                 <div class="transfer-verification">
                   <div class="transfer-amount">
                     <span class="caption">{{
-                      "crypto.closeOperation.amount" | translate
+                      "modal_component.close_operation.amount" | translate
                     }}</span>
                     <h2>{{ operationToClose.entryCoin }} {{ currentPrice }}</h2>
                     <p style="margin-top: -20px">
@@ -78,14 +82,19 @@
                       <div class="dot bg-success"></div>
                       <div class="content">
                         <h5 class="title text-start">
-                          {{ "crypto.closeOperation.open" | translate }}
+                          {{
+                            "modal_component.close_operation.open" | translate
+                          }}
                           {{ operationToClose.assetSell?.symbol }}-{{
                             operationToClose.asset?.symbol
                           }}
                         </h5>
                         <div class="text text-start">
                           <p>
-                            {{ "crypto.closeOperation.pair" | translate }}:
+                            {{
+                              "modal_component.close_operation.pair"
+                                | translate
+                            }}:
                             <strong
                               >{{ operationToClose.assetSell?.symbol }}-{{
                                 operationToClose.asset?.symbol
@@ -93,7 +102,10 @@
                             >
                           </p>
                           <p class="p">
-                            {{ "crypto.closeOperation.quantity" | translate }}:
+                            {{
+                              "modal_component.close_operation.quantity"
+                                | translate
+                            }}:
                             <strong
                               >{{ operationToClose.entryQuantity }}
                               {{ operationToClose.exitCoin }}</strong
@@ -101,14 +113,20 @@
                           </p>
                           <p class="p">
                             {{ operationToClose.assetSell?.symbol }}
-                            {{ "crypto.closeOperation.value" | translate }}:
+                            {{
+                              "modal_component.close_operation.value"
+                                | translate
+                            }}:
                             <strong
                               >{{ operationToClose.entryPriceValue }}
                               {{ operationToClose.entryCoin }}</strong
                             >
                           </p>
                           <p class="p">
-                            {{ "crypto.closeOperation.price" | translate }}
+                            {{
+                              "modal_component.close_operation.price"
+                                | translate
+                            }}
                             {{ operationToClose.exitCoin }}:
                             <strong
                               >{{ operationToClose.entryPrice }}
@@ -116,7 +134,10 @@
                             >
                           </p>
                           <p *ngIf="operationToClose.fees" class="p">
-                            {{ "crypto.closeOperation.fees" | translate }}:
+                            {{
+                              "modal_component.close_operation.fees"
+                                | translate
+                            }}:
                             <strong
                               >{{ operationToClose.fees }}
                               {{ operationToClose.assetSell?.symbol }}</strong
@@ -132,12 +153,41 @@
                       <div class="dot bg-danger"></div>
                       <div *ngIf="isEditActive" class="content">
                         <div class="row">
+                          <div class="col-12">
+                            <div
+                              class="form-group boxed float-end ms-1 me-1 date-form"
+                            >
+                              <div class="input-wrapper">
+                                <input
+                                  name="date"
+                                  [(ngModel)]="closingDate"
+                                  #date1="ngModel"
+                                  type="date"
+                                  class="form-control"
+                                  id="text4b"
+                                  value="{{ closingDate }}"
+                                  required
+                                />
+                                <div
+                                  *ngIf="validateClosingDate()"
+                                  class="alert alert-danger mb-1"
+                                  role="alert"
+                                >
+                                  {{
+                                    "modal_component.operations.add_stats.data_select"
+                                      | translate
+                                  }}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                           <div class="col-12 col-md-6">
                             <div class="form-group basic">
                               <div class="input-wrapper">
                                 <label class="label" for="quantity1"
                                   >{{
-                                    "crypto.closeOperation.quantity" | translate
+                                    "modal_component.close_operation.quantity"
+                                      | translate
                                   }}
                                   ({{
                                     operationToClose.assetSell?.symbol
@@ -164,7 +214,8 @@
                               <div class="input-wrapper">
                                 <label class="label" for="quantityValue1"
                                   >{{
-                                    "crypto.closeOperation.value" | translate
+                                    "modal_component.close_operation.value"
+                                      | translate
                                   }}
                                   ({{ cryptoCurrency }})</label
                                 >
@@ -189,7 +240,8 @@
                               <div class="input-wrapper">
                                 <label class="label" for="price1"
                                   >{{
-                                    "crypto.closeOperation.selling" | translate
+                                    "modal_component.close_operation.selling"
+                                      | translate
                                   }}
                                   ({{ operationToClose.asset?.symbol }})</label
                                 >
@@ -214,7 +266,8 @@
                               <div class="input-wrapper">
                                 <label class="label" for="fees"
                                   >{{
-                                    "crypto.closeOperation.fees" | translate
+                                    "modal_component.close_operation.fees"
+                                      | translate
                                   }}
                                   ({{ operationToClose.asset?.symbol }})</label
                                 >
@@ -225,7 +278,8 @@
                                   class="form-control"
                                   id="fees"
                                   placeholder="{{
-                                    'crypto.closeOperation.fees' | translate
+                                    'modal_component.close_operation.fees'
+                                      | translate
                                   }}"
                                   [(ngModel)]="fees"
                                   (keyup)="refreshData()"
@@ -240,14 +294,19 @@
                       </div>
                       <div *ngIf="!isEditActive" class="content">
                         <h5 class="title text-start">
-                          {{ "crypto.closeOperation.closeP" | translate }}
+                          {{
+                            "modal_component.close_operation.closeP" | translate
+                          }}
                           {{ operationToClose.asset?.symbol }}-{{
                             operationToClose.assetSell?.symbol
                           }}
                         </h5>
                         <div class="text text-start">
                           <p>
-                            {{ "crypto.closeOperation.pair" | translate }}:
+                            {{
+                              "modal_component.close_operation.pair"
+                                | translate
+                            }}:
                             <strong
                               >{{ operationToClose.asset?.symbol }}-{{
                                 operationToClose.assetSell?.symbol
@@ -255,7 +314,10 @@
                             >
                           </p>
                           <p class="p">
-                            {{ "crypto.closeOperation.quantity" | translate }}:
+                            {{
+                              "modal_component.close_operation.quantity"
+                                | translate
+                            }}:
                             <strong
                               >{{ operationToClose.exitQuantity }}
                               {{ operationToClose.entryCoin }}</strong
@@ -263,7 +325,10 @@
                           </p>
                           <p class="p">
                             {{ operationToClose.assetSell?.symbol }}
-                            {{ "crypto.closeOperation.value" | translate }}:
+                            {{
+                              "modal_component.close_operation.value"
+                                | translate
+                            }}:
                             <strong
                               >{{ operationToClose.exitPriceValue }}
                               {{ cryptoCurrency }}
@@ -283,7 +348,10 @@
                             >
                           </p>
                           <p class="p">
-                            {{ "crypto.closeOperation.sellPrice" | translate }}
+                            {{
+                              "modal_component.close_operation.sellPrice"
+                                | translate
+                            }}
                             {{ operationToClose.exitCoin }}:
                             <strong
                               >{{ operationToClose.exitPrice }}
@@ -291,7 +359,10 @@
                             >
                           </p>
                           <p *ngIf="fees" class="p">
-                            {{ "crypto.closeOperation.fees" | translate }}:
+                            {{
+                              "modal_component.close_operation.fees"
+                                | translate
+                            }}:
                             <strong
                               >{{ fees }}
                               {{ operationToClose.asset?.symbol }}</strong
@@ -311,15 +382,15 @@
                   *ngIf="!isEditActive"
                   (click)="isEditActive = true"
                   class="btn btn-lg btn-outline-secondary btn-block goBack"
-                  >{{ "crypto.closeOperation.edit" | translate }}</a
+                  >{{ "modal_component.close_operation.edit" | translate }}</a
                 >
                 <button
-                  [disabled]="f.invalid"
+                  [disabled]="f.invalid || validateClosingDate()"
                   *ngIf="isEditActive"
                   (click)="isEditActive = false"
                   class="btn btn-lg btn-primary btn-block goBack"
                 >
-                  {{ "crypto.closeOperation.save" | translate }}
+                  {{ "modal_component.close_operation.save" | translate }}
                 </button>
               </div>
               <div class="col-6">
@@ -329,7 +400,7 @@
                   class="btn btn-danger btn-lg btn-block"
                   data-bs-toggle="modal"
                 >
-                  {{ "crypto.closeOperation.close" | translate }}
+                  {{ "modal_component.close_operation.close" | translate }}
                 </button>
               </div>
             </div>
