@@ -49,6 +49,7 @@
         @if (!isAssetsWithNoHistory) {
         <li class="nav-item">
           <a
+            (click)="changeData()"
             class="nav-link {{ isAssetsWithNoHistory ? '' : 'active' }}"
             data-bs-toggle="tab"
             href="#overview"
@@ -89,6 +90,7 @@
             [hidden]="hidden"
             [resumeData]="resumeData"
             [isPast]="isPast"
+            [change]="change"
           ></app-resume-assets>
         </div>
         <div class="tab-pane fade" id="card" role="tabpanel">

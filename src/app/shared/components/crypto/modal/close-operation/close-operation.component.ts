@@ -32,7 +32,7 @@ export class CloseOperationComponent implements OnDestroy {
 
   currentPrice: number = 0;
   isEditActive: boolean = false;
-  closingDate: string = this.formatDate(new Date());
+  closingDate: string = Utils.formatDate(new Date());
 
   fees: number = 0;
 
@@ -56,10 +56,6 @@ export class CloseOperationComponent implements OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.operation) this.getData();
-  }
-
-  formatDate(date: Date): string {
-    return date.toISOString().split('T')[0]; // Converte la data in formato 'YYYY-MM-DD'
   }
 
   getData() {

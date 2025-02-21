@@ -44,7 +44,7 @@ export class WalletService {
       return of(this.cache.getWalletByIdCache(id));
     if (UserService.getUserData().mockedUser) {
       return this.http.get<ResponseModel>(
-        environment.mockedGetWalletByIdDataUrl
+        environment.mockedGetWalletByIdDataUrl.replace('#ID#', id.toString())
       );
     } else {
       const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);

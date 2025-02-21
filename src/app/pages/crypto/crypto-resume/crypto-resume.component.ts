@@ -26,6 +26,7 @@ import { SharedService } from 'src/assets/core/services/config/shared.service';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-crypto-resume',
@@ -60,6 +61,7 @@ export class CryptoResumeComponent
   currentYear = new Date().getFullYear();
 
   isPast: boolean = false;
+  change: string = '';
 
   constructor(
     private cryptoService: CryptoService,
@@ -250,5 +252,9 @@ export class CryptoResumeComponent
     //    (asset) => !asset.history || !asset.history.length
     //  )
     //);
+  }
+
+  changeData() {
+    this.change = uuidv4();
   }
 }

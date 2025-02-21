@@ -35,13 +35,15 @@ export class ResumeAssetsComponent implements OnChanges {
   private tableId = 'crypto_resume_table';
   private dataTableInstance: any;
 
+  @Input('change') change: string = '';
+
   constructor(private translate: TranslateService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.getDatas();
     if (changes['resumeData'] && !Utils.isNullOrEmpty(this.resumeData.assets)) {
       this.reinitializeDataTable();
-    }
+    } else if (changes['change']) this.getDatas();
   }
 
   private reinitializeDataTable(): void {

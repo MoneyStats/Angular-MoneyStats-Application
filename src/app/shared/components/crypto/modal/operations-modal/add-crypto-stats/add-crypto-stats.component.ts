@@ -159,6 +159,12 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
           // Creo un nuovo oggetto Stats e imposto i dati per il nuovo stat
           const stats = new Stats();
           this.setDataForNewStats(asset, statsWalletDays, stats);
+          // Fix Error Code: undefined,  Message: Converting circular structure to JSON
+          asset.operations.forEach((o) => {
+            o.asset = undefined;
+            o.assetSell = undefined;
+            o.wallet = undefined;
+          });
 
           // Resetto il valore di newValue per l'asset
           asset.newValue = 0; // Imposto 0 invece di una stringa vuota
@@ -430,6 +436,7 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
 
   save() {
     this.saveValidation = false;
+    console.log(this.wallets);
     this.addStats = this.statsService
       .addStatsData(this.wallets)
       .subscribe((data) => {

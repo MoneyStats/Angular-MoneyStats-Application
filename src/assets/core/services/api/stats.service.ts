@@ -20,7 +20,11 @@ export class StatsService {
     if (this.cache.getResumeCache(year))
       return of(this.cache.getResumeCache(year));
     if (UserService.getUserData().mockedUser) {
-      return this.http.get<ResponseModel>(environment.getResumeDataUrlMock);
+      const url = environment.getResumeDataUrlMock.replace(
+        '#YEAR#',
+        year.toString()
+      );
+      return this.http.get<ResponseModel>(url);
     } else {
       const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
       const headers = new HttpHeaders({ Authorization: authToken! });

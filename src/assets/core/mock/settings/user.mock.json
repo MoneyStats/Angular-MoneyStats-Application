@@ -22,9 +22,11 @@
       "attributes": {
         "money_stats_settings": {
           "currency": "EUR",
+          "liveWallets": "ACTIVE",
           "cryptoCurrency": "USD",
+          "currencySymbol": "€",
           "completeRequirement": "COMPLETED",
-          "liveWallets": "ACTIVE"
+          "cryptoCurrencySymbol": "$"
         }
       }
     }

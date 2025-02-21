@@ -64,7 +64,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   isEditFees: boolean = false;
   fees: number = 0;
 
-  operationDate: Date = new Date();
+  operationDate: string = Utils.formatDate(new Date());
 
   /* Refactor */
   assetToSell: Asset = new Asset();
@@ -103,7 +103,8 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.cryptoCurrency = UserService.getUserData().attributes.money_stats_settings.cryptoCurrency!;
+    this.cryptoCurrency =
+      UserService.getUserData().attributes.money_stats_settings.cryptoCurrency!;
     this.getOperationExchange();
   }
 
@@ -112,7 +113,6 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   }
 
   getOperationExchange() {
-    this.operationDate = new Date();
     this.routeSubscribe = this.route.params.subscribe((a: any) => {
       this.operationType = a.operationType;
       this.walletSelect = a.wallet;

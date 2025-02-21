@@ -23,25 +23,32 @@ export const environment = {
   /**
    * @Mock_Data
    */
-  getUserUrl: baseUrlApp + 'assets/core/mock/user.mock.json',
-  authorizeUrlMock: baseUrlApp + 'assets/core/mock/authorize.mock.json',
-  getDashboardDataUrlMock: baseUrlApp + 'assets/core/mock/dashboard.mock.json',
-  mockedGetWalletsDataUrl: baseUrlApp + 'assets/core/mock/wallets.mock.json',
+  getUserUrl: baseUrlApp + 'assets/core/mock/settings/user.mock.json',
+  authorizeUrlMock:
+    baseUrlApp + 'assets/core/mock/settings/authorize.mock.json',
+  getDashboardDataUrlMock:
+    baseUrlApp + 'assets/core/mock/app.dashboard.mock.json',
+  mockedGetWalletsDataUrl:
+    baseUrlApp + 'assets/core/mock/app.wallets.mock.json',
   mockedGetWalletsCryptoDataUrl:
-    baseUrlApp + 'assets/core/mock/wallets.crypto.mock.json',
+    baseUrlApp + 'assets/core/mock/crypto.wallets.mock.json',
   mockedGetWalletByIdDataUrl:
-    baseUrlApp + 'assets/core/mock/walletById.mock.json',
-  getResumeDataUrlMock: baseUrlApp + 'assets/core/mock/stats.mock.json',
-  getHistoryDataUrlMock: baseUrlApp + 'assets/core/mock/history.mock.json',
+    baseUrlApp + 'assets/core/mock/wallets/app.wallet_by_id_#ID#.mock.json',
+  getResumeDataUrlMock:
+    baseUrlApp + 'assets/core/mock/app.resume_#YEAR#.mock.json',
+  getHistoryDataUrlMock: baseUrlApp + 'assets/core/mock/app.history.mock.json',
   getTemplate: baseUrlApp + 'assets/template/template.json',
-  getCryptoDashboardMock: baseUrlApp + 'assets/core/mock/crypto.dash.mock.json',
-  getCryptoPriceMock: baseUrlApp + 'assets/core/mock/crypto.price.mock.json',
-  getCryptoResumeMock: baseUrlApp + 'assets/core/mock/crypto.stats.mock.json',
+  getCryptoDashboardMock:
+    baseUrlApp + 'assets/core/mock/crypto.dashboard.mock.json',
+  getCryptoPriceMock:
+    baseUrlApp + 'assets/core/mock/crypto.marketData.mock.json',
+  getCryptoResumeMock:
+    baseUrlApp + 'assets/core/mock/crypto.resume_#YEAR#.mock.json',
   getCryptoAssetsMock: baseUrlApp + 'assets/core/mock/crypto.assets.mock.json',
   getCryptoAssetsDetailsMock:
-    baseUrlApp + 'assets/core/mock/crypto.details.mock.json',
+    baseUrlApp + 'assets/core/mock/assets/crypto.asset_#IDENTIFIER#.mock.json',
   getCryptoHistoryDataUrlMock:
-    baseUrlApp + 'assets/core/mock/history.crypto.mock.json',
+    baseUrlApp + 'assets/core/mock/crypto.history.mock.json',
 
   /**
    * @Authentication_Datas

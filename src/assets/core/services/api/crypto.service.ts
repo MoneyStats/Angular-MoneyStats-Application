@@ -89,7 +89,11 @@ export class CryptoService {
       Authorization: authToken!,
     });
     if (UserService.getUserData().mockedUser) {
-      return this.http.get<any>(environment.getCryptoResumeMock);
+      const url = environment.getCryptoResumeMock.replace(
+        '#YEAR#',
+        year.toString()
+      );
+      return this.http.get<any>(url);
     } else {
       const url = environment.getCryptoResumeDataUrl.replace(
         ':year',
@@ -143,7 +147,11 @@ export class CryptoService {
       Authorization: authToken!,
     });
     if (UserService.getUserData().mockedUser) {
-      return this.http.get<any>(environment.getCryptoAssetsDetailsMock);
+      const url = environment.getCryptoAssetsDetailsMock.replace(
+        '#IDENTIFIER#',
+        identifier
+      );
+      return this.http.get<any>(url);
     } else {
       const url = environment.getCryptoAssetsDetailsDataUrl.replace(
         ':identifier',

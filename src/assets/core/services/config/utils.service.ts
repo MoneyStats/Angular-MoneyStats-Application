@@ -94,6 +94,10 @@ export class Utils {
     }).format(date);
   }
 
+  public static formatDate(date: Date): string {
+    return date.toISOString().split('T')[0]; // Converte la data in formato 'YYYY-MM-DD'
+  }
+
   public static getBrowserVersion(userAgent: any): string {
     let browserVersion = 'Unknown';
 

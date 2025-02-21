@@ -12,6 +12,7 @@
     <li *ngIf="filterByPage(i)">
       <a
         class="item zoom"
+        style="border-radius: 20px !important"
         (click)="selectOperation(operation)"
         data-bs-toggle="modal"
         attr.data-bs-target="#{{ modalID }}"
