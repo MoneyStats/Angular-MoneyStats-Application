@@ -19,11 +19,11 @@ RUN npm install --force && \
 
 # Usa nginx come server
 FROM nginx:alpine
-COPY --from=builder /app/dist/ /usr/share/nginx/html/
+COPY --from=builder /app/dist/* /usr/share/nginx/html/
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Avvia il server
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
 
 #FROM node:19.2.0-alpine AS builder
 #WORKDIR '/app'
