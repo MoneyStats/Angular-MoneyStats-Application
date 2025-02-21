@@ -7,12 +7,12 @@ services:
     hostname: prod.moneystats.angular
     ports:
       - "10000:80"
-    environment:
-      - MONEYSTATS_SERVICE_URL=${MONEYSTATS_SERVICE_URL}
-      - ACCESS_SPHERE_SERVICE_URL=${ACCESS_SPHERE_SERVICE_URL}
-      - IMAGE_SIZE=${IMAGE_SIZE}
-      - CACHE_ENABLE=${CACHE_ENABLE}
-      - CACHE_TIMEOUT=${CACHE_TIMEOUT}
+    #environment:
+    #  - MONEYSTATS_SERVICE_URL=${MONEYSTATS_SERVICE_URL}
+    #  - ACCESS_SPHERE_SERVICE_URL=${ACCESS_SPHERE_SERVICE_URL}
+    #  - IMAGE_SIZE=${IMAGE_SIZE}
+    #  - CACHE_ENABLE=${CACHE_ENABLE}
+    #  - CACHE_TIMEOUT=${CACHE_TIMEOUT}
     networks:
       docker-network:
         aliases:

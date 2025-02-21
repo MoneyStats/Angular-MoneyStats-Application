@@ -61,6 +61,14 @@ jobs:
       - name: 🗝️ Grant execute permission to script
         run: chmod +x ./rename.sh
 
+      - name: ✏️ Create .env file
+        run: |
+          echo "MONEYSTATS_SERVICE_URL=${{ vars.MONEYSTATS_SERVICE_URL }}" > .env
+          echo "ACCESS_SPHERE_SERVICE_URL=${{ vars.ACCESS_SPHERE_SERVICE_URL }}" >> .env
+          echo "IMAGE_SIZE=${{ vars.IMAGE_SIZE }}" >> .env
+          echo "CACHE_ENABLE=${{ vars.CACHE_ENABLE }}" >> .env
+          echo "CACHE_TIMEOUT=${{ vars.CACHE_TIMEOUT }}" >> .env
+
       - name: ✅ Get current package version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
