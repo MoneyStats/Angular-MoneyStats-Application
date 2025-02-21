@@ -13,6 +13,7 @@ RUN chmod +x rename.sh
 RUN ./rename.sh $config
 
 # Installa dipendenze e builda il progetto
+RUN npm install @angular/cli -g
 RUN npm install --force && \
   npm run $config
 
