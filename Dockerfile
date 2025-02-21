@@ -13,7 +13,7 @@ RUN chmod +x rename.sh
 RUN ./rename.sh $config
 
 # Installa dipendenze e builda il progetto
-RUN npm ci && \
+RUN npm install --force && \
   npm run $config
 
 # Usa nginx come server
