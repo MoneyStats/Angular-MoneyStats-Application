@@ -1,16 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Category } from 'src/assets/core/data/class/dashboard.class';
+import {
+  categories,
+  Category,
+} from 'src/assets/core/data/class/dashboard.class';
 import { environment } from 'src/environments/environment';
 
 @Component({
-    selector: 'app-category-modal',
-    templateUrl: './category.component.html',
-    styleUrls: ['./category.component.scss'],
-    standalone: false
+  selector: 'app-category-modal',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.scss'],
+  standalone: false,
 })
 export class CategoryModalComponent implements OnInit {
   @Input('modalId') modalId: string = '';
-  @Input('categories') categories: Array<Category> = [];
+  categories: Array<Category> = categories;
   environment = environment;
 
   constructor() {}

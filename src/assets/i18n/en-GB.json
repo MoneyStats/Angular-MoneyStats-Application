@@ -278,7 +278,7 @@
     "security_new_placeholder": "Enter your new password",
     "security_repete_label": "Confirm New Password",
     "security_repete_placeholder": "Re-enter your new password",
-    "security_email_not_match_warning":"The email do not match. Please ensure the 'Email' match with your account.",
+    "security_email_not_match_warning": "The email do not match. Please ensure the 'Email' match with your account.",
     "security_warning": "The passwords do not match. Please ensure the 'Password' and 'Confirm password' fields are identical.",
     "info_title": "Info",
     "info_support": "Support",
@@ -682,7 +682,7 @@
           "version_date": "2024-12-09",
           "version_title": "MoneyStats V3.0.0",
           "version": "V3.0.0",
-          "changelog": "&#183; Updated the Backend server to the latest available version, improving stability and security.<br>&#183; Upgraded the Frontend server to the most recent version for an optimized user experience.<br>&#183; Unified the charting system with a single library, improving data retrieval and visualization.<br>&#183; Implemented a new cache management system to increase efficiency and loading speed.<br>&#183; Optimized overall performance, reducing response times and enhancing responsiveness.<br>&#183; Each page is now independent and no longer depends on the main dashboard, offering greater modularity.<br>&#183; New login system via Access-Sphere, with advanced security measures to protect access to the app.<br>&#183; Added integration with Google Cloud for smoother and more scalable operations.<br>&#183; Improved translations and text for a clearer and more localized user experience.<br>&#183; New animations and effects to make the user interface more dynamic and interactive."
+          "changelog": "&#183; Updated the server to the latest available version, improving stability and security.<br>&#183; Upgraded the server to the most recent version for an optimized user experience.<br>&#183; Unified the charting system with a single library, improving data retrieval and visualization.<br>&#183; Implemented a new cache management system to increase efficiency and loading speed.<br>&#183; Optimized overall performance, reducing response times and enhancing responsiveness.<br>&#183; Each page is now independent and no longer depends on the main dashboard, offering greater modularity.<br>&#183; New login system via Access-Sphere, with advanced security measures to protect access to the app.<br>&#183; Added Google Login support, allowing users to sign in quickly and securely using their Google accounts.<br>&#183; Added integration with Google Cloud for smoother and more scalable operations.<br>&#183; Implemented new cryptocurrency statistics, including real-time price tracking, market trends, and historical data analysis.<br>&#183; Improved translations and text for a clearer and more localized user experience.<br>&#183; New animations and effects to make the user interface more dynamic and interactive."
         }
       ]
     }

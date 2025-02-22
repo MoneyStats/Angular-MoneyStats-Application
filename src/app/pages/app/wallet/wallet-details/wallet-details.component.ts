@@ -177,7 +177,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
       );
       let check = false;
       lastYear.forEach((h: { balance: any }) => {
-        if (Utils.isNullOrEmpty(h.balance)) check = true;
+        if (!Utils.isNullOrEmpty(h.balance)) check = true;
       });
       if (check)
         setTimeout(() => {

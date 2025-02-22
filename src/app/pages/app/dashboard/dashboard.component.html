@@ -255,8 +255,5 @@
   (emitAddWallet)="addWallet($event)"
   [modalId]="modalConstant.ADDWALLET"
 ></app-add-wallet>
-<app-category-modal
-  [modalId]="modalConstant.CATEGORY"
-  [categories]="dashboard.categories"
-></app-category-modal>
+<app-category-modal [modalId]="modalConstant.CATEGORY"></app-category-modal>
 <app-update [modalId]="modalConstant.UPDATEAPP" #content></app-update>
