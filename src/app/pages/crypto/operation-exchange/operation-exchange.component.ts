@@ -325,7 +325,9 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
             this.marketDataSelected.current_price!
           ).toFixed(2)
         );
-        operation.exitQuantity = this.balanceToTransfer - this.fees;
+        operation.exitQuantity = parseFloat(
+          (this.balanceToTransfer - this.fees).toFixed(8)
+        );
         operation.performance = 0;
         operation.trend = 0;
 

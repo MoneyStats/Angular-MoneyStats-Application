@@ -231,8 +231,12 @@ export class CryptoService {
               if (!Utils.isNullOrEmpty(allAssets[index].balance))
                 allAssets[index].balance! += asset.balance!;
               allAssets[index].value! += asset.value!;
-              allAssets[index].performance! =
-                (allAssets[index].performance! + asset.performance!) / 2;
+              allAssets[index].performance! = parseFloat(
+                (
+                  (allAssets[index].performance! + asset.performance!) /
+                  2
+                ).toFixed(2)
+              );
 
               allAssets[index].trend! = allAssets[index].trend! + asset.trend!;
 
@@ -250,8 +254,9 @@ export class CryptoService {
                     hist.trend += history.trend;
                   }
                   if (!Utils.isNullOrEmpty(hist.percentage)) {
-                    hist.percentage =
-                      (hist.percentage + history.percentage) / 2;
+                    hist.percentage = parseFloat(
+                      ((hist.percentage + history.percentage) / 2).toFixed(2)
+                    );
                   }
                 }
                 //allAssets[index].history!.find(
