@@ -18,3 +18,9 @@
 .crypto {
   height: 85px;
 }
+
+.item:hover,
+.item:active {
+  background-color: #161129b7 !important;
+  transition: background-color 0.3s;
+}

@@ -62,8 +62,10 @@
                 [title]="chart1Y.title!"
                 [colors]="chart1Y.colors!"
                 [legend]="chart1Y.legend!"
-                [stroke]="chart1Y.stroke!"
                 [labels]="chart1Y.labels!"
+                [tooltip]="chart1Y.tooltip!"
+                [dataLabels]="chart1Y.dataLabels!"
+                [grid]="chart1Y.grid!"
                 type="area"
               ></apx-chart>
             </div>
@@ -86,8 +88,10 @@
                 [title]="chart3Y.title!"
                 [colors]="chart3Y.colors!"
                 [legend]="chart3Y.legend!"
-                [stroke]="chart3Y.stroke!"
                 [labels]="chart3Y.labels!"
+                [tooltip]="chart3Y.tooltip!"
+                [dataLabels]="chart3Y.dataLabels!"
+                [grid]="chart3Y.grid!"
                 type="area"
               ></apx-chart>
             </div>
@@ -110,8 +114,10 @@
                 [title]="chartOptions.title!"
                 [colors]="chartOptions.colors!"
                 [legend]="chartOptions.legend!"
-                [stroke]="chartOptions.stroke!"
                 [labels]="chartOptions.labels!"
+                [tooltip]="chartOptions.tooltip!"
+                [dataLabels]="chartOptions.dataLabels!"
+                [grid]="chartOptions.grid!"
                 type="area"
                 class="border_round"
               ></apx-chart>
@@ -129,19 +135,19 @@
         <ul class="listview no-line transparent flush simple-listview">
           <li>
             <div class="text-muted">
-              {{ "crypto.asset.details.overview.rank" | translate }}
+              {{ "crypto_asset_page.details.rank" | translate }}
             </div>
             <strong>#{{ asset.rank }}</strong>
           </li>
           <li>
             <div class="text-muted">
-              {{ "crypto.asset.details.overview.identifier" | translate }}
+              {{ "crypto_asset_page.details.identifier" | translate }}
             </div>
             <strong>{{ asset.identifier }}</strong>
           </li>
           <li>
             <div class="text-muted">
-              {{ "crypto.asset.details.overview.balance" | translate }}
+              {{ "crypto_asset_page.details.balance" | translate }}
             </div>
             <strong
               >{{ hidden ? amount : asset.balance }} {{ asset.symbol }}</strong
@@ -149,65 +155,52 @@
           </li>
           <li>
             <div class="text-muted">
-              {{ "crypto.asset.details.overview.value" | translate
-              }}{{ cryptoService.currency }}
+              {{ "crypto_asset_page.details.value" | translate
+              }}{{ cryptoCurrency }}
             </div>
             <strong
-              >{{ cryptoService.currency }}
-              {{ hidden ? amount : asset.value }}</strong
+              >{{ cryptoCurrency }} {{ hidden ? amount : asset.value }}</strong
             >
           </li>
           <li>
             <div class="text-muted">
-              {{ "crypto.asset.details.overview.invested" | translate }}
+              {{ "crypto_asset_page.details.invested" | translate }}
             </div>
             <strong
-              >{{ cryptoService.currency }}
+              >{{ cryptoCurrency }}
               {{ hidden ? amount : asset.invested }}</strong
             >
           </li>
           <li>
             <div class="text-muted">
-              {{ "crypto.asset.details.overview.performance" | translate }}
+              {{ "crypto_asset_page.details.performance" | translate }}
             </div>
             <strong
               ><span
                 class="badge {{
-                  ((asset.value! - asset.invested!) / asset.invested!) * 100! ==
-                  0
+                  calculatePerformance(asset) == 0
                     ? 'badge-warning'
-                    : ((asset.value! - asset.invested!) / asset.invested!) *
-                        100! >
-                      0
+                    : calculatePerformance(asset) > 0
                     ? 'badge-success'
                     : 'badge-danger'
                 }}"
               >
                 <ion-icon
                   name="{{
-                    ((asset.value! - asset.invested!) / asset.invested!) *
-                      100! ==
-                    0
+                    calculatePerformance(asset) == 0
                       ? 'arrow-down-outline'
-                      : ((asset.value! - asset.invested!) / asset.invested!) *
-                          100! >
-                        0
+                      : calculatePerformance(asset) > 0
                       ? 'arrow-up-outline'
                       : 'arrow-down-outline'
                   }}"
                 ></ion-icon>
-                {{
-                  (
-                    ((asset.value! - asset.invested!) / asset.invested!) *
-                    100!
-                  ).toFixed(2)
-                }}%
+                {{ calculatePerformance(asset).toFixed(2) }}%
               </span></strong
             >
           </li>
           <li>
             <div class="text-muted">
-              {{ "crypto.asset.details.overview.trend" | translate }}
+              {{ "crypto_asset_page.details.trend" | translate }}
             </div>
             <strong
               class="{{
@@ -235,7 +228,7 @@
             </div>
             <div class="col text-secondary text-end">
               <strong
-                >{{ cryptoService.currency }}
+                >{{ cryptoCurrency }}
                 {{ hidden ? amount : cryptoDashboard.balance }}</strong
               >
             </div>
@@ -275,11 +268,10 @@
     <div class="section inset mb-0">
       <div class="section-heading mb-1">
         <div class="section-title">
-          {{ "crypto.asset.details.overview.wallets" | translate
-          }}{{ asset.name }}
+          {{ "crypto_asset_page.details.wallets" | translate }}{{ asset.name }}
         </div>
         <a
-          *ngIf="!showZeroBalance"
+          *ngIf="!showZeroBalance && isWalletHasZero"
           (click)="zeroBalanceSwitch()"
           class="link clickable"
         >
@@ -287,7 +279,7 @@
             name="eye-outline"
             style="width: 20px; height: 20px; vertical-align: -5px"
           ></ion-icon>
-          {{ "crypto.asset.show" | translate }}</a
+          {{ "crypto_asset_page.show" | translate }}</a
         >
         <a
           *ngIf="showZeroBalance"
@@ -298,9 +290,16 @@
             name="eye-off-outline"
             style="width: 20px; height: 20px; vertical-align: -5px"
           ></ion-icon>
-          {{ "crypto.asset.hidden" | translate }}</a
+          {{ "crypto_asset_page.hidden" | translate }}</a
         >
       </div>
+      @if (isAssetListEmptyOrZero) {
+      <div class="alert alert-warning m-2 text-center" role="alert">
+        <div>
+          {{ "crypto_asset_page.details.empty_wallets_data" | translate }}
+        </div>
+      </div>
+      } @if (!isAssetListEmptyOrZero) {
       <div class="accordion border_round" id="accordionExample2">
         <div class="accordion-item" *ngFor="let wallet of walletsAsset">
           <h2
@@ -354,7 +353,7 @@
               <div class="row">
                 <div class="col-6 text-center">
                   <div class="text-muted" *ngIf="!isEditInvestmentActive">
-                    {{ "crypto.asset.details.overview.invested" | translate }}
+                    {{ "crypto_asset_page.details.invested" | translate }}
                   </div>
                   <strong
                     class="clickable"
@@ -377,8 +376,7 @@
                     <div class="form-group boxed row">
                       <div class="input-wrapper col-md-5 col-12 text-end">
                         <label class="label" for="select4">{{
-                          "crypto.asset.details.overview.editInvested"
-                            | translate
+                          "crypto_asset_page.details.editInvested" | translate
                         }}</label>
                         <input
                           type="number"
@@ -395,8 +393,7 @@
                       </div>
                       <div class="input-wrapper col-md-5 col-12 text-end">
                         <label class="label" for="select4">{{
-                          "crypto.asset.details.overview.editBalance"
-                            | translate
+                          "crypto_asset_page.details.editBalance" | translate
                         }}</label>
                         <input
                           type="number"
@@ -419,16 +416,14 @@
                           type="button"
                           class="btn btn-outline-primary rounded shadowed me-1 mb-1 d-inline"
                         >
-                          {{ "crypto.asset.details.overview.save" | translate }}
+                          {{ "crypto_asset_page.details.save" | translate }}
                         </button>
                         <button
                           (click)="isEditInvestmentActive = false"
                           type="button"
                           class="btn btn-outline-secondary rounded shadowed me-1 mb-1 d-inline"
                         >
-                          {{
-                            "crypto.asset.details.overview.cancel" | translate
-                          }}
+                          {{ "crypto_asset_page.details.cancel" | translate }}
                         </button>
                       </div>
                     </div>
@@ -436,9 +431,7 @@
                 </div>
                 <div class="col-6 text-center">
                   <div class="text-muted">
-                    {{
-                      "crypto.asset.details.overview.performance" | translate
-                    }}
+                    {{ "crypto_asset_page.details.performance" | translate }}
                   </div>
                   <strong
                     class="{{
@@ -457,7 +450,8 @@
                           ).toFixed(2)
                     }}
                     {{ cryptoDashboard.currency }}
-                    <span
+                    <!-- OLD PERFORMANCE
+                     <span
                       class="badge {{
                         ((wallet.assets[0].value! -
                           wallet.assets[0].invested!) /
@@ -501,6 +495,31 @@
                               100!
                             ).toFixed(2)
                       }}%
+                    </span>
+                  -->
+                    <span
+                      class="badge {{
+                        calculatePerformance(wallet.assets[0]) == 0
+                          ? 'badge-warning'
+                          : calculatePerformance(wallet.assets[0]) > 0
+                          ? 'badge-success'
+                          : 'badge-danger'
+                      }}"
+                    >
+                      <ion-icon
+                        name="{{
+                          calculatePerformance(wallet.assets[0]) == 0
+                            ? 'arrow-down-outline'
+                            : calculatePerformance(wallet.assets[0]) > 0
+                            ? 'arrow-up-outline'
+                            : 'arrow-down-outline'
+                        }}"
+                      ></ion-icon>
+                      {{
+                        hidden
+                          ? amount
+                          : calculatePerformance(wallet.assets[0]).toFixed(2)
+                      }}%
                     </span></strong
                   >
                 </div>
@@ -512,7 +531,7 @@
                 role="alert"
               >
                 <div *ngIf="wallet.type == 'Trading'">
-                  {{ "crypto.asset.details.overview.info-trading" | translate }}
+                  {{ "crypto_asset_page.details.info-trading" | translate }}
                 </div>
                 <div
                   *ngIf="
@@ -521,7 +540,7 @@
                   "
                 >
                   {{
-                    "crypto.asset.details.overview.warning-empty-wallets"
+                    "crypto_asset_page.details.warning-empty-wallets"
                       | translate
                   }}
                 </div>
@@ -601,6 +620,7 @@
           </div>
         </div>
       </div>
+      }
     </div>
   </div>
   <div
@@ -611,15 +631,15 @@
     <div class="section mt-4">
       <div class="section-heading">
         <h2 class="title">
-          {{ "crypto.asset.details.overview.operations" | translate }}
+          {{ "crypto_asset_page.details.operations" | translate }}
         </h2>
         <a (click)="goToOperations()" class="link clickable">{{
-          "crypto.asset.details.overview.view" | translate
+          "crypto_asset_page.details.view" | translate
         }}</a>
       </div>
       <app-operations-list
         [modalID]="modalConstant.CRYPTOOPERATIONDETAILS"
-        [cryptoDashboard]="cryptoDashboard"
+        [cryptoAssets]="cryptoAssets"
         [walletsAsset]="walletsAsset"
         [isAssetOperations]="true"
       ></app-operations-list>
@@ -666,7 +686,7 @@
                   <strong>{{ operation.wallet.name }}</strong>
                   <div class="text-small text-secondary">
                     {{ operation.wallet.assets[0].name }}
-                    {{ "crypto.asset.details.overview.price" | translate }}
+                    {{ "crypto_asset_page.details.price" | translate }}
                     {{ operation.exitPrice }}
                     {{ cryptoDashboard.currency }}
                   </div>
@@ -691,12 +711,12 @@
                   </div>
 
                   <div class="text-small">
-                    {{ "crypto.asset.details.overview.invest" | translate }}
+                    {{ "crypto_asset_page.details.invest" | translate }}
                     <strong
                       >{{ operation.entryPriceValue }}
                       {{ cryptoDashboard.currency }}</strong
                     >
-                    {{ "crypto.asset.details.overview.on" | translate }}
+                    {{ "crypto_asset_page.details.on" | translate }}
                     {{ operation.exitDate | date : "d MMM yy" }}
                   </div>
                 </div>
@@ -708,7 +728,7 @@
           <a
             class="btn btn-block btn-outline-secondary"
             (click)="goToOperations()"
-            >{{ "crypto.asset.details.overview.more" | translate }}</a
+            >{{ "crypto_asset_page.details.more" | translate }}</a
           >
         </div>
       </div>-->

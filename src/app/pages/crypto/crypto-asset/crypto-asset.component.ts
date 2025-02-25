@@ -15,14 +15,18 @@ import {
 } from 'src/assets/core/data/constant/constant';
 import { Subscription } from 'rxjs';
 import { Utils } from 'src/assets/core/services/config/utils.service';
+import { SharedService } from 'src/assets/core/services/config/shared.service';
+import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 
 @Component({
   selector: 'app-crypto-asset',
   templateUrl: './crypto-asset.component.html',
   styleUrls: ['./crypto-asset.component.scss'],
+  standalone: false,
 })
 export class CryptoAssetComponent implements OnInit, OnDestroy {
   cryptoAssetSubscribe: Subscription = new Subscription();
+  getCryptoWalletSubscribe: Subscription = new Subscription();
 
   amount: string = '******';
   hidden: boolean = false;
@@ -35,7 +39,12 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
   showZeroBalance: boolean = false;
   thisYear: number = new Date().getFullYear();
 
-  constructor(private cryptoService: CryptoService) {}
+  cryptoWallet?: Wallet[];
+
+  constructor(
+    private cryptoService: CryptoService,
+    private shared: SharedService
+  ) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -43,6 +52,7 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.cryptoAssetSubscribe.unsubscribe();
+    this.getCryptoWalletSubscribe.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -51,37 +61,63 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
   }
 
   getAssets() {
-    this.cryptoDashboard = Utils.copyObject(this.cryptoService.cryptoDashboard);
+    const dashboard = this.shared.getCryptoDashboardData();
+    this.cryptoDashboard = !Utils.isNullOrEmpty(dashboard)
+      ? dashboard
+      : new CryptoDashboard();
     this.cryptoAssetSubscribe = this.cryptoService
       .getCryptoAssetsData()
       .subscribe((data) => {
         this.cryptoService.cache.cacheAssetsData(data);
         LOG.info(data.message!, 'CryptoAssetComponent');
         this.assets = data.data;
-        this.cryptoService.assets = data.data;
-        this.cryptoDashboard.assets = data.data;
+        this.cryptoDashboard.assets = this.shared.setCryptoAssets(data.data);
+        this.graph1Y();
       });
-    this.graph1Y();
     this.isWalletBalanceHidden();
+  }
+
+  getWalletsCryptoData() {
+    if (Utils.isNullOrEmpty(this.cryptoWallet))
+      this.getCryptoWalletSubscribe = this.cryptoService
+        .getWalletsCryptoData()
+        .subscribe((data) => {
+          this.cryptoService.cache.cacheWalletsCryptoData(data);
+          LOG.info(data.message!, 'CryptoDashboardComponent');
+          const wallets = data.data;
+          this.cryptoWallet = !Utils.isNullOrEmpty(wallets)
+            ? wallets.filter((w: any) => w.category == 'Crypto')
+            : [];
+          this.shared.setCryptoWallets(this.cryptoWallet!);
+        });
   }
 
   graphAll() {
     if (!this.chartOptions) {
-      let dashboard = Utils.copyObject(this.cryptoDashboard);
+      let dashboard = new CryptoDashboard();
       // Get All Date serve a prendere tutte le date per i grafici
+      dashboard.assets = Utils.copyObject(this.assets);
       dashboard.statsAssetsDays = this.getAllDate();
       setTimeout(() => {
-        if (this.cryptoDashboard.wallets) {
-          if (ScreenService.screenWidth! <= 780) {
-            this.chartOptions = ChartService.renderCryptoDatas(dashboard, [
-              ApexChartsOptions.MOBILE_MODE,
-              ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
-            ]);
+        if (dashboard.assets) {
+          if (ScreenService.isMobileDevice()) {
+            this.chartOptions = ChartService.renderCryptoDatas(
+              dashboard,
+              true,
+              [
+                ApexChartsOptions.MOBILE_MODE,
+                ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
+              ]
+            );
           } else
-            this.chartOptions = ChartService.renderCryptoDatas(dashboard, [
-              ApexChartsOptions.ULTRA_WIDE,
-              ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
-            ]);
+            this.chartOptions = ChartService.renderCryptoDatas(
+              dashboard,
+              true,
+              [
+                ApexChartsOptions.ULTRA_WIDE,
+                ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
+              ]
+            );
         }
       }, 500);
     }
@@ -89,16 +125,15 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
 
   graph1Y() {
     if (!this.chart1Y) {
-      let dashboard = Utils.copyObject(this.cryptoDashboard);
+      let dashboard = new CryptoDashboard();
       // Get All Date serve a prendere tutte le date per i grafici
+      dashboard.assets = Utils.copyObject(this.assets);
       dashboard.statsAssetsDays = this.getAllDate();
 
       let assets: Asset[] = [];
       dashboard.assets.forEach((asset: Asset) => {
         let last1Year = asset.history?.filter(
-          (h) =>
-            h.date.toString().split('-')[0] ===
-            new Date().getFullYear().toString()
+          (h) => new Date(h.date).getFullYear() === new Date().getFullYear()
         );
         asset.history = last1Year;
         if (asset.balance != 0) assets.push(asset);
@@ -110,13 +145,13 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
             s.toString().split('-')[0] === new Date().getFullYear().toString()
         );
       setTimeout(() => {
-        if (ScreenService.screenWidth! <= 780)
-          this.chart1Y = ChartService.renderCryptoDatas(dashboard, [
+        if (ScreenService.isMobileDevice())
+          this.chart1Y = ChartService.renderCryptoDatas(dashboard, true, [
             ApexChartsOptions.MOBILE_MODE,
             ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
           ]);
         else
-          this.chart1Y = ChartService.renderCryptoDatas(dashboard, [
+          this.chart1Y = ChartService.renderCryptoDatas(dashboard, true, [
             ApexChartsOptions.ULTRA_WIDE,
             ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
           ]);
@@ -126,7 +161,8 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
 
   graph3Y() {
     if (!this.chart3Y) {
-      let dashboard = Utils.copyObject(this.cryptoDashboard);
+      let dashboard = new CryptoDashboard();
+      dashboard.assets = Utils.copyObject(this.assets);
       // Get All Date serve a prendere tutte le date per i grafici
       dashboard.statsAssetsDays = this.getAllDate();
       let last3 = [
@@ -150,13 +186,13 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
             last3.includes(s.toString().split('-')[0])
         );
       setTimeout(() => {
-        if (ScreenService.screenWidth! <= 780)
-          this.chart3Y = ChartService.renderCryptoDatas(dashboard, [
+        if (ScreenService.isMobileDevice())
+          this.chart3Y = ChartService.renderCryptoDatas(dashboard, true, [
             ApexChartsOptions.MOBILE_MODE,
             ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
           ]);
         else
-          this.chart3Y = ChartService.renderCryptoDatas(dashboard, [
+          this.chart3Y = ChartService.renderCryptoDatas(dashboard, true, [
             ApexChartsOptions.ULTRA_WIDE,
             ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
           ]);
@@ -172,7 +208,7 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
 
   getAllDate(): string[] {
     let date: string[] = [];
-    this.cryptoDashboard.assets.forEach((a) =>
+    this.assets.forEach((a) =>
       a.history?.forEach((h) => {
         if (!date.find((d) => d == h.date.toString()))
           date.push(h.date.toString());
@@ -189,5 +225,25 @@ export class CryptoAssetComponent implements OnInit, OnDestroy {
     if (isHidden != null) {
       this.hidden = isHidden;
     }
+  }
+
+  get isAssetListEmptyOrZero(): boolean {
+    return !this.showZeroBalance
+      ? !this.assets?.length ||
+          this.assets.every((asset) => asset.balance === 0)
+      : false;
+  }
+
+  get isAssetHasZero(): boolean {
+    return !this.showZeroBalance
+      ? !this.assets?.length ||
+          this.assets.filter((asset) => asset.balance === 0).length > 0
+      : false;
+  }
+
+  get isGraphEmptyOrZero(): boolean {
+    return (
+      !this.assets?.length || this.assets.every((asset) => asset.balance === 0)
+    );
   }
 }

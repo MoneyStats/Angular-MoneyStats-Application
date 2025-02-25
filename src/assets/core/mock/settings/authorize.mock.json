@@ -1,0 +1,14 @@
+{
+    "status": 200,
+    "message": "Token is valid",
+    "spanId": "3f5bccd1-4209-4530-ac99-bc15d9b5e5b9",
+    "data": {
+        "token": {
+            "access_token": "access_token"
+        },
+        "strapiToken": {
+            "access_token": "access_token",
+            "refresh_token": "refresh_token"
+        }
+    }
+}

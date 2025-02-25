@@ -10,7 +10,7 @@
     <div class="modal-content modal-round mx-auto">
       <div class="modal-header">
         <h5 class="modal-title">
-          {{ "crypto.cryptoModal.selectCurrency.title" | translate }}
+          {{ "modal_component.asset.currency_title" | translate }}
         </h5>
       </div>
       <div class="modal-body">
@@ -20,11 +20,11 @@
               <div class="col-md-6">
                 <div class="card-title">
                   <h2 class="modal-title d-inline" style="vertical-align: -4px">
-                    {{ "crypto.cryptoModal.selectCurrency.title" | translate }}
+                    {{ "modal_component.asset.currency_title" | translate }}
                   </h2>
                   <p>
                     <small>{{
-                      "crypto.cryptoModal.selectCurrency.subtitle" | translate
+                      "modal_component.asset.currency_subtitle" | translate
                     }}</small>
                   </p>
                 </div>
@@ -43,9 +43,7 @@
                       #currency1="ngModel"
                     >
                       <option [value]="currency" selected disabled>
-                        {{
-                          "crypto.cryptoModal.selectCurrency.title" | translate
-                        }}
+                        {{ "modal_component.asset.currency_title" | translate }}
                       </option>
                       <option
                         *ngFor="let curr of currencies"
@@ -69,7 +67,7 @@
                 data-bs-dismiss="modal"
                 (click)="selectCurrency()"
               >
-                {{ "crypto.cryptoModal.selectCurrency.save" | translate }}
+                {{ "shared_text.save" | translate }}
               </button>
             </div>
 
@@ -82,7 +80,7 @@
                 data-bs-dismiss="modal"
                 (click)="selectCurrency()"
               >
-                {{ "crypto.cryptoModal.selectCurrency.save" | translate }}
+                {{ "shared_text.save" | translate }}
               </button>
             </div>
           </div>

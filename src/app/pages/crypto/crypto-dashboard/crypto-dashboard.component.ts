@@ -3,6 +3,7 @@ import {
   ElementRef,
   OnDestroy,
   OnInit,
+  Output,
   Renderer2,
   ViewChild,
 } from '@angular/core';
@@ -21,6 +22,9 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { environment } from 'src/environments/environment';
 import { Subscription } from 'rxjs';
 import { Utils } from 'src/assets/core/services/config/utils.service';
+import { SharedService } from 'src/assets/core/services/config/shared.service';
+import { WalletService } from 'src/assets/core/services/api/wallet.service';
+import { TranslateService } from '@ngx-translate/core';
 
 declare const TradingView: any;
 
@@ -28,10 +32,13 @@ declare const TradingView: any;
   selector: 'app-crypto-dashboard',
   templateUrl: './crypto-dashboard.component.html',
   styleUrls: ['./crypto-dashboard.component.scss'],
+  standalone: false,
 })
 export class CryptoDashboardComponent implements OnInit, OnDestroy {
   getDashboardSubscribe: Subscription = new Subscription();
+  getCryptoWalletSubscribe: Subscription = new Subscription();
   marketDataSubscribe: Subscription = new Subscription();
+  walletsSubscribe: Subscription = new Subscription();
 
   filterMarketData: Array<any> = [];
 
@@ -48,14 +55,18 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
 
   symbolList: Array<string> = [];
 
+  @Output('wallets') wallets: Wallet[] = [];
   cryptoDashboard: CryptoDashboard = new CryptoDashboard();
   cryptoWallet?: Wallet[];
   assets: Asset[] = [];
 
   constructor(
     public screenService: ScreenService,
+    private walletService: WalletService,
     private _renderer2: Renderer2,
-    private cryptoService: CryptoService
+    private cryptoService: CryptoService,
+    private shared: SharedService,
+    private translate: TranslateService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -63,7 +74,7 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getDashboard();
+    this.getCryptoDashboard();
     ScreenService.showFooter();
   }
 
@@ -75,24 +86,50 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
     this.appendDayGraph();
   }
 
-  getDashboard() {
+  getCryptoDashboard() {
     this.getDashboardSubscribe = this.cryptoService
       .getCryptoDashboardData()
       .subscribe((data) => {
         this.cryptoService.cache.cacheCryptoDashboardData(data);
         LOG.info(data.message!, 'CryptoDashboardComponent');
         this.cryptoDashboard = data.data;
-        this.cryptoService.cryptoDashboard = data.data;
+        this.shared.setCryptoDashboardData(data.data);
         this.assets = data.data.assets;
-        //this.cryptoService.cryptoDashboard.assets = this.assets;
-        //this.cryptoDashboard.assets = this.assets;
-        this.cryptoWallet = this.cryptoDashboard.wallets.filter(
-          (w) => w.category == 'Crypto'
-        );
         this.getCoinForGraph();
         this.getMarketData();
       });
     this.isWalletBalanceHidden();
+  }
+
+  emitOperationClick(click: boolean) {
+    this.getWalletsCryptoData();
+  }
+
+  getWalletsCryptoData() {
+    if (Utils.isNullOrEmpty(this.cryptoWallet))
+      this.getCryptoWalletSubscribe = this.cryptoService
+        .getWalletsCryptoData()
+        .subscribe((data) => {
+          this.cryptoService.cache.cacheWalletsCryptoData(data);
+          LOG.info(data.message!, 'CryptoDashboardComponent');
+          const wallets = data.data;
+          this.cryptoWallet = !Utils.isNullOrEmpty(wallets)
+            ? wallets.filter((w: any) => w.category == 'Crypto')
+            : [];
+          this.shared.setCryptoWallets(this.cryptoWallet!);
+        });
+  }
+
+  getWalletsData() {
+    if (Utils.isNullOrEmpty(this.shared.getWallets()))
+      this.walletsSubscribe = this.walletService
+        .getWalletsData()
+        .subscribe((data) => {
+          this.walletService.cache.cacheWalletsData(data);
+          LOG.info(data.message!, 'CryptoDashboardComponent');
+          this.wallets = this.shared.setWallets(data.data);
+        });
+    else this.wallets = this.shared.getWallets();
   }
 
   vibrate() {
@@ -303,7 +340,7 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
     //this.selectGraph?.nativeElement.appendChild(script);
   }
   saveWallet(wallet: Wallet) {
-    this.getDashboard();
+    this.getCryptoDashboard();
   }
   hiddenShowAmount() {
     if (this.hidden) {
@@ -327,6 +364,7 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
     this.marketDataSubscribe = this.cryptoService
       .getCryptoPriceData(this.cryptoDashboard.currency)
       .subscribe((data) => {
+        LOG.info(data.message!, 'CryptoDashboardComponent');
         this.cryptoService.cache.cacheMarketDataByCurrencyData(data);
         this.cryptoDashboard.lastUpdate = data.data[0].updateDate;
         this.filterMarketData = data.data;
@@ -341,5 +379,13 @@ export class CryptoDashboardComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.getDashboardSubscribe.unsubscribe();
     this.marketDataSubscribe.unsubscribe();
+    this.getCryptoWalletSubscribe.unsubscribe();
+    this.walletsSubscribe.unsubscribe();
+  }
+
+  getCopyright() {
+    return this.translate
+      .instant('copyright')
+      .replace('#YEAR#', new Date().getFullYear());
   }
 }

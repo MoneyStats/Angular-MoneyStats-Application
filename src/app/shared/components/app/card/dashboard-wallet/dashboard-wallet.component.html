@@ -4,7 +4,7 @@
     <div class="left">
       <a class="clickable" (click)="hiddenShowAmount()">
         <span class="title"
-          >{{ "dashboard.dashboardCard.title" | translate }}
+          >{{ "dashboard_page.dashboard_card.title" | translate }}
           <ion-icon
             *ngIf="!hidden"
             name="eye-outline"
@@ -52,11 +52,11 @@
         data-bs-toggle="modal"
         attr.data-bs-target="#{{ modalConstant.ADDWALLET }}"
       >
-        <div class="icon-wrapper bg-danger">
+        <div class="icon-wrapper bg-danger zoomx2">
           <ion-icon name="duplicate-outline"></ion-icon>
         </div>
         <strong>{{
-          "dashboard.dashboardCard.footer.title1" | translate
+          "dashboard_page.dashboard_card.icons.title1" | translate
         }}</strong>
       </a>
     </div>
@@ -66,17 +66,17 @@
         data-bs-toggle="modal"
         attr.data-bs-target="#{{ modalConstant.CATEGORY }}"
       >
-        <div class="icon-wrapper">
+        <div class="icon-wrapper zoomx2">
           <ion-icon name="albums-outline"></ion-icon>
         </div>
         <strong>{{
-          "dashboard.dashboardCard.footer.title2" | translate
+          "dashboard_page.dashboard_card.icons.title2" | translate
         }}</strong>
       </a>
     </div>
     <div class="item hidden_mobile">
       <a routerLink="/crypto/dashboard">
-        <div class="icon-wrapper bg-primary">
+        <div class="icon-wrapper bg-primary zoomx2">
           <img
             src="{{
               environment.baseUrlVersion
@@ -85,17 +85,15 @@
             srcset=""
           />
         </div>
-        <strong>{{ "crypto.dashboard.title" | translate }}</strong>
+        <strong>{{ "crypto_dashboard_page.title" | translate }}</strong>
       </a>
     </div>
     <div class="item">
       <a href="#" routerLink="wallet">
-        <div class="icon-wrapper bg-success">
+        <div class="icon-wrapper bg-success zoomx2">
           <ion-icon name="card-outline"></ion-icon>
         </div>
-        <strong>{{
-          "dashboard.dashboardCard.footer.title3" | translate
-        }}</strong>
+        <strong>{{ "shared_text.wallets" | translate }}</strong>
       </a>
     </div>
     <div class="item">
@@ -105,12 +103,10 @@
         data-bs-toggle="modal"
         data-bs-target="#dateStatementActionSheet"
       >
-        <div class="icon-wrapper bg-warning">
+        <div class="icon-wrapper bg-warning zoomx2">
           <ion-icon name="bar-chart"></ion-icon>
         </div>
-        <strong>{{
-          "dashboard.dashboardCard.footer.title4" | translate
-        }}</strong>
+        <strong>{{ "shared_text.resume" | translate }}</strong>
       </a>
     </div>
   </div>

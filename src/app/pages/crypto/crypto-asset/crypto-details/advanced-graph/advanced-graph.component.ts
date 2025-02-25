@@ -8,9 +8,10 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'app-advanced-graph',
-  templateUrl: './advanced-graph.component.html',
-  styleUrls: ['./advanced-graph.component.scss'],
+    selector: 'app-advanced-graph',
+    templateUrl: './advanced-graph.component.html',
+    styleUrls: ['./advanced-graph.component.scss'],
+    standalone: false
 })
 export class AdvancedGraphComponent implements OnInit {
   @ViewChild('tradingViewAdvanced') tradingViewAdvanced?: ElementRef;

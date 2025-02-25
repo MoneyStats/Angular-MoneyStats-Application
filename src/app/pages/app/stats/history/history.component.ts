@@ -1,18 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Dashboard, Stats } from 'src/assets/core/data/class/dashboard.class';
-import {
-  ApexOptions,
-  ChartJSOptions,
-} from 'src/assets/core/data/constant/apex.chart';
+import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { Utils } from 'src/assets/core/services/config/utils.service';
-import { ChartJSService } from 'src/assets/core/utils/chartjs.service';
+import { ChartService } from 'src/assets/core/utils/chart.service';
 
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.scss'],
+  standalone: false,
 })
-export class HistoryComponent implements OnInit {
+export class HistoryComponent implements OnChanges {
   public chartOptions?: Partial<ApexOptions>;
   @Input('resume') resume: Map<string, Dashboard> = new Map<
     string,
@@ -28,22 +26,25 @@ export class HistoryComponent implements OnInit {
 
   tableBalance: Array<any> = [];
 
-  public lineChartJS?: ChartJSOptions = new ChartJSOptions();
   constructor() {}
 
-  ngOnInit(): void {
-    this.resume.forEach((value: Dashboard, key: string) => {
-      this.tableBalance.push(this.tableCreate(key, value));
-    });
-    this.totalMap.set('History', this.totalList);
-    this.renderChart();
+  ngOnChanges(): void {
+    if (
+      !Utils.isNullOrEmpty(this.resume) &&
+      Utils.isNullOrEmpty(this.totalMap)
+    ) {
+      this.resume.forEach((value: Dashboard, key: string) => {
+        this.tableBalance.push(this.tableCreate(key, value));
+      });
+      this.totalMap.set('History', this.totalList);
+      this.renderChart();
+    }
   }
 
   renderChart() {
-    this.lineChartJS = ChartJSService.renderChartLine(this.totalMap);
-    //setTimeout(() => {
-    //  this.chartOptions = this.charts.renderChartLineCategory(this.totalMap);
-    //}, 200);
+    setTimeout(() => {
+      this.chartOptions = ChartService.renderChartLineCategory(this.totalMap);
+    }, 200);
   }
 
   tableCreate(date: string, dashboard: any) {

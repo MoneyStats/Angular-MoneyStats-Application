@@ -29,35 +29,40 @@ export class ErrorService {
   mapError(error: any) {
     this.exception = error.error;
     this.exception.error!.statusCode = error.status;
-    let exceptionMap: Record<string, any> =
-      this.translateService.instant('exception');
-
-    let errorCode = this.exception.error?.errorCode!;
-
-    if (exceptionMap.hasOwnProperty(errorCode)) {
-      // Puoi accedere alla traduzione direttamente usando la chiave
-      const error = exceptionMap[errorCode];
-      // Assegna il messaggio tradotto all'oggetto UtilsException
-      this.exception.error!.message = this.buildErrorMessage(
-        error,
-        this.exception,
-        errorCode
-      );
-      this.exception.error!.status = error.status;
-      this.exception.error!.exception = error.exception;
-    }
+    this.mapTranslateError();
+    //let exceptionMap: Record<string, any> =
+    //  this.translateService.instant('exception');
+    //
+    //let errorCode = this.exception.error?.errorCode!;
+    //
+    //if (exceptionMap.hasOwnProperty(errorCode)) {
+    //  // Puoi accedere alla traduzione direttamente usando la chiave
+    //  const error = exceptionMap[errorCode];
+    //  // Assegna il messaggio tradotto all'oggetto UtilsException
+    //  this.exception.error!.message = this.buildErrorMessage(
+    //    error,
+    //    this.exception,
+    //    errorCode
+    //  );
+    //  this.exception.error!.status = error.status;
+    //  this.exception.error!.exception = error.exception;
+    //}
   }
 
   getUnknowError(error: any) {
-    error.status = HttpStatusCode.InternalServerError;
     this.exception.url = error.url;
     this.exception.dateTime = new Date();
     let errorModel: Error = new Error();
-    errorModel.errorCode = ErrorCodeLogout.UnknowError;
+    errorModel.errorCode =
+      error.status == 0
+        ? ErrorCodeLogout.UnknowError
+        : ErrorCodeLogout.InternalServerError;
     errorModel.message = error.message;
     errorModel.statusCode = HttpStatusCode.InternalServerError;
     errorModel.exception = error.statusText;
     this.exception.error = errorModel;
+    error.status = HttpStatusCode.InternalServerError;
+    this.mapTranslateError();
   }
 
   handleWalletStatsError() {
@@ -72,15 +77,19 @@ export class ErrorService {
     this.exception.error = errorModel;
   }
 
-  buildErrorMessage(errorMap: any, exception: any, errorCode: string) {
-    switch (errorCode) {
-      case ErrorCode.Duplicate_Key:
-        return errorMap.message.replace(
-          ErrorMessageMetadata.KEY,
-          exception.error.message.split("'")[1]
-        );
-      default:
-        return errorMap.message;
+  mapTranslateError() {
+    let exceptionMap: Record<string, any> =
+      this.translateService.instant('exception');
+
+    let errorCode = this.exception.error?.errorCode!;
+
+    if (exceptionMap.hasOwnProperty(errorCode)) {
+      // Puoi accedere alla traduzione direttamente usando la chiave
+      const error = exceptionMap[errorCode];
+      // Assegna il messaggio tradotto all'oggetto UtilsException
+      this.exception.error!.message = error.message;
+      this.exception.error!.status = error.status;
+      this.exception.error!.exception = error.exception;
     }
   }
 }

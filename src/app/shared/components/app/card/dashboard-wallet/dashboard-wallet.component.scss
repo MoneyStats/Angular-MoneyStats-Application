@@ -1,3 +1,23 @@
 .wallet-card {
   border-radius: 20px;
 }
+
+.bg-danger:hover {
+  background-color: #ff396ed8 !important;
+  transition: background-color 0.3s;
+}
+
+.bg-success:hover {
+  background-color: #1dcc70d8 !important;
+  transition: background-color 0.3s;
+}
+
+.bg-warning:hover {
+  background-color: #ffb400d8 !important;
+  transition: background-color 0.3s;
+}
+
+.bg-primary:hover {
+  background-color: #080957d8 !important;
+  transition: background-color 0.3s;
+}

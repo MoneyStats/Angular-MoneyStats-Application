@@ -10,7 +10,6 @@ import { environment } from 'src/environments/environment';
 import { RouterModule } from '@angular/router';
 import { ContentBoxComponent } from './card/content-box/content-box.component';
 import { DashboardWalletComponent } from './card/dashboard-wallet/dashboard-wallet.component';
-import { SplideSlideComponent } from './card/splide-slide/splide-slide.component';
 import { StatsCardComponent } from './card/stats-card/stats-card.component';
 import { AvailableSoonComponent } from './modal/available-soon/available-soon.component';
 import { BackupDataComponent } from './modal/backup-data/backup-data.component';
@@ -21,19 +20,17 @@ import { LanguagesComponent } from './modal/languages/languages.component';
 import { OpenBugComponent } from './modal/open-bug/open-bug.component';
 import { ProfileSettingsComponent } from './modal/profile-settings/profile-settings.component';
 import { ReportBugComponent } from './modal/report-bug/report-bug.component';
-import { SocialListComponent } from './modal/social/social-list/social-list.component';
-import { SocialDetailsComponent } from './modal/social/social-details/social-details.component';
 import { UpdateComponent } from './modal/update/update.component';
 import { VersionComponent } from './modal/version-and-change/version/version.component';
 import { ChangelogComponent } from './modal/version-and-change/changelog/changelog.component';
 import { WalletCardComponent } from './wallet/wallet-card/wallet-card.component';
 import { WalletHistoryCardComponent } from './wallet/wallet-history/wallet-history.component';
+import { RegistrationTokenComponent } from './modal/registration-token/registration-token.component';
 
 @NgModule({
   declarations: [
     ContentBoxComponent,
     DashboardWalletComponent,
-    SplideSlideComponent,
     StatsCardComponent,
     AvailableSoonComponent,
     BackupDataComponent,
@@ -44,18 +41,16 @@ import { WalletHistoryCardComponent } from './wallet/wallet-history/wallet-histo
     OpenBugComponent,
     ProfileSettingsComponent,
     ReportBugComponent,
-    SocialListComponent,
-    SocialDetailsComponent,
     UpdateComponent,
     VersionComponent,
     ChangelogComponent,
     WalletCardComponent,
     WalletHistoryCardComponent,
+    RegistrationTokenComponent,
   ],
   exports: [
     ContentBoxComponent,
     DashboardWalletComponent,
-    SplideSlideComponent,
     StatsCardComponent,
     AvailableSoonComponent,
     BackupDataComponent,
@@ -66,13 +61,12 @@ import { WalletHistoryCardComponent } from './wallet/wallet-history/wallet-histo
     OpenBugComponent,
     ProfileSettingsComponent,
     ReportBugComponent,
-    SocialListComponent,
-    SocialDetailsComponent,
     UpdateComponent,
     VersionComponent,
     ChangelogComponent,
     WalletCardComponent,
     WalletHistoryCardComponent,
+    RegistrationTokenComponent,
   ],
   imports: [
     RouterModule,

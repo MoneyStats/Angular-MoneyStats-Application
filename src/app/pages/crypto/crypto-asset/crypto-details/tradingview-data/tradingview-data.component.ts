@@ -3,19 +3,18 @@ import {
   ElementRef,
   Input,
   OnChanges,
-  OnInit,
   Renderer2,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { CryptoService } from 'src/assets/core/services/api/crypto.service';
 
 @Component({
-  selector: 'app-tradingview-data',
-  templateUrl: './tradingview-data.component.html',
-  styleUrls: ['./tradingview-data.component.scss'],
+    selector: 'app-tradingview-data',
+    templateUrl: './tradingview-data.component.html',
+    styleUrls: ['./tradingview-data.component.scss'],
+    standalone: false
 })
-export class TradingviewDataComponent implements OnInit, OnChanges {
+export class TradingviewDataComponent implements OnChanges {
   @ViewChild('tradingView') tradingView?: ElementRef;
   @ViewChild('tradingViewTechnicalAnalisys')
   tradingViewTechnicalAnalisys?: ElementRef;
@@ -26,18 +25,10 @@ export class TradingviewDataComponent implements OnInit, OnChanges {
 
   @Input('assetSymbol') assetSymbol: string = 'BTC';
 
-  constructor(
-    private _renderer2: Renderer2,
-    private cryptoService: CryptoService
-  ) {}
+  constructor(private _renderer2: Renderer2) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.ngAfterViewInit();
-  }
-
-  ngOnInit(): void {
-    if (this.assetSymbol == undefined)
-      this.assetSymbol = this.cryptoService.asset?.symbol!;
   }
 
   ngAfterViewInit(): void {

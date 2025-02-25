@@ -1,25 +1,21 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Dashboard, Stats } from 'src/assets/core/data/class/dashboard.class';
-import { ChartOptions } from 'chart.js';
-import {
-  ApexOptions,
-  ChartJSOptions,
-} from 'src/assets/core/data/constant/apex.chart';
-import { ChartJSService } from 'src/assets/core/utils/chartjs.service';
+import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { Utils } from 'src/assets/core/services/config/utils.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
+import { ChartService } from 'src/assets/core/utils/chart.service';
+import {
+  ModalConstant,
+  OperationsType,
+} from 'src/assets/core/data/constant/constant';
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss'],
+  standalone: false,
 })
-export class CategoryComponent implements OnInit, OnChanges {
+export class CategoryComponent implements OnChanges {
   @Input('dashboard') dashboard: Dashboard = new Dashboard();
   @Input('coinSymbol') coinSymbol: string = '';
 
@@ -45,19 +41,19 @@ export class CategoryComponent implements OnInit, OnChanges {
   totalMap: Map<string, any> = new Map<string, any>();
   totalList: Array<any> = [];
 
-  public lineChartJS?: ChartJSOptions = new ChartJSOptions();
   public chartCategory?: Partial<ApexOptions>;
-  public chartBar?: Partial<ChartOptions>;
+  @Input('change') change: string = '';
   constructor() {}
 
-  ngOnInit(): void {
-    if (this.dashboard.statsWalletDays) {
-      this.generateData();
-      this.renderChart();
-    }
+  public get modalConstant(): typeof ModalConstant {
+    return ModalConstant;
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  public get operationTypeConstant(): typeof OperationsType {
+    return OperationsType;
+  }
+
+  ngOnChanges(): void {
     if (this.dashboard.statsWalletDays) {
       this.generateData();
       this.renderChart();
@@ -65,11 +61,15 @@ export class CategoryComponent implements OnInit, OnChanges {
   }
 
   renderChart() {
-    this.lineChartJS = ChartJSService.renderChartLine(this.totalMap);
+    this.chartCategory = undefined;
+    setTimeout(() => {
+      this.chartCategory = ChartService.renderChartLineCategory(this.totalMap);
+    }, 200);
   }
 
   generateData() {
     let moreThanOneInAMonth: Array<string> = [];
+    let wallets: Array<any> = [...this.dashboard.wallets];
     if (this.dashboard.statsWalletDays) {
       this.dashboard.statsWalletDays.forEach((date) => {
         let yearMonth: string = date.split('-')[0] + '-' + date.split('-')[1];
@@ -82,13 +82,37 @@ export class CategoryComponent implements OnInit, OnChanges {
           moreThanOneInAMonth.push(date);
         }
       });
+      if (UserService.getUserData().attributes.money_stats_settings.liveWallets === 'ACTIVE')
+        if (
+          !moreThanOneInAMonth.find(
+            (d) =>
+              new Date(d).toLocaleDateString() ==
+              new Date().toLocaleDateString()
+          ) &&
+          moreThanOneInAMonth.filter(
+            (d) => new Date(d).getFullYear() === new Date().getFullYear()
+          ).length > 0
+        ) {
+          let date = new Date();
+          moreThanOneInAMonth.push(date.toString());
+          wallets.map((w) => {
+            if (w.balance) {
+              let stats = new Stats();
+              stats.balance = w.balance;
+              stats.date = date;
+              if (w.history && !w.history.includes(stats))
+                w.history.push(stats);
+            }
+            return w;
+          });
+        }
     }
     // INVESTMENTS
     this.categoryTableBalance = [];
     this.totalList = [];
     this.balances = [];
 
-    let table = this.dashboard.wallets.filter((wallet) =>
+    let table = wallets.filter((wallet) =>
       this.INVESTMENTS.includes(wallet.category)
     );
     moreThanOneInAMonth.forEach((date) => {
@@ -110,9 +134,7 @@ export class CategoryComponent implements OnInit, OnChanges {
     this.totalList = [];
     this.balances = [];
 
-    table = this.dashboard.wallets.filter((wallet) =>
-      this.CAPITAL.includes(wallet.category)
-    );
+    table = wallets.filter((wallet) => this.CAPITAL.includes(wallet.category));
     moreThanOneInAMonth.forEach((date) => {
       this.categoryTableBalance.push(this.tableCreate(date, table));
     });
@@ -132,9 +154,7 @@ export class CategoryComponent implements OnInit, OnChanges {
     this.totalList = [];
     this.balances = [];
 
-    table = this.dashboard.wallets.filter((wallet) =>
-      this.SAVING.includes(wallet.category)
-    );
+    table = wallets.filter((wallet) => this.SAVING.includes(wallet.category));
     moreThanOneInAMonth.forEach((date) => {
       this.categoryTableBalance.push(this.tableCreate(date, table));
     });
@@ -154,9 +174,7 @@ export class CategoryComponent implements OnInit, OnChanges {
     this.totalList = [];
     this.balances = [];
 
-    table = this.dashboard.wallets.filter((wallet) =>
-      this.DEBITS.includes(wallet.category)
-    );
+    table = wallets.filter((wallet) => this.DEBITS.includes(wallet.category));
     moreThanOneInAMonth.forEach((date) => {
       this.categoryTableBalance.push(this.tableCreate(date, table));
     });
@@ -176,9 +194,7 @@ export class CategoryComponent implements OnInit, OnChanges {
     this.totalList = [];
     this.balances = [];
 
-    table = this.dashboard.wallets.filter((wallet) =>
-      this.OTHER.includes(wallet.category)
-    );
+    table = wallets.filter((wallet) => this.OTHER.includes(wallet.category));
     moreThanOneInAMonth.forEach((date) => {
       this.categoryTableBalance.push(this.tableCreate(date, table));
     });
@@ -200,7 +216,11 @@ export class CategoryComponent implements OnInit, OnChanges {
 
     wallet.forEach((w: any) => {
       let hist = w.history
-        ? w.history.find((h: any) => h.date === date)
+        ? w.history.find(
+            (h: any) =>
+              new Date(h.date).toLocaleDateString() ===
+              new Date(date).toLocaleDateString()
+          )
         : undefined;
       if (!hist) {
         hist = new Stats();

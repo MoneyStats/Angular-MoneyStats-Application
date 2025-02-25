@@ -7,11 +7,14 @@ import { LoaderService } from 'src/assets/core/interceptors/loader.service';
   selector: 'app-loading',
   templateUrl: './loading.component.html',
   styleUrls: ['./loading.component.scss'],
+  standalone: false,
 })
 export class LoadingComponent implements OnInit {
-  isLoading: Subject<boolean> = this.loaderService.isLoading;
+  isLoading?: Subject<boolean>;
 
   constructor(private loaderService: LoaderService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isLoading = this.loaderService.isLoading;
+  }
 }

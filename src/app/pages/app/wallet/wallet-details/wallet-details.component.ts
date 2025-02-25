@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { ActivatedRoute } from '@angular/router';
-import { Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { ChartService } from 'src/assets/core/utils/chart.service';
 import { WalletService } from 'src/assets/core/services/api/wallet.service';
@@ -16,14 +16,19 @@ import { Subscription } from 'rxjs';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
 import { User } from 'src/assets/core/data/class/user.class';
+import { SharedService } from 'src/assets/core/services/config/shared.service';
+import { Utils } from 'src/assets/core/services/config/utils.service';
+import { ImageColorPickerService } from 'src/assets/core/utils/image.color.picker.service';
 
 @Component({
   selector: 'app-wallet-details',
   templateUrl: './wallet-details.component.html',
   styleUrls: ['./wallet-details.component.scss'],
+  standalone: false,
 })
 export class WalletDetailsComponent implements OnInit, OnDestroy {
   user: User = UserService.getUserData();
+  walletByIdSubscribe: Subscription = new Subscription();
   routeSubscribe: Subscription = new Subscription();
   saveWalletSubscribe: Subscription = new Subscription();
 
@@ -55,11 +60,17 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
 
   thisYear: number = new Date().getFullYear();
 
+  totalBalance: number = 0;
+  percentageWallet: number = 100;
+
+  theme: string = '';
+
   constructor(
     public screenService: ScreenService,
     private route: ActivatedRoute,
     public walletService: WalletService,
-    public appService: AppService
+    public appService: AppService,
+    private shared: SharedService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
@@ -69,23 +80,35 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.routeSubscribe.unsubscribe();
     this.saveWalletSubscribe.unsubscribe();
+    this.walletByIdSubscribe.unsubscribe();
   }
-  screenWidth() {
-    return ScreenService.screenWidth;
+  isMobile() {
+    return ScreenService.isMobileDevice();
   }
 
   ngOnInit(): void {
     ScreenService.setupHeader();
     ScreenService.hideFooter();
+    if (!Utils.isNullOrEmpty(this.shared.getDashboard()))
+      this.totalBalance = this.shared.getDashboard().balance;
     this.routeSubscribe = this.route.params.subscribe((w: any) => {
       this.walletId = w.id;
       this.walletName = w.wallet;
+
+      // Chiamata al servizio
+      this.walletByIdSubscribe = this.walletService
+        .getWalletByID(this.walletId!)
+        .subscribe((res) => {
+          this.walletService.cache.cacheWalletByIdData(res, this.walletId!);
+          LOG.info(res.message!, 'WalletDetailsComponent');
+          this.wallet = res.data;
+          this.renderDetailsPage();
+          this.percentageWallet = this.percentageWalletInTotal();
+        });
     });
+  }
 
-    this.wallet = this.walletService.walletDetails?.find(
-      (w: Wallet) => w.id == this.walletId && w.name === this.walletName
-    );
-
+  renderDetailsPage() {
     this.graph1Y();
 
     if (this.wallet?.info != undefined) {
@@ -102,14 +125,29 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
       this.wallet!.history = [];
     }
 
+    if (this.wallet?.img) {
+      ImageColorPickerService.getColorFromImage(
+        this.wallet?.img,
+        '284bff'
+      ).then((color) => {
+        let backgroud = document.getElementById('gradientSection');
+        let graphCard = document.getElementById('graph-card');
+        if (!ScreenService.isMobileDevice()) {
+          backgroud!.style.background = color;
+          graphCard?.classList.add('ms-1');
+        }
+      });
+    }
+
     this.renderImage();
-    this.walletService.walletHistory = this.wallet;
-    this.coinSymbol = UserService.getUserData().settings.currencySymbol;
+    this.shared.setWallet(this.wallet!);
+    this.coinSymbol =
+      UserService.getUserData().attributes.money_stats_settings.currencySymbol;
     this.isWalletBalanceHidden();
   }
 
   renderImage() {
-    if (ScreenService.screenWidth! <= 780) {
+    if (ScreenService.isMobileDevice()) {
       const image = document.getElementById('gradientSection');
       image!.style.backgroundImage = 'url(' + this.wallet!.img + ')';
     }
@@ -117,10 +155,12 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
 
   graphAll() {
     if (!this.chartAll && this.wallet?.history) {
+      let walletGraph = Utils.copyObject(this.wallet);
+      walletGraph = Utils.mapLiveWalletForChart(walletGraph);
       setTimeout(() => {
         this.chartAll = ChartService.renderChartWallet(
-          this.wallet?.name!,
-          this.wallet?.history!
+          walletGraph.name,
+          walletGraph.history
         );
       }, 500);
     }
@@ -128,33 +168,42 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
 
   graph1Y() {
     if (!this.chart1Y && this.wallet?.history) {
-      let lastYear = this.wallet?.history.filter(
-        (h) =>
-          h.date.toString().split('-')[0] ===
+      let walletGraph = Utils.copyObject(this.wallet);
+      walletGraph = Utils.mapLiveWalletForChart(walletGraph);
+      let lastYear = walletGraph.history.filter(
+        (h: Stats) =>
+          new Date(h.date).getFullYear().toString() ===
           new Date().getFullYear().toString()
       );
-      setTimeout(() => {
-        this.chart1Y = ChartService.renderChartWallet(
-          this.wallet?.name!,
-          lastYear!
-        );
-      }, 500);
+      let check = false;
+      lastYear.forEach((h: { balance: any }) => {
+        if (!Utils.isNullOrEmpty(h.balance)) check = true;
+      });
+      if (check)
+        setTimeout(() => {
+          this.chart1Y = ChartService.renderChartWallet(
+            walletGraph.name,
+            lastYear!
+          );
+        }, 500);
     }
   }
 
   graph3Y() {
     if (!this.chart3Y && this.wallet?.history) {
+      let walletGraph = Utils.copyObject(this.wallet);
+      walletGraph = Utils.mapLiveWalletForChart(walletGraph);
       let last3 = [
         new Date().getFullYear().toString(),
         (new Date().getFullYear() - 1).toString(),
         (new Date().getFullYear() - 2).toString(),
       ];
-      let last3Year = this.wallet?.history.filter((h) =>
-        last3.includes(h.date.toString().split('-')[0])
+      let last3Year = walletGraph.history.filter((h: Stats) =>
+        last3.includes(new Date(h.date).getFullYear().toString())
       );
       setTimeout(() => {
         this.chart3Y = ChartService.renderChartWallet(
-          this.wallet?.name!,
+          walletGraph.name,
           last3Year!
         );
       }, 500);
@@ -162,7 +211,9 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
   }
 
   percentageWalletInTotal(): number {
-    return (this.wallet!.balance * 100) / this.walletService?.totalBalance!;
+    if (this.wallet != undefined && this.totalBalance != 0)
+      return (this.wallet!.balance * 100) / this.totalBalance;
+    return 0;
   }
 
   addInfo() {
@@ -260,7 +311,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
 
   saveOrUpdateWallet() {
     this.saveWalletSubscribe = this.walletService
-      .addUpdateWalletData(this.wallet!)
+      .addOrUpdateWalletsData(this.wallet!)
       .subscribe((data) => {
         LOG.info(data.message!, 'WalletDetailsComponent');
         this.infoKey = '';
@@ -269,5 +320,19 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
         this.editBtn = false;
         this.editShow = false;
       });
+  }
+
+  get isAssetListEmptyOrZero(): boolean {
+    return !this.showZeroBalance
+      ? !this.wallet?.assets?.length ||
+          this.wallet.assets.every((asset) => asset.balance === 0)
+      : false;
+  }
+
+  get isAssetHasZero(): boolean {
+    return !this.showZeroBalance
+      ? !this.wallet?.assets?.length ||
+          this.wallet.assets.filter((asset) => asset.balance === 0).length > 0
+      : false;
   }
 }

@@ -131,6 +131,12 @@
   z-index: 999 !important;
 }
 
+@media screen and (min-width: 780px) and (max-width: 991px) {
+  .stats-section {
+    margin-top: 30px;
+  }
+}
+
 @media screen and (min-width: 780px) and (max-width: 1200px) {
   .section-performance {
     margin-top: 40px;

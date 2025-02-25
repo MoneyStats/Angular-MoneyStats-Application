@@ -1,22 +1,20 @@
 <section class="section-width mx-auto">
   <app-header-mobile
-    *ngIf="screenWidth()! <= 780"
-    [title]="'support.title' | translate"
-    [backBtn]="'support.mobile_back' | translate"
+    *ngIf="isMobile()"
+    [title]="'support_page.title' | translate"
   >
   </app-header-mobile>
   <!-- App Capsule -->
   <div id="appCapsule">
     <app-title-desktop
-      [title]="'support.title' | translate"
-      [back]="'support.back' | translate"
+      [title]="'support_page.title' | translate"
     ></app-title-desktop>
     <div class="hidden_desktop mt-4 ms-2">
       <p class="text-start fs-2 title-page">
-        {{ "support.title" | translate }}
+        {{ "support_page.title" | translate }}
       </p>
       <p class="card-subtitle text-start mb-1 fs-6">
-        <small>{{ "support.subtitle" | translate }}</small>
+        <small>{{ "support_page.subtitle" | translate }}</small>
       </p>
     </div>
     <div class="section captionCenter mt-2">
@@ -24,14 +22,14 @@
         <div class="card-body">
           <div class="p-1">
             <div class="text-center">
-              <h2>{{ "support.formTitle" | translate }}</h2>
-              <p>{{ "support.formSubTitle" | translate }}</p>
+              <h2>{{ "support_page.form_title" | translate }}</h2>
+              <p>{{ "support_page.form_sub_title" | translate }}</p>
             </div>
             <form #f="ngForm" type="submit">
               <div class="form-group basic animated">
                 <div class="input-wrapper">
                   <label class="label" for="name">{{
-                    "support.name" | translate
+                    "support_page.name" | translate
                   }}</label>
                   <input
                     type="text"
@@ -41,7 +39,7 @@
                     #name1="ngModel"
                     [(ngModel)]="name"
                     required
-                    placeholder="{{ 'support.namePlace' | translate }}"
+                    placeholder="{{ 'support_page.name_place' | translate }}"
                   />
                   <i class="clear-input">
                     <ion-icon name="close-circle"></ion-icon>
@@ -52,7 +50,7 @@
               <div class="form-group basic animated">
                 <div class="input-wrapper">
                   <label class="label" for="email">{{
-                    "support.email" | translate
+                    "support_page.email" | translate
                   }}</label>
                   <input
                     type="email"
@@ -62,7 +60,7 @@
                     #email1="ngModel"
                     [(ngModel)]="email"
                     required
-                    placeholder="{{ 'support.emailPlace' | translate }}"
+                    placeholder="{{ 'support_page.email_place' | translate }}"
                   />
                   <i class="clear-input">
                     <ion-icon name="close-circle"></ion-icon>
@@ -73,7 +71,7 @@
               <div class="form-group basic animated">
                 <div class="input-wrapper">
                   <label class="label" for="message">{{
-                    "support.message" | translate
+                    "support_page.message" | translate
                   }}</label>
                   <textarea
                     id="message"
@@ -83,7 +81,7 @@
                     required
                     rows="4"
                     class="form-control"
-                    placeholder="{{ 'support.messagePlace' | translate }}"
+                    placeholder="{{ 'support_page.message_place' | translate }}"
                   ></textarea>
                   <i class="clear-input">
                     <ion-icon name="close-circle"></ion-icon>
@@ -98,7 +96,7 @@
                   (click)="contactSupport()"
                   class="btn btn-primary btn-lg btn-block"
                 >
-                  {{ "support.send" | translate }}
+                  {{ "support_page.send" | translate }}
                 </button>
               </div>
             </form>

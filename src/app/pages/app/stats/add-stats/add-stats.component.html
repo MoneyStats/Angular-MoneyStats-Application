@@ -1,40 +1,39 @@
 <section class="section-width mx-auto">
   <app-header-mobile
-    *ngIf="screenWidth()! <= 780"
-    title="{{ 'insertStats.title' | translate }}"
-    backBtn="{{ 'insertStats.mobile_back' | translate }}"
+    *ngIf="isMobile()"
+    title="{{ 'add_stats_page.title' | translate }}"
   >
   </app-header-mobile>
   <div id="appCapsule">
-    <form #f="ngForm" type="submit">
+    <form #f="ngForm" type="submit" style="cursor: auto">
       <div class="row">
         <app-title-desktop
           class="col-md-6"
-          [title]="'insertStats.title' | translate"
-          [back]="'insertStats.back' | translate"
+          [title]="'add_stats_page.title' | translate"
         ></app-title-desktop>
 
         <div class="editWallet col-md-6">
+          @if (!saveValidation && walletsToSave && walletsToSave.length) {
           <button
             style="width: 150px"
-            *ngIf="!saveValidation && walletsToSave && walletsToSave.length"
             type="button"
             class="btn btn-primary ms-1 me-1 mb-1 float-end"
             [disabled]="f.invalid || validate()"
             (click)="confirm()"
           >
-            {{ "insertStats.continue" | translate }}
+            {{ "add_stats_page.continue" | translate }}
           </button>
+          } @if (saveValidation && walletsToSave && walletsToSave.length) {
           <button
             style="width: 150px"
-            *ngIf="saveValidation && walletsToSave && walletsToSave.length"
             type="button"
             class="btn btn-primary ms-1 me-1 mb-1 float-end"
             [disabled]="f.invalid"
             (click)="save()"
           >
-            {{ "insertStats.save" | translate }}
+            {{ "shared_text.save" | translate }}
           </button>
+          } @if (walletsToSave && walletsToSave.length) {
           <div
             class="form-group boxed float-end ms-1 me-1"
             style="max-width: 200px; margin-top: -10px"
@@ -55,38 +54,170 @@
                 class="alert alert-danger mb-1"
                 role="alert"
               >
-                {{ "insertStats.dataPresent" | translate }}
+                {{ "add_stats_page.data_present" | translate }}
               </div>
             </div>
           </div>
+          }
         </div>
       </div>
       <div class="section mt-2 mx-auto">
         <div class="hidden_desktop mt-4">
           <p class="text-start fs-2 title-page">
-            {{ "insertStats.card_title" | translate }}
+            {{ "add_stats_page.card_title" | translate }}
           </p>
           <p class="card-subtitle text-start mb-1 fs-6">
-            <small>{{ "insertStats.card_subtitle" | translate }}</small>
+            <small>{{ "add_stats_page.card_subtitle" | translate }}</small>
           </p>
         </div>
+        @if (walletsToSave && walletsToSave.length) {
+        <div class="card mb-2">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">
+                    {{ "add_stats_page.logo" | translate }}
+                  </th>
+                  <th scope="col">
+                    {{ "add_stats_page.wallet_name" | translate }}
+                  </th>
+                  <th scope="col">
+                    {{ "add_stats_page.new_stats" | translate }}
+                  </th>
+                  <th scope="col" class="text-end hidden_mobile">
+                    {{ "add_stats_page.current_balance" | translate }}
+                  </th>
+                  <th scope="col" class="text-end hidden_mobile">
+                    {{ "shared_text.performance" | translate }}
+                  </th>
+                  <th scope="col" class="text-end hidden_mobile">
+                    {{ "add_stats_page.date_last_stats" | translate }}
+                  </th>
+                  <th
+                    *ngIf="!saveValidation"
+                    scope="col"
+                    class="text-end hidden_mobile"
+                  >
+                    {{ "shared_text.performance" | translate }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let wallet of walletsToSave">
+                  <td>
+                    <img
+                      src="{{ wallet.img }}"
+                      alt="img"
+                      class="image-block imaged w48 me-2"
+                      style="border-radius: 50%"
+                    />
+                  </td>
+                  <th scope="row" class="align-middle">{{ wallet.name }}</th>
+                  <td class="align-middle text-primary">
+                    <div *ngIf="!saveValidation" class="form-group boxed">
+                      <div class="input-wrapper">
+                        <input
+                          name="newStatsBalance"
+                          [(ngModel)]="wallet.newBalance"
+                          #newStatsBalance="ngModel"
+                          type="number"
+                          min="0"
+                          class="form-control"
+                          id="newStatsBalance"
+                          placeholder="{{
+                            'add_stats_page.new_bal' | translate
+                          }}"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <mark *ngIf="saveValidation" class="h5 mb-0" id="tot1"
+                      >{{ coinSymbol }} {{ wallet.balance }}</mark
+                    >
+                  </td>
+                  <td class="align-middle text-primary hidden_mobile text-end">
+                    {{ coinSymbol }} {{ wallet.balance }}
+                  </td>
+                  <td class="align-middle text-end hidden_mobile">
+                    <div class="text-small">
+                      <span
+                        class="badge {{
+                          wallet.performanceLastStats == 0
+                            ? 'badge-warning'
+                            : wallet.performanceLastStats > 0
+                            ? 'badge-success'
+                            : 'badge-danger'
+                        }}"
+                      >
+                        <ion-icon
+                          name="{{
+                            wallet.performanceLastStats > 0
+                              ? 'arrow-up-outline'
+                              : 'arrow-down-outline'
+                          }}"
+                        ></ion-icon>
+                        {{ coinSymbol }} {{ wallet.differenceLastStats }} ({{
+                          wallet.performanceLastStats
+                        }}%)
+                      </span>
+                    </div>
+                  </td>
+                  <td class="align-middle text-end hidden_mobile">
+                    {{ wallet.dateLastStats | date : "dd MMM y" }}
+                  </td>
+                  <td
+                    *ngIf="!saveValidation"
+                    style="max-width: 50px"
+                    class="align-middle text-end hidden_mobile"
+                  >
+                    <div class="text-small">
+                      <span
+                        class="badge {{
+                          calculatePerformance(wallet) == 0
+                            ? 'badge-warning'
+                            : calculatePerformance(wallet) > 0
+                            ? 'badge-success'
+                            : 'badge-danger'
+                        }}"
+                      >
+                        <ion-icon
+                          name="{{
+                            calculatePerformance(wallet) >= 0
+                              ? 'arrow-up-outline'
+                              : 'arrow-down-outline'
+                          }}"
+                        ></ion-icon>
+                        {{ coinSymbol }}
+                        {{ calculatePerformance(wallet) }} ({{
+                          calculatePercentage(wallet)
+                        }}%)
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        }
         <app-content-box
           *ngIf="!walletsToSave || !walletsToSave.length"
-          [header]="'dashboard.wallet_splide.nodata.header' | translate"
-          [body]="'dashboard.wallet_splide.nodata.body' | translate"
-          [footer]="'dashboard.wallet_splide.nodata.footer' | translate"
+          [header]="'add_stats_page.title' | translate"
+          [body]="'wallets_page.empty_body_text' | translate"
         ></app-content-box>
         <div
+          hidden
           *ngIf="walletsToSave && walletsToSave.length"
           class="card box-shadow"
         >
           <div class="card-body">
             <div class="hidden_mobile m-3">
               <p class="text-center fs-1">
-                {{ "insertStats.card_title" | translate }}
+                {{ "add_stats_page.card_title" | translate }}
               </p>
               <p class="card-subtitle text-center mb-1">
-                {{ "insertStats.card_subtitle" | translate }}
+                {{ "add_stats_page.card_subtitle" | translate }}
               </p>
             </div>
             <div class="transactions row m-4">
@@ -112,7 +243,7 @@
                               class="form-control"
                               id="text4b"
                               placeholder="{{
-                                'insertStats.newBal' | translate
+                                'add_stats_page.new_bal' | translate
                               }}"
                               required
                             />
@@ -127,7 +258,7 @@
                           </div>
                           <div class="input-info">
                             {{ wallet.name }}
-                            {{ "insertStats.balance" | translate }}
+                            {{ "add_stats_page.balance" | translate }}
                             {{ wallet.balance }}
                             {{ coinSymbol }}
                           </div>
@@ -171,31 +302,11 @@
                         ></span
                       >
                       <span class="text-nowrap sincetot"
-                        >{{ "stats.since" | translate }}
+                        >{{ "resume_page.since" | translate }}
                         {{ wallet.dateLastStats | date : "dd MMM y" }}</span
                       >
                     </p>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div class="form-group boxed hidden_desktop">
-              <div class="input-wrapper">
-                <input
-                  name="date"
-                  [(ngModel)]="dateStats"
-                  #date="ngModel"
-                  type="date"
-                  class="form-control"
-                  id="text4b"
-                  required
-                />
-                <div
-                  *ngIf="dateValidation"
-                  class="alert alert-danger mb-1"
-                  role="alert"
-                >
-                  {{ "insertStats.dataPresent" | translate }}
                 </div>
               </div>
             </div>
@@ -212,6 +323,29 @@
             class="pb-1 pt-3 logo"
           />
         </div>-->
+        <div
+          *ngIf="walletsToSave && walletsToSave.length"
+          class="form-group boxed hidden_desktop"
+        >
+          <div class="input-wrapper">
+            <input
+              name="date"
+              [(ngModel)]="dateStats"
+              #date="ngModel"
+              type="date"
+              class="form-control"
+              id="text4b"
+              required
+            />
+            <div
+              *ngIf="dateValidation"
+              class="alert alert-danger mb-1"
+              role="alert"
+            >
+              {{ "add_stats_page.data_present" | translate }}
+            </div>
+          </div>
+        </div>
         <div class="card-footer hidden_desktop card-btn">
           <div class="form-group basic">
             <button
@@ -221,7 +355,7 @@
               *ngIf="!saveValidation && walletsToSave && walletsToSave.length"
               (click)="confirm()"
             >
-              {{ "insertStats.continue" | translate }}
+              {{ "add_stats_page.continue" | translate }}
             </button>
           </div>
           <div class="form-group basic">
@@ -232,7 +366,7 @@
               [disabled]="f.invalid"
               (click)="save()"
             >
-              {{ "insertStats.save" | translate }}
+              {{ "shared_text.save" | translate }}
             </button>
           </div>
         </div>

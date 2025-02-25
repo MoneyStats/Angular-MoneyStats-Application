@@ -4,6 +4,7 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 import { Router } from '@angular/router';
@@ -11,7 +12,7 @@ import {
   Asset,
   CryptoDashboard,
 } from 'src/assets/core/data/class/crypto.class';
-import { Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ApexOptions } from 'src/assets/core/data/constant/apex.chart';
 import { CryptoService } from 'src/assets/core/services/api/crypto.service';
 import { ChartService } from 'src/assets/core/utils/chart.service';
@@ -26,11 +27,13 @@ import {
 } from 'src/assets/core/data/constant/constant';
 import { Subscription } from 'rxjs';
 import { Utils } from 'src/assets/core/services/config/utils.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
 
 @Component({
   selector: 'app-details-overview',
   templateUrl: './details-overview.component.html',
   styleUrls: ['./details-overview.component.scss'],
+  standalone: false,
 })
 export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
   updateinvestmentSubscribe: Subscription = new Subscription();
@@ -47,6 +50,9 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
 
   walletsAsset: Wallet[] = [];
 
+  @Input('cryptoWallets') cryptoWallets: Array<Wallet> = [];
+  @Input('cryptoAssets') cryptoAssets: Array<Asset> = [];
+
   isEditInvestmentActive: boolean = false;
 
   operationSelect: any;
@@ -54,6 +60,9 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
   showZeroBalance: boolean = false;
 
   thisYear: number = new Date().getFullYear();
+
+  cryptoCurrency?: string =
+    UserService.getUserData().attributes.money_stats_settings.cryptoCurrency;
 
   constructor(public cryptoService: CryptoService, private router: Router) {}
 
@@ -111,26 +120,20 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
     this.setColor();
     if (!this.chartOptions) {
       let dashboard: CryptoDashboard = Utils.copyObject(this.cryptoDashboard);
-      dashboard.assets = [
-        this.asset.name == undefined
-          ? Utils.copyObject(this.cryptoService.asset!)
-          : Utils.copyObject(this.asset),
-      ];
+      dashboard.assets = [Utils.copyObject(this.asset)];
       // Get All Date serve a prendere tutte le date per i grafici
       dashboard.statsAssetsDays = this.getAllDate(dashboard.assets);
       setTimeout(() => {
-        if (this.cryptoDashboard.wallets) {
-          if (ScreenService.screenWidth! <= 780) {
-            this.chartOptions = ChartService.renderCryptoDatas(dashboard, [
-              ApexChartsOptions.MOBILE_MODE,
-              ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
-            ]);
-          } else
-            this.chartOptions = ChartService.renderCryptoDatas(dashboard, [
-              ApexChartsOptions.DESKTOP_MODE,
-              ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
-            ]);
-        }
+        if (ScreenService.isMobileDevice()) {
+          this.chartOptions = ChartService.renderCryptoDatas(dashboard, true, [
+            ApexChartsOptions.MOBILE_MODE,
+            ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
+          ]);
+        } else
+          this.chartOptions = ChartService.renderCryptoDatas(dashboard, true, [
+            ApexChartsOptions.DESKTOP_MODE,
+            ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
+          ]);
       }, 500);
     }
   }
@@ -139,14 +142,10 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
     this.setColor();
     if (!this.chart1Y) {
       let dashboard: CryptoDashboard = Utils.copyObject(this.cryptoDashboard);
-      dashboard.assets = [
-        this.asset.name == undefined
-          ? Utils.copyObject(this.cryptoService.asset!)
-          : Utils.copyObject(this.asset),
-      ];
+      dashboard.assets = [Utils.copyObject(this.asset)];
       // Get All Date serve a prendere tutte le date per i grafici
       dashboard.statsAssetsDays = this.getAllDate(dashboard.assets);
-      if (dashboard.assets[0]) {
+      if (!Utils.isNullOrEmpty(dashboard.assets[0].identifier)) {
         dashboard.assets[0].history = dashboard.assets[0].history?.filter(
           (h) =>
             h.date.toString().split('-')[0] ===
@@ -158,13 +157,13 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
               s.toString().split('-')[0] === new Date().getFullYear().toString()
           );
         setTimeout(() => {
-          if (ScreenService.screenWidth! <= 780)
-            this.chart1Y = ChartService.renderCryptoDatas(dashboard, [
+          if (ScreenService.isMobileDevice())
+            this.chart1Y = ChartService.renderCryptoDatas(dashboard, true, [
               ApexChartsOptions.MOBILE_MODE,
               ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
             ]);
           else
-            this.chart1Y = ChartService.renderCryptoDatas(dashboard, [
+            this.chart1Y = ChartService.renderCryptoDatas(dashboard, true, [
               ApexChartsOptions.DESKTOP_MODE,
               ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
             ]);
@@ -178,11 +177,7 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
     if (!this.chart3Y) {
       let dashboard: CryptoDashboard = Utils.copyObject(this.cryptoDashboard);
 
-      dashboard.assets = [
-        this.asset.name == undefined
-          ? Utils.copyObject(this.cryptoService.asset!)
-          : Utils.copyObject(this.asset),
-      ];
+      dashboard.assets = [Utils.copyObject(this.asset)];
       // Get All Date serve a prendere tutte le date per i grafici
       dashboard.statsAssetsDays = this.getAllDate(dashboard.assets);
       let last3 = [
@@ -200,13 +195,13 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
           last3.includes(s.toString().split('-')[0])
         );
       setTimeout(() => {
-        if (ScreenService.screenWidth! <= 780)
-          this.chart3Y = ChartService.renderCryptoDatas(dashboard, [
+        if (ScreenService.isMobileDevice())
+          this.chart3Y = ChartService.renderCryptoDatas(dashboard, true, [
             ApexChartsOptions.MOBILE_MODE,
             ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
           ]);
         else
-          this.chart3Y = ChartService.renderCryptoDatas(dashboard, [
+          this.chart3Y = ChartService.renderCryptoDatas(dashboard, true, [
             ApexChartsOptions.DESKTOP_MODE,
             ApexChartsOptions.LIVE_PRICE_AS_LAST_DATA,
           ]);
@@ -215,17 +210,15 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   percentageAssetInTotal(): number {
-    return (this.asset.value! * 100) / this.cryptoDashboard.balance;
+    const res = (this.asset.value! * 100) / this.cryptoDashboard.balance;
+    return !Utils.isNullOrEmpty(res) ? res : 0;
   }
 
   filterWallets(): Wallet[] {
-    let name =
-      this.asset.name == undefined
-        ? this.cryptoService.asset?.name
-        : this.asset.name;
-    const dashboard = Utils.copyObject(this.cryptoDashboard);
-    let wallAsset = dashboard.wallets
-      ? dashboard.wallets.filter((w: { assets: any[] | undefined }) => {
+    let name = this.asset.name;
+    const wallets = Utils.copyObject(this.cryptoWallets);
+    let wallAsset = wallets
+      ? wallets.filter((w: { assets: any[] | undefined }) => {
           if (w.assets != undefined && w.assets.length != 0)
             return w.assets.slice().find((a) => a.name == name);
           return null;
@@ -235,6 +228,12 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
       w.assets = w.assets.slice().filter((a: any) => a.name == name);
       if (w.assets[0].history == undefined) {
         w.assets[0].history = [];
+      } else if (w.assets[0].history) {
+        w.assets[0].history = w.assets[0].history.filter(
+          (h: Stats) =>
+            h.date.toString().split('-')[0] ===
+            new Date().getFullYear().toString()
+        );
       }
     });
     return wallAsset;
@@ -242,6 +241,7 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
 
   getOperations() {
     let wallets = Utils.copyObject(this.walletsAsset);
+    let assets = Utils.copyObject(this.cryptoAssets);
     let operations: any[] = [];
     wallets.forEach((wallet: any) => {
       if (
@@ -254,8 +254,8 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
           operation.wallet = wallet;
           operation.asset = wallet.assets[0];
           if (operation.type != OperationsType.NEWINVESTMENT)
-            operation.assetSell = this.cryptoDashboard.assets.find(
-              (a) => a.symbol == operation.entryCoin
+            operation.assetSell = assets.find(
+              (a: { symbol: any }) => a.symbol == operation.entryCoin
             );
           operations.push(operation);
         });
@@ -267,22 +267,23 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
   updateInvestment(wallet: Wallet) {
     this.isEditInvestmentActive = false;
     this.updateinvestmentSubscribe = this.cryptoService
-      .addOrUpdateCryptoAsset(wallet)
+      .updateCryptoAsset(wallet)
       .subscribe((data) => {
         LOG.info(data.message!, 'DetailsOverviewComponent');
       });
 
-    let wallets = Utils.copyObject(this.walletsAsset);
+    let wallets = Utils.copyObject(this.cryptoWallets);
+    let walletsFullList: Wallet[] = Utils.copyObject(this.walletsAsset);
     let invested = 0;
     let balance = 0;
     wallets.forEach((w: any) => {
       invested += w.assets[0].invested;
       balance += w.assets[0].balance;
-      this.cryptoService.cryptoDashboard.wallets
+      walletsFullList
         .find((w1) => w1.name == w.name)!
         .assets.find((a) => a.identifier == w.assets[0].identifier)!.balance =
         w.assets[0].balance;
-      this.cryptoService.cryptoDashboard.wallets
+      walletsFullList
         .find((w1) => w1.name == w.name)!
         .assets.find((a) => a.identifier == w.assets[0].identifier)!.invested =
         w.assets[0].invested;
@@ -328,6 +329,30 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
       wallet.assets[0] == undefined ||
       wallet.assets[0].history == undefined ||
       wallet.assets[0].history.length == 0
+    );
+  }
+
+  calculatePerformance(asset: Asset) {
+    const res = ((asset.value! - asset.invested!) / asset.invested!) * 100;
+    return !Utils.isNullOrEmpty(res) ? res : 0;
+  }
+
+  get isAssetListEmptyOrZero(): boolean {
+    return !this.showZeroBalance
+      ? !this.walletsAsset?.length ||
+          this.walletsAsset.every(
+            (wallet) =>
+              wallet.balance === 0 ||
+              wallet.assets.every((a) => a.balance === 0)
+          )
+      : false;
+  }
+
+  get isWalletHasZero(): boolean {
+    return (
+      this.walletsAsset?.some((wallet) =>
+        wallet.assets.some((asset) => asset.balance === 0)
+      ) ?? false
     );
   }
 }

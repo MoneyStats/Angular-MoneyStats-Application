@@ -1,7 +1,7 @@
 <div *ngIf="resumeData.assets" class="transactions row">
   <div class="col-md-6 mt-2">
     <!-- item -->
-    <a routerLink="/crypto/asset" class="item">
+    <a routerLink="/crypto/asset" class="item zoom">
       <div class="detail">
         <div class="col-auto" style="padding-right: 20px">
           <div
@@ -11,9 +11,9 @@
           </div>
         </div>
         <div>
-          <strong>{{ "stats.total" | translate }}</strong>
+          <strong>{{ "resume_page.total" | translate }}</strong>
           <p class="sincetot">
-            {{ "stats.since" | translate }}
+            {{ "resume_page.since" | translate }}
             {{ resumeData.lastUpdate | date : "dd MMM y" }}
           </p>
         </div>
@@ -28,7 +28,7 @@
   </div>
   <div class="col-md-6 mt-2">
     <!-- item -->
-    <a routerLink="/crypto/asset" class="item">
+    <a routerLink="/crypto/asset" class="item zoom">
       <div class="detail">
         <div class="col-auto" style="padding-right: 20px">
           <div
@@ -38,9 +38,9 @@
           </div>
         </div>
         <div>
-          <strong>{{ "stats.performance" | translate }}</strong>
+          <strong>{{ "shared_text.performance" | translate }}</strong>
           <p class="sincetot">
-            {{ "stats.since" | translate }}
+            {{ "resume_page.since" | translate }}
             {{ resumeData.holdingLong.lastUpdate | date : "dd MMM y" }}
           </p>
         </div>
@@ -84,7 +84,9 @@
   </div>
 
   <div class="mt-2 sec1">
-    <div class="section-title">{{ "crypto.resume.assetList" | translate }}</div>
+    <div class="section-title">
+      {{ "crypto_resume_page.assetList" | translate }}
+    </div>
     <div class="transactions row">
       <div
         class="col-xl-3 col-sm-6 mobile-size"
@@ -133,11 +135,19 @@
                   *ngIf="!asset.deletedDate"
                   class="{{
                     asset.history != undefined
-                      ? asset.history![asset.history!.length - 1].percentage ==
-                        0
+                      ? calculatePercentage(
+                          asset.value!,
+                          asset.history![asset.history!.length - 1].balance,
+                          isPast,
+                          asset.history![asset.history!.length - 1].percentage
+                        ) == 0
                         ? 'text-warning'
-                        : asset.history![asset.history!.length - 1].percentage >
-                          0
+                        : calculatePercentage(
+                            asset.value!,
+                            asset.history![asset.history!.length - 1].balance,
+                            isPast,
+                            asset.history![asset.history!.length - 1].percentage
+                          ) > 0
                         ? 'text-success'
                         : 'text-danger'
                       : 'text-warning'
@@ -145,22 +155,36 @@
                   ><i
                     class="fa {{
                       asset.history != undefined &&
-                      asset.history![asset.history!.length - 1].percentage > 0
+                      calculatePercentage(
+                        asset.value!,
+                        asset.history![asset.history!.length - 1].balance,
+                        isPast,
+                        asset.history![asset.history!.length - 1].percentage
+                      ) > 0
                         ? 'fa-arrow-up'
                         : 'fa-arrow-down'
                     }}"
                   ></i
                   >{{
                     asset.history != undefined
-                      ? asset.history![asset.history!.length - 1].percentage >=
-                        1000
+                      ? calculatePercentage(
+                          asset.value!,
+                          asset.history![asset.history!.length - 1].balance,
+                          isPast,
+                          asset.history![asset.history!.length - 1].percentage
+                        ) >= 1000
                         ? "+"
                         : ""
                       : ""
                   }}
                   {{
                     asset.history != undefined
-                      ? asset.history![asset.history!.length - 1].percentage
+                      ? calculatePercentage(
+                          asset.value!,
+                          asset.history![asset.history!.length - 1].balance,
+                          isPast,
+                          asset.history![asset.history!.length - 1].percentage
+                        )
                       : 0
                   }}%</span
                 >
@@ -168,14 +192,15 @@
                   *ngIf="asset.deletedDate"
                   class="badge badge-danger"
                   style="width: 70px"
-                  >{{ "stats.data.deleted" | translate }}</span
+                  >{{ "resume_page.data.deleted" | translate }}</span
                 ></span
               >
               <span class="text-nowrap sincetot"
-                >{{ "stats.since" | translate }}
+                >{{ "resume_page.since" | translate }}
                 {{
                   asset.history != undefined
-                    ? asset.history![asset.history!.length - 1].date
+                    ? (asset.history![asset.history!.length - 1].date
+                      | date : "dd MMM y")
                     : ("" | date : "dd MMM y")
                 }}</span
               >
@@ -185,9 +210,10 @@
       </div>
     </div>
   </div>
+  @if (tableBalance.length > 0) {
   <div class="section col-xl-12">
     <div class="section-title">
-      {{ "crypto.resume.graphAsset" | translate }}
+      {{ "crypto_resume_page.graphAsset" | translate }}
     </div>
     <div class="card inner-round border_round">
       <div
@@ -206,25 +232,29 @@
         [title]="chartOptions.title!"
         [colors]="chartOptions.colors!"
         [legend]="chartOptions.legend!"
-        [stroke]="chartOptions.stroke!"
         [labels]="chartOptions.labels!"
+        [tooltip]="chartOptions.tooltip!"
+        [dataLabels]="chartOptions.dataLabels!"
+        [grid]="chartOptions.grid!"
         type="area"
         class="border_round"
       ></apx-chart>
     </div>
   </div>
+  }
   <!-- App Capsule -->
-  <div class="section mt-2 mb-4 col-xl-12">
-    <div class="section-title">
-      {{ "crypto.resume.tableAsset" | translate }}
-    </div>
+  <div class="section mt-4 mb-4 col-xl-12">
+    <!-- <div class="section-title">
+      {{ "crypto_resume_page.tableAsset" | translate }}
+    </div>-->
     <div *ngIf="resumeData.assets" class="card">
-      <div class="table-responsive">
-        <table class="table">
+      <div class="table-responsive ms-2 me-2">
+        <!--<div class="table-responsive">-->
+        <table class="table" id="crypto_resume_table">
           <thead>
             <tr>
-              <th scope="col">
-                {{ "stats.data.table_date" | translate }}
+              <th scope="col" style="width: 100px">
+                {{ "resume_page.table_date" | translate }}
               </th>
               <th
                 scope="col"
@@ -235,10 +265,10 @@
                 {{ asset.name }}
               </th>
               <th scope="col" class="text-end">
-                {{ "stats.data.table_balance" | translate }}
+                {{ "shared_text.amount" | translate }}
               </th>
               <th scope="col" class="text-end">
-                {{ "stats.data.table_trend" | translate }}
+                {{ "resume_page.table_trend" | translate }}
               </th>
             </tr>
           </thead>
@@ -289,13 +319,52 @@
           </tbody>
         </table>
         <div
+          hidden
           *ngIf="tableBalance.length == 0"
           class="mx-auto text-center alert alert-danger mb-1"
           role="alert"
         >
-          {{ "crypto.resume.warning" | translate }}
+          {{ "crypto_resume_page.warning" | translate }}
         </div>
       </div>
     </div>
   </div>
+  <!-- Graph -->
+  @if (resumeData.assets) {
+  <div class="section col-xl-12">
+    <div class="section-heading">
+      <h2 class="title" id="year">
+        {{ "resume_page.graph3" | translate }}
+      </h2>
+    </div>
+    <div class="card border_round">
+      <div class="card-body" style="min-height: 400px">
+        <div
+          *ngIf="!chartBar"
+          class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
+        >
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <apx-chart
+          *ngIf="chartBar"
+          [series]="chartBar.series!"
+          [chart]="chartBar.chart!"
+          [title]="chartBar.title!"
+          [colors]="chartBar.colors!"
+          [legend]="chartBar.legend!"
+          [labels]="chartBar.labels!"
+          [plotOptions]="chartBar.plotOptions!"
+          [grid]="chartBar.grid!"
+          [tooltip]="chartBar.tooltip!"
+          type="bar"
+        ></apx-chart>
+        <!--<div id="chart-line"></div>-->
+      </div>
+    </div>
+  </div>
+  <!-- * Graph -->
+  }
 </div>

@@ -2,12 +2,17 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
+import {
+  Dashboard,
+  Stats,
+  Wallet,
+} from 'src/assets/core/data/class/dashboard.class';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { ErrorService } from 'src/assets/core/interceptors/error.service';
 import { DashboardService } from 'src/assets/core/services/api/dashboard.service';
 import { StatsService } from 'src/assets/core/services/api/stats.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
+import { SharedService } from 'src/assets/core/services/config/shared.service';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
@@ -18,8 +23,10 @@ import { environment } from 'src/environments/environment';
   selector: 'app-add-stats',
   templateUrl: './add-stats.component.html',
   styleUrls: ['./add-stats.component.scss'],
+  standalone: false,
 })
 export class AddStatsComponent implements OnInit, OnDestroy {
+  dashboardSubscribe: Subscription = new Subscription();
   addStatsSubscribe: Subscription = new Subscription();
 
   environment = environment;
@@ -31,33 +38,51 @@ export class AddStatsComponent implements OnInit, OnDestroy {
   walletsToSave: Wallet[] = [];
   coinSymbol?: string;
 
+  dashboard: Dashboard = new Dashboard();
+
   constructor(
     public screenService: ScreenService,
     private dashboardService: DashboardService,
     private statsService: StatsService,
     private errorService: ErrorService,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private shared: SharedService
   ) {}
 
-  ngOnDestroy(): void {
-    this.addStatsSubscribe.unsubscribe();
+  calculatePerformance(wallet: Wallet) {
+    if (!wallet.newBalance) return 0;
+    const res = (wallet.newBalance - wallet.balance).toFixed(2);
+    return Number.parseFloat(res);
+  }
+
+  calculatePercentage(wallet: Wallet) {
+    if (!wallet.newBalance) return 0;
+    const res = (
+      ((wallet.newBalance - wallet.balance) / wallet.balance) *
+      100
+    ).toFixed(2);
+    const result = Number.parseFloat(res);
+    if (result > 1000) return '+1000';
+    return result;
   }
 
   ngOnInit(): void {
     ScreenService.setupHeader();
     ScreenService.hideFooter();
-    if (this.dashboardService.dashboard.wallets) {
-      this.walletsToSave = this.dashboardService.dashboard.wallets.filter(
-        (w) => !w.deletedDate
-      );
-    }
-    this.coinSymbol = UserService.getUserData().settings.currencySymbol;
-    this.getTodayAsString();
+    this.getDashboard().then((dash) => {
+      if (this.dashboard.wallets) {
+        this.walletsToSave = this.dashboard.wallets.filter(
+          (w) => !w.deletedDate
+        );
+      }
+      this.coinSymbol = UserService.getUserData().attributes.money_stats_settings.currencySymbol;
+      this.getTodayAsString();
+    });
   }
 
-  screenWidth() {
-    return ScreenService.screenWidth;
+  isMobile() {
+    return ScreenService.isMobileDevice();
   }
 
   validate() {
@@ -72,7 +97,7 @@ export class AddStatsComponent implements OnInit, OnDestroy {
         }
       });
     }
-    let statsWalletDays = this.dashboardService.dashboard.statsWalletDays;
+    let statsWalletDays = this.dashboard.statsWalletDays;
     if (statsWalletDays && statsWalletDays.find((d) => d === this.dateStats)) {
       this.dateValidation = true;
       validate = true;
@@ -107,7 +132,7 @@ export class AddStatsComponent implements OnInit, OnDestroy {
   }
 
   confirm() {
-    let statsWalletDays = this.dashboardService.dashboard.statsWalletDays;
+    let statsWalletDays = this.dashboard.statsWalletDays;
     if (!statsWalletDays) statsWalletDays = [];
 
     this.walletsToSave.forEach((wallet) => {
@@ -119,10 +144,9 @@ export class AddStatsComponent implements OnInit, OnDestroy {
 
       wallet.newBalance = parseFloat('');
     });
-    if (!this.dashboardService.dashboard.statsWalletDays)
-      this.dashboardService.dashboard.statsWalletDays = [];
-    this.dashboardService.dashboard.statsWalletDays.push(this.dateStats);
-    this.dashboardService.dashboard.statsWalletDays.sort();
+    if (!this.dashboard.statsWalletDays) this.dashboard.statsWalletDays = [];
+    this.dashboard.statsWalletDays.push(this.dateStats);
+    this.dashboard.statsWalletDays.sort();
     this.saveValidation = true;
   }
 
@@ -253,5 +277,33 @@ export class AddStatsComponent implements OnInit, OnDestroy {
       wallet.lowPriceDate = currentDate;
     }
     return wallet;
+  }
+
+  getDashboard(): Promise<any> {
+    if (Utils.isNullOrEmpty(this.shared.getDashboard())) {
+      return new Promise((resolve, reject) => {
+        this.dashboardSubscribe = this.dashboardService
+          .getDashboardData()
+          .subscribe({
+            next: (data) => {
+              this.dashboardService.cache.cacheDashboardData(data);
+              LOG.info(data.message!, 'AddStatsComponent');
+              this.dashboard = this.shared.setDashboard(data.data);
+              resolve(this.dashboard); // Risolvi la Promise con il valore
+            },
+            error: (err) => {
+              reject(err); // In caso di errore, rifiuta la Promise
+            },
+          });
+      });
+    } else {
+      this.dashboard = this.shared.getDashboard();
+      return Promise.resolve(this.shared.getDashboard());
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.addStatsSubscribe.unsubscribe();
+    this.dashboardSubscribe.unsubscribe();
   }
 }

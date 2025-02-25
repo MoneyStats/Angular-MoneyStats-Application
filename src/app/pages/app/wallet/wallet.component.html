@@ -1,9 +1,9 @@
 <section class="section-width mx-auto">
   <app-header-mobile
-    *ngIf="screenWidth()! <= 780"
-    title="{{ 'wallet.title' | translate }}"
-    backBtn="{{ 'wallet.mobile_back' | translate }}"
-    rightBtn="{{ 'wallet.mobile_add' | translate }}"
+    *ngIf="isMobile()"
+    title="{{ 'wallets_page.title' | translate }}"
+    backBtn="{{ 'shared_text.mobile_back' | translate }}"
+    rightBtn="{{ 'wallets_page.mobile_add' | translate }}"
     [dataBsTarget]="modalConstant.ADDWALLET"
   >
   </app-header-mobile>
@@ -18,12 +18,12 @@
           href="#active"
           role="tab"
         >
-          {{ "wallet.active" | translate }}
+          {{ "wallets_page.active" | translate }}
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" data-bs-toggle="tab" href="#deleted" role="tab">
-          {{ "wallet.deleted" | translate }}
+          {{ "wallets_page.deleted" | translate }}
         </a>
       </li>
     </ul>
@@ -35,8 +35,7 @@
     <div class="row">
       <app-title-desktop
         class="col-md-6"
-        [title]="'wallet.title' | translate"
-        [back]="'wallet.back' | translate"
+        [title]="'wallets_page.title' | translate"
       ></app-title-desktop>
       <div class="addWallet col-md-6 text-end">
         <button
@@ -45,27 +44,40 @@
           data-bs-toggle="modal"
           attr.data-bs-target="#{{ modalConstant.ADDWALLET }}"
         >
-          {{ "wallet.add" | translate }}
+          {{ "wallets_page.add" | translate }}
         </button>
       </div>
     </div>
 
     <app-content-box
       *ngIf="!wallets || !wallets.length"
-      [header]="'wallet.nodata.header' | translate"
-      [body]="'wallet.nodata.body' | translate"
-      [footer]="'wallet.nodata.footer' | translate"
+      [header]="'wallets_page.title' | translate"
+      [body]="'wallets_page.empty_body_text' | translate"
     ></app-content-box>
     <div class="section tab-content mt-0 mb-2">
       <!-- waiting tab -->
       <div class="tab-pane fade show active" id="active" role="tabpanel">
         <div class="row">
-          <app-wallet-card
+          <!--<app-wallet-card
             *ngFor="let wallet of walletActive(wallets)"
-            class="col-md-3 mt-3 col-sm-4 col-6"
+            [style]="
+              'background-image: url(' +
+              wallet!.img +
+              ') !important; box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.85)'
+            "
+            class="col-xl-2 col-md-3 mt-3 col-sm-4 col-6"
             [coinSymbol]="coinSymbol"
             [wallet]="wallet"
-            [btn]="'wallet.open' | translate"
+            [btn]="'wallets_page.open' | translate"
+            [hiddenAmount]="hidden"
+          >
+          </app-wallet-card>-->
+          <app-wallet-card
+            *ngFor="let wallet of walletActive(wallets)"
+            class="col-xl-2 col-md-3 mt-3 col-sm-4 col-6"
+            [coinSymbol]="coinSymbol"
+            [wallet]="wallet"
+            [btn]="'wallets_page.open' | translate"
             [hiddenAmount]="hidden"
           >
           </app-wallet-card>
@@ -76,11 +88,24 @@
       <!-- deleted tab -->
       <div class="tab-pane fade" id="deleted" role="tabpanel">
         <div class="row">
+          <!--<app-wallet-card
+            *ngFor="let wallet of walletDeleted(wallets)"
+            [style]="
+              'background-image: url(' +
+              wallet!.img +
+              ') !important; box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.85)'
+            "
+            class="col-xl-2 col-md-3 mt-3 col-sm-4 col-6"
+            [wallet]="wallet"
+            [btn]="'wallets_page.open' | translate"
+            [hiddenAmount]="hidden"
+          >
+          </app-wallet-card>-->
           <app-wallet-card
             *ngFor="let wallet of walletDeleted(wallets)"
-            class="col-md-3 mt-3 col-sm-4 col-6"
+            class="col-xl-2 col-md-3 mt-3 col-sm-4 col-6"
             [wallet]="wallet"
-            [btn]="'wallet.open' | translate"
+            [btn]="'wallets_page.open' | translate"
             [hiddenAmount]="hidden"
           >
           </app-wallet-card>

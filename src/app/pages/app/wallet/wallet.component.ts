@@ -7,6 +7,7 @@ import {
 } from 'src/assets/core/data/constant/constant';
 import { UserService } from 'src/assets/core/services/api/user.service';
 import { WalletService } from 'src/assets/core/services/api/wallet.service';
+import { SharedService } from 'src/assets/core/services/config/shared.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 
@@ -14,6 +15,7 @@ import { ScreenService } from 'src/assets/core/utils/screen.service';
   selector: 'app-wallet',
   templateUrl: './wallet.component.html',
   styleUrls: ['./wallet.component.scss'],
+  standalone: false,
 })
 export class WalletComponent implements OnInit, OnDestroy {
   walletsSubscribe: Subscription = new Subscription();
@@ -22,11 +24,15 @@ export class WalletComponent implements OnInit, OnDestroy {
   amount: string = '******';
   hidden: boolean = false;
 
-  coinSymbol: string = UserService.getUserData().settings.currencySymbol;
+  coinSymbol: string = UserService.getUserData().attributes.money_stats_settings.currencySymbol;
+
+  walletsActive: Wallet[] = [];
+  walletsDeleted: Wallet[] = [];
 
   constructor(
     private walletService: WalletService,
-    public screenService: ScreenService
+    public screenService: ScreenService,
+    private shared: SharedService
   ) {}
 
   ngOnDestroy(): void {
@@ -37,8 +43,8 @@ export class WalletComponent implements OnInit, OnDestroy {
     return ModalConstant;
   }
 
-  screenWidth() {
-    return ScreenService.screenWidth;
+  isMobile() {
+    return ScreenService.isMobileDevice();
   }
 
   ngOnInit(): void {
@@ -51,9 +57,9 @@ export class WalletComponent implements OnInit, OnDestroy {
         this.walletService.cache.cacheWalletsData(res);
         LOG.info(res.message!, 'WalletComponent');
         this.wallets = res.data;
-        this.walletService.walletActive = this.walletActive(res.data);
-        this.walletService.walletDeleted = this.walletDeleted(res.data);
-        this.walletDetails(res.data);
+        this.shared.setWallets(this.wallets);
+        this.walletsActive = this.walletActive(res.data);
+        this.walletsDeleted = this.walletDeleted(res.data);
         let isHidden = JSON.parse(
           localStorage.getItem(StorageConstant.HIDDENAMOUNT)!
         );
@@ -64,15 +70,13 @@ export class WalletComponent implements OnInit, OnDestroy {
   }
 
   walletActive(wallets: Wallet[]): Array<Wallet> {
-    return wallets.filter((w) => !w.deletedDate);
+    if (wallets) return wallets.filter((w) => !w.deletedDate);
+    else return [];
   }
 
   walletDeleted(wallets: Wallet[]): Array<Wallet> {
-    return wallets.filter((w) => w.deletedDate);
-  }
-
-  walletDetails(res: Wallet[]) {
-    this.walletService.walletDetails = res;
+    if (wallets) return wallets.filter((w) => w.deletedDate);
+    else return [];
   }
 
   addWallet(wallet: Wallet) {

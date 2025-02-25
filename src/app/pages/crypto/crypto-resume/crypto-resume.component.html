@@ -1,6 +1,7 @@
 <div class="mx-auto section-width">
   <app-crypto-header
-    title="{{ 'crypto.resume.title' | translate }}"
+    title="{{ 'crypto_resume_page.title' | translate }}"
+    (emitOperationClick)="emitOperationClick($event)"
   ></app-crypto-header>
 
   <!-- App Capsule -->
@@ -8,9 +9,10 @@
     <div class="row" style="margin-top: 10px; margin-bottom: -60px">
       <div class="col-md-6">
         <div class="title-section">
-          <h2 class="title">{{ "crypto.resume.title" | translate }}</h2>
+          <h2 class="title">{{ "crypto_resume_page.title" | translate }}</h2>
         </div>
       </div>
+      @if (resumeData.balance != 0 && !isAssetsWithNoHistory) {
       <div class="addWallet col-md-6">
         <div class="form-group boxed">
           <div class="input-wrapper" style="max-width: 150px; margin-left: 80%">
@@ -18,10 +20,12 @@
               class="form-control custom-select"
               id="select4b"
               (change)="onChange($event)"
+              [disabled]="resumeFullYears.length == 1"
             >
               <option
-                *ngFor="let year of years.slice().reverse()"
-                value="{{ year }}"
+                [selected]="currentYear.toString() === year"
+                *ngFor="let year of resumeFullYears.slice().reverse()"
+                [value]="year"
               >
                 {{ year }}
               </option>
@@ -29,43 +33,61 @@
           </div>
         </div>
       </div>
+      }
     </div>
   </div>
+  @if (resumeData.balance == 0) {
+  <app-content-box
+    [header]="'crypto_resume_page.title' | translate"
+    [body]="'resume_page.empty_body_text' | translate"
+  ></app-content-box>
+  } @if (resumeData.balance != 0) {
   <div class="card transparent">
     <div class="card-body">
       <ul class="nav nav-tabs capsuled" role="tablist">
         <!-- Se Cambi *ngIf="assets" devi cambiare anche altra -->
-        <li *ngIf="assets" class="nav-item">
+        @if (!isAssetsWithNoHistory) {
+        <li class="nav-item">
           <a
-            class="nav-link active"
+            (click)="changeData()"
+            class="nav-link {{ isAssetsWithNoHistory ? '' : 'active' }}"
             data-bs-toggle="tab"
             href="#overview"
             role="tab"
+            id="resumeData"
           >
-            {{ "crypto.resume.tab.tab1" | translate }}
+            {{ "crypto_resume_page.resume_tab1" | translate }}
           </a>
         </li>
+        }
         <li *ngIf="isOperationPresent() > 0" class="nav-item">
           <a class="nav-link" data-bs-toggle="tab" href="#card" role="tab">
-            {{ "crypto.resume.tab.tab2" | translate }}
+            {{ "crypto_resume_page.resume_tab2" | translate }}
           </a>
         </li>
         <li class="nav-item">
           <a
-            class="nav-link {{ assets ? '' : 'active' }}"
+            (click)="getAssets()"
+            (click)="getWalletsCryptoData()"
+            (click)="getCryptoHistoryData()"
+            class="nav-link {{ !isAssetsWithNoHistory ? '' : 'active' }}"
             data-bs-toggle="tab"
             href="#resume"
             role="tab"
+            #history
           >
-            {{ "crypto.resume.tab.tab3" | translate }}
+            {{ "crypto_resume_page.resume_tab3" | translate }}
           </a>
         </li>
       </ul>
       <div class="tab-content mt-1 margin-bottom-size">
-        <div class="tab-pane fade show active" id="overview" role="tabpanel">
+        <div
+          class="tab-pane fade {{ isAssetsWithNoHistory ? '' : 'show active' }}"
+          id="overview"
+          role="tabpanel"
+        >
           <app-resume-assets
             [hidden]="hidden"
-            *ngIf="assets && assets.length"
             [resumeData]="resumeData"
             [isPast]="isPast"
           ></app-resume-assets>
@@ -87,12 +109,16 @@
             </div>
           </div>
           <app-trading-resume
+            (emptyTradingData)="goToResume()"
             [cryptoDashboard]="resumeData"
             [wallets]="resumeData.wallets"
+            [cryptoAssets]="resumeAssets"
           ></app-trading-resume>
         </div>
         <div
-          class="tab-pane fade {{ assets ? '' : 'show active' }}"
+          class="tab-pane fade {{
+            !isAssetsWithNoHistory ? '' : 'show active'
+          }}"
           id="resume"
           role="tabpanel"
         >
@@ -100,18 +126,22 @@
             [hidden]="hidden"
             [cryptoResume]="resume"
             [cryptoCurrency]="resumeData.currency"
+            [cryptoAssets]="cryptoAssets"
+            [cryptoWallets]="cryptoWallets"
+            [cryptoHistory]="cryptoHistory!"
           ></app-investments-history>
         </div>
       </div>
     </div>
   </div>
+  }
 </div>
 
 <app-operations-modal
   [modalId]="modalConstant.ADDOPERATIONS"
-  [wallets]="cryptoService.cryptoDashboard.wallets"
-  [assets]="cryptoService.cryptoDashboard.assets"
-  [currency]="cryptoService.cryptoDashboard.currency"
-  [statsAssetsDays]="cryptoService.cryptoDashboard.statsAssetsDays"
-  (emitAddStats)="getResume()"
+  [wallets]="cryptoWallets"
+  [assets]="cryptoAssets"
+  [currency]="cryptoDashboard.currency"
+  [statsAssetsDays]="cryptoDashboard.statsAssetsDays"
+  (emitAddStats)="getResume(currentYear)"
 ></app-operations-modal>

@@ -2,18 +2,23 @@ import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { fader } from 'src/app/shared/animations/route-animations';
-import { Status, User } from 'src/assets/core/data/class/user.class';
+import {
+  AccessSphereResponse,
+  Status,
+  User,
+} from 'src/assets/core/data/class/user.class';
 import {
   ModalConstant,
   ProfileSettings,
   StorageConstant,
+  Tracing,
   UserRole,
 } from 'src/assets/core/data/constant/constant';
 import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { AppService } from 'src/assets/core/services/api/app.service';
 import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
-import { CacheService } from 'src/assets/core/services/config/cache.service';
+import { CacheService } from 'src/assets/core/services/config/cache/cache.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
@@ -26,18 +31,19 @@ import { environment } from 'src/environments/environment';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
   animations: [fader],
+  standalone: false,
 })
 export class SettingsComponent implements OnInit, OnDestroy {
   marketDataSubscribe: Subscription = new Subscription();
   cacheSubscribe: Subscription = new Subscription();
   updateUserSubscribe: Subscription = new Subscription();
+  exchangeTokenSubscribe: Subscription = new Subscription();
 
   environment = environment;
   @Output('profileConst') profileConst: string = '';
   user?: User;
 
   warning: boolean = false;
-  isAutoUpdate: boolean = false;
   isLiveWallet: boolean = false;
 
   constructor(
@@ -53,6 +59,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.marketDataSubscribe.unsubscribe();
     this.cacheSubscribe.unsubscribe();
     this.updateUserSubscribe.unsubscribe();
+    this.exchangeTokenSubscribe.unsubscribe();
   }
 
   public get modalConstant(): typeof ModalConstant {
@@ -71,30 +78,21 @@ export class SettingsComponent implements OnInit, OnDestroy {
     ScreenService.setupHeader();
     ScreenService.showFooter();
     ScreenService.goToSettings();
-    this.user = this.authService.user;
+    this.user = UserService.getUserData();
     ThemeService.switchDarkMode();
-    if (this.user?.name === 'DEFAULT_NAME') {
-      this.user = this.authService.user;
-    }
     if (this.user?.name === 'DEFAULT_NAME') {
       this.user = UserService.getUserData();
     }
-    let autoUpdate = !localStorage.getItem(StorageConstant.AUTOUPDATE);
-    if (autoUpdate) {
-      this.isAutoUpdate = autoUpdate;
-    }
-    if (this.user?.settings.liveWallets != undefined) {
+    if (this.user?.attributes.money_stats_settings.liveWallets != undefined) {
       this.isLiveWallet =
-        this.user.settings.liveWallets == Status.ACTIVE ? true : false;
+        this.user.attributes.money_stats_settings.liveWallets == Status.ACTIVE
+          ? true
+          : false;
     }
   }
 
-  screenWidth() {
-    return ScreenService.screenWidth;
-  }
-
-  disconnect(user: User) {
-    this.user = user;
+  isMobile() {
+    return ScreenService.isMobileDevice();
   }
 
   openAccountSettings(profileConst: string) {
@@ -138,14 +136,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }
   }
 
-  autoUpdate() {
-    this.isAutoUpdate == true ? false : true;
-    localStorage.setItem(
-      StorageConstant.AUTOUPDATE,
-      JSON.stringify(this.isAutoUpdate)
-    );
-  }
-
   cleanCache() {
     this.cacheSubscribe = this.appService.cleanCache().subscribe((res) => {
       LOG.info(res.message!, 'SettingsComponent');
@@ -170,17 +160,20 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   liveWallet() {
     this.cacheService.clearCache();
-    if (this.user?.settings.liveWallets == undefined)
-      this.user!.settings.liveWallets = Status.NOT_ACTIVE;
+    if (this.user?.attributes.money_stats_settings.liveWallets == undefined)
+      this.user!.attributes.money_stats_settings.liveWallets =
+        Status.NOT_ACTIVE;
     else
-      this.user!.settings.liveWallets =
-        this.user?.settings.liveWallets &&
-        this.user?.settings.liveWallets == Status.ACTIVE
+      this.user!.attributes.money_stats_settings.liveWallets =
+        this.user?.attributes.money_stats_settings.liveWallets &&
+        this.user?.attributes.money_stats_settings.liveWallets == Status.ACTIVE
           ? Status.NOT_ACTIVE
           : Status.ACTIVE;
     this.updateUser(
       this.translate.instant('response.live') +
-        (this.user?.settings.liveWallets == 'ACTIVE' ? 'Active' : 'Not Active')
+        (this.user?.attributes.money_stats_settings.liveWallets == 'ACTIVE'
+          ? 'Active'
+          : 'Not Active')
     );
     this.isLiveWallet == true ? false : true;
   }
@@ -190,8 +183,27 @@ export class SettingsComponent implements OnInit, OnDestroy {
       .updateUserData(this.user!)
       .subscribe((res) => {
         LOG.info(res.message!, 'SettingsComponent');
-        this.userService.setUserGlobally(res.data);
+        let accessSphereResponse: AccessSphereResponse =
+          new AccessSphereResponse();
+        accessSphereResponse.user = res.data;
+        this.userService.setUserGlobally(accessSphereResponse);
         SwalService.toastMessage(SwalIcon.SUCCESS, message);
+      });
+  }
+
+  exchangeTokenAndRedirect() {
+    const client_id = environment.taxCalculatorClientID;
+    this.exchangeTokenSubscribe = this.authService
+      .exchangeToken(client_id)
+      .subscribe((data) => {
+        LOG.info(data.message!, 'SettingsComponent');
+        const SESSION_ID = localStorage.getItem(Tracing.SESSION_ID);
+        const redirectUri = environment.taxCalculatorUrl
+          .concat('?access-token=')
+          .concat(data.data.token.access_token)
+          .concat('&session-id=')
+          .concat(SESSION_ID!);
+        window.location.href = redirectUri;
       });
   }
 }

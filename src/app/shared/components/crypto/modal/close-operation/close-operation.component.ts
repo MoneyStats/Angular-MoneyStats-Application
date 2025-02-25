@@ -4,30 +4,35 @@ import {
   ModalConstant,
   OperationsType,
 } from 'src/assets/core/data/constant/constant';
-import { CryptoService } from 'src/assets/core/services/api/crypto.service';
-import { SwalService } from 'src/assets/core/utils/swal.service';
-import { Router } from '@angular/router';
-import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
 import { Subscription } from 'rxjs';
-import { LOG } from 'src/assets/core/utils/log.service';
-import { TranslateService } from '@ngx-translate/core';
 import { Utils } from 'src/assets/core/services/config/utils.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
+import { Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { LOG } from 'src/assets/core/utils/log.service';
+import { SwalService } from 'src/assets/core/utils/swal.service';
+import { SwalIcon } from 'src/assets/core/data/constant/swal.icon';
+import { CryptoService } from 'src/assets/core/services/api/crypto.service';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-close-operation',
   templateUrl: './close-operation.component.html',
   styleUrls: ['./close-operation.component.scss'],
+  standalone: false,
 })
 export class CloseOperationComponent implements OnDestroy {
   closeSubscribe: Subscription = new Subscription();
 
   @Input('modalId') modalId: string = '';
   @Input('operation') operation?: Operation = new Operation();
+  @Input('walletsAsset') walletsAsset: Wallet[] = [];
   operationToClose: Operation = new Operation();
   cryptoCurrency: string = '';
 
   currentPrice: number = 0;
   isEditActive: boolean = false;
+  closingDate: string = Utils.formatDate(new Date());
 
   fees: number = 0;
 
@@ -61,13 +66,14 @@ export class CloseOperationComponent implements OnDestroy {
     ) {
       return;
     }
-    this.cryptoCurrency = this.cryptoService.cryptoDashboard.currency;
+    this.cryptoCurrency =
+      UserService.getUserData().attributes.money_stats_settings.cryptoCurrency!;
     let currentPrice =
       this.operation?.entryQuantity! * this.operation?.asset?.current_price!;
     this.currentPrice = parseFloat(currentPrice.toFixed(2));
     let operation = Utils.copyObject(this.operation);
     //let operation = this.operation;
-    operation!.exitDate = new Date();
+    operation!.exitDate = new Date(this.closingDate);
     operation!.exitPrice = operation?.asset?.current_price;
     operation!.exitPriceValue = parseFloat(currentPrice.toFixed(2));
     operation!.exitQuantity = parseFloat(currentPrice.toFixed(8));
@@ -110,10 +116,18 @@ export class CloseOperationComponent implements OnDestroy {
     );
   }
 
+  validateClosingDate() {
+    const closingDate = new Date(this.closingDate);
+    const entryDate = new Date(this.operationToClose.entryDate!);
+    if (entryDate >= closingDate) return true;
+    this.operationToClose.exitDate = closingDate;
+    return false;
+  }
+
   closeOperation() {
     this.operationToClose!.status = 'CLOSED';
-    let dashboard = Utils.copyObject(this.cryptoService.cryptoDashboard);
-    let wallet = dashboard.wallets.find(
+    const wallets = Utils.copyObject(this.walletsAsset);
+    let wallet = wallets.find(
       (w: any) =>
         w.assets != undefined &&
         w.assets.find(
@@ -143,7 +157,6 @@ export class CloseOperationComponent implements OnDestroy {
     asset1!.balance -= this.operationToClose?.entryQuantity!;
     asset1!.invested -= this.operationToClose?.entryPriceValue!;
     asset1!.updateDate = new Date();
-
     asset2!.balance += this.operationToClose?.exitQuantity!;
     asset2!.invested += this.operationToClose?.entryPriceValue!;
     asset2!.updateDate = new Date();
@@ -151,7 +164,7 @@ export class CloseOperationComponent implements OnDestroy {
     wallet!.assets = [asset1!, asset2!];
 
     this.closeSubscribe = this.cryptoService
-      .addOrUpdateCryptoAsset(wallet!)
+      .updateCryptoAsset(wallet!)
       .subscribe((data) => {
         LOG.info(data.message!, 'CloseOperationComponent');
         SwalService.toastMessage(

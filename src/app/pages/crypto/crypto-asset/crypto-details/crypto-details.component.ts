@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   OnDestroy,
@@ -15,53 +16,78 @@ import {
 import { CryptoService } from 'src/assets/core/services/api/crypto.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
-import { StorageConstant } from 'src/assets/core/data/constant/constant';
+import {
+  ModalConstant,
+  StorageConstant,
+} from 'src/assets/core/data/constant/constant';
 import { Subscription } from 'rxjs';
 import { Utils } from 'src/assets/core/services/config/utils.service';
+import { SharedService } from 'src/assets/core/services/config/shared.service';
+import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 
 @Component({
   selector: 'app-crypto-details',
   templateUrl: './crypto-details.component.html',
   styleUrls: ['./crypto-details.component.scss'],
+  standalone: false,
 })
-export class CryptoDetailsComponent implements OnInit, OnDestroy {
+export class CryptoDetailsComponent
+  implements OnInit, AfterViewInit, OnDestroy
+{
+  getCryptoWalletSubscribe: Subscription = new Subscription();
   @ViewChild('tradingViewDetails') tradingViewDetails?: ElementRef;
   routeSubscribe: Subscription = new Subscription();
   detailsSubscribe: Subscription = new Subscription();
   cryptoDashSubscribe: Subscription = new Subscription();
+  cryptoAssetSubscribe: Subscription = new Subscription();
 
   amount: string = '******';
   hidden: boolean = false;
   cryptoDashboard: CryptoDashboard = new CryptoDashboard();
   @Output('asset') asset: Asset = new Asset();
   @Output('assetName') assetName: string = '';
+  @Output('cryptoWallets') cryptoWallets: Array<Wallet> = [];
+  @Output('cryptoAssets') cryptoAssets: Array<Asset> = [];
 
   constructor(
     private route: ActivatedRoute,
     private cryptoService: CryptoService,
-    private _renderer2: Renderer2
+    private _renderer2: Renderer2,
+    private shared: SharedService
   ) {}
+
+  public get modalConstant(): typeof ModalConstant {
+    return ModalConstant;
+  }
 
   ngOnDestroy(): void {
     this.routeSubscribe.unsubscribe();
     this.detailsSubscribe.unsubscribe();
     this.cryptoDashSubscribe.unsubscribe();
+    this.getCryptoWalletSubscribe.unsubscribe();
   }
 
   ngOnInit(): void {
     ScreenService.hideFooter();
 
-    let assets = [...this.cryptoService.assets];
-    //let assets = deepCopy(this.cryptoDashboard.assets);
+    let assets = [...this.shared.getCryptoAssets()];
     this.routeSubscribe = this.route.params.subscribe((a: any) => {
       this.assetName = a.identifier;
-      if (assets.length != 0) {
-        this.asset = assets.find((as) => as.identifier == a.identifier)!;
-      } else this.getCryptoDetails(a.identifier);
+      //if (assets.length != 0) {
+      //  this.asset = assets.find((as) => as.identifier == a.identifier)!;
+      //} else this.getCryptoDetails(a.identifier);
 
-      if (this.cryptoService.cryptoDashboard.balance != 0 && assets.length != 0)
+      this.getCryptoDetails(a.identifier);
+      this.getWalletsCryptoData();
+      this.getAssetsCryptoData();
+
+      if (
+        !Utils.isNullOrEmpty(this.shared.getCryptoDashboardData()) &&
+        this.shared.getCryptoDashboardData().balance != 0 &&
+        assets.length != 0
+      )
         this.cryptoDashboard = Utils.copyObject(
-          this.cryptoService.cryptoDashboard
+          this.shared.getCryptoDashboardData()
         );
       else this.getCryptoDashboard();
     });
@@ -76,9 +102,12 @@ export class CryptoDetailsComponent implements OnInit, OnDestroy {
     this.detailsSubscribe = this.cryptoService
       .getCryptoDetails(identifier)
       .subscribe((details) => {
+        this.cryptoService.cache.cacheAssetsByIdentifierCache(
+          details,
+          identifier
+        );
         LOG.info(details.message!, 'CryptoDetailsComponent');
         this.asset = details.data;
-        this.cryptoService.asset = details.data;
         this.ngAfterViewInit();
       });
   }
@@ -124,5 +153,46 @@ export class CryptoDetailsComponent implements OnInit, OnDestroy {
     script.text = text.replace('$SYMBOL$', symbol);
     this._renderer2.appendChild(div, script);
     this._renderer2.appendChild(this.tradingViewDetails?.nativeElement, div);
+  }
+
+  getWalletsCryptoData() {
+    if (Utils.isNullOrEmpty(this.shared.getCryptoWallets()))
+      this.getCryptoWalletSubscribe = this.cryptoService
+        .getWalletsCryptoData()
+        .subscribe((data) => {
+          this.cryptoService.cache.cacheWalletsCryptoData(data);
+          LOG.info(data.message!, 'CryptoDashboardComponent');
+          this.cryptoWallets = this.shared.setCryptoWallets(data.data);
+        });
+    else this.cryptoWallets = this.shared.getCryptoWallets();
+  }
+
+  getAssetsCryptoData() {
+    if (Utils.isNullOrEmpty(this.shared.getCryptoAssets()))
+      this.cryptoAssetSubscribe = this.cryptoService
+        .getCryptoAssetsData()
+        .subscribe((data) => {
+          this.cryptoService.cache.cacheAssetsData(data);
+          LOG.info(data.message!, 'CryptoAssetComponent');
+          this.cryptoAssets = data.data;
+          this.shared.setCryptoAssets(data.data);
+        });
+    else this.cryptoAssets = this.shared.getCryptoAssets();
+  }
+
+  getAssets() {
+    const dashboard = this.shared.getCryptoDashboardData();
+    this.cryptoDashboard = !Utils.isNullOrEmpty(dashboard)
+      ? dashboard
+      : new CryptoDashboard();
+    this.cryptoAssetSubscribe = this.cryptoService
+      .getCryptoAssetsData()
+      .subscribe((data) => {
+        this.cryptoService.cache.cacheAssetsData(data);
+        LOG.info(data.message!, 'CryptoAssetComponent');
+        this.cryptoAssets = data.data;
+        this.cryptoDashboard.assets = this.shared.setCryptoAssets(data.data);
+      });
+    this.isWalletBalanceHidden();
   }
 }

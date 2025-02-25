@@ -1,15 +1,16 @@
 <div class="mx-auto section-width">
   <app-crypto-header
     [routerLinks]="''"
-    [title]="'crypto.requirements.headerTitle' | translate"
+    [title]="'requirements_page.header_title' | translate"
+    [isMenuActive]="false"
   ></app-crypto-header>
 
   <!-- App Capsule -->
   <div id="appCapsule">
     <div class="title-section">
-      <h2 class="title">{{ "crypto.requirements.title" | translate }}</h2>
+      <h2 class="title">{{ "requirements_page.title" | translate }}</h2>
       <p>
-        {{ "crypto.requirements.subTitle" | translate }}
+        {{ "requirements_page.sub_title" | translate }}
       </p>
     </div>
 
@@ -41,10 +42,10 @@
               <div class="in">
                 <div>
                   <strong>
-                    {{ "crypto.requirements.req4.title" | translate }}</strong
+                    {{ "requirements_page.req4_title" | translate }}</strong
                   >
                   <div class="text-small text-secondary">
-                    {{ "crypto.requirements.req4.subTitle" | translate }}
+                    {{ "requirements_page.req4_subTitle" | translate }}
                   </div>
                 </div>
                 <div class="text-end"></div>
@@ -75,10 +76,10 @@
               <div class="in">
                 <div>
                   <strong>{{
-                    "crypto.requirements.req1.title" | translate
+                    "requirements_page.req1_title" | translate
                   }}</strong>
                   <div class="text-small text-secondary">
-                    {{ "crypto.requirements.req1.subTitle" | translate }}
+                    {{ "requirements_page.req1_subTitle" | translate }}
                   </div>
                 </div>
                 <div class="text-end"></div>
@@ -109,10 +110,10 @@
               <div class="in">
                 <div>
                   <strong>{{
-                    "crypto.requirements.req2.title" | translate
+                    "requirements_page.req2_title" | translate
                   }}</strong>
                   <div class="text-small text-secondary">
-                    {{ "crypto.requirements.req2.subTitle" | translate }}
+                    {{ "requirements_page.req2_subTitle" | translate }}
                   </div>
                 </div>
                 <div class="text-end"></div>
@@ -124,7 +125,9 @@
           <!-- item -->
           <li>
             <a
-              class="item clickable {{ isCryptoWalletCreated ? '' : 'disabled' }}"
+              class="item clickable {{
+                isCryptoWalletCreated ? '' : 'disabled'
+              }}"
               data-bs-toggle="modal"
               attr.data-bs-target="#{{ modalConstant.ADDASSET }}"
             >
@@ -143,10 +146,10 @@
               <div class="in">
                 <div>
                   <strong>
-                    {{ "crypto.requirements.req3.title" | translate }}</strong
+                    {{ "requirements_page.req3_title" | translate }}</strong
                   >
                   <div class="text-small text-secondary">
-                    {{ "crypto.requirements.req3.subTitle" | translate }}
+                    {{ "requirements_page.req3_subTitle" | translate }}
                   </div>
                 </div>
                 <div class="text-end"></div>
@@ -166,14 +169,20 @@
       type="button"
       routerLink="/crypto/dashboard"
     >
-      {{ "crypto.requirements.next" | translate }}
+      {{ "requirements_page.next" | translate }}
     </button>
   </div>
 </div>
-<app-add-wallet
+<!--<app-add-wallet
   (emitAddWallet)="saveWallet($event)"
   [modalId]="modalConstant.ADDWALLET"
   [categoriesInput]="dashboard?.categories"
+  [isCrypto]="enableModalCrypto"
+  [wallets]="wallets!"
+></app-add-wallet>-->
+<app-add-wallet
+  (emitAddWallet)="saveWallet($event)"
+  [modalId]="modalConstant.ADDWALLET"
   [isCrypto]="enableModalCrypto"
   [wallets]="wallets!"
 ></app-add-wallet>
@@ -182,6 +191,7 @@
   (emitAddAsset)="saveWallet($event)"
   [modalId]="modalConstant.ADDASSET"
   [wallets]="cryptoWallet!"
+  [marketData]="marketData"
   [cryptoCurrency]="currency"
 ></app-add-asset-modal>
 

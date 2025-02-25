@@ -1,0 +1,27 @@
+{
+  "status": 200,
+  "message": "Data for History!",
+  "spanId": "0a96c713-02e8-4622-bd9c-929a6fd2092f",
+  "data": {
+    "2025": {
+      "balance": 7304.24,
+      "lastStatsPerformance": 47.56,
+      "lastStatsBalanceDifference": 2354.24
+    },
+    "2024": {
+      "balance": 4500.0,
+      "lastStatsPerformance": 15.38,
+      "lastStatsBalanceDifference": 600.0
+    },
+    "2023": {
+      "balance": 4000.0,
+      "lastStatsPerformance": 40.38,
+      "lastStatsBalanceDifference": 100.0
+    },
+    "2022": {
+      "balance": 2000.0,
+      "lastStatsPerformance": 20,
+      "lastStatsBalanceDifference": 500.0
+    }
+  }
+}

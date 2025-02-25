@@ -8,14 +8,16 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content section-width">
       <div class="modal-header section-width mx-auto">
-        <h5 class="modal-title">{{ "modal.category.title" | translate }}</h5>
+        <h5 class="modal-title">
+          {{ "modal_component.category.title" | translate }}
+        </h5>
         <a href="javascript:;" data-bs-dismiss="modal">{{
-          "modal.category.close" | translate
+          "modal_component.category.close" | translate
         }}</a>
       </div>
       <div class="modal-body">
         <!--<div class="listview-title mt-1">
-          {{ "modal.category.list" | translate }}
+          {{ "modal_component.category.list" | translate }}
         </div>-->
         <ul class="listview image-listview inset mb-2">
           <li *ngFor="let category of categories">

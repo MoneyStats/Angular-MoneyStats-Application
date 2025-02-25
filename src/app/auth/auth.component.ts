@@ -9,12 +9,13 @@ import { LOG } from 'src/assets/core/utils/log.service';
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
+  standalone: false,
 })
 export class AuthComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.cleanLocalStorage();
+    if (!window.location.href.includes('?code')) this.cleanLocalStorage();
   }
 
   cleanLocalStorage() {

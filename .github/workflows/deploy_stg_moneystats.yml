@@ -5,10 +5,10 @@ on:
     branches: [develop]
 
 env:
-  NODE_VERSION: "16.13.2"
-  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  NODE_VERSION: "22.0.0"
+  DOCKER_USERNAME: ${{ vars.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-  DOCKER_REPOSITORY: ${{ secrets.DOCKER_REPOSITORY }}
+  DOCKER_REPOSITORY: ${{ vars.DOCKER_REPOSITORY }}
 
 jobs:
   checkout-and-setup:
@@ -21,7 +21,7 @@ jobs:
           persist-credentials: false
 
       - name: 🔧 Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.0.2
         with:
           node-version: "${{ env.NODE_VERSION }}"
 
@@ -60,6 +60,14 @@ jobs:
 
       - name: 🗝️ Grant execute permission to script
         run: chmod +x ./rename.sh
+
+      - name: ✏️ Create .env file
+        run: |
+          echo "MONEYSTATS_SERVICE_URL=${{ vars.MONEYSTATS_SERVICE_URL }}" > .env
+          echo "ACCESS_SPHERE_SERVICE_URL=${{ vars.ACCESS_SPHERE_SERVICE_URL }}" >> .env
+          echo "IMAGE_SIZE=${{ vars.IMAGE_SIZE }}" >> .env
+          echo "CACHE_ENABLE=${{ vars.CACHE_ENABLE }}" >> .env
+          echo "CACHE_TIMEOUT=${{ vars.CACHE_TIMEOUT }}" >> .env
 
       - name: ✅ Get current package version
         id: package-version

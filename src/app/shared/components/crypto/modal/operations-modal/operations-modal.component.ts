@@ -1,26 +1,15 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Asset } from 'src/assets/core/data/class/crypto.class';
 import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
-import { ErrorService } from 'src/assets/core/interceptors/error.service';
-import { CryptoService } from 'src/assets/core/services/api/crypto.service';
-import { StatsService } from 'src/assets/core/services/api/stats.service';
 
 @Component({
   selector: 'app-operations-modal',
   templateUrl: './operations-modal.component.html',
   styleUrls: ['./operations-modal.component.scss'],
+  standalone: false,
 })
-export class OperationsModalComponent implements OnInit {
+export class OperationsModalComponent {
   @Input('modalId') modalId: string = '';
   @Input('wallets') wallets: Wallet[] = [];
   @Input('assets') assets: Asset[] = [];
@@ -47,8 +36,6 @@ export class OperationsModalComponent implements OnInit {
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
   }
-
-  ngOnInit(): void {}
 
   /**
    * ADD STATS METHODS

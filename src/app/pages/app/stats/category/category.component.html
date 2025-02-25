@@ -1,9 +1,8 @@
 <div class="row">
   <app-content-box
     *ngIf="!dashboard.statsWalletDays || !dashboard.statsWalletDays"
-    [header]="'dashboard.graph.nodata.header' | translate"
-    [body]="'dashboard.graph.nodata.body' | translate"
-    [footer]="'dashboard.graph.nodata.footer' | translate"
+    [header]="'resume_page.title' | translate"
+    [body]="'resume_page.empty_body_text' | translate"
   ></app-content-box>
   <!-- App Capsule -->
   <section *ngIf="dashboard.statsWalletDays">
@@ -12,23 +11,36 @@
         class="section mt-2 col-xl-3 col-md-6"
         *ngIf="mapWalletCategory.get(KEY_INVESTMENTS).data"
       >
-        <div class="section-title">
-          {{ "stats.data.investments" | translate }}
+        <div
+          data-bs-toggle="modal"
+          attr.data-bs-target="#{{ modalConstant.INFO }}"
+          class="section-title"
+        >
+          {{ "resume_page.investments" | translate }}
+          <a
+            class="headerButton goBack clickable"
+            style="vertical-align: text-top; color: #fff"
+          >
+            <!--<ion-icon name="chevron-back-outline"></ion-icon>-->
+            <ion-icon name="alert-circle-outline"></ion-icon>
+          </a>
         </div>
         <div class="card">
           <div class="table-responsive">
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">{{ "stats.data.table_date" | translate }}</th>
                   <th scope="col">
-                    {{ "stats.data.table_balance" | translate }}
+                    {{ "resume_page.table_date" | translate }}
+                  </th>
+                  <th scope="col">
+                    {{ "shared_text.amount" | translate }}
                   </th>
                   <th scope="col" class="text-end">
-                    {{ "stats.data.table_performance" | translate }}
+                    {{ "shared_text.performance" | translate }}
                   </th>
                   <th scope="col" class="text-end">
-                    {{ "stats.data.table_value" | translate }}
+                    {{ "resume_page.table_trend" | translate }}
                   </th>
                 </tr>
               </thead>
@@ -92,21 +104,36 @@
         class="section mt-2 col-xl-3 col-md-6"
         *ngIf="mapWalletCategory.get(KEY_CAPITAL).data"
       >
-        <div class="section-title">{{ "stats.data.capital" | translate }}</div>
+        <div
+          data-bs-toggle="modal"
+          attr.data-bs-target="#{{ modalConstant.INFO }}"
+          class="section-title"
+        >
+          {{ "resume_page.capital" | translate }}
+          <a
+            class="headerButton goBack clickable"
+            style="vertical-align: text-top; color: #fff"
+          >
+            <!--<ion-icon name="chevron-back-outline"></ion-icon>-->
+            <ion-icon name="alert-circle-outline"></ion-icon>
+          </a>
+        </div>
         <div class="card">
           <div class="table-responsive">
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">{{ "stats.data.table_date" | translate }}</th>
                   <th scope="col">
-                    {{ "stats.data.table_balance" | translate }}
+                    {{ "resume_page.table_date" | translate }}
+                  </th>
+                  <th scope="col">
+                    {{ "shared_text.amount" | translate }}
                   </th>
                   <th scope="col" class="text-end">
-                    {{ "stats.data.table_performance" | translate }}
+                    {{ "shared_text.performance" | translate }}
                   </th>
                   <th scope="col" class="text-end">
-                    {{ "stats.data.table_value" | translate }}
+                    {{ "resume_page.table_trend" | translate }}
                   </th>
                 </tr>
               </thead>
@@ -177,14 +204,14 @@
       >
         <div class="section-heading">
           <h2 class="title" id="year">
-            {{ "stats.data.graph1" | translate }}
+            {{ "resume_page.graph1" | translate }}
           </h2>
         </div>
 
         <div class="card border_round">
-          <div class="card-body mx-auto" style="min-height: 400px">
+          <div class="card-body" style="min-height: 400px">
             <div
-              *ngIf="!lineChartJS"
+              *ngIf="!chartCategory"
               class="lds-ellipsis position-absolute top-50 start-50 translate-middle"
             >
               <div></div>
@@ -192,32 +219,20 @@
               <div></div>
               <div></div>
             </div>
-            <canvas
-              baseChart
-              height="{{
-                mapWalletCategory.get(KEY_INVESTMENTS).data &&
-                mapWalletCategory.get(KEY_CAPITAL).data
-                  ? 400
-                  : 500
-              }}"
-              [type]="'line'"
-              [data]="lineChartJS!.lineChartData"
-              [options]="lineChartJS!.lineChartOptions"
-              [legend]="lineChartJS!.lineChartLegend"
-            >
-            </canvas>
-            <!--<apx-chart
-          *ngIf="chartCategory"
-          [series]="chartCategory.series!"
-          [chart]="chartCategory.chart!"
-          [title]="chartCategory.title!"
-          [colors]="chartCategory.colors!"
-          [legend]="chartCategory.legend!"
-          [stroke]="chartCategory.stroke!"
-          [labels]="chartCategory.labels!"
-          type="area"
-        ></apx-chart>
-        <div id="chart-line"></div>-->
+            <apx-chart
+              *ngIf="chartCategory"
+              [series]="chartCategory.series!"
+              [chart]="chartCategory.chart!"
+              [title]="chartCategory.title!"
+              [colors]="chartCategory.colors!"
+              [legend]="chartCategory.legend!"
+              [labels]="chartCategory.labels!"
+              [grid]="chartCategory.grid!"
+              [dataLabels]="chartCategory.dataLabels!"
+              [tooltip]="chartCategory.tooltip!"
+              type="area"
+            ></apx-chart>
+            <div id="chart-line"></div>
           </div>
         </div>
       </div>
@@ -229,21 +244,36 @@
         class="section mt-2 col-xl-4 col-md-6"
         *ngIf="mapWalletCategory.get(KEY_SAVING).data"
       >
-        <div class="section-title">{{ "stats.data.saving" | translate }}</div>
+        <div
+          data-bs-toggle="modal"
+          attr.data-bs-target="#{{ modalConstant.INFO }}"
+          class="section-title"
+        >
+          {{ "resume_page.saving" | translate }}
+          <a
+            class="headerButton goBack clickable"
+            style="vertical-align: text-top; color: #fff"
+          >
+            <!--<ion-icon name="chevron-back-outline"></ion-icon>-->
+            <ion-icon name="alert-circle-outline"></ion-icon>
+          </a>
+        </div>
         <div class="card">
           <div class="table-responsive">
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">{{ "stats.data.table_date" | translate }}</th>
                   <th scope="col">
-                    {{ "stats.data.table_balance" | translate }}
+                    {{ "resume_page.table_date" | translate }}
+                  </th>
+                  <th scope="col">
+                    {{ "shared_text.amount" | translate }}
                   </th>
                   <th scope="col" class="text-end">
-                    {{ "stats.data.table_performance" | translate }}
+                    {{ "shared_text.performance" | translate }}
                   </th>
                   <th scope="col" class="text-end">
-                    {{ "stats.data.table_value" | translate }}
+                    {{ "resume_page.table_trend" | translate }}
                   </th>
                 </tr>
               </thead>
@@ -307,21 +337,36 @@
         class="section mt-2 col-xl-4 col-md-6"
         *ngIf="mapWalletCategory.get(KEY_DEBITS).data"
       >
-        <div class="section-title">{{ "stats.data.debits" | translate }}</div>
+        <div
+          data-bs-toggle="modal"
+          attr.data-bs-target="#{{ modalConstant.INFO }}"
+          class="section-title"
+        >
+          {{ "resume_page.debits" | translate }}
+          <a
+            class="headerButton goBack clickable"
+            style="vertical-align: text-top; color: #fff"
+          >
+            <!--<ion-icon name="chevron-back-outline"></ion-icon>-->
+            <ion-icon name="alert-circle-outline"></ion-icon>
+          </a>
+        </div>
         <div class="card">
           <div class="table-responsive">
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">{{ "stats.data.table_date" | translate }}</th>
                   <th scope="col">
-                    {{ "stats.data.table_balance" | translate }}
+                    {{ "resume_page.table_date" | translate }}
+                  </th>
+                  <th scope="col">
+                    {{ "shared_text.amount" | translate }}
                   </th>
                   <th scope="col" class="text-end">
-                    {{ "stats.data.table_performance" | translate }}
+                    {{ "shared_text.performance" | translate }}
                   </th>
                   <th scope="col" class="text-end">
-                    {{ "stats.data.table_value" | translate }}
+                    {{ "resume_page.table_trend" | translate }}
                   </th>
                 </tr>
               </thead>
@@ -385,21 +430,36 @@
         class="section mt-2 col-xl-4 col-md-6"
         *ngIf="mapWalletCategory.get(KEY_OTHER).data"
       >
-        <div class="section-title">{{ "stats.data.others" | translate }}</div>
+        <div
+          data-bs-toggle="modal"
+          attr.data-bs-target="#{{ modalConstant.INFO }}"
+          class="section-title"
+        >
+          {{ "resume_page.others" | translate }}
+          <a
+            class="headerButton goBack clickable"
+            style="vertical-align: text-top; color: #fff"
+          >
+            <!--<ion-icon name="chevron-back-outline"></ion-icon>-->
+            <ion-icon name="alert-circle-outline"></ion-icon>
+          </a>
+        </div>
         <div class="card">
           <div class="table-responsive">
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">{{ "stats.data.table_date" | translate }}</th>
                   <th scope="col">
-                    {{ "stats.data.table_balance" | translate }}
+                    {{ "resume_page.table_date" | translate }}
+                  </th>
+                  <th scope="col">
+                    {{ "shared_text.amount" | translate }}
                   </th>
                   <th scope="col" class="text-end">
-                    {{ "stats.data.table_performance" | translate }}
+                    {{ "shared_text.performance" | translate }}
                   </th>
                   <th scope="col" class="text-end">
-                    {{ "stats.data.table_value" | translate }}
+                    {{ "resume_page.table_trend" | translate }}
                   </th>
                 </tr>
               </thead>
@@ -461,3 +521,8 @@
     </div>
   </section>
 </div>
+
+<app-info-modal
+  [operationType]="operationTypeConstant.CATEGORY"
+  [modalId]="modalConstant.INFO"
+></app-info-modal>

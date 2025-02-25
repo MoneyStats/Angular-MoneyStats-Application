@@ -1,36 +1,85 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewChecked,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import {
   Asset,
   CryptoDashboard,
 } from 'src/assets/core/data/class/crypto.class';
-import { Stats, Wallet } from 'src/assets/core/data/class/dashboard.class';
+import { Wallet } from 'src/assets/core/data/class/dashboard.class';
 import {
   ModalConstant,
   OperationsType,
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
 import { CryptoService } from 'src/assets/core/services/api/crypto.service';
+import { UserService } from 'src/assets/core/services/api/user.service';
+import { SharedService } from 'src/assets/core/services/config/shared.service';
+import { Utils } from 'src/assets/core/services/config/utils.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-crypto-resume',
   templateUrl: './crypto-resume.component.html',
   styleUrls: ['./crypto-resume.component.scss'],
+  standalone: false,
 })
-export class CryptoResumeComponent implements OnInit, OnDestroy {
+export class CryptoResumeComponent
+  implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked
+{
+  @ViewChild('history') history!: ElementRef;
   getResumeSub: Subscription = new Subscription();
+  getCryptoWalletSubscribe: Subscription = new Subscription();
+  cryptoAssetSubscribe: Subscription = new Subscription();
+  cryptoHistorySubscribe: Subscription = new Subscription();
+  getDashboardSubscribe: Subscription = new Subscription();
+
   amount: string = '******';
   hidden: boolean = false;
-  assets: Asset[] = [];
+  resumeAssets: Asset[] = [];
   resumeData: CryptoDashboard = new CryptoDashboard();
   resume: Map<string, CryptoDashboard> = new Map<string, CryptoDashboard>();
-  years: Array<string> = [];
+  resumeFullYears: Array<string> = [];
+
+  /** History Object */
+  @Output('cryptoAssets') cryptoAssets: Array<Asset> = [];
+  @Output('cryptoWallets') cryptoWallets: Array<Wallet> = [];
+  @Output('cryptoHistory') cryptoHistory?: Map<number, CryptoDashboard>;
+  @Output('cryptoDashboard') cryptoDashboard: CryptoDashboard =
+    new CryptoDashboard();
+
+  currentYear = new Date().getFullYear();
 
   isPast: boolean = false;
+  change: string = '';
 
-  constructor(public cryptoService: CryptoService) {}
+  constructor(
+    private cryptoService: CryptoService,
+    private shared: SharedService,
+    private cdr: ChangeDetectorRef
+  ) {}
+
+  ngAfterViewChecked() {
+    // Forza Angular a verificare i cambiamenti
+    this.cdr.detectChanges();
+  }
+
+  ngAfterViewInit(): void {
+    if (this.isAssetsWithNoHistory) {
+      this.getAssets();
+      this.getWalletsCryptoData();
+    }
+  }
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -38,36 +87,63 @@ export class CryptoResumeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     ScreenService.hideFooter();
-    this.getResume();
+    this.getResume(this.currentYear);
   }
 
-  getResume() {
+  getResume(year: number) {
     this.getResumeSub = this.cryptoService
-      .getCryptoResumeData()
+      .getCryptoResumeData(year)
       .subscribe((res) => {
-        this.cryptoService.cache.cacheCryptoResumeData(res);
+        this.cryptoService.cache.cacheCryptoResumeData(res, year);
         LOG.info(res.message!, 'CryptoResumeComponent');
         this.resume = new Map<string, CryptoDashboard>(
           Object.entries(res.data)
         );
-        this.years = Array.from(this.resume.keys());
-        this.updateData(this.years[this.years.length - 1]);
-        this.cryptoService.cryptoResume = this.resume;
+
+        if (UserService.getUserData().mockedUser) {
+          const keys = Array.from(this.resume.keys());
+          const firstKey = keys.length > 0 ? keys[0] : undefined;
+          year = Number.parseInt(firstKey!);
+        }
+
+        this.resumeFullYears = [];
+        // Ottieni l'array di anni senza duplicati e in ordine decrescente
+        const uniqueYears = Array.from(
+          new Set(this.resume.get(year.toString())?.yearsWalletStats ?? [])
+        ).sort((a, b) => a - b);
+
+        // Aggiungi gli anni ordinati in ordine decrescente all'array resumeFullYears
+        uniqueYears.forEach((y) => {
+          this.resumeFullYears.push(y.toString());
+        });
+
+        this.updateData(year.toString());
+
+        //this.resumeFullYears = Array.from(this.resume.keys());
+        //this.updateData(this.resumeFullYears[this.resumeFullYears.length - 1]);
+        //this.cryptoService.cryptoResume = this.resume;
       });
     //this.resumeData = this.cryptoService.cryptoDashboard;
     this.isWalletBalanceHidden();
   }
 
   onChange(e: any) {
-    this.updateData(e.target.value);
+    this.getResume(e.target.value);
   }
 
   updateData(year: string) {
-    if (this.years[this.years.length - 1] != year) {
+    if (this.resumeFullYears[this.resumeFullYears.length - 1] != year) {
       this.isPast = true;
     } else this.isPast = false;
     this.resumeData = this.resume.get(year)!;
-    this.assets = this.resumeData.assets;
+    if (
+      this.resumeData.yearsWalletStats.length > 0 &&
+      Utils.isNullOrEmpty(this.resumeData.statsAssetsDays)
+    ) {
+      this.getResume(this.resumeData.yearsWalletStats[0]);
+      return;
+    }
+    this.resumeAssets = this.resumeData.assets;
   }
 
   isOperationPresent() {
@@ -99,7 +175,86 @@ export class CryptoResumeComponent implements OnInit, OnDestroy {
     }
   }
 
+  getAssets() {
+    if (Utils.isNullOrEmpty(this.shared.getCryptoAssets()))
+      this.cryptoAssetSubscribe = this.cryptoService
+        .getCryptoAssetsData()
+        .subscribe((data) => {
+          this.cryptoService.cache.cacheAssetsData(data);
+          LOG.info(data.message!, 'CryptoResumeComponent');
+          this.cryptoAssets = this.shared.setCryptoAssets(data.data);
+        });
+    else this.cryptoAssets = this.shared.getCryptoAssets();
+  }
+
+  getWalletsCryptoData() {
+    if (Utils.isNullOrEmpty(this.shared.getCryptoWallets()))
+      this.getCryptoWalletSubscribe = this.cryptoService
+        .getWalletsCryptoData()
+        .subscribe((data) => {
+          this.cryptoService.cache.cacheWalletsCryptoData(data);
+          LOG.info(data.message!, 'CryptoResumeComponent');
+          this.cryptoWallets = this.shared.setCryptoWallets(data.data);
+        });
+    else this.cryptoWallets = this.shared.getCryptoWallets();
+  }
+
+  getCryptoHistoryData() {
+    if (Utils.isNullOrEmpty(this.shared.getCryptoHistoryData()))
+      this.cryptoHistorySubscribe = this.cryptoService
+        .getCryptoHistoryData()
+        .subscribe((data) => {
+          this.cryptoService.cache.cacheCryptoHistoryData(data.data);
+          LOG.info(data.message!, 'CryptoResumeComponent');
+          this.cryptoHistory = this.shared.setCryptoHistoryData(data.data);
+        });
+    else this.cryptoHistory = this.shared.getCryptoHistoryData();
+  }
+
+  getDashboard() {
+    if (Utils.isNullOrEmpty(this.shared.getCryptoDashboardData()))
+      this.getDashboardSubscribe = this.cryptoService
+        .getCryptoDashboardData()
+        .subscribe((data) => {
+          this.cryptoService.cache.cacheCryptoDashboardData(data);
+          LOG.info(data.message!, 'CryptoResumeComponent');
+          this.cryptoDashboard = this.shared.setCryptoDashboardData(data.data);
+        });
+    else this.cryptoDashboard = this.shared.getCryptoDashboardData();
+  }
+
+  goToResume() {
+    const resume = document.getElementById('resumeData');
+    resume?.click();
+  }
+
+  emitOperationClick(click: boolean) {
+    this.getWalletsCryptoData();
+    this.getDashboard();
+  }
+
   ngOnDestroy(): void {
     this.getResumeSub.unsubscribe();
+    this.getCryptoWalletSubscribe.unsubscribe();
+    this.cryptoAssetSubscribe.unsubscribe();
+    this.cryptoHistorySubscribe.unsubscribe();
+    this.getDashboardSubscribe.unsubscribe();
+  }
+
+  get isAssetsWithNoHistory(): boolean {
+    return (
+      !this.resumeData.statsAssetsDays ||
+      !this.resumeData.statsAssetsDays.length
+    );
+    //return (
+    //  !this.resumeAssets?.length ||
+    //  this.resumeAssets.every(
+    //    (asset) => !asset.history || !asset.history.length
+    //  )
+    //);
+  }
+
+  changeData() {
+    this.change = uuidv4();
   }
 }

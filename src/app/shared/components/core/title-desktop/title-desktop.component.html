@@ -1,6 +1,7 @@
 <div class="title-section">
   <h2 class="title">{{ title }}</h2>
   <a *ngIf="back != undefined" (click)="goBack()" class="link"
-    ><i class="fa fa-arrow-left" style="padding-right: 10px"></i> {{ back }}</a
+    ><i class="fa fa-arrow-left" style="padding-right: 10px"></i>
+    {{ back != "" ? back : ("shared_text.back_page" | translate) }}</a
   >
 </div>

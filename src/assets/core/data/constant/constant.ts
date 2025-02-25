@@ -3,8 +3,6 @@ export enum ModalConstant {
   EDITWALLET = 'editWalletModal',
   DELETEWALLET = 'deleteWalletModal',
   RESTOREWALLET = 'restoreWalletModal',
-  ACCOUNTLIST = 'accountListModal',
-  ACCOUNTDETAILS = 'accountDetailsModal',
   VERSION = 'versionModal',
   CHANGELOG = 'changelogModal',
   PROFILESETTINGS = 'profileSettingsModal',
@@ -25,6 +23,7 @@ export enum ModalConstant {
   CRYPTOTRADINGRESUME = 'modalCryptoTradingResume',
   CRYPTOOPERATION = 'modalCryptoOperation',
   CLOSEOPERATION = 'closeOperationModal',
+  REGISTRATIONTOKEN = 'registrationTokenModal',
 }
 
 export enum SelectAssetConstant {
@@ -35,14 +34,19 @@ export enum SelectAssetConstant {
   TRANSFER = 'newTransferOperation',
 }
 
-export enum StorageConstant {
-  GITHUBACCOUNT = 'github_account',
-  ACCESSTOKEN = 'accessToken',
-  AUTHTOKEN = 'authToken',
-  USERACCOUNT = 'userAccount',
-  HIDDENAMOUNT = 'hiddenAmount',
-  AUTOUPDATE = 'auto_update',
-}
+import { environment } from 'src/environments/environment';
+
+export const StorageConstant = {
+  GITHUBACCOUNT: environment.clientID + '_github_account',
+  ACCESSTOKEN: environment.clientID + '_access_token', // Funzione per valore dinamico
+  TAX_CALCULATOR_ACCESS_TOKEN:
+    environment.taxCalculatorClientID + '_access-token', // Funzione per valore dinamico
+  AUTHTOKEN: environment.clientID + '_auth_token',
+  USERACCOUNT: environment.clientID + '_user_account',
+  USER_ATTRIBUTES: environment.clientID + '_user_attributes',
+  HIDDENAMOUNT: 'hidden_amount',
+  AUTOUPDATE: 'auto_update',
+};
 
 export enum ProfileSettings {
   USERNAME = 'usernameSettings',
@@ -50,11 +54,11 @@ export enum ProfileSettings {
   PASSWORD = 'passwordSettings',
 }
 
-export enum LanguagesSettings {
-  ATTR_LANGUAGE = 'lang',
-  ENGLISH = 'en-GB',
-  ITALIAN = 'it-IT',
-}
+export const LanguagesSettings = {
+  ATTR_LANGUAGE: environment.clientID + '_lang',
+  ENGLISH: 'en-GB',
+  ITALIAN: 'it-IT',
+};
 
 export enum AppConfigConst {
   DEFAULT_WALLET_IMG = 'assets/images/sample/wallet.png',
@@ -67,6 +71,7 @@ export enum OperationsType {
   TRADING = 'Trading',
   TRANSFER = 'Transfer',
   CLOSEOPERATION = 'Close-Position',
+  CATEGORY = 'Category',
 }
 
 export enum MarketDataCategory {
@@ -75,8 +80,18 @@ export enum MarketDataCategory {
 }
 
 export enum UserRole {
-  USER = 'USER',
-  ADMIN = 'ADMIN',
+  USER = 'MONEY_STATS_USER',
+  ADMIN = 'MONEY_STATS_ADMIN',
+  TAX_CALCULATOR = 'TAX_CALCULATOR_ADMIN',
+}
+
+export enum Tracing {
+  SPAN_ID = 'Span-ID',
+  TRACE_ID = 'Trace-ID',
+  PARENT_ID = 'Parent-ID',
+  SESSION_ID = 'Session-ID',
+  REDIRECT_URI = 'redirect-uri',
+  REGISTRATION_TOKEN = 'Registration-Token',
 }
 
 export var Operations = ['New Investment', 'Holding', 'Trading', 'Transfer'];
