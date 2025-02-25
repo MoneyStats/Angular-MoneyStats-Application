@@ -437,7 +437,6 @@ export class AddCryptoStatsComponent implements OnInit, OnChanges, OnDestroy {
 
   save() {
     this.saveValidation = false;
-    console.log(this.wallets);
     this.addStats = this.statsService
       .addStatsData(this.wallets)
       .subscribe((data) => {

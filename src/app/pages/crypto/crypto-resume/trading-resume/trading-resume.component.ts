@@ -82,7 +82,6 @@ export class TradingResumeComponent implements OnInit, OnChanges {
     let operations: Operation[] = [];
     let wallets = Utils.copyObject(this.wallets);
     let assets = this.cryptoService.getAssetList(this.wallets);
-    console.log(assets);
     if (wallets)
       wallets.forEach((wallet: any) => {
         if (wallet.assets && wallet.assets.length > 0)
@@ -112,7 +111,6 @@ export class TradingResumeComponent implements OnInit, OnChanges {
       this.trading = ChartService.renderTradingOperations(operations, [200]);
     } else
       this.trading = ChartService.renderTradingOperations(operations, [350]);
-    console.log(operations);
     this.getOperationTable(operations, totalInvested);
     if (Utils.isNullOrEmpty(operations)) {
       this.emptyTradingData.emit(true);
