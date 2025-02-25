@@ -5,6 +5,7 @@ import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { ModalConstant } from 'src/assets/core/data/constant/constant';
 import { Utils } from 'src/assets/core/services/config/utils.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
+import { User } from 'src/assets/core/data/class/user.class';
 
 @Component({
   selector: 'app-crypto-header',
@@ -25,11 +26,12 @@ export class CryptoHeaderComponent {
 
   cryptoCurrency: string =
     UserService.getUserData().attributes.money_stats_settings.cryptoCurrency;
+  user: User = UserService.getUserData();
 
   constructor(
     private location: Location,
     private router: Router,
-    public userService: AuthService
+    private userService: AuthService
   ) {}
 
   public get modalConstant(): typeof ModalConstant {
