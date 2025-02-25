@@ -66,7 +66,7 @@ export const environment = {
   logoutUrl: access_host + '/v1/oAuth/2.0/logout',
   forgotPasswordUrl: access_host + '/v1/users/change/password/request',
   resetPasswordUrl: access_host + '/v1/users/change/password',
-  clientID: 'MONEYSTATS-TEST-01',
+  clientID: 'MONEYSTATS-AUTH-01',
   redirectUri: 'https://moneystats.github.io',
   registerDataUrl: access_host + '/v1/users/register',
   checkTokenDataUrl: service_host + '/v1/auth/code',
