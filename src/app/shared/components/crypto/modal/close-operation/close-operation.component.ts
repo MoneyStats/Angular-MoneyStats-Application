@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, SimpleChanges } from '@angular/core';
 import { Operation } from 'src/assets/core/data/class/crypto.class';
 import {
+  MarketDataCategory,
   ModalConstant,
   OperationsType,
 } from 'src/assets/core/data/constant/constant';
@@ -32,9 +33,11 @@ export class CloseOperationComponent implements OnDestroy {
 
   currentPrice: number = 0;
   isEditActive: boolean = false;
+  isPercentageFee: boolean = false;
   closingDate: string = Utils.formatDate(new Date());
 
   fees: number = 0;
+  percentageFees: number = 0;
 
   constructor(
     private cryptoService: CryptoService,
@@ -48,6 +51,10 @@ export class CloseOperationComponent implements OnDestroy {
 
   public get operationTypeConstant(): typeof OperationsType {
     return OperationsType;
+  }
+
+  public get marktDataCategory(): typeof MarketDataCategory {
+    return MarketDataCategory;
   }
 
   ngOnDestroy(): void {
@@ -94,7 +101,21 @@ export class CloseOperationComponent implements OnDestroy {
     let operation = this.operationToClose;
     let currentPrice =
       this.operationToClose?.entryQuantity! * this.operationToClose?.exitPrice!;
-    let fees = this.fees * this.operationToClose?.exitPrice!;
+
+    // Calcolo delle fees in base alla scelta dell'utente
+    let calculatedFees = this.isPercentageFee
+      ? (this.percentageFees / 100) * currentPrice // Calcolo percentuale
+      : this.fees; // Fees inserite manualmente
+
+    // Se l'asset è una CRYPTOCURRENCY, usa il valore base 1, altrimenti moltiplica per exitPrice
+    let fees =
+      calculatedFees *
+      (this.operationToClose.asset?.category ===
+      MarketDataCategory.CRYPTOCURRENCY
+        ? 1
+        : this.operationToClose?.exitPrice!);
+
+    // Calcoli finali
     operation!.exitPriceValue = parseFloat((currentPrice - fees).toFixed(2));
     operation!.exitQuantity = parseFloat((currentPrice - fees).toFixed(8));
     operation!.performance = parseFloat(
@@ -107,7 +128,6 @@ export class CloseOperationComponent implements OnDestroy {
     operation!.trend = parseFloat(
       (currentPrice - fees - this.operationToClose?.entryPriceValue!).toFixed(2)
     );
-    //this.isEditActive = false;
   }
 
   updateExitPrice() {
@@ -155,9 +175,11 @@ export class CloseOperationComponent implements OnDestroy {
 
     asset1!.operations = [this.operationToClose];
     asset1!.balance -= this.operationToClose?.entryQuantity!;
+    asset1!.balance = asset1!.balance < 0 ? 0 : asset1!.balance;
     asset1!.invested -= this.operationToClose?.entryPriceValue!;
     asset1!.updateDate = new Date();
     asset2!.balance += this.operationToClose?.exitQuantity!;
+    asset2!.balance = asset2!.balance < 0 ? 0 : asset2!.balance;
     asset2!.invested += this.operationToClose?.entryPriceValue!;
     asset2!.updateDate = new Date();
 
