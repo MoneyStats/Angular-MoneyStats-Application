@@ -512,7 +512,7 @@
 
         <div class="section">
           @if (validateSelect() && marketDataSelected.category ==
-          marktDataCategory.STABLECOIN) {
+          marktDataCategory.STABLECOIN && operationType == operations.HOLDING) {
           <div class="fontsize-caption mt-2">
             <div class="row text-start">
               <div
@@ -757,8 +757,8 @@
         <div *ngIf="validateSelect()" class="section mt-2">
           <div class="row fontsize-caption">
             <!-- Edit Balance -->
-            @if (marketDataSelected.category ==
-            marktDataCategory.CRYPTOCURRENCY) {
+            @if (marketDataSelected.category == marktDataCategory.CRYPTOCURRENCY
+            || operationType != operations.HOLDING) {
             <div class="col-6">
               <div class="row text-start">
                 <div
@@ -816,8 +816,8 @@
                 </div>
               </div>
             </div>
-            } @if (marketDataSelected.category == marktDataCategory.STABLECOIN)
-            {
+            } @if (marketDataSelected.category == marktDataCategory.STABLECOIN
+            && operationType == operations.HOLDING) {
             <div class="col-6">
               <div class="row text-start">
                 <div
