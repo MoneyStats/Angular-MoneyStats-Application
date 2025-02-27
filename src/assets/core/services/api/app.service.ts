@@ -40,6 +40,7 @@ export class AppService {
   }
 
   restoreData(wallets: Wallet[]): Observable<ResponseModel> {
+    this.cleanCache();
     const authToken = localStorage.getItem(StorageConstant.ACCESSTOKEN);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

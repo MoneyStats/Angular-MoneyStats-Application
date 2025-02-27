@@ -511,6 +511,67 @@
         </div>
 
         <div class="section">
+          @if (validateSelect() && marketDataSelected.category ==
+          marktDataCategory.STABLECOIN) {
+          <div class="fontsize-caption mt-2">
+            <div class="row text-start">
+              <div
+                *ngIf="!isEditSellBalance"
+                (click)="isEditSellBalance = true"
+                class="clickable"
+              >
+                <b>{{ marketDataSelected.symbol }}</b> =
+                {{ marketDataSelected.current_price }} {{ fiat }}
+              </div>
+              <div class="d-flex justify-content-start">
+                <div
+                  *ngIf="isEditSellBalance"
+                  class="row"
+                  style="max-width: 300px"
+                >
+                  <div class="col-md col-sm-12">
+                    <div class="form-group basic">
+                      <div class="input-wrapper">
+                        <label class="label" for="price"
+                          >{{ "operation_exchange_page.price" | translate }}
+                          {{ marketDataSelected.symbol }}</label
+                        >
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="price"
+                          name="price"
+                          style="max-width: 300px"
+                          #price1="ngModel"
+                          [(ngModel)]="marketDataSelected.current_price"
+                          value="{{ marketDataSelected.current_price }}"
+                          required
+                          placeholder="{{
+                            'operation_exchange_page.newPrice' | translate
+                          }}"
+                        />
+                        <i class="clear-input">
+                          <ion-icon name="close-circle"></ion-icon>
+                        </i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col" style="max-width: 80px">
+                    <button
+                      [disabled]="f.invalid"
+                      style="vertical-align: -25px"
+                      type="button"
+                      class="btn btn-primary rounded me-1"
+                      (click)="editBalance()"
+                    >
+                      {{ "operation_exchange_page.save" | translate }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          }
           <div class="exchange-line">
             <div class="exchange-icon">
               <ion-icon name="swap-vertical-outline"></ion-icon>
@@ -696,6 +757,8 @@
         <div *ngIf="validateSelect()" class="section mt-2">
           <div class="row fontsize-caption">
             <!-- Edit Balance -->
+            @if (marketDataSelected.category ==
+            marktDataCategory.CRYPTOCURRENCY) {
             <div class="col-6">
               <div class="row text-start">
                 <div
@@ -753,6 +816,66 @@
                 </div>
               </div>
             </div>
+            } @if (marketDataSelected.category == marktDataCategory.STABLECOIN)
+            {
+            <div class="col-6">
+              <div class="row text-start">
+                <div
+                  *ngIf="!isEditBalance"
+                  (click)="isEditBalance = true"
+                  class="clickable"
+                >
+                  <b>{{ assetToSell.symbol }}</b> =
+                  {{ assetToSell.current_price }} {{ fiat }}
+                </div>
+                <div class="d-flex justify-content-start">
+                  <div
+                    *ngIf="isEditBalance"
+                    class="row"
+                    style="max-width: 300px"
+                  >
+                    <div class="col-md col-sm-12">
+                      <div class="form-group basic">
+                        <div class="input-wrapper">
+                          <label class="label" for="price"
+                            >{{ "operation_exchange_page.price" | translate }}
+                            {{ assetToSell.symbol }}</label
+                          >
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="price"
+                            name="price"
+                            #price1="ngModel"
+                            [(ngModel)]="assetToSell.current_price"
+                            value="{{ assetToSell.current_price }}"
+                            required
+                            placeholder="{{
+                              'operation_exchange_page.newPrice' | translate
+                            }}"
+                          />
+                          <i class="clear-input">
+                            <ion-icon name="close-circle"></ion-icon>
+                          </i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col" style="max-width: 80px">
+                      <button
+                        [disabled]="f.invalid"
+                        style="vertical-align: -25px"
+                        type="button"
+                        class="btn btn-primary rounded me-1"
+                        (click)="editBalance()"
+                      >
+                        {{ "operation_exchange_page.save" | translate }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            }
             <!-- END Edit Balance -->
             <!-- Edit Date -->
             <div class="col-6">

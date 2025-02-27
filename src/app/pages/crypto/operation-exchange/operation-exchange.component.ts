@@ -40,6 +40,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   wallet: Wallet = new Wallet();
 
   // Usate per modificare la data dell'operazione e il saldo dell'asset
+  isEditSellBalance: boolean = false;
   isEditBalance: boolean = false;
   isEditDate: boolean = false;
 
@@ -100,6 +101,10 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
 
   public get operations(): typeof OperationsType {
     return OperationsType;
+  }
+
+  public get marktDataCategory(): typeof MarketDataCategory {
+    return MarketDataCategory;
   }
 
   ngOnInit(): void {
@@ -373,10 +378,16 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     // Setting Operation for Holding & Trading and Transfer
     if (this.operationType != OperationsType.NEWINVESTMENT) {
       operation.entryCoin = assetBuying.symbol;
-      operation.entryPrice = this.marketDataSelected.current_price;
+      operation.entryPrice =
+        this.marketDataSelected.category == MarketDataCategory.STABLECOIN
+          ? this.assetToSell.current_price!
+          : this.marketDataSelected.current_price;
       operation.exitCoin = assetSelling.symbol;
       if (this.operationType != OperationsType.TRADING)
-        operation.exitPrice = this.marketDataSelected.current_price;
+        operation.exitPrice =
+          this.marketDataSelected.category == MarketDataCategory.STABLECOIN
+            ? this.assetToSell.current_price!
+            : this.marketDataSelected.current_price;
     }
     if (this.operationType != OperationsType.TRANSFER) {
       operation.entryPriceValue = parseFloat(this.investedMoney.toFixed(2));
@@ -453,6 +464,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
 
   editBalance() {
     this.isEditBalance = false;
+    this.isEditSellBalance = false;
     this.makeNewBalance();
   }
 

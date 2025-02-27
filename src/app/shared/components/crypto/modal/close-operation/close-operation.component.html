@@ -263,14 +263,39 @@
                           </div>
                           <div class="col-12 col-md-6">
                             <div class="form-group basic">
+                              @if (!isPercentageFee) {
                               <div class="input-wrapper">
+                                @if (operationToClose.asset?.category ==
+                                marktDataCategory.CRYPTOCURRENCY) {
                                 <label class="label" for="fees"
                                   >{{
                                     "modal_component.close_operation.fees"
                                       | translate
                                   }}
-                                  ({{ operationToClose.asset?.symbol }})</label
-                                >
+                                  ({{ operationToClose.assetSell?.symbol }})
+                                  <mark
+                                    class="clickable"
+                                    style="vertical-align: 2px"
+                                    (click)="isPercentageFee = true"
+                                  >
+                                    %
+                                  </mark></label
+                                >}@if (operationToClose.asset?.category ==
+                                marktDataCategory.STABLECOIN) {
+                                <label class="label" for="fees"
+                                  >{{
+                                    "modal_component.close_operation.fees"
+                                      | translate
+                                  }}
+                                  ({{ operationToClose.asset?.symbol }})
+                                  <mark
+                                    class="clickable"
+                                    style="vertical-align: 2px"
+                                    (click)="isPercentageFee = true"
+                                  >
+                                    %
+                                  </mark></label
+                                >}
                                 <input
                                   name="fees"
                                   #fees1="ngModel"
@@ -288,6 +313,59 @@
                                   <ion-icon name="close-circle"></ion-icon>
                                 </i>
                               </div>
+                              } @if (isPercentageFee) {
+                              <div class="input-wrapper">
+                                @if (operationToClose.asset?.category ==
+                                marktDataCategory.CRYPTOCURRENCY) {
+                                <label class="label" for="fees"
+                                  >{{
+                                    "modal_component.close_operation.fees"
+                                      | translate
+                                  }}
+                                  (%)
+                                  <mark
+                                    class="clickable"
+                                    style="vertical-align: 2px"
+                                    (click)="isPercentageFee = false"
+                                    >{{
+                                      operationToClose.assetSell?.symbol
+                                    }}</mark
+                                  ></label
+                                >}@if (operationToClose.asset?.category ==
+                                marktDataCategory.STABLECOIN) {
+                                <label class="label" for="fees"
+                                  >{{
+                                    "modal_component.close_operation.fees"
+                                      | translate
+                                  }}
+                                  (%)
+                                  <mark
+                                    class="clickable"
+                                    style="vertical-align: 2px"
+                                    (click)="isPercentageFee = false"
+                                    >{{
+                                      operationToClose.assetSell?.symbol
+                                    }}</mark
+                                  ></label
+                                >}
+                                <input
+                                  name="fees"
+                                  #fees1="ngModel"
+                                  type="number"
+                                  class="form-control"
+                                  id="fees"
+                                  placeholder="{{
+                                    'modal_component.close_operation.fees'
+                                      | translate
+                                  }}"
+                                  [(ngModel)]="percentageFees"
+                                  (keyup)="refreshData()"
+                                />
+                                <i class="clear-input">
+                                  <ion-icon name="close-circle"></ion-icon>
+                                </i>
+                              </div>
+                              }
                             </div>
                           </div>
                         </div>

@@ -438,8 +438,8 @@ export class ChartService {
       });
 
       investedBalance.push(parseFloat(investedSum.toFixed(2)));
-      trendBalance.push(profit);
-      singleBalance.push(singleTrend);
+      trendBalance.push(parseFloat(profit.toFixed(2)));
+      singleBalance.push(parseFloat(singleTrend.toFixed(2)));
     });
     tradingDate.splice(0, 0, '2023-01-01');
 
