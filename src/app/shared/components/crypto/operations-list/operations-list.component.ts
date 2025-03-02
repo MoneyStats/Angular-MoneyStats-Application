@@ -24,7 +24,7 @@ import { UserService } from 'src/assets/core/services/api/user.service';
   styleUrls: ['./operations-list.component.scss'],
   standalone: false,
 })
-export class OperationsListComponent implements OnInit, OnChanges {
+export class OperationsListComponent implements OnChanges {
   @Input('walletsAsset') walletsAsset: Wallet[] = [];
   @Input('cryptoAssets') cryptoAssets: Asset[] = [];
   @Input('isAssetOperations') isAssetOperations: boolean = false;
@@ -53,10 +53,12 @@ export class OperationsListComponent implements OnInit, OnChanges {
     return ModalConstant;
   }
 
-  ngOnInit(): void {}
-
   ngOnChanges(changes: SimpleChanges): void {
-    this.getOperations();
+    if (
+      (changes['walletsAsset'] || changes['cryptoAssets']) &&
+      Utils.isNullOrEmpty(this.operations)
+    )
+      this.getOperations();
   }
 
   getOperations() {
@@ -77,7 +79,20 @@ export class OperationsListComponent implements OnInit, OnChanges {
                   assets.find((a) => a.symbol == operation.entryCoin)
                 );
               }
-              operations.push(operation);
+              let operationLight = Utils.copyObject(operation);
+              if (!Utils.isNullOrEmpty(operationLight.asset)) {
+                operationLight.asset.operations = undefined;
+                operationLight.asset.history = undefined;
+              }
+              if (!Utils.isNullOrEmpty(operationLight.wallet)) {
+                operationLight.wallet.assets = undefined;
+                operationLight.wallet.history = undefined;
+              }
+              if (!Utils.isNullOrEmpty(operationLight.assetSell)) {
+                operationLight.assetSell.history = undefined;
+                operationLight.assetSell.operations = undefined;
+              }
+              operations.push(operationLight);
             });
         });
     });

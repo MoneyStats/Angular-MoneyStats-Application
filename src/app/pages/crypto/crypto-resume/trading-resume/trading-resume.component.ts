@@ -87,7 +87,7 @@ export class TradingResumeComponent implements OnInit, OnChanges {
         if (wallet.assets && wallet.assets.length > 0)
           wallet.assets.forEach((asset: any) => {
             if (wallet.type == OperationsType.TRADING) {
-              totalInvested += asset.invested;
+              // totalInvested += asset.invested;
             }
             if (asset.operations && asset.operations.length > 0) {
               asset.operations = asset.operations.filter(
@@ -100,6 +100,9 @@ export class TradingResumeComponent implements OnInit, OnChanges {
                   operation.assetSell = Utils.copyObject(
                     assets.find((a) => a.symbol == operation.entryCoin)
                   );
+                if (operation.type == OperationsType.TRADING) {
+                  totalInvested += operation.entryPriceValue;
+                }
                 operations.push(operation);
               });
             }

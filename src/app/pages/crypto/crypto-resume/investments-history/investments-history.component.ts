@@ -37,13 +37,14 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
   @Input('cryptoCurrency') cryptoCurrency: string = '';
   @Input('cryptoAssets') cryptoAssets: Asset[] = [];
   @Input('cryptoWallets') cryptoWallets: Wallet[] = [];
+  @Input('currentYear') currentYear: any = new Date().getFullYear();
   // History Tab
   totalList: Array<any> = [];
   totalMap: Map<string, any> = new Map<string, any>();
   balances: Array<number> = [];
   tableBalance: Array<any> = [];
   // END History Tab
-  isOperationPresent: boolean = false;
+  //isOperationPresent: boolean = false;
   operations: Operation[] = [];
   operationSelect?: Operation;
 
@@ -65,12 +66,15 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes['cryptoWallets'] && Utils.isNullOrEmpty(this.operations)) {
+      this.isOperationsPresent();
+      //this.getOperations();
+    }
     this.getResume();
-    this.getOperations();
   }
 
   ngOnInit(): void {
-    this.getOperations();
+    //this.getOperations();
     //this.getResume();
   }
 
@@ -139,6 +143,27 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
     array.index = array.length - 1;
     return array;
   }
+
+  isOperationsPresent() {
+    let foundOperation = false; // Variabile per tracciare se troviamo almeno una operazione
+
+    if (!Utils.isNullOrEmpty(this.cryptoWallets)) {
+      // Itera attraverso ogni wallet
+      this.cryptoWallets.forEach((wallet: any) => {
+        if (wallet.assets && wallet.assets.length > 0 && !foundOperation) {
+          // Itera attraverso ogni asset del wallet
+          wallet.assets.forEach((asset: any) => {
+            if (asset.operations && asset.operations.length > 0) {
+              foundOperation = true; // Trova almeno una operazione
+            }
+          });
+        }
+      });
+    }
+
+    return foundOperation; // Ritorna true se è stata trovata almeno una operazione, altrimenti false
+  }
+
   /**
    * END History Tab Section
    */
@@ -152,18 +177,57 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
           wallet.assets.forEach((asset: any) => {
             if (asset.operations && asset.operations.length > 0)
               asset.operations.forEach((operation: any) => {
-                operation.asset = asset;
-                operation.wallet = wallet;
-                if (operation.type != OperationsType.NEWINVESTMENT)
-                  operation.assetSell = Utils.copyObject(
-                    assets.find((a: Asset) => a.symbol == operation.entryCoin)
-                  );
-                this.operations.push(operation);
+                // Verifica se la data di apertura è nell'anno corrente
+                const isCurrentYearEntryDate = !Utils.isNullOrEmpty(
+                  operation.entryDate
+                )
+                  ? new Date(operation.entryDate).getFullYear() ===
+                    this.currentYear
+                  : false;
+
+                // Verifica se la data di chiusura è nell'anno corrente
+                const isCurrentYearExitDate = !Utils.isNullOrEmpty(
+                  operation.exitDate
+                )
+                  ? new Date(operation.exitDate).getFullYear() ===
+                    this.currentYear
+                  : false;
+
+                // Condizioni per includere l'operazione
+                const shouldIncludeOperation =
+                  (isCurrentYearEntryDate && isCurrentYearExitDate) || // Apre e chiude nello stesso anno
+                  (isCurrentYearEntryDate &&
+                    Utils.isNullOrEmpty(operation.exitDate)) || // Apre nell'anno corrente e non è chiusa
+                  (!isCurrentYearEntryDate &&
+                    Utils.isNullOrEmpty(operation.exitDate)); // Apre nell'anno scorso e non è chiusa
+
+                if (shouldIncludeOperation) {
+                  operation.asset = asset;
+                  operation.wallet = wallet;
+                  if (operation.type != OperationsType.NEWINVESTMENT)
+                    operation.assetSell = Utils.copyObject(
+                      assets.find((a: Asset) => a.symbol == operation.entryCoin)
+                    );
+                  let operationLight = Utils.copyObject(operation);
+                  if (!Utils.isNullOrEmpty(operationLight.asset)) {
+                    operationLight.asset.operations = undefined;
+                    operationLight.asset.history = undefined;
+                  }
+                  if (!Utils.isNullOrEmpty(operationLight.wallet)) {
+                    operationLight.wallet.assets = undefined;
+                    operationLight.wallet.history = undefined;
+                  }
+                  if (!Utils.isNullOrEmpty(operationLight.assetSell)) {
+                    operationLight.assetSell.history = undefined;
+                    operationLight.assetSell.operations = undefined;
+                  }
+                  this.operations.push(operationLight);
+                }
               });
           });
       });
     this.operations.sort((a, b) => (a.exitDate! < b.exitDate! ? 1 : -1));
-    if (this.operations.length > 0) this.isOperationPresent = true;
+    //if (this.operations.length > 0) this.isOperationPresent = true;
   }
 
   goToOperations() {

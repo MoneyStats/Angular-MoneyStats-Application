@@ -252,8 +252,9 @@
     </div>
   </div>
   <!-- * Graph -->
-  }
-  <div class="section mb-3 col-md-12" *ngIf="isOperationPresent">
+  } @if (isOperationsPresent()) {
+  <!--<div class="section mb-3 col-md-12" *ngIf="isOperationPresent">-->
+  <div class="section mb-3 col-md-12">
     <!-- History -->
     <div class="section cards-op mt-4">
       <div class="section-heading">
@@ -276,4 +277,5 @@
     </div>
     <!-- History -->
   </div>
+  }
 </div>

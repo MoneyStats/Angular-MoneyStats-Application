@@ -251,6 +251,11 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     let percentualeInvestitoCalcolata = 0;
     let transferedAsset: any = new Asset();
 
+    console.log('Invested Money', this.investedMoney);
+    console.log('Invested Balance', this.investedBalance);
+    console.log('Asset Buying', assetBuying);
+    console.log('Asset Sell', assetSelling, this.assetToSell);
+
     switch (this.operationType) {
       case OperationsType.NEWINVESTMENT:
         // Setting Invested Money into the Asset
@@ -272,6 +277,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
         percentualeInvestitoCalcolata =
           assetBuying.invested * (this.investedMoney / assetBuying.value!);
         assetBuying.balance -= this.investedBalance;
+        console.log('Percetuale', percentualeInvestitoCalcolata, assetBuying);
         if (assetBuying.balance == 0)
           percentualeInvestitoCalcolata = assetBuying.invested;
         assetBuying.invested -= percentualeInvestitoCalcolata;
