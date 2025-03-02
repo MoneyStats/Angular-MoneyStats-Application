@@ -173,18 +173,26 @@ export class CloseOperationComponent implements OnDestroy {
     if (this.operationToClose.fees) this.operationToClose.fees! += fees;
     else this.operationToClose.fees = fees;
 
+    console.log(
+      this.operationToClose?.entryQuantity!,
+      asset1.balance,
+      asset1.invested,
+      asset2.balance,
+      asset2.invested
+    );
+
     asset1!.operations = [this.operationToClose];
     asset1!.balance -= this.operationToClose?.entryQuantity!;
-    asset1!.balance = asset1!.balance < 0 ? 0 : asset1!.balance;
     asset1!.invested -= this.operationToClose?.entryPriceValue!;
+    asset1!.invested = asset1!.invested < 0 ? 0 : asset1!.invested;
     asset1!.updateDate = new Date();
     asset2!.balance += this.operationToClose?.exitQuantity!;
-    asset2!.balance = asset2!.balance < 0 ? 0 : asset2!.balance;
     asset2!.invested += this.operationToClose?.entryPriceValue!;
+    asset2!.invested = asset2!.invested < 0 ? 0 : asset2!.invested;
     asset2!.updateDate = new Date();
 
     wallet!.assets = [asset1!, asset2!];
-
+    console.log(asset1, asset2);
     this.closeSubscribe = this.cryptoService
       .updateCryptoAsset(wallet!)
       .subscribe((data) => {
