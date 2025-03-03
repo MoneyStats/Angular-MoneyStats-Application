@@ -240,72 +240,98 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
   }
 
   exchangeInvestments() {
-    let assetBuying =
-      this.operationType == OperationsType.NEWINVESTMENT
-        ? Utils.copyObject(this.assetInWallet)
-        : Utils.copyObject(this.assetToSell);
-    assetBuying.lastUpdate = new Date();
+    let assetToBeSelled = this.getAssetToBuy();
+    assetToBeSelled.lastUpdate = new Date();
 
     let operation: Operation = new Operation();
-    let assetSelling = new Asset();
+    let assetToExchange = new Asset();
     let percentualeInvestitoCalcolata = 0;
     let transferedAsset: any = new Asset();
 
-    console.log('Invested Money', this.investedMoney);
-    console.log('Invested Balance', this.investedBalance);
-    console.log('Asset Buying', assetBuying);
-    console.log('Asset Sell', assetSelling, this.assetToSell);
-
     switch (this.operationType) {
       case OperationsType.NEWINVESTMENT:
-        // Setting Invested Money into the Asset
-        Utils.isNullOrEmpty(assetBuying.invested)
-          ? (assetBuying.invested = this.investedMoney)
-          : (assetBuying.invested += this.investedMoney);
-        Utils.isNullOrEmpty(assetBuying.balance)
-          ? (assetBuying.balance = this.assetNewBalance)
-          : (assetBuying.balance += this.assetNewBalance);
-
-        // Setting Operation for New Investment
-        operation.entryCoin = this.fiat;
-        operation.entryPrice = assetBuying.current_price;
-        operation.exitCoin = assetBuying.symbol;
-        operation.exitPrice = assetBuying.current_price;
+        this.handleNewInvestment(assetToBeSelled, operation);
         break;
       case OperationsType.HOLDING:
       case OperationsType.TRADING:
-        percentualeInvestitoCalcolata =
-          assetBuying.invested * (this.investedMoney / assetBuying.value!);
-        assetBuying.balance -= this.investedBalance;
-        console.log('Percetuale', percentualeInvestitoCalcolata, assetBuying);
-        if (assetBuying.balance == 0)
-          percentualeInvestitoCalcolata = assetBuying.invested;
-        assetBuying.invested -= percentualeInvestitoCalcolata;
-
-        const assetAsString = JSON.stringify(this.assetInWallet);
-        const assetParse = JSON.parse(assetAsString);
-        assetSelling = Utils.copyObject(assetParse);
-
-        Utils.isNullOrEmpty(assetSelling.invested)
-          ? (assetSelling.invested = percentualeInvestitoCalcolata)
-          : (assetSelling.invested += percentualeInvestitoCalcolata);
-        Utils.isNullOrEmpty(assetSelling.balance)
-          ? (assetSelling.balance = this.assetNewBalance)
-          : (assetSelling.balance += this.assetNewBalance);
+        assetToExchange = this.handleTradingHolding(assetToBeSelled);
         break;
+        //percentualeInvestitoCalcolata =
+        //  assetToBeSelled.invested *
+        //  (this.investedMoney / assetToBeSelled.value!);
+        //assetToBeSelled.balance -= this.investedBalance;
+        //if (assetToBeSelled.balance == 0)
+        //  percentualeInvestitoCalcolata = assetToBeSelled.invested;
+        //assetToBeSelled.invested -= percentualeInvestitoCalcolata;
+
+        //const assetAsString = JSON.stringify(this.assetInWallet);
+        //const assetParse = JSON.parse(assetAsString);
+        //assetToExchange = Utils.copyObject(assetParse);
+        //const asset1 = Utils.copyObject(assetToBeSelled);
+        //const asset2 = Utils.copyObject(assetToExchange);
+
+        //const percentageInvested = this.calculatePercentageInvested(
+        //  assetToBeSelled.balance,
+        //  this.investedBalance
+        //);
+        //
+        //const investedToTransfer = this.calculateInvestment(
+        //  assetToBeSelled.invested,
+        //  percentageInvested
+        //);
+        //
+        //console.log(investedToTransfer, this.investedBalance);
+        //
+        //const investedToMove = assetToBeSelled.invested - investedToTransfer;
+        //console.log('REMOVE', investedToMove);
+        //
+        //assetToBeSelled.invested = Math.max(0, investedToTransfer);
+        //
+        ////Utils.isNullOrEmpty(assetToExchange.invested)
+        ////  ? (assetToExchange.invested = percentualeInvestitoCalcolata)
+        ////  : (assetToExchange.invested += percentualeInvestitoCalcolata);
+        //Utils.isNullOrEmpty(assetToExchange.invested)
+        //  ? (assetToExchange.invested = investedToMove)
+        //  : (assetToExchange.invested += investedToMove);
+        //Utils.isNullOrEmpty(assetToExchange.balance)
+        //  ? (assetToExchange.balance = this.assetNewBalance)
+        //  : (assetToExchange.balance += this.assetNewBalance);
+        //break;
+
+        // OLD DATA
+        //percentualeInvestitoCalcolata =
+        //  assetToBeSelled.invested *
+        //  (this.investedMoney / assetToBeSelled.value!);
+        //assetToBeSelled.balance -= this.investedBalance;
+        //if (assetToBeSelled.balance == 0)
+        //  percentualeInvestitoCalcolata = assetToBeSelled.invested;
+        //assetToBeSelled.invested -= percentualeInvestitoCalcolata;
+        //
+        //const assetAsString = JSON.stringify(this.assetInWallet);
+        //const assetParse = JSON.parse(assetAsString);
+        //assetToExchange = Utils.copyObject(assetParse);
+        //
+        //Utils.isNullOrEmpty(assetToExchange.invested)
+        //  ? (assetToExchange.invested = percentualeInvestitoCalcolata)
+        //  : (assetToExchange.invested += percentualeInvestitoCalcolata);
+        //Utils.isNullOrEmpty(assetToExchange.balance)
+        //  ? (assetToExchange.balance = this.assetNewBalance)
+        //  : (assetToExchange.balance += this.assetNewBalance);
+        //break;
       case OperationsType.TRANSFER:
         percentualeInvestitoCalcolata =
-          assetBuying.invested * (this.balanceToTransfer / assetBuying.value!);
-        assetBuying.balance -= this.balanceToTransfer;
+          assetToBeSelled.invested *
+          (this.balanceToTransfer / assetToBeSelled.value!);
+        assetToBeSelled.balance -= this.balanceToTransfer;
 
-        if (assetBuying.balance == 0) {
-          percentualeInvestitoCalcolata = assetBuying.invested;
+        if (assetToBeSelled.balance == 0) {
+          percentualeInvestitoCalcolata = assetToBeSelled.invested;
         }
-        assetBuying.invested -= percentualeInvestitoCalcolata;
+        assetToBeSelled.invested -= percentualeInvestitoCalcolata;
 
         transferedAsset = this.walletToTansfer.assets
           ? Utils.copyObject(this.walletToTansfer.assets).find(
-              (as: any) => as.identifier == assetBuying.identifier
+              (as: any) => as.identifier == assetToBeSelled.identifier
             )
           : undefined;
 
@@ -316,7 +342,7 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
           transferedAsset.invested = 0;
           transferedAsset.performance = 0;
           transferedAsset.trend = 0;
-          transferedAsset.lastUpdate = assetBuying.lastUpdate;
+          transferedAsset.lastUpdate = assetToBeSelled.lastUpdate;
           transferedAsset.history = [];
         }
 
@@ -344,17 +370,18 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
 
         // Chiud eventuali operazioni di trading se sono presenti e Aperte
         if (
-          assetBuying.operations.filter((o: any) => o.status === 'OPEN')
+          assetToBeSelled.operations.filter((o: any) => o.status === 'OPEN')
             .length > 0
         ) {
-          let open = assetBuying.operations.filter(
+          let open = assetToBeSelled.operations.filter(
             (o: Operation) => o.status === 'OPEN'
           )[0];
 
           open.status = 'CLOSED';
           open.exitDate = new Date();
-          open.exitPrice = assetBuying.current_price;
-          let currentPrice = open.entryQuantity! * assetBuying.current_price!;
+          open.exitPrice = assetToBeSelled.current_price;
+          let currentPrice =
+            open.entryQuantity! * assetToBeSelled.current_price!;
           open.exitPriceValue = parseFloat(currentPrice.toFixed(2));
           open.exitQuantity = parseFloat(currentPrice.toFixed(8));
           open.performance = parseFloat(
@@ -366,67 +393,243 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
           open.trend = parseFloat(
             (currentPrice - open.entryPriceValue!).toFixed(2)
           );
-          assetBuying.operations = [open];
+          assetToBeSelled.operations = [open];
         }
         break;
       default:
         break;
     }
 
+    this.finalizeOperation(
+      assetToBeSelled,
+      assetToExchange,
+      transferedAsset,
+      operation
+    );
     // Setting Operation
+    //operation.identifier = uuidv4();
+    //operation.type = this.operationType;
+    //operation.status =
+    //  this.operationType != OperationsType.TRADING ? 'CLOSED' : 'OPEN';
+    //operation.entryDate = new Date(this.operationDate);
+    //operation.fees = this.fees;
+    //
+    //// Setting Operation for Holding & Trading and Transfer
+    //if (this.operationType != OperationsType.NEWINVESTMENT) {
+    //  operation.entryCoin = assetToBeSelled.symbol;
+    //  operation.entryPrice =
+    //    this.marketDataSelected.category == MarketDataCategory.STABLECOIN
+    //      ? this.assetToSell.current_price!
+    //      : this.marketDataSelected.current_price;
+    //  operation.exitCoin = assetToExchange.symbol;
+    //  if (this.operationType != OperationsType.TRADING)
+    //    operation.exitPrice =
+    //      this.marketDataSelected.category == MarketDataCategory.STABLECOIN
+    //        ? this.assetToSell.current_price!
+    //        : this.marketDataSelected.current_price;
+    //}
+    //if (this.operationType != OperationsType.TRANSFER) {
+    //  operation.entryPriceValue = parseFloat(this.investedMoney.toFixed(2));
+    //  operation.entryQuantity = this.assetNewBalance;
+    //}
+    //if (this.operationType != OperationsType.TRADING) {
+    //  operation.exitDate = new Date(this.operationDate);
+    //  if (this.operationType != OperationsType.TRANSFER) {
+    //    operation.exitPriceValue = parseFloat(this.investedMoney.toFixed(2));
+    //    operation.exitQuantity = this.investedMoney;
+    //  }
+    //}
+    //if (this.operationType != OperationsType.TRANSFER) {
+    //  this.operationType == OperationsType.NEWINVESTMENT
+    //    ? (assetToBeSelled.operations = [operation])
+    //    : (assetToExchange.operations = [operation]);
+    //
+    //  let walletToSave = Utils.copyObject(this.wallet);
+    //
+    //  if (this.operationType != OperationsType.NEWINVESTMENT)
+    //    walletToSave.assets = [assetToExchange, assetToBeSelled];
+    //  else walletToSave.assets = [assetToBeSelled];
+    //
+    //  this.saveWallet(walletToSave);
+    //} else {
+    //  operation.exitCoin = operation.entryCoin;
+    //  transferedAsset.operations = [operation];
+    //
+    //  let walletSell = Utils.copyObject(this.wallet);
+    //  let walletBuy = Utils.copyObject(this.walletToTansfer);
+    //
+    //  walletSell.assets = [assetToBeSelled];
+    //  walletBuy.assets = [transferedAsset];
+    //
+    //  this.saveWallets([walletSell, walletBuy]);
+    //}
+  }
+
+  /** Recupera l'asset da acquistare */
+  getAssetToBuy() {
+    return this.operationType === OperationsType.NEWINVESTMENT
+      ? Utils.copyObject(this.assetInWallet)
+      : Utils.copyObject(this.assetToSell);
+  }
+
+  /** Gestisce l'operazione di nuovo investimento */
+  handleNewInvestment(assetToBeSelled: Asset, operation: Operation) {
+    assetToBeSelled.invested =
+      (assetToBeSelled.invested || 0) + this.investedMoney;
+    assetToBeSelled.balance =
+      (assetToBeSelled.balance || 0) + this.assetNewBalance;
+
+    // Setting Operation for New Investment
+    operation.entryCoin = this.fiat;
+    operation.entryPrice = this.marketDataSelected.current_price;
+    operation.exitCoin = assetToBeSelled.symbol;
+    operation.exitPrice = this.marketDataSelected.current_price;
+  }
+
+  /** Gestisce le operazioni di Trading e Holding */
+  handleTradingHolding(assetToBeSelled: Asset): Asset {
+    let assetToExchange = Utils.copyObject(this.assetInWallet);
+    const percentageInvested = this.calculatePercentageInvested(
+      assetToBeSelled.balance,
+      this.investedBalance
+    );
+
+    const investedToTransfer = this.calculateInvestment(
+      assetToBeSelled.invested,
+      percentageInvested
+    );
+
+    const investedToMove = assetToBeSelled.invested - investedToTransfer;
+
+    assetToBeSelled.invested = Math.max(0, investedToTransfer);
+    assetToBeSelled.balance -= this.investedBalance;
+
+    assetToExchange.invested = (assetToExchange.invested || 0) + investedToMove;
+    assetToExchange.balance =
+      (assetToExchange.balance || 0) + this.assetNewBalance;
+    return assetToExchange;
+  }
+
+  /** Gestisce l'operazione di trasferimento */
+  handleTransfer(assetBuying: Asset, operation: Operation) {
+    //let percentInvested = this.calculatePercentageInvestedNew(
+    //  assetBuying,
+    //  this.balanceToTransfer
+    //);
+    //assetBuying.balance -= this.balanceToTransfer;
+    //assetBuying.invested -= percentInvested;
+    //
+    //let transferredAsset = this.getTransferredAsset(assetBuying);
+    //transferredAsset!.balance += this.balanceToTransfer - this.fees;
+    //transferredAsset!.invested += percentInvested;
+    //
+    //this.closeOpenOperations(assetBuying);
+    //
+    //return transferredAsset;
+  }
+
+  /** Recupera o inizializza l'asset trasferito */
+  getTransferredAsset(assetBuying: Asset) {
+    let asset = this.walletToTansfer.assets?.find(
+      (as) => as.identifier === assetBuying.identifier
+    );
+    if (!asset) {
+      asset = {
+        ...Utils.copyObject(this.marketDataSelected),
+        balance: 0,
+        invested: 0,
+        performance: 0,
+        trend: 0,
+        history: [],
+      };
+    }
+    return asset;
+  }
+
+  /** Chiude eventuali operazioni aperte */
+  closeOpenOperations(assetBuying: Asset) {
+    let openOperations = assetBuying.operations.filter(
+      (o) => o.status === 'OPEN'
+    );
+    if (openOperations.length > 0) {
+      let open = openOperations[0];
+      open.status = 'CLOSED';
+      open.exitDate = new Date();
+      open.exitPrice = assetBuying.current_price;
+      let currentValue = open.entryQuantity! * assetBuying.current_price!;
+      open.exitPriceValue = parseFloat(currentValue.toFixed(2));
+      open.exitQuantity = parseFloat(currentValue.toFixed(8));
+      open.performance = parseFloat(
+        (((currentValue - open.entryPriceValue!) / currentValue) * 100).toFixed(
+          2
+        )
+      );
+      open.trend = parseFloat(
+        (currentValue - open.entryPriceValue!).toFixed(2)
+      );
+      assetBuying.operations = [open];
+    }
+  }
+
+  /** Finalizza l'operazione e salva i dati */
+  finalizeOperation(
+    assetToBeSelled: Asset,
+    assetToExchange: Asset,
+    transferredAsset: Asset,
+    operation: Operation
+  ) {
     operation.identifier = uuidv4();
     operation.type = this.operationType;
     operation.status =
-      this.operationType != OperationsType.TRADING ? 'CLOSED' : 'OPEN';
+      this.operationType !== OperationsType.TRADING ? 'CLOSED' : 'OPEN';
     operation.entryDate = new Date(this.operationDate);
     operation.fees = this.fees;
 
-    // Setting Operation for Holding & Trading and Transfer
-    if (this.operationType != OperationsType.NEWINVESTMENT) {
-      operation.entryCoin = assetBuying.symbol;
+    if (this.operationType !== OperationsType.NEWINVESTMENT) {
+      operation.entryCoin = assetToBeSelled.symbol;
       operation.entryPrice =
-        this.marketDataSelected.category == MarketDataCategory.STABLECOIN
+        this.marketDataSelected.category === MarketDataCategory.STABLECOIN
           ? this.assetToSell.current_price!
           : this.marketDataSelected.current_price;
-      operation.exitCoin = assetSelling.symbol;
-      if (this.operationType != OperationsType.TRADING)
+      operation.exitCoin = assetToExchange.symbol;
+      if (this.operationType !== OperationsType.TRADING) {
         operation.exitPrice =
-          this.marketDataSelected.category == MarketDataCategory.STABLECOIN
+          this.marketDataSelected.category === MarketDataCategory.STABLECOIN
             ? this.assetToSell.current_price!
             : this.marketDataSelected.current_price;
+      }
     }
-    if (this.operationType != OperationsType.TRANSFER) {
+
+    if (this.operationType !== OperationsType.TRANSFER) {
       operation.entryPriceValue = parseFloat(this.investedMoney.toFixed(2));
       operation.entryQuantity = this.assetNewBalance;
-    }
-    if (this.operationType != OperationsType.TRADING) {
-      operation.exitDate = new Date(this.operationDate);
-      if (this.operationType != OperationsType.TRANSFER) {
+      if (this.operationType !== OperationsType.TRADING) {
+        operation.exitDate = new Date(this.operationDate);
         operation.exitPriceValue = parseFloat(this.investedMoney.toFixed(2));
         operation.exitQuantity = this.investedMoney;
       }
     }
-    if (this.operationType != OperationsType.TRANSFER) {
-      this.operationType == OperationsType.NEWINVESTMENT
-        ? (assetBuying.operations = [operation])
-        : (assetSelling.operations = [operation]);
 
-      let walletToSave = Utils.copyObject(this.wallet);
+    let walletToSave = Utils.copyObject(this.wallet);
 
-      if (this.operationType != OperationsType.NEWINVESTMENT)
-        walletToSave.assets = [assetSelling, assetBuying];
-      else walletToSave.assets = [assetBuying];
-
+    if (this.operationType !== OperationsType.TRANSFER) {
+      if (this.operationType === OperationsType.NEWINVESTMENT) {
+        assetToBeSelled.operations = [operation];
+        walletToSave.assets = [assetToBeSelled];
+      } else {
+        assetToExchange.operations = [operation];
+        walletToSave.assets = [assetToExchange, assetToBeSelled];
+      }
       this.saveWallet(walletToSave);
     } else {
       operation.exitCoin = operation.entryCoin;
-      transferedAsset.operations = [operation];
+      transferredAsset.operations = [operation];
 
       let walletSell = Utils.copyObject(this.wallet);
       let walletBuy = Utils.copyObject(this.walletToTansfer);
 
-      walletSell.assets = [assetBuying];
-      walletBuy.assets = [transferedAsset];
+      walletSell.assets = [assetToBeSelled];
+      walletBuy.assets = [transferredAsset];
 
       this.saveWallets([walletSell, walletBuy]);
     }
@@ -511,4 +714,15 @@ export class OperationExchangeComponent implements OnInit, OnDestroy {
     return false;
   }
   /** END Validation Button */
+
+  calculateInvestment(invested: number, percentage: number) {
+    const percentageToMoltiplicate = percentage / 100;
+    return invested * percentageToMoltiplicate;
+  }
+
+  calculatePercentageInvested(currentBalance: number, sellingBalance: number) {
+    if (currentBalance === 0) return 0; // Evita divisione per zero
+    if (currentBalance === sellingBalance) return 100; // Se vendi tutto, è il 100%
+    return ((currentBalance - sellingBalance) / currentBalance) * 100;
+  }
 }

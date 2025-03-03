@@ -43,6 +43,7 @@ export class TradingResumeComponent implements OnInit, OnChanges {
 
   walletsFilter: Wallet[] = [];
   invested: number = 0;
+  balanceCurrentYear: number = 0;
 
   constructor(public cryptoService: CryptoService, private router: Router) {}
 
@@ -78,6 +79,7 @@ export class TradingResumeComponent implements OnInit, OnChanges {
   }
 
   getOperations() {
+    let investedThisYear: number = 0;
     let totalInvested: number = 0;
     let operations: Operation[] = [];
     let wallets = Utils.copyObject(this.wallets);
@@ -87,7 +89,7 @@ export class TradingResumeComponent implements OnInit, OnChanges {
         if (wallet.assets && wallet.assets.length > 0)
           wallet.assets.forEach((asset: any) => {
             if (wallet.type == OperationsType.TRADING) {
-              // totalInvested += asset.invested;
+              totalInvested += asset.invested;
             }
             if (asset.operations && asset.operations.length > 0) {
               asset.operations = asset.operations.filter(
@@ -101,20 +103,21 @@ export class TradingResumeComponent implements OnInit, OnChanges {
                     assets.find((a) => a.symbol == operation.entryCoin)
                   );
                 if (operation.type == OperationsType.TRADING) {
-                  totalInvested += operation.entryPriceValue;
+                  investedThisYear += operation.entryPriceValue;
                 }
                 operations.push(operation);
               });
             }
           });
       });
+    this.invested = totalInvested;
     operations = operations.filter((o) => o.type == OperationsType.TRADING);
     operations.sort((a, b) => (a.entryDate! < b.entryDate! ? 1 : -1));
     if (ScreenService.isMobileDevice()) {
       this.trading = ChartService.renderTradingOperations(operations, [200]);
     } else
       this.trading = ChartService.renderTradingOperations(operations, [350]);
-    this.getOperationTable(operations, totalInvested);
+    this.getOperationTable(operations, investedThisYear);
     if (Utils.isNullOrEmpty(operations)) {
       this.emptyTradingData.emit(true);
     }
@@ -140,6 +143,6 @@ export class TradingResumeComponent implements OnInit, OnChanges {
       o.balance = parseFloat((balance += o.trend!).toFixed(2));
     });
     this.operations.reverse();
-    this.invested = totalInvested;
+    this.balanceCurrentYear = totalInvested;
   }
 }

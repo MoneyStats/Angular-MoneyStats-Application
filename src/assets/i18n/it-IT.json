@@ -385,7 +385,7 @@
     "tableAsset": "Storico performance annuale",
     "warning": "Aggiungi nuove statistiche crypto per visualizzare i dati",
     "investments": {
-      "title": "Media di acquisto della valuta",
+      "title": "Media di acquisto della valuta, Totale investito:",
       "table_tab1": "Asset",
       "table_tab2": "Quantità",
       "table_tab3": "Investito",
@@ -395,7 +395,8 @@
       "table_tab7": "Variazione +/-",
       "table_tab8": "Performance"
     },
-    "trading_table_title": "Performance Trading - Saldo iniziale",
+    "trading_table_title": "Performance Trading - Saldo iniziale:",
+    "trading_table_subTitle": "Saldo anno corrente:",
     "trading_table_tab1": "Data di ingresso",
     "trading_table_tab2": "Scambio",
     "trading_table_tab3": "Quantità acquistata",

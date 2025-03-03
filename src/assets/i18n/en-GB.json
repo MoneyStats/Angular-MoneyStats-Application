@@ -385,7 +385,7 @@
     "tableAsset": "Annual Performance History",
     "warning": "Add new crypto stats to view data",
     "investments": {
-      "title": "Average Purchase Price of the Currency",
+      "title": "Average Purchase Price of the Currency, Total Invested:",
       "table_tab1": "Asset",
       "table_tab2": "Quantity",
       "table_tab3": "Invested",
@@ -396,6 +396,7 @@
       "table_tab8": "Performance"
     },
     "trading_table_title": "Trading Performance - Initial Balance",
+    "trading_table_subTitle": "Balance Current Year:",
     "trading_table_tab1": "Entry Date",
     "trading_table_tab2": "Exchange",
     "trading_table_tab3": "Quantity Bought",

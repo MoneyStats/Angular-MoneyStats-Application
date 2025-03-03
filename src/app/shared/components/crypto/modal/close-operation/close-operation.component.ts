@@ -173,22 +173,27 @@ export class CloseOperationComponent implements OnDestroy {
     if (this.operationToClose.fees) this.operationToClose.fees! += fees;
     else this.operationToClose.fees = fees;
 
-    console.log(
-      this.operationToClose?.entryQuantity!,
+    const percentageInvested = this.calculatePercentageInvested(
       asset1.balance,
-      asset1.invested,
-      asset2.balance,
-      asset2.invested
+      this.operationToClose?.entryQuantity!
     );
+
+    const investedToTransfer = this.calculateInvestment(
+      asset1.invested,
+      percentageInvested
+    );
+    // Aggiorna gli investimenti
+    asset1!.invested = Math.max(0, asset1!.invested - investedToTransfer);
+    asset2!.invested += investedToTransfer;
 
     asset1!.operations = [this.operationToClose];
     asset1!.balance -= this.operationToClose?.entryQuantity!;
-    asset1!.invested -= this.operationToClose?.entryPriceValue!;
-    asset1!.invested = asset1!.invested < 0 ? 0 : asset1!.invested;
+    //asset1!.invested -= this.operationToClose?.entryPriceValue!;
+    //asset1!.invested = asset1!.invested < 0 ? 0 : asset1!.invested;
     asset1!.updateDate = new Date();
     asset2!.balance += this.operationToClose?.exitQuantity!;
-    asset2!.invested += this.operationToClose?.entryPriceValue!;
-    asset2!.invested = asset2!.invested < 0 ? 0 : asset2!.invested;
+    //asset2!.invested += this.operationToClose?.entryPriceValue!;
+    //asset2!.invested = asset2!.invested < 0 ? 0 : asset2!.invested;
     asset2!.updateDate = new Date();
 
     wallet!.assets = [asset1!, asset2!];
@@ -203,5 +208,16 @@ export class CloseOperationComponent implements OnDestroy {
         );
         this.router.navigate(['/crypto/dashboard']);
       });
+  }
+
+  calculateInvestment(invested: number, percentage: number) {
+    const percentageToMoltiplicate = percentage / 100;
+    return invested * percentageToMoltiplicate;
+  }
+
+  calculatePercentageInvested(currentBalance: number, sellingBalance: number) {
+    if (currentBalance === 0) return 0; // Evita divisione per zero
+    if (currentBalance === sellingBalance) return 100; // Se vendi tutto, è il 100%
+    return ((currentBalance - sellingBalance) / currentBalance) * 100;
   }
 }
