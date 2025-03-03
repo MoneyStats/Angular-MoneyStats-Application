@@ -180,6 +180,8 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
     this.cryptoAssets.forEach((asset) => {
       totalInvested += asset.invested;
     });
+
+    this.cryptoAssets = this.cryptoAssets.filter((asset) => asset.balance > 0);
     return this.cryptoCurrency + ' ' + totalInvested.toFixed(2);
   }
 }
