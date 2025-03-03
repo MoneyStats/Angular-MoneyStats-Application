@@ -40,6 +40,9 @@
     <div class="section-title">
       {{ "crypto_resume_page.trading_table_title" | translate }}
       {{ invested.toFixed(2) }}
+      {{ cryptoDashboard.currency }} -
+      {{ "crypto_resume_page.trading_table_subTitle" | translate }}
+      {{ balanceCurrentYear.toFixed(2) }}
       {{ cryptoDashboard.currency }}
     </div>
     <div class="card">
@@ -172,7 +175,7 @@
   </div>
   <div class="col-md-12">
     <!-- History -->
-    <div class="section cards-op mt-2">
+    <div class="section cards-op mt-2 mb-2">
       <div class="section-heading">
         <h2 class="title">
           {{ "crypto_asset_page.details.operations" | translate }}

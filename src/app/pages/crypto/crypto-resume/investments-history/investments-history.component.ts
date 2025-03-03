@@ -68,13 +68,11 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['cryptoWallets'] && Utils.isNullOrEmpty(this.operations)) {
       this.isOperationsPresent();
-      //this.getOperations();
     }
     this.getResume();
   }
 
   ngOnInit(): void {
-    //this.getOperations();
     //this.getResume();
   }
 
@@ -102,9 +100,10 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
 
   renderChart() {
     this.chartPie = ChartService.appRenderChartPie(this.cryptoAssets);
-    setTimeout(() => {
-      this.chartHistory = ChartService.renderChartLineCategory(this.totalMap);
-    }, 200);
+    if (!Utils.isNullOrEmpty(this.totalMap))
+      setTimeout(() => {
+        this.chartHistory = ChartService.renderChartLineCategory(this.totalMap);
+      }, 200);
   }
 
   /**
@@ -164,72 +163,6 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
     return foundOperation; // Ritorna true se è stata trovata almeno una operazione, altrimenti false
   }
 
-  /**
-   * END History Tab Section
-   */
-  getOperations() {
-    let assets = Utils.copyObject(this.cryptoAssets);
-    this.cryptoAssets = assets.filter((a: any) => a.balance > 0);
-    this.operations = [];
-    if (!Utils.isNullOrEmpty(this.cryptoWallets))
-      this.cryptoWallets.forEach((wallet: any) => {
-        if (wallet.assets && wallet.assets.length > 0)
-          wallet.assets.forEach((asset: any) => {
-            if (asset.operations && asset.operations.length > 0)
-              asset.operations.forEach((operation: any) => {
-                // Verifica se la data di apertura è nell'anno corrente
-                const isCurrentYearEntryDate = !Utils.isNullOrEmpty(
-                  operation.entryDate
-                )
-                  ? new Date(operation.entryDate).getFullYear() ===
-                    this.currentYear
-                  : false;
-
-                // Verifica se la data di chiusura è nell'anno corrente
-                const isCurrentYearExitDate = !Utils.isNullOrEmpty(
-                  operation.exitDate
-                )
-                  ? new Date(operation.exitDate).getFullYear() ===
-                    this.currentYear
-                  : false;
-
-                // Condizioni per includere l'operazione
-                const shouldIncludeOperation =
-                  (isCurrentYearEntryDate && isCurrentYearExitDate) || // Apre e chiude nello stesso anno
-                  (isCurrentYearEntryDate &&
-                    Utils.isNullOrEmpty(operation.exitDate)) || // Apre nell'anno corrente e non è chiusa
-                  (!isCurrentYearEntryDate &&
-                    Utils.isNullOrEmpty(operation.exitDate)); // Apre nell'anno scorso e non è chiusa
-
-                if (shouldIncludeOperation) {
-                  operation.asset = asset;
-                  operation.wallet = wallet;
-                  if (operation.type != OperationsType.NEWINVESTMENT)
-                    operation.assetSell = Utils.copyObject(
-                      assets.find((a: Asset) => a.symbol == operation.entryCoin)
-                    );
-                  let operationLight = Utils.copyObject(operation);
-                  if (!Utils.isNullOrEmpty(operationLight.asset)) {
-                    operationLight.asset.operations = undefined;
-                    operationLight.asset.history = undefined;
-                  }
-                  if (!Utils.isNullOrEmpty(operationLight.wallet)) {
-                    operationLight.wallet.assets = undefined;
-                    operationLight.wallet.history = undefined;
-                  }
-                  if (!Utils.isNullOrEmpty(operationLight.assetSell)) {
-                    operationLight.assetSell.history = undefined;
-                    operationLight.assetSell.operations = undefined;
-                  }
-                  this.operations.push(operationLight);
-                }
-              });
-          });
-      });
-    this.operations.sort((a, b) => (a.exitDate! < b.exitDate! ? 1 : -1));
-    //if (this.operations.length > 0) this.isOperationPresent = true;
-  }
-
   goToOperations() {
     let uuid = uuidv4();
     this.cryptoService.operationsMap.set(uuid, this.operations);
@@ -240,5 +173,13 @@ export class InvestmentsHistoryComponent implements OnInit, OnChanges {
 
   selectOperation(operation: any) {
     this.operationSelect = operation;
+  }
+
+  calculateTotalInvested() {
+    let totalInvested = 0;
+    this.cryptoAssets.forEach((asset) => {
+      totalInvested += asset.invested;
+    });
+    return this.cryptoCurrency + ' ' + totalInvested.toFixed(2);
   }
 }
