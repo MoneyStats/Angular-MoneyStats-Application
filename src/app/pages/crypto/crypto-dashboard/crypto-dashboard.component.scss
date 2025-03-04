@@ -44,6 +44,22 @@
   }
 }
 
+@media screen and (max-width: 394px) {
+  .mobile_col {
+    a {
+      font-size: small;
+    }
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .mobile_col {
+    a {
+      font-size: smaller;
+    }
+  }
+}
+
 .statics {
   width: max-content;
   align-items: center;

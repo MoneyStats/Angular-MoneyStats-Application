@@ -339,15 +339,12 @@
               <div class="space"></div>
             </button>
           </h2>
+          @if (!showZeroBalance ? wallet.assets[0].balance > 0 :
+          wallet.assets[0].balance >= 0) {
           <div
             id="{{ wallet.name.split('.')[0] + wallet.id }}"
             class="accordion-collapse collapse"
             data-bs-parent="#accordionExample2"
-            *ngIf="
-              !showZeroBalance
-                ? wallet.assets[0].balance > 0
-                : wallet.assets[0].balance >= 0
-            "
           >
             <div class="accordion-body">
               <div class="row">
@@ -358,7 +355,7 @@
                   <strong
                     class="clickable"
                     *ngIf="!isEditInvestmentActive"
-                    (click)="isEditInvestmentActive = true"
+                    (click)="editData()"
                     ><p>
                       {{ hidden ? amount : wallet.assets[0].invested }}
                       {{ cryptoDashboard.currency }}
@@ -419,7 +416,7 @@
                           {{ "crypto_asset_page.details.save" | translate }}
                         </button>
                         <button
-                          (click)="isEditInvestmentActive = false"
+                          (click)="changeZeroBalance()"
                           type="button"
                           class="btn btn-outline-secondary rounded shadowed me-1 mb-1 d-inline"
                         >
@@ -450,53 +447,6 @@
                           ).toFixed(2)
                     }}
                     {{ cryptoDashboard.currency }}
-                    <!-- OLD PERFORMANCE
-                     <span
-                      class="badge {{
-                        ((wallet.assets[0].value! -
-                          wallet.assets[0].invested!) /
-                          wallet.assets[0].invested!) *
-                          100! ==
-                        0
-                          ? 'badge-warning'
-                          : ((wallet.assets[0].value! -
-                              wallet.assets[0].invested!) /
-                              wallet.assets[0].invested!) *
-                              100! >
-                            0
-                          ? 'badge-success'
-                          : 'badge-danger'
-                      }}"
-                    >
-                      <ion-icon
-                        name="{{
-                          ((wallet.assets[0].value! -
-                            wallet.assets[0].invested!) /
-                            wallet.assets[0].invested!) *
-                            100! ==
-                          0
-                            ? 'arrow-down-outline'
-                            : ((wallet.assets[0].value! -
-                                wallet.assets[0].invested!) /
-                                wallet.assets[0].invested!) *
-                                100! >
-                              0
-                            ? 'arrow-up-outline'
-                            : 'arrow-down-outline'
-                        }}"
-                      ></ion-icon>
-                      {{
-                        hidden
-                          ? amount
-                          : (
-                              ((wallet.assets[0].value! -
-                                wallet.assets[0].invested!) /
-                                wallet.assets[0].invested!) *
-                              100!
-                            ).toFixed(2)
-                      }}%
-                    </span>
-                  -->
                     <span
                       class="badge {{
                         calculatePerformance(wallet.assets[0]) == 0
@@ -618,6 +568,7 @@
               </div>
             </div>
           </div>
+          }
         </div>
       </div>
       }
