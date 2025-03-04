@@ -58,6 +58,7 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
   operationSelect: any;
 
   showZeroBalance: boolean = false;
+  showZeroBalanceChanged: boolean = false;
 
   thisYear: number = new Date().getFullYear();
 
@@ -239,6 +240,14 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
     return wallAsset;
   }
 
+  editData() {
+    this.isEditInvestmentActive = true;
+    if (!this.showZeroBalance) {
+      this.showZeroBalance = true;
+      this.showZeroBalanceChanged = true;
+    }
+  }
+
   getOperations() {
     let wallets = Utils.copyObject(this.walletsAsset);
     let assets = Utils.copyObject(this.cryptoAssets);
@@ -264,8 +273,16 @@ export class DetailsOverviewComponent implements OnInit, OnChanges, OnDestroy {
     return operations;
   }
 
-  updateInvestment(wallet: Wallet) {
+  changeZeroBalance() {
+    if (this.showZeroBalanceChanged) {
+      this.showZeroBalance = this.showZeroBalance ? false : true;
+      this.showZeroBalanceChanged = false;
+    }
     this.isEditInvestmentActive = false;
+  }
+
+  updateInvestment(wallet: Wallet) {
+    this.changeZeroBalance();
     this.updateinvestmentSubscribe = this.cryptoService
       .updateCryptoAsset(wallet)
       .subscribe((data) => {

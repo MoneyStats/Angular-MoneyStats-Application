@@ -91,7 +91,7 @@
                     pointer-events: visible;
                     cursor: pointer;
                   "
-                  class="col-6 zoomx2"
+                  class="col-6 mobile_col zoomx2"
                 >
                   <ion-icon
                     class="icon-size icon-color"
@@ -115,7 +115,7 @@
                     pointer-events: visible;
                     cursor: pointer;
                   "
-                  class="col-6 hidden_desktop"
+                  class="col-6 mobile_col hidden_desktop"
                   (click)="vibrate()"
                   routerLink="/crypto/asset"
                 >
@@ -384,7 +384,7 @@
           <h2 class="title ms-2">
             {{ "crypto_dashboard_page.asset_card_title" | translate }}
           </h2>
-          <a routerLink="/crypto/asset" class="link">{{
+          <a routerLink="/crypto/asset" class="link me-3">{{
             "shared_text.view" | translate
           }}</a>
         </div>
@@ -469,7 +469,7 @@
         </h2>
         <a
           [routerLink]="['/crypto/market-data', cryptoDashboard.currency]"
-          class="link me-2"
+          class="link me-3"
           >{{ "shared_text.view" | translate }}</a
         >
       </div>
