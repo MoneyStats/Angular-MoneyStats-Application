@@ -5,14 +5,15 @@ import {
   ModalConstant,
   StorageConstant,
 } from 'src/assets/core/data/constant/constant';
+import { CacheService } from 'src/assets/core/services/config/cache/cache.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-    selector: 'app-dashboard-wallet',
-    templateUrl: './dashboard-wallet.component.html',
-    styleUrls: ['./dashboard-wallet.component.scss'],
-    standalone: false
+  selector: 'app-dashboard-wallet',
+  templateUrl: './dashboard-wallet.component.html',
+  styleUrls: ['./dashboard-wallet.component.scss'],
+  standalone: false,
 })
 export class DashboardWalletComponent implements OnInit {
   environment = environment;
@@ -24,7 +25,7 @@ export class DashboardWalletComponent implements OnInit {
   @Output('changeAmountStatus') changeAmountStatus =
     new EventEmitter<boolean>();
 
-  constructor() {}
+  constructor(private cache: CacheService) {}
 
   public get modalConstant(): typeof ModalConstant {
     return ModalConstant;
@@ -51,5 +52,10 @@ export class DashboardWalletComponent implements OnInit {
     }
     localStorage.setItem(StorageConstant.HIDDENAMOUNT, this.hidden.toString());
     this.changeAmountStatus.emit(this.hidden);
+  }
+
+  cleanCacheAndRefresh() {
+    this.cache.clearCache();
+    window.location.reload();
   }
 }
