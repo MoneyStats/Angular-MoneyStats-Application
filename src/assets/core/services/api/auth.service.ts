@@ -188,7 +188,7 @@ export class AuthService {
         environment.clientID +
         '&access_type=online&redirect_uri=' +
         environment.redirectUri +
-        '&scope=openid&response_type=code';
+        '&scope=openid&response_type=token';
       return this.http.get<ResponseModel>(url, {
         headers: headers,
       });
