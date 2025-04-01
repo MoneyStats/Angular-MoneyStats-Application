@@ -9,12 +9,7 @@ import {
 import { NavigationEnd, Router } from '@angular/router';
 import { Dashboard } from 'src/assets/core/data/class/dashboard.class';
 import { User } from 'src/assets/core/data/class/user.class';
-import {
-  ModalConstant,
-  StorageConstant,
-  Tracing,
-  UserRole,
-} from 'src/assets/core/data/constant/constant';
+import { ModalConstant, Tracing } from 'src/assets/core/data/constant/constant';
 import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { ToastService } from 'src/assets/core/utils/toast.service';
 import { environment } from 'src/environments/environment';
@@ -22,6 +17,7 @@ import { UserService } from 'src/assets/core/services/api/user.service';
 import { SharedService } from 'src/assets/core/services/config/shared.service';
 import { Subscription } from 'rxjs';
 import { LOG } from 'src/assets/core/utils/log.service';
+import { Roles } from 'src/assets/core/services/config/roles.service';
 
 @Component({
   selector: 'app-header',
@@ -63,8 +59,8 @@ export class HeaderComponent implements OnInit, OnChanges, OnDestroy {
     return ModalConstant;
   }
 
-  public get userRole(): typeof UserRole {
-    return UserRole;
+  public get roles(): typeof Roles {
+    return Roles;
   }
 
   ngOnInit(): void {

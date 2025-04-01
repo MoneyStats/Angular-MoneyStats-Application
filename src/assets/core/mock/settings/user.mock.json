@@ -11,7 +11,7 @@
       "surname": "User",
       "email": "email@email.com",
       "username": "moneystats",
-      "role": "MOCK",
+      "roles": ["MOCK"],
       "profilePhoto": "https://moneystats.github.io/assets/images/sample/avatar.png",
       "currency": "EUR",
       "mockedUser": true,

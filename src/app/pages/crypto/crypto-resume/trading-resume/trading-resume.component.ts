@@ -90,6 +90,7 @@ export class TradingResumeComponent implements OnInit, OnChanges {
           wallet.assets.forEach((asset: any) => {
             if (wallet.type == OperationsType.TRADING) {
               totalInvested += asset.invested;
+              //investedThisYear += asset.value;
             }
             if (asset.operations && asset.operations.length > 0) {
               asset.operations = asset.operations.filter(
@@ -105,6 +106,25 @@ export class TradingResumeComponent implements OnInit, OnChanges {
                 if (operation.type == OperationsType.TRADING) {
                   investedThisYear += operation.entryPriceValue;
                 }
+                //if (
+                //  operation.type == OperationsType.TRADING &&
+                //  operation.status == 'CLOSED'
+                //) {
+                //  console.log(operation, investedThisYear);
+                //  //investedThisYear += operation.entryPriceValue;
+                //  //investedThisYear -= operation.trend;
+                //}
+                //if (
+                //  operation.type == OperationsType.TRADING &&
+                //  operation.status == 'OPEN'
+                //) {
+                //  console.log(operation);
+                //  //const actualTrend =
+                //  //  operation.asset.balance * operation.asset.current_price -
+                //  //  operation.entryPriceValue;
+                //  //// Attuale 1540 + 5.93
+                //  //investedThisYear -= actualTrend;
+                //}
                 operations.push(operation);
               });
             }

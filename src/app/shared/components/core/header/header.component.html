@@ -176,7 +176,7 @@
               </div>
             </a>
           </li>
-          @if (user?.roles?.includes(userRole.TAX_CALCULATOR)) {
+          @if (roles.hasTaxCalculatorRoles()) {
           <li>
             <a
               (click)="exchangeTokenAndRedirect()"

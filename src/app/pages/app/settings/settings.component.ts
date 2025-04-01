@@ -10,7 +10,6 @@ import {
 import {
   ModalConstant,
   ProfileSettings,
-  StorageConstant,
   Tracing,
   UserRole,
 } from 'src/assets/core/data/constant/constant';
@@ -19,6 +18,7 @@ import { AppService } from 'src/assets/core/services/api/app.service';
 import { AuthService } from 'src/assets/core/services/api/auth.service';
 import { UserService } from 'src/assets/core/services/api/user.service';
 import { CacheService } from 'src/assets/core/services/config/cache/cache.service';
+import { Roles } from 'src/assets/core/services/config/roles.service';
 import { LOG } from 'src/assets/core/utils/log.service';
 import { ScreenService } from 'src/assets/core/utils/screen.service';
 import { SwalService } from 'src/assets/core/utils/swal.service';
@@ -66,8 +66,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
     return ModalConstant;
   }
 
-  public get userRole(): typeof UserRole {
-    return UserRole;
+  public get roles(): typeof Roles {
+    return Roles;
   }
 
   public get profileSettings(): typeof ProfileSettings {
