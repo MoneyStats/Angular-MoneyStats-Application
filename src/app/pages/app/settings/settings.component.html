@@ -205,7 +205,7 @@
       </ul>
 
       <!-- Admin Features -->
-      @if (user?.roles?.includes(userRole.ADMIN)) {
+      @if (roles.hasAdminRoles()) {
       <div>
         <div class="listview-title mt-1">
           {{ "settings_page.admin_title" | translate }}
@@ -226,7 +226,7 @@
               </div>
             </a>
           </li>
-          @if (user?.roles?.includes(userRole.TAX_CALCULATOR)) {
+          @if (roles.hasTaxCalculatorRoles()) {
           <li>
             <a (click)="exchangeTokenAndRedirect()" class="item zoom clickable">
               <div class="in">

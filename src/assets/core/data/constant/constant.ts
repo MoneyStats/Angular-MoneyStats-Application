@@ -82,7 +82,8 @@ export enum MarketDataCategory {
 export enum UserRole {
   USER = 'MONEY_STATS_USER',
   ADMIN = 'MONEY_STATS_ADMIN',
-  TAX_CALCULATOR = 'TAX_CALCULATOR_ADMIN',
+  TAX_CALCULATOR_ADMIN = 'TAX_CALCULATOR_ADMIN',
+  TAX_CALCULATOR_USER = 'TAX_CALCULATOR_USER',
 }
 
 export enum Tracing {
