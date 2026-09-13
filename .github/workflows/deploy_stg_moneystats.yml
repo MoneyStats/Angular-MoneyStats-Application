@@ -1,8 +1,9 @@
-name: Deploy-STG
+name: 🚀 Deploy Staging
 
 on:
   push:
     branches: [develop]
+  workflow_dispatch:
 
 env:
   NODE_VERSION: "22.0.0"
@@ -16,12 +17,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "☁️ Checkout Repository"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: 🔧 Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v4.0.2
+        uses: actions/setup-node@v7.0.0
         with:
           node-version: "${{ env.NODE_VERSION }}"
 
@@ -30,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: checkout-and-setup
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
       - name: 📦 Dependency Injection
         run: |
           npm install -g @angular/cli
@@ -44,7 +45,7 @@ jobs:
     needs: dependency-and-build
     steps:
       - name: 🐳 Log in to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           username: ${{ env.DOCKER_USERNAME }}
           password: ${{ env.DOCKER_PASSWORD }}
@@ -56,7 +57,7 @@ jobs:
       name: stg-moneystats-angular
     needs: [dependency-and-build, docker-login]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
 
       - name: 🗝️ Grant execute permission to script
         run: chmod +x ./rename.sh
@@ -74,7 +75,7 @@ jobs:
         uses: martinbeentjes/npm-get-version-action@v1.3.1
 
       - name: 🐳 Build & push Docker image
-        uses: mr-smithers-excellent/docker-build-push@v6.4
+        uses: mr-smithers-excellent/docker-build-push@v7.0
         with:
           image: ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_REPOSITORY }}
           tags: ${{ steps.package-version.outputs.current-version }}, latest
